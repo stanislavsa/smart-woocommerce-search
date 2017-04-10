@@ -1,0 +1,179 @@
+/**
+ * General
+ */
+
+.wrap > h1 {
+	margin-top: 20px;
+}
+
+h1.ysm-nav-tab-wrapper,
+.wrap h2.ysm-nav-tab-wrapper,
+h3.ysm-nav-tab-wrapper {
+	margin-top: 15px;
+	margin-bottom: 15px;
+}
+
+.ysm-widget-edit-settings,
+.ysm-widget-edit-constructor {
+	margin-top: 15px;
+	margin-bottom: 15px;
+}
+
+.ysm-widget-edit-settings h2.hndle,
+.ysm-widget-edit-constructor h2.hndle {
+	font-size: 16px;
+	padding: 8px 12px;
+	margin: 0;
+	line-height: 1.6;
+}
+
+.ysm-column-container {
+	width: 46%;
+	float: left;
+	padding: 0 2px;
+}
+
+/**
+ * Widgets List
+ */
+.ysm-widgets-list {
+	border: 1px solid #ccc;
+	margin-top: 25px;
+}
+
+.ysm-widgets-list table {
+	width: 100%;
+	border-collapse: collapse;
+	border-spacing: 0px;
+}
+
+.ysm-widgets-list td {
+	border-bottom: 1px solid #ccc;
+	height: 40px;
+	padding-left: 10px;
+	padding-right: 10px;
+	vertical-align: middle;
+}
+
+.ysm-widgets-list thead {
+	background: #f9f9f9;
+}
+
+.ysm-widgets-list tbody {
+	background: #fff;
+}
+
+.ysm-widgets-list a {
+	text-decoration: none;
+}
+
+.ysm-loader {
+	background: url("../images/loader6.gif") no-repeat 50% 50%;
+}
+
+/**
+ * Edit widget
+ */
+.ysm-widget-edit-title-wrap > input {
+	width: 350px;
+	max-width: 100%;
+	margin: 20px 0;
+	height: 35px;
+	font-size: 16px;
+}
+
+.ysm-widget-settings-tab .ysm-widget-settings-th {
+	color: #777;
+}
+
+/**
+ * Widget Fields
+ */
+
+#ysm-widget-settings-nav-wrapper .nav-tab-active {
+	background: #fff;
+	border-bottom: 1px solid #fff;
+}
+
+#ysm-widget-settings-nav-wrapper .nav-tab-active:focus {
+	-webkit-box-shadow: none;
+	-moz-box-shadow: none;
+	box-shadow: none;
+}
+
+.ysm-widget-fields-wrapper {
+	float: left;
+	width: 20%;
+	margin: 15px 2%;
+	border: 1px solid #e0e0e0;
+	min-height: 150px;
+}
+
+
+/**
+ * Toggles
+ */
+
+.ysm-row-toggle {
+	width: 30px;
+	position: absolute;
+	right: 0;
+	top: 0;
+	color: #777;
+	cursor: pointer;
+	text-align: center;
+}
+
+.ysm-row-toggle:before {
+	content: "\f142";
+	display: inline-block;
+	font: normal 20px/1 dashicons;
+	margin-top: 2px;
+	speak: none;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+.ysm-row.closed .ysm-row-toggle:before {
+	content: "\f140";
+}
+
+.ysm-row-toggle:hover {
+	color: #444;
+}
+
+
+@media only screen and (max-width: 960px) {
+
+	.ysm-column-container {
+		width: 100% !important;
+	}
+
+}
+
+
+@media only screen and (max-width: 782px) {
+
+	.ysm-row-actions-bar {
+		height: 35px;
+	}
+
+	.ysm-row-actions-buttons > a > span {
+		height: 35px;
+		width: 40px;
+		font-size: 30px;
+	}
+
+    .ysm-column-container {
+        width: 100%;
+    }
+
+    hr { display: none; }
+
+	.ysm-rows-wrapper,
+	.ysm-widget-fields-wrapper {
+		float: none;
+		width: 100%;
+	}
+
+}

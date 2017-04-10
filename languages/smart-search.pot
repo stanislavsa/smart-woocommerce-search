@@ -1,0 +1,430 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. Text in function
+#: templates/admin-page-form.php:349
+msgid "\"No Results\" text"
+msgstr ""
+
+#. Text in function
+#: templates/admin-page-form.php:349
+msgid "\"View all\" Link Text"
+msgstr ""
+
+#. Text in function
+#: templates/admin-page-form.php:349
+msgid "\"View all\" Link Text Background"
+msgstr ""
+
+#. Text in function
+#: templates/admin-page-form.php:349
+msgid "\"View all\" Link Text Color"
+msgstr ""
+
+#. Text in function
+#: templates/admin-page-form.php:349
+msgid "\"View all\" link text background in results popup"
+msgstr ""
+
+#. Text in function
+#: templates/admin-page-form.php:349
+msgid "\"View all\" link text color in results popup"
+msgstr ""
+
+#. Text in echo
+#: templates/admin-page-custom.php:25
+msgid "Add New"
+msgstr ""
+
+#. Text in function
+#: templates/admin-page-form.php:349
+msgid "Background Color"
+msgstr ""
+
+#. Text in function
+#: templates/admin-page-form.php:254
+#: templates/admin-page-form.php:349
+msgid "Border Color"
+msgstr ""
+
+#. Text in function
+#: templates/admin-page-form.php:349
+msgid "Character Count"
+msgstr ""
+
+#. Text in function
+#: templates/admin-page-form.php:349
+msgid "Content"
+msgstr ""
+
+#. Text in function
+#: templates/admin-page-default.php:1
+msgid "Default Search"
+msgstr ""
+
+#. Text in function
+#: templates/admin-page-form.php:349
+msgid "Default Search Widget"
+msgstr ""
+
+#. Text in function
+#: templates/admin-page-form.php:349
+msgid "Display \"View all\" Link"
+msgstr ""
+
+#. Text in function
+#: templates/admin-page-form.php:349
+msgid "Display Excerpt"
+msgstr ""
+
+#. Text in function
+#: templates/admin-page-form.php:349
+msgid "Display Image"
+msgstr ""
+
+#. Text in function
+#: templates/admin-page-form.php:349
+msgid "Display Price"
+msgstr ""
+
+#. Text in function
+#: templates/admin-page-form.php:349
+msgid "Display a link at the bottom of results popup"
+msgstr ""
+
+#. Text in function
+#: templates/admin-page-form.php:349
+msgid "Display excerpt in results output"
+msgstr ""
+
+#. Text in function
+#: templates/admin-page-form.php:349
+msgid "Display featured image in results output"
+msgstr ""
+
+#. Text in function
+#: templates/admin-page-form.php:349
+msgid "Display product price"
+msgstr ""
+
+#. Text in function
+#: templates/admin-page-form.php:254
+msgid "Display search field with rounded border"
+msgstr ""
+
+#. Text in function
+#: inc/class-ysm-search-widget.php:1
+msgid "Displays search box"
+msgstr ""
+
+#. Text in function
+#: templates/admin-page-default.php:15
+msgid "Edit %s Widget"
+msgstr ""
+
+#. Text in function
+#: templates/admin-page-custom.php:17
+msgid "Edit Widget"
+msgstr ""
+
+#. Text in function
+#: templates/admin-page-form.php:349
+msgid "Enable Smart Search in Default Search Widget"
+msgstr ""
+
+#. Text in function
+#: templates/admin-page-form.php:349
+msgid "Enable Smart Search in Product Search Widget"
+msgstr ""
+
+#. Text in function
+#: templates/admin-page-form.php:349
+msgid "Enable search through \"%s\""
+msgstr ""
+
+#. Text in function
+#: templates/admin-page-form.php:349
+msgid "Enable search through \"%s\" post type"
+msgstr ""
+
+#. Text in echo
+#: templates/admin-page-form.php:35
+msgid "Enter name"
+msgstr ""
+
+#. Text in function
+#: templates/admin-page-form.php:349
+msgid "Excerpt"
+msgstr ""
+
+#. Text in function
+#: templates/admin-page-form.php:349
+msgid "Excerpt Symbols Count"
+msgstr ""
+
+#. Text in function
+#: templates/admin-page-form.php:349
+msgid "Excerpt Text Color"
+msgstr ""
+
+#. Text in function
+#: templates/admin-page-form.php:349
+msgid "Excerpt text color in results popup"
+msgstr ""
+
+#. Text in echo
+#: templates/admin-page-form.php:202
+msgid "Fields"
+msgstr ""
+
+#. Text in function
+#: templates/admin-page-form.php:1
+msgid "General"
+msgstr ""
+
+#. Text in echo
+#: templates/admin-page-custom.php:33
+msgid "ID"
+msgstr ""
+
+#. Text in function
+#: templates/admin-page-form.php:254
+msgid "Icon Color"
+msgstr ""
+
+#. Text in function
+#: templates/admin-page-form.php:349
+msgid "If not empty displays when any post match search query"
+msgstr ""
+
+#. Text in function
+#: templates/admin-page-form.php:349
+msgid "Image Size"
+msgstr ""
+
+#. Text in echo
+#: templates/admin-page-form.php:252
+msgid "Input Field"
+msgstr ""
+
+#. Text in function
+#: templates/admin-page-form.php:1
+msgid "Items to Search through"
+msgstr ""
+
+#. Text in function
+#: templates/admin-page-form.php:349
+msgid "Maximal number of symbols in excerpt"
+msgstr ""
+
+#. Text in function
+#: templates/admin-page-form.php:349
+msgid "Maximum number of results"
+msgstr ""
+
+#. Text in function
+#: templates/admin-page-form.php:349
+msgid "Minimum number of character"
+msgstr ""
+
+#. Text in echo
+#: templates/admin-page-custom.php:34
+msgid "Name"
+msgstr ""
+
+#. Text in function
+#: templates/admin-page-form.php:349
+msgid "No Results"
+msgstr ""
+
+#. Text in function
+#: templates/admin-page-form.php:349
+msgid "Placeholder"
+msgstr ""
+
+#. Text in function
+#: templates/admin-page-form.php:349
+msgid "Placeholder in search input"
+msgstr ""
+
+#. Text in function
+#: templates/admin-page-form.php:349
+msgid "Popup background color"
+msgstr ""
+
+#. Text in function
+#: templates/admin-page-form.php:349
+msgid "Popup border color"
+msgstr ""
+
+#. Text in function
+#: templates/admin-page-form.php:349
+msgid "Post Category"
+msgstr ""
+
+#. Text in function
+#: templates/admin-page-form.php:349
+msgid "Post Tag"
+msgstr ""
+
+#. Text in echo
+#: templates/admin-page-form.php:173
+msgid "Post Types"
+msgstr ""
+
+#. Text in function
+#: templates/admin-page-form.php:349
+msgid "Price Color"
+msgstr ""
+
+#. Text in function
+#: templates/admin-page-form.php:349
+msgid "Price text color in results popup"
+msgstr ""
+
+#. Text in function
+#: templates/admin-page-form.php:349
+msgid "Product Category"
+msgstr ""
+
+#. Text in echo
+#: templates/admin-page-form.php:347
+msgid "Product Elements"
+msgstr ""
+
+#. Text in function
+#: templates/admin-page-form.php:349
+msgid "Product SKU"
+msgstr ""
+
+#. Text in function
+#: templates/admin-page-default.php:1
+msgid "Product Search"
+msgstr ""
+
+#. Text in function
+#: templates/admin-page-form.php:349
+msgid "Product Search Widget"
+msgstr ""
+
+#. Text in function
+#: templates/admin-page-form.php:349
+msgid "Product Tag"
+msgstr ""
+
+#. Text in function
+#: templates/admin-page-form.php:349
+msgid "Results Count"
+msgstr ""
+
+#. Text in echo
+#: templates/admin-page-form.php:286
+msgid "Results Popup Elements"
+msgstr ""
+
+#. Text in function
+#: templates/admin-page-form.php:254
+msgid "Rounded border"
+msgstr ""
+
+#. Text in echo
+#: templates/admin-page-form.php:365
+msgid "Save"
+msgstr ""
+
+#. Text in function
+#: templates/admin-page-form.php:254
+msgid "Search field border color"
+msgstr ""
+
+#. Text in function
+#: templates/admin-page-form.php:254
+msgid "Search field icon color"
+msgstr ""
+
+#. Text in function
+#: templates/admin-page-form.php:254
+msgid "Search field text color"
+msgstr ""
+
+#. Text in function
+#: templates/admin-page-form.php:349
+msgid "Search in %s"
+msgstr ""
+
+#. Text in function
+#: templates/admin-page-form.php:349
+msgid "Search results featured image size (px)"
+msgstr ""
+
+#. Text in echo
+#: inc/class-ysm-search-widget.php:60
+msgid "Select Widget:"
+msgstr ""
+
+#. Text in echo
+#: templates/admin-page-form.php:53
+msgid "Settings"
+msgstr ""
+
+#. Text in echo
+#: templates/admin-page-custom.php:35
+msgid "Shortcode"
+msgstr ""
+
+#. Text in function
+#: inc/class-ysm-search-widget.php:1
+msgid "Smart Search"
+msgstr ""
+
+#. Text in function
+#: templates/admin-page-form.php:1
+msgid "Styling"
+msgstr ""
+
+#. Text in function
+#: templates/admin-page-form.php:254
+msgid "Text Color"
+msgstr ""
+
+#. Text in function
+#: templates/admin-page-form.php:349
+msgid "Title"
+msgstr ""
+
+#. Text in function
+#: templates/admin-page-form.php:349
+msgid "Title Text Color"
+msgstr ""
+
+#. Text in function
+#: templates/admin-page-form.php:349
+msgid "Title text color in results popup"
+msgstr ""
+
+#. Text in echo
+#: inc/class-ysm-search-widget.php:56
+msgid "Title:"
+msgstr ""
+
+#. Text in echo
+#: templates/admin-page-form.php:49
+msgid "Toggle panel: Settings"
+msgstr ""
+
+#. Text in function
+#: templates/admin-page-form.php:349
+msgid "View all"
+msgstr ""
+
+#. Text in function
+#: inc/class-ysm-custom-widget-manager.php:1
+msgid "Your settings have been saved."
+msgstr ""
+
+#. Text in echo
+#: inc/class-ysm-custom-widget-manager.php:323
+msgid "placeholder"
+msgstr ""
