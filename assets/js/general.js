@@ -6,7 +6,7 @@
 
 		if (ysm_L10n.enable_search == 1){
 
-			var $el = $('.widget.widget_search');
+			var $el = $('.widget_search');
 
 			$el.each(function () {
 
@@ -27,7 +27,7 @@
 
 		if (ysm_L10n.enable_product_search == 1){
 
-			var $el = $('.widget.woocommerce.widget_product_search');
+			var $el = $('.woocommerce.widget_product_search');
 
 			$el.each(function () {
 

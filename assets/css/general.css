@@ -274,7 +274,7 @@
 }
 
 .smart-search-view-all-holder > a {
-	display: block;
+	display: block !important;
 	height: 30px;
 	line-height: 30px;
 	background: #ccc;
