@@ -150,12 +150,12 @@ $tabs = array(
 							'value' => 1,
 						));
 
-						/*ysm_setting( $w_id, 'display_view_all_link', array(
+						ysm_setting( $w_id, 'display_sku', array(
 							'type' => 'checkbox',
-							'title' => __('Display "View all" Link', 'smart_search'),
-							'description' => __('Display a link at the bottom of results popup', 'smart_search'),
-							'value' => '',
-						));*/
+							'title' => __('Display SKU', 'smart_search'),
+							'description' => __('Display product SKU', 'smart_search'),
+							'value' => 1,
+						));
 
 						ysm_setting( $w_id, 'view_all_link_text', array(
 							'type' => 'text',

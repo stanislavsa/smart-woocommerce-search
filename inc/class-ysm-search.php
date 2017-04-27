@@ -253,6 +253,10 @@ class Ysm_Search
 			self::$display_opts['display_price'] = 'display_price';
 		}
 
+		if ( !empty( $settings['display_sku'] ) ) {
+			self::$display_opts['display_sku'] = 'display_sku';
+		}
+
 		if ( !empty( $settings['search_page_default_output'] ) ) {
 			self::$display_opts['search_page_default_output'] = 'search_page_default_output';
 		}
@@ -543,12 +547,19 @@ class Ysm_Search
 			$post_title = preg_replace( '/'.self::$s.'/i', "<strong>$0</strong>", $post_title );
 			$output .=          '<div class="smart-search-post-title">' . $post_title . '</div>';
 
-			/* price */
-			if ( !empty(self::$display_opts['display_price']) && $post->post_type == 'product' && ysm_is_woocommerce_active() ) {
+			if ( 'product' === $post->post_type && ysm_is_woocommerce_active() ) {
 				$product = wc_get_product( $post->ID );
-				$output .= '<div class="smart-search-post-price">' . $product->get_price_html() . '</div>';
+				/* product price */
+				if ( !empty( self::$display_opts['display_price'] ) ) {
+					$output .= '<div class="smart-search-post-price">' . $product->get_price_html() . '</div>';
+				}
+				/* product sku */
+				if ( !empty( self::$display_opts['display_sku'] ) ) {
+					$output .= '<div class="smart-search-post-sku">' . esc_html( $product->get_sku() ) . '</div>';
+				}
 			}
 
+			$output .= '<div class="smart-search-clear"></div>';
 			$output .= '</div><!--.smart-search-post-holder-->';
 			$output .= '<div class="smart-search-clear"></div>';
 
