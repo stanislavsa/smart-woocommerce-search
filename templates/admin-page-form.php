@@ -288,6 +288,13 @@ $tabs = array(
 								'value' => '',
 							));
 
+							ysm_setting( $w_id, 'input_border_width', array(
+								'type' => 'text',
+								'title' => __('Border Width, px', 'smart_search'),
+								'description' => __('Search field border width in pixels', 'smart_search'),
+								'value' => '1',
+							));
+
 							ysm_setting( $w_id, 'input_text_color', array(
 								'type' => 'color',
 								'title' => __('Text Color', 'smart_search'),
