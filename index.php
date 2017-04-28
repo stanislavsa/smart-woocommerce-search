@@ -5,12 +5,12 @@
  * Description: Smart Search allows you to search any content type on a website, including WooCommerce products
  * Author:      Stanislav S - YummyWP
  * Author URI:  http://yummywp.com
- * Version:     1.1.3
+ * Version:     1.2.0
  * Domain Path: /languages
  * Text Domain: smart_search
  */
 
-define('YSM_VER', 'ysm-1.1.3');
+define('YSM_VER', 'ysm-1.2.0');
 define('YSM_DIR', plugin_dir_path( __FILE__ ));
 define('YSM_URI', plugin_dir_url( __FILE__ ));
 
