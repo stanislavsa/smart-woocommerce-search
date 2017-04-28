@@ -208,6 +208,10 @@ class Ysm_Search
 			self::$fields['post_excerpt'] = 1;
 		}
 
+		if ( !empty( $settings['allowed_product_cat'] ) ) {
+			self::$fields['allowed_product_cat'] = $settings['allowed_product_cat'];
+		}
+
 		if ( !empty( $settings['field_tag'] ) ) {
 			self::$terms['post_tag'] = 'post_tag';
 		}
@@ -443,7 +447,23 @@ class Ysm_Search
 			$s_terms = implode(',', $s_terms);
 
 			$where['or'][] = "( t_tax.taxonomy IN ({$s_terms}) AND lower(t.name) LIKE %s )";
+		}
 
+		// restrict searching only in defined categories
+		if ( !empty( self::$fields['allowed_product_cat'] ) ) {
+			$allowed_product_cats = explode( ',', trim( self::$fields['allowed_product_cat'], ',' ) );
+			$allowed_product_cats_filtered = array();
+			foreach ( $allowed_product_cats as $allowed_product_cat ) {
+				$allowed_product_cat = trim( $allowed_product_cat );
+				if ( ! empty( $allowed_product_cat ) ) {
+					$allowed_product_cats_filtered[] = "'" . intval( $allowed_product_cat ) . "'";
+				}
+			}
+			$allowed_product_cats_filtered = implode( ",", $allowed_product_cats_filtered );
+			$where['and'][] = sprintf( "( p.post_type NOT IN ('product') OR ( p.post_type = 'product' AND t_tax.taxonomy = 'product_cat' AND t.term_id IN (%s) ) )", $allowed_product_cats_filtered );
+		}
+
+		if ( !empty( self::$terms ) || !empty( self::$fields['allowed_product_cat'] ) ) {
 			$join['t_rel'] = "LEFT JOIN {$wpdb->term_relationships} t_rel ON p.ID = t_rel.object_id";
 			$join['t_tax'] = "LEFT JOIN {$wpdb->term_taxonomy} t_tax ON t_tax.term_taxonomy_id = t_rel.term_taxonomy_id";
 			$join['t'] = "LEFT JOIN {$wpdb->terms} t ON t_tax.term_id = t.term_id";
