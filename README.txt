@@ -73,9 +73,10 @@ Yes, when using products search or when you set option to search only through pr
 
 == Screenshots ==
 
-1. Smart WooCommerce Search settings page - General tab
-2. Smart WooCommerce Search settings page - Items to Search through tab
-3. Smart WooCommerce Search settings page - Styling tab
+1. Smart WooCommerce Search Custom Widget
+2. Smart WooCommerce Search Settings Page - General tab
+3. Smart WooCommerce Search Settings Page - Items to Search through tab
+4. Smart WooCommerce Search Settings Page - Styling tab
 
 == Changelog ==
 
