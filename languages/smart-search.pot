@@ -336,7 +336,7 @@ msgstr ""
 
 #. Text in function
 #: templates/admin-page-form.php:317
-msgid "Product categories ids separated by comma. Restrict product searching by chosen product categories"
+msgid "Product categories ids separated by comma.<br>Restrict product searching by chosen product categories"
 msgstr ""
 
 #. Text in echo

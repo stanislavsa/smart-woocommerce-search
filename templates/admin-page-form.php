@@ -251,7 +251,7 @@ $tabs = array(
 						ysm_setting( $w_id, 'allowed_product_cat', array(
 							'type' => 'text',
 							'title' => __('Allowed Product Categories', 'smart_search'),
-							'description' => __('Product categories ids separated by comma. Restrict product searching by chosen product categories', 'smart_search'),
+							'description' => __('Product categories ids separated by comma.<br>Restrict product searching by chosen product categories', 'smart_search'),
 							'value' => '',
 						));
 
