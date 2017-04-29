@@ -162,7 +162,7 @@ function ysm_enqueue_scripts() {
 			));
 		}
 
-		if (!empty( intval( $v['settings']['input_border_width'] ) )) {
+		if (!empty( $v['settings']['input_border_width'] )) {
 			Ysm_Style_Generator::add_rule($css_id, array(
 				'selectors' => array(
 					'.search-field[type="search"]',

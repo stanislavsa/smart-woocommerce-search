@@ -43,6 +43,7 @@ Give it a try and enjoy:)
  * Search through product Tags
  * Translation ready
  * Visual Composer compatible
+ * WPML compatible
  * Search results with images and prices
 
 [View plugin Demo](http://yummywp.com/plugin/smart-search/).
