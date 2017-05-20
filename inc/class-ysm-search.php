@@ -83,6 +83,8 @@ class Ysm_Search
 		unset($registered_pt['attachment']);
 		unset($registered_pt['revision']);
 		unset($registered_pt['nav_menu_item']);
+		unset($registered_pt['custom_css']);
+		unset($registered_pt['customize_changeset']);
 
 		if (ysm_is_woocommerce_active()) {
 			$registered_pt['product'] = 'Product';
@@ -403,8 +405,19 @@ class Ysm_Search
 		$where['and'][] = "p.post_type IN ({$s_post_types})";
 
 		if ( isset(self::$pt['product']) ) {
-			$join['pmpv'] = "LEFT JOIN {$wpdb->postmeta} pmpv ON pmpv.post_id = p.ID";
-			$where['and'][] = "( p.post_type NOT IN ('product') OR (p.post_type = 'product' AND pmpv.meta_key = '_visibility' AND CAST(pmpv.meta_value AS CHAR) IN ('search','visible')) )";
+
+			if ( version_compare( WC()->version, '3.0.0', '<' ) ) {
+				$join['pmpv'] = "LEFT JOIN {$wpdb->postmeta} pmpv ON pmpv.post_id = p.ID";
+				$where['and'][] = "( p.post_type NOT IN ('product') OR (p.post_type = 'product' AND pmpv.meta_key = '_visibility' AND CAST(pmpv.meta_value AS CHAR) IN ('search','visible')) )";
+			} else {
+				$wc_product_visibility_term_ids = wc_get_product_visibility_term_ids();
+				$where['and'][] = sprintf( "p.ID NOT IN (
+					SELECT object_id
+					FROM {$wpdb->term_relationships}
+					WHERE term_taxonomy_id IN (%d)
+				)", $wc_product_visibility_term_ids['exclude-from-search'] );
+			}
+
 		}
 
 		/* relevance part */
