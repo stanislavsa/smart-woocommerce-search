@@ -392,6 +392,29 @@ function ysm_change_admin_title( $admin_title, $title ) {
 add_filter( 'admin_title', 'ysm_change_admin_title', 10, 2 );
 
 /**
+ * Change the admin footer text on Smart Search admin pages.
+ */
+function ysm_change_admin_footer_text( $footer_text ) {
+	$current_screen = get_current_screen();
+	$ysm_screens = array(
+		'toplevel_page_smart-search',
+		'smart-search_page_smart-search-custom',
+		'smart-search_page_smart-search-custom-new',
+	);
+
+	if ( isset( $current_screen->id ) && in_array( $current_screen->id, $ysm_screens ) ) {
+		//if ( ! get_option( 'ysm_admin_footer_text_rate' ) ) {
+			$rate_link = '<a href="https://wordpress.org/support/plugin/smart-woocommerce-search/reviews?rate=5#new-post" target="_blank" id="ysm-rate-plugin">&#9733;&#9733;&#9733;&#9733;&#9733;</a>';
+			$footer_text = sprintf( 'If you like <strong>Smart Search</strong> plugin please leave us a %s rating.', $rate_link );
+		//}
+	}
+
+	return $footer_text;
+}
+
+add_filter( 'admin_footer_text', 'ysm_change_admin_footer_text', 1 );
+
+/**
  * Init Search
  */
 Ysm_Setting::init();

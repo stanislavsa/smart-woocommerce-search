@@ -84,6 +84,12 @@
 			return false;
 		});
 
+		/**
+		 * Admin footer text rating
+		 */
+		$('#ysm-rate-plugin').on('click', function(){
+			$(this).parent().text( 'Thank you!' );
+		});
 	});
 
 })(jQuery);
