@@ -3,8 +3,8 @@ Contributors: yummy-wp
 Donate link: http://yummywp.com/donation/
 Tags: woocommerce search, woocommerce search plugin, search for woocommerce, search for wp, search for wordpress, search plugin, ajax search, woocommerce search by sku, search results,  woocommerce search shortcode, search products, product search, search autocomplete, woocommerce advanced search, woocommerce predictive search, woocommerce live search, woocommerce single product, woocommerce site search, search, woocommerce, products, shop, instant search, autocomplete, autosuggest, category search, custom search, predictive search, relevant search, search product, woocommerce plugin, woocommerce product search, posts search, wp search, wordpress search
 Requires at least: 4.2
-Tested up to: 4.7.4
-Stable tag: 1.2.0
+Tested up to: 4.7.5
+Stable tag: 1.2.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -79,6 +79,10 @@ Yes, when using products search or when you set option to search only through pr
 4. Smart WooCommerce Search Settings Page - Styling tab
 
 == Changelog ==
+
+= 1.2.1 =
+* Fixed WooCommerce 3.0 compatibility issue, when new products didn't shows up in the search results
+* Small improvements
 
 = 1.2.0 =
 * Added option to display a product SKU in the results popup
