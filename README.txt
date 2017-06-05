@@ -1,10 +1,10 @@
 === Smart WooCommerce Search ===
 Contributors: yummy-wp
-Donate link: http://yummywp.com/donation/
-Tags: woocommerce search, woocommerce search plugin, search for woocommerce, search for wp, search for wordpress, search plugin, ajax search, woocommerce search by sku, search results,  woocommerce search shortcode, search products, product search, search autocomplete, woocommerce advanced search, woocommerce predictive search, woocommerce live search, woocommerce single product, woocommerce site search, search, woocommerce, products, shop, instant search, autocomplete, autosuggest, category search, custom search, predictive search, relevant search, search product, woocommerce plugin, woocommerce product search, posts search, wp search, wordpress search
+Donate link: https://yummywp.com/
+Tags: woocommerce search, woocommerce search plugin, search for woocommerce, product search, search, woocommerce, woocommerce product search, search woocommerce, shop, shop search, instant search, autocomplete, autosuggest, search for wp, search for wordpress, search plugin, ajax search, woocommerce search by sku, search results,  woocommerce search shortcode, search products, search autocomplete, woocommerce advanced search, woocommerce predictive search, woocommerce live search, woocommerce single product, woocommerce site search, products, shop, category search, custom search, predictive search, relevant search, search product, woocommerce plugin, posts search, wp search, wordpress search
 Requires at least: 4.2
 Tested up to: 4.7.5
-Stable tag: 1.2.1
+Stable tag: 1.2.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -13,6 +13,8 @@ Smart Search allows you to search any content type on a website, including WooCo
 == Description ==
 
 = Smart Search plugin is smart, fast, and easy to use. =
+
+[View plugin Demo](https://yummywp.com/plugin/smart-search/).
 
 Smart WooCommerce Search provides efficient search through your website.
 
@@ -46,9 +48,9 @@ Give it a try and enjoy:)
  * WPML compatible
  * Search results with images and prices
 
-[View plugin Demo](http://yummywp.com/plugin/smart-search/).
+[View plugin Demo](https://yummywp.com/plugin/smart-search/).
 
-[Plugin Documentation](http://yummywp.com/docs/smart-search/).
+[Plugin Documentation](https://yummywp.com/docs/smart-search/).
 
 == Installation ==
 
@@ -79,6 +81,10 @@ Yes, when using products search or when you set option to search only through pr
 4. Smart WooCommerce Search Settings Page - Styling tab
 
 == Changelog ==
+
+= 1.2.2 =
+* Fixed issue with a special characters like "őűóíúéá"
+* Fixed issue with a multibyte strings
 
 = 1.2.1 =
 * Fixed WooCommerce 3.0 compatibility issue, when new products didn't shows up in the search results
