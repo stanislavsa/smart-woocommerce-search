@@ -324,7 +324,7 @@ class Ysm_Search
 				}
 
 				self::$result_post_ids = $wp_posts;
-				$query->set('s', htmlentities( strip_tags( self::$s ) ) );
+				$query->set('s', esc_attr( strip_tags( self::$s ) ) );
 				$query->set('post__in', $wp_posts );
 				$query-> set('orderby' ,'post__in');
 
@@ -373,7 +373,7 @@ class Ysm_Search
 	{
 		global $wpdb;
 
-		self::$s = htmlentities( strip_tags( $s ) );
+		self::$s = esc_attr( strip_tags( $s ) );
 		$s = strtolower($s);
 
 		/* SELECT part */
