@@ -374,7 +374,7 @@ class Ysm_Search
 		global $wpdb;
 
 		self::$s = esc_attr( strip_tags( $s ) );
-		$s = strtolower($s);
+		$s = mb_strtolower( $s );
 
 		/* SELECT part */
 		$select = array();
