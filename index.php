@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Smart WooCommerce Search
  * Plugin URI:  https://yummywp.com/plugin/smart-search
- * Description: Smart Search allows you to search any content type on a website, including WooCommerce products
+ * Description: Ajax Smart WooCommerce Search allows you to instantly search products.
  * Author:      Stanislav S - YummyWP
  * Author URI:  https://yummywp.com
  * Version:     1.2.2
