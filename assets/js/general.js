@@ -189,7 +189,7 @@
 					} else if (options.no_results_text.length) {
 						$results_wrapper.css({
 							maxHeight: 'auto',
-							height: 40
+							height: 42
 						}).nanoScroller({
 							contentClass: 'smart-search-suggestions',
 							stop: true
