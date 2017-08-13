@@ -163,6 +163,13 @@ $tabs = array(
 							'value' => __('View all', 'smart_search'),
 						));
 
+						ysm_setting( $w_id, 'accent_words_on_search_page', array(
+							'type' => 'checkbox',
+							'title' => __('Accent Words on Search Page', 'smart_search'),
+							'description' => __('Accent searchable words on search page. Works only if "Default Output on Search Page" option is disabled.', 'smart_search'),
+							'value' => 0,
+						));
+
 						?>
 
 						</tbody>

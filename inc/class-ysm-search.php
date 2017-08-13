@@ -79,6 +79,10 @@ class Ysm_Search
 		add_action('pre_get_posts', array(__CLASS__, 'search_filter'));
 		add_action('wp', array(__CLASS__, 'remove_search_filter'));
 
+		add_filter('the_title', array(__CLASS__, 'accent_search_words'), 9999, 1);
+		add_filter('get_the_excerpt', array(__CLASS__, 'accent_search_words'), 9999, 1);
+		add_filter('the_content', array(__CLASS__, 'accent_search_words'), 9999, 1);
+
 		$registered_pt = get_post_types();
 		unset($registered_pt['attachment']);
 		unset($registered_pt['revision']);
@@ -267,6 +271,10 @@ class Ysm_Search
 			self::$display_opts['search_page_default_output'] = 'search_page_default_output';
 		}
 
+		if ( !empty( $settings['accent_words_on_search_page'] ) ) {
+			self::$display_opts['accent_words_on_search_page'] = 'accent_words_on_search_page';
+		}
+
 	}
 
 	/**
@@ -277,7 +285,7 @@ class Ysm_Search
 	public static function search_filter($query)
 	{
 
-		if ( !is_admin() && $query->is_main_query() ) {
+		if ( $query->is_main_query() ) {
 
 			if ( $query->is_search && isset($_GET['search_id']) ) {
 
@@ -341,7 +349,7 @@ class Ysm_Search
 	public static function remove_search_filter()
 	{
 		global $wp_the_query;
-		if ( !is_admin() && !( defined( 'DOING_AJAX' ) && DOING_AJAX ) ) {
+		if ( ! ( defined( 'DOING_AJAX' ) && DOING_AJAX ) ) {
 
 			if (!empty( $wp_the_query->query_vars['s'] ) && isset($_GET['search_id'])) {
 				remove_filter( 'posts_where',   array( __CLASS__, 'posts_where' ), 9999 );
@@ -670,6 +678,40 @@ class Ysm_Search
 		//ob_clean();
 		echo json_encode($res);
 		exit();
+	}
+
+	public static function accent_search_words( $text ) {
+
+		if ( is_search() && isset($_GET['search_id']) ) {
+
+			if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
+				return $text;
+			}
+
+			$w_id = $_GET['search_id'];
+			$s    = $_GET['s'];
+
+			if ( empty( $w_id ) || empty( $s ) ) {
+				return $text;
+			}
+
+			if ($w_id == 'product') {
+				self::$w_id = 'product';
+			} else if ($w_id == 'default') {
+				self::$w_id = 'default';
+			} else {
+				self::$w_id = (int) $w_id;
+			}
+
+			self::parse_settings();
+
+			if ( empty( self::$display_opts['search_page_default_output'] ) && ! empty( self::$display_opts['accent_words_on_search_page'] ) ) {
+				$text = preg_replace( '/' . self::$s . '/i', "<strong>$0</strong>", $text );
+			}
+
+		}
+
+		return $text;
 	}
 
 }
