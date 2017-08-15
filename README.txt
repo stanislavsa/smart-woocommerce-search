@@ -4,7 +4,7 @@ Donate link: https://yummywp.com/
 Tags: woocommerce search, ajax search, product search, instant search, woocommerce search plugin, search for woocommerce, search, woocommerce, woocommerce product search, search woocommerce, shop, shop search, autocomplete, autosuggest, search for wp, search for wordpress, search plugin, woocommerce search by sku, search results,  woocommerce search shortcode, search products, search autocomplete, woocommerce advanced search, woocommerce predictive search, woocommerce live search, woocommerce single product, woocommerce site search, products, shop, category search, custom search, predictive search, relevant search, search product, woocommerce plugin, posts search, wp search, wordpress search
 Requires at least: 4.2
 Tested up to: 4.8
-Stable tag: 1.2.3
+Stable tag: 1.3.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -81,6 +81,11 @@ Yes, when using products search or when you set option to search only through pr
 4. Smart WooCommerce Search Settings Page - Styling tab
 
 == Changelog ==
+
+= 1.3.0 =
+* Added option "Enable search through Variable Product Variations"
+* Added option "Accent Words on Search Page"
+* Under the hood improvements
 
 = 1.2.3 =
 * Fixed issue with a border in "No results" block
