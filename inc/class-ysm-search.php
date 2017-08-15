@@ -64,6 +64,12 @@ class Ysm_Search
 	protected static $s = '';
 
 	/**
+	 * Debug
+	 * @var bool
+	 */
+	public static $debug = false;
+
+	/**
 	 * Initial hooks
 	 */
 	public static function init()
@@ -192,11 +198,15 @@ class Ysm_Search
 		} else {
 
 			foreach (self::$registered_pt as $type){
-				if ( isset($settings['post_type_'.$type]) ){
+				if ( isset($settings['post_type_'.$type]) ) {
 					self::$pt[ $type ] = $type;
 				}
 			}
 
+		}
+
+		if ( ! empty( $settings['post_type_product_variation'] ) ) {
+			self::$pt[ 'product_variation' ] = 'product_variation';
 		}
 
 		self::$max_posts = !empty( $settings['max_post_count'] ) ? $settings['max_post_count'] : 99;
@@ -480,8 +490,14 @@ class Ysm_Search
 					$allowed_product_cats_filtered[] = "'" . intval( $allowed_product_cat ) . "'";
 				}
 			}
-			$allowed_product_cats_filtered = implode( ",", $allowed_product_cats_filtered );
-			$where['and'][] = sprintf( "( p.post_type NOT IN ('product') OR ( p.post_type = 'product' AND t_tax.taxonomy = 'product_cat' AND t.term_id IN (%s) ) )", $allowed_product_cats_filtered );
+
+			if ( ! empty( $allowed_product_cats_filtered ) ) {
+				$allowed_product_cats_filtered = implode( ",", $allowed_product_cats_filtered );
+				$where['and'][] = sprintf( "( p.post_type NOT IN ('product') OR ( p.post_type = 'product' AND t_tax.taxonomy = 'product_cat' AND t.term_id IN (%s) ) )", $allowed_product_cats_filtered );
+				// product variations
+				//$where['and'][] = sprintf( "( p.post_type NOT IN ('product_variation') OR ( p.post_type = 'product_variation' AND t_tax.taxonomy = 'product_cat' AND t.term_id IN (%s) ) )", $allowed_product_cats_filtered );
+			}
+
 		}
 
 		if ( !empty( self::$terms ) || !empty( self::$fields['allowed_product_cat'] ) ) {
@@ -588,7 +604,7 @@ class Ysm_Search
 			$post_title = preg_replace( '/'.self::$s.'/i', "<strong>$0</strong>", $post_title );
 			$output .=          '<div class="smart-search-post-title">' . $post_title . '</div>';
 
-			if ( 'product' === $post->post_type && ysm_is_woocommerce_active() ) {
+			if ( ( 'product' === $post->post_type || 'product_variation' === $post->post_type ) && ysm_is_woocommerce_active() ) {
 				$product = wc_get_product( $post->ID );
 				/* product price */
 				if ( !empty( self::$display_opts['display_price'] ) ) {
@@ -675,7 +691,16 @@ class Ysm_Search
 			'view_all_link' => $view_all_link
 		);
 
-		//ob_clean();
+		//debug output
+		if ( self::$debug ) {
+			global $wpdb;
+			echo "<pre>";
+			print_r( $wpdb->queries );
+			echo "</pre>";
+		} else {
+			ob_clean();
+		}
+
 		echo json_encode($res);
 		exit();
 	}

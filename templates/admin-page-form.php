@@ -213,6 +213,17 @@ $tabs = array(
 
 						<?php } ?>
 
+						<th class="ysm-widget-settings-th"><?php _e('Product Variations', 'smart_search') ?></th>
+
+						<?php
+						ysm_setting( $w_id, 'post_type_product_variation', array(
+							'type'  => 'checkbox',
+							'title' => __('Search in Variations', 'smart_search'),
+							'description' => __('Enable search through Variable Product Variations', 'smart_search'),
+							'value' => 0,
+						));
+						?>
+
 						<th class="ysm-widget-settings-th"><?php _e('Fields', 'smart_search') ?></th>
 
 						<?php
