@@ -80,7 +80,7 @@ function ysm_get_widget_list_row_template($args) {
 					<td>' . $id . '</td>
 					<td>
 						<a href="' . admin_url( 'admin.php?page=smart-search-custom&action=edit&id=' . $id ) . '">
-							' . esc_html( $args['name'] ) . '
+							' . ( ! empty( $args['name'] ) ? esc_html( $args['name'] ) : 'no name' ) . '
 						</a>
 					</td>
 					<td>

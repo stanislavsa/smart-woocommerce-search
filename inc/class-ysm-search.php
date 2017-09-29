@@ -198,7 +198,7 @@ class Ysm_Search
 		} else {
 
 			foreach (self::$registered_pt as $type){
-				if ( isset($settings['post_type_'.$type]) ) {
+				if ( ! empty($settings['post_type_'.$type]) ) {
 					self::$pt[ $type ] = $type;
 				}
 			}

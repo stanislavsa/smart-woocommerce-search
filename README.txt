@@ -48,7 +48,7 @@ Give it a try and enjoy:)
  * WPML compatible
  * Search results with images and prices
 
-[View plugin Demo](https://yummywp.com/plugin/smart-search/).
+[View plugin Demo](https://yummywp.com/plugins/smart-woocommerce-search/).
 
 [Plugin Documentation](https://yummywp.com/docs/smart-search/).
 
