@@ -123,6 +123,16 @@
 				}
 			});
 
+			$(window).on('resize', function () {
+				var _width = $this.outerWidth() + 'px';
+
+				$results_wrapper.css({
+					width: _width
+				}).find('.smart-search-suggestions').css({
+					width: _width
+				});
+			});
+
 			$this.devbridgeAutocomplete({
 				minChars        : options.minChars,
 				appendTo        : $results_wrapper,
