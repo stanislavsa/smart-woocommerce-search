@@ -291,3 +291,7 @@
 	background: #ccc;
 	text-align: center;
 }
+
+.woocommerce-loop-product__title > strong {
+	display: inline !important;
+}

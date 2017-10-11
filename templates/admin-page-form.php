@@ -170,6 +170,13 @@ $tabs = array(
 							'value' => 0,
 						));
 
+						ysm_setting( $w_id, 'enable_fuzzy_search', array(
+							'type' => 'checkbox',
+							'title' => __('Fuzzy Search', 'smart_search'),
+							'description' => __('Enable multiple word search. May slow down the search request speed.', 'smart_search'),
+							'value' => 0,
+						));
+
 						?>
 
 						</tbody>

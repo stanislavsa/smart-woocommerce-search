@@ -53,6 +53,11 @@ class Ysm_Search
 	 */
 	protected static $max_posts = 0;
 	/**
+	 * Minimal symbols count
+	 * @var int
+	 */
+	protected static $min_symbols = 0;
+	/**
 	 * List of found post id's that satisfy search query
 	 * @var array
 	 */
@@ -61,7 +66,11 @@ class Ysm_Search
 	 * Search query
 	 * @var string
 	 */
-	protected static $s = '';
+	protected static $s = '';/**
+	 * Search words
+	 * @var string
+	 */
+	protected static $s_words = [];
 
 	/**
 	 * Debug
@@ -210,6 +219,7 @@ class Ysm_Search
 		}
 
 		self::$max_posts = !empty( $settings['max_post_count'] ) ? $settings['max_post_count'] : 99;
+		self::$min_symbols = !empty( $settings['char_count'] ) ? $settings['char_count'] : 3;
 
 		/* fields to search through */
 		if ( !empty( $settings['field_title'] ) ) {
@@ -283,6 +293,10 @@ class Ysm_Search
 
 		if ( !empty( $settings['accent_words_on_search_page'] ) ) {
 			self::$display_opts['accent_words_on_search_page'] = 'accent_words_on_search_page';
+		}
+
+		if ( !empty( $settings['enable_fuzzy_search'] ) ) {
+			self::$display_opts['enable_fuzzy_search'] = 'enable_fuzzy_search';
 		}
 
 	}
@@ -393,6 +407,21 @@ class Ysm_Search
 
 		self::$s = esc_attr( strip_tags( $s ) );
 		$s = mb_strtolower( $s );
+		$s_words = array();
+
+		if ( ! empty( self::$display_opts['enable_fuzzy_search'] ) ) {
+			$s_words_temp = explode( ' ', $s );
+
+			foreach ( $s_words_temp as $word ) {
+				if ( strlen( $word ) >= self::$min_symbols ) {
+					$s_words[] = $word;
+				}
+			}
+		} else {
+			$s_words[] = $s;
+		}
+
+		self::$s_words = $s_words;
 
 		/* SELECT part */
 		$select = array();
@@ -453,17 +482,17 @@ class Ysm_Search
 		/* filters */
 
 		if ( !empty(self::$fields['post_title']) ) {
-			$where['or'][] = "lower(p.post_title) LIKE %s";
+			$where['or'][] = self::make_like_query( 'lower(p.post_title)' );
 			$relevance['p.post_title'] = 30;
 		}
 
 		if ( !empty(self::$fields['post_content']) ) {
-			$where['or'][] = "lower(p.post_content) LIKE %s";
+			$where['or'][] = self::make_like_query( 'lower(p.post_content)' );
 			$relevance['p.post_content'] = 10;
 		}
 
 		if ( !empty(self::$fields['post_excerpt']) ) {
-			$where['or'][] = "lower(p.post_excerpt) LIKE %s";
+			$where['or'][] = self::make_like_query( 'lower(p.post_excerpt)' );
 			$relevance['p.post_excerpt'] = 10;
 		}
 
@@ -477,7 +506,7 @@ class Ysm_Search
 
 			$s_terms = implode(',', $s_terms);
 
-			$where['or'][] = "( t_tax.taxonomy IN ({$s_terms}) AND lower(t.name) LIKE %s )";
+			$where['or'][] = "( t_tax.taxonomy IN ({$s_terms}) AND (" . self::make_like_query( 'lower(t.name)' ) . ") )";
 		}
 
 		// restrict searching only in defined categories
@@ -509,7 +538,7 @@ class Ysm_Search
 		if ( !empty( self::$postmeta ) ) {
 
 			foreach (self::$postmeta as $postmeta) {
-				$where['or'][] = "( pm.meta_key = '{$postmeta}' AND  lower( pm.meta_value ) LIKE %s )";
+				$where['or'][] = "( pm.meta_key = '{$postmeta}' AND (" . self::make_like_query( 'lower(pm.meta_value)' ) . ") )";
 			}
 
 			$join['pm'] = "LEFT JOIN {$wpdb->postmeta} pm ON pm.post_id = p.ID";
@@ -533,7 +562,7 @@ class Ysm_Search
 			foreach ($relevance as $k => $v) {
 
 				$relevance_query[] = "( CASE
-			                    WHEN ( lower($k) LIKE '%s' ) THEN " . (int) $v ."
+			                    WHEN (" . self::make_like_query( "lower($k)" )  . ") THEN " . (int) $v ."
 			                    ELSE 0
 			                   END )";
 
@@ -571,6 +600,16 @@ class Ysm_Search
 		return $posts;
 	}
 
+	protected static function make_like_query( $field ) {
+		global $wpdb;
+		$query = [];
+
+		foreach ( self::$s_words as $s_word ) {
+			$query[] = $wpdb->prepare( "$field LIKE '%s'", array( "%".$s_word."%" ) );
+		}
+
+		return implode( ' OR ', $query );
+	}
 	/**
 	 * Prepare suggestions list
 	 * @param $posts
@@ -599,9 +638,12 @@ class Ysm_Search
 			/* holder open */
 			$output .=      '<div class="smart-search-post-holder">';
 
+			/* replace pattern */
+			$pattern = '/' . implode( '|', array_map( 'trim', self::$s_words ) ) . '/i';
+
 			/* title */
 			$post_title = esc_html( $post->post_title );
-			$post_title = preg_replace( '/'.self::$s.'/i', "<strong>$0</strong>", $post_title );
+			$post_title = preg_replace( $pattern, "<strong>$0</strong>", $post_title );
 			$output .=          '<div class="smart-search-post-title">' . $post_title . '</div>';
 
 			if ( ( 'product' === $post->post_type || 'product_variation' === $post->post_type ) && ysm_is_woocommerce_active() ) {
@@ -640,7 +682,7 @@ class Ysm_Search
 					$post_excerpt .= ' ...';
 				}
 
-				$post_excerpt = preg_replace( '/'.self::$s.'/i', "<strong>$0</strong>", $post_excerpt );
+				$post_excerpt = preg_replace( $pattern, "<strong>$0</strong>", $post_excerpt );
 				$output .= '<div class="smart-search-post-excerpt">' . $post_excerpt . '</div>';
 			}
 
@@ -730,8 +772,11 @@ class Ysm_Search
 
 			self::parse_settings();
 
+			/* replace pattern */
+			$pattern = '/' . implode( '|', array_map( 'trim', self::$s_words ) ) . '/i';
+
 			if ( empty( self::$display_opts['search_page_default_output'] ) && ! empty( self::$display_opts['accent_words_on_search_page'] ) ) {
-				$text = preg_replace( '/' . self::$s . '/i', "<strong>$0</strong>", $text );
+				$text = preg_replace( $pattern, "<strong>$0</strong>", $text );
 			}
 
 		}
