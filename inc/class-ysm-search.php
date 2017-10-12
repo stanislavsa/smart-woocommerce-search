@@ -66,7 +66,8 @@ class Ysm_Search
 	 * Search query
 	 * @var string
 	 */
-	protected static $s = '';/**
+	protected static $s = '';
+	/**
 	 * Search words
 	 * @var string
 	 */
@@ -545,18 +546,10 @@ class Ysm_Search
 		}
 
 		if ( !empty($where['or']) ) {
-			$placeholder = array();
-			$like_query = "(" . implode(' OR ', $where['or']) . ")";
-
-			foreach ($where['or'] as $val) {
-				$placeholder[] = "%".$s."%";
-			}
-
-			$where['and'][] = $wpdb->prepare( $like_query, $placeholder );
+			$where['and'][] = "(" . implode(' OR ', $where['or']) . ")";
 		}
 
 		if ( !empty($relevance) ) {
-			$placeholder = array();
 			$relevance_query = array();
 
 			foreach ($relevance as $k => $v) {
@@ -565,12 +558,9 @@ class Ysm_Search
 			                    WHEN (" . self::make_like_query( "lower($k)" )  . ") THEN " . (int) $v ."
 			                    ELSE 0
 			                   END )";
-
-				$placeholder[] = "%".$s."%";
 			}
 
 			$relevance_query = "( " . implode(' + ', $relevance_query) . " )";
-			$relevance_query = $wpdb->prepare( $relevance_query, $placeholder );
 
 			$select[] = "$relevance_query as relevance";
 			$orderby[] = "relevance DESC";
@@ -605,7 +595,7 @@ class Ysm_Search
 		$query = [];
 
 		foreach ( self::$s_words as $s_word ) {
-			$query[] = $wpdb->prepare( "$field LIKE '%s'", array( "%".$s_word."%" ) );
+			$query[] = $wpdb->prepare( "$field LIKE %s", array( "%" . trim( $s_word ) . "%" ) );
 		}
 
 		return implode( ' OR ', $query );
