@@ -71,7 +71,7 @@ class Ysm_Search
 	 * Search words
 	 * @var string
 	 */
-	protected static $s_words = [];
+	protected static $s_words = array();
 
 	/**
 	 * Debug
@@ -592,7 +592,7 @@ class Ysm_Search
 
 	protected static function make_like_query( $field ) {
 		global $wpdb;
-		$query = [];
+		$query = array();
 
 		foreach ( self::$s_words as $s_word ) {
 			$query[] = $wpdb->prepare( "$field LIKE %s", array( "%" . trim( $s_word ) . "%" ) );
