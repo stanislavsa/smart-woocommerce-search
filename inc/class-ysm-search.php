@@ -357,7 +357,7 @@ class Ysm_Search
 				}
 
 				self::$result_post_ids = $wp_posts;
-				$query->set('s', esc_attr( strip_tags( self::$s ) ) );
+				$query->set('s', implode( ' ', self::$s_words ) );
 				$query->set('post__in', $wp_posts );
 				$query-> set('orderby' ,'post__in');
 
@@ -406,7 +406,7 @@ class Ysm_Search
 	{
 		global $wpdb;
 
-		self::$s = esc_attr( strip_tags( $s ) );
+		$s = esc_attr( strip_tags( $s ) );
 		$s = mb_strtolower( $s );
 		$s_words = array();
 
@@ -628,12 +628,9 @@ class Ysm_Search
 			/* holder open */
 			$output .=      '<div class="smart-search-post-holder">';
 
-			/* replace pattern */
-			$pattern = '/' . implode( '|', array_map( 'trim', self::$s_words ) ) . '/i';
-
 			/* title */
 			$post_title = esc_html( $post->post_title );
-			$post_title = preg_replace( $pattern, "<strong>$0</strong>", $post_title );
+			$post_title = self::text_replace( $post_title );
 			$output .=          '<div class="smart-search-post-title">' . $post_title . '</div>';
 
 			if ( ( 'product' === $post->post_type || 'product_variation' === $post->post_type ) && ysm_is_woocommerce_active() ) {
@@ -672,7 +669,7 @@ class Ysm_Search
 					$post_excerpt .= ' ...';
 				}
 
-				$post_excerpt = preg_replace( $pattern, "<strong>$0</strong>", $post_excerpt );
+				$post_excerpt = self::text_replace( $post_excerpt );
 				$output .= '<div class="smart-search-post-excerpt">' . $post_excerpt . '</div>';
 			}
 
@@ -692,7 +689,7 @@ class Ysm_Search
      */
     protected static function get_viewall_link_url () {
 
-        $url = home_url('/') . '?s=' . self::$s;
+        $url = home_url('/') . '?s=' . implode( ' ', self::$s_words );
 
         //if ( empty(self::$display_opts['search_page_default_output']) ) {
             $url .= '&search_id=' . self::$w_id;
@@ -720,7 +717,7 @@ class Ysm_Search
 
 		$res = array(
 			'suggestions' => self::$suggestions,
-			'view_all_link' => $view_all_link
+			'view_all_link' => $view_all_link,
 		);
 
 		//debug output
@@ -762,16 +759,26 @@ class Ysm_Search
 
 			self::parse_settings();
 
-			/* replace pattern */
-			$pattern = '/' . implode( '|', array_map( 'trim', self::$s_words ) ) . '/i';
-
 			if ( empty( self::$display_opts['search_page_default_output'] ) && ! empty( self::$display_opts['accent_words_on_search_page'] ) ) {
-				$text = preg_replace( $pattern, "<strong>$0</strong>", $text );
+				$text = self::text_replace( $text );
 			}
 
 		}
 
 		return $text;
+	}
+
+	public static function text_replace( $text ) {
+		$words = self::$s_words;
+
+		foreach ( $words as &$w ) {
+			$w = preg_quote( trim( $w ) );
+			$w = str_replace( '/', '\/', $w );
+		}
+
+		/* replace pattern */
+		$pattern = '/' . implode( '|', $words ) . '/i';
+		return preg_replace( $pattern, "<strong>$0</strong>", $text );
 	}
 
 }
