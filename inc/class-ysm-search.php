@@ -300,6 +300,10 @@ class Ysm_Search
 			self::$display_opts['enable_fuzzy_search'] = 'enable_fuzzy_search';
 		}
 
+		if ( !empty( $settings['exclude_out_of_stock_products'] ) ) {
+			self::$display_opts['exclude_out_of_stock_products'] = 'exclude_out_of_stock_products';
+		}
+
 	}
 
 	/**
@@ -406,7 +410,7 @@ class Ysm_Search
 	{
 		global $wpdb;
 
-		$s = esc_attr( strip_tags( $s ) );
+		$s = esc_attr( strip_tags( trim( $s ) ) );
 		$s = mb_strtolower( $s );
 		$s_words = array();
 
@@ -464,6 +468,11 @@ class Ysm_Search
 					FROM {$wpdb->term_relationships}
 					WHERE term_taxonomy_id IN (%d)
 				)", $wc_product_visibility_term_ids['exclude-from-search'] );
+			}
+
+			if ( ! empty( self::$display_opts['exclude_out_of_stock_products'] ) ) {
+				$join['pmpv'] = "LEFT JOIN {$wpdb->postmeta} pmpv ON pmpv.post_id = p.ID";
+				$where['and'][] = "( p.post_type NOT IN ('product') OR ( p.post_type = 'product' AND pmpv.meta_key = '_stock_status' AND CAST(pmpv.meta_value AS CHAR) NOT IN ('outofstock') ) )";
 			}
 
 		}
@@ -677,7 +686,8 @@ class Ysm_Search
 
 			self::$suggestions[] = array(
 				'value' => esc_js($post->post_title),
-				'data' => $output,
+				'data'  => $output,
+				'url'   => esc_url( get_permalink( $post->ID ) ),
 			);
 		}
 

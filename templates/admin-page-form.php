@@ -273,6 +273,13 @@ $tabs = array(
 
 						<?php
 
+						ysm_setting( $w_id, 'exclude_out_of_stock_products', array(
+							'type' => 'checkbox',
+							'title' => __('Exclude "Out of stock"', 'smart_search'),
+							'description' => __('Exclude "Out of stock" products from results', 'smart_search'),
+							'value' => 0,
+						));
+
 						ysm_setting( $w_id, 'allowed_product_cat', array(
 							'type' => 'text',
 							'title' => __('Allowed Product Categories', 'smart_search'),
