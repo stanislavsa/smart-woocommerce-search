@@ -185,7 +185,7 @@ if ( ! function_exists( 'ysm_enqueue_scripts' ) ) {
 				$pt_list['page'] = $v['settings']['post_type_page'];
 			}
 
-			if ( isset( $pt_list['product'] ) && count( $pt_list ) === 1 ) {
+			if ( isset( $pt_list['product'] ) ) {
 				$localized[ $js_pref . 'layout' ] = 'product';
 			}
 
