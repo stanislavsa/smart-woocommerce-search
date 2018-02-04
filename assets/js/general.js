@@ -12,7 +12,7 @@
 
 				var attr = {
 						id: 'default',
-						serviceUrl: ysm_L10n.ajaxurl + '?action=ysm_default_search',
+						serviceUrl: ysm_L10n.ajaxurl + 'ysm_default_search',
 						layout: ysm_L10n['layout'],
 						maxHeight: 400,
 						minChars: ysm_L10n.char_count,
@@ -33,7 +33,7 @@
 
 				var attr = {
 						id: 'product',
-						serviceUrl: ysm_L10n.ajaxurl + '?action=ysm_product_search',
+						serviceUrl: ysm_L10n.ajaxurl + 'ysm_product_search',
 						layout: 'product',
 						maxHeight: 400,
 						minChars: ysm_L10n.product_char_count,
@@ -54,7 +54,7 @@
 				var id = $(this).find('form').data('id'),
 					attr = {
 						id: id,
-						serviceUrl: ysm_L10n.ajaxurl + '?action=ysm_custom_search&id=' + id,
+						serviceUrl: ysm_L10n.ajaxurl + 'ysm_custom_search&id=' + id,
 						layout: ysm_L10n['custom_'+ id +'_layout'],
 						maxHeight: 400,
 						minChars: ysm_L10n['custom_'+ id +'_char_count'],

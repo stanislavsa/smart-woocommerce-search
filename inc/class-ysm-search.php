@@ -77,20 +77,28 @@ class Ysm_Search
 	 * Debug
 	 * @var bool
 	 */
-	public static $debug = false;
+	protected static $debug    = false;
+	private static $time_start = 0;
+	private static $time_end   = 0;
 
 	/**
 	 * Initial hooks
 	 */
-	public static function init()
-	{
-
-		add_action('wp_ajax_nopriv_ysm_default_search', array(__CLASS__, 'default_search'));
-		add_action('wp_ajax_ysm_default_search', array(__CLASS__, 'default_search'));
-		add_action('wp_ajax_nopriv_ysm_product_search', array(__CLASS__, 'product_search'));
-		add_action('wp_ajax_ysm_product_search', array(__CLASS__, 'product_search'));
-		add_action('wp_ajax_nopriv_ysm_custom_search', array(__CLASS__, 'custom_search'));
-		add_action('wp_ajax_ysm_custom_search', array(__CLASS__, 'custom_search'));
+	public static function init() {
+		self::$time_start = microtime( true );
+		// ajax
+		if ( isset( $_REQUEST['wc-ajax'] ) ) {
+			add_action( 'wc_ajax_ysm_default_search', array( __CLASS__, 'default_search' ) );
+			add_action( 'wc_ajax_ysm_product_search', array( __CLASS__, 'product_search' ) );
+			add_action( 'wc_ajax_ysm_custom_search', array( __CLASS__, 'custom_search' ) );
+		} else {
+			add_action( 'wp_ajax_ysm_default_search', array( __CLASS__, 'default_search' ) );
+			add_action( 'wp_ajax_ysm_product_search', array( __CLASS__, 'product_search' ) );
+			add_action( 'wp_ajax_ysm_custom_search', array( __CLASS__, 'custom_search' ) );
+			add_action( 'wp_ajax_nopriv_ysm_default_search', array( __CLASS__, 'default_search' ) );
+			add_action( 'wp_ajax_nopriv_ysm_product_search', array( __CLASS__, 'product_search' ) );
+			add_action( 'wp_ajax_nopriv_ysm_custom_search', array( __CLASS__, 'custom_search' ) );
+		}
 
 		add_action('pre_get_posts', array(__CLASS__, 'search_filter'));
 		add_action('wp', array(__CLASS__, 'remove_search_filter'));
@@ -99,19 +107,14 @@ class Ysm_Search
 		add_filter('get_the_excerpt', array(__CLASS__, 'accent_search_words'), 9999, 1);
 		add_filter('the_content', array(__CLASS__, 'accent_search_words'), 9999, 1);
 
-		$registered_pt = get_post_types();
-		unset($registered_pt['attachment']);
-		unset($registered_pt['revision']);
-		unset($registered_pt['nav_menu_item']);
-		unset($registered_pt['custom_css']);
-		unset($registered_pt['customize_changeset']);
+		self::$registered_pt = array(
+			'post',
+			'page',
+		);
 
 		if (ysm_is_woocommerce_active()) {
-			$registered_pt['product'] = 'Product';
+			self::$registered_pt[] = 'product';
 		}
-
-		self::$registered_pt = array_keys($registered_pt);
-
 	}
 
 	/**
@@ -163,9 +166,7 @@ class Ysm_Search
 	/**
 	 * Custom search widget case
 	 */
-	public static function custom_search()
-	{
-
+	public static function custom_search() {
 		if (isset($_REQUEST['id'])) {
 			self::$w_id = (int) $_REQUEST['id'];
 		}
@@ -406,8 +407,7 @@ class Ysm_Search
 	 * @param string $s
 	 * @return array|null|object
 	 */
-	protected static function search_posts($s = '')
-	{
+	protected static function search_posts($s = '') {
 		global $wpdb;
 
 		$s = esc_attr( strip_tags( trim( $s ) ) );
@@ -487,7 +487,7 @@ class Ysm_Search
 		$orderby = array();
 
 		/* LIMIT */
-		$limit = self::$max_posts === '' ? 100 : self::$max_posts;
+		$limit = empty( self::$max_posts ) ? 10 : (int) self::$max_posts;
 
 		/* filters */
 
@@ -545,15 +545,6 @@ class Ysm_Search
 			$join['t'] = "LEFT JOIN {$wpdb->terms} t ON t_tax.term_id = t.term_id";
 		}
 
-		if ( !empty( self::$postmeta ) ) {
-
-			foreach (self::$postmeta as $postmeta) {
-				$where['or'][] = "( pm.meta_key = '{$postmeta}' AND (" . self::make_like_query( 'lower(pm.meta_value)' ) . ") )";
-			}
-
-			$join['pm'] = "LEFT JOIN {$wpdb->postmeta} pm ON pm.post_id = p.ID";
-		}
-
 		if ( !empty($where['or']) ) {
 			$where['and'][] = "(" . implode(' OR ', $where['or']) . ")";
 		}
@@ -590,12 +581,118 @@ class Ysm_Search
 		         " GROUP BY " . $groupby .
 		         " ORDER BY " . implode(' , ', $orderby);
 
-		if ($limit !== '-1') {
-			$query .= " LIMIT " . (int) $limit;
+		$query .= " LIMIT " . (int) $limit;
+
+		$posts = $wpdb->get_results($query, OBJECT_K);
+		if ( ! $posts || ! is_array( $posts ) ) {
+			$posts = array();
 		}
+
+		if ( count( $posts ) < $limit ) {
+			$additional_posts = self::search_postmeta( $limit - count( $posts ) );
+			$posts = array_merge( $posts, $additional_posts );
+		}
+		return $posts;
+	}
+
+	/**
+	 * Extend search with postmeta
+	 * @param int $limit
+	 * @return array|null|object
+	 */
+	static function search_postmeta( $limit = 0 ) {
+
+		global $wpdb;
+
+		/* SELECT part */
+		$select = array();
+		$select[] = "DISTINCT p.ID";
+		$select[] = "p.post_title";
+		$select[] = "p.post_content";
+		$select[] = "p.post_excerpt";
+		$select[] = "p.post_type";
+
+		/* JOIN part */
+		$join = array();
+
+		/* WHERE part */
+		$where = array(
+			'and' => array(),
+			'or' => array(),
+		);
+
+		$where['and'][] = "p.post_status = 'publish'";
+
+		$s_post_types = array();
+
+		foreach (self::$pt as $type){
+			$s_post_types[] = "'" . esc_sql($type) . "'";
+		}
+
+		$s_post_types = implode(',', $s_post_types);
+		$where['and'][] = "p.post_type IN ({$s_post_types})";
+
+		if ( isset(self::$pt['product']) ) {
+
+			if ( version_compare( WC()->version, '3.0.0', '<' ) ) {
+				$join['pmpv'] = "LEFT JOIN {$wpdb->postmeta} pmpv ON pmpv.post_id = p.ID";
+				$where['and'][] = "( p.post_type NOT IN ('product') OR (p.post_type = 'product' AND pmpv.meta_key = '_visibility' AND CAST(pmpv.meta_value AS CHAR) IN ('search','visible')) )";
+			} else {
+				$wc_product_visibility_term_ids = wc_get_product_visibility_term_ids();
+				$where['and'][] = sprintf( "p.ID NOT IN (
+					SELECT object_id
+					FROM {$wpdb->term_relationships}
+					WHERE term_taxonomy_id IN (%d)
+				)", $wc_product_visibility_term_ids['exclude-from-search'] );
+			}
+
+			if ( ! empty( self::$display_opts['exclude_out_of_stock_products'] ) ) {
+				$join['pmpv'] = "LEFT JOIN {$wpdb->postmeta} pmpv ON pmpv.post_id = p.ID";
+				$where['and'][] = "( p.post_type NOT IN ('product') OR ( p.post_type = 'product' AND pmpv.meta_key = '_stock_status' AND CAST(pmpv.meta_value AS CHAR) NOT IN ('outofstock') ) )";
+			}
+
+		}
+
+		/* GROUP BY part */
+		$groupby = "p.ID";
+
+		/* ORDER BY part */
+		$orderby = array();
+
+		// post meta fields
+		if ( !empty( self::$postmeta ) ) {
+
+			foreach (self::$postmeta as $postmeta) {
+				$where['or'][] = "( pm.meta_key = '{$postmeta}' AND (" . self::make_like_query( 'lower(pm.meta_value)' ) . ") )";
+			}
+
+			$join['pm'] = "LEFT JOIN {$wpdb->postmeta} pm ON pm.post_id = p.ID";
+		}
+
+		if ( !empty($where['or']) ) {
+			$where['and'][] = "(" . implode(' OR ', $where['or']) . ")";
+		}
+
+		// wpml
+		if ( defined('ICL_LANGUAGE_CODE') && ICL_LANGUAGE_CODE != '' ) {
+			$join['icl'] = $wpdb->prepare( "RIGHT JOIN {$wpdb->prefix}icl_translations icl ON (p.ID = icl.element_id AND icl.language_code = '%s')", ICL_LANGUAGE_CODE );
+		}
+
+		$orderby[] = "p.post_title ASC";
+
+		$query = "SELECT " . implode(' , ', $select) .
+			" FROM {$wpdb->posts} p
+                 " . implode(' ', $join) .
+			" WHERE " . implode(' AND ', $where['and']) .
+			" GROUP BY " . $groupby .
+			" ORDER BY " . implode(' , ', $orderby);
+		$query .= " LIMIT " . (int) $limit;
 
 		$posts = $wpdb->get_results($query, OBJECT_K);
 
+		if ( ! $posts || ! is_array( $posts ) ) {
+			$posts = array();
+		}
 		return $posts;
 	}
 
@@ -733,11 +830,12 @@ class Ysm_Search
 		//debug output
 		if ( self::$debug ) {
 			global $wpdb;
-			echo "<pre>";
-			print_r( $wpdb->queries );
-			echo "</pre>";
+			$res['queries'] = $wpdb->queries;
+
+			self::$time_end = microtime( true );
+			$res['time'] = self::$time_end - self::$time_start;
 		} else {
-			ob_clean();
+			//ob_clean();
 		}
 
 		echo json_encode($res);

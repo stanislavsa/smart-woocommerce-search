@@ -140,8 +140,14 @@ if ( ! function_exists( 'ysm_enqueue_scripts' ) ) {
 			wp_enqueue_script( 'smart-search-general', YSM_URI . 'assets/js/min/main.min.js', array( 'jquery' ), YSM_VER, 1 );
 		}
 
+		if ( ysm_is_woocommerce_active() && version_compare( WC()->version, '2.4.0', '>' ) ) {
+			$ajaxurl = WC_AJAX::get_endpoint( '' ) . '=';
+		} else {
+			$ajaxurl = admin_url( 'admin-ajax.php', 'relative' ) . '?action=';
+		}
+
 		$localized                          = array();
-		$localized['ajaxurl']               = admin_url( 'admin-ajax.php', 'relative' );
+		$localized['ajaxurl']               = $ajaxurl;
 		$localized['enable_search']         = (int) ysm_get_option( 'default', 'enable_search' );
 		$localized['enable_product_search'] = (int) ysm_get_option( 'product', 'enable_product_search' );
 		$localized['loader_icon']           = YSM_URI . 'assets/images/loader6.gif';
@@ -327,8 +333,6 @@ if ( ! function_exists( 'ysm_enqueue_scripts' ) ) {
 					),
 				) );
 			}
-
-
 		}
 
 		wp_localize_script( 'smart-search-general', 'ysm_L10n', $localized );
