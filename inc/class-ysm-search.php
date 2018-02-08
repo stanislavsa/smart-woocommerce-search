@@ -353,7 +353,8 @@ class Ysm_Search
 					return $query;
 				}
 
-				self::$max_posts = '-1';
+				$posts_per_page = get_option( 'posts_per_page' );
+				self::$max_posts = ! empty( $posts_per_page ) ? (int) $posts_per_page : 10;
 
 				$posts = self::search_posts($s);
 
@@ -797,12 +798,9 @@ class Ysm_Search
     protected static function get_viewall_link_url () {
 
         $url = home_url('/') . '?s=' . implode( ' ', self::$s_words );
+        $url .= '&search_id=' . self::$w_id;
 
-        //if ( empty(self::$display_opts['search_page_default_output']) ) {
-            $url .= '&search_id=' . self::$w_id;
-        //}
-
-        if ( self::$w_id === 'product' || ( isset(self::$pt[ 'product' ]) && count(self::$pt) === 1 ) ) {
+        if ( 'product' === self::$w_id || isset( self::$pt['product'] ) ) {
             $url .= '&post_type=product';
         }
 
