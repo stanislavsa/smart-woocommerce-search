@@ -8,6 +8,9 @@
  * Version:     1.4.5
  * Domain Path: /languages
  * Text Domain: smart_search
+ *
+ * WC requires at least: 2.2
+ * WC tested up to: 3.3
  */
 
 if ( ! defined( 'ABSPATH' ) ) exit;
