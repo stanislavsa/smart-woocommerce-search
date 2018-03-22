@@ -457,6 +457,16 @@ class Ysm_Search
 		$s_post_types = implode(',', $s_post_types);
 		$where['and'][] = "p.post_type IN ({$s_post_types})";
 
+		/* search exclude */
+		if ( class_exists( 'SearchExclude' ) ) {
+			$search_exclude = get_option( 'sep_exclude', array() );
+			if ( ! empty( $search_exclude ) && is_array( $search_exclude ) ) {
+				$search_exclude = implode(',', $search_exclude);
+				$where['and'][] = "p.ID NOT IN ({$search_exclude})";
+			}
+		}
+
+		/* product visibility */
 		if ( isset(self::$pt['product']) ) {
 
 			if ( version_compare( WC()->version, '3.0.0', '<' ) ) {
@@ -582,7 +592,9 @@ class Ysm_Search
 		         " GROUP BY " . $groupby .
 		         " ORDER BY " . implode(' , ', $orderby);
 
-		$query .= " LIMIT " . (int) $limit;
+		if ($limit !== '-1') {
+			$query .= " LIMIT " . (int) $limit;
+		}
 
 		$posts = $wpdb->get_results($query, OBJECT_K);
 		if ( ! $posts || ! is_array( $posts ) ) {
@@ -593,7 +605,8 @@ class Ysm_Search
 			$additional_posts = self::search_postmeta( $limit - count( $posts ) );
 			$posts = array_merge( $posts, $additional_posts );
 		}
-		return $posts;
+
+		return apply_filters( 'smart_search_query_results', $posts );
 	}
 
 	/**
@@ -633,6 +646,16 @@ class Ysm_Search
 		$s_post_types = implode(',', $s_post_types);
 		$where['and'][] = "p.post_type IN ({$s_post_types})";
 
+		/* search exclude */
+		if ( class_exists( 'SearchExclude' ) ) {
+			$search_exclude = get_option( 'sep_exclude', array() );
+			if ( ! empty( $search_exclude ) && is_array( $search_exclude ) ) {
+				$search_exclude = implode(',', $search_exclude);
+				$where['and'][] = "p.ID NOT IN ({$search_exclude})";
+			}
+		}
+
+		/* product visibility */
 		if ( isset(self::$pt['product']) ) {
 
 			if ( version_compare( WC()->version, '3.0.0', '<' ) ) {
@@ -711,8 +734,7 @@ class Ysm_Search
 	 * Prepare suggestions list
 	 * @param $posts
 	 */
-	protected static function get_suggestions($posts)
-	{
+	protected static function get_suggestions($posts) {
 
 		foreach ($posts as $post) {
 
@@ -721,7 +743,7 @@ class Ysm_Search
 			/* featured image */
 			if ( !empty(self::$display_opts['display_icon']) && has_post_thumbnail( $post->ID )) {
 
-				$image = get_the_post_thumbnail($post->ID);
+				$image = get_the_post_thumbnail( $post->ID, 'post-thumbnail', apply_filters( 'smart_search_suggestions_image_attributes', array() ) );
 
 				if (empty($image)) {
 					$post_format = get_post_format($post->ID);
@@ -810,8 +832,7 @@ class Ysm_Search
 	/**
 	 * Output suggestions
 	 */
-	protected static function output()
-	{
+	protected static function output() {
 		$view_all_link = '';
 
 		if (!empty(self::$display_opts['display_view_all_link']) || !empty(self::$display_opts['view_all_link_text'])) {
