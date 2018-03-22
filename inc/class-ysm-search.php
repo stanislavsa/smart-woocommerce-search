@@ -354,7 +354,7 @@ class Ysm_Search
 				}
 
 				$posts_per_page = get_option( 'posts_per_page' );
-				self::$max_posts = ! empty( $posts_per_page ) ? (int) $posts_per_page : 10;
+				self::$max_posts = ! empty( $posts_per_page ) ? (int) $posts_per_page : '-1';
 
 				$posts = self::search_posts($s);
 
@@ -498,7 +498,7 @@ class Ysm_Search
 		$orderby = array();
 
 		/* LIMIT */
-		$limit = empty( self::$max_posts ) ? 10 : (int) self::$max_posts;
+		$limit = empty( self::$max_posts ) ? 10 : self::$max_posts;
 
 		/* filters */
 
@@ -592,7 +592,7 @@ class Ysm_Search
 		         " GROUP BY " . $groupby .
 		         " ORDER BY " . implode(' , ', $orderby);
 
-		if ($limit !== '-1') {
+		if ( $limit !== '-1' ) {
 			$query .= " LIMIT " . (int) $limit;
 		}
 
@@ -601,8 +601,11 @@ class Ysm_Search
 			$posts = array();
 		}
 
-		if ( count( $posts ) < $limit ) {
-			$additional_posts = self::search_postmeta( $limit - count( $posts ) );
+		if ( '-1' === $limit || count( $posts ) < $limit ) {
+			if ( $limit !== '-1' ) {
+				$limit = $limit - count( $posts );
+			}
+			$additional_posts = self::search_postmeta( $limit );
 			$posts = array_merge( $posts, $additional_posts );
 		}
 
@@ -710,7 +713,10 @@ class Ysm_Search
 			" WHERE " . implode(' AND ', $where['and']) .
 			" GROUP BY " . $groupby .
 			" ORDER BY " . implode(' , ', $orderby);
-		$query .= " LIMIT " . (int) $limit;
+
+		if ( $limit !== '-1' ) {
+			$query .= " LIMIT " . (int) $limit;
+		}
 
 		$posts = $wpdb->get_results($query, OBJECT_K);
 

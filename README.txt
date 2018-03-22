@@ -4,7 +4,7 @@ Donate link: https://yummywp.com/
 Tags: woocommerce search, ajax search, product search, instant search, woocommerce search plugin, search for woocommerce, search, woocommerce, woocommerce product search, search woocommerce, shop, shop search, autocomplete, autosuggest, search for wp, search for wordpress, search plugin, woocommerce search by sku, search results,  woocommerce search shortcode, search products, search autocomplete, woocommerce advanced search, woocommerce predictive search, woocommerce live search, woocommerce single product, woocommerce site search, products, shop, category search, custom search, predictive search, relevant search, search product, woocommerce plugin, posts search, wp search, wordpress search
 Requires at least: 4.2
 Tested up to: 4.9
-Stable tag: 1.4.5
+Stable tag: 1.4.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -48,6 +48,7 @@ Give it a try and enjoy:)
  * Visual Composer compatible
  * WPML compatible
  * Search results with images and prices
+ * Search Exclude plugin compatible
 
 [View plugin Demo](https://yummywp.com/plugins/smart-woocommerce-search/).
 
@@ -82,6 +83,10 @@ Yes, when using products search or when you set option to search only through pr
 4. Smart WooCommerce Search Settings Page - Styling tab
 
 == Changelog ==
+
+= 1.4.6 =
+* Added Search Exclude plugin compatibility
+* Under the hood improvements
 
 = 1.4.5 =
 * Fixed View All Button link
