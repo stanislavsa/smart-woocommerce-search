@@ -353,8 +353,7 @@ class Ysm_Search
 					return $query;
 				}
 
-				$posts_per_page = get_option( 'posts_per_page' );
-				self::$max_posts = ! empty( $posts_per_page ) ? (int) $posts_per_page : '-1';
+				self::$max_posts = '-1';
 
 				$posts = self::search_posts($s);
 
