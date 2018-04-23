@@ -600,7 +600,7 @@ class Ysm_Search
 			$posts = array();
 		}
 
-		if ( '-1' === $limit || count( $posts ) < $limit ) {
+		if ( ! empty( self::$postmeta ) && ( '-1' === $limit || count( $posts ) < $limit ) ) {
 			if ( $limit !== '-1' ) {
 				$limit = $limit - count( $posts );
 			}
@@ -608,7 +608,12 @@ class Ysm_Search
 			$posts = array_merge( $posts, $additional_posts );
 		}
 
-		return apply_filters( 'smart_search_query_results', $posts );
+		$resulted_posts = array();
+		foreach ( $posts as $post ) {
+			$resulted_posts[ $post->ID ] = $post;
+		}
+
+		return apply_filters( 'smart_search_query_results', $resulted_posts );
 	}
 
 	/**
