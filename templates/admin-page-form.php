@@ -380,6 +380,18 @@ $tabs = array(
 							'value' => '',
 						));
 
+						ysm_setting( $w_id, 'popup_desc_pos', array(
+							'type' => 'select',
+							'title' => __('Excerpt Position', 'smart_search'),
+							'description' => __('Excerpt position in results popup', 'smart_search'),
+							'value' => '',
+							'choices' => array(
+								'below_image' => __('Below image', 'smart_search'),
+								'below_title' => __('Below title', 'smart_search'),
+								'below_price' => __('Below price and SKU', 'smart_search'),
+							),
+						));
+
 						ysm_setting( $w_id, 'popup_price_text_color', array(
 							'type' => 'color',
 							'title' => __('Price Color', 'smart_search'),

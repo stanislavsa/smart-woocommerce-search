@@ -31,6 +31,7 @@
 .ysm-search-widget .search-field[type="search"] {
 	font-style: italic;
 	font-size: 14px;
+	text-indent: 3px;
 	display: inline-block;
 	padding: 10px 40px 10px 10px;
 	margin: 0;
@@ -186,6 +187,10 @@
 .smart-search-post-date {
 	font-size: 12px;
 	color: #333;
+}
+
+.smart-search-post-price-holder {
+	overflow: hidden;
 }
 
 .smart-search-post-price {

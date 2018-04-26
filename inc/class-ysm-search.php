@@ -305,6 +305,12 @@ class Ysm_Search
 			self::$display_opts['exclude_out_of_stock_products'] = 'exclude_out_of_stock_products';
 		}
 
+		if ( ! empty( $settings['popup_desc_pos'] ) ) {
+			self::$display_opts['popup_desc_pos'] = $settings['popup_desc_pos'];
+		} else {
+			self::$display_opts['popup_desc_pos'] = 'below_image';
+		}
+
 	}
 
 	/**
@@ -772,22 +778,6 @@ class Ysm_Search
 			$post_title = self::text_replace( $post_title );
 			$output .=          '<div class="smart-search-post-title">' . $post_title . '</div>';
 
-			if ( ( 'product' === $post->post_type || 'product_variation' === $post->post_type ) && ysm_is_woocommerce_active() ) {
-				$product = wc_get_product( $post->ID );
-				/* product price */
-				if ( !empty( self::$display_opts['display_price'] ) ) {
-					$output .= '<div class="smart-search-post-price">' . $product->get_price_html() . '</div>';
-				}
-				/* product sku */
-				if ( !empty( self::$display_opts['display_sku'] ) ) {
-					$output .= '<div class="smart-search-post-sku">' . esc_html( $product->get_sku() ) . '</div>';
-				}
-			}
-
-			$output .= '<div class="smart-search-clear"></div>';
-			$output .= '</div><!--.smart-search-post-holder-->';
-			$output .= '<div class="smart-search-clear"></div>';
-
 			/* excerpt */
 			if (!empty(self::$display_opts['display_excerpt'])) {
 
@@ -809,6 +799,37 @@ class Ysm_Search
 				}
 
 				$post_excerpt = self::text_replace( $post_excerpt );
+			} else {
+				$post_excerpt = '';
+			}
+
+			if ( ! empty( $post_excerpt ) && 'below_title' === self::$display_opts['popup_desc_pos'] ) {
+				$output .= '<div class="smart-search-post-excerpt">' . $post_excerpt . '</div>';
+			}
+
+			if ( ( 'product' === $post->post_type || 'product_variation' === $post->post_type ) && ysm_is_woocommerce_active() ) {
+				$output .= '<div class="smart-search-post-price-holder">';
+				$product = wc_get_product( $post->ID );
+				/* product price */
+				if ( !empty( self::$display_opts['display_price'] ) ) {
+					$output .= '<div class="smart-search-post-price">' . $product->get_price_html() . '</div>';
+				}
+				/* product sku */
+				if ( !empty( self::$display_opts['display_sku'] ) ) {
+					$output .= '<div class="smart-search-post-sku">' . esc_html( $product->get_sku() ) . '</div>';
+				}
+				$output .= '</div>';
+			}
+
+			if ( ! empty( $post_excerpt ) && 'below_price' === self::$display_opts['popup_desc_pos'] ) {
+				$output .= '<div class="smart-search-post-excerpt">' . $post_excerpt . '</div>';
+			}
+
+			$output .= '<div class="smart-search-clear"></div>';
+			$output .= '</div><!--.smart-search-post-holder-->';
+			$output .= '<div class="smart-search-clear"></div>';
+
+			if ( ! empty( $post_excerpt ) && 'below_image' === self::$display_opts['popup_desc_pos'] ) {
 				$output .= '<div class="smart-search-post-excerpt">' . $post_excerpt . '</div>';
 			}
 
