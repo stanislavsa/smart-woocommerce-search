@@ -5,7 +5,7 @@
  * Description: Ajax Smart WooCommerce Search allows you to instantly search products.
  * Author:      Stanislav S - YummyWP
  * Author URI:  https://yummywp.com
- * Version:     1.4.8
+ * Version:     1.5.0
  * Domain Path: /languages
  * Text Domain: smart_search
  *
@@ -35,7 +35,7 @@ if ( defined( 'YSM_PRO' ) ) {
  * Define main constants
  */
 if ( ! defined( 'YSM_VER' ) ) {
-	define('YSM_VER', 'ysm-1.4.8');
+	define('YSM_VER', 'ysm-1.5.0');
 }
 
 if ( ! defined( 'YSM_DIR' ) ) {
