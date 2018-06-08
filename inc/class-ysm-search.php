@@ -240,6 +240,10 @@ class Ysm_Search
 			self::$fields['allowed_product_cat'] = $settings['allowed_product_cat'];
 		}
 
+		if ( !empty( $settings['disallowed_product_cat'] ) ) {
+			self::$fields['disallowed_product_cat'] = $settings['disallowed_product_cat'];
+		}
+
 		if ( !empty( $settings['field_tag'] ) ) {
 			self::$terms['post_tag'] = 'post_tag';
 		}
@@ -536,6 +540,27 @@ class Ysm_Search
 		}
 
 		// restrict searching only in defined categories
+		if ( !empty( self::$fields['disallowed_product_cat'] ) ) {
+			$disallowed_product_cats = explode( ',', trim( self::$fields['disallowed_product_cat'], ',' ) );
+			$disallowed_product_cats_filtered = array();
+			foreach ( $disallowed_product_cats as $disallowed_product_cat ) {
+				$disallowed_product_cat = trim( $disallowed_product_cat );
+				if ( ! empty( $disallowed_product_cat ) ) {
+					$disallowed_product_cats_filtered[] = "'" . intval( $disallowed_product_cat ) . "'";
+					$children_terms = get_term_children( intval( $disallowed_product_cat ), 'product_cat' );
+					if ( ! is_wp_error( $children_terms ) && is_array( $children_terms ) && $children_terms ) {
+						foreach ( $children_terms as $children_term ) {
+							$disallowed_product_cats_filtered[] = "'" . intval( $children_term ) . "'";
+						}
+					}
+				}
+			}
+
+			if ( ! empty( $disallowed_product_cats_filtered ) ) {
+				$disallowed_product_cats_filtered = implode( ",", $disallowed_product_cats_filtered );
+				$where['and'][] = sprintf( "( p.post_type NOT IN ('product') OR ( p.post_type = 'product' AND t_tax.taxonomy = 'product_cat' AND t.term_id NOT IN (%s) ) )", $disallowed_product_cats_filtered );
+			}
+		}
 		if ( !empty( self::$fields['allowed_product_cat'] ) ) {
 			$allowed_product_cats = explode( ',', trim( self::$fields['allowed_product_cat'], ',' ) );
 			$allowed_product_cats_filtered = array();
@@ -555,7 +580,11 @@ class Ysm_Search
 
 		}
 
-		if ( !empty( self::$terms ) || !empty( self::$fields['allowed_product_cat'] ) ) {
+		if (
+			!empty( self::$terms ) ||
+			!empty( self::$fields['allowed_product_cat'] ) ||
+			!empty( self::$fields['disallowed_product_cat'] )
+		) {
 			$join['t_rel'] = "LEFT JOIN {$wpdb->term_relationships} t_rel ON p.ID = t_rel.object_id";
 			$join['t_tax'] = "LEFT JOIN {$wpdb->term_taxonomy} t_tax ON t_tax.term_taxonomy_id = t_rel.term_taxonomy_id";
 			$join['t'] = "LEFT JOIN {$wpdb->terms} t ON t_tax.term_id = t.term_id";

@@ -1,16 +1,16 @@
 <?php
 /**
  * Plugin Name: Smart WooCommerce Search
- * Plugin URI:  https://yummywp.com/plugin/smart-search
+ * Plugin URI:  https://yummywp.com/plugins/smart-woocommerce-search/
  * Description: Ajax Smart WooCommerce Search allows you to instantly search products.
- * Author:      Stanislav S - YummyWP
+ * Author:      YummyWP
  * Author URI:  https://yummywp.com
- * Version:     1.5.0
+ * Version:     1.5.1
  * Domain Path: /languages
  * Text Domain: smart_search
  *
  * WC requires at least: 2.2
- * WC tested up to: 3.3
+ * WC tested up to: 3.4
  */
 
 if ( ! defined( 'ABSPATH' ) ) exit;
@@ -35,7 +35,7 @@ if ( defined( 'YSM_PRO' ) ) {
  * Define main constants
  */
 if ( ! defined( 'YSM_VER' ) ) {
-	define('YSM_VER', 'ysm-1.5.0');
+	define('YSM_VER', 'ysm-1.5.1');
 }
 
 if ( ! defined( 'YSM_DIR' ) ) {

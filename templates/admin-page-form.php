@@ -287,6 +287,13 @@ $tabs = array(
 							'value' => '',
 						));
 
+						ysm_setting( $w_id, 'disallowed_product_cat', array(
+							'type' => 'text',
+							'title' => __('Disallowed Product Categories', 'smart_search'),
+							'description' => __('Product categories ids separated by comma.<br>Do not search in chosen product categories', 'smart_search'),
+							'value' => '',
+						));
+
 						?>
 
 						</tbody>

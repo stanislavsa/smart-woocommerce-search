@@ -1,14 +1,13 @@
 === Smart WooCommerce Search ===
 Contributors: yummy-wp
-Donate link: https://yummywp.com/
-Tags: woocommerce search, ajax search, product search, instant search, woocommerce search plugin, search for woocommerce, search, woocommerce, woocommerce product search, search woocommerce, shop, shop search, autocomplete, autosuggest, search for wp, search for wordpress, search plugin, woocommerce search by sku, search results,  woocommerce search shortcode, search products, search autocomplete, woocommerce advanced search, woocommerce predictive search, woocommerce live search, woocommerce single product, woocommerce site search, products, shop, category search, custom search, predictive search, relevant search, search product, woocommerce plugin, posts search, wp search, wordpress search
+Tags: woocommerce search, ajax search, woocommerce search by sku, woocommerce search shortcod, product search, woocommerce search results, instant search, woocommerce search plugin, woocommerce search form, search for woocommerce, woocommerce search page, search, woocommerce, woocommerce product search, search woocommerce, shop, shop search, autocomplete, autosuggest, search for wp, search for wordpress, search plugin, woocommerce search by sku, search results,  woocommerce search shortcode, search products, search autocomplete, woocommerce advanced search, woocommerce predictive search, woocommerce live search, woocommerce single product, woocommerce site search, products, shop, category search, custom search, predictive search, relevant search, search product, woocommerce plugin, posts search, wp search, wordpress search
 Requires at least: 4.2
 Tested up to: 4.9
-Stable tag: 1.5.0
+Stable tag: 1.5.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Ajax Smart WooCommerce Search allows you to instantly search products.
+Smart WooCommerce Ajax Search allows you to instantly search products.
 
 == Description ==
 
@@ -28,9 +27,7 @@ It’s pretty easy to select required fields to be used for the search in the pl
 
 The main purpose of Smart plugin is to improve the user search experience for any WordPress based website.
 
-Also Smart Search could be integrated into default WordPress search widget to be used on any website, and by doing that the plugin expands the default search widget and overwrite the default WordPress search result.
-
-And at last you could create a custom Smart Search widget and add it to any page through the shortcode or add it to a sidebar.
+And at last you could create a custom Smart Search widget and add it to any page through the shortcode [smart_search id="1"] or add it to a sidebar via "Smart Search" widget.
 
 Give it a try and enjoy:)
 
@@ -43,16 +40,32 @@ Give it a try and enjoy:)
  * Search by product SKU
  * Search through product Categories
  * Search through product Tags
+ * Search in Variations
+ * Allow/disallow searching in selected product categories
+ * Exclude "Out of stock" products from search results
+ * Search results with images and prices
  * Fuzzy search
  * Translation ready
  * Visual Composer compatible
  * WPML compatible
- * Search results with images and prices
  * Search Exclude plugin compatible
 
-[View plugin Demo](https://yummywp.com/plugins/smart-woocommerce-search/).
+[View plugin Demo](https://smart-woocommerce-search.yummywp.com/).
 
 [Plugin Documentation](https://yummywp.com/docs/smart-search/).
+
+ = Premium Features - Smart Ajax Product Search =
+
+  * Search through custom fields
+  * Search results with "Out of stock" label
+  * Search results with "Sale" label
+  * Search results with "Featured" label
+  * ACF plugin compatible
+  * More customization and styling settings
+
+[Read More](https://yummywp.com/plugins/smart-ajax-product-search/).
+
+[View plugin Demo](https://smart-ajax-product-search.yummywp.com/).
 
 == Installation ==
 
@@ -83,6 +96,10 @@ Yes, when using products search or when you set option to search only through pr
 4. Smart WooCommerce Search Settings Page - Styling tab
 
 == Changelog ==
+
+= 1.5.1 =
+* Added "Disallowed Product Categories" option
+* Support for WooCommerce 3.4.2
 
 = 1.5.0 =
 * Added excerpt position option
