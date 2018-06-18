@@ -237,11 +237,29 @@ class Ysm_Search
 		}
 
 		if ( !empty( $settings['allowed_product_cat'] ) ) {
-			self::$fields['allowed_product_cat'] = $settings['allowed_product_cat'];
+			if ( ! is_array( $settings['allowed_product_cat'] ) ) {
+				$settings['allowed_product_cat'] = explode( ',', $settings['allowed_product_cat'] );
+			}
+			self::$fields['allowed_product_cat'] = array();
+			foreach ( $settings['allowed_product_cat'] as $dis_cat ) {
+				$dis_cat = trim( $dis_cat );
+				if ( $dis_cat ) {
+					self::$fields['allowed_product_cat'][] = intval( $dis_cat );
+				}
+			}
 		}
 
 		if ( !empty( $settings['disallowed_product_cat'] ) ) {
-			self::$fields['disallowed_product_cat'] = $settings['disallowed_product_cat'];
+			if ( ! is_array( $settings['disallowed_product_cat'] ) ) {
+				$settings['disallowed_product_cat'] = explode( ',', $settings['disallowed_product_cat'] );
+			}
+			self::$fields['disallowed_product_cat'] = array();
+			foreach ( $settings['disallowed_product_cat'] as $dis_cat ) {
+				$dis_cat = trim( $dis_cat );
+				if ( $dis_cat ) {
+					self::$fields['disallowed_product_cat'][] = intval( $dis_cat );
+				}
+			}
 		}
 
 		if ( !empty( $settings['field_tag'] ) ) {
@@ -420,6 +438,7 @@ class Ysm_Search
 	protected static function search_posts($s = '') {
 		global $wpdb;
 
+		// define search words
 		$s = esc_attr( strip_tags( trim( $s ) ) );
 		$s = mb_strtolower( $s );
 		$s_words = array();
@@ -435,203 +454,211 @@ class Ysm_Search
 		} else {
 			$s_words[] = $s;
 		}
-
 		self::$s_words = $s_words;
-
-		/* SELECT part */
-		$select = array();
-		$select[] = "DISTINCT p.ID";
-		$select[] = "p.post_title";
-		$select[] = "p.post_content";
-		$select[] = "p.post_excerpt";
-		$select[] = "p.post_type";
-
-		/* JOIN part */
-		$join = array();
-
-		/* WHERE part */
-		$where = array(
-			'and' => array(),
-			'or' => array(),
-		);
-
-		$where['and'][] = "p.post_status = 'publish'";
-
-		$s_post_types = array();
-
-		foreach (self::$pt as $type){
-			$s_post_types[] = "'" . esc_sql($type) . "'";
-		}
-
-		$s_post_types = implode(',', $s_post_types);
-		$where['and'][] = "p.post_type IN ({$s_post_types})";
-
-		/* search exclude */
-		if ( class_exists( 'SearchExclude' ) ) {
-			$search_exclude = get_option( 'sep_exclude', array() );
-			if ( ! empty( $search_exclude ) && is_array( $search_exclude ) ) {
-				$search_exclude = implode(',', $search_exclude);
-				$where['and'][] = "p.ID NOT IN ({$search_exclude})";
-			}
-		}
-
-		/* product visibility */
-		if ( isset(self::$pt['product']) ) {
-
-			if ( version_compare( WC()->version, '3.0.0', '<' ) ) {
-				$join['pmpv'] = "LEFT JOIN {$wpdb->postmeta} pmpv ON pmpv.post_id = p.ID";
-				$where['and'][] = "( p.post_type NOT IN ('product') OR (p.post_type = 'product' AND pmpv.meta_key = '_visibility' AND CAST(pmpv.meta_value AS CHAR) IN ('search','visible')) )";
-			} else {
-				$wc_product_visibility_term_ids = wc_get_product_visibility_term_ids();
-				$where['and'][] = sprintf( "p.ID NOT IN (
-					SELECT object_id
-					FROM {$wpdb->term_relationships}
-					WHERE term_taxonomy_id IN (%d)
-				)", $wc_product_visibility_term_ids['exclude-from-search'] );
-			}
-
-			if ( ! empty( self::$display_opts['exclude_out_of_stock_products'] ) ) {
-				$join['pmpv'] = "LEFT JOIN {$wpdb->postmeta} pmpv ON pmpv.post_id = p.ID";
-				$where['and'][] = "( p.post_type NOT IN ('product') OR ( p.post_type = 'product' AND pmpv.meta_key = '_stock_status' AND CAST(pmpv.meta_value AS CHAR) NOT IN ('outofstock') ) )";
-			}
-
-		}
-
-		/* relevance part */
-		$relevance = array();
-
-		/* GROUP BY part */
-		$groupby = "p.ID";
-
-		/* ORDER BY part */
-		$orderby = array();
 
 		/* LIMIT */
 		$limit = empty( self::$max_posts ) ? 10 : self::$max_posts;
 
-		/* filters */
+		$fields_list = array_merge( self::$fields, self::$terms );
+		unset( $fields_list['disallowed_product_cat'] );
+		unset( $fields_list['allowed_product_cat'] );
 
-		if ( !empty(self::$fields['post_title']) ) {
-			$where['or'][] = self::make_like_query( 'lower(p.post_title)' );
-			$relevance['p.post_title'] = 30;
-		}
+		if ( ! empty( $fields_list ) ) {
 
-		if ( !empty(self::$fields['post_content']) ) {
-			$where['or'][] = self::make_like_query( 'lower(p.post_content)' );
-			$relevance['p.post_content'] = 10;
-		}
+			/* SELECT part */
+			$select = array();
+			$select[] = "DISTINCT p.ID";
+			$select[] = "p.post_title";
+			$select[] = "p.post_content";
+			$select[] = "p.post_excerpt";
+			$select[] = "p.post_type";
 
-		if ( !empty(self::$fields['post_excerpt']) ) {
-			$where['or'][] = self::make_like_query( 'lower(p.post_excerpt)' );
-			$relevance['p.post_excerpt'] = 10;
-		}
+			/* JOIN part */
+			$join = array();
 
-		/* tags and categories */
-		if ( !empty( self::$terms ) ) {
-			$s_terms = array();
+			/* WHERE part */
+			$where = array(
+				'and' => array(),
+				'or' => array(),
+			);
 
-			foreach (self::$terms as $term){
-				$s_terms[] = "'" . $term . "'";
+			$where['and'][] = "p.post_status = 'publish'";
+
+			$s_post_types = array();
+
+			foreach (self::$pt as $type){
+				$s_post_types[] = "'" . esc_sql($type) . "'";
 			}
 
-			$s_terms = implode(',', $s_terms);
+			$s_post_types = implode(',', $s_post_types);
+			$where['and'][] = "p.post_type IN ({$s_post_types})";
 
-			$where['or'][] = "( t_tax.taxonomy IN ({$s_terms}) AND (" . self::make_like_query( 'lower(t.name)' ) . ") )";
-		}
+			/* search exclude */
+			if ( class_exists( 'SearchExclude' ) ) {
+				$search_exclude = get_option( 'sep_exclude', array() );
+				if ( ! empty( $search_exclude ) && is_array( $search_exclude ) ) {
+					$search_exclude = implode(',', $search_exclude);
+					$where['and'][] = "p.ID NOT IN ({$search_exclude})";
+				}
+			}
 
-		// restrict searching only in defined categories
-		if ( !empty( self::$fields['disallowed_product_cat'] ) ) {
-			$disallowed_product_cats = explode( ',', trim( self::$fields['disallowed_product_cat'], ',' ) );
-			$disallowed_product_cats_filtered = array();
-			foreach ( $disallowed_product_cats as $disallowed_product_cat ) {
-				$disallowed_product_cat = trim( $disallowed_product_cat );
-				if ( ! empty( $disallowed_product_cat ) ) {
-					$disallowed_product_cats_filtered[] = "'" . intval( $disallowed_product_cat ) . "'";
-					$children_terms = get_term_children( intval( $disallowed_product_cat ), 'product_cat' );
-					if ( ! is_wp_error( $children_terms ) && is_array( $children_terms ) && $children_terms ) {
-						foreach ( $children_terms as $children_term ) {
-							$disallowed_product_cats_filtered[] = "'" . intval( $children_term ) . "'";
+			/* relevance part */
+			$relevance = array();
+
+			/* GROUP BY part */
+			$groupby = "p.ID";
+
+			/* ORDER BY part */
+			$orderby = array();
+
+			/* filters */
+
+			if ( !empty(self::$fields['post_title']) ) {
+				$where['or'][] = self::make_like_query( 'lower(p.post_title)' );
+				$relevance['p.post_title'] = 30;
+			}
+
+			if ( !empty(self::$fields['post_content']) ) {
+				$where['or'][] = self::make_like_query( 'lower(p.post_content)' );
+				$relevance['p.post_content'] = 10;
+			}
+
+			if ( !empty(self::$fields['post_excerpt']) ) {
+				$where['or'][] = self::make_like_query( 'lower(p.post_excerpt)' );
+				$relevance['p.post_excerpt'] = 10;
+			}
+
+			/* tags and categories */
+			if ( !empty( self::$terms ) ) {
+				$s_terms = array();
+
+				foreach (self::$terms as $term){
+					$s_terms[] = "'" . $term . "'";
+				}
+
+				$s_terms = implode(',', $s_terms);
+
+				$where['or'][] = "( t_tax.taxonomy IN ({$s_terms}) AND (" . self::make_like_query( 'lower(t.name)' ) . ") )";
+			}
+
+			/* product visibility */
+			if ( isset(self::$pt['product']) ) {
+
+				if ( !empty( self::$fields['disallowed_product_cat'] ) ) {
+					$disallowed_product_cats_filtered = array();
+					foreach ( self::$fields['disallowed_product_cat'] as $disallowed_product_cat ) {
+						$disallowed_product_cats_filtered[] = "'" . $disallowed_product_cat . "'";
+						$children_terms = get_term_children( $disallowed_product_cat, 'product_cat' );
+						if ( ! is_wp_error( $children_terms ) && is_array( $children_terms ) && $children_terms ) {
+							foreach ( $children_terms as $children_term ) {
+								$disallowed_product_cats_filtered[] = "'" . intval( $children_term ) . "'";
+							}
 						}
 					}
 				}
-			}
 
-			if ( ! empty( $disallowed_product_cats_filtered ) ) {
-				$disallowed_product_cats_filtered = implode( ",", $disallowed_product_cats_filtered );
-				$where['and'][] = sprintf( "( p.post_type NOT IN ('product') OR ( p.post_type = 'product' AND t_tax.taxonomy = 'product_cat' AND t.term_id NOT IN (%s) ) )", $disallowed_product_cats_filtered );
-			}
-		}
-		if ( !empty( self::$fields['allowed_product_cat'] ) ) {
-			$allowed_product_cats = explode( ',', trim( self::$fields['allowed_product_cat'], ',' ) );
-			$allowed_product_cats_filtered = array();
-			foreach ( $allowed_product_cats as $allowed_product_cat ) {
-				$allowed_product_cat = trim( $allowed_product_cat );
-				if ( ! empty( $allowed_product_cat ) ) {
-					$allowed_product_cats_filtered[] = "'" . intval( $allowed_product_cat ) . "'";
+				if ( version_compare( WC()->version, '3.0.0', '<' ) ) {
+					$where['and'][] = sprintf( "p.ID NOT IN (
+						SELECT DISTINCT t_rel.object_id
+						FROM {$wpdb->term_relationships} t_rel
+						WHERE t_rel.term_taxonomy_id IN (%s)
+					)", implode( ",", $disallowed_product_cats_filtered ) );
+					$join['pmpv'] = "LEFT JOIN {$wpdb->postmeta} pmpv ON pmpv.post_id = p.ID";
+					$where['and'][] = "( p.post_type NOT IN ('product') OR (p.post_type = 'product' AND pmpv.meta_key = '_visibility' AND CAST(pmpv.meta_value AS CHAR) IN ('search','visible')) )";
+				} else {
+					$exclude_terms = array();
+					$wc_product_visibility_term_ids = wc_get_product_visibility_term_ids();
+					if ( $wc_product_visibility_term_ids['exclude-from-search'] ) {
+						$exclude_terms[] = "'" . $wc_product_visibility_term_ids['exclude-from-search'] . "'";
+					}
+					if ( ! empty( $disallowed_product_cats_filtered ) ) {
+						$exclude_terms = array_merge( $exclude_terms, $disallowed_product_cats_filtered );
+					}
+
+					$where['and'][] = sprintf( "p.ID NOT IN (
+						SELECT DISTINCT object_id
+						FROM {$wpdb->term_relationships}
+						WHERE term_taxonomy_id IN (%s)
+					)", implode( ",", $exclude_terms ) );
+				}
+
+				if ( ! empty( self::$display_opts['exclude_out_of_stock_products'] ) ) {
+					$join['pmpv'] = "LEFT JOIN {$wpdb->postmeta} pmpv ON pmpv.post_id = p.ID";
+					$where['and'][] = "( p.post_type NOT IN ('product') OR ( p.post_type = 'product' AND pmpv.meta_key = '_stock_status' AND CAST(pmpv.meta_value AS CHAR) NOT IN ('outofstock') ) )";
+				}
+
+				// restrict searching only in defined categories
+				if ( !empty( self::$fields['allowed_product_cat'] ) ) {
+					$allowed_product_cats_filtered = array();
+					foreach ( self::$fields['allowed_product_cat'] as $allowed_product_cat ) {
+						$allowed_product_cats_filtered[] = "'" . $allowed_product_cat . "'";
+					}
+
+					if ( ! empty( $allowed_product_cats_filtered ) ) {
+						$allowed_product_cats_filtered = implode( ",", $allowed_product_cats_filtered );
+						$where['and'][] = sprintf( "( p.post_type NOT IN ('product') OR ( p.post_type = 'product' AND t_tax.taxonomy = 'product_cat' AND t.term_id IN (%s) ) )", $allowed_product_cats_filtered );
+						// product variations
+						//$where['and'][] = sprintf( "( p.post_type NOT IN ('product_variation') OR ( p.post_type = 'product_variation' AND t_tax.taxonomy = 'product_cat' AND t.term_id IN (%s) ) )", $allowed_product_cats_filtered );
+					}
+
 				}
 			}
 
-			if ( ! empty( $allowed_product_cats_filtered ) ) {
-				$allowed_product_cats_filtered = implode( ",", $allowed_product_cats_filtered );
-				$where['and'][] = sprintf( "( p.post_type NOT IN ('product') OR ( p.post_type = 'product' AND t_tax.taxonomy = 'product_cat' AND t.term_id IN (%s) ) )", $allowed_product_cats_filtered );
-				// product variations
-				//$where['and'][] = sprintf( "( p.post_type NOT IN ('product_variation') OR ( p.post_type = 'product_variation' AND t_tax.taxonomy = 'product_cat' AND t.term_id IN (%s) ) )", $allowed_product_cats_filtered );
+			if (
+				!empty( self::$terms ) ||
+				!empty( self::$fields['allowed_product_cat'] ) ||
+				!empty( self::$fields['disallowed_product_cat'] )
+			) {
+				$join['t_rel'] = "LEFT JOIN {$wpdb->term_relationships} t_rel ON p.ID = t_rel.object_id";
+				$join['t_tax'] = "LEFT JOIN {$wpdb->term_taxonomy} t_tax ON t_tax.term_taxonomy_id = t_rel.term_taxonomy_id";
+				$join['t'] = "LEFT JOIN {$wpdb->terms} t ON t_tax.term_id = t.term_id";
 			}
 
-		}
+			if ( !empty($where['or']) ) {
+				$where['and'][] = "(" . implode(' OR ', $where['or']) . ")";
+			}
 
-		if (
-			!empty( self::$terms ) ||
-			!empty( self::$fields['allowed_product_cat'] ) ||
-			!empty( self::$fields['disallowed_product_cat'] )
-		) {
-			$join['t_rel'] = "LEFT JOIN {$wpdb->term_relationships} t_rel ON p.ID = t_rel.object_id";
-			$join['t_tax'] = "LEFT JOIN {$wpdb->term_taxonomy} t_tax ON t_tax.term_taxonomy_id = t_rel.term_taxonomy_id";
-			$join['t'] = "LEFT JOIN {$wpdb->terms} t ON t_tax.term_id = t.term_id";
-		}
+			if ( !empty($relevance) ) {
+				$relevance_query = array();
 
-		if ( !empty($where['or']) ) {
-			$where['and'][] = "(" . implode(' OR ', $where['or']) . ")";
-		}
+				foreach ($relevance as $k => $v) {
 
-		if ( !empty($relevance) ) {
-			$relevance_query = array();
-
-			foreach ($relevance as $k => $v) {
-
-				$relevance_query[] = "( CASE
+					$relevance_query[] = "( CASE
 			                    WHEN (" . self::make_like_query( "lower($k)" )  . ") THEN " . (int) $v ."
 			                    ELSE 0
 			                   END )";
+				}
+
+				$relevance_query = "( " . implode(' + ', $relevance_query) . " )";
+
+				$select[] = "$relevance_query as relevance";
+				$orderby[] = "relevance DESC";
 			}
 
-			$relevance_query = "( " . implode(' + ', $relevance_query) . " )";
+			if ( defined('ICL_LANGUAGE_CODE') && ICL_LANGUAGE_CODE != '' ) {
+				$join['icl'] = $wpdb->prepare( "RIGHT JOIN {$wpdb->prefix}icl_translations icl ON (p.ID = icl.element_id AND icl.language_code = '%s')", ICL_LANGUAGE_CODE );
+			}
 
-			$select[] = "$relevance_query as relevance";
-			$orderby[] = "relevance DESC";
-		}
+			$join = apply_filters('smart_search_query_join', $join);
+			$where = apply_filters('smart_search_query_where', $where);
+			$orderby[] = "p.post_title ASC";
 
-		if ( defined('ICL_LANGUAGE_CODE') && ICL_LANGUAGE_CODE != '' ) {
-			$join['icl'] = $wpdb->prepare( "RIGHT JOIN {$wpdb->prefix}icl_translations icl ON (p.ID = icl.element_id AND icl.language_code = '%s')", ICL_LANGUAGE_CODE );
-		}
-
-		$join = apply_filters('smart_search_query_join', $join);
-		$where = apply_filters('smart_search_query_where', $where);
-		$orderby[] = "p.post_title ASC";
-
-		$query = "SELECT " . implode(' , ', $select) .
-				 " FROM {$wpdb->posts} p
+			$query = "SELECT " . implode(' , ', $select) .
+				" FROM {$wpdb->posts} p
                  " . implode(' ', $join) .
-		         " WHERE " . implode(' AND ', $where['and']) .
-		         " GROUP BY " . $groupby .
-		         " ORDER BY " . implode(' , ', $orderby);
+				" WHERE " . implode(' AND ', $where['and']) .
+				" GROUP BY " . $groupby .
+				" ORDER BY " . implode(' , ', $orderby);
 
-		if ( $limit !== '-1' ) {
-			$query .= " LIMIT " . (int) $limit;
-		}
+			if ( $limit !== '-1' ) {
+				$query .= " LIMIT " . (int) $limit;
+			}
 
-		$posts = $wpdb->get_results($query, OBJECT_K);
-		if ( ! $posts || ! is_array( $posts ) ) {
+			$posts = $wpdb->get_results($query, OBJECT_K);
+			if ( ! $posts || ! is_array( $posts ) ) {
+				$posts = array();
+			}
+		} else {
 			$posts = array();
 		}
 
@@ -700,16 +727,42 @@ class Ysm_Search
 		/* product visibility */
 		if ( isset(self::$pt['product']) ) {
 
+			if ( !empty( self::$fields['disallowed_product_cat'] ) ) {
+				$disallowed_product_cats_filtered = array();
+				foreach ( self::$fields['disallowed_product_cat'] as $disallowed_product_cat ) {
+					$disallowed_product_cats_filtered[] = "'" . $disallowed_product_cat . "'";
+					$children_terms = get_term_children( $disallowed_product_cat, 'product_cat' );
+					if ( ! is_wp_error( $children_terms ) && is_array( $children_terms ) && $children_terms ) {
+						foreach ( $children_terms as $children_term ) {
+							$disallowed_product_cats_filtered[] = "'" . intval( $children_term ) . "'";
+						}
+					}
+				}
+			}
+
 			if ( version_compare( WC()->version, '3.0.0', '<' ) ) {
+				$where['and'][] = sprintf( "p.ID NOT IN (
+						SELECT DISTINCT t_rel.object_id
+						FROM {$wpdb->term_relationships} t_rel
+						WHERE t_rel.term_taxonomy_id IN (%s)
+					)", implode( ",", $disallowed_product_cats_filtered ) );
 				$join['pmpv'] = "LEFT JOIN {$wpdb->postmeta} pmpv ON pmpv.post_id = p.ID";
 				$where['and'][] = "( p.post_type NOT IN ('product') OR (p.post_type = 'product' AND pmpv.meta_key = '_visibility' AND CAST(pmpv.meta_value AS CHAR) IN ('search','visible')) )";
 			} else {
+				$exclude_terms = array();
 				$wc_product_visibility_term_ids = wc_get_product_visibility_term_ids();
+				if ( $wc_product_visibility_term_ids['exclude-from-search'] ) {
+					$exclude_terms[] = "'" . $wc_product_visibility_term_ids['exclude-from-search'] . "'";
+				}
+				if ( ! empty( $disallowed_product_cats_filtered ) ) {
+					$exclude_terms = array_merge( $exclude_terms, $disallowed_product_cats_filtered );
+				}
+
 				$where['and'][] = sprintf( "p.ID NOT IN (
-					SELECT object_id
-					FROM {$wpdb->term_relationships}
-					WHERE term_taxonomy_id IN (%d)
-				)", $wc_product_visibility_term_ids['exclude-from-search'] );
+						SELECT DISTINCT object_id
+						FROM {$wpdb->term_relationships}
+						WHERE term_taxonomy_id IN (%s)
+					)", implode( ",", $exclude_terms ) );
 			}
 
 			if ( ! empty( self::$display_opts['exclude_out_of_stock_products'] ) ) {
@@ -717,6 +770,21 @@ class Ysm_Search
 				$where['and'][] = "( p.post_type NOT IN ('product') OR ( p.post_type = 'product' AND pmpv.meta_key = '_stock_status' AND CAST(pmpv.meta_value AS CHAR) NOT IN ('outofstock') ) )";
 			}
 
+			// restrict searching only in defined categories
+			if ( !empty( self::$fields['allowed_product_cat'] ) ) {
+				$allowed_product_cats_filtered = array();
+				foreach ( self::$fields['allowed_product_cat'] as $allowed_product_cat ) {
+					$allowed_product_cats_filtered[] = "'" . $allowed_product_cat . "'";
+				}
+
+				if ( ! empty( $allowed_product_cats_filtered ) ) {
+					$allowed_product_cats_filtered = implode( ",", $allowed_product_cats_filtered );
+					$where['and'][] = sprintf( "( p.post_type NOT IN ('product') OR ( p.post_type = 'product' AND t_tax.taxonomy = 'product_cat' AND t.term_id IN (%s) ) )", $allowed_product_cats_filtered );
+					// product variations
+					//$where['and'][] = sprintf( "( p.post_type NOT IN ('product_variation') OR ( p.post_type = 'product_variation' AND t_tax.taxonomy = 'product_cat' AND t.term_id IN (%s) ) )", $allowed_product_cats_filtered );
+				}
+
+			}
 		}
 
 		/* GROUP BY part */

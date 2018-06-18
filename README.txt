@@ -3,7 +3,7 @@ Contributors: yummy-wp
 Tags: woocommerce search, ajax search, woocommerce search by sku, woocommerce search shortcod, product search, woocommerce search results, instant search, woocommerce search plugin, woocommerce search form, search for woocommerce, woocommerce search page, search, woocommerce, woocommerce product search, search woocommerce, shop, shop search, autocomplete, autosuggest, search for wp, search for wordpress, search plugin, woocommerce search by sku, search results,  woocommerce search shortcode, search products, search autocomplete, woocommerce advanced search, woocommerce predictive search, woocommerce live search, woocommerce single product, woocommerce site search, products, shop, category search, custom search, predictive search, relevant search, search product, woocommerce plugin, posts search, wp search, wordpress search
 Requires at least: 4.2
 Tested up to: 4.9
-Stable tag: 1.5.1
+Stable tag: 1.5.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -57,10 +57,15 @@ Give it a try and enjoy:)
  = Premium Features - Smart Ajax Product Search =
 
   * Search through custom fields
+  * Search through custom taxonomies
+  * Search through product attributes
+  * Search through product brands
   * Search results with "Out of stock" label
   * Search results with "Sale" label
   * Search results with "Featured" label
   * ACF plugin compatible
+  * Custom Post Type UI plugin compatible
+  * Ultimate WooCommerce Brands plugin compatible
   * More customization and styling settings
 
 [Read More](https://yummywp.com/plugins/smart-ajax-product-search/).
@@ -96,6 +101,10 @@ Yes, when using products search or when you set option to search only through pr
 4. Smart WooCommerce Search Settings Page - Styling tab
 
 == Changelog ==
+
+= 1.5.2 =
+* Fixed - "Disallowed Product Categories" option
+* Fixed - searching by SKU
 
 = 1.5.1 =
 * Added "Disallowed Product Categories" option
