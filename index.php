@@ -194,7 +194,7 @@ if ( ! function_exists( 'ysm_enqueue_scripts' ) ) {
 				$pt_list['page'] = $v['settings']['post_type_page'];
 			}
 
-			if ( isset( $pt_list['product'] ) ) {
+			if ( isset( $pt_list['product'] ) && empty( $v['settings']['search_page_layout_posts'] ) ) {
 				$localized[ $js_pref . 'layout' ] = 'product';
 			}
 

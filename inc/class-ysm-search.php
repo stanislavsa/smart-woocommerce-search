@@ -315,6 +315,10 @@ class Ysm_Search
 			self::$display_opts['search_page_default_output'] = 'search_page_default_output';
 		}
 
+		if ( !empty( $settings['search_page_layout_posts'] ) ) {
+			self::$display_opts['search_page_layout_posts'] = 'search_page_layout_posts';
+		}
+
 		if ( !empty( $settings['accent_words_on_search_page'] ) ) {
 			self::$display_opts['accent_words_on_search_page'] = 'accent_words_on_search_page';
 		}
@@ -950,9 +954,11 @@ class Ysm_Search
         $url = home_url('/') . '?s=' . implode( ' ', self::$s_words );
         $url .= '&search_id=' . self::$w_id;
 
-        if ( 'product' === self::$w_id || isset( self::$pt['product'] ) ) {
-            $url .= '&post_type=product';
-        }
+	    if ( empty( self::$display_opts['search_page_layout_posts'] ) ) {
+		    if ( 'product' === self::$w_id || isset( self::$pt['product'] ) ) {
+			    $url .= '&post_type=product';
+		    }
+	    }
 
         return $url;
     }

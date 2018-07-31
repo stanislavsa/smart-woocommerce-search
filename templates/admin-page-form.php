@@ -110,7 +110,14 @@ $tabs = array(
 						ysm_setting( $w_id, 'search_page_default_output', array(
 							'type' => 'checkbox',
 							'title' => __('Default Output on Search Page', 'smart_search'),
-							'description' => __("Display default search output on search results page.<br>By default the plugin modified search results according to selected options", 'smart_search'),
+							'description' => __("Disable altering search results by Smart Search plugin on the search results page.<br>By default the plugin modified search results according to selected options", 'smart_search'),
+							'value' => 0,
+						));
+
+						ysm_setting( $w_id, 'search_page_layout_posts', array(
+							'type' => 'checkbox',
+							'title' => __('Search Page Layout with Posts', 'smart_search'),
+							'description' => __("Display posts with products using theme search results layout.<br>Usefull if you want to display posts with products.<br>By default if 'Search in Products' option selected only products displays using WooCommerce search results layout", 'smart_search'),
 							'value' => 0,
 						));
 
