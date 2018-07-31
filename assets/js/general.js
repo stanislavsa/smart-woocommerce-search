@@ -164,7 +164,7 @@
 						if ( !$results_wrapper.find('.smart-search-view-all-holder').length ) {
 							$results_wrapper.addClass('has-viewall-button').append('<div class="smart-search-view-all-holder"></div>');
 						}
-						$results_wrapper.find('.smart-search-view-all-holder').html(res.view_all_link).show();
+						$results_wrapper.find('.smart-search-view-all-holder').html(res.view_all_link);
 					}
 
 					return res;
@@ -191,7 +191,11 @@
 							content.height('auto');
 
 							if ( $results_wrapper.find('.smart-search-view-all-holder').length ) {
-								$results_wrapper.find('.smart-search-view-all-holder').show();
+								if ( $this.val().length < options.minChars ) {
+									$results_wrapper.find('.smart-search-view-all-holder').hide();
+								} else {
+									$results_wrapper.find('.smart-search-view-all-holder').show();
+								}
 							}
 
 						}, 50);

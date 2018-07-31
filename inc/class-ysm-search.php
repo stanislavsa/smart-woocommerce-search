@@ -100,7 +100,7 @@ class Ysm_Search
 			add_action( 'wp_ajax_nopriv_ysm_custom_search', array( __CLASS__, 'custom_search' ) );
 		}
 
-		add_action('pre_get_posts', array(__CLASS__, 'search_filter'));
+		add_action('pre_get_posts', array(__CLASS__, 'search_filter'), 9999);
 		add_action('wp', array(__CLASS__, 'remove_search_filter'));
 
 		add_filter('the_title', array(__CLASS__, 'accent_search_words'), 9999, 1);
@@ -411,7 +411,7 @@ class Ysm_Search
 
 			if (!empty( $wp_the_query->query_vars['s'] ) && isset($_GET['search_id'])) {
 				remove_filter( 'posts_where',   array( __CLASS__, 'posts_where' ), 9999 );
-				remove_action('pre_get_posts', array( __CLASS__, 'search_filter' ));
+				remove_action('pre_get_posts', array( __CLASS__, 'search_filter' ), 9999);
 			}
 
 		}
@@ -425,7 +425,7 @@ class Ysm_Search
 	public static function posts_where($where )
 	{
 		global $wpdb;
-		$ids = !empty(self::$result_post_ids) ? implode(' , ', self::$result_post_ids) : '0';
+		$ids = !empty(self::$result_post_ids) ? implode(' , ', array_map( 'absint', self::$result_post_ids ) ) : '0';
 		$where = " AND {$wpdb->posts}.ID IN (" . $ids . ") ";
 		return $where;
 	}
