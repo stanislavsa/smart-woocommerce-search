@@ -3,7 +3,7 @@ Contributors: yummy-wp
 Tags: woocommerce search, ajax search, woocommerce search by sku, woocommerce search shortcod, product search, woocommerce search results, instant search, woocommerce search plugin, woocommerce search form, search for woocommerce, woocommerce search page, search, woocommerce, woocommerce product search, search woocommerce, shop, shop search, autocomplete, autosuggest, search for wp, search for wordpress, search plugin, woocommerce search by sku, search results,  woocommerce search shortcode, search products, search autocomplete, woocommerce advanced search, woocommerce predictive search, woocommerce live search, woocommerce single product, woocommerce site search, products, shop, category search, custom search, predictive search, relevant search, search product, woocommerce plugin, posts search, wp search, wordpress search
 Requires at least: 4.2
 Tested up to: 4.9
-Stable tag: 1.5.2
+Stable tag: 1.5.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -11,11 +11,13 @@ Smart WooCommerce Ajax Search allows you to instantly search products.
 
 == Description ==
 
-= Smart Search plugin is smart, fast, and easy to use. =
+= Improve customer experience and boost your sales with Instant Ajax WooCommerce search plugin for WordPress websites. Powerful, amazing and efficient! =
 
-[View plugin Demo](https://yummywp.com/plugins/smart-woocommerce-search/).
+[Read more](https://yummywp.com/plugins/smart-woocommerce-search/).
 
-Smart WooCommerce Search provides efficient search through your website.
+[View plugin Demo](https://smart-woocommerce-search.yummywp.com/).
+
+Smart WooCommerce Search is an Instant Ajax WooCommerce search plugin that lets your customers search any product in your website. Simply enter a relevant keyword, and the plugin will browse all WooCommerce categories one at a time.
 
 It is fast, and easy to use plugin for WooCommerce based websites with a huge amount of items.
 
@@ -36,6 +38,7 @@ Give it a try and enjoy:)
  * Customization settings
  * Custom Widget and shortcode
  * Settings to select fields and post types (product, post, page) to search through
+ * Search results with images and prices
  * Simple integration into default search widgets
  * Search by product SKU
  * Search through product Categories
@@ -43,7 +46,6 @@ Give it a try and enjoy:)
  * Search in Variations
  * Allow/disallow searching in selected product categories
  * Exclude "Out of stock" products from search results
- * Search results with images and prices
  * Fuzzy search
  * Translation ready
  * Visual Composer compatible
@@ -75,9 +77,10 @@ Give it a try and enjoy:)
 == Installation ==
 
 1. Unzip the downloaded .zip file.
-2. Upload the plugin folder into the `wp-content/plugins/` directory of your WordPress site.
-3. Activate the plugin through the 'Plugins' screen in WordPress
-4. Use the Smart Search screen (/wp-admin/admin.php?page=smart-search) to configure the plugin
+2. Upload the plugin folder to the `wp-content/plugins/` directory of your WordPress site.
+3. Go to the 'Plugins' menu in WordPress and activate the Smart WooCommerce Search plugin.
+4. Configure the plugin (/wp-admin/admin.php?page=smart-search)
+5. Place the search plugin shortcode <?php echo do_shortcode('[smart_search id="1"]');  ?> into your template or simply use the built-in widget.
 
 == Frequently Asked Questions ==
 
@@ -93,6 +96,11 @@ Please read a [documentation](http://yummywp.com/docs/smart-search/).
 
 Yes, when using products search or when you set option to search only through products in default or in custom search widget (shortcode) the search page displays WooCommerce product layout.
 
+= How to add Smart Search widget into the theme template (a PHP file) =
+
+Just add these code <?php echo do_shortcode('[smart_search id="1"]');  ?>
+In example used widget with ID = 1, so don't forget to change widget ID to needed value.
+
 == Screenshots ==
 
 1. Smart WooCommerce Search Custom Widget
@@ -101,6 +109,10 @@ Yes, when using products search or when you set option to search only through pr
 4. Smart WooCommerce Search Settings Page - Styling tab
 
 == Changelog ==
+
+= 1.5.3 =
+* Added - "Search Page Layout with Posts" option
+* Fixed - displaying of "View all" link when no suggestions
 
 = 1.5.2 =
 * Fixed - "Disallowed Product Categories" option
