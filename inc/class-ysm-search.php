@@ -107,6 +107,8 @@ class Ysm_Search
 		add_filter('get_the_excerpt', array(__CLASS__, 'accent_search_words'), 9999, 1);
 		add_filter('the_content', array(__CLASS__, 'accent_search_words'), 9999, 1);
 
+		add_filter( 'smart_search_query_results', array( __CLASS__, 'query_results_filter' ), 10 );
+
 		self::$registered_pt = array(
 			'post',
 			'page',
@@ -1040,6 +1042,33 @@ class Ysm_Search
 		/* replace pattern */
 		$pattern = '/' . implode( '|', $words ) . '/i';
 		return preg_replace( $pattern, "<strong>$0</strong>", $text );
+	}
+
+	public static function query_results_filter( $res_posts ) {
+		if ( empty( self::$display_opts['enable_fuzzy_search'] ) ) {
+			return $res_posts;
+		}
+		if ( 2 > count( self::$s_words ) ) {
+			return $res_posts;
+		}
+		$sorted = [];
+		foreach ( $res_posts as $res_post ) {
+			$sorted[ $res_post->ID ] = $res_post;
+			foreach ( self::$s_words as $w ) {
+				if ( false !== strpos( $res_post->post_title, $w ) ) {
+					$sorted[ $res_post->ID ]->relevance += 20;
+				}
+			}
+		}
+		usort( $sorted, array( __CLASS__, 'cmp' ) );
+		return $sorted;
+	}
+
+	function cmp( $a, $b ) {
+		if ( $a->relevance == $b->relevance ) {
+			return 0;
+		}
+		return ( $a->relevance < $b->relevance ) ? 1 : -1;
 	}
 
 }
