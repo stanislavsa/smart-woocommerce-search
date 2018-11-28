@@ -301,3 +301,8 @@
 .woocommerce-loop-product__title > strong {
 	display: inline !important;
 }
+
+.ysm-hide .smart-search-suggestions,
+.ysm-hide .smart-search-view-all-holder {
+	display: none !important;
+}

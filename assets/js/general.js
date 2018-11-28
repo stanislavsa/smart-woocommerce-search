@@ -246,6 +246,15 @@
 				$this.devbridgeAutocomplete().onValueChange();
 			});
 
+			$(window).on( 'touchstart' , function(event) {
+				var $wrapper = $( event.target ).hasClass( 'ysm-active' ) ? $( event.target ) : $( event.target ).parents( '.ysm-active' );
+				if ( $wrapper.length ) {
+					$wrapper.removeClass( 'ysm-hide' );
+				} else {
+					$('.ysm-active').addClass( 'ysm-hide' );
+				}
+			});
+
 		}
 
 	});
