@@ -1064,7 +1064,7 @@ class Ysm_Search
 		return $sorted;
 	}
 
-	function cmp( $a, $b ) {
+	public static function cmp( $a, $b ) {
 		if ( $a->relevance == $b->relevance ) {
 			return 0;
 		}
