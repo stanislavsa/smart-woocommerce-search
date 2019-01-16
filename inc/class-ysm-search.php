@@ -326,7 +326,7 @@ class Ysm_Search
 		}
 
 		if ( !empty( $settings['enable_fuzzy_search'] ) ) {
-			self::$display_opts['enable_fuzzy_search'] = 'enable_fuzzy_search';
+			self::$display_opts['enable_fuzzy_search'] = $settings['enable_fuzzy_search'];
 		}
 
 		if ( !empty( $settings['exclude_out_of_stock_products'] ) ) {
@@ -845,6 +845,10 @@ class Ysm_Search
 
 		foreach ( self::$s_words as $s_word ) {
 			$query[] = $wpdb->prepare( "$field LIKE %s", array( "%" . trim( $s_word ) . "%" ) );
+		}
+
+		if ( ! empty( self::$display_opts['enable_fuzzy_search'] ) && '2' === self::$display_opts['enable_fuzzy_search'] ) {
+			return implode( ' AND ', $query );
 		}
 
 		return implode( ' OR ', $query );

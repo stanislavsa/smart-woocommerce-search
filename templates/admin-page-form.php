@@ -178,10 +178,15 @@ $tabs = array(
 						));
 
 						ysm_setting( $w_id, 'enable_fuzzy_search', array(
-							'type' => 'checkbox',
+							'type' => 'select',
 							'title' => __('Fuzzy Search', 'smart_search'),
-							'description' => __('Enable multiple word search. May slow down the search request speed.', 'smart_search'),
-							'value' => 0,
+							'description' => __('Enable multiple word search.', 'smart_search'),
+							'value' => '',
+							'choices' => array(
+								''  => __('No', 'smart_search'),
+								'1' => __('"alpha" OR "beta"', 'smart_search'),
+								'2' => __('"alpha" AND "beta"', 'smart_search'),
+							),
 						));
 
 						?>
@@ -343,6 +348,13 @@ $tabs = array(
 								'type' => 'color',
 								'title' => __('Text Color', 'smart_search'),
 								'description' => __('Search field text color', 'smart_search'),
+								'value' => '',
+							));
+
+							ysm_setting( $w_id, 'input_bg_color', array(
+								'type' => 'color',
+								'title' => __('Background Color', 'smart_search'),
+								'description' => __('Search field background color', 'smart_search'),
 								'value' => '',
 							));
 
