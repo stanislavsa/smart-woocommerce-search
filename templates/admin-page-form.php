@@ -124,7 +124,7 @@ $tabs = array(
 						ysm_setting( $w_id, 'no_results_text', array(
 							'type' => 'text',
 							'title' => __('"No Results" text', 'smart_search'),
-							'description' => __('If not empty displays when any post match search query', 'smart_search'),
+							'description' => __('If not empty displays when no results returned', 'smart_search'),
 							'value' => __( 'No Results', 'smart_search' ),
 						));
 
@@ -145,7 +145,7 @@ $tabs = array(
 						ysm_setting( $w_id, 'excerpt_symbols_count', array(
 							'type' => 'text',
 							'title' => __('Excerpt Symbols Amount', 'smart_search'),
-							'description' => __('Maximal number of symbols in excerpt', 'smart_search'),
+							'description' => __('Maximum number of symbols for description in results', 'smart_search'),
 							'value' => '50',
 						));
 
