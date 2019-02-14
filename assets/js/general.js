@@ -148,7 +148,14 @@
 				formatResult: function (suggestion, currentValue) {
 					return suggestion.data;
 				},
-				onSearchStart   : function () {
+				onSearchStart   : function ( query ) {
+					if ( this.value.indexOf( '  ' ) !== -1 ) {
+						this.value = this.value.replace( /\s+/, ' ' );
+					}
+					var trimmed = $.trim( this.value );
+					if ( trimmed !== this.value ) {
+						return false;
+					}
 					$this.css({'background-image': 'url(' + options.loaderIcon + ')','background-repeat': 'no-repeat', 'background-position': '50% 50%'});
 				},
 				onSelect        : function (suggestion) {

@@ -1,9 +1,9 @@
 === Smart WooCommerce Search ===
 Contributors: yummy-wp
-Tags: woocommerce search, ajax search, woocommerce search by sku, woocommerce search shortcod, product search, woocommerce search results, instant search, woocommerce search plugin, woocommerce search form, search for woocommerce, woocommerce search page, search, woocommerce, woocommerce product search, search woocommerce, shop, shop search, autocomplete, autosuggest, search for wp, search for wordpress, search plugin, woocommerce search by sku, search results,  woocommerce search shortcode, search products, search autocomplete, woocommerce advanced search, woocommerce predictive search, woocommerce live search, woocommerce single product, woocommerce site search, products, shop, category search, custom search, predictive search, relevant search, search product, woocommerce plugin, posts search, wp search, wordpress search
+Tags: woocommerce search, ajax search, woocommerce, woocommerce search by sku, woocommerce search shortcod, product search, product filter, woocommerce search results, instant search, woocommerce search plugin, woocommerce search form, search for woocommerce, woocommerce search page, search, woocommerce product search, search woocommerce, shop, shop search, autocomplete, autosuggest, search for wp, search for wordpress, search plugin, woocommerce search by sku, search results,  woocommerce search shortcode, search products, search autocomplete, woocommerce advanced search, woocommerce predictive search, woocommerce live search, woocommerce single product, woocommerce site search, products, shop, category search, custom search, predictive search, relevant search, search product, woocommerce plugin, posts search, wp search, wordpress search
 Requires at least: 4.2
 Tested up to: 5.0
-Stable tag: 1.5.6
+Stable tag: 1.5.7
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -66,13 +66,17 @@ Give it a try and enjoy:)
   * Search results with "Sale" label
   * Search results with "Featured" label
   * ACF plugin compatible
+  * Stop words
+  * Synonyms
   * Custom Post Type UI plugin compatible
   * Ultimate WooCommerce Brands plugin compatible
   * More customization and styling settings
 
-[Read More](https://yummywp.com/plugins/smart-ajax-product-search/).
+[Read More](https://yummywp.com/plugins/smart-woocommerce-search/).
 
 [View plugin Demo](https://smart-ajax-product-search.yummywp.com/).
+
+[Plugin Documentation](https://yummywp.com/docs/smart-search-pro/).
 
 == Installation ==
 
@@ -109,6 +113,10 @@ In example used widget with ID = 1, so don't forget to change widget ID to neede
 4. Smart WooCommerce Search Settings Page - Styling tab
 
 == Changelog ==
+
+= 1.5.7 =
+* Fixed - search results page query
+* Improved - autocomplete function
 
 = 1.5.6 =
 * Added - "Search Field Background Color" option

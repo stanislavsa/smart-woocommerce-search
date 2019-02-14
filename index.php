@@ -3,9 +3,10 @@
  * Plugin Name: Smart WooCommerce Search
  * Plugin URI:  https://yummywp.com/plugins/smart-woocommerce-search/
  * Description: Ajax Smart WooCommerce Search allows you to instantly search products.
+ * Tags: woocommerce search, ajax search, woocommerce, woocommerce search by sku, woocommerce search shortcod, product search, product filter, woocommerce search results, instant search, woocommerce search plugin, woocommerce search form, search for woocommerce, woocommerce search page, search, woocommerce product search, search woocommerce, shop, shop search, autocomplete, autosuggest, search for wp, search for WordPress, search plugin, woocommerce search by sku, search results,  woocommerce search shortcode, search products, search autocomplete, woocommerce advanced search, woocommerce predictive search, woocommerce live search, woocommerce single product, woocommerce site search, products, shop, category search, custom search, predictive search, relevant search, search product, woocommerce plugin, posts search, wp search, WordPress search
  * Author:      YummyWP
  * Author URI:  https://yummywp.com
- * Version:     1.5.6
+ * Version:     1.5.7
  * Domain Path: /languages
  * Text Domain: smart_search
  *
@@ -35,7 +36,7 @@ if ( defined( 'YSM_PRO' ) ) {
  * Define main constants
  */
 if ( ! defined( 'YSM_VER' ) ) {
-	define('YSM_VER', 'ysm-1.5.5');
+	define('YSM_VER', 'ysm-1.5.7');
 }
 
 if ( ! defined( 'YSM_DIR' ) ) {

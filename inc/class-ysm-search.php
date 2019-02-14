@@ -101,7 +101,7 @@ class Ysm_Search
 		}
 
 		add_action('pre_get_posts', array(__CLASS__, 'search_filter'), 9999);
-		add_action('wp', array(__CLASS__, 'remove_search_filter'));
+		add_action( 'wp', array( __CLASS__, 'remove_search_filter' ), 9999 );
 
 		add_filter('the_title', array(__CLASS__, 'accent_search_words'), 9999, 1);
 		add_filter('get_the_excerpt', array(__CLASS__, 'accent_search_words'), 9999, 1);
@@ -351,7 +351,7 @@ class Ysm_Search
 
 		if ( $query->is_main_query() ) {
 
-			if ( $query->is_search && isset($_GET['search_id']) ) {
+			if ( $query->is_search() && isset( $_GET['search_id'] ) ) {
 
 				if ( defined( 'DOING_AJAX' ) && DOING_AJAX  ) {
 					return $query;
@@ -398,7 +398,14 @@ class Ysm_Search
 				self::$result_post_ids = $wp_posts;
 				$query->set('s', implode( ' ', self::$s_words ) );
 				$query->set('post__in', $wp_posts );
-				$query-> set('orderby' ,'post__in');
+
+				$orderby = $query->get('orderby');
+				if ( 'relevance' === $orderby ) {
+					$query->set('orderby' ,'post__in');
+				}
+
+				$query->set('meta_query' ,array());
+				$query->set('tax_query' ,array());
 
 				add_filter( 'posts_where',   array( __CLASS__, 'posts_where' ), 9999 );
 			}
@@ -1048,18 +1055,18 @@ class Ysm_Search
 		return preg_replace( $pattern, "<strong>$0</strong>", $text );
 	}
 
+	/**
+	 * Sort results by relevance
+	 * @param $res_posts
+	 * @return array
+	 */
 	public static function query_results_filter( $res_posts ) {
-		if ( empty( self::$display_opts['enable_fuzzy_search'] ) ) {
-			return $res_posts;
-		}
-		if ( 2 > count( self::$s_words ) ) {
-			return $res_posts;
-		}
 		$sorted = [];
 		foreach ( $res_posts as $res_post ) {
 			$sorted[ $res_post->ID ] = $res_post;
 			foreach ( self::$s_words as $w ) {
-				if ( false !== strpos( $res_post->post_title, $w ) ) {
+				$pos = strpos( mb_strtolower( trim( $res_post->post_title ) ), $w );
+				if ( false !== $pos ) {
 					$sorted[ $res_post->ID ]->relevance += 20;
 				}
 			}
