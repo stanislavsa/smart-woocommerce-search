@@ -567,7 +567,8 @@ class Ysm_Search
 					$where['and'][] = sprintf( "p.ID NOT IN (
 						SELECT DISTINCT t_rel.object_id
 						FROM {$wpdb->term_relationships} t_rel
-						WHERE t_rel.term_taxonomy_id IN (%s)
+						LEFT JOIN {$wpdb->term_taxonomy} t_tax ON t_rel.term_taxonomy_id = t_tax.term_taxonomy_id
+						WHERE t_tax.term_id IN (%s)
 					)", implode( ",", $disallowed_product_cats_filtered ) );
 					$join['pmpv'] = "LEFT JOIN {$wpdb->postmeta} pmpv ON pmpv.post_id = p.ID";
 					$where['and'][] = "( p.post_type NOT IN ('product') OR (p.post_type = 'product' AND pmpv.meta_key = '_visibility' AND CAST(pmpv.meta_value AS CHAR) IN ('search','visible')) )";
@@ -581,11 +582,22 @@ class Ysm_Search
 						$exclude_terms = array_merge( $exclude_terms, $disallowed_product_cats_filtered );
 					}
 
-					$where['and'][] = sprintf( "p.ID NOT IN (
-						SELECT DISTINCT object_id
-						FROM {$wpdb->term_relationships}
-						WHERE term_taxonomy_id IN (%s)
-					)", implode( ",", $exclude_terms ) );
+					if ( $exclude_terms ) {
+						$where['and'][] = sprintf( "p.ID NOT IN (
+							SELECT DISTINCT object_id
+							FROM {$wpdb->term_relationships} t_rel
+							LEFT JOIN {$wpdb->term_taxonomy} t_tax ON t_rel.term_taxonomy_id = t_tax.term_taxonomy_id
+							WHERE t_tax.term_id IN (%s)
+						)", implode( ",", $exclude_terms ) );
+
+						$where['and'][] = sprintf( "( p.post_type NOT IN ('product_variation') OR 
+							( p.post_type = 'product_variation' AND p.post_parent NOT IN (
+								SELECT DISTINCT object_id
+								FROM {$wpdb->term_relationships} t_rel
+								LEFT JOIN {$wpdb->term_taxonomy} t_tax ON t_rel.term_taxonomy_id = t_tax.term_taxonomy_id
+								WHERE t_tax.term_id IN (%s)
+							) ) )", implode( ",", $exclude_terms ) );
+					}
 				}
 
 				if ( ! empty( self::$display_opts['exclude_out_of_stock_products'] ) ) {
@@ -602,9 +614,21 @@ class Ysm_Search
 
 					if ( ! empty( $allowed_product_cats_filtered ) ) {
 						$allowed_product_cats_filtered = implode( ",", $allowed_product_cats_filtered );
-						$where['and'][] = sprintf( "( p.post_type NOT IN ('product') OR ( p.post_type = 'product' AND t_tax.taxonomy = 'product_cat' AND t.term_id IN (%s) ) )", $allowed_product_cats_filtered );
+						$where['and'][] = sprintf( "( p.post_type NOT IN ('product') OR 
+													( p.post_type = 'product' AND p.ID IN (
+							SELECT DISTINCT object_id
+							FROM {$wpdb->term_relationships} t_rel
+							LEFT JOIN {$wpdb->term_taxonomy} t_tax ON t_rel.term_taxonomy_id = t_tax.term_taxonomy_id
+							WHERE t_tax.term_id IN (%s)
+						) ) )", $allowed_product_cats_filtered );
 						// product variations
-						//$where['and'][] = sprintf( "( p.post_type NOT IN ('product_variation') OR ( p.post_type = 'product_variation' AND t_tax.taxonomy = 'product_cat' AND t.term_id IN (%s) ) )", $allowed_product_cats_filtered );
+						$where['and'][] = sprintf( "( p.post_type NOT IN ('product_variation') OR 
+													( p.post_type = 'product_variation' AND p.post_parent IN (
+							SELECT DISTINCT object_id
+							FROM {$wpdb->term_relationships} t_rel
+							LEFT JOIN {$wpdb->term_taxonomy} t_tax ON t_rel.term_taxonomy_id = t_tax.term_taxonomy_id
+							WHERE t_tax.term_id IN (%s)
+						) ) )", $allowed_product_cats_filtered );
 					}
 
 				}
