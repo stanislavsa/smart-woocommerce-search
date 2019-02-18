@@ -353,9 +353,9 @@ class Ysm_Search
 
 			if ( $query->is_search() && isset( $_GET['search_id'] ) ) {
 
-				if ( defined( 'DOING_AJAX' ) && DOING_AJAX  ) {
-					return $query;
-				}
+//				if ( defined( 'DOING_AJAX' ) && DOING_AJAX  ) {
+//					return $query;
+//				}
 
 				$wp_posts = array();
 				$w_id = $_GET['search_id'];
@@ -404,10 +404,10 @@ class Ysm_Search
 					$query->set('orderby' ,'post__in');
 				}
 
-				$query->set('meta_query' ,array());
-				$query->set('tax_query' ,array());
+//				$query->set('meta_query' ,array());
+//				$query->set('tax_query' ,array());
 
-				add_filter( 'posts_where',   array( __CLASS__, 'posts_where' ), 9999 );
+				add_filter( 'posts_where',   array( __CLASS__, 'posts_where' ), 999999 );
 			}
 
 		}
@@ -419,15 +419,8 @@ class Ysm_Search
 	 */
 	public static function remove_search_filter()
 	{
-		global $wp_the_query;
-		if ( ! ( defined( 'DOING_AJAX' ) && DOING_AJAX ) ) {
-
-			if (!empty( $wp_the_query->query_vars['s'] ) && isset($_GET['search_id'])) {
-				remove_filter( 'posts_where',   array( __CLASS__, 'posts_where' ), 9999 );
-				remove_action('pre_get_posts', array( __CLASS__, 'search_filter' ), 9999);
-			}
-
-		}
+		remove_filter( 'posts_where',   array( __CLASS__, 'posts_where' ), 999999 );
+		remove_action('pre_get_posts', array( __CLASS__, 'search_filter' ), 9999);
 	}
 
 	/**
