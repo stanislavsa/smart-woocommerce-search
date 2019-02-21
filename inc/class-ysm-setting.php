@@ -137,7 +137,12 @@ class Ysm_Setting
 		?>
 		<select class="select" name="<?php echo esc_attr( $args['name'] ); ?>" id="<?php echo esc_attr( $id ); ?>" <?php disabled( $args['disabled'], true ); ?>>
 			<?php foreach ( $args['choices'] as $key => $value ) { ?>
-				<option value="<?php echo esc_attr( $key ); ?>" <?php selected( $key, esc_attr( $args['value'] ) ); ?>><?php echo esc_html( $value ); ?></option>
+				<?php
+				$args['value'] = (array) $args['value'];
+				$args['value'] = array_map( 'esc_attr', $args['value'] );
+				$selected = in_array( $key, $args['value'] ) ? 'selected' : '';
+				?>
+				<option value="<?php echo esc_attr( $key ); ?>" <?php echo esc_attr( $selected ); ?>><?php echo esc_html( $value ); ?></option>
 			<?php } ?>
 		</select>
 		<?php
