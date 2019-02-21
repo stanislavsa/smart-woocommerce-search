@@ -142,11 +142,26 @@ h3.ysm-nav-tab-wrapper {
 	color: #444;
 }
 
+.ysm-wrap-left {
+	width: 80%;
+	float: left;
+}
+
+.ysm-wrap-right {
+	width: 20%;
+	float: right;
+}
 
 @media only screen and (max-width: 960px) {
 
 	.ysm-column-container {
 		width: 100% !important;
+	}
+
+	.ysm-wrap-left,
+	.ysm-wrap-right {
+		width: 100%;
+		float: none;
 	}
 
 }
