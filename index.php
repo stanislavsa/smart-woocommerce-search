@@ -48,6 +48,7 @@ if ( ! defined( 'YSM_URI' ) ) {
 }
 
 include_once YSM_DIR . 'inc/functions.php';
+include_once YSM_DIR . 'inc/query-hooks.php';
 include_once YSM_DIR . 'inc/class-ysm-search.php';
 include_once YSM_DIR . 'inc/class-ysm-setting.php';
 include_once YSM_DIR . 'inc/class-ysm-message.php';

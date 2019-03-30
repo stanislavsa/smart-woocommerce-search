@@ -22,12 +22,14 @@
 			));
 		}
 
-		ysm_setting( $w_id, 'placeholder', array(
-			'type' => 'text',
-			'title' => __('Placeholder', 'smart_search'),
-			'description' => __('Placeholder in search input', 'smart_search'),
-			'value' => _x( 'Search &hellip;', 'placeholder', 'smart_search' ),
-		));
+		if ($w_id !== 'default' && $w_id !== 'product') {
+			ysm_setting($w_id, 'placeholder', array(
+				'type' => 'text',
+				'title' => __('Placeholder', 'smart_search'),
+				'description' => __('Placeholder in search input', 'smart_search'),
+				'value' => _x('Search &hellip;', 'placeholder', 'smart_search'),
+			));
+		}
 
 		ysm_setting( $w_id, 'char_count', array(
 			'type' => 'text',

@@ -88,6 +88,9 @@ class Ysm_Setting
 
 		ob_start();
 
+		if ( is_array( $args['value'] ) ) {
+			$args['value'] = implode( ',', $args['value'] );
+		}
 		?>
 		<label for="<?php echo esc_attr( $id ); ?>">
 			<input value="<?php echo esc_attr( $args['value'] ); ?>" placeholder="<?php echo esc_attr( $args['placeholder'] ); ?>" <?php disabled($args['disabled'], true); ?>
