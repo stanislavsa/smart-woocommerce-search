@@ -332,6 +332,9 @@ class Ysm_Search
 		}
 
 		if ( !empty( $settings['enable_fuzzy_search'] ) ) {
+			if ( is_array( $settings['enable_fuzzy_search'] ) ) {
+				$settings['enable_fuzzy_search'] = $settings['enable_fuzzy_search'][0];
+			}
 			self::$display_opts['enable_fuzzy_search'] = $settings['enable_fuzzy_search'];
 		}
 
