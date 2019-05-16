@@ -121,7 +121,7 @@
 			'description' => __('Enable multiple word search.', 'smart_search'),
 			'value' => '',
 			'choices' => array(
-				''  => __('No', 'smart_search'),
+				'0'  => __('No', 'smart_search'),
 				'1' => __('"alpha" OR "beta"', 'smart_search'),
 				'2' => __('"alpha" AND "beta"', 'smart_search'),
 			),

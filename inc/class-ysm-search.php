@@ -921,6 +921,19 @@ class Ysm_Search
 					$post_excerpt = $post->post_content;
 				}
 
+				if ( false !== strpos( $post_excerpt, '[et_pb_' ) ) {
+					// Add DIVI shortcodes to remove them by strip_shortcodes()
+					if ( ! shortcode_exists( 'et_pb_section' ) ) {
+						add_shortcode( 'et_pb_section', '__return_false');
+					}
+					if ( ! shortcode_exists( 'et_pb_row' ) ) {
+						add_shortcode( 'et_pb_row', '__return_false');
+					}
+					if ( ! shortcode_exists( 'et_pb_column' ) ) {
+						add_shortcode( 'et_pb_column', '__return_false');
+					}
+				}
+
 				$post_excerpt = strip_tags( strip_shortcodes( $post_excerpt) );
 
 				$excerpt_symbols_count_max = !empty( self::$display_opts['excerpt_symbols_count']  ) ? (int) self::$display_opts['excerpt_symbols_count'] : 50;
