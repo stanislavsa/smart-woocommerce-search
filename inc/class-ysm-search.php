@@ -602,7 +602,7 @@ class Ysm_Search
 
 				if ( ! empty( self::$display_opts['exclude_out_of_stock_products'] ) ) {
 					$join['pmpv'] = "LEFT JOIN {$wpdb->postmeta} pmpv ON pmpv.post_id = p.ID";
-					$where['and'][] = "( p.post_type NOT IN ('product') OR ( p.post_type = 'product' AND pmpv.meta_key = '_stock_status' AND CAST(pmpv.meta_value AS CHAR) NOT IN ('outofstock') ) )";
+					$where['and'][] = "( p.post_type NOT IN ('product', 'product_variation') OR ( p.post_type IN ('product', 'product_variation') AND pmpv.meta_key = '_stock_status' AND CAST(pmpv.meta_value AS CHAR) NOT IN ('outofstock') ) )";
 				}
 
 				// restrict searching only in defined categories
@@ -665,7 +665,7 @@ class Ysm_Search
 				$orderby[] = "relevance DESC";
 			}
 
-			if ( defined('ICL_LANGUAGE_CODE') && ICL_LANGUAGE_CODE != '' ) {
+			if ( defined('ICL_LANGUAGE_CODE') && ICL_LANGUAGE_CODE != '' && ! defined( 'POLYLANG_BASENAME' ) ) {
 				$join['icl'] = $wpdb->prepare( "RIGHT JOIN {$wpdb->prefix}icl_translations icl ON (p.ID = icl.element_id AND icl.language_code = '%s')", ICL_LANGUAGE_CODE );
 			}
 
@@ -800,7 +800,7 @@ class Ysm_Search
 
 			if ( ! empty( self::$display_opts['exclude_out_of_stock_products'] ) ) {
 				$join['pmpv'] = "LEFT JOIN {$wpdb->postmeta} pmpv ON pmpv.post_id = p.ID";
-				$where['and'][] = "( p.post_type NOT IN ('product') OR ( p.post_type = 'product' AND pmpv.meta_key = '_stock_status' AND CAST(pmpv.meta_value AS CHAR) NOT IN ('outofstock') ) )";
+				$where['and'][] = "( p.post_type NOT IN ('product', 'product_variation') OR ( p.post_type IN ('product', 'product_variation') AND pmpv.meta_key = '_stock_status' AND CAST(pmpv.meta_value AS CHAR) NOT IN ('outofstock') ) )";
 			}
 
 			// restrict searching only in defined categories
@@ -841,7 +841,7 @@ class Ysm_Search
 		}
 
 		// wpml
-		if ( defined('ICL_LANGUAGE_CODE') && ICL_LANGUAGE_CODE != '' ) {
+		if ( defined('ICL_LANGUAGE_CODE') && ICL_LANGUAGE_CODE != '' && ! defined( 'POLYLANG_BASENAME' ) ) {
 			$join['icl'] = $wpdb->prepare( "RIGHT JOIN {$wpdb->prefix}icl_translations icl ON (p.ID = icl.element_id AND icl.language_code = '%s')", ICL_LANGUAGE_CODE );
 		}
 

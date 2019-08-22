@@ -1,15 +1,16 @@
 <?php
 namespace YSM\Query;
 
-add_filter( 'smart_search_query_where', __NAMESPACE__ . '\\search_exclude' );
+add_filter( 'smart_search_query_where', __NAMESPACE__ . '\\search_exclude', 10, 2 );
 add_filter( 'smart_search_query_where', __NAMESPACE__ . '\\check_variations_parent', 10, 2 );
 
 /**
  * Search exclude
  * @param $where
+ * @param $params
  * @return mixed
  */
-function search_exclude( $where ) {
+function search_exclude( $where, $params ) {
 	if ( class_exists( 'SearchExclude' ) ) {
 		$search_exclude = get_option( 'sep_exclude', array() );
 		if ( ! empty( $search_exclude ) && is_array( $search_exclude ) ) {
