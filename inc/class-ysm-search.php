@@ -362,10 +362,6 @@ class Ysm_Search
 
 			if ( $query->is_search() && isset( $_GET['search_id'] ) ) {
 
-//				if ( defined( 'DOING_AJAX' ) && DOING_AJAX  ) {
-//					return $query;
-//				}
-
 				$wp_posts = array();
 				$w_id = $_GET['search_id'];
 				$s = $_GET['s'];
@@ -412,9 +408,6 @@ class Ysm_Search
 				if ( 'relevance' === $orderby ) {
 					$query->set('orderby' ,'post__in');
 				}
-
-//				$query->set('meta_query' ,array());
-//				$query->set('tax_query' ,array());
 
 				add_filter( 'posts_where',   array( __CLASS__, 'posts_where' ), 999999 );
 			}
