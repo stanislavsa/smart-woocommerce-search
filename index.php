@@ -73,22 +73,15 @@ if ( ! function_exists( 'ysm_load_textdomain' ) ) {
  */
 if ( ! function_exists( 'ysm_add_menu_page' ) ) {
 	function ysm_add_menu_page() {
+	    global $submenu;
+	    
 		add_menu_page( __( 'Smart Search', 'smart_search' ),
 			__( 'Smart Search', 'smart_search' ),
 			'manage_options',
 			'smart-search',
-			null,
+			'ysm_display_admin_page_default',
 			'dashicons-search',
 			39 );
-
-		add_submenu_page( 'smart-search',
-			__( 'Default Search Widget Settings', 'smart_search' ),
-			__( 'Default', 'smart_search' ),
-			'manage_options',
-			'smart-search',
-			'ysm_display_admin_page_default',
-			'',
-			1 );
 
 		add_submenu_page( 'smart-search',
 			__( 'Custom Search Widgets', 'smart_search' ),
@@ -96,8 +89,7 @@ if ( ! function_exists( 'ysm_add_menu_page' ) ) {
 			'manage_options',
 			'smart-search-custom',
 			'ysm_display_admin_page_custom',
-			'',
-			2 );
+			1 );
 
 		add_submenu_page( 'smart-search',
 			__( 'Add New Search Widget', 'smart_search' ),
@@ -105,8 +97,9 @@ if ( ! function_exists( 'ysm_add_menu_page' ) ) {
 			'manage_options',
 			'smart-search-custom-new',
 			'ysm_display_admin_page_custom_new',
-			'',
-			3 );
+			2 );
+			
+		$submenu['smart-search'][0][0] = __( 'Default', 'smart_search' );
 	}
 }
 
