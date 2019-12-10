@@ -79,34 +79,32 @@ if ( ! function_exists( 'ysm_add_menu_page' ) ) {
 			'smart-search',
 			null,
 			'dashicons-search',
-			39 );
+			39
+		);
 
 		add_submenu_page( 'smart-search',
 			__( 'Default Search Widget Settings', 'smart_search' ),
 			__( 'Default', 'smart_search' ),
 			'manage_options',
 			'smart-search',
-			'ysm_display_admin_page_default',
-			'',
-			1 );
+			'ysm_display_admin_page_default'
+		);
 
 		add_submenu_page( 'smart-search',
 			__( 'Custom Search Widgets', 'smart_search' ),
 			__( 'Custom Widgets', 'smart_search' ),
 			'manage_options',
 			'smart-search-custom',
-			'ysm_display_admin_page_custom',
-			'',
-			2 );
+			'ysm_display_admin_page_custom'
+		);
 
 		add_submenu_page( 'smart-search',
 			__( 'Add New Search Widget', 'smart_search' ),
 			__( 'Add New', 'smart_search' ),
 			'manage_options',
 			'smart-search-custom-new',
-			'ysm_display_admin_page_custom_new',
-			'',
-			3 );
+			'ysm_display_admin_page_custom_new'
+		);
 	}
 }
 
