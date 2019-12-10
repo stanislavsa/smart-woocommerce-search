@@ -889,7 +889,11 @@ class Ysm_Search
 			/* featured image */
 			if ( !empty(self::$display_opts['display_icon']) && has_post_thumbnail( $post->ID )) {
 
-				$image = get_the_post_thumbnail( $post->ID, 'post-thumbnail', apply_filters( 'smart_search_suggestions_image_attributes', array() ) );
+				$image = get_the_post_thumbnail(
+					$post->ID,
+					apply_filters( 'smart_search_suggestions_image_size', 'post-thumbnail' ),
+					apply_filters( 'smart_search_suggestions_image_attributes', array() )
+				);
 
 				if (empty($image)) {
 					$post_format = get_post_format($post->ID);
@@ -993,7 +997,9 @@ class Ysm_Search
      */
     protected static function get_viewall_link_url () {
 
-        $url = home_url('/') . '?s=' . implode( ' ', self::$s_words );
+	    $url = implode( ' ', self::$s_words );
+	    $url = str_replace( '+', '%2b', $url );
+	    $url = home_url('/') . '?s=' . $url;
         $url .= '&search_id=' . self::$w_id;
 
 	    if ( empty( self::$display_opts['search_page_layout_posts'] ) ) {

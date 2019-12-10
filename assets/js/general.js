@@ -111,6 +111,7 @@
 				} else {
 					var action = $(this).attr('action');
 
+					val = val.replace(/\+/g, '%2b');
 					val = val.replace(/\s/g, '+');
 					action += '?s=' + val + '&search_id=' + options.id;
 
