@@ -996,15 +996,13 @@ class Ysm_Search
      * @return string
      */
     protected static function get_viewall_link_url () {
-
-	    $url = implode( ' ', self::$s_words );
-	    $url = str_replace( '+', '%2b', $url );
-	    $url = home_url('/') . '?s=' . $url;
-        $url .= '&search_id=' . self::$w_id;
+	    $param = implode( ' ', self::$s_words );
+	    $param = str_replace( '+', '%2b', $param );
+	    $url = add_query_arg( array( 's' => $param, 'search_id' => self::$w_id ), home_url('/') );
 
 	    if ( empty( self::$display_opts['search_page_layout_posts'] ) ) {
 		    if ( 'product' === self::$w_id || isset( self::$pt['product'] ) ) {
-			    $url .= '&post_type=product';
+			    $url = add_query_arg( array( 'post_type' => 'product' ), $url );
 		    }
 	    }
 

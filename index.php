@@ -11,7 +11,7 @@
  * Text Domain: smart_search
  *
  * WC requires at least: 2.2
- * WC tested up to: 3.8
+ * WC tested up to: 3.9
  */
 
 if ( ! defined( 'ABSPATH' ) ) exit;

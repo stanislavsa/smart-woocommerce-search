@@ -113,7 +113,8 @@
 
 					val = val.replace(/\+/g, '%2b');
 					val = val.replace(/\s/g, '+');
-					action += '?s=' + val + '&search_id=' + options.id;
+					action += ( -1 !== action.indexOf('?') ) ? '&' : '?';
+					action += 's=' + val + '&search_id=' + options.id;
 
 					if ( options.layout === 'product' ) {
 						action += '&post_type=product';
@@ -182,6 +183,8 @@
 					$this.css('background-image', 'none');
 
 					if (suggestions.length > 0) {
+
+						$results_wrapper.parents('.ysm-active').removeClass( 'ysm-hide' );
 
 						setTimeout( function(){
 							var content = $results_wrapper.find('.smart-search-suggestions'),
