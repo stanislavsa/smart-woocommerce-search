@@ -363,8 +363,14 @@ class Ysm_Search
 			if ( $query->is_search() && isset( $_GET['search_id'] ) ) {
 
 				$wp_posts = array();
-				$w_id = $_GET['search_id'];
-				$s = $_GET['s'];
+				$w_id = ! empty( $_GET['search_id'] ) ? $_GET['search_id'] : 0;
+				$s    = '';
+
+				if ( ! empty( $_GET['woof_text'] ) ) {
+					$s = $_GET['woof_text'];
+				} elseif ( ! empty( $_GET['s'] ) ) {
+					$s = $_GET['s'];
+				}
 
 				if (empty($w_id)) {
 					return $query;
@@ -1049,8 +1055,14 @@ class Ysm_Search
 				return $text;
 			}
 
-			$w_id = $_GET['search_id'];
-			$s    = $_GET['s'];
+			$w_id = ! empty( $_GET['search_id'] ) ? $_GET['search_id'] : 0;
+			$s    = '';
+
+			if ( ! empty( $_GET['woof_text'] ) ) {
+				$s = $_GET['woof_text'];
+			} elseif ( ! empty( $_GET['s'] ) ) {
+				$s = $_GET['s'];
+			}
 
 			if ( empty( $w_id ) || empty( $s ) ) {
 				return $text;
