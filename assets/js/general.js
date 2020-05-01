@@ -169,7 +169,7 @@
 					var res = typeof response === 'string' ? $.parseJSON(response) : response,
 						val = $this.val();
 
-					if (res.view_all_link != '') {
+					if (res && res.view_all_link && res.view_all_link != '') {
 						if ( !$results_wrapper.find('.smart-search-view-all-holder').length ) {
 							$results_wrapper.addClass('has-viewall-button').append('<div class="smart-search-view-all-holder"></div>');
 						}

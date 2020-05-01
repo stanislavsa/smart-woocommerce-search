@@ -410,7 +410,11 @@ class Ysm_Search
 				$query->set('s', implode( ' ', self::$s_words ) );
 				$query->set('post__in', $wp_posts );
 
-				$orderby = $query->get('orderby');
+				if ( ! empty( $_GET['product_orderby'] ) ) {
+					$orderby = $_GET['product_orderby'];
+				} else {
+					$orderby = $query->get('orderby');
+				}
 				if ( 'relevance' === $orderby ) {
 					$query->set('orderby' ,'post__in');
 				}
