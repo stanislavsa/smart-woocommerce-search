@@ -415,9 +415,8 @@ class Ysm_Search
 					if ( 'relevance' === $orderby ) {
 						$query->set('orderby' ,'post__in');
 					}
+					add_filter( 'posts_where',   array( __CLASS__, 'posts_where' ), 999999 );
 				}
-
-				add_filter( 'posts_where',   array( __CLASS__, 'posts_where' ), 999999 );
 			}
 
 		}
