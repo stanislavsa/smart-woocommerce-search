@@ -358,7 +358,7 @@ class Ysm_Search
 	public static function search_filter($query)
 	{
 
-		if ( $query->is_main_query() ) {
+		if ( $query->is_main_query() && ! is_admin() ) {
 
 			if ( $query->is_search() && isset( $_GET['search_id'] ) ) {
 
@@ -415,8 +415,8 @@ class Ysm_Search
 					if ( 'relevance' === $orderby ) {
 						$query->set('orderby' ,'post__in');
 					}
-					add_filter( 'posts_where',   array( __CLASS__, 'posts_where' ), 999999 );
 				}
+				add_filter( 'posts_where',   array( __CLASS__, 'posts_where' ), 999999 );
 			}
 
 		}
