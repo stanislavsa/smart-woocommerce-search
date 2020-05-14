@@ -105,7 +105,8 @@ class Ysm_Search
 			add_action( 'wp_ajax_nopriv_ysm_custom_search', array( __CLASS__, 'custom_search' ) );
 		}
 
-		add_action('pre_get_posts', array(__CLASS__, 'search_filter'), 9999);
+		add_action( 'pre_get_posts', array( __CLASS__, 'search_filter' ), 9999 );
+		add_action( 'woocommerce_product_query', array( __CLASS__, 'search_filter' ), 9999 );
 		add_action( 'wp', array( __CLASS__, 'remove_search_filter' ), 9999 );
 
 		add_filter('the_title', array(__CLASS__, 'accent_search_words'), 9999, 1);
@@ -355,68 +356,56 @@ class Ysm_Search
 	 * @param $query
 	 * @return mixed
 	 */
-	public static function search_filter($query)
-	{
+	public static function search_filter( $query ) {
+		global $wp_the_query;
 
-		if ( $query->is_main_query() && ! is_admin() ) {
+		$s = '';
+		if ( ! empty( $_GET['woof_text'] ) ) {
+			$s = sanitize_text_field( $_GET['woof_text'] );
+		} elseif ( ! empty( $_GET['s'] ) ) {
+			$s = sanitize_text_field( $_GET['s'] );
+		}
 
-			if ( $query->is_search() && isset( $_GET['search_id'] ) ) {
+		if ( ! is_admin() && ! empty( $wp_the_query->query_vars['s'] ) && ! empty( $s ) && ! ( defined( 'DOING_AJAX' ) && DOING_AJAX ) ) {
 
+			$w_id = ! empty( $_GET['search_id'] ) ? sanitize_text_field( $_GET['search_id'] ) : 0;
+			if ( ! in_array( $w_id, array( 'default', 'product' ), true ) ) {
+				$w_id = (int) $w_id;
+			}
+
+			if ( $w_id ) {
+				self::$w_id = $w_id;
 				$wp_posts = array();
-				$w_id = ! empty( $_GET['search_id'] ) ? $_GET['search_id'] : 0;
-				$s    = '';
-
-				if ( ! empty( $_GET['woof_text'] ) ) {
-					$s = $_GET['woof_text'];
-				} elseif ( ! empty( $_GET['s'] ) ) {
-					$s = $_GET['s'];
-				}
-
-				if (empty($w_id)) {
-					return $query;
-				}
-
-				if (empty($s)) {
-					return $query;
-				}
-
-				if ($w_id == 'product') {
-					self::$w_id = 'product';
-				} else if ($w_id == 'default') {
-					self::$w_id = 'default';
-				} else {
-					self::$w_id = (int) $w_id;
-				}
 
 				self::parse_settings();
 
-                if (!empty(self::$display_opts['search_page_default_output'])) {
-                    return $query;
-                }
+				if ( ! empty( self::$display_opts['search_page_default_output'] ) ) {
+					return $query;
+				}
 
-				if (count(self::$pt) === 0){
+				if ( empty( self::$pt ) ) {
 					return $query;
 				}
 
 				self::$max_posts = '-1';
 
-				$posts = self::search_posts($s);
+				$posts = self::search_posts( $s );
 
-				foreach ($posts as $post) {
+				foreach ( $posts as $post ) {
 					$wp_posts[] = $post->ID;
 				}
 
 				self::$result_post_ids = $wp_posts;
-				$query->set('s', implode( ' ', self::$s_words ) );
-				$query->set('post__in', $wp_posts );
+				$query->set( 's', '' );
+				$query->set( 'post__in', $wp_posts );
 
 				if ( empty( $_GET['product_orderby'] ) ) {
-					$orderby = $query->get('orderby');
+					$orderby = $query->get( 'orderby' );
 					if ( 'relevance' === $orderby ) {
-						$query->set('orderby' ,'post__in');
+						$query->set( 'orderby' ,'post__in' );
 					}
 				}
-				add_filter( 'posts_where',   array( __CLASS__, 'posts_where' ), 999999 );
+
 			}
 
 		}
@@ -426,23 +415,10 @@ class Ysm_Search
 	/**
 	 * Remove hook that change posts set on search results page
 	 */
-	public static function remove_search_filter()
-	{
-		remove_filter( 'posts_where',   array( __CLASS__, 'posts_where' ), 999999 );
-		remove_action('pre_get_posts', array( __CLASS__, 'search_filter' ), 9999);
-	}
-
-	/**
-	 * Filter that set posts id's on search results page
-	 * @param $where
-	 * @return string
-	 */
-	public static function posts_where($where )
-	{
-		global $wpdb;
-		$ids = !empty(self::$result_post_ids) ? implode(' , ', array_map( 'absint', self::$result_post_ids ) ) : '0';
-		$where = " AND {$wpdb->posts}.ID IN (" . $ids . ") ";
-		return $where;
+	public static function remove_search_filter() {
+		if ( ! is_admin() &&  ! empty( $_GET['s'] ) && ! ( defined( 'DOING_AJAX' ) && DOING_AJAX ) ) {
+			remove_action( 'pre_get_posts', array( __CLASS__, 'search_filter' ), 9999 );
+		}
 	}
 
 	/**
