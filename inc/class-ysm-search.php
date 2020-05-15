@@ -357,8 +357,6 @@ class Ysm_Search
 	 * @return mixed
 	 */
 	public static function search_filter( $query ) {
-		global $wp_the_query;
-
 		$s = '';
 		if ( ! empty( $_GET['woof_text'] ) ) {
 			$s = sanitize_text_field( $_GET['woof_text'] );
@@ -366,7 +364,7 @@ class Ysm_Search
 			$s = sanitize_text_field( $_GET['s'] );
 		}
 
-		if ( ! is_admin() && ! empty( $wp_the_query->query_vars['s'] ) && ! empty( $s ) && ! ( defined( 'DOING_AJAX' ) && DOING_AJAX ) ) {
+		if ( $query->is_main_query() && ! is_admin() && ! empty( $query->query_vars['s'] ) && ! empty( $s ) && ! ( defined( 'DOING_AJAX' ) && DOING_AJAX ) ) {
 
 			$w_id = ! empty( $_GET['search_id'] ) ? sanitize_text_field( $_GET['search_id'] ) : 0;
 			if ( ! in_array( $w_id, array( 'default', 'product' ), true ) ) {
