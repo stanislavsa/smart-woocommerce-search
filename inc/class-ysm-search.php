@@ -357,12 +357,7 @@ class Ysm_Search
 	 * @return mixed
 	 */
 	public static function search_filter( $query ) {
-		$s = '';
-		if ( ! empty( $_GET['woof_text'] ) ) {
-			$s = sanitize_text_field( $_GET['woof_text'] );
-		} elseif ( ! empty( $_GET['s'] ) ) {
-			$s = sanitize_text_field( $_GET['s'] );
-		}
+		$s = ysm_get_s();
 
 		if ( $query->is_main_query() && ! is_admin() && ! empty( $query->query_vars['s'] ) && ! empty( $s ) && ! ( defined( 'DOING_AJAX' ) && DOING_AJAX ) ) {
 
@@ -391,6 +386,10 @@ class Ysm_Search
 
 				foreach ( $posts as $post ) {
 					$wp_posts[] = $post->ID;
+				}
+
+				if ( empty( $wp_posts ) ) {
+					$wp_posts[] = 0;
 				}
 
 				self::$result_post_ids = $wp_posts;
@@ -1031,13 +1030,7 @@ class Ysm_Search
 			}
 
 			$w_id = ! empty( $_GET['search_id'] ) ? $_GET['search_id'] : 0;
-			$s    = '';
-
-			if ( ! empty( $_GET['woof_text'] ) ) {
-				$s = $_GET['woof_text'];
-			} elseif ( ! empty( $_GET['s'] ) ) {
-				$s = $_GET['s'];
-			}
+			$s    = ysm_get_s();
 
 			if ( empty( $w_id ) || empty( $s ) ) {
 				return $text;

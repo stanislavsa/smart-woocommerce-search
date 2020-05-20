@@ -3,9 +3,9 @@
 	<table class="form-table">
 		<tbody>
 
-		<?php if ($w_id !== 'default' && $w_id !== 'product') { ?>
+		<?php if ( $w_id !== 'default' && $w_id !== 'product' ) { ?>
 
-			<th class="ysm-widget-settings-th"><?php _e('Input Field', 'smart_search') ?></th>
+			<th class="ysm-widget-settings-th"><?php esc_html_e( 'Input Field', 'smart_search' ); ?></th>
 
 			<?php
 			ysm_setting( $w_id, 'input_round_border', array(
@@ -53,7 +53,7 @@
 
 		<?php } ?>
 
-		<th class="ysm-widget-settings-th"><?php _e('Results Popup Elements', 'smart_search') ?></th>
+		<th class="ysm-widget-settings-th"><?php esc_html_e( 'Results Popup Elements', 'smart_search' ); ?></th>
 
 		<?php
 		ysm_setting( $w_id, 'popup_thumb_size', array(
@@ -123,7 +123,6 @@
 			'description' => __('"View all" link text background in results popup', 'smart_search'),
 			'value' => '',
 		));
-
 		?>
 
 		</tbody>

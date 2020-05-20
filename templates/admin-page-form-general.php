@@ -4,7 +4,7 @@
 		<tbody>
 
 		<?php
-		if ($w_id === 'default') {
+		if ( $w_id === 'default' ) {
 			ysm_setting( $w_id, 'enable_search', array(
 				'type' => 'checkbox',
 				'title' => __('Default Search Widget', 'smart_search'),
@@ -13,7 +13,7 @@
 			));
 		}
 
-		if ($w_id === 'product') {
+		if ( $w_id === 'product' ) {
 			ysm_setting( $w_id, 'enable_product_search', array(
 				'type' => 'checkbox',
 				'title' => __('Product Search Widget', 'smart_search'),
@@ -22,8 +22,8 @@
 			));
 		}
 
-		if ($w_id !== 'default' && $w_id !== 'product') {
-			ysm_setting($w_id, 'placeholder', array(
+		if ( $w_id !== 'default' && $w_id !== 'product' ) {
+			ysm_setting( $w_id, 'placeholder', array(
 				'type' => 'text',
 				'title' => __('Placeholder', 'smart_search'),
 				'description' => __('Placeholder in search input', 'smart_search'),
@@ -126,7 +126,6 @@
 				'2' => __('"alpha" AND "beta"', 'smart_search'),
 			),
 		));
-
 		?>
 
 		</tbody>

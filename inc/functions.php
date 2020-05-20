@@ -108,3 +108,18 @@ function ysm_get_default_widgets() {
 	$widget_manager = Ysm_Widget_Manager::init();
 	return $widget_manager->get_all_widgets();
 }
+
+/**
+ * Get 's' query var
+ * @return string
+ */
+function ysm_get_s() {
+	$s = '';
+	if ( ! empty( $_GET['woof_text'] ) ) {
+		$s = sanitize_text_field( $_GET['woof_text'] );
+	} elseif ( ! empty( $_GET['s'] ) ) {
+		$s = sanitize_text_field( $_GET['s'] );
+	}
+
+	return $s;
+}

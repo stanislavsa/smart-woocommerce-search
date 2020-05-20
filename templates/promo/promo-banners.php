@@ -33,7 +33,7 @@
 <div class="ym-ads-wrap">
 	<h3>Premium Version of Smart Search</h3>
 	<a href="https://yummywp.com/plugins/smart-woocommerce-search/#smart-search-compare" target="_blank">
-		<img src="<?php echo plugin_dir_url( __FILE__ ) . '/img/smart-search-ad.png'; ?>" alt="">
+		<img src="<?php echo esc_url( plugin_dir_url( __FILE__ ) . '/img/smart-search-ad.png' ); ?>" alt="">
 	</a>
 	<a class="ym-ads-btn" href="https://yummywp.com/plugins/smart-woocommerce-search/#smart-search-compare" target="_blank">
 		GET PRO!
