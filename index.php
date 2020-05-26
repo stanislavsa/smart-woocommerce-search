@@ -6,7 +6,7 @@
  * Tags: woocommerce search, ajax search, woocommerce, woocommerce search by sku, woocommerce search shortcod, product search, product filter, woocommerce search results, instant search, woocommerce search plugin, woocommerce search form, search for woocommerce, woocommerce search page, search, woocommerce product search, search woocommerce, shop, shop search, autocomplete, autosuggest, search for wp, search for WordPress, search plugin, woocommerce search by sku, search results,  woocommerce search shortcode, search products, search autocomplete, woocommerce advanced search, woocommerce predictive search, woocommerce live search, woocommerce single product, woocommerce site search, products, shop, category search, custom search, predictive search, relevant search, search product, woocommerce plugin, posts search, wp search, WordPress search
  * Author:      YummyWP
  * Author URI:  https://yummywp.com
- * Version:     1.5.18
+ * Version:     1.5.19
  * Domain Path: /languages
  * Text Domain: smart_search
  *
@@ -37,7 +37,7 @@ if ( defined( 'YSM_PRO' ) ) {
  * Define main constants
  */
 if ( ! defined( 'YSM_VER' ) ) {
-	define( 'YSM_VER', 'ysm-1.5.18' );
+	define( 'YSM_VER', 'ysm-1.5.19' );
 }
 
 if ( ! defined( 'YSM_DIR' ) ) {
@@ -50,6 +50,7 @@ if ( ! defined( 'YSM_URI' ) ) {
 
 include_once YSM_DIR . 'inc/functions.php';
 include_once YSM_DIR . 'inc/hooks.php';
+include_once YSM_DIR . 'inc/rest.php';
 include_once YSM_DIR . 'inc/query-hooks.php';
 include_once YSM_DIR . 'inc/class-ysm-search.php';
 include_once YSM_DIR . 'inc/class-ysm-setting.php';
@@ -144,14 +145,8 @@ if ( ! function_exists( 'ysm_enqueue_scripts' ) ) {
 			wp_enqueue_script( 'smart-search-general', YSM_URI . 'assets/js/min/main.min.js', array( 'jquery' ), YSM_VER, 1 );
 		}
 
-		if ( ysm_is_woocommerce_active() && version_compare( WC()->version, '2.4.0', '>' ) ) {
-			$ajaxurl = WC_AJAX::get_endpoint( '' ) . '=';
-		} else {
-			$ajaxurl = admin_url( 'admin-ajax.php', 'relative' ) . '?action=';
-		}
-
 		$localized                          = array();
-		$localized['ajaxurl']               = $ajaxurl;
+		$localized['restUrl']               = rest_url( 'ysm/v1/search' );
 		$localized['enable_search']         = (int) ysm_get_option( 'default', 'enable_search' );
 		$localized['enable_product_search'] = (int) ysm_get_option( 'product', 'enable_product_search' );
 		$localized['loader_icon']           = YSM_URI . 'assets/images/loader6.gif';

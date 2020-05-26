@@ -3,8 +3,7 @@
  * Class Ysm_Setting
  * @author YummyWP
  */
-class Ysm_Setting
-{
+class Ysm_Setting {
 
 	/**
 	 * @var null
@@ -25,9 +24,8 @@ class Ysm_Setting
 	 * Get instance
 	 * @return null|Ysm_Setting
 	 */
-	public static function init()
-	{
-		if (self::$_instance === null) {
+	public static function init() {
+		if ( null === self::$_instance ) {
 			self::$_instance = new self();
 		}
 		return self::$_instance;

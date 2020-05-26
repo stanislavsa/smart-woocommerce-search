@@ -4,8 +4,7 @@
  * Class Ysm_Search
  * Retrieves posts from the database depending on settings
  */
-class Ysm_Search
-{
+class Ysm_Search {
 
 	/**
 	 * Current widget id
@@ -91,116 +90,31 @@ class Ysm_Search
 	 */
 	public static function init() {
 		self::$time_start = microtime( true );
-		// ajax
-		if ( isset( $_REQUEST['wc-ajax'] ) ) {
-			add_action( 'wc_ajax_ysm_default_search', array( __CLASS__, 'default_search' ) );
-			add_action( 'wc_ajax_ysm_product_search', array( __CLASS__, 'product_search' ) );
-			add_action( 'wc_ajax_ysm_custom_search', array( __CLASS__, 'custom_search' ) );
-		} else {
-			add_action( 'wp_ajax_ysm_default_search', array( __CLASS__, 'default_search' ) );
-			add_action( 'wp_ajax_ysm_product_search', array( __CLASS__, 'product_search' ) );
-			add_action( 'wp_ajax_ysm_custom_search', array( __CLASS__, 'custom_search' ) );
-			add_action( 'wp_ajax_nopriv_ysm_default_search', array( __CLASS__, 'default_search' ) );
-			add_action( 'wp_ajax_nopriv_ysm_product_search', array( __CLASS__, 'product_search' ) );
-			add_action( 'wp_ajax_nopriv_ysm_custom_search', array( __CLASS__, 'custom_search' ) );
-		}
 
 		add_action( 'pre_get_posts', array( __CLASS__, 'search_filter' ), 9999 );
 		add_action( 'woocommerce_product_query', array( __CLASS__, 'search_filter' ), 9999 );
 		add_action( 'wp', array( __CLASS__, 'remove_search_filter' ), 9999 );
 
-		add_filter('the_title', array(__CLASS__, 'accent_search_words'), 9999, 1);
-		add_filter('get_the_excerpt', array(__CLASS__, 'accent_search_words'), 9999, 1);
-		add_filter('the_content', array(__CLASS__, 'accent_search_words'), 9999, 1);
+		add_filter( 'the_title', 'ysm_accent_search_term', 9999, 1 );
+		add_filter( 'get_the_excerpt', 'ysm_accent_search_term', 9999, 1 );
+		add_filter( 'the_content', 'ysm_accent_search_term', 9999, 1 );
 
 		add_filter( 'smart_search_query_results', array( __CLASS__, 'query_results_filter' ), 10 );
+	}
+
+	/**
+	 * Parse widget settings to define search behavior
+	 */
+	public static function parse_settings() {
 
 		self::$registered_pt = array(
 			'post',
 			'page',
 		);
 
-		if (ysm_is_woocommerce_active()) {
+		if ( class_exists( 'WooCommerce' ) ) {
 			self::$registered_pt[] = 'product';
 		}
-	}
-
-	/**
-	 * Default search widget case
-	 */
-	public static function default_search()
-	{
-		self::$w_id = 'default';
-		self::parse_settings();
-
-		$s = $_REQUEST['query'];
-
-		if (!$s) {
-			self::output();
-		}
-
-		if (count(self::$pt) === 0){
-			self::output();
-		}
-
-		$posts = self::search_posts($s);
-		self::get_suggestions($posts);
-		self::output();
-	}
-
-	/**
-	 * Default woocommerce product search widget case
-	 */
-	public static function product_search()
-	{
-		self::$w_id = 'product';
-		self::parse_settings();
-
-		$s = $_REQUEST['query'];
-
-		if (!$s) {
-			self::output();
-		}
-
-		if (count(self::$pt) === 0){
-			self::output();
-		}
-
-		$posts = self::search_posts($s);
-		self::get_suggestions($posts);
-		self::output();
-	}
-
-	/**
-	 * Custom search widget case
-	 */
-	public static function custom_search() {
-		if (isset($_REQUEST['id'])) {
-			self::$w_id = (int) $_REQUEST['id'];
-		}
-
-		self::parse_settings();
-
-		$s = $_REQUEST['query'];
-
-		if (!$s) {
-			self::output();
-		}
-
-		if (count(self::$pt) === 0){
-			self::output();
-		}
-
-		$posts = self::search_posts($s);
-		self::get_suggestions($posts);
-		self::output();
-	}
-
-	/**
-	 * Parse widget settings to define search behavior
-	 */
-	public static function parse_settings()
-	{
 
 		if (self::$w_id == 'product' || self::$w_id == 'default') {
 			$widgets = ysm_get_default_widgets();
@@ -423,11 +337,11 @@ class Ysm_Search
 	 * @param string $s
 	 * @return array|null|object
 	 */
-	protected static function search_posts($s = '') {
+	public static function search_posts($s = '') {
 		global $wpdb;
 
 		// define search words
-		$s = esc_attr( strip_tags( trim( $s ) ) );
+		$s = strip_tags( trim( $s ) );
 		$s = mb_strtolower( $s );
 		$s_words = array();
 
@@ -860,7 +774,7 @@ class Ysm_Search
 	 * Prepare suggestions list
 	 * @param $posts
 	 */
-	protected static function get_suggestions($posts) {
+	public static function get_suggestions($posts) {
 
 		foreach ($posts as $post) {
 
@@ -888,8 +802,8 @@ class Ysm_Search
 			$output .=      '<div class="smart-search-post-holder">';
 
 			/* title */
-			$post_title = esc_html( $post->post_title );
-			$post_title = self::text_replace( $post_title );
+			$post_title = esc_html( wp_strip_all_tags( $post->post_title ) );
+			$post_title = ysm_text_replace( $post_title );
 			$output .=          '<div class="smart-search-post-title">' . $post_title . '</div>';
 
 			/* excerpt */
@@ -925,7 +839,7 @@ class Ysm_Search
 					$post_excerpt .= ' ...';
 				}
 
-				$post_excerpt = self::text_replace( $post_excerpt );
+				$post_excerpt = ysm_text_replace( $post_excerpt );
 			} else {
 				$post_excerpt = '';
 			}
@@ -934,7 +848,7 @@ class Ysm_Search
 				$output .= '<div class="smart-search-post-excerpt">' . $post_excerpt . '</div>';
 			}
 
-			if ( ( 'product' === $post->post_type || 'product_variation' === $post->post_type ) && ysm_is_woocommerce_active() ) {
+			if ( ( 'product' === $post->post_type || 'product_variation' === $post->post_type ) && class_exists( 'WooCommerce' ) ) {
 				$output .= '<div class="smart-search-post-price-holder">';
 				$product = wc_get_product( $post->ID );
 				/* product price */
@@ -992,7 +906,7 @@ class Ysm_Search
 	/**
 	 * Output suggestions
 	 */
-	protected static function output() {
+	public static function output() {
 		$view_all_link = '';
 
 		if (!empty(self::$display_opts['display_view_all_link']) || !empty(self::$display_opts['view_all_link_text'])) {
@@ -1021,53 +935,6 @@ class Ysm_Search
 		exit();
 	}
 
-	public static function accent_search_words( $text ) {
-
-		if ( is_search() && isset($_GET['search_id']) ) {
-
-			if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
-				return $text;
-			}
-
-			$w_id = ! empty( $_GET['search_id'] ) ? $_GET['search_id'] : 0;
-			$s    = ysm_get_s();
-
-			if ( empty( $w_id ) || empty( $s ) ) {
-				return $text;
-			}
-
-			if ($w_id == 'product') {
-				self::$w_id = 'product';
-			} else if ($w_id == 'default') {
-				self::$w_id = 'default';
-			} else {
-				self::$w_id = (int) $w_id;
-			}
-
-			self::parse_settings();
-
-			if ( empty( self::$display_opts['search_page_default_output'] ) && ! empty( self::$display_opts['accent_words_on_search_page'] ) ) {
-				$text = self::text_replace( $text );
-			}
-
-		}
-
-		return $text;
-	}
-
-	public static function text_replace( $text ) {
-		$words = self::$s_words;
-
-		foreach ( $words as &$w ) {
-			$w = preg_quote( trim( $w ) );
-			$w = str_replace( '/', '\/', $w );
-		}
-
-		/* replace pattern */
-		$pattern = '/' . implode( '|', $words ) . '/i';
-		return preg_replace( $pattern, "<strong>$0</strong>", $text );
-	}
-
 	/**
 	 * Sort results by relevance
 	 * @param $res_posts
@@ -1093,6 +960,12 @@ class Ysm_Search
 		return $sorted;
 	}
 
+	/**
+	 * Compare
+	 * @param $a
+	 * @param $b
+	 * @return int
+	 */
 	public static function cmp( $a, $b ) {
 		if ( $a->relevance == $b->relevance ) {
 			return 0;
@@ -1100,4 +973,47 @@ class Ysm_Search
 		return ( $a->relevance < $b->relevance ) ? 1 : -1;
 	}
 
+	/**
+	 * Get current widget id
+	 * @return int|string
+	 */
+	public static function get_widget_id() {
+		return self::$w_id;
+	}
+
+	/**
+	 * Get current widget id
+	 * @param $new_widget_id
+	 */
+	public static function set_widget_id( $new_widget_id ) {
+		if ( ! in_array( $new_widget_id, array( 'product', 'default' ), true ) ) {
+			$new_widget_id = (int) $new_widget_id;
+		}
+		self::$w_id = $new_widget_id;
+	}
+
+	/**
+	 * Get post types
+	 * @return array
+	 */
+	public static function get_post_types() {
+		return self::$pt;
+	}
+
+	/**
+	 * Get search terms
+	 * @return string
+	 */
+	public static function get_search_terms() {
+		return self::$s_words;
+	}
+
+	/**
+	 * Get var
+	 * @param $name
+	 * @return mixed|null
+	 */
+	public static function get_var( $name ) {
+		return isset( self::$display_opts[ $name ] ) ? self::$display_opts[ $name ] : null;
+	}
 }

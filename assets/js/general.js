@@ -4,64 +4,60 @@
 
 	$(function(){
 
-		if (ysm_L10n.enable_search == 1){
+		if ( ysm_L10n.enable_search == 1 ) {
 
-			var $el = $('.widget_search');
+			var $el = $( '.widget_search' );
 
 			$el.each(function () {
-
 				var attr = {
-						id: 'default',
-						serviceUrl: ysm_L10n.ajaxurl + 'ysm_default_search',
-						layout: ysm_L10n['layout'],
-						maxHeight: 400,
-						minChars: ysm_L10n.char_count,
-						no_results_text: ysm_L10n.no_results_text
-					};
+					id: 'default',
+					serviceUrl: ysm_L10n.restUrl + '?id=default',
+					layout: ysm_L10n['layout'],
+					maxHeight: 400,
+					minChars: ysm_L10n.char_count,
+					no_results_text: ysm_L10n.no_results_text
+				};
 
-				ysm_init_autocomplete(this, attr);
-
+				ysm_init_autocomplete( this, attr );
 			});
 
 		}
 
-		if (ysm_L10n.enable_product_search == 1){
+		if ( ysm_L10n.enable_product_search == 1 ) {
 
-			var $el = $('.woocommerce.widget_product_search');
+			var $el = $( '.woocommerce.widget_product_search' );
 
 			$el.each(function () {
-
 				var attr = {
-						id: 'product',
-						serviceUrl: ysm_L10n.ajaxurl + 'ysm_product_search',
-						layout: 'product',
-						maxHeight: 400,
-						minChars: ysm_L10n.product_char_count,
-						no_results_text: ysm_L10n.product_no_results_text
-					};
+					id: 'product',
+					serviceUrl: ysm_L10n.restUrl + '?id=product',
+					layout: 'product',
+					maxHeight: 400,
+					minChars: ysm_L10n.product_char_count,
+					no_results_text: ysm_L10n.product_no_results_text
+				};
 
-				ysm_init_autocomplete(this, attr);
-
+				ysm_init_autocomplete( this, attr );
 			});
 
 		}
 
-		var $custom_widgets = $('.ysm-search-widget');
+		var $custom_widgets = $( '.ysm-search-widget' );
 
-		if ($custom_widgets.length) {
+		if ( $custom_widgets.length ) {
 
 			$custom_widgets.each(function () {
-				var id = $(this).find('form').data('id'),
+				var id   = $( this ).find('form').data('id'),
 					attr = {
 						id: id,
-						serviceUrl: ysm_L10n.ajaxurl + 'ysm_custom_search&id=' + id,
+						serviceUrl: ysm_L10n.restUrl + '?id=' + encodeURIComponent( id ),
 						layout: ysm_L10n['custom_'+ id +'_layout'],
 						maxHeight: 400,
 						minChars: ysm_L10n['custom_'+ id +'_char_count'],
 						no_results_text: ysm_L10n['custom_'+ id +'_no_results_text']
 					};
 
-				ysm_init_autocomplete(this, attr);
+				ysm_init_autocomplete( this, attr );
 			});
 
 		}
@@ -83,7 +79,7 @@
 
 			var defaults = {
 				id: '',
-				serviceUrl: ysm_L10n.ajaxurl,
+				serviceUrl: ysm_L10n.restUrl,
 				layout: '',
 				maxHeight: 600,
 				minChars: 3,
