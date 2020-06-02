@@ -145,8 +145,10 @@ if ( ! function_exists( 'ysm_enqueue_scripts' ) ) {
 			wp_enqueue_script( 'smart-search-general', YSM_URI . 'assets/js/min/main.min.js', array( 'jquery' ), YSM_VER, 1 );
 		}
 
+		$rest_url = rest_url( 'ysm/v1/search' ) . '?';
+
 		$localized                          = array();
-		$localized['restUrl']               = rest_url( 'ysm/v1/search' );
+		$localized['restUrl']               = $rest_url;
 		$localized['enable_search']         = (int) ysm_get_option( 'default', 'enable_search' );
 		$localized['enable_product_search'] = (int) ysm_get_option( 'product', 'enable_product_search' );
 		$localized['loader_icon']           = YSM_URI . 'assets/images/loader6.gif';

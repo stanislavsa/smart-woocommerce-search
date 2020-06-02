@@ -337,7 +337,7 @@ class Ysm_Search {
 	 * @param string $s
 	 * @return array|null|object
 	 */
-	public static function search_posts($s = '') {
+	public static function search_posts( $s = '' ) {
 		global $wpdb;
 
 		// define search words
@@ -522,6 +522,7 @@ class Ysm_Search {
 			}
 
 			if (
+				defined( 'POLYLANG_BASENAME' ) ||
 				!empty( self::$terms ) ||
 				!empty( self::$fields['allowed_product_cat'] ) ||
 				!empty( self::$fields['disallowed_product_cat'] )
@@ -705,6 +706,17 @@ class Ysm_Search {
 				}
 
 			}
+		}
+
+		if (
+			defined( 'POLYLANG_BASENAME' ) ||
+			!empty( self::$terms ) ||
+			!empty( self::$fields['allowed_product_cat'] ) ||
+			!empty( self::$fields['disallowed_product_cat'] )
+		) {
+			$join['t_rel'] = "LEFT JOIN {$wpdb->term_relationships} t_rel ON p.ID = t_rel.object_id";
+			$join['t_tax'] = "LEFT JOIN {$wpdb->term_taxonomy} t_tax ON t_tax.term_taxonomy_id = t_rel.term_taxonomy_id";
+			$join['t'] = "LEFT JOIN {$wpdb->terms} t ON t_tax.term_id = t.term_id";
 		}
 
 		/* GROUP BY part */

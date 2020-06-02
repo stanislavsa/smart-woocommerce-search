@@ -11,7 +11,7 @@
 			$el.each(function () {
 				var attr = {
 					id: 'default',
-					serviceUrl: ysm_L10n.restUrl + '?id=default',
+					serviceUrl: ysm_L10n.restUrl + 'id=default',
 					layout: ysm_L10n['layout'],
 					maxHeight: 400,
 					minChars: ysm_L10n.char_count,
@@ -30,7 +30,7 @@
 			$el.each(function () {
 				var attr = {
 					id: 'product',
-					serviceUrl: ysm_L10n.restUrl + '?id=product',
+					serviceUrl: ysm_L10n.restUrl + 'id=product',
 					layout: 'product',
 					maxHeight: 400,
 					minChars: ysm_L10n.product_char_count,
@@ -50,7 +50,7 @@
 				var id   = $( this ).find('form').data('id'),
 					attr = {
 						id: id,
-						serviceUrl: ysm_L10n.restUrl + '?id=' + encodeURIComponent( id ),
+						serviceUrl: ysm_L10n.restUrl + 'id=' + encodeURIComponent( id ),
 						layout: ysm_L10n['custom_'+ id +'_layout'],
 						maxHeight: 400,
 						minChars: ysm_L10n['custom_'+ id +'_char_count'],
