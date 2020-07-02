@@ -42,15 +42,10 @@ class Ysm_Search {
 	 */
 	protected static $suggestions = array();
 	/**
-	 * List of elements that should be displayed in the widget
+	 * List of vars
 	 * @var array
 	 */
-	protected static $display_opts = array();
-	/**
-	 * List of elements that should be displayed in the widget
-	 * @var array
-	 */
-	protected static $settings = array();
+	protected static $vars = array();
 	/**
 	 * Limitation of search results
 	 * @var int
@@ -66,16 +61,6 @@ class Ysm_Search {
 	 * @var array
 	 */
 	protected static $result_post_ids = array();
-	/**
-	 * Search query
-	 * @var string
-	 */
-	protected static $s = '';
-	/**
-	 * Search words
-	 * @var string
-	 */
-	protected static $s_words = array();
 
 	/**
 	 * Debug
@@ -123,7 +108,6 @@ class Ysm_Search {
 		}
 
 		$settings = $widgets[ self::$w_id ]['settings'];
-		self::$settings = $settings;
 
 		if (self::$w_id == 'product') {
 
@@ -206,63 +190,20 @@ class Ysm_Search {
 		}
 
 		/* output items to display */
-		if ( !empty( $settings['display_icon'] ) ) {
-			self::$display_opts['display_icon'] = 'display_icon';
-		}
 
-		if ( !empty( $settings['display_excerpt'] ) ) {
-			self::$display_opts['display_excerpt'] = 'display_excerpt';
-		}
-
-		if ( !empty( $settings['excerpt_symbols_count'] ) ) {
-			self::$display_opts['excerpt_symbols_count'] = $settings['excerpt_symbols_count'];
-		}
-
-		if ( !empty( $settings['display_view_all_link'] ) ) {
-			self::$display_opts['display_view_all_link'] = 'display_view_all_link';
-		}
-
-		if ( !empty( $settings['view_all_link_text'] ) ) {
-			self::$display_opts['view_all_link_text'] = $settings['view_all_link_text'];
-		}
-
-		if ( !empty( $settings['display_price'] ) ) {
-			self::$display_opts['display_price'] = 'display_price';
-		}
-
-		if ( !empty( $settings['display_sku'] ) ) {
-			self::$display_opts['display_sku'] = 'display_sku';
-		}
-
-		if ( !empty( $settings['search_page_default_output'] ) ) {
-			self::$display_opts['search_page_default_output'] = 'search_page_default_output';
-		}
-
-		if ( !empty( $settings['search_page_layout_posts'] ) ) {
-			self::$display_opts['search_page_layout_posts'] = 'search_page_layout_posts';
-		}
-
-		if ( !empty( $settings['accent_words_on_search_page'] ) ) {
-			self::$display_opts['accent_words_on_search_page'] = 'accent_words_on_search_page';
-		}
-
-		if ( !empty( $settings['enable_fuzzy_search'] ) ) {
-			if ( is_array( $settings['enable_fuzzy_search'] ) ) {
-				$settings['enable_fuzzy_search'] = $settings['enable_fuzzy_search'][0];
-			}
-			self::$display_opts['enable_fuzzy_search'] = $settings['enable_fuzzy_search'];
-		}
-
-		if ( !empty( $settings['exclude_out_of_stock_products'] ) ) {
-			self::$display_opts['exclude_out_of_stock_products'] = 'exclude_out_of_stock_products';
+		if ( ! empty( $settings['enable_fuzzy_search'] ) && is_array( $settings['enable_fuzzy_search'] ) ) {
+			$settings['enable_fuzzy_search'] = $settings['enable_fuzzy_search'][0];
 		}
 
 		if ( ! empty( $settings['popup_desc_pos'] ) ) {
-			self::$display_opts['popup_desc_pos'] = $settings['popup_desc_pos'];
+			if ( is_array( $settings['popup_desc_pos'] ) ) {
+				$settings['popup_desc_pos'] = $settings['popup_desc_pos'][0];
+			}
 		} else {
-			self::$display_opts['popup_desc_pos'] = 'below_image';
+			$settings['popup_desc_pos'] = 'below_image';
 		}
 
+		self::$vars = array_merge( self::$vars, $settings );
 	}
 
 	/**
@@ -286,17 +227,18 @@ class Ysm_Search {
 
 				self::parse_settings();
 
-				if ( ! empty( self::$display_opts['search_page_default_output'] ) ) {
+				if ( self::get_var( 'search_page_default_output' ) ) {
 					return $query;
 				}
 
-				if ( empty( self::$pt ) ) {
+				if ( ! self::get_post_types() ) {
 					return $query;
 				}
 
 				self::$max_posts = '-1';
 
-				$posts = self::search_posts( $s );
+				self::set_s( $s );
+				$posts = self::search_posts();
 
 				foreach ( $posts as $post ) {
 					$wp_posts[] = $post->ID;
@@ -313,14 +255,11 @@ class Ysm_Search {
 				if ( empty( $_GET['product_orderby'] ) ) {
 					$orderby = $query->get( 'orderby' );
 					if ( 'relevance' === $orderby ) {
-						$query->set( 'orderby' ,'post__in' );
+						$query->set( 'orderby', 'post__in' );
 					}
 				}
-
 			}
-
 		}
-
 	}
 
 	/**
@@ -334,29 +273,12 @@ class Ysm_Search {
 
 	/**
 	 * Generate a main query to retrieve posts from database
-	 * @param string $s
 	 * @return array|null|object
 	 */
-	public static function search_posts( $s = '' ) {
+	public static function search_posts() {
 		global $wpdb;
 
-		// define search words
-		$s = strip_tags( trim( $s ) );
-		$s = mb_strtolower( $s );
-		$s_words = array();
-
-		if ( ! empty( self::$display_opts['enable_fuzzy_search'] ) ) {
-			$s_words_temp = explode( ' ', $s );
-
-			foreach ( $s_words_temp as $word ) {
-				if ( strlen( $word ) >= self::$min_symbols ) {
-					$s_words[] = $word;
-				}
-			}
-		} else {
-			$s_words[] = $s;
-		}
-		self::$s_words = $s_words;
+		self::set_search_terms();
 
 		/* LIMIT */
 		$limit = empty( self::$max_posts ) ? 10 : self::$max_posts;
@@ -388,11 +310,11 @@ class Ysm_Search {
 
 			$s_post_types = array();
 
-			foreach (self::$pt as $type){
-				$s_post_types[] = "'" . esc_sql($type) . "'";
+			foreach ( self::get_post_types() as $type ) {
+				$s_post_types[] = "'" . esc_sql( $type ) . "'";
 			}
 
-			$s_post_types = implode(',', $s_post_types);
+			$s_post_types = implode( ',', $s_post_types );
 			$where['and'][] = "p.post_type IN ({$s_post_types})";
 
 			/* relevance part */
@@ -435,7 +357,7 @@ class Ysm_Search {
 			}
 
 			/* product visibility */
-			if ( isset(self::$pt['product']) ) {
+			if ( self::get_post_types( 'product' ) ) {
 
 				if ( !empty( self::$fields['disallowed_product_cat'] ) ) {
 					$disallowed_product_cats_filtered = array();
@@ -487,7 +409,7 @@ class Ysm_Search {
 					}
 				}
 
-				if ( ! empty( self::$display_opts['exclude_out_of_stock_products'] ) ) {
+				if ( self::get_var( 'exclude_out_of_stock_products' ) ) {
 					$join['pmpv'] = "LEFT JOIN {$wpdb->postmeta} pmpv ON pmpv.post_id = p.ID";
 					$where['and'][] = "( p.post_type NOT IN ('product', 'product_variation') OR ( p.post_type IN ('product', 'product_variation') AND pmpv.meta_key = '_stock_status' AND CAST(pmpv.meta_value AS CHAR) NOT IN ('outofstock') ) )";
 				}
@@ -557,8 +479,8 @@ class Ysm_Search {
 				$join['icl'] = $wpdb->prepare( "RIGHT JOIN {$wpdb->prefix}icl_translations icl ON (p.ID = icl.element_id AND icl.language_code = '%s')", ICL_LANGUAGE_CODE );
 			}
 
-			$join = apply_filters( 'smart_search_query_join', $join, self::$settings );
-			$where = apply_filters( 'smart_search_query_where', $where, self::$settings );
+			$join = apply_filters( 'smart_search_query_join', $join );
+			$where = apply_filters( 'smart_search_query_where', $where );
 			$orderby[] = "p.post_title ASC";
 
 			$query = "SELECT " . implode(' , ', $select) .
@@ -626,15 +548,15 @@ class Ysm_Search {
 
 		$s_post_types = array();
 
-		foreach (self::$pt as $type){
-			$s_post_types[] = "'" . esc_sql($type) . "'";
+		foreach ( self::get_post_types() as $type ) {
+			$s_post_types[] = "'" . esc_sql( $type ) . "'";
 		}
 
-		$s_post_types = implode(',', $s_post_types);
+		$s_post_types = implode( ',', $s_post_types );
 		$where['and'][] = "p.post_type IN ({$s_post_types})";
 
 		/* product visibility */
-		if ( isset(self::$pt['product']) ) {
+		if ( self::get_post_types( 'product' ) ) {
 
 			if ( !empty( self::$fields['disallowed_product_cat'] ) ) {
 				$disallowed_product_cats_filtered = array();
@@ -686,7 +608,7 @@ class Ysm_Search {
 				}
 			}
 
-			if ( ! empty( self::$display_opts['exclude_out_of_stock_products'] ) ) {
+			if ( self::get_var( 'exclude_out_of_stock_products' ) ) {
 				$join['pmpv'] = "LEFT JOIN {$wpdb->postmeta} pmpv ON pmpv.post_id = p.ID";
 				$where['and'][] = "( p.post_type NOT IN ('product', 'product_variation') OR ( p.post_type IN ('product', 'product_variation') AND pmpv.meta_key = '_stock_status' AND CAST(pmpv.meta_value AS CHAR) NOT IN ('outofstock') ) )";
 			}
@@ -746,8 +668,8 @@ class Ysm_Search {
 
 		$orderby[] = "p.post_title ASC";
 
-		$join = apply_filters( 'smart_search_query_join', $join, self::$settings );
-		$where = apply_filters( 'smart_search_query_where', $where, self::$settings );
+		$join = apply_filters( 'smart_search_query_join', $join );
+		$where = apply_filters( 'smart_search_query_where', $where );
 
 		$query = "SELECT " . implode(' , ', $select) .
 			" FROM {$wpdb->posts} p
@@ -772,11 +694,11 @@ class Ysm_Search {
 		global $wpdb;
 		$query = array();
 
-		foreach ( self::$s_words as $s_word ) {
+		foreach ( self::get_search_terms() as $s_word ) {
 			$query[] = $wpdb->prepare( "$field LIKE %s", array( "%" . trim( $s_word ) . "%" ) );
 		}
 
-		if ( ! empty( self::$display_opts['enable_fuzzy_search'] ) && '2' === self::$display_opts['enable_fuzzy_search'] ) {
+		if ( '2' === self::get_var( 'enable_fuzzy_search' ) ) {
 			return implode( ' AND ', $query );
 		}
 
@@ -793,7 +715,7 @@ class Ysm_Search {
 			$output = '<a href="' . esc_url( get_permalink($post->ID) ) . '" class="smart-search-post post-' . (int) $post->ID . '">';
 
 			/* featured image */
-			if ( !empty(self::$display_opts['display_icon']) && has_post_thumbnail( $post->ID )) {
+			if ( self::get_var( 'display_icon' ) && has_post_thumbnail( $post->ID ) ) {
 
 				$image = get_the_post_thumbnail(
 					$post->ID,
@@ -819,7 +741,7 @@ class Ysm_Search {
 			$output .=          '<div class="smart-search-post-title">' . $post_title . '</div>';
 
 			/* excerpt */
-			if (!empty(self::$display_opts['display_excerpt'])) {
+			if ( self::get_var( 'display_excerpt' ) ) {
 
 				if ( $post->post_excerpt != '' ) {
 					$post_excerpt = $post->post_excerpt;
@@ -842,7 +764,7 @@ class Ysm_Search {
 
 				$post_excerpt = strip_tags( strip_shortcodes( $post_excerpt) );
 
-				$excerpt_symbols_count_max = !empty( self::$display_opts['excerpt_symbols_count']  ) ? (int) self::$display_opts['excerpt_symbols_count'] : 50;
+				$excerpt_symbols_count_max = self::get_var( 'excerpt_symbols_count' ) ? (int) self::get_var( 'excerpt_symbols_count' ) : 50;
 				$excerpt_symbols_count = strlen($post_excerpt);
 
 				$post_excerpt = mb_substr( $post_excerpt, 0, $excerpt_symbols_count_max);
@@ -856,7 +778,7 @@ class Ysm_Search {
 				$post_excerpt = '';
 			}
 
-			if ( ! empty( $post_excerpt ) && 'below_title' === self::$display_opts['popup_desc_pos'] ) {
+			if ( ! empty( $post_excerpt ) && 'below_title' === self::get_var( 'popup_desc_pos' ) ) {
 				$output .= '<div class="smart-search-post-excerpt">' . $post_excerpt . '</div>';
 			}
 
@@ -864,17 +786,17 @@ class Ysm_Search {
 				$output .= '<div class="smart-search-post-price-holder">';
 				$product = wc_get_product( $post->ID );
 				/* product price */
-				if ( !empty( self::$display_opts['display_price'] ) ) {
+				if ( self::get_var( 'display_price' ) ) {
 					$output .= '<div class="smart-search-post-price">' . $product->get_price_html() . '</div>';
 				}
 				/* product sku */
-				if ( !empty( self::$display_opts['display_sku'] ) ) {
+				if ( self::get_var( 'display_sku' ) ) {
 					$output .= '<div class="smart-search-post-sku">' . esc_html( $product->get_sku() ) . '</div>';
 				}
 				$output .= '</div>';
 			}
 
-			if ( ! empty( $post_excerpt ) && 'below_price' === self::$display_opts['popup_desc_pos'] ) {
+			if ( ! empty( $post_excerpt ) && 'below_price' === self::get_var( 'popup_desc_pos' ) ) {
 				$output .= '<div class="smart-search-post-excerpt">' . $post_excerpt . '</div>';
 			}
 
@@ -882,7 +804,7 @@ class Ysm_Search {
 			$output .= '</div><!--.smart-search-post-holder-->';
 			$output .= '<div class="smart-search-clear"></div>';
 
-			if ( ! empty( $post_excerpt ) && 'below_image' === self::$display_opts['popup_desc_pos'] ) {
+			if ( ! empty( $post_excerpt ) && 'below_image' === self::get_var( 'popup_desc_pos' ) ) {
 				$output .= '<div class="smart-search-post-excerpt">' . $post_excerpt . '</div>';
 			}
 
@@ -902,12 +824,12 @@ class Ysm_Search {
      * @return string
      */
     protected static function get_viewall_link_url () {
-	    $param = implode( ' ', self::$s_words );
+	    $param = implode( ' ', self::get_search_terms() );
 	    $param = str_replace( '+', '%2b', $param );
 	    $url = add_query_arg( array( 's' => $param, 'search_id' => self::$w_id ), home_url('/') );
 
-	    if ( empty( self::$display_opts['search_page_layout_posts'] ) ) {
-		    if ( 'product' === self::$w_id || isset( self::$pt['product'] ) ) {
+	    if ( ! self::get_var( 'search_page_layout_posts' ) ) {
+		    if ( 'product' === self::$w_id || self::get_post_types( 'product' ) ) {
 			    $url = add_query_arg( array( 'post_type' => 'product' ), $url );
 		    }
 	    }
@@ -921,10 +843,8 @@ class Ysm_Search {
 	public static function output() {
 		$view_all_link = '';
 
-		if (!empty(self::$display_opts['display_view_all_link']) || !empty(self::$display_opts['view_all_link_text'])) {
-			$view_all_link = self::get_viewall_link_url();
-
-			$view_all_link = '<a class="smart-search-view-all" href="' . $view_all_link . '">' . __( self::$display_opts['view_all_link_text'] , 'smart_search') . '</a>';
+		if ( self::get_var( 'display_view_all_link' ) || self::get_var( 'view_all_link_text' ) ) {
+			$view_all_link = '<a class="smart-search-view-all" href="' . esc_url( self::get_viewall_link_url() ) . '">' . esc_html__( self::get_var( 'view_all_link_text' ) , 'smart_search') . '</a>';
 		}
 
 		$res = array(
@@ -961,7 +881,7 @@ class Ysm_Search {
 			} else {
 				$sorted[ $res_post->ID ]->relevance = (int) $sorted[ $res_post->ID ]->relevance;
 			}
-			foreach ( self::$s_words as $w ) {
+			foreach ( self::get_search_terms() as $w ) {
 				$pos = strpos( mb_strtolower( trim( $res_post->post_title ) ), $w );
 				if ( false !== $pos ) {
 					$sorted[ $res_post->ID ]->relevance += 20;
@@ -1005,10 +925,26 @@ class Ysm_Search {
 	}
 
 	/**
-	 * Get post types
-	 * @return array
+	 * Set search string
+	 * @param $s
 	 */
-	public static function get_post_types() {
+	public static function set_s( $s = '' ) {
+		$s = strip_tags( trim( $s ) );
+		if ( $s ) {
+			$s = mb_strtolower( $s );
+			self::$vars['s'] = $s;
+		}
+	}
+
+	/**
+	 * Get post types
+	 * @param string $type
+	 * @return array|bool
+	 */
+	public static function get_post_types( $type = '' ) {
+		if ( $type ) {
+			return isset( self::$pt[ $type ] );
+		}
 		return self::$pt;
 	}
 
@@ -1017,7 +953,22 @@ class Ysm_Search {
 	 * @return string
 	 */
 	public static function get_search_terms() {
-		return self::$s_words;
+		return self::$vars['search_terms'];
+	}
+
+	/**
+	 * Set search terms
+	 * @return string
+	 */
+	protected static function set_search_terms() {
+		self::$vars['search_terms'] = array();
+		$search_terms = self::get_var( 'enable_fuzzy_search' ) ? explode( ' ', self::get_var( 's' ) ) : (array) self::get_var( 's' );
+		$search_terms = (array) apply_filters( 'ysm_check_words', $search_terms );
+		foreach ( $search_terms as $search_term ) {
+			if ( strlen( $search_term ) >= self::$min_symbols ) {
+				self::$vars['search_terms'][] = $search_term;
+			}
+		}
 	}
 
 	/**
@@ -1026,6 +977,6 @@ class Ysm_Search {
 	 * @return mixed|null
 	 */
 	public static function get_var( $name ) {
-		return isset( self::$display_opts[ $name ] ) ? self::$display_opts[ $name ] : null;
+		return isset( self::$vars[ $name ] ) ? self::$vars[ $name ] : null;
 	}
 }

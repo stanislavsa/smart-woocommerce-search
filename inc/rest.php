@@ -45,7 +45,8 @@ function handle_request( \WP_REST_Request $request ) {
 		\Ysm_Search::output();
 	}
 
-	$posts = \Ysm_Search::search_posts( $query );
+	\Ysm_Search::set_s( $query );
+	$posts = \Ysm_Search::search_posts();
 	\Ysm_Search::get_suggestions( $posts );
 	\Ysm_Search::output();
 
