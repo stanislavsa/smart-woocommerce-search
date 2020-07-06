@@ -12,11 +12,6 @@ class Ysm_Search {
 	 */
 	protected static $w_id = 0;
 	/**
-	 * List of post meta fields to search through
-	 * @var array
-	 */
-	protected static $postmeta = array();
-	/**
 	 * List of suggestions
 	 * @var array
 	 */
@@ -89,11 +84,10 @@ class Ysm_Search {
 			$settings['post_types']['product'] = 'product';
 		} else {
 			foreach ( $registered_pt as $type ) {
-				if ( ! empty($settings['post_type_'.$type]) ) {
+				if ( ! empty( $settings[ 'post_type_' . $type ] ) ) {
 					$settings['post_types'][ $type ] = $type;
 				}
 			}
-
 		}
 
 		if ( ! empty( $settings['post_type_product_variation'] ) ) {
@@ -137,6 +131,7 @@ class Ysm_Search {
 			$settings['disallowed_product_cat'] = $disallowed_cats;
 		}
 
+		// taxonomies
 		$settings['taxonomies'] = array();
 
 		if ( ! empty( $settings['field_tag'] ) ) {
@@ -155,11 +150,11 @@ class Ysm_Search {
 			$settings['taxonomies']['product_cat'] = 'product_cat';
 		}
 
+		/* post meta */
+		$settings['postmeta'] = array();
 		if ( ! empty( $settings['field_product_sku'] ) ) {
-			self::$postmeta['_sku'] = '_sku';
+			$settings['postmeta']['_sku'] = '_sku';
 		}
-
-		/* output items to display */
 
 		if ( ! empty( $settings['enable_fuzzy_search'] ) && is_array( $settings['enable_fuzzy_search'] ) ) {
 			$settings['enable_fuzzy_search'] = $settings['enable_fuzzy_search'][0];
@@ -313,99 +308,10 @@ class Ysm_Search {
 		/* product visibility */
 		if ( self::get_post_types( 'product' ) ) {
 
-			if ( self::get_var( 'disallowed_product_cat' ) ) {
-				$disallowed_product_cats_filtered = array();
-				foreach ( self::get_var( 'disallowed_product_cat' ) as $disallowed_product_cat ) {
-					$disallowed_product_cats_filtered[] = "'" . $disallowed_product_cat . "'";
-					$children_terms = get_term_children( $disallowed_product_cat, 'product_cat' );
-					if ( ! is_wp_error( $children_terms ) && is_array( $children_terms ) && $children_terms ) {
-						foreach ( $children_terms as $children_term ) {
-							$disallowed_product_cats_filtered[] = "'" . intval( $children_term ) . "'";
-						}
-					}
-				}
-			}
-
-			if ( version_compare( WC()->version, '3.0.0', '<' ) ) {
-				$where['and'][] = sprintf( "p.ID NOT IN (
-					SELECT DISTINCT t_rel.object_id
-					FROM {$wpdb->term_relationships} t_rel
-					LEFT JOIN {$wpdb->term_taxonomy} t_tax ON t_rel.term_taxonomy_id = t_tax.term_taxonomy_id
-					WHERE t_tax.term_id IN (%s)
-				)", implode( ",", $disallowed_product_cats_filtered ) );
-				$join['pmpv'] = "LEFT JOIN {$wpdb->postmeta} pmpv ON pmpv.post_id = p.ID";
-				$where['and'][] = "( p.post_type NOT IN ('product') OR (p.post_type = 'product' AND pmpv.meta_key = '_visibility' AND CAST(pmpv.meta_value AS CHAR) IN ('search','visible')) )";
-			} else {
-				$exclude_terms = array();
-				$wc_product_visibility_term_ids = wc_get_product_visibility_term_ids();
-				if ( $wc_product_visibility_term_ids['exclude-from-search'] ) {
-					$exclude_terms[] = "'" . $wc_product_visibility_term_ids['exclude-from-search'] . "'";
-				}
-				if ( ! empty( $disallowed_product_cats_filtered ) ) {
-					$exclude_terms = array_merge( $exclude_terms, $disallowed_product_cats_filtered );
-				}
-
-				if ( $exclude_terms ) {
-					$where['and'][] = sprintf( "p.ID NOT IN (
-						SELECT DISTINCT object_id
-						FROM {$wpdb->term_relationships} t_rel
-						LEFT JOIN {$wpdb->term_taxonomy} t_tax ON t_rel.term_taxonomy_id = t_tax.term_taxonomy_id
-						WHERE t_tax.term_id IN (%s)
-					)", implode( ",", $exclude_terms ) );
-
-					$where['and'][] = sprintf( "( p.post_type NOT IN ('product_variation') OR 
-						( p.post_type = 'product_variation' AND p.post_parent NOT IN (
-							SELECT DISTINCT object_id
-							FROM {$wpdb->term_relationships} t_rel
-							LEFT JOIN {$wpdb->term_taxonomy} t_tax ON t_rel.term_taxonomy_id = t_tax.term_taxonomy_id
-							WHERE t_tax.term_id IN (%s)
-						) ) )", implode( ",", $exclude_terms ) );
-				}
-			}
-
 			if ( self::get_var( 'exclude_out_of_stock_products' ) ) {
 				$join['pmpv'] = "LEFT JOIN {$wpdb->postmeta} pmpv ON pmpv.post_id = p.ID";
 				$where['and'][] = "( p.post_type NOT IN ('product', 'product_variation') OR ( p.post_type IN ('product', 'product_variation') AND pmpv.meta_key = '_stock_status' AND CAST(pmpv.meta_value AS CHAR) NOT IN ('outofstock') ) )";
 			}
-
-			// restrict searching only in defined categories
-			if ( self::get_var( 'allowed_product_cat' ) ) {
-				$allowed_product_cats_filtered = array();
-				foreach ( self::get_var( 'allowed_product_cat' ) as $allowed_product_cat ) {
-					$allowed_product_cats_filtered[] = "'" . $allowed_product_cat . "'";
-				}
-
-				if ( ! empty( $allowed_product_cats_filtered ) ) {
-					$allowed_product_cats_filtered = implode( ",", $allowed_product_cats_filtered );
-					$where['and'][] = sprintf( "( p.post_type NOT IN ('product') OR 
-												( p.post_type = 'product' AND p.ID IN (
-						SELECT DISTINCT object_id
-						FROM {$wpdb->term_relationships} t_rel
-						LEFT JOIN {$wpdb->term_taxonomy} t_tax ON t_rel.term_taxonomy_id = t_tax.term_taxonomy_id
-						WHERE t_tax.term_id IN (%s)
-					) ) )", $allowed_product_cats_filtered );
-					// product variations
-					$where['and'][] = sprintf( "( p.post_type NOT IN ('product_variation') OR 
-												( p.post_type = 'product_variation' AND p.post_parent IN (
-						SELECT DISTINCT object_id
-						FROM {$wpdb->term_relationships} t_rel
-						LEFT JOIN {$wpdb->term_taxonomy} t_tax ON t_rel.term_taxonomy_id = t_tax.term_taxonomy_id
-						WHERE t_tax.term_id IN (%s)
-					) ) )", $allowed_product_cats_filtered );
-				}
-
-			}
-		}
-
-		if (
-			defined( 'POLYLANG_BASENAME' ) ||
-			self::get_var( 'taxonomies' ) ||
-			self::get_var( 'allowed_product_cat' ) ||
-			self::get_var( 'disallowed_product_cat' )
-		) {
-			$join['t_rel'] = "LEFT JOIN {$wpdb->term_relationships} t_rel ON p.ID = t_rel.object_id";
-			$join['t_tax'] = "LEFT JOIN {$wpdb->term_taxonomy} t_tax ON t_tax.term_taxonomy_id = t_rel.term_taxonomy_id";
-			$join['t'] = "LEFT JOIN {$wpdb->terms} t ON t_tax.term_id = t.term_id";
 		}
 
 		if ( !empty($where['or']) ) {
@@ -458,7 +364,7 @@ class Ysm_Search {
 			$posts = array();
 		}
 
-		if ( ! empty( self::$postmeta ) && ( '-1' === $limit || count( $posts ) < $limit ) ) {
+		if ( self::get_var( 'postmeta' ) && ( '-1' === $limit || count( $posts ) < $limit ) ) {
 			if ( $limit !== '-1' ) {
 				$limit = $limit - count( $posts );
 			}
@@ -506,87 +412,10 @@ class Ysm_Search {
 		/* product visibility */
 		if ( self::get_post_types( 'product' ) ) {
 
-			if ( self::get_var( 'disallowed_product_cat' ) ) {
-				$disallowed_product_cats_filtered = array();
-				foreach ( self::get_var( 'disallowed_product_cat' ) as $disallowed_product_cat ) {
-					$disallowed_product_cats_filtered[] = "'" . $disallowed_product_cat . "'";
-					$children_terms = get_term_children( $disallowed_product_cat, 'product_cat' );
-					if ( ! is_wp_error( $children_terms ) && is_array( $children_terms ) && $children_terms ) {
-						foreach ( $children_terms as $children_term ) {
-							$disallowed_product_cats_filtered[] = "'" . intval( $children_term ) . "'";
-						}
-					}
-				}
-			}
-
-			if ( version_compare( WC()->version, '3.0.0', '<' ) ) {
-				$where['and'][] = sprintf( "p.ID NOT IN (
-						SELECT DISTINCT t_rel.object_id
-						FROM {$wpdb->term_relationships} t_rel
-						LEFT JOIN {$wpdb->term_taxonomy} t_tax ON t_rel.term_taxonomy_id = t_tax.term_taxonomy_id
-						WHERE t_tax.term_id IN (%s)
-					)", implode( ",", $disallowed_product_cats_filtered ) );
-				$join['pmpv'] = "LEFT JOIN {$wpdb->postmeta} pmpv ON pmpv.post_id = p.ID";
-				$where['and'][] = "( p.post_type NOT IN ('product') OR (p.post_type = 'product' AND pmpv.meta_key = '_visibility' AND CAST(pmpv.meta_value AS CHAR) IN ('search','visible')) )";
-			} else {
-				$exclude_terms = array();
-				$wc_product_visibility_term_ids = wc_get_product_visibility_term_ids();
-				if ( $wc_product_visibility_term_ids['exclude-from-search'] ) {
-					$exclude_terms[] = "'" . $wc_product_visibility_term_ids['exclude-from-search'] . "'";
-				}
-				if ( ! empty( $disallowed_product_cats_filtered ) ) {
-					$exclude_terms = array_merge( $exclude_terms, $disallowed_product_cats_filtered );
-				}
-
-				if ( $exclude_terms ) {
-					$where['and'][] = sprintf( "p.ID NOT IN (
-							SELECT DISTINCT object_id
-							FROM {$wpdb->term_relationships} t_rel
-							LEFT JOIN {$wpdb->term_taxonomy} t_tax ON t_rel.term_taxonomy_id = t_tax.term_taxonomy_id
-							WHERE t_tax.term_id IN (%s)
-						)", implode( ",", $exclude_terms ) );
-
-					$where['and'][] = sprintf( "( p.post_type NOT IN ('product_variation') OR 
-							( p.post_type = 'product_variation' AND p.post_parent NOT IN (
-								SELECT DISTINCT object_id
-								FROM {$wpdb->term_relationships} t_rel
-								LEFT JOIN {$wpdb->term_taxonomy} t_tax ON t_rel.term_taxonomy_id = t_tax.term_taxonomy_id
-								WHERE t_tax.term_id IN (%s)
-							) ) )", implode( ",", $exclude_terms ) );
-				}
-			}
-
 			if ( self::get_var( 'exclude_out_of_stock_products' ) ) {
 				$join['pmpv'] = "LEFT JOIN {$wpdb->postmeta} pmpv ON pmpv.post_id = p.ID";
 				$where['and'][] = "( p.post_type NOT IN ('product', 'product_variation') OR ( p.post_type IN ('product', 'product_variation') AND pmpv.meta_key = '_stock_status' AND CAST(pmpv.meta_value AS CHAR) NOT IN ('outofstock') ) )";
 			}
-
-			// restrict searching only in defined categories
-			if ( self::get_var( 'allowed_product_cat' ) ) {
-				$allowed_product_cats_filtered = array();
-				foreach ( self::get_var( 'allowed_product_cat' ) as $allowed_product_cat ) {
-					$allowed_product_cats_filtered[] = "'" . $allowed_product_cat . "'";
-				}
-
-				if ( ! empty( $allowed_product_cats_filtered ) ) {
-					$allowed_product_cats_filtered = implode( ",", $allowed_product_cats_filtered );
-					$where['and'][] = sprintf( "( p.post_type NOT IN ('product') OR ( p.post_type = 'product' AND t_tax.taxonomy = 'product_cat' AND t.term_id IN (%s) ) )", $allowed_product_cats_filtered );
-					// product variations
-					//$where['and'][] = sprintf( "( p.post_type NOT IN ('product_variation') OR ( p.post_type = 'product_variation' AND t_tax.taxonomy = 'product_cat' AND t.term_id IN (%s) ) )", $allowed_product_cats_filtered );
-				}
-
-			}
-		}
-
-		if (
-			defined( 'POLYLANG_BASENAME' ) ||
-			self::get_var( 'taxonomies' ) ||
-			self::get_var( 'allowed_product_cat' ) ||
-			self::get_var( 'disallowed_product_cat' )
-		) {
-			$join['t_rel'] = "LEFT JOIN {$wpdb->term_relationships} t_rel ON p.ID = t_rel.object_id";
-			$join['t_tax'] = "LEFT JOIN {$wpdb->term_taxonomy} t_tax ON t_tax.term_taxonomy_id = t_rel.term_taxonomy_id";
-			$join['t'] = "LEFT JOIN {$wpdb->terms} t ON t_tax.term_id = t.term_id";
 		}
 
 		/* GROUP BY part */
@@ -596,10 +425,10 @@ class Ysm_Search {
 		$orderby = array();
 
 		// post meta fields
-		if ( !empty( self::$postmeta ) ) {
+		if ( self::get_var( 'postmeta' ) ) {
 
-			foreach (self::$postmeta as $postmeta) {
-				$where['or'][] = "( pm.meta_key = '{$postmeta}' AND (" . self::make_like_query( 'lower(pm.meta_value)' ) . ") )";
+			foreach ( self::get_var( 'postmeta' ) as $postmeta_field ) {
+				$where['or'][] = "( pm.meta_key = '{$postmeta_field}' AND (" . self::make_like_query( 'lower(pm.meta_value)' ) . ") )";
 			}
 
 			$join['pm'] = "LEFT JOIN {$wpdb->postmeta} pm ON pm.post_id = p.ID";
