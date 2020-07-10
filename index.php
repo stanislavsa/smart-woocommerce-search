@@ -12,7 +12,7 @@
  *
  * Requires PHP: 5.4
  * WC requires at least: 2.2
- * WC tested up to: 4.2
+ * WC tested up to: 4.3
  */
 
 if ( ! defined( 'ABSPATH' ) ) exit;

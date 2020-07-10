@@ -12,7 +12,7 @@ Smart WooCommerce Ajax Search allows you to instantly search products.
 
 == Description ==
 
-= Improve customer experience and boost your sales with Instant Ajax WooCommerce search plugin for WordPress websites. Powerful, amazing and efficient! =
+= Improve customer experience and boost your sales with Smart Ajax WooCommerce search plugin for WordPress websites. Powerful, amazing and efficient! =
 
 [Read more](https://yummywp.com/plugins/smart-woocommerce-search/).
 
@@ -117,7 +117,8 @@ In example used widget with ID = 1, so don't forget to change widget ID to neede
 == Changelog ==
 
 = 1.5.20 =
-* code refactoring
+* code refactoring and optimization
+* WooCommerce 4.3 compatibility
 
 = 1.5.19 =
 * Fixed: issue related to single quote in a search terms
