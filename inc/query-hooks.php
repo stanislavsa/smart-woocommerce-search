@@ -73,40 +73,30 @@ function disallowed_product_cats( $where ) {
 		}
 	}
 
-	if ( version_compare( WC()->version, '3.0.0', '<' ) ) {
-		$where['and'][] = sprintf( "p.ID NOT IN (
-						SELECT DISTINCT t_rel.object_id
-						FROM {$wpdb->term_relationships} t_rel
-						LEFT JOIN {$wpdb->term_taxonomy} t_tax ON t_rel.term_taxonomy_id = t_tax.term_taxonomy_id
-						WHERE t_tax.term_id IN (%s)
-					)", implode( ",", $disallowed_product_cats_filtered ) );
-		$where['and'][] = "( p.post_type NOT IN ('product') OR (p.post_type = 'product' AND pmpv.meta_key = '_visibility' AND CAST(pmpv.meta_value AS CHAR) IN ('search','visible')) )";
-	} else {
-		$exclude_terms = array();
-		$wc_product_visibility_term_ids = wc_get_product_visibility_term_ids();
-		if ( $wc_product_visibility_term_ids['exclude-from-search'] ) {
-			$exclude_terms[] = "'" . $wc_product_visibility_term_ids['exclude-from-search'] . "'";
-		}
-		if ( ! empty( $disallowed_product_cats_filtered ) ) {
-			$exclude_terms = array_merge( $exclude_terms, $disallowed_product_cats_filtered );
-		}
+	$exclude_terms = array();
+	$wc_product_visibility_term_ids = wc_get_product_visibility_term_ids();
+	if ( $wc_product_visibility_term_ids['exclude-from-search'] ) {
+		$exclude_terms[] = "'" . $wc_product_visibility_term_ids['exclude-from-search'] . "'";
+	}
+	if ( ! empty( $disallowed_product_cats_filtered ) ) {
+		$exclude_terms = array_merge( $exclude_terms, $disallowed_product_cats_filtered );
+	}
 
-		if ( $exclude_terms ) {
-			$where['and'][] = sprintf( "p.ID NOT IN (
+	if ( $exclude_terms ) {
+		$where['and'][] = sprintf( "p.ID NOT IN (
 							SELECT DISTINCT object_id
 							FROM {$wpdb->term_relationships} t_rel
 							LEFT JOIN {$wpdb->term_taxonomy} t_tax ON t_rel.term_taxonomy_id = t_tax.term_taxonomy_id
 							WHERE t_tax.term_id IN (%s)
 						)", implode( ',', $exclude_terms ) );
 
-			$where['and'][] = sprintf( "( p.post_type NOT IN ('product_variation') OR 
+		$where['and'][] = sprintf( "( p.post_type NOT IN ('product_variation') OR 
 							( p.post_type = 'product_variation' AND p.post_parent NOT IN (
 								SELECT DISTINCT object_id
 								FROM {$wpdb->term_relationships} t_rel
 								LEFT JOIN {$wpdb->term_taxonomy} t_tax ON t_rel.term_taxonomy_id = t_tax.term_taxonomy_id
 								WHERE t_tax.term_id IN (%s)
 							) ) )", implode( ",", $exclude_terms ) );
-		}
 	}
 
 	return $where;

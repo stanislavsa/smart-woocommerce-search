@@ -67,6 +67,7 @@ class Ysm_Search {
 
 		if ( class_exists( 'WooCommerce' ) ) {
 			$registered_pt[] = 'product';
+			$registered_pt[] = 'product_variation';
 		}
 
 		$widget_id = self::get_widget_id();
@@ -88,10 +89,6 @@ class Ysm_Search {
 					$settings['post_types'][ $type ] = $type;
 				}
 			}
-		}
-
-		if ( ! empty( $settings['post_type_product_variation'] ) ) {
-			$settings['post_types']['product_variation'] = 'product_variation';
 		}
 
 		// posts_per_page
@@ -199,7 +196,7 @@ class Ysm_Search {
 					return $query;
 				}
 
-				self::set_var( 'max_post_count', '-1' );
+				self::set_var( 'max_post_count', -1 );
 
 				self::set_s( $s );
 				$posts = self::search_posts();
@@ -355,7 +352,7 @@ class Ysm_Search {
 			" GROUP BY " . $groupby .
 			" ORDER BY " . implode(' , ', $orderby);
 
-		if ( $limit !== '-1' ) {
+		if ( $limit !== -1 ) {
 			$query .= " LIMIT " . (int) $limit;
 		}
 
@@ -364,8 +361,8 @@ class Ysm_Search {
 			$posts = array();
 		}
 
-		if ( self::get_var( 'postmeta' ) && ( '-1' === $limit || count( $posts ) < $limit ) ) {
-			if ( $limit !== '-1' ) {
+		if ( self::get_var( 'postmeta' ) && ( -1 === $limit || count( $posts ) < $limit ) ) {
+			if ( $limit !== -1 ) {
 				$limit = $limit - count( $posts );
 			}
 			$additional_posts = self::search_postmeta( $limit );
@@ -455,7 +452,7 @@ class Ysm_Search {
 			" GROUP BY " . $groupby .
 			" ORDER BY " . implode(' , ', $orderby);
 
-		if ( $limit !== '-1' ) {
+		if ( $limit !== -1 ) {
 			$query .= " LIMIT " . (int) $limit;
 		}
 
@@ -481,6 +478,7 @@ class Ysm_Search {
 
 		return implode( ' OR ', $query );
 	}
+
 	/**
 	 * Prepare suggestions list
 	 * @param $posts
@@ -574,7 +572,9 @@ class Ysm_Search {
 				$output .= '<div class="smart-search-post-price-holder">';
 				/* product price */
 				if ( self::get_var( 'display_price' ) ) {
+					// @codingStandardsIgnoreStart
 					$output .= '<div class="smart-search-post-price">' . $wc_product->get_price_html() . '</div>';
+					// @codingStandardsIgnoreEnd
 				}
 				/* product sku */
 				if ( self::get_var( 'display_sku' ) ) {
@@ -646,8 +646,6 @@ class Ysm_Search {
 
 			self::$time_end = microtime( true );
 			$res['time'] = self::$time_end - self::$time_start;
-		} else {
-			//ob_clean();
 		}
 
 		echo json_encode($res);
@@ -680,7 +678,7 @@ class Ysm_Search {
 	}
 
 	/**
-	 * Compare
+	 * Compare by relevance
 	 * @param $a
 	 * @param $b
 	 * @return int
@@ -738,10 +736,10 @@ class Ysm_Search {
 
 	/**
 	 * Get search terms
-	 * @return string
+	 * @return array
 	 */
 	public static function get_search_terms() {
-		return self::$vars['search_terms'];
+		return (array) self::$vars['search_terms'];
 	}
 
 	/**

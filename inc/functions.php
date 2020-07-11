@@ -157,7 +157,7 @@ function ysm_accent_search_term( $text ) {
 /**
  * Wrap search terms in <strong> tag
  * @param $text
- * @return string|string[]|null
+ * @return string
  */
 function ysm_text_replace( $text ) {
 	$words = \Ysm_Search::get_search_terms();
