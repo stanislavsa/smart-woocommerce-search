@@ -6,7 +6,7 @@
  * Tags: woocommerce search, ajax search, woocommerce, woocommerce search by sku, woocommerce search shortcod, product search, product filter, woocommerce search results, instant search, woocommerce search plugin, woocommerce search form, search for woocommerce, woocommerce search page, search, woocommerce product search, search woocommerce, shop, shop search, autocomplete, autosuggest, search for wp, search for WordPress, search plugin, woocommerce search by sku, search results,  woocommerce search shortcode, search products, search autocomplete, woocommerce advanced search, woocommerce predictive search, woocommerce live search, woocommerce single product, woocommerce site search, products, shop, category search, custom search, predictive search, relevant search, search product, woocommerce plugin, posts search, wp search, WordPress search
  * Author:      YummyWP
  * Author URI:  https://yummywp.com
- * Version:     1.5.21
+ * Version:     1.6.0
  * Domain Path: /languages
  * Text Domain: smart_search
  *
@@ -48,17 +48,7 @@ if ( ! defined( 'YSM_URI' ) ) {
 	define( 'YSM_URI', plugin_dir_url( __FILE__ ) );
 }
 
-include_once YSM_DIR . 'inc/functions.php';
-include_once YSM_DIR . 'inc/hooks.php';
-include_once YSM_DIR . 'inc/rest.php';
-include_once YSM_DIR . 'inc/query-hooks.php';
-include_once YSM_DIR . 'inc/class-ysm-search.php';
-include_once YSM_DIR . 'inc/class-ysm-setting.php';
-include_once YSM_DIR . 'inc/class-ysm-message.php';
-include_once YSM_DIR . 'inc/class-ysm-widget-manager.php';
-include_once YSM_DIR . 'inc/class-ysm-custom-widget-manager.php';
-include_once YSM_DIR . 'inc/class-ysm-search-widget.php';
-include_once YSM_DIR . 'inc/class-ysm-style-generator.php';
+include_once YSM_DIR . 'inc/index.php';
 
 /**
  * Load plugin textdomain.
@@ -362,8 +352,9 @@ if ( ! function_exists( 'ysm_enqueue_scripts' ) ) {
  */
 if ( ! function_exists( 'ysm_admin_enqueue_scripts' ) ) {
 	function ysm_admin_enqueue_scripts() {
+		$cur_page = filter_input( INPUT_GET, 'page', FILTER_SANITIZE_STRING );
 
-		if ( ! isset( $_GET['page'] ) || strpos( $_GET['page'], 'smart-search' ) === false ) {
+		if ( ! $cur_page || false === strpos( $cur_page, 'smart-search' ) ) {
 			return;
 		}
 
@@ -395,25 +386,28 @@ if ( ! function_exists( 'ysm_admin_enqueue_scripts' ) ) {
 if ( ! function_exists( 'ysm_change_admin_title' ) ) {
 	function ysm_change_admin_title( $admin_title, $title ) {
 		$is_smart_search = false;
+		$cur_page = filter_input( INPUT_GET, 'page', FILTER_SANITIZE_STRING );
 
-		if ( isset( $_GET['page'] ) && $_GET['page'] === 'smart-search-custom' ) {
-			if ( isset( $_GET['action'] ) && $_GET['action'] === 'edit' && ! empty( $_GET['id'] ) ) {
+		if ( $cur_page && 'smart-search-custom' === $cur_page ) {
+			$action = filter_input( INPUT_GET, 'action', FILTER_SANITIZE_STRING );
+			$id = filter_input( INPUT_GET, 'id', FILTER_SANITIZE_STRING );
+			if ( $action && 'edit' === $action && ! empty( $id ) ) {
 				$is_smart_search = true;
 				$title           = __( 'Edit Custom Search Widget', 'smart_search' );
 			}
 		}
 
-		if ( isset( $_GET['page'] ) && $_GET['page'] === 'smart-search' ) {
-			if ( isset( $_GET['tab'] ) ) {
+		if ( $cur_page && 'smart-search' === $cur_page ) {
+			$tab = filter_input( INPUT_GET, 'tab', FILTER_SANITIZE_STRING );
+			if ( $tab ) {
 				$tabs = array(
 					'default' => __( 'Default Search', 'smart_search' ),
 					'product' => __( 'Product Search', 'smart_search' ),
 				);
 
 				$is_smart_search = true;
-				$title           = sprintf( __( 'Edit %s Search Widget', 'smart_search' ), $tabs[ $_GET['tab'] ] );
+				$title           = sprintf( __( 'Edit %s Search Widget', 'smart_search' ), $tabs[ $tab ] );
 			}
-
 		}
 
 		if ( $is_smart_search ) {

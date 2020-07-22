@@ -1,18 +1,19 @@
 <?php
-if ( ! defined('ABSPATH') ) exit;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
-$tabs = array(
+$type = filter_input( INPUT_GET, 'type', FILTER_SANITIZE_STRING );
+$tabs_def = array(
 	'default' => __( 'WordPres Default Search', 'smart_search' ),
-	'product' => __( 'WooCommerce Default Product Search', 'smart_search' ),
+	'product' => __( 'WooCommerce Product Search', 'smart_search' ),
 );
-$tabs = apply_filters( 'smart_search_admin_tabs', $tabs );
-$current_tab = ! empty( $_GET['type'] ) && isset( $tabs[ $_GET['type'] ] ) ? $_GET['type'] : 'default';
+$tabs_def = apply_filters( 'smart_search_admin_tabs', $tabs_def );
+$current_tab = ! empty( $type ) && isset( $tabs_def[ $type ] ) ? $type : 'default';
 $widgets = ysm_get_default_widgets();
 $w_id = $current_tab;
 ?>
 <div class="wrap">
 
-	<h1><?php echo sprintf( __( 'Extend %s Widget', 'smart_search' ), $tabs[ $current_tab ] ); ?></h1>
+	<h1><?php echo esc_html( sprintf( __( 'Extend %s Widget', 'smart_search' ), $tabs_def[ $current_tab ] ) ); ?></h1>
 
 	<h2 class="nav-tab-wrapper ysm-nav-tab-wrapper">
 		<?php foreach ( $tabs as $id => $title ) { ?>

@@ -54,12 +54,12 @@ msgid "Accent searchable words on search page. Works only if \"Default Output on
 msgstr ""
 
 #. Text in echo
-#: smart-woocommerce-search/templates/admin-page-custom.php:25
+#: smart-woocommerce-search/templates/admin-page-custom.php:23
 msgid "Add New"
 msgstr ""
 
 #. Text in function
-#: smart-woocommerce-search/templates/admin-page-form-fields.php:88
+#: smart-woocommerce-search/templates/admin-page-form-fields.php:81
 msgid "Allowed Product Categories"
 msgstr ""
 
@@ -101,7 +101,7 @@ msgid "Character Amount"
 msgstr ""
 
 #. Text in function
-#: smart-woocommerce-search/templates/admin-page-form-fields.php:88
+#: smart-woocommerce-search/templates/admin-page-form-fields.php:81
 msgid "Content"
 msgstr ""
 
@@ -121,7 +121,7 @@ msgid "Disable altering search results by Smart Search plugin on the search resu
 msgstr ""
 
 #. Text in function
-#: smart-woocommerce-search/templates/admin-page-form-fields.php:88
+#: smart-woocommerce-search/templates/admin-page-form-fields.php:81
 msgid "Disallowed Product Categories"
 msgstr ""
 
@@ -176,12 +176,12 @@ msgid "Display search field with rounded border"
 msgstr ""
 
 #. Text in function
-#: smart-woocommerce-search/inc/class-ysm-search-widget.php:1
+#: smart-woocommerce-search/inc/custom/class-ysm-search-widget.php:1
 msgid "Displays search box"
 msgstr ""
 
-#. Text in function
-#: smart-woocommerce-search/templates/admin-page-custom.php:17
+#. Text in echo
+#: smart-woocommerce-search/templates/admin-page-custom.php:16
 msgid "Edit Widget"
 msgstr ""
 
@@ -201,7 +201,7 @@ msgid "Enable multiple word search."
 msgstr ""
 
 #. Text in function
-#: smart-woocommerce-search/templates/admin-page-form-fields.php:88
+#: smart-woocommerce-search/templates/admin-page-form-fields.php:81
 msgid "Enable search through \"%s\""
 msgstr ""
 
@@ -211,17 +211,17 @@ msgid "Enable search through \"%s\" post type"
 msgstr ""
 
 #. Text in function
-#: smart-woocommerce-search/templates/admin-page-form-fields.php:88
+#: smart-woocommerce-search/templates/admin-page-form-fields.php:81
 msgid "Enable search through Variable Product Variations"
 msgstr ""
 
 #. Text in echo
-#: smart-woocommerce-search/templates/admin-page-form.php:36
+#: smart-woocommerce-search/templates/admin-page-form.php:34
 msgid "Enter name"
 msgstr ""
 
 #. Text in function
-#: smart-woocommerce-search/templates/admin-page-form-fields.php:88
+#: smart-woocommerce-search/templates/admin-page-form-fields.php:81
 msgid "Excerpt"
 msgstr ""
 
@@ -251,22 +251,22 @@ msgid "Excerpt text color in results popup"
 msgstr ""
 
 #. Text in function
-#: smart-woocommerce-search/templates/admin-page-form-fields.php:88
+#: smart-woocommerce-search/templates/admin-page-form-fields.php:81
 msgid "Exclude \"Out of stock\""
 msgstr ""
 
 #. Text in function
-#: smart-woocommerce-search/templates/admin-page-form-fields.php:88
+#: smart-woocommerce-search/templates/admin-page-form-fields.php:81
 msgid "Exclude \"Out of stock\" products from results"
 msgstr ""
 
 #. Text in function
-#: smart-woocommerce-search/templates/admin-page-default.php:15
+#: smart-woocommerce-search/templates/admin-page-default.php:16
 msgid "Extend %s Widget"
 msgstr ""
 
 #. Text in echo
-#: smart-woocommerce-search/templates/admin-page-form-fields.php:48
+#: smart-woocommerce-search/templates/admin-page-form-fields.php:44
 msgid "Fields"
 msgstr ""
 
@@ -281,7 +281,7 @@ msgid "General"
 msgstr ""
 
 #. Text in echo
-#: smart-woocommerce-search/templates/admin-page-custom.php:33
+#: smart-woocommerce-search/templates/admin-page-custom.php:31
 msgid "ID"
 msgstr ""
 
@@ -331,7 +331,7 @@ msgid "Minimum number of character"
 msgstr ""
 
 #. Text in echo
-#: smart-woocommerce-search/templates/admin-page-custom.php:34
+#: smart-woocommerce-search/templates/admin-page-custom.php:32
 msgid "Name"
 msgstr ""
 
@@ -366,12 +366,12 @@ msgid "Popup border color"
 msgstr ""
 
 #. Text in function
-#: smart-woocommerce-search/templates/admin-page-form-fields.php:88
+#: smart-woocommerce-search/templates/admin-page-form-fields.php:81
 msgid "Post Category"
 msgstr ""
 
 #. Text in function
-#: smart-woocommerce-search/templates/admin-page-form-fields.php:88
+#: smart-woocommerce-search/templates/admin-page-form-fields.php:81
 msgid "Post Tag"
 msgstr ""
 
@@ -391,12 +391,12 @@ msgid "Price text color in results popup"
 msgstr ""
 
 #. Text in function
-#: smart-woocommerce-search/templates/admin-page-form-fields.php:88
+#: smart-woocommerce-search/templates/admin-page-form-fields.php:81
 msgid "Product Category"
 msgstr ""
 
 #. Text in function
-#: smart-woocommerce-search/templates/admin-page-form-fields.php:88
+#: smart-woocommerce-search/templates/admin-page-form-fields.php:81
 msgid "Product SKU"
 msgstr ""
 
@@ -406,27 +406,27 @@ msgid "Product Search Widget"
 msgstr ""
 
 #. Text in function
-#: smart-woocommerce-search/templates/admin-page-form-fields.php:88
+#: smart-woocommerce-search/templates/admin-page-form-fields.php:81
 msgid "Product Tag"
 msgstr ""
 
 #. Text in echo
-#: smart-woocommerce-search/templates/admin-page-form-fields.php:37
+#: smart-woocommerce-search/templates/admin-page-form-fields.php:33
 msgid "Product Variations"
 msgstr ""
 
 #. Text in function
-#: smart-woocommerce-search/templates/admin-page-form-fields.php:88
+#: smart-woocommerce-search/templates/admin-page-form-fields.php:81
 msgid "Product categories ids separated by comma.<br>Do not search in chosen product categories"
 msgstr ""
 
 #. Text in function
-#: smart-woocommerce-search/templates/admin-page-form-fields.php:88
+#: smart-woocommerce-search/templates/admin-page-form-fields.php:81
 msgid "Product categories ids separated by comma.<br>Restrict product searching by chosen product categories"
 msgstr ""
 
 #. Text in echo
-#: smart-woocommerce-search/templates/admin-page-form-fields.php:86
+#: smart-woocommerce-search/templates/admin-page-form-fields.php:79
 msgid "Restrictions"
 msgstr ""
 
@@ -446,7 +446,8 @@ msgid "Rounded border"
 msgstr ""
 
 #. Text in echo
-#: smart-woocommerce-search/templates/admin-page-form.php:79
+#: smart-woocommerce-search/templates/admin-page-form.php:18
+#: smart-woocommerce-search/templates/admin-page-form.php:76
 msgid "Save"
 msgstr ""
 
@@ -482,12 +483,12 @@ msgstr ""
 
 #. Text in function
 #: smart-woocommerce-search/templates/admin-page-form-fields.php:10
-#: smart-woocommerce-search/templates/admin-page-form-fields.php:88
+#: smart-woocommerce-search/templates/admin-page-form-fields.php:81
 msgid "Search in %s"
 msgstr ""
 
 #. Text in function
-#: smart-woocommerce-search/templates/admin-page-form-fields.php:88
+#: smart-woocommerce-search/templates/admin-page-form-fields.php:81
 msgid "Search in Variations"
 msgstr ""
 
@@ -497,22 +498,22 @@ msgid "Search results featured image size (px)"
 msgstr ""
 
 #. Text in echo
-#: smart-woocommerce-search/inc/class-ysm-search-widget.php:60
+#: smart-woocommerce-search/inc/custom/class-ysm-search-widget.php:51
 msgid "Select Widget:"
 msgstr ""
 
 #. Text in echo
-#: smart-woocommerce-search/templates/admin-page-form.php:54
+#: smart-woocommerce-search/templates/admin-page-form.php:51
 msgid "Settings"
 msgstr ""
 
 #. Text in echo
-#: smart-woocommerce-search/templates/admin-page-custom.php:35
+#: smart-woocommerce-search/templates/admin-page-custom.php:33
 msgid "Shortcode"
 msgstr ""
 
 #. Text in function
-#: smart-woocommerce-search/inc/class-ysm-search-widget.php:1
+#: smart-woocommerce-search/inc/custom/class-ysm-search-widget.php:1
 msgid "Smart Search"
 msgstr ""
 
@@ -527,7 +528,7 @@ msgid "Text Color"
 msgstr ""
 
 #. Text in function
-#: smart-woocommerce-search/templates/admin-page-form-fields.php:88
+#: smart-woocommerce-search/templates/admin-page-form-fields.php:81
 msgid "Title"
 msgstr ""
 
@@ -542,17 +543,17 @@ msgid "Title text color in results popup"
 msgstr ""
 
 #. Text in echo
-#: smart-woocommerce-search/inc/class-ysm-search-widget.php:56
+#: smart-woocommerce-search/inc/custom/class-ysm-search-widget.php:47
 msgid "Title:"
 msgstr ""
 
 #. Text in echo
-#: smart-woocommerce-search/index.php:26
+#: smart-woocommerce-search/index.php:27
 msgid "To activate the free version of Smart WooCommerce Search you need to deactivate the Pro version."
 msgstr ""
 
 #. Text in echo
-#: smart-woocommerce-search/templates/admin-page-form.php:50
+#: smart-woocommerce-search/templates/admin-page-form.php:47
 msgid "Toggle panel: Settings"
 msgstr ""
 
@@ -563,7 +564,7 @@ msgstr ""
 
 #. Text in function
 #: smart-woocommerce-search/templates/admin-page-default.php:1
-msgid "WooCommerce Default Product Search"
+msgid "WooCommerce Product Search"
 msgstr ""
 
 #. Text in function
@@ -572,12 +573,12 @@ msgid "WordPres Default Search"
 msgstr ""
 
 #. Text in function
-#: smart-woocommerce-search/inc/class-ysm-custom-widget-manager.php:1
+#: smart-woocommerce-search/inc/custom/class-ysm-custom-widget-manager.php:1
 msgid "Your settings have been saved."
 msgstr ""
 
 #. Text in echo
-#: smart-woocommerce-search/inc/class-ysm-custom-widget-manager.php:322
-#: smart-woocommerce-search/inc/class-ysm-custom-widget-manager.php:323
+#: smart-woocommerce-search/inc/custom/class-ysm-custom-widget-manager.php:302
+#: smart-woocommerce-search/inc/custom/class-ysm-custom-widget-manager.php:303
 msgid "placeholder"
 msgstr ""
