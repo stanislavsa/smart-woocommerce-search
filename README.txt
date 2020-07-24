@@ -117,6 +117,7 @@ In example used widget with ID = 1, so don't forget to change widget ID to neede
 = 1.6.0 =
 * code refactoring and optimization
 * Elementor compatibility
+* Accessibility fix
 
 = 1.5.20 =
 * code refactoring and optimization

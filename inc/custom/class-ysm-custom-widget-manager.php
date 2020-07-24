@@ -60,18 +60,21 @@ class Ysm_Custom_Widget_Manager {
 			$this->counter = 0;
 		}
 
+		$page = filter_input( INPUT_GET, 'page', FILTER_SANITIZE_STRING );
 		/* custom widgets list or edit widget page */
-		if ( ! empty( $_GET['page'] ) && $_GET['page'] === 'smart-search-custom' ) {
+		if ( ! empty( $page ) && 'smart-search-custom' === $page ) {
 			$this->mode = 'custom-list';
+			$action = filter_input( INPUT_GET, 'action', FILTER_SANITIZE_STRING );
+			$id = filter_input( INPUT_GET, 'id', FILTER_SANITIZE_STRING );
 
-			if ( isset( $_GET['action'] ) && $_GET['action'] === 'edit' && ! empty( $_GET['id'] ) ) {
+			if ( isset( $action ) && 'edit' === $action && ! empty( $id ) ) {
 				$this->mode = 'custom-edit';
-				$this->widget_id = (int) $_GET['id'];
+				$this->widget_id = (int) $id;
 			}
 		}
 
 		/* add new custom widget page */
-		if ( ! empty( $_GET['page'] ) && $_GET['page'] === 'smart-search-custom-new' ) {
+		if ( ! empty( $page ) && 'smart-search-custom-new' === $page ) {
 			$this->mode = 'custom-new';
 			$this->widget_id = 0;
 		}
@@ -84,11 +87,12 @@ class Ysm_Custom_Widget_Manager {
 
 		$this->widgets = $settings;
 
-		if ( isset( $_POST['save'] ) ) {
+		if ( filter_input( INPUT_POST, 'save', FILTER_SANITIZE_STRING ) ) {
 
 			require_once ABSPATH . 'wp-includes/pluggable.php';
 
-			if ( ! empty( $_REQUEST['_wpnonce'] ) && wp_verify_nonce( $_REQUEST['_wpnonce'], $this->wp_option ) ) {
+			$wpnonce = filter_input( INPUT_POST, '_wpnonce', FILTER_SANITIZE_STRING );
+			if ( ! empty( $wpnonce ) && wp_verify_nonce( $wpnonce, $this->wp_option ) ) {
 				$this->save();
 			}
 		}
@@ -107,6 +111,7 @@ class Ysm_Custom_Widget_Manager {
 		if ( null === self::$_instance ) {
 			self::$_instance = new self();
 		}
+
 		return self::$_instance;
 	}
 
@@ -143,9 +148,11 @@ class Ysm_Custom_Widget_Manager {
 	 * @param $id
 	 */
 	public function duplicate( $id ) {
+		$w_id = filter_input( INPUT_POST, 'id', FILTER_SANITIZE_INT );
+		$action = filter_input( INPUT_POST, 'action', FILTER_SANITIZE_STRING );
 
-		if ( isset( $_POST['action'] ) ) {
-			$id = (int) $_POST['id'];
+		if ( $action ) {
+			$id = (int) $w_id;
 			$res = array(
 				'id' => 0,
 				'name' => '',
@@ -161,13 +168,13 @@ class Ysm_Custom_Widget_Manager {
 			$settings[ $this->counter ] = $original;
 			update_option( $this->wp_option, $settings );
 
-			if ( isset( $_POST['action'] ) ) {
+			if ( $action ) {
 				$res['id'] = $this->counter;
 				$res['name'] = esc_html( $original['name'] );
 			}
 		}
 
-		if ( isset( $_POST['action'] ) ) {
+		if ( $action ) {
 			echo json_encode( $res );
 			exit;
 		}
@@ -178,23 +185,24 @@ class Ysm_Custom_Widget_Manager {
 	 * @param $id
 	 */
 	public function remove( $id ) {
-
-		if ( isset( $_POST['action'] ) ) {
-			$id = (int) $_POST['id'];
+		$w_id = filter_input( INPUT_POST, 'id', FILTER_SANITIZE_INT );
+		$action = filter_input( INPUT_POST, 'action', FILTER_SANITIZE_STRING );
+		if ( $action ) {
+			$id = (int) $w_id;
 		}
 
 		if ( isset( $this->widgets[ $id ] ) ) {
-			unset( $this->widgets[$id] );
+			unset( $this->widgets[ $id ] );
 			$settings = $this->widgets;
 			$settings['counter'] = $this->counter;
 			update_option( $this->wp_option, $settings );
 
-			if ( isset( $_POST['action'] ) ) {
+			if ( $action ) {
 				echo 1;
 			}
 		}
 
-		if ( isset( $_POST['action'] ) ) {
+		if ( $action ) {
 			exit;
 		}
 	}
@@ -216,8 +224,8 @@ class Ysm_Custom_Widget_Manager {
 	 * Save widget settings
 	 */
 	protected function save() {
-
 		if ( in_array( $this->mode, array( 'custom-edit', 'custom-new' ), true ) ) {
+			$name = filter_input( INPUT_POST, 'name', FILTER_SANITIZE_STRING );
 			$settings = $this->widgets;
 
 			/* if new widget */
@@ -228,7 +236,7 @@ class Ysm_Custom_Widget_Manager {
 			$settings['counter'] = $this->counter;
 
 			$settings[ $this->widget_id ] = array(
-				'name' => ! empty( $_POST['name'] ) ? sanitize_text_field( $_POST['name'] ) : '',
+				'name' => ! empty( $name ) ? sanitize_text_field( $name ) : '',
 				'settings' => ! empty( $_POST['settings'] ) ? (array) $_POST['settings'] : array(),
 			);
 
@@ -295,22 +303,24 @@ class Ysm_Custom_Widget_Manager {
 		if ( ! empty( $settings['post_type_product'] ) && empty( $settings['search_page_layout_posts'] ) ) {
 			$layout = 'product';
 		}
+
+		$uniq_id = 'ysm-smart-search-' . $w_id . '-' . uniqid();
 		?>
 		<div class="<?php echo esc_attr( $w_classes ); ?>">
-		<form data-id="<?php echo esc_attr( $w_id ); ?>" role="search" method="get" class="search-form" action="<?php echo esc_url( home_url( '/' ) ); ?>">
-			<label>
-				<span class="screen-reader-text"><?php esc_attr_e( $settings['placeholder'], 'smart_search' ); ?></span>
-				<input type="search" name="s" value="<?php echo get_search_query(); ?>" class="search-field" placeholder="<?php esc_attr_e( $settings['placeholder'], 'smart_search' ); ?>" />
-				<input type="hidden" name="search_id" value="<?php echo esc_attr( $w_id ); ?>" />
-				<?php if ( 'product' === $layout ) : ?>
-					<input type="hidden" name="post_type" value="product" />
-				<?php endif; ?>
-				<?php if ( function_exists('is_amp_endpoint') && is_amp_endpoint() ) : ?>
-					<input type="hidden" name="amp" value="1" />
-				<?php endif; ?>
-				<button type="submit" class="search-submit"><span class="screen-reader-text"><?php echo _x( 'Search', 'submit button', 'smart_search' ); ?></span></button>
-			</label>
-		</form>
+			<form data-id="<?php echo esc_attr( $w_id ); ?>" role="search" method="get" class="search-form" action="<?php echo esc_url( home_url( '/' ) ); ?>">
+				<label for="<?php echo esc_attr( $uniq_id ); ?>">
+					<span class="screen-reader-text"><?php esc_attr_e( $settings['placeholder'], 'smart_search' ); ?></span>
+					<input type="search" name="s" value="<?php echo get_search_query(); ?>" id="<?php echo esc_attr( $uniq_id ); ?>" class="search-field" placeholder="<?php esc_attr_e( $settings['placeholder'], 'smart_search' ); ?>" />
+					<input type="hidden" name="search_id" value="<?php echo esc_attr( $w_id ); ?>" />
+					<?php if ( 'product' === $layout ) : ?>
+						<input type="hidden" name="post_type" value="product" />
+					<?php endif; ?>
+					<?php if ( function_exists( 'is_amp_endpoint' ) && is_amp_endpoint() ) : ?>
+						<input type="hidden" name="amp" value="1" />
+					<?php endif; ?>
+					<button type="submit" class="search-submit" aria-label="<?php echo esc_html_x( 'Search', 'submit button', 'smart_search' ); ?>"><span class="screen-reader-text"><?php echo esc_html_x( 'Search', 'submit button', 'smart_search' ); ?></span></button>
+				</label>
+			</form>
 		</div>
 		<?php
 	}
@@ -319,6 +329,6 @@ class Ysm_Custom_Widget_Manager {
 	 * Register widget
 	 */
 	public function register_widgets() {
-		register_widget('Ysm_Search_Widget');
+		register_widget( 'Ysm_Search_Widget' );
 	}
 }
