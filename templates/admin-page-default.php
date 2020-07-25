@@ -16,7 +16,7 @@ $w_id = $current_tab;
 	<h1><?php echo esc_html( sprintf( __( 'Extend %s Widget', 'smart_search' ), $tabs_def[ $current_tab ] ) ); ?></h1>
 
 	<h2 class="nav-tab-wrapper ysm-nav-tab-wrapper">
-		<?php foreach ( $tabs as $id => $title ) { ?>
+		<?php foreach ( $tabs_def as $id => $title ) { ?>
 			<a href="<?php echo esc_url( admin_url( 'admin.php?page=smart-search&type=' . $id ) ); ?>" class="nav-tab<?php echo $current_tab === $id ? ' nav-tab-active' : ''; ?>"><?php echo esc_html( $title ); ?></a>
 		<?php } ?>
 	</h2>
