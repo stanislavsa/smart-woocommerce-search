@@ -3,8 +3,7 @@
  * Class Ysm_Message
  * @author YummyWP
  */
-class Ysm_Message
-{
+class Ysm_Message {
 
 	/**
 	 * @var array
@@ -22,7 +21,7 @@ class Ysm_Message
 	/**
 	 * Ysm_Message constructor.
 	 */
-	private function __construct(){}
+	private function __construct() {}
 
 	/**
 	 * Cloning is not allowed
@@ -32,9 +31,8 @@ class Ysm_Message
 	/**
 	 * @return null|Ysm_Message
 	 */
-	public static function init()
-	{
-		if (self::$_instance === null) {
+	public static function init() {
+		if ( null === self::$_instance ) {
 			self::$_instance = new self();
 		}
 		return self::$_instance;
@@ -44,8 +42,7 @@ class Ysm_Message
 	 * Add message to messages array
 	 * @param $text
 	 */
-	public function add_message($text )
-	{
+	public function add_message( $text ) {
 		$this->messages[] = $text;
 	}
 
@@ -53,23 +50,21 @@ class Ysm_Message
 	 * Add error to errors array
 	 * @param $text
 	 */
-	public function add_error($text )
-	{
+	public function add_error( $text ) {
 		$this->errors[] = $text;
 	}
 
 	/**
 	 * Display messages and errors
 	 */
-	public function display()
-	{
-		if ( !empty( $this->errors ) ) {
+	public function display() {
+		if ( ! empty( $this->errors ) ) {
 			foreach ( $this->errors as $error ) {
 				echo '<div class="error"><p><strong>' . esc_html( $error ) . '</strong></p></div>';
 			}
 		}
 
-		if ( !empty( $this->messages )) {
+		if ( ! empty( $this->messages ) ) {
 			foreach ( $this->messages as $message ) {
 				echo '<div class="updated notice is-dismissible"><p><strong>' . esc_html( $message ) . '</strong></p></div>';
 			}

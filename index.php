@@ -6,7 +6,7 @@
  * Tags: woocommerce search, ajax search, woocommerce, woocommerce search by sku, woocommerce search shortcod, product search, product filter, woocommerce search results, instant search, woocommerce search plugin, woocommerce search form, search for woocommerce, woocommerce search page, search, woocommerce product search, search woocommerce, shop, shop search, autocomplete, autosuggest, search for wp, search for WordPress, search plugin, woocommerce search by sku, search results,  woocommerce search shortcode, search products, search autocomplete, woocommerce advanced search, woocommerce predictive search, woocommerce live search, woocommerce single product, woocommerce site search, products, shop, category search, custom search, predictive search, relevant search, search product, woocommerce plugin, posts search, wp search, WordPress search
  * Author:      YummyWP
  * Author URI:  https://yummywp.com
- * Version:     1.6.0
+ * Version:     1.6.1
  * Domain Path: /languages
  * Text Domain: smart_search
  *
@@ -98,6 +98,14 @@ if ( ! function_exists( 'ysm_add_menu_page' ) ) {
 			'smart-search-custom-new',
 			'ysm_display_admin_page_custom_new'
 		);
+
+		add_submenu_page( 'smart-search',
+			__( 'Update to Pro', 'smart_search' ),
+			__( 'Update to Pro', 'smart_search' ),
+			'manage_options',
+			'smart-search-update-to-pro',
+			'ysm_display_admin_page_update_to_pro'
+		);
 	}
 	add_action( 'admin_menu', 'ysm_add_menu_page' );
 }
@@ -117,6 +125,15 @@ if ( ! function_exists( 'ysm_display_admin_page_custom' ) ) {
 if ( ! function_exists( 'ysm_display_admin_page_custom_new' ) ) {
 	function ysm_display_admin_page_custom_new() {
 		include_once YSM_DIR . 'templates/admin-page-custom-new.php';
+	}
+}
+
+if ( ! function_exists( 'ysm_display_admin_page_update_to_pro' ) ) {
+	function ysm_display_admin_page_update_to_pro() {
+		if ( 'smart-search-update-to-pro' === filter_input( INPUT_GET, 'page', FILTER_SANITIZE_STRING ) ) {
+			wp_redirect( 'https://yummywp.com/plugins/smart-woocommerce-search/#smart-search-compare' );
+			die;
+		}
 	}
 }
 
@@ -186,155 +203,7 @@ if ( ! function_exists( 'ysm_enqueue_scripts' ) ) {
 				$localized[ $js_pref . 'layout' ] = 'product';
 			}
 
-			/* input styles */
-
-			if ( isset( $v['settings']['input_border_color'] ) ) {
-				Ysm_Style_Generator::add_rule( $css_id, array(
-					'selectors' => array(
-						'.search-field[type="search"]',
-					),
-					'props'     => array(
-						'border-color' => $v['settings']['input_border_color'],
-					),
-				) );
-			}
-
-			if ( ! empty( $v['settings']['input_border_width'] ) ) {
-				Ysm_Style_Generator::add_rule( $css_id, array(
-					'selectors' => array(
-						'.search-field[type="search"]',
-					),
-					'props'     => array(
-						'border-width' => intval( $v['settings']['input_border_width'] ) . 'px',
-					),
-				) );
-			}
-
-			if ( isset( $v['settings']['input_text_color'] ) ) {
-				Ysm_Style_Generator::add_rule( $css_id, array(
-					'selectors' => array(
-						'.search-field[type="search"]',
-					),
-					'props'     => array(
-						'color' => $v['settings']['input_text_color'],
-					),
-				) );
-			}
-
-			if ( ! empty( $v['settings']['input_bg_color'] ) ) {
-				Ysm_Style_Generator::add_rule( $css_id, array(
-					'selectors' => array(
-						'.search-field[type="search"]',
-					),
-					'props'     => array(
-						'background-color' => $v['settings']['input_bg_color'],
-					),
-				) );
-			}
-
-			if ( isset( $v['settings']['input_icon_color'] ) ) {
-				Ysm_Style_Generator::add_rule( $css_id, array(
-					'selectors' => array(
-						'.search-submit',
-					),
-					'props'     => array(
-						'color' => $v['settings']['input_icon_color'],
-					),
-				) );
-			}
-
-			/* popup styles */
-
-			if ( isset( $v['settings']['popup_thumb_size'] ) ) {
-				$th_size = (int) $v['settings']['popup_thumb_size'];
-				Ysm_Style_Generator::add_rule( $css_id, array(
-					'selectors' => array(
-						'.smart-search-suggestions .smart-search-post-icon',
-					),
-					'props'     => array(
-						'width' => ! empty( $th_size ) ? $th_size . 'px' : '100%',
-					),
-				) );
-			}
-
-			if ( isset( $v['settings']['popup_border_color'] ) ) {
-				Ysm_Style_Generator::add_rule( $css_id, array(
-					'selectors' => array(
-						'.smart-search-suggestions',
-					),
-					'props'     => array(
-						'border-color' => $v['settings']['popup_border_color'],
-					),
-				) );
-			}
-
-			if ( isset( $v['settings']['popup_bg_color'] ) ) {
-				Ysm_Style_Generator::add_rule( $css_id, array(
-					'selectors' => array(
-						'.smart-search-suggestions',
-					),
-					'props'     => array(
-						'background-color' => $v['settings']['popup_bg_color'],
-					),
-				) );
-			}
-
-			if ( isset( $v['settings']['popup_title_text_color'] ) ) {
-				Ysm_Style_Generator::add_rule( $css_id, array(
-					'selectors' => array(
-						'.smart-search-post-title',
-					),
-					'props'     => array(
-						'color' => $v['settings']['popup_title_text_color'],
-					),
-				) );
-			}
-
-			if ( isset( $v['settings']['popup_desc_text_color'] ) ) {
-				Ysm_Style_Generator::add_rule( $css_id, array(
-					'selectors' => array(
-						'.smart-search-post-excerpt',
-					),
-					'props'     => array(
-						'color' => $v['settings']['popup_desc_text_color'],
-					),
-				) );
-			}
-
-			if ( isset( $v['settings']['popup_price_text_color'] ) ) {
-				Ysm_Style_Generator::add_rule( $css_id, array(
-					'selectors' => array(
-						'.smart-search-post-price',
-						'.smart-search-post-price .woocommerce-Price-amount',
-						'.smart-search-post-price .woocommerce-Price-currencySymbol',
-					),
-					'props'     => array(
-						'color' => $v['settings']['popup_price_text_color'],
-					),
-				) );
-			}
-
-			if ( isset( $v['settings']['popup_view_all_link_text_color'] ) ) {
-				Ysm_Style_Generator::add_rule( $css_id, array(
-					'selectors' => array(
-						'.smart-search-view-all',
-					),
-					'props'     => array(
-						'color' => $v['settings']['popup_view_all_link_text_color'],
-					),
-				) );
-			}
-
-			if ( isset( $v['settings']['popup_view_all_link_bg_color'] ) ) {
-				Ysm_Style_Generator::add_rule( $css_id, array(
-					'selectors' => array(
-						'.smart-search-view-all',
-					),
-					'props'     => array(
-						'background-color' => $v['settings']['popup_view_all_link_bg_color'],
-					),
-				) );
-			}
+			ysm_add_inline_styles_to_stack( $v, $css_id );
 		}
 
 		wp_localize_script( 'smart-search-general', 'ysm_L10n', $localized );
@@ -451,6 +320,34 @@ if ( ! function_exists( 'ysm_change_admin_footer_text' ) ) {
 	}
 	add_filter( 'admin_footer_text', 'ysm_change_admin_footer_text', 1 );
 }
+
+/**
+ * Add plugin action links
+ * @param $links
+ * @return array
+ */
+if ( ! function_exists( 'ysm_plugin_action_links' ) ) {
+	function ysm_plugin_action_links( $links ) {
+		$links[] = sprintf( '<a href="%s">%s</a>', admin_url( 'admin.php?page=smart-search' ), __( 'Settings', 'smart_search' ) );
+		$links[] = sprintf( '<a href="%s" target="_blank" class="ysm-update-to-pro-link">%s</a>', 'https://yummywp.com/plugins/smart-woocommerce-search/#smart-search-compare', __( 'Update to Pro', 'smart_search' ) );
+
+		return $links;
+	}
+	add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), 'ysm_plugin_action_links' );
+}
+
+function ysm_admin_head() {
+	?>
+	<style>
+		.ysm-update-to-pro-link,
+		#toplevel_page_smart-search a[href="admin.php?page=smart-search-update-to-pro"] {
+			color: red;
+			font-weight: bold;
+		}
+	</style>
+	<?php
+}
+add_filter( 'admin_head', 'ysm_admin_head' );
 
 /**
  * Init Search

@@ -178,7 +178,7 @@ class Ysm_Search {
 
 		if ( $query->is_main_query() && ! is_admin() && ! empty( $query->query_vars['s'] ) && ! empty( $s ) && ! ( defined( 'DOING_AJAX' ) && DOING_AJAX ) ) {
 
-			$w_id = ! empty( $_GET['search_id'] ) ? sanitize_text_field( $_GET['search_id'] ) : 0;
+			$w_id = filter_input( INPUT_GET, 'search_id', FILTER_SANITIZE_STRING );
 			if ( ! in_array( $w_id, array( 'default', 'product' ), true ) ) {
 				$w_id = (int) $w_id;
 			}
@@ -212,7 +212,8 @@ class Ysm_Search {
 				$query->set( 's', '' );
 				$query->set( 'post__in', $wp_posts );
 
-				if ( empty( $_GET['product_orderby'] ) ) {
+				$product_orderby = filter_input( INPUT_GET, 'product_orderby', FILTER_SANITIZE_STRING );
+				if ( empty( $product_orderby ) ) {
 					$orderby = $query->get( 'orderby' );
 					if ( 'relevance' === $orderby ) {
 						$query->set( 'orderby', 'post__in' );
@@ -226,7 +227,7 @@ class Ysm_Search {
 	 * Remove hook that change posts set on search results page
 	 */
 	public static function remove_search_filter() {
-		if ( ! is_admin() &&  ! empty( $_GET['s'] ) && ! ( defined( 'DOING_AJAX' ) && DOING_AJAX ) ) {
+		if ( ! is_admin() &&  ! empty( filter_input( INPUT_GET, 's', FILTER_SANITIZE_STRING ) ) && ! ( defined( 'DOING_AJAX' ) && DOING_AJAX ) ) {
 			remove_action( 'pre_get_posts', array( __CLASS__, 'search_filter' ), 9999 );
 		}
 	}

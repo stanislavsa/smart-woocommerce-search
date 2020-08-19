@@ -152,6 +152,18 @@ h3.ysm-nav-tab-wrapper {
 	float: right;
 }
 
+.ysm-widget-edit-settings > .handlediv {
+	float: right;
+}
+
+.ysm-widget-edit-settings > .handlediv:after {
+	clear: right;
+}
+
+.ysm-widget-edit-settings > h2 {
+	border-bottom: 1px solid #ccd0d4;
+}
+
 @media only screen and (max-width: 960px) {
 
 	.ysm-column-container {

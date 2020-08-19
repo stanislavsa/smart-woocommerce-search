@@ -2,6 +2,7 @@
 include_once __DIR__ . '/custom/functions.php';
 include_once __DIR__ . '/custom/hooks.php';
 include_once __DIR__ . '/custom/rest.php';
+include_once __DIR__ . '/custom/inline-styles-functions.php';
 include_once __DIR__ . '/custom/query-hooks.php';
 include_once __DIR__ . '/custom/class-ysm-search.php';
 include_once __DIR__ . '/custom/class-ysm-setting.php';

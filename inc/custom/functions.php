@@ -113,12 +113,12 @@ function ysm_get_default_widgets() {
  * @return string
  */
 function ysm_get_s() {
-	$s = '';
-	if ( ! empty( $_GET['woof_text'] ) ) {
-		$s = sanitize_text_field( $_GET['woof_text'] );
-	} elseif ( ! empty( $_GET['s'] ) ) {
-		$s = sanitize_text_field( $_GET['s'] );
+	$s = filter_input( INPUT_GET, 's', FILTER_SANITIZE_STRING );
+	$woof_text = filter_input( INPUT_GET, 'woof_text', FILTER_SANITIZE_STRING );
+	if ( ! empty( $woof_text ) ) {
+		$s = $woof_text;
 	}
+	$s = sanitize_text_field( $s );
 
 	return $s;
 }
