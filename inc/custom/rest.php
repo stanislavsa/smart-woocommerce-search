@@ -11,6 +11,7 @@ function rest_route() {
 	register_rest_route( 'ysm/v1', 'search', array(
 		'methods'  => \WP_REST_Server::READABLE,
 		'callback' => __NAMESPACE__ . '\\handle_request',
+		'permission_callback' => '__return_true',
 		'args'     => array(
 			'query' => array(
 				'required'          => false,

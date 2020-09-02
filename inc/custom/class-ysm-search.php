@@ -318,7 +318,8 @@ class Ysm_Search {
 
 		/* SELECT part */
 		$select = array(
-			"DISTINCT p.ID"
+			"DISTINCT p.ID",
+			"p.post_title",
 		);
 
 		if ( !empty($relevance) ) {
@@ -513,7 +514,7 @@ class Ysm_Search {
 				}
 			}
 
-			$output = '<a href="' . esc_url( get_permalink( $post->ID ) ) . '" class="' . esc_attr( implode( ' ', $post_classes ) ) . '">';
+			$output = '<div class="' . esc_attr( implode( ' ', $post_classes ) ) . '">';
 
 			if ( $image ) {
 				$output .= '<div class="smart-search-post-icon">' . $image . '</div>';
@@ -596,7 +597,7 @@ class Ysm_Search {
 				$output .= '<div class="smart-search-post-excerpt">' . wp_kses_post( $post_excerpt ) . '</div>';
 			}
 
-			$output .= '</a>';
+			$output .= '</div>';
 
 			self::$suggestions[] = array(
 				'value' => esc_js($post->post_title),
