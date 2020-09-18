@@ -201,6 +201,17 @@
 								if ( $this.val().length < options.minChars ) {
 									$results_wrapper.find('.smart-search-view-all-holder').hide();
 								} else {
+									var serviceUrl = options.serviceUrl,
+										cacheKey,
+										that = $this.devbridgeAutocomplete();
+
+									if ( $.isFunction( serviceUrl ) ) {
+										serviceUrl = serviceUrl.call( that.element, query );
+									}
+									cacheKey = serviceUrl + '?' + $.param( { query: query } );
+									if ( that.cachedResponse && that.cachedResponse[cacheKey] ) {
+										$results_wrapper.find( '.smart-search-view-all-holder' ).html( that.cachedResponse[cacheKey].view_all_link );
+									}
 									$results_wrapper.find('.smart-search-view-all-holder').show();
 								}
 							}
