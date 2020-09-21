@@ -187,8 +187,8 @@
             });
 
             // Listen for click event on suggestions list:
-            container.on('click.autocomplete', suggestionSelector, function () {
-                that.select($(this).data('index'));
+            container.on('click.autocomplete', suggestionSelector, function ( e ) {
+                that.select($(this).data('index'), e);
             });
 
             that.fixPositionCapture = function () {
@@ -838,10 +838,12 @@
             that.select(i);
         },
 
-        select: function (i) {
+        select: function (i, e) {
             var that = this;
-            that.hide();
-            that.onSelect(i);
+            if ( !$(e.target).hasClass('smart-search-add_to_cart') ) {
+                that.hide();
+                that.onSelect(i);
+            }
         },
 
         moveUp: function () {

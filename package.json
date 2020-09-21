@@ -14,14 +14,16 @@
   "license": "ISC",
   "homepage": "https://github.com/stanislavsa/smart-woocommerce-search",
   "devDependencies": {
-    "gulp": "^3.9.1",
+    "del": "^3.0.0",
+    "gulp": "github:gulpjs/gulp#4.0",
     "gulp-concat": "^2.6.1",
+    "gulp-sass": "^3.1.0",
     "gulp-uglify": "^2.0.0"
   },
   "bugs": {
     "url": "https://github.com/stanislavsa/smart-woocommerce-search/issues"
   },
   "dependencies": {
-    "pump": "^1.0.3"
+    "pump": "^1.0.2"
   }
 }

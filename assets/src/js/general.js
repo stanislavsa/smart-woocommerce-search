@@ -73,7 +73,9 @@
 			var $this = $(el).find('input[type="search"]').length ? $(el).find('input[type="search"]') : $(el).find('input[type="text"]'),
 				$form = $(el).find('form');
 
-			if (!$this.length) return;
+			if ( ! $this.length ) {
+				return;
+			}
 
 			$(el).addClass('ysm-active');
 

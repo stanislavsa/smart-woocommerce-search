@@ -143,14 +143,14 @@ if ( ! function_exists( 'ysm_display_admin_page_update_to_pro' ) ) {
  */
 if ( ! function_exists( 'ysm_enqueue_scripts' ) ) {
 	function ysm_enqueue_scripts() {
-		wp_enqueue_style( 'smart-search', YSM_URI . 'assets/css/general.css', array(), YSM_VER );
+		wp_enqueue_style( 'smart-search', YSM_URI . 'assets/dist/css/general.css', array(), YSM_VER );
 
 		if ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) {
-			wp_enqueue_script( 'smart-search-autocomplete', YSM_URI . 'assets/js/jquery.autocomplete.js', array( 'jquery' ), false, 1 );
-			wp_enqueue_script( 'smart-search-custom-scroll', YSM_URI . 'assets/js/jquery.nanoscroller.js', array( 'jquery' ), false, 1 );
-			wp_enqueue_script( 'smart-search-general', YSM_URI . 'assets/js/general.js', array( 'jquery' ), time(), 1 );
+			wp_enqueue_script( 'smart-search-autocomplete', YSM_URI . 'assets/src/js/jquery.autocomplete.js', array( 'jquery' ), false, 1 );
+			wp_enqueue_script( 'smart-search-custom-scroll', YSM_URI . 'assets/src/js/jquery.nanoscroller.js', array( 'jquery' ), false, 1 );
+			wp_enqueue_script( 'smart-search-general', YSM_URI . 'assets/src/js/general.js', array( 'jquery' ), time(), 1 );
 		} else {
-			wp_enqueue_script( 'smart-search-general', YSM_URI . 'assets/js/min/main.min.js', array( 'jquery' ), YSM_VER, 1 );
+			wp_enqueue_script( 'smart-search-general', YSM_URI . 'assets/dist/js/main.js', array( 'jquery' ), YSM_VER, 1 );
 		}
 
 		$rest_url = rest_url( 'ysm/v1/search' ) . '?';
@@ -229,9 +229,9 @@ if ( ! function_exists( 'ysm_admin_enqueue_scripts' ) ) {
 		}
 
 		wp_enqueue_style( 'wp-color-picker' );
-		wp_enqueue_style( 'smart-search-admin', YSM_URI . 'assets/css/ysm-admin.css' );
+		wp_enqueue_style( 'smart-search-admin', YSM_URI . 'assets/dist/css/admin.css' );
 		wp_enqueue_script( 'postbox' );
-		wp_enqueue_script( 'smart-search-admin', YSM_URI . 'assets/js/ysm-admin.js', array(
+		wp_enqueue_script( 'smart-search-admin', YSM_URI . 'assets/dist/js/admin.js', array(
 			'jquery',
 			'jquery-ui-core',
 			'jquery-ui-sortable',
@@ -246,6 +246,10 @@ if ( ! function_exists( 'ysm_admin_enqueue_scripts' ) ) {
 			'row_delete'    => __( 'Delete row?', 'smart_search' ),
 			'widget_delete' => __( 'Delete widget?', 'smart_search' ),
 		) );
+
+		// Select2
+		wp_enqueue_style( 'ysrs-select2', YSM_URI . 'assets/dist/css/select2.min.css', array(), YSM_VER );
+		wp_enqueue_script( 'ysrs-select2', YSM_URI . 'assets/dist/js/select2.min.js', array(), YSM_VER, true );
 	}
 	add_action( 'admin_enqueue_scripts', 'ysm_admin_enqueue_scripts' );
 }

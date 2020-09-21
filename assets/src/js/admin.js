@@ -70,26 +70,12 @@
 			return false;
 		});
 
-		/**
-		 * Widget settings tabs
-		 */
-		$('#ysm-widget-settings-nav-wrapper > a').on('click', function(){
-			var id = $(this).attr('href'),
-				holder = $(this).parent('.nav-tab-wrapper');
-
-			holder.find('a').removeClass('nav-tab-active');
-			$(this).addClass('nav-tab-active');
-			holder.parent().find('.ysm-widget-settings-tab').hide();
-			$(id).fadeIn();
-			return false;
+		$('.ymapp-settings__content #loader').on('change', function(){
+			var new_val = $('.ysm-loader-preview').attr('src')
+							.replace(/images\/\S*.gif$/, 'images/' + $(this).val() + '.gif');
+			$('.ysm-loader-preview').attr('src', new_val);
 		});
 
-		/**
-		 * Admin footer text rating
-		 */
-		$('#ysm-rate-plugin').on('click', function(){
-			$(this).parent().text( 'Thank you!' );
-		});
 	});
 
 })(jQuery);

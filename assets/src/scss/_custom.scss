@@ -1,16 +1,6 @@
-/**
- * General
- */
-
-.wrap > h1 {
-	margin-top: 20px;
-}
-
-h1.ysm-nav-tab-wrapper,
-.wrap h2.ysm-nav-tab-wrapper,
-h3.ysm-nav-tab-wrapper {
-	margin-top: 15px;
-	margin-bottom: 15px;
+// plugin styles
+#general_tab {
+	display: block;
 }
 
 .ysm-widget-edit-settings,
@@ -21,10 +11,15 @@ h3.ysm-nav-tab-wrapper {
 
 .ysm-widget-edit-settings h2.hndle,
 .ysm-widget-edit-constructor h2.hndle {
-	font-size: 16px;
+	font-size: 20px;
 	padding: 8px 12px;
 	margin: 0;
 	line-height: 1.6;
+}
+
+.ysm-widget-edit-settings .form-table th {
+	padding-top: 30px;
+	padding-bottom: 30px;
 }
 
 .ysm-column-container {
@@ -41,6 +36,21 @@ h3.ysm-nav-tab-wrapper {
 	margin-top: 25px;
 }
 
+.ysm-widgets-list .dashicons-admin-page:before,
+.ysm-widgets-list .dashicons-trash:before {
+	color: #555;
+	font-size: 24px;
+}
+
+.ysm-widgets-list .dashicons-trash:before {
+	color: red;
+}
+
+.ysm-widget-duplicate,
+.ysm-widget-remove {
+	margin-left: 20px;
+}
+
 .ysm-widgets-list table {
 	width: 100%;
 	border-collapse: collapse;
@@ -53,6 +63,7 @@ h3.ysm-nav-tab-wrapper {
 	padding-left: 10px;
 	padding-right: 10px;
 	vertical-align: middle;
+	text-align: center;
 }
 
 .ysm-widgets-list thead {
@@ -68,7 +79,7 @@ h3.ysm-nav-tab-wrapper {
 }
 
 .ysm-loader {
-	background: url("../images/loader6.gif") no-repeat 50% 50%;
+	background: url("../../images/loader1.gif") no-repeat 50% 50%;
 }
 
 /**
@@ -82,24 +93,9 @@ h3.ysm-nav-tab-wrapper {
 	font-size: 16px;
 }
 
-.ysm-widget-settings-tab .ysm-widget-settings-th {
-	color: #777;
-}
-
 /**
  * Widget Fields
  */
-
-#ysm-widget-settings-nav-wrapper .nav-tab-active {
-	background: #fff;
-	border-bottom: 1px solid #fff;
-}
-
-#ysm-widget-settings-nav-wrapper .nav-tab-active:focus {
-	-webkit-box-shadow: none;
-	-moz-box-shadow: none;
-	box-shadow: none;
-}
 
 .ysm-widget-fields-wrapper {
 	float: left;
@@ -142,38 +138,18 @@ h3.ysm-nav-tab-wrapper {
 	color: #444;
 }
 
-.ysm-wrap-left {
-	width: 80%;
-	float: left;
+#stopwords_tab .repeater-holder {
+	max-width: 400px;
 }
 
-.ysm-wrap-right {
-	width: 20%;
-	float: right;
-}
-
-.ysm-widget-edit-settings > .handlediv {
-	float: right;
-}
-
-.ysm-widget-edit-settings > .handlediv:after {
-	clear: right;
-}
-
-.ysm-widget-edit-settings > h2 {
-	border-bottom: 1px solid #ccd0d4;
-}
+/**
+ * Media
+ */
 
 @media only screen and (max-width: 960px) {
 
 	.ysm-column-container {
 		width: 100% !important;
-	}
-
-	.ysm-wrap-left,
-	.ysm-wrap-right {
-		width: 100%;
-		float: none;
 	}
 
 }
@@ -191,11 +167,11 @@ h3.ysm-nav-tab-wrapper {
 		font-size: 30px;
 	}
 
-    .ysm-column-container {
-        width: 100%;
-    }
+	.ysm-column-container {
+		width: 100%;
+	}
 
-    hr { display: none; }
+	hr { display: none; }
 
 	.ysm-rows-wrapper,
 	.ysm-widget-fields-wrapper {
