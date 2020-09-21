@@ -1,30 +1,30 @@
 <?php
-if ( ! defined('ABSPATH') ) exit;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 wp_enqueue_script( 'postbox' );
 
 $tabs = array(
-	'ysm_w_settings_general' => __( 'General', 'smart_search' ),
-	'ysm_w_settings_fields'  => __( 'Items to Search through', 'smart_search' ),
-	'ysm_w_settings_styles'  => __( 'Styling', 'smart_search' ),
+	'general_tab'    => __( 'General', 'smart_search' ),
+	'fields_tab'     => __( 'Items to Search through', 'smart_search' ),
+	'layout_tab'     => __( 'Layout', 'smart_search' ),
+	'styles_tab'     => __( 'Styling', 'smart_search' ),
+	'spellcheck_tab' => __( 'Spell Correction', 'smart_search' ),
+	'stopwords_tab'  => __( 'Stop Words', 'smart_search' ),
 );
 ?>
 
 <div class="ysm-wrap-left">
 <form method="post" action="" enctype="multipart/form-data">
 
-	<?php if ( $w_id !== 'product' && $w_id !== 'default' ) { ?>
-		<p class="submit" style="float: right;">
-			<input type="submit" value="<?php esc_html_e( 'Save', 'smart_search' ); ?>" name="save" class="button-primary" />
-			<?php
-			if ( $w_id === 'product' || $w_id === 'default' ) {
-				wp_nonce_field( 'smart_search_default' );
-			} else {
-				wp_nonce_field( 'smart_search_custom' );
-			}
-			?>
-		</p>
-	<?php } ?>
+	<input type="submit" value="<?php esc_html_e( 'Save', 'smart_search' ); ?>" name="save" class="ymapp-button ymapp-hide-on-mobile" style="float:right;" />
+
+	<?php
+	if ( $w_id === 'product' || $w_id === 'default' ) {
+		wp_nonce_field( 'smart_search_default' );
+	} else {
+		wp_nonce_field( 'smart_search_custom' );
+	}
+	?>
 
 	<?php
 	if ( $w_id !== 'product' && $w_id !== 'default' ) {
@@ -33,9 +33,14 @@ $tabs = array(
 		<div class="ysm-widget-edit-title-wrap">
 			<input type="text" name="name" size="30" value="<?php echo esc_html( $w_title ); ?>" placeholder="<?php esc_html_e( 'Enter name', 'smart_search' ); ?>" autocomplete="off">
 		</div>
-		<?php
-	}
-	?>
+	<?php } else { ?>
+		<div class="clear"></div>
+		<h2 class="nav-tab-wrapper" id="ymapp-settings__nav">
+			<?php foreach ( $tabs_def as $id => $title ) { ?>
+				<a href="<?php echo esc_url( admin_url( 'admin.php?page=smart-search&type=' . $id ) ); ?>" class="nav-tab<?php echo $current_tab === $id ? ' nav-tab-active' : ''; ?>"><?php echo esc_html( $title ); ?></a>
+			<?php } ?>
+		</h2>
+	<?php } ?>
 
 	<div class="clear"></div>
 
@@ -52,19 +57,23 @@ $tabs = array(
 
 			<div class="inside">
 
-				<h2 class="nav-tab-wrapper" id="ysm-widget-settings-nav-wrapper">
+				<h2 class="nav-tab-wrapper" id="ymapp-settings__nav">
 					<?php foreach ( $tabs as $id => $title ) { ?>
-						<a href="#<?php echo esc_html( $id ); ?>" class="nav-tab<?php echo $id === 'ysm_w_settings_general' ? ' nav-tab-active' : ''; ?>"><?php echo esc_html( $title ); ?></a>
+						<span data-href="#<?php echo esc_html( $id ); ?>" class="nav-tab<?php echo $id === 'general_tab' ? ' nav-tab-active' : ''; ?>"><?php echo esc_html( $title ); ?></span>
 					<?php } ?>
 				</h2>
 
-				<br>
+				<?php include 'admin-page-general-tab.php'; ?>
 
-				<?php require_once __DIR__ . '/admin-page-form-general.php'; ?>
+				<?php include 'admin-page-fields-tab.php'; ?>
 
-				<?php require_once __DIR__ . '/admin-page-form-fields.php'; ?>
+				<?php include 'admin-page-layout-tab.php'; ?>
 
-				<?php require_once __DIR__ . '/admin-page-form-styles.php'; ?>
+				<?php include 'admin-page-styling-tab.php'; ?>
+
+				<?php include 'admin-page-spellcheck-tab.php'; ?>
+
+				<?php include 'admin-page-stopwords-tab.php'; ?>
 
 			</div>
 
@@ -72,15 +81,8 @@ $tabs = array(
 
 	</div>
 
-	<p class="submit">
-		<input type="submit" value="<?php esc_html_e( 'Save', 'smart_search' ); ?>" name="save" class="button-primary" />
-		<?php
-		if ( $w_id === 'product' || $w_id === 'default' ) {
-			wp_nonce_field( 'smart_search_default' );
-		} else {
-			wp_nonce_field( 'smart_search_custom' );
-		}
-		?>
+	<p class="submit" style="float: right;">
+		<input type="submit" value="<?php esc_html_e( 'Save', 'smart_search' ); ?>" name="save" class="ymapp-button" />
 	</p>
 
 </form>
