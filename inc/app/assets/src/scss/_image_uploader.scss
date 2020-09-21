@@ -1,0 +1,65 @@
+/*
+* Image Uploader
+*/
+
+.ymapp-settings__content {
+  .image-uploader {
+    position: relative;
+
+    .image-preview {
+      display: none;
+      position: relative;
+      max-width: 100%;
+      width: 200px;
+    }
+
+    .no-image {
+      line-height: 30px;
+      input {
+        margin-left: 20px;
+      }
+    }
+
+    &.has-image {
+      .image-preview {
+        display: block;
+      }
+      .no-image {
+        display: none;
+      }
+    }
+
+    .image-delete,
+    .image-edit {
+      position: absolute;
+      right: -11px;
+      display: block;
+      height: 30px;
+      width: 30px;
+      border-radius: 17px;
+      box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
+      overflow: hidden;
+      color: #333;
+      background: #fff;
+      border: 1px solid #ccc;
+      padding-top: 1px;
+      padding-left: 1px;
+      cursor: pointer;
+      font-size: 30px;
+      top: -15px;
+    }
+
+    .image-delete {
+      color: red;
+    }
+
+    .image-edit {
+      right: 40px;
+    }
+
+    .image-preview-img {
+      max-width: 100%;
+      max-height: 500px;
+    }
+  }
+}

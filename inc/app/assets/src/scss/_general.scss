@@ -1,0 +1,98 @@
+/**
+ * General
+ */
+.wrap {
+	h1 {
+		margin-top: 30px;
+		margin-bottom: 30px;
+		padding: 0px 0px;
+		background-color: #fff;
+		color: #333;
+		font-size: 26px;
+		font-style: italic;
+		height: 80px;
+		line-height: 80px;
+		border-right: 3px solid $main-color;
+		margin-left: 60px;
+
+		span {
+			display: inline-block;
+			height: 100%;
+			padding: 0 20px;
+			background: $main-color;
+			color: #fff;
+			position: relative;
+		}
+
+		span:before {
+			content: '';
+			width: 0;
+			height: 0;
+			border-bottom: 80px solid $main-color;
+			border-left: 60px solid transparent;
+			position: absolute;
+			top: 0;
+			left: -60px;
+		}
+
+		span:after {
+			content: '';
+			width: 0;
+			height: 0;
+			border-top: 80px solid $main-color;
+			border-right: 60px solid transparent;
+			position: absolute;
+			top: 0;
+			left: 100%;
+		}
+	}
+}
+
+.form-table {
+	th {
+		padding: 22px 10px 18px 0;
+	}
+}
+
+.float__right {
+	float: right;
+}
+
+.float__left {
+	float: left;
+}
+
+/**
+ * Media
+ */
+@media only screen and (max-width: 782px) {
+
+	hr {
+		display: none;
+	}
+
+	.ymapp-hide-on-mobile {
+		display: none;
+	}
+}
+
+@media only screen and (max-width: 400px) {
+
+	.wrap {
+		h1 {
+			margin-left: 0;
+			border-right: none;
+			height: auto;
+			line-height: 46px;
+
+			span {
+				display: block;
+			}
+
+			span:before,
+			span:after {
+				display: none;
+			}
+		}
+	}
+}

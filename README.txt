@@ -1,7 +1,7 @@
 === Smart WooCommerce Search ===
 Contributors: yummy-wp
 Tags: woocommerce search, ajax search, woocommerce, genesis, elementor, divi, avada, enfold, filters, product filter, woo search, relevanssi, jetpack, woocommerce search by sku, woocommerce search shortcod, product search, product filter, woocommerce search results, instant search, woocommerce search plugin, woocommerce search form, search for woocommerce, woocommerce search page, search, woocommerce product search, search woocommerce, shop, shop search, autocomplete, autosuggest, search for wp, search for wordpress, search plugin, woocommerce search by sku, search results,  woocommerce search shortcode, search products, search autocomplete, woocommerce advanced search, woocommerce predictive search, woocommerce live search, woocommerce single product, woocommerce site search, products, shop, category search, custom search, predictive search, relevant search, search product, woocommerce plugin, yith, woof, wp search, wordpress search
-Stable tag: 1.6.3
+Stable tag: 2.0.0
 Requires at least: 4.2
 Tested up to: 5.5
 Requires PHP: 5.4
@@ -114,8 +114,11 @@ In example used widget with ID = 1, so don't forget to change widget ID to neede
 
 == Changelog ==
 
-= 1.6.3 =
-* Fixed: View All button
+= 2.0.0 =
+* Database queries optimization
+* Code optimization
+* UI improvements
+* Fixed: View All button link
 
 = 1.6.2 =
 * Tweaks: WooCommerce 4.4 compatibility

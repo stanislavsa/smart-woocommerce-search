@@ -1,0 +1,56 @@
+/**
+ * Buttons
+ */
+.ymapp-button,
+.ymapp-button-small {
+	display: inline-block;
+	padding: 16px 30px;
+	margin-left: 30px;
+	margin-right: 0px;
+	font-size: 20px;
+	height: 50px;
+	line-height: 15px;
+	text-transform: uppercase;
+	-webkit-border-radius: 1px;
+	-moz-border-radius: 1px;
+	border-radius: 1px;
+	border: 1px solid $button-bg-color;
+	background: $button-bg-color;
+	color: #fff;
+	vertical-align: top;
+	text-decoration: none;
+	cursor: pointer;
+	-webkit-appearance: none;
+	white-space: nowrap;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+.ymapp-button:hover,
+.ymapp-button:focus,
+.ymapp-button-small:hover,
+.ymapp-button-small:focus {
+	background: $button-hover-bg-color;
+	border-color: $button-hover-bg-color;
+	color: #fff;
+}
+
+.ymapp-button-small {
+	padding: 5px 20px;
+	line-height: 22px;
+	font-size: 14px;
+	height: 36px;
+}
+
+.ymapp-button-grey {
+	background: $button-grey-bg-color;
+	border-color: $button-grey-bg-color;
+}
+
+.ymapp-button-grey:hover,
+.ymapp-button-grey:focus {
+	background: $button-grey-hover-bg-color;
+	border-color: $button-grey-hover-bg-color;
+	color: #fff;
+}

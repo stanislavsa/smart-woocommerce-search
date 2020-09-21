@@ -1,0 +1,46 @@
+/*
+* Repeater
+*/
+
+.ymapp-settings__content {
+  .repeater-holder {
+
+    li {
+      border-left: 50px solid #eee;
+      border-right: 50px solid #eee;
+      border-bottom: 1px solid #eee;
+      border-top: 1px solid #eee;
+      position: relative;
+      max-width: 700px;
+      display: inline-block;
+
+      label {
+        display: inline-block;
+        padding: 2px 20px;
+      }
+
+      .repeater-move,
+      .repeater-delete {
+        position: absolute;
+        top: 50%;
+        margin-top: -10px;
+        width: 50px;
+        height: 100%;
+        font-size: 20px;
+        line-height: 20px;
+      }
+
+      .repeater-move {
+        left: -50px;
+        cursor: move;
+      }
+
+      .repeater-delete {
+        right: -50px;
+        font-size: 22px;
+        line-height: 22px;
+        color: red;
+      }
+    }
+  }
+}
