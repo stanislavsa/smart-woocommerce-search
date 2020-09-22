@@ -1,5 +1,4 @@
-<div id="ysm_w_settings_general" class="ysm-widget-settings-tab">
-
+<div id="general_tab" class="ymapp-settings__content">
 	<table class="form-table">
 		<tbody>
 
@@ -27,7 +26,7 @@
 				'type' => 'text',
 				'title' => __('Placeholder', 'smart_search'),
 				'description' => __('Placeholder in search input', 'smart_search'),
-				'value' => _x('Search &hellip;', 'placeholder', 'smart_search'),
+				'value' => _x( 'Search &hellip;', 'placeholder', 'smart_search' ),
 			));
 		}
 
@@ -45,6 +44,32 @@
 			'value' => 3,
 		));
 
+		ysm_setting( $w_id, 'no_results_text', array(
+			'type' => 'text',
+			'title' => __('"No Results" text', 'smart_search'),
+			'description' => __('If not empty displays when no results returned', 'smart_search'),
+			'value' => 'No Results',
+		));
+
+		ysm_setting( $w_id, 'excerpt_symbols_count', array(
+			'type' => 'text',
+			'title' => __('Excerpt Symbols Amount', 'smart_search'),
+			'description' => __('Maximum number of symbols for description in results', 'smart_search'),
+			'value' => '50',
+		));
+
+		ysm_setting( $w_id, 'view_all_link_text', array(
+			'type' => 'text',
+			'title' => __('"View all" Link Text', 'smart_search'),
+			'description' => __('If not empty displays a link at the bottom of results popup', 'smart_search'),
+			'value' => 'View all',
+		));
+
+		ysm_setting( $w_id, 'view_all_link_found_posts', array(
+			'type'        => 'pro',
+			'title'       => __( 'Number of Found Posts in the "View all" Link', 'smart_search' ),
+		));
+
 		ysm_setting( $w_id, 'search_page_default_output', array(
 			'type' => 'checkbox',
 			'title' => __('Default Output on Search Page', 'smart_search'),
@@ -57,55 +82,6 @@
 			'title' => __('Search Page Layout with Posts', 'smart_search'),
 			'description' => __("Display posts with products using theme search results layout.<br>Usefull if you want to display posts with products.<br>By default if 'Search in Products' option selected only products displays using WooCommerce search results layout", 'smart_search'),
 			'value' => 0,
-		));
-
-		ysm_setting( $w_id, 'no_results_text', array(
-			'type' => 'text',
-			'title' => __('"No Results" text', 'smart_search'),
-			'description' => __('If not empty displays when no results returned', 'smart_search'),
-			'value' => __( 'No Results', 'smart_search' ),
-		));
-
-		ysm_setting( $w_id, 'display_icon', array(
-			'type' => 'checkbox',
-			'title' => __('Display Image', 'smart_search'),
-			'description' => __('Display featured image in results output', 'smart_search'),
-			'value' => 1,
-		));
-
-		ysm_setting( $w_id, 'display_excerpt', array(
-			'type' => 'checkbox',
-			'title' => __('Display Excerpt', 'smart_search'),
-			'description' => __('Display excerpt in results output', 'smart_search'),
-			'value' => 1,
-		));
-
-		ysm_setting( $w_id, 'excerpt_symbols_count', array(
-			'type' => 'text',
-			'title' => __('Excerpt Symbols Amount', 'smart_search'),
-			'description' => __('Maximum number of symbols for description in results', 'smart_search'),
-			'value' => '50',
-		));
-
-		ysm_setting( $w_id, 'display_price', array(
-			'type' => 'checkbox',
-			'title' => __('Display Price', 'smart_search'),
-			'description' => __('Display product price', 'smart_search'),
-			'value' => 1,
-		));
-
-		ysm_setting( $w_id, 'display_sku', array(
-			'type' => 'checkbox',
-			'title' => __('Display SKU', 'smart_search'),
-			'description' => __('Display product SKU', 'smart_search'),
-			'value' => 1,
-		));
-
-		ysm_setting( $w_id, 'view_all_link_text', array(
-			'type' => 'text',
-			'title' => __('"View all" Link Text', 'smart_search'),
-			'description' => __('If not empty displays a link at the bottom of results popup', 'smart_search'),
-			'value' => __('View all', 'smart_search'),
 		));
 
 		ysm_setting( $w_id, 'accent_words_on_search_page', array(
@@ -126,9 +102,41 @@
 				'2' => __('"alpha" AND "beta"', 'smart_search'),
 			),
 		));
+
+		ysm_setting( $w_id, 'exclude_out_of_stock_products', array(
+			'type' => 'checkbox',
+			'title' => __('Exclude "Out of stock"', 'smart_search'),
+			'description' => __('Exclude "Out of stock" products from results', 'smart_search'),
+			'value' => 0,
+		));
+
+		ysm_setting( $w_id, 'product_variation_visibility', array(
+			'type'  => 'pro',
+			'title' => __('Visibility of Variable Products', 'smart_search'),
+		));
+
+		ysm_setting( $w_id, 'select_limit', array(
+			'type'  => 'pro',
+			'title' => __('Select Limit for DB Query', 'smart_search'),
+		));
+
+		ysm_setting( $w_id, 'enable_transient', array(
+			'type'  => 'pro',
+			'title' => __('Enable Transient', 'smart_search'),
+		));
+
+		ysm_setting( $w_id, 'search_sku_first', array(
+			'type'  => 'pro',
+			'title' => __('SKU Search Top Priority', 'smart_search'),
+		));
+
+		ysm_setting( $w_id, 'skip_punctuation', array(
+			'type'  => 'pro',
+			'title' => __('Skip Punctuation', 'smart_search'),
+		));
+
 		?>
 
 		</tbody>
 	</table>
-
 </div>

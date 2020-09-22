@@ -1,11 +1,10 @@
-<div id="ysm_w_settings_styles" class="ysm-widget-settings-tab" style="display: none">
-
+<div id="styles_tab" class="ymapp-settings__content">
 	<table class="form-table">
 		<tbody>
 
 		<?php if ( $w_id !== 'default' && $w_id !== 'product' ) { ?>
 
-			<th class="ysm-widget-settings-th"><?php esc_html_e( 'Input Field', 'smart_search' ); ?></th>
+			<th class="ymapp-settings__title"><?php esc_html_e( 'Input Field', 'smart_search' ); ?></th>
 
 			<?php
 			ysm_setting( $w_id, 'input_round_border', array(
@@ -49,20 +48,27 @@
 				'description' => __('Search field icon color', 'smart_search'),
 				'value' => '',
 			));
+
+			ysm_setting( $w_id, 'input_icon_bg', array(
+				'type'  => 'pro',
+				'title' => __( 'Icon Background', 'smart_search' ),
+			));
+
+			$cur_loader = ysm_get_option($w_id, 'loader');
+			if ( is_array( $cur_loader ) ) {
+				$cur_loader = $cur_loader[0];
+			}
+			ysm_setting( $w_id, 'loader', array(
+				'type'  => 'pro',
+				'title' => __( 'Loader', 'smart_search' ),
+			));
 			?>
 
 		<?php } ?>
 
-		<th class="ysm-widget-settings-th"><?php esc_html_e( 'Results Popup Elements', 'smart_search' ); ?></th>
+		<th class="ymapp-settings__title"><?php esc_html_e( 'Results Popup Elements', 'smart_search' ); ?></th>
 
 		<?php
-		ysm_setting( $w_id, 'popup_thumb_size', array(
-			'type' => 'text',
-			'title' => __('Image Size', 'smart_search'),
-			'description' => __('Search results featured image size (px)', 'smart_search'),
-			'value' => '50',
-		));
-
 		ysm_setting( $w_id, 'popup_border_color', array(
 			'type' => 'color',
 			'title' => __('Border Color', 'smart_search'),
@@ -91,25 +97,6 @@
 			'value' => '',
 		));
 
-		ysm_setting( $w_id, 'popup_desc_pos', array(
-			'type' => 'select',
-			'title' => __('Excerpt Position', 'smart_search'),
-			'description' => __('Excerpt position in results popup', 'smart_search'),
-			'value' => '',
-			'choices' => array(
-				'below_image' => __('Below image', 'smart_search'),
-				'below_title' => __('Below title', 'smart_search'),
-				'below_price' => __('Below price and SKU', 'smart_search'),
-			),
-		));
-
-		ysm_setting( $w_id, 'popup_price_text_color', array(
-			'type' => 'color',
-			'title' => __('Price Color', 'smart_search'),
-			'description' => __('Price text color in results popup', 'smart_search'),
-			'value' => '',
-		));
-
 		ysm_setting( $w_id, 'popup_view_all_link_text_color', array(
 			'type' => 'color',
 			'title' => __('"View all" Link Text Color', 'smart_search'),
@@ -125,7 +112,48 @@
 		));
 		?>
 
+		<th class="ymapp-settings__title"><?php esc_html_e( 'Product Elements', 'smart_search' ); ?></th>
+
+		<?php
+		ysm_setting( $w_id, 'popup_price_text_color', array(
+			'type' => 'color',
+			'title' => __('Price Color', 'smart_search'),
+			'description' => __('Price text color in results popup', 'smart_search'),
+			'value' => '',
+		));
+
+		ysm_setting( $w_id, 'popup_out_of_stock_label_text_color', array(
+			'type'  => 'pro',
+			'title' => __('"Out of stock" Label Color', 'smart_search'),
+		));
+
+		ysm_setting( $w_id, 'popup_out_of_stock_label_bg_color', array(
+			'type'  => 'pro',
+			'title' => __('"Out of stock" Label Background Color', 'smart_search'),
+		));
+
+		ysm_setting( $w_id, 'popup_sale_label_text_color', array(
+			'type'  => 'pro',
+			'title' => __('"Sale" Label Color', 'smart_search'),
+		));
+
+		ysm_setting( $w_id, 'popup_sale_label_bg_color', array(
+			'type'  => 'pro',
+			'title' => __('"Sale" Label Background Color', 'smart_search'),
+		));
+
+		ysm_setting( $w_id, 'popup_featured_label_text_color', array(
+			'type'  => 'pro',
+			'title' => __('"Featured" Label Color', 'smart_search'),
+		));
+
+		ysm_setting( $w_id, 'popup_featured_label_bg_color', array(
+			'type'  => 'pro',
+			'title' => __('"Featured" Label Background Color', 'smart_search'),
+		));
+
+		?>
+
 		</tbody>
 	</table>
-
 </div>
