@@ -148,7 +148,7 @@ class Ysm_Custom_Widget_Manager {
 	 * @param $id
 	 */
 	public function duplicate( $id ) {
-		$w_id = filter_input( INPUT_POST, 'id', FILTER_SANITIZE_INT );
+		$w_id = filter_input( INPUT_POST, 'id', FILTER_SANITIZE_STRING );
 		$action = filter_input( INPUT_POST, 'action', FILTER_SANITIZE_STRING );
 
 		if ( $action ) {
@@ -185,7 +185,7 @@ class Ysm_Custom_Widget_Manager {
 	 * @param $id
 	 */
 	public function remove( $id ) {
-		$w_id = filter_input( INPUT_POST, 'id', FILTER_SANITIZE_INT );
+		$w_id = filter_input( INPUT_POST, 'id', FILTER_SANITIZE_STRING );
 		$action = filter_input( INPUT_POST, 'action', FILTER_SANITIZE_STRING );
 		if ( $action ) {
 			$id = (int) $w_id;

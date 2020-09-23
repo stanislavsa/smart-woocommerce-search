@@ -13,7 +13,6 @@ $tabs = array(
 );
 ?>
 
-<div class="ysm-wrap-left">
 <form method="post" action="" enctype="multipart/form-data">
 
 	<input type="submit" value="<?php esc_html_e( 'Save', 'smart_search' ); ?>" name="save" class="ymapp-button ymapp-hide-on-mobile" style="float:right;" />
@@ -86,7 +85,5 @@ $tabs = array(
 	</p>
 
 </form>
-</div>
-<div class="ysm-wrap-right">
-	<?php include_once __DIR__ . '/promo/promo-banners.php'; ?>
-</div>
+
+<?php include_once __DIR__ . '/promo/promo-banners.php'; ?>

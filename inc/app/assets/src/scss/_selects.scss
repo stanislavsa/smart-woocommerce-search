@@ -2,8 +2,14 @@
  * Selects
  */
 .ymapp-settings__content select {
-  width: 200px;
+  width: 200px !important;
 }
-.ymapp-settings__content .select2-container {
+.select2-container {
   min-width: 200px;
+}
+.select2-container input{
+  min-width: 180px;
+}
+.select2-dropdown {
+  z-index: 999999 !important;
 }

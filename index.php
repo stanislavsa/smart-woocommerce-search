@@ -101,8 +101,8 @@ if ( ! function_exists( 'ysm_add_menu_page' ) ) {
 		);
 
 		add_submenu_page( 'smart-search',
-			__( 'Update to Pro', 'smart_search' ),
-			__( 'Update to Pro', 'smart_search' ),
+			__( 'Upgrade to Pro', 'smart_search' ),
+			__( 'Upgrade to Pro', 'smart_search' ),
 			'manage_options',
 			'smart-search-update-to-pro',
 			'ysm_display_admin_page_update_to_pro'
@@ -334,7 +334,7 @@ if ( ! function_exists( 'ysm_change_admin_footer_text' ) ) {
 if ( ! function_exists( 'ysm_plugin_action_links' ) ) {
 	function ysm_plugin_action_links( $links ) {
 		$links[] = sprintf( '<a href="%s">%s</a>', admin_url( 'admin.php?page=smart-search' ), __( 'Settings', 'smart_search' ) );
-		$links[] = sprintf( '<a href="%s" target="_blank" class="ysm-update-to-pro-link">%s</a>', 'https://yummywp.com/plugins/smart-woocommerce-search/#smart-search-compare', __( 'Update to Pro', 'smart_search' ) );
+		$links[] = sprintf( '<a href="%s" target="_blank" class="ysm-update-to-pro-link">%s</a>', 'https://yummywp.com/plugins/smart-woocommerce-search/#smart-search-compare', __( 'Upgrade to Pro', 'smart_search' ) );
 
 		return $links;
 	}
