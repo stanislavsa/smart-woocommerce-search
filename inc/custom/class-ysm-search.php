@@ -454,7 +454,7 @@ class Ysm_Search {
 	    $url = add_query_arg( array( 's' => $param, 'search_id' => self::get_widget_id() ), home_url('/') );
 
 		if ( ! self::get_var( 'search_page_layout_posts' ) ) {
-			if ( 'product' === self::get_widget_id() || self::get_post_types( 'product' ) ) {
+			if ( self::get_post_types( 'product' ) ) {
 				$url = add_query_arg( array( 'post_type' => 'product' ), $url );
 			}
 		}

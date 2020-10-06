@@ -204,7 +204,7 @@ class Ysm_DB {
 		global $wpdb;
 
 		if ( false !== strpos( $where, 'ysm-meta-query-placeholder' ) ) {
-			$where = preg_replace( '@([a-z0-9_-]+)?\.meta_value LIKE \'({[^}]*})?ysm-meta-query-placeholder({[^}]*})?\'@', '( ' . self::make_like_query( 'lower($1.meta_value)' ) . ' ) ', $where );
+			$where = preg_replace( '@(\S+)?\.meta_value LIKE \'({[^}]*})?ysm-meta-query-placeholder({[^}]*})?\'@', '( ' . self::make_like_query( 'lower($1.meta_value)' ) . ' ) ', $where );
 		}
 
 		// where OR

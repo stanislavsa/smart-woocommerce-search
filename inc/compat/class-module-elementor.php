@@ -99,7 +99,7 @@ class Elementor_Smart_Search_Widget extends \Elementor\Widget_Base {
 		}
 
 		$this->add_control(
-			'id',
+			'ysm_widget_id',
 			[
 				'label' => __( 'Select one of search widgets', 'smart_search' ),
 				'type' => \Elementor\Controls_Manager::SELECT,
@@ -123,9 +123,13 @@ class Elementor_Smart_Search_Widget extends \Elementor\Widget_Base {
 
 		$settings = $this->get_settings_for_display();
 
-		if ( ! empty( $settings['id'] ) ) {
+		if ( empty( $settings['ysm_widget_id'] ) && ! empty( $settings['id'] ) ) {
+			$settings['ysm_widget_id'] = $settings['id'];
+		}
+
+		if ( ! empty( $settings['ysm_widget_id'] ) ) {
 			echo '<div class="smart_search-elementor-widget">';
-			echo do_shortcode( sprintf( '[smart_search id="%s"]', $settings['id'] ) );
+			echo do_shortcode( sprintf( '[smart_search id="%s"]', $settings['ysm_widget_id'] ) );
 			echo '</div>';
 		}
 	}
