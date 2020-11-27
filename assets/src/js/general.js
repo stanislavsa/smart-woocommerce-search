@@ -178,18 +178,27 @@
 				},
 				onSearchComplete: function (query, suggestions) {
 
-					$this.css('background-image', 'none');
+					$this.css( 'background-image', 'none' );
 
-					if (suggestions.length > 0) {
+					if ( suggestions.length > 0 ) {
 
-						$results_wrapper.parents('.ysm-active').removeClass( 'ysm-hide' );
+						$results_wrapper.parents( '.ysm-active' ).removeClass( 'ysm-hide' );
 
-						setTimeout( function(){
-							var content = $results_wrapper.find('.smart-search-suggestions'),
-								maxHeight = parseInt($results_wrapper.css("max-height"), 10),
-								contentEl = content[0];
+						setTimeout( function() {
+							var content = $results_wrapper.find( '.smart-search-suggestions' ),
+								maxHeight = parseInt( $results_wrapper.css( "max-height" ), 10 ),
+								contentEl = content[0],
+								contentElChildren = $( contentEl ).find( '.autocomplete-suggestion' ),
+								contentElHeight = 0,
+								viewAllButton = $results_wrapper.find( '.smart-search-view-all-holder' );
 
-							$results_wrapper.height(contentEl.scrollHeight > maxHeight ? maxHeight : contentEl.scrollHeight);
+							if ( contentElChildren.length ) {
+								contentElChildren.each(function () {
+									contentElHeight += this.scrollHeight + parseInt( $( this ).css( 'borderBottomWidth' ), 10 );
+								});
+								contentElHeight += parseInt( $( contentEl ).css( 'borderTopWidth' ), 10 ); // border top of .smart-search-suggestions
+								contentElHeight += parseInt( $( contentEl ).css( 'borderBottomWidth' ), 10 ); // border bottom of .smart-search-suggestions
+							}
 
 							$results_wrapper.nanoScroller({
 								contentClass: 'smart-search-suggestions',
@@ -197,11 +206,14 @@
 								iOSNativeScrolling: true
 							});
 
-							content.height('auto');
+							$results_wrapper.height( contentElHeight > maxHeight ? maxHeight : contentElHeight );
 
-							if ( $results_wrapper.find('.smart-search-view-all-holder').length ) {
+
+							$( contentEl ).height( 'auto' );
+
+							if ( viewAllButton.length ) {
 								if ( $this.val().length < options.minChars ) {
-									$results_wrapper.find('.smart-search-view-all-holder').hide();
+									viewAllButton.hide();
 								} else {
 									var serviceUrl = options.serviceUrl,
 										cacheKey,
@@ -212,15 +224,15 @@
 									}
 									cacheKey = serviceUrl + '?' + $.param( { query: query } );
 									if ( that.cachedResponse && that.cachedResponse[cacheKey] ) {
-										$results_wrapper.find( '.smart-search-view-all-holder' ).html( that.cachedResponse[cacheKey].view_all_link );
+										viewAllButton.html( that.cachedResponse[cacheKey].view_all_link );
 									}
-									$results_wrapper.find('.smart-search-view-all-holder').show();
+									viewAllButton.show();
 								}
 							}
 
 						}, 50);
 
-					} else if (options.no_results_text.length) {
+					} else if ( options.no_results_text.length ) {
 						$results_wrapper.css({
 							maxHeight: 'auto',
 							height: 42
@@ -229,11 +241,11 @@
 							stop: true
 						});
 
-						$results_wrapper.find('.smart-search-suggestions').height(40);
-						$results_wrapper.find('.smart-search-view-all-holder').hide();
+						$results_wrapper.find( '.smart-search-suggestions' ).height( 40 );
+						$results_wrapper.find( '.smart-search-view-all-holder' ).hide();
 					} else {
-						$results_wrapper.find('.smart-search-suggestions').height(0);
-						$results_wrapper.find('.smart-search-view-all-holder').hide();
+						$results_wrapper.find( '.smart-search-suggestions' ).height( 0 );
+						$results_wrapper.find( '.smart-search-view-all-holder' ).hide();
 					}
 
 				},

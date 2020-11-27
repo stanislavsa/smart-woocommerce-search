@@ -393,7 +393,7 @@ class Ysm_Search {
 			/* title */
 			$post_title = wp_strip_all_tags( get_the_title( $post->ID ) );
 			$post_title = ysm_text_replace( $post_title );
-			$output .=    '<div class="smart-search-post-title">' . wp_kses_post( $post_title ) . '</div>';
+			$output .=    '<div class="smart-search-post-title"><a href="' . esc_url( get_the_permalink( $post->ID ) ) . '">' . wp_kses_post( $post_title ) . '</a></div>';
 
 			if ( ! empty( $post_excerpt ) && 'below_title' === self::get_var( 'popup_desc_pos' ) ) {
 				$output .= '<div class="smart-search-post-excerpt">' . wp_kses_post( $post_excerpt ) . '</div>';
