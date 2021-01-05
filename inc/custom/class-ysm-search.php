@@ -522,8 +522,19 @@ class Ysm_Search {
 				}
 			}
 		}
-		usort( $sorted, array( __CLASS__, 'cmp' ) );
+		usort( $sorted, array( __CLASS__, 'cmp_title' ) );
+		usort( $sorted, array( __CLASS__, 'cmp_relevance' ) );
 		return $sorted;
+	}
+
+	/**
+	 * Compare by title
+	 * @param $a
+	 * @param $b
+	 * @return int
+	 */
+	public static function cmp_title( $a, $b ) {
+		return strcasecmp( $a->post_title, $b->post_title );
 	}
 
 	/**
@@ -532,7 +543,7 @@ class Ysm_Search {
 	 * @param $b
 	 * @return int
 	 */
-	public static function cmp( $a, $b ) {
+	public static function cmp_relevance( $a, $b ) {
 		if ( $a->relevance == $b->relevance ) {
 			return 0;
 		}

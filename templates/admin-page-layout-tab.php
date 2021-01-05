@@ -11,6 +11,12 @@
 			'value' => 1,
 		));
 
+		ysm_setting( $w_id, 'variation_thumb_fallback', array(
+			'type'        => 'pro',
+			'title'       => __( 'Variation Image Fallback', 'smart_search' ),
+			'description' => __( 'Display featured image of the parent variable product if variation does not have a thumbnail', 'smart_search' ),
+		));
+
 		ysm_setting( $w_id, 'popup_thumb_size', array(
 			'type' => 'text',
 			'title' => __('Image Size', 'smart_search'),
