@@ -71,6 +71,7 @@
 }
 
 .ysm-search-widget .search-submit {
+	display: block;
 	position: absolute;
 	top: 1px;
 	right: 1px;
@@ -306,4 +307,12 @@
 .ysm-hide .smart-search-suggestions,
 .ysm-hide .smart-search-view-all-holder {
 	display: none !important;
+}
+
+.ysm-search-widget input[type="search"]::-webkit-search-decoration,
+.ysm-search-widget input[type="search"]::-webkit-search-cancel-button,
+.ysm-search-widget input[type="search"]::-webkit-search-results-button,
+.ysm-search-widget input[type="search"]::-webkit-search-results-decoration {
+	-webkit-appearance: none;
+	display: none;
 }
