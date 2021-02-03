@@ -30,7 +30,6 @@ include_once __DIR__ . '/custom/class-ysm-db.php';
 include_once __DIR__ . '/custom/class-ysm-setting.php';
 include_once __DIR__ . '/custom/class-ysm-message.php';
 include_once __DIR__ . '/custom/class-ysm-widget-manager.php';
-include_once __DIR__ . '/custom/class-ysm-custom-widget-manager.php';
 include_once __DIR__ . '/custom/class-ysm-search-widget.php';
 include_once __DIR__ . '/custom/class-ysm-style-generator.php';
 include_once __DIR__ . '/compat/compat-visual-composer.php';

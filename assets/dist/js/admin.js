@@ -181,7 +181,7 @@
 		 * Widget list actions
 		 */
 
-		$('.ysm-widgets-list').on('click', '.ysm-widget-remove', function(){
+		$('.ysm-custom-widgets-list').on('click', '.ysm-widget-remove', function(){
 			var $td = $(this).parents('td'),
 				id = $(this).data('id');
 
@@ -204,7 +204,7 @@
 			return false;
 		});
 
-		$('.ysm-widgets-list').on('click', '.ysm-widget-duplicate', function(){
+		$('.ysm-custom-widgets-list').on('click', '.ysm-widget-duplicate', function(){
 			var $td = $(this).parents('td'),
 				id = $(this).data('id'),
 				tmpl = wp.template('ysm-widget-list-row');
@@ -224,7 +224,7 @@
 						output = tmpl(data);
 
 					$td.removeClass('ysm-loader');
-					$('.ysm-widgets-list').find('tbody').append(output);
+					$('.ysm-custom-widgets-list').find('tbody').append(output);
 				}
 			}, 'json');
 

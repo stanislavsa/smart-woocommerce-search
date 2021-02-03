@@ -46,7 +46,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 		ysm_setting( $w_id, 'post_type_product_variation', array(
 			'type'  => 'checkbox',
 			'title' => __( 'Search in Variations', 'smart_search' ),
-			'description' => __( 'Enable search through Variable Product Variations', 'smart_search' ),
+			'description' => __( 'Deprecated: Will be available only in PRO version', 'smart_search' ),
 			'value' => 0,
 		));
 		?>
@@ -76,13 +76,13 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 			'excerpt' => 1,
 		);
 
-		foreach ($fields as $id => $field){
+		foreach ( $fields as $id => $field ) {
 
 			ysm_setting( $w_id, 'field_' . $id, array(
 				'type' => 'checkbox',
-				'title' => sprintf( __('Search in %s', 'smart_search'), $field ),
-				'description' => sprintf( __('Enable search through "%s"', 'smart_search'), $field ),
-				'value' => isset($search_in[$id]) ? $search_in[$id] : '',
+				'title' => sprintf(  __('Search in %s', 'smart_search' ), $field ),
+				'description' => 'product_sku' === $id ? __( 'Deprecated: Will be available only in PRO version', 'smart_search' ) : sprintf( __('Enable search through "%s"', 'smart_search'), $field ),
+				'value' => isset( $search_in[$id] ) ? $search_in[$id] : '',
 			));
 
 		}

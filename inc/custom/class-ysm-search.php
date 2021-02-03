@@ -72,7 +72,7 @@ class Ysm_Search {
 
 		$widget_id = self::get_widget_id();
 
-		if ( in_array( $widget_id, array( 'product', 'default' ), true ) ) {
+		if ( in_array( $widget_id, ysm_get_default_widgets_ids(), true ) ) {
 			$widgets = ysm_get_default_widgets();
 		} else {
 			$widgets = ysm_get_custom_widgets();
@@ -179,7 +179,7 @@ class Ysm_Search {
 		if ( $query->is_main_query() && ! is_admin() && ! empty( $query->query_vars['s'] ) && ! empty( $s ) && ! ( defined( 'DOING_AJAX' ) && DOING_AJAX ) ) {
 
 			$w_id = filter_input( INPUT_GET, 'search_id', FILTER_SANITIZE_STRING );
-			if ( ! in_array( $w_id, array( 'default', 'product' ), true ) ) {
+			if ( ! in_array( $w_id, ysm_get_default_widgets_ids(), true ) ) {
 				$w_id = (int) $w_id;
 			}
 
@@ -563,7 +563,7 @@ class Ysm_Search {
 	 * @param $new_widget_id
 	 */
 	public static function set_widget_id( $new_widget_id ) {
-		if ( ! in_array( $new_widget_id, array( 'product', 'default' ), true ) ) {
+		if ( ! in_array( $new_widget_id, ysm_get_default_widgets_ids(), true ) ) {
 			$new_widget_id = (int) $new_widget_id;
 		}
 		self::$w_id = $new_widget_id;

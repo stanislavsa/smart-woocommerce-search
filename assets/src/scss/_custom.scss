@@ -76,21 +76,32 @@
 
 .ysm-widgets-list a {
 	text-decoration: none;
+	font-size: 14px;
 }
 
 .ysm-loader {
-	background: url("../../images/loader1.gif") no-repeat 50% 50%;
+	background: url("../../images/loader6.gif") no-repeat 50% 50%;
+}
+
+h2.ysm-widgets-title {
+	padding: 16px 30px;
+	margin-top: 20px;
+	font-size: 18px;
+	background: #fff;
+	border-bottom: 1px solid #fff;
 }
 
 /**
  * Edit widget
  */
 .ysm-widget-edit-title-wrap > input {
-	width: 350px;
+	width: 450px;
 	max-width: 100%;
-	margin: 20px 0;
-	height: 35px;
-	font-size: 16px;
+	margin: 5px 0 1em 0;
+	height: 45px;
+	font-size: 18px;
+	font-weight: 600;
+	padding: 0 30px;
 }
 
 /**

@@ -6,14 +6,14 @@
  * Tags: woocommerce search, ajax search, woocommerce, woocommerce search by sku, woocommerce search shortcod, product search, product filter, woocommerce search results, instant search, woocommerce search plugin, woocommerce search form, search for woocommerce, woocommerce search page, search, woocommerce product search, search woocommerce, shop, shop search, autocomplete, autosuggest, search for wp, search for WordPress, search plugin, woocommerce search by sku, search results,  woocommerce search shortcode, search products, search autocomplete, woocommerce advanced search, woocommerce predictive search, woocommerce live search, woocommerce single product, woocommerce site search, products, shop, category search, custom search, predictive search, relevant search, search product, woocommerce plugin, posts search, wp search, WordPress search
  * Author:      YummyWP
  * Author URI:  https://yummywp.com
- * Version:     2.0.3
+ * Version:     2.1.0
  * Domain Path: /languages
  * Text Domain: smart_search
  *
  * Requires PHP: 5.4
  *
  * WC requires at least: 3.0
- * WC tested up to: 4.8
+ * WC tested up to: 5.0
  */
 
 if ( ! defined( 'ABSPATH' ) ) exit;
@@ -38,7 +38,7 @@ if ( defined( 'YSM_PRO' ) ) {
  * Define main constants
  */
 if ( ! defined( 'YSM_VER' ) ) {
-	define( 'YSM_VER', 'ysm-2.0.3' );
+	define( 'YSM_VER', 'ysm-2.1.0' );
 }
 
 if ( ! defined( 'YSM_DIR' ) ) {
@@ -77,19 +77,11 @@ if ( ! function_exists( 'ysm_add_menu_page' ) ) {
 		);
 
 		add_submenu_page( 'smart-search',
-			__( 'Default Search Widget Settings', 'smart_search' ),
-			__( 'Default', 'smart_search' ),
+			__( 'Search Widgets', 'smart_search' ),
+			__( 'Widgets', 'smart_search' ),
 			'manage_options',
 			'smart-search',
-			'ysm_display_admin_page_default'
-		);
-
-		add_submenu_page( 'smart-search',
-			__( 'Custom Search Widgets', 'smart_search' ),
-			__( 'Custom Widgets', 'smart_search' ),
-			'manage_options',
-			'smart-search-custom',
-			'ysm_display_admin_page_custom'
+			'ysm_display_admin_page_widgets'
 		);
 
 		add_submenu_page( 'smart-search',
@@ -97,7 +89,7 @@ if ( ! function_exists( 'ysm_add_menu_page' ) ) {
 			__( 'Add New', 'smart_search' ),
 			'manage_options',
 			'smart-search-custom-new',
-			'ysm_display_admin_page_custom_new'
+			'ysm_display_admin_page_widget_new'
 		);
 
 		add_submenu_page( 'smart-search',
@@ -111,21 +103,15 @@ if ( ! function_exists( 'ysm_add_menu_page' ) ) {
 	add_action( 'admin_menu', 'ysm_add_menu_page' );
 }
 
-if ( ! function_exists( 'ysm_display_admin_page_default' ) ) {
-	function ysm_display_admin_page_default() {
-		include_once YSM_DIR . 'templates/admin-page-default.php';
+if ( ! function_exists( 'ysm_display_admin_page_widgets' ) ) {
+	function ysm_display_admin_page_widgets() {
+		include_once YSM_DIR . 'templates/admin-page-widgets.php';
 	}
 }
 
-if ( ! function_exists( 'ysm_display_admin_page_custom' ) ) {
-	function ysm_display_admin_page_custom() {
-		include_once YSM_DIR . 'templates/admin-page-custom.php';
-	}
-}
-
-if ( ! function_exists( 'ysm_display_admin_page_custom_new' ) ) {
-	function ysm_display_admin_page_custom_new() {
-		include_once YSM_DIR . 'templates/admin-page-custom-new.php';
+if ( ! function_exists( 'ysm_display_admin_page_widget_new' ) ) {
+	function ysm_display_admin_page_widget_new() {
+		include_once YSM_DIR . 'templates/admin-page-widget-new.php';
 	}
 }
 
@@ -262,25 +248,16 @@ if ( ! function_exists( 'ysm_change_admin_title' ) ) {
 		$is_smart_search = false;
 		$cur_page = filter_input( INPUT_GET, 'page', FILTER_SANITIZE_STRING );
 
-		if ( $cur_page && 'smart-search-custom' === $cur_page ) {
+		if ( $cur_page && 'smart-search' === $cur_page ) {
 			$action = filter_input( INPUT_GET, 'action', FILTER_SANITIZE_STRING );
 			$id = filter_input( INPUT_GET, 'id', FILTER_SANITIZE_STRING );
 			if ( $action && 'edit' === $action && ! empty( $id ) ) {
 				$is_smart_search = true;
-				$title           = __( 'Edit Custom Search Widget', 'smart_search' );
-			}
-		}
-
-		if ( $cur_page && 'smart-search' === $cur_page ) {
-			$tab = filter_input( INPUT_GET, 'tab', FILTER_SANITIZE_STRING );
-			if ( $tab ) {
-				$tabs = array(
-					'default' => __( 'Default Search', 'smart_search' ),
-					'product' => __( 'Product Search', 'smart_search' ),
-				);
-
-				$is_smart_search = true;
-				$title           = sprintf( __( 'Edit %s Search Widget', 'smart_search' ), $tabs[ $tab ] );
+				if ( ysm_get_default_widgets_names( $id ) ) {
+					$title = sprintf( __( 'Edit Widget: %s', 'smart_search' ), ysm_get_default_widgets_names( $id ) );
+				} else {
+					$title = sprintf( __( 'Edit Widget: %s', 'smart_search' ), $id );
+				}
 			}
 		}
 
@@ -292,7 +269,6 @@ if ( ! function_exists( 'ysm_change_admin_title' ) ) {
 			} else {
 				$admin_title = get_bloginfo( 'name' );
 			}
-
 			$admin_title = sprintf( __( '%1$s &lsaquo; %2$s &#8212; WordPress', 'smart_search' ), $title, $admin_title );
 		}
 
@@ -359,5 +335,4 @@ add_filter( 'admin_head', 'ysm_admin_head' );
  */
 Ysm_Setting::init();
 Ysm_Widget_Manager::init();
-Ysm_Custom_Widget_Manager::init();
 Ysm_Search::init();

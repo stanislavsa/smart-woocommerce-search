@@ -156,6 +156,8 @@
 					if ( trimmed !== this.value ) {
 						return false;
 					}
+					query.query = encodeURIComponent( query.query );
+
 					$this.css({'background-image': 'url(' + options.loaderIcon + ')','background-repeat': 'no-repeat', 'background-position': '50% 50%'});
 				},
 				onSelect        : function (suggestion) {

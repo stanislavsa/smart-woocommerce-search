@@ -1,18 +1,46 @@
 <?php
 /**
+ * Get list of default widgets names
+ * @return array
+ */
+function ysm_get_default_widgets_ids() {
+	return array(
+		'default',
+		'product',
+	);
+}
+
+/**
+ * Get list of default widgets names
+ * @param string $id
+ * @return array|string
+ */
+function ysm_get_default_widgets_names( $id = '' ) {
+	$list = array(
+		'default' => __( 'WordPres Default Search', 'smart_search' ),
+		'product' => __( 'WooCommerce Product Search', 'smart_search' ),
+	);
+
+	if ( $id ) {
+		if ( isset( $list[ $id ] ) ) {
+			return $list[ $id ];
+		} else {
+			return '';
+		}
+	}
+
+	return $list;
+}
+
+/**
  * Get option by $id
  * @param $w_id
  * @param $id
  * @return string|null
  */
 function ysm_get_option( $w_id, $id ) {
-	if ( in_array( $w_id, array( 'default', 'product' ), true ) ) {
-		$manager = Ysm_Widget_Manager::init();
-		$value   = $manager->get( $w_id, $id );
-	} else {
-		$manager = Ysm_Custom_Widget_Manager::init();
-		$value   = $manager->get( $w_id, $id );
-	}
+	$manager = Ysm_Widget_Manager::init();
+	$value   = $manager->get( $w_id, $id );
 
 	return $value;
 }
@@ -70,7 +98,7 @@ function ysm_get_widget_list_row_template( $args ) {
 	$template = '<tr>
 					<td>' . esc_html( $id ) . '</td>
 					<td>
-						<a href="' . esc_url( admin_url( 'admin.php?page=smart-search-custom&action=edit&id=' . $id ) ) . '">
+						<a href="' . esc_url( admin_url( 'admin.php?page=smart-search&action=edit&id=' ) ) . esc_attr( $id ) . '">
 							' . ( ! empty( $args['name'] ) ? esc_html( $args['name'] ) : 'no name' ) . '
 						</a>
 					</td>
@@ -95,8 +123,8 @@ function ysm_get_widget_list_row_template( $args ) {
  * @return array
  */
 function ysm_get_custom_widgets() {
-	$widget_manager = Ysm_Custom_Widget_Manager::init();
-	return $widget_manager->get_all_widgets();
+	$widget_manager = Ysm_Widget_Manager::init();
+	return $widget_manager->get_all_widgets( 'custom' );
 }
 
 /**
@@ -105,7 +133,7 @@ function ysm_get_custom_widgets() {
  */
 function ysm_get_default_widgets() {
 	$widget_manager = Ysm_Widget_Manager::init();
-	return $widget_manager->get_all_widgets();
+	return $widget_manager->get_all_widgets( 'default' );
 }
 
 /**
@@ -118,6 +146,8 @@ function ysm_get_s() {
 	if ( ! empty( $woof_text ) ) {
 		$s = $woof_text;
 	}
+	$s = html_entity_decode( $s );
+	$s = wp_strip_all_tags( $s );
 	$s = sanitize_text_field( $s );
 
 	return $s;
