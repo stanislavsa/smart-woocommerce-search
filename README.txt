@@ -116,6 +116,7 @@ In example used widget with ID = 1, so don't forget to change widget ID to neede
 
 = 2.1.0 =
 * Fixed: special character issue
+* Updated: admin pages structure
 * Compatibility: WooCommerce 5.0
 
 = 2.0.3 =
