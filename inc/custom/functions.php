@@ -21,7 +21,7 @@ function ysm_get_default_widgets_names( $id = '' ) {
 		'product' => __( 'WooCommerce Product Search', 'smart_search' ),
 	);
 
-	if ( $id ) {
+	if ( '' !== $id ) {
 		if ( isset( $list[ $id ] ) ) {
 			return $list[ $id ];
 		} else {

@@ -81,12 +81,14 @@ if ( $action && 'edit' === $action && $id ) {
 				</thead>
 				<tbody>
 				<?php
-				foreach ( $widgets as $id => $widget ) {
-					/* @codingStandardsIgnoreLine */
-					echo ysm_get_widget_list_row_template( array(
-						'id'   => (int) $id,
-						'name' => $widget['name'],
-					) );
+				if ( $widgets ) {
+					foreach ( $widgets as $id => $widget ) {
+						/* @codingStandardsIgnoreLine */
+						echo ysm_get_widget_list_row_template( array(
+							'id'   => (int) $id,
+							'name' => $widget['name'],
+						) );
+					}
 				}
 				?>
 				</tbody>

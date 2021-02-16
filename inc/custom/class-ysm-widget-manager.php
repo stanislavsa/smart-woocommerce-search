@@ -72,6 +72,18 @@ class Ysm_Widget_Manager {
 		/* get widgets and counter */
 		$settings = get_option( $this->wp_option, null );
 
+		if ( ! is_array( $settings ) ) {
+			$settings = array();
+		}
+
+		if ( 'smart_search_default' === $this->wp_option ) {
+			foreach ( ysm_get_default_widgets_ids() as $default_widgets_id ) {
+				if ( ! isset( $settings[ $default_widgets_id ] ) ) {
+					$settings[ $default_widgets_id ] = array();
+				}
+			}
+		}
+
 		if ( isset( $settings['counter'] ) ) {
 			$this->counter = (int) $settings['counter'];
 			unset( $settings['counter'] );
@@ -137,14 +149,21 @@ class Ysm_Widget_Manager {
 	 * @return null|string
 	 */
 	public function get( $w_id, $id ) {
-		if ( ! isset( $this->widgets[ $w_id ] ) ) {
+		if ( ysm_get_default_widgets_names( $w_id ) ) {
+			$wp_option = 'smart_search_default';
+		} else {
+			$wp_option = $this->wp_option;
+		}
+		$settings = get_option( $wp_option, null );
+
+		if ( ! isset( $settings[ $w_id ] ) ) {
 			return null;
 		}
 
-		if ( isset( $this->widgets[ $w_id ]['settings'][ $id ] ) ) {
-			return $this->widgets[ $w_id ]['settings'][ $id ];
+		if ( isset( $settings[ $w_id ]['settings'][ $id ] ) ) {
+			return $settings[ $w_id ]['settings'][ $id ];
 		} else {
-			return '';
+			return null;
 		}
 	}
 
@@ -226,6 +245,10 @@ class Ysm_Widget_Manager {
 			unset( $widgets['counter'] );
 		}
 
+		if ( ! is_array( $widgets ) ) {
+			$widgets = array();
+		}
+
 		return $widgets;
 	}
 
@@ -237,20 +260,21 @@ class Ysm_Widget_Manager {
 			$name = filter_input( INPUT_POST, 'name', FILTER_SANITIZE_STRING );
 			$settings = $this->widgets;
 
-			/* if new widget */
-			if ( ! $this->widget_id ) {
-				$this->widget_id = ++$this->counter;
-			}
-
-			if ( $this->counter ) {
-				$settings['counter'] = $this->counter;
-			}
-
 			if ( ysm_get_default_widgets_names( $this->widget_id ) ) {
 				$settings[ $this->widget_id ] = array(
 					'settings' => ! empty( $_POST['settings'] ) ? (array) $_POST['settings'] : array(),
 				);
 			} else {
+				/* if new widget */
+				if ( ! $this->counter ) {
+					$this->counter = 0;
+				}
+
+				if ( ! $this->widget_id ) {
+					$this->widget_id = ++$this->counter;
+				}
+				$settings['counter'] = $this->counter;
+
 				$settings[ $this->widget_id ] = array(
 					'name' => ! empty( $name ) ? sanitize_text_field( $name ) : '',
 					'settings' => ! empty( $_POST['settings'] ) ? (array) $_POST['settings'] : array(),
