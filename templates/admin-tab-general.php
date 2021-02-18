@@ -1,32 +1,40 @@
 <div id="general_tab" class="ymapp-settings__content">
 	<table class="form-table">
 		<tbody>
-
 		<?php
-		if ( $w_id === 'default' ) {
+		if ( 'default' === $w_id ) {
 			ysm_setting( $w_id, 'enable_search', array(
-				'type' => 'checkbox',
-				'title' => __('Default Search Widget', 'smart_search'),
-				'description' => __('Enable Smart Search in Default Search Widget', 'smart_search'),
-				'value' => 1,
+				'type'        => 'checkbox',
+				'title'       => __( 'Enable Smart Search', 'smart_search' ),
+				'description' => __( 'Extend Default search bar with the Smart Search features.', 'smart_search' ),
+				'value'       => 1,
 			));
 		}
 
-		if ( $w_id === 'product' ) {
+		if ( 'product' === $w_id ) {
 			ysm_setting( $w_id, 'enable_product_search', array(
-				'type' => 'checkbox',
-				'title' => __('Product Search Widget', 'smart_search'),
-				'description' => __('Enable Smart Search in Product Search Widget', 'smart_search'),
-				'value' => 1,
+				'type'        => 'checkbox',
+				'title'       => __( 'Enable Smart Search', 'smart_search' ),
+				'description' => __( 'Extend Product search bar with the Smart Search features.', 'smart_search' ),
+				'value'       => 1,
 			));
 		}
 
-		if ( $w_id !== 'default' && $w_id !== 'product' ) {
+		if ( 'avada' === $w_id ) {
+			ysm_setting( $w_id, 'enable_avada_search', array(
+				'type'        => 'checkbox',
+				'title'       => __( 'Enable Smart Search', 'smart_search' ),
+				'description' => __( 'Extend Avada search bar with the Smart Search features.', 'smart_search' ),
+				'value'       => 1,
+			));
+		}
+
+		if ( ! in_array( $w_id, ysm_get_default_widgets_ids(), true ) ) {
 			ysm_setting( $w_id, 'placeholder', array(
-				'type' => 'text',
-				'title' => __('Placeholder', 'smart_search'),
-				'description' => __('Placeholder in search input', 'smart_search'),
-				'value' => _x( 'Search &hellip;', 'placeholder', 'smart_search' ),
+				'type'        => 'text',
+				'title'       => __( 'Placeholder', 'smart_search' ),
+				'description' => __( 'Placeholder in search input', 'smart_search' ),
+				'value'       => _x( 'Search &hellip;', 'placeholder', 'smart_search' ),
 			));
 		}
 

@@ -4,10 +4,16 @@
  * @return array
  */
 function ysm_get_default_widgets_ids() {
-	return array(
-		'default',
-		'product',
-	);
+	$list = array();
+
+	if ( defined( 'AVADA_VERSION' ) ) {
+		$list[] = 'avada';
+	}
+
+	$list[] = 'product';
+	$list[] = 'default';
+
+	return $list;
 }
 
 /**

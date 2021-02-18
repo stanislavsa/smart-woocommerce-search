@@ -6,7 +6,7 @@
  * Tags: woocommerce search, ajax search, woocommerce, woocommerce search by sku, woocommerce search shortcod, product search, product filter, woocommerce search results, instant search, woocommerce search plugin, woocommerce search form, search for woocommerce, woocommerce search page, search, woocommerce product search, search woocommerce, shop, shop search, autocomplete, autosuggest, search for wp, search for WordPress, search plugin, woocommerce search by sku, search results,  woocommerce search shortcode, search products, search autocomplete, woocommerce advanced search, woocommerce predictive search, woocommerce live search, woocommerce single product, woocommerce site search, products, shop, category search, custom search, predictive search, relevant search, search product, woocommerce plugin, posts search, wp search, WordPress search
  * Author:      YummyWP
  * Author URI:  https://yummywp.com
- * Version:     2.1.1
+ * Version:     2.2.0
  * Domain Path: /languages
  * Text Domain: smart_search
  *
@@ -38,7 +38,7 @@ if ( defined( 'YSM_PRO' ) ) {
  * Define main constants
  */
 if ( ! defined( 'YSM_VER' ) ) {
-	define( 'YSM_VER', 'ysm-2.1.0' );
+	define( 'YSM_VER', 'ysm-2.2.0' );
 }
 
 if ( ! defined( 'YSM_DIR' ) ) {
@@ -143,8 +143,15 @@ if ( ! function_exists( 'ysm_enqueue_scripts' ) ) {
 
 		$localized                          = array();
 		$localized['restUrl']               = $rest_url;
-		$localized['enable_search']         = (int) ysm_get_option( 'default', 'enable_search' );
-		$localized['enable_product_search'] = (int) ysm_get_option( 'product', 'enable_product_search' );
+
+		foreach ( ysm_get_default_widgets_ids() as $default_widget ) {
+			if ( 'default' === $default_widget ) {
+				$localized['enable_search'] = (int) ysm_get_option( 'default', 'enable_search' );
+			} else {
+				$localized[ 'enable_' . $default_widget . '_search' ] = (int) ysm_get_option( $default_widget, 'enable_' . $default_widget . '_search' );
+			}
+		}
+
 		$localized['loader_icon']           = YSM_URI . 'assets/images/loader6.gif';
 
 		$custom_widgets = ysm_get_custom_widgets();
@@ -158,7 +165,10 @@ if ( ! function_exists( 'ysm_enqueue_scripts' ) ) {
 				$js_pref = '';
 			} elseif ( $k === 'product' ) {
 				$css_id  = '.widget_product_search.ysm-active';
-				$js_pref = 'product_';
+				$js_pref = $k . '_';
+			} elseif ( $k === 'avada' ) {
+				$css_id  = '.fusion-search-form.ysm-active';
+				$js_pref = $k . '_';
 			} else {
 				$css_id  = '.ysm-search-widget-' . $k;
 				$js_pref = 'custom_' . $k . '_';

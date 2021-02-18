@@ -98,7 +98,7 @@ class Ysm_Widget_Manager {
 		}
 
 		/* check custom widget id and redirect to 'add new widget' page if wrong id */
-		if ( 'custom-edit' === $this->mode && ! isset( $settings[ $this->widget_id ] ) ) {
+		if ( 'custom-edit' === $this->mode && ! ysm_get_default_widgets_names( $this->widget_id ) && ! isset( $settings[ $this->widget_id ] ) ) {
 			header( 'Location: ' . admin_url( 'admin.php?page=smart-search' ) );
 			exit;
 		}

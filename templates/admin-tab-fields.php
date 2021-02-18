@@ -13,9 +13,9 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 			$post_types = get_post_types( array( 'public' => true ), 'object' );
 
 			$search_in = array(
-				'post' => 1,
+				'post' => 0,
 				'page' => 0,
-				'product' => 0,
+				'product' => 1,
 			);
 
 			foreach ( $post_types as $id => $post_type ) {
@@ -23,8 +23,8 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 				if ( isset( $search_in[ $id ] ) ) {
 					ysm_setting( $w_id, 'post_type_' . $id, array(
 						'type'        => 'checkbox',
-						'title'       => sprintf( __('Search in %s', 'smart_search'), $post_type->label ),
-						'description' => sprintf( __('Enable search through "%s" post type', 'smart_search'), $post_type->labels->singular_name ),
+						'title'       => sprintf( __( 'Search in %s', 'smart_search' ), $post_type->label ),
+						'description' => sprintf( __( 'Enable search through "%s" post type', 'smart_search' ), $post_type->labels->singular_name ),
 						'value'       => $search_in[ $id ],
 					));
 				}

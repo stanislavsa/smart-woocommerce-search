@@ -6,40 +6,47 @@
 
 		if ( ysm_L10n.enable_search == 1 ) {
 
-			var $el = $( '.widget_search' );
-
-			$el.each(function () {
-				var attr = {
+			$( '.widget_search' ).each(function () {
+				ysm_init_autocomplete( this, {
 					id: 'default',
 					serviceUrl: ysm_L10n.restUrl + 'id=default',
 					layout: ysm_L10n['layout'],
 					maxHeight: 400,
 					minChars: ysm_L10n.char_count,
 					no_results_text: ysm_L10n.no_results_text
-				};
-
-				ysm_init_autocomplete( this, attr );
+				} );
 			});
 
 		}
 
 		if ( ysm_L10n.enable_product_search == 1 ) {
 
-			var $el = $( '.woocommerce.widget_product_search' );
-
-			$el.each(function () {
-				var attr = {
+			$( '.woocommerce.widget_product_search' ).each(function () {
+				ysm_init_autocomplete( this, {
 					id: 'product',
 					serviceUrl: ysm_L10n.restUrl + 'id=product',
 					layout: 'product',
 					maxHeight: 400,
 					minChars: ysm_L10n.product_char_count,
 					no_results_text: ysm_L10n.product_no_results_text
-				};
-
-				ysm_init_autocomplete( this, attr );
+				} );
 			});
+		}
 
+		if ( ysm_L10n.enable_avada_search && ysm_L10n.enable_avada_search == 1 ) {
+
+			$( '.fusion-search-form' ).each(function () {
+				ysm_init_autocomplete( this, {
+					id: 'avada',
+					serviceUrl: ysm_L10n.restUrl + 'id=avada',
+					layout: ysm_L10n.avada_layout,
+					maxHeight: ysm_L10n.avada_popup_height,
+					minChars: ysm_L10n.avada_char_count,
+					no_results_text: ysm_L10n.avada_no_results_text,
+					loaderIcon: ysm_L10n.avada_loader_icon,
+					preventBadQueries: ysm_L10n.avada_prevent_bad_queries
+				} );
+			});
 		}
 
 		var $custom_widgets = $( '.ysm-search-widget' );
@@ -71,7 +78,7 @@
 		function ysm_init_autocomplete(el, attr) {
 
 			var $this = $(el).find('input[type="search"]').length ? $(el).find('input[type="search"]') : $(el).find('input[type="text"]'),
-				$form = $(el).find('form');
+				$form = ( el.tagName === 'FORM' || el.tagName === 'form' ) ? $( el ) : $( el ).find( 'form' );
 
 			if ( ! $this.length ) {
 				return;
@@ -157,6 +164,7 @@
 						return false;
 					}
 					query.query = encodeURIComponent( query.query );
+					query.query = query.query.replace( '%20', ' ' );
 
 					$this.css({'background-image': 'url(' + options.loaderIcon + ')','background-repeat': 'no-repeat', 'background-position': '50% 50%'});
 				},
@@ -200,6 +208,10 @@
 								});
 								contentElHeight += parseInt( $( contentEl ).css( 'borderTopWidth' ), 10 ); // border top of .smart-search-suggestions
 								contentElHeight += parseInt( $( contentEl ).css( 'borderBottomWidth' ), 10 ); // border bottom of .smart-search-suggestions
+							}
+
+							if ( $results_wrapper.outerWidth() == 0 ) {
+								$results_wrapper.width( $this.outerWidth() + 'px' );
 							}
 
 							$results_wrapper.nanoScroller({
