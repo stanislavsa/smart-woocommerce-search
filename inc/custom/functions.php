@@ -25,6 +25,8 @@ function ysm_get_default_widgets_names( $id = '' ) {
 	$list = array(
 		'default' => __( 'WordPres Default Search', 'smart_search' ),
 		'product' => __( 'WooCommerce Product Search', 'smart_search' ),
+		'avada'   => __( 'Avada Search Bar', 'smart_search' ),
+		'divi'    => __( 'DIVI Search Bar', 'smart_search' ),
 	);
 
 	if ( '' !== $id ) {
@@ -184,7 +186,7 @@ function ysm_accent_search_term( $text ) {
 	\Ysm_Search::parse_settings();
 
 	if ( empty( \Ysm_Search::get_var( 'search_page_default_output' ) ) && ! empty( \Ysm_Search::get_var( 'accent_words_on_search_page' ) ) ) {
-		$text = ysm_text_replace( $text );
+		$text = ysm_text_replace( wp_strip_all_tags( $text ) );
 	}
 
 	return $text;
