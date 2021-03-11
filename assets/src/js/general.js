@@ -157,14 +157,14 @@
 				},
 				onSearchStart   : function ( query ) {
 					if ( this.value.indexOf( '  ' ) !== -1 ) {
-						this.value = this.value.replace( /\s+/, ' ' );
+						this.value = this.value.replace( /\s+/g, ' ' );
 					}
 					var trimmed = $.trim( this.value );
 					if ( trimmed !== this.value ) {
 						return false;
 					}
 					query.query = encodeURIComponent( query.query );
-					query.query = query.query.replace( '%20', ' ' );
+					query.query = query.query.replace( /%20/g, ' ' );
 
 					$this.css({'background-image': 'url(' + options.loaderIcon + ')','background-repeat': 'no-repeat', 'background-position': '50% 50%'});
 				},

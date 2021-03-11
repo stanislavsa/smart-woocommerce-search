@@ -44,8 +44,8 @@ class Ysm_Search {
 	public static function init() {
 		self::$time_start = microtime( true );
 
-		add_action( 'pre_get_posts', array( __CLASS__, 'search_filter' ), 9999 );
-		add_action( 'woocommerce_product_query', array( __CLASS__, 'search_filter' ), 9999 );
+		add_action( 'pre_get_posts', array( __CLASS__, 'search_filter' ), 99999999 );
+		add_action( 'woocommerce_product_query', array( __CLASS__, 'search_filter' ), 99999999 );
 		add_action( 'wp', array( __CLASS__, 'remove_search_filter' ), 9999 );
 
 		add_filter( 'the_title', 'ysm_accent_search_term', 9999, 1 );
@@ -227,7 +227,7 @@ class Ysm_Search {
 	 */
 	public static function remove_search_filter() {
 		if ( ! is_admin() && ! empty( filter_input( INPUT_GET, 's', FILTER_SANITIZE_STRING ) ) && ! ( defined( 'DOING_AJAX' ) && DOING_AJAX ) ) {
-			remove_action( 'pre_get_posts', array( __CLASS__, 'search_filter' ), 9999 );
+			remove_action( 'pre_get_posts', array( __CLASS__, 'search_filter' ), 99999999 );
 		}
 	}
 
