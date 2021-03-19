@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Class Ysm_Search
  * Retrieves posts from the database depending on settings
@@ -10,7 +9,7 @@ class Ysm_Search {
 	 * Current widget id
 	 * @var int
 	 */
-	protected static $w_id = 0;
+	public static $w_id = 0;
 	/**
 	 * List of suggestions
 	 * @var array
@@ -21,6 +20,11 @@ class Ysm_Search {
 	 * @var array
 	 */
 	protected static $vars = array();
+	/**
+	 * Number of found posts
+	 * @var array
+	 */
+	protected static $found_posts = 0;
 	/**
 	 * List of protected vars, that can't be overwritten
 	 * @var array
@@ -34,7 +38,7 @@ class Ysm_Search {
 	 * Debug
 	 * @var bool
 	 */
-	protected static $debug    = false;
+	protected static $debug    = 0;
 	private static $time_start = 0;
 	private static $time_end   = 0;
 
@@ -47,6 +51,7 @@ class Ysm_Search {
 		add_action( 'pre_get_posts', array( __CLASS__, 'search_filter' ), 99999999 );
 		add_action( 'woocommerce_product_query', array( __CLASS__, 'search_filter' ), 99999999 );
 		add_action( 'wp', array( __CLASS__, 'remove_search_filter' ), 9999 );
+		add_filter( 'found_posts', array( __CLASS__, 'alter_found_posts' ), 99999999, 2 );
 
 		add_filter( 'the_title', 'ysm_accent_search_term', 9999, 1 );
 		add_filter( 'get_the_excerpt', 'ysm_accent_search_term', 9999, 1 );
@@ -83,11 +88,11 @@ class Ysm_Search {
 		$settings['post_types'] = array();
 		if ( 'product' === $widget_id ) {
 			$settings['post_types']['product'] = 'product';
-		} else {
-			foreach ( $registered_pt as $type ) {
-				if ( ! empty( $settings[ 'post_type_' . $type ] ) ) {
-					$settings['post_types'][ $type ] = $type;
-				}
+		}
+
+		foreach ( $registered_pt as $type ) {
+			if ( ! empty( $settings[ 'post_type_' . $type ] ) ) {
+				$settings['post_types'][ $type ] = $type;
 			}
 		}
 
@@ -179,6 +184,9 @@ class Ysm_Search {
 		if ( $query->is_main_query() && ! is_admin() && ! empty( $query->query_vars['s'] ) && ! empty( $s ) && ! ( defined( 'DOING_AJAX' ) && DOING_AJAX ) ) {
 
 			$w_id = filter_input( INPUT_GET, 'search_id', FILTER_SANITIZE_STRING );
+			if ( ! $w_id ) {
+				$w_id = apply_filters( 'ysm_search_page_default_widget', 0 );
+			}
 			if ( ! in_array( $w_id, ysm_get_default_widgets_ids(), true ) ) {
 				$w_id = (int) $w_id;
 			}
@@ -198,7 +206,28 @@ class Ysm_Search {
 
 				self::set_var( 'max_post_count', -1 );
 				self::set_s( $s );
-				$posts = self::search_posts();
+
+				$post_type = filter_input( INPUT_GET, 'post_type', FILTER_SANITIZE_STRING );
+				$per_page = get_option( 'posts_per_page' );
+				if ( $post_type && 'product' === $post_type ) {
+					$columns = get_option( 'woocommerce_catalog_columns', 4 );
+					if ( function_exists( 'wc_get_default_products_per_row' ) ) {
+						$columns = wc_get_default_products_per_row();
+					}
+					if ( function_exists( 'wc_get_default_product_rows_per_page' ) ) {
+						$per_page = $columns * wc_get_default_product_rows_per_page();
+					}
+					$posts_count = apply_filters( 'loop_shop_per_page', $per_page );
+				} else {
+					$posts_count = $per_page;
+				}
+				if ( 1 < $query->query_vars['paged'] ) {
+					$offset = ( $query->query_vars['paged'] - 1 ) * $posts_count;
+				} else {
+					$offset = 0;
+				}
+
+				$posts = self::search_posts( $posts_count, $offset );
 
 				foreach ( $posts as $post ) {
 					$wp_posts[] = $post->ID;
@@ -210,6 +239,10 @@ class Ysm_Search {
 
 				$query->set( 's', '' );
 				$query->set( 'post__in', $wp_posts );
+				$query->set( 'post_type', self::get_post_types() );
+				$query->set( 'ysm_found_posts', self::$found_posts );
+				$query->set( 'offset', 0 );
+				$query->set( 'posts_per_page', $posts_count );
 
 				$product_orderby = filter_input( INPUT_GET, 'product_orderby', FILTER_SANITIZE_STRING );
 				if ( empty( $product_orderby ) ) {
@@ -220,6 +253,14 @@ class Ysm_Search {
 				}
 			}
 		}
+	}
+
+	public static function alter_found_posts( $found_posts, $query ) {
+		if ( $query->is_main_query() && ! empty( $query->query_vars['ysm_found_posts'] ) ) {
+			$found_posts = $query->query_vars['ysm_found_posts'];
+		}
+
+		return $found_posts;
 	}
 
 	/**
@@ -235,7 +276,7 @@ class Ysm_Search {
 	 * Generate a main query to retrieve posts from database
 	 * @return array|null|object
 	 */
-	public static function search_posts() {
+	public static function search_posts( $posts_count = 0, $offset = 0 ) {
 
 		self::set_search_terms();
 
@@ -252,11 +293,9 @@ class Ysm_Search {
 				'orderby' => 'title',
 			) );
 			Ysm_DB::set_relevance( array( 'post_title', 'post_content', 'post_excerpt' ) );
-
 			$the_query = Ysm_DB::do_query();
-			$res_posts = $the_query->posts;
 
-			$posts = array_unique( array_merge( $posts, $res_posts ) );
+			$posts = array_unique( array_merge( $posts, $the_query->posts ) );
 		}
 
 		if ( $postmeta && ( -1 === $limit || count( $posts ) < $limit ) ) {
@@ -283,17 +322,23 @@ class Ysm_Search {
 			}
 
 			Ysm_DB::add_meta_query( $meta_query );
-
 			$the_query = Ysm_DB::do_query();
-			$res_posts = $the_query->posts;
 
-			$posts = array_unique( array_merge( $posts, $res_posts ) );
+			$posts = array_unique( array_merge( $posts, $the_query->posts ) );
 		}
 
 		$resulted_posts = array();
 		if ( $posts ) {
+			self::$found_posts = count( $posts );
+			if ( ! $posts_count ) {
+				$posts_count = self::get_var( 'max_post_count' );
+				if ( -1 === $posts_count ) {
+					$posts_count = ysm_get_option( self::get_widget_id(), 'max_post_count' );
+				}
+			}
+			$posts = array_slice( $posts, $offset, $posts_count );
 			$the_query = new WP_Query( array(
-				'posts_per_page' => self::get_var( 'max_post_count' ),
+				'posts_per_page' => $posts_count,
 				'post_type'      => self::get_post_types(),
 				'post__in'       => array_map( 'intval', $posts ),
 			) );
@@ -559,7 +604,7 @@ class Ysm_Search {
 	}
 
 	/**
-	 * Get current widget id
+	 * Set current widget id
 	 * @param $new_widget_id
 	 */
 	public static function set_widget_id( $new_widget_id ) {

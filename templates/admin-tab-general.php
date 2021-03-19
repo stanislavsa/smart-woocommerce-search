@@ -101,7 +101,7 @@
 
 		ysm_setting( $w_id, 'enable_fuzzy_search', array(
 			'type' => 'select',
-			'title' => __('Fuzzy Search', 'smart_search'),
+			'title' => __('Multiple Word Search', 'smart_search'),
 			'description' => __('Enable multiple word search.', 'smart_search'),
 			'value' => '',
 			'choices' => array(
