@@ -50,6 +50,8 @@ class Ysm_Widget_Manager {
 		/* register widgets */
 		add_action( 'widgets_init', array( $this, 'register_widgets' ) );
 
+		add_action( 'init', array( $this, 'on_wp_init' ) );
+
 		$page = filter_input( INPUT_GET, 'page', FILTER_SANITIZE_STRING );
 		/* custom widgets list or edit widget page */
 		if ( ! empty( $page ) && 'smart-search' === $page ) {
@@ -104,16 +106,6 @@ class Ysm_Widget_Manager {
 		}
 
 		$this->widgets = $settings;
-
-		if ( filter_input( INPUT_POST, 'save', FILTER_SANITIZE_STRING ) ) {
-
-			require_once ABSPATH . 'wp-includes/pluggable.php';
-
-			$wpnonce = filter_input( INPUT_POST, '_wpnonce', FILTER_SANITIZE_STRING );
-			if ( ! empty( $wpnonce ) && wp_verify_nonce( $wpnonce, $this->wp_option ) ) {
-				$this->save();
-			}
-		}
 	}
 
 	/**
@@ -130,6 +122,19 @@ class Ysm_Widget_Manager {
 		}
 
 		return self::$_instance;
+	}
+
+	public function on_wp_init() {
+		$page = filter_input( INPUT_GET, 'page', FILTER_SANITIZE_STRING );
+		/* custom widgets list or edit widget page */
+		if ( ! empty( $page ) && in_array( $page, array( 'smart-search-custom-new', 'smart-search' ), true ) ) {
+			if ( filter_input( INPUT_POST, 'save', FILTER_SANITIZE_STRING ) ) {
+				$wpnonce = filter_input( INPUT_POST, '_wpnonce', FILTER_SANITIZE_STRING );
+				if ( ! empty( $wpnonce ) && wp_verify_nonce( $wpnonce, $this->wp_option ) ) {
+					$this->save();
+				}
+			}
+		}
 	}
 
 	/**
@@ -190,7 +195,7 @@ class Ysm_Widget_Manager {
 			$settings = $this->widgets;
 			$settings['counter'] = ++$this->counter;
 			$settings[ $this->counter ] = $original;
-			update_option( $this->wp_option, $settings );
+			update_option( $this->wp_option, $settings, 'no' );
 
 			if ( $action ) {
 				$res['id'] = $this->counter;
@@ -219,7 +224,7 @@ class Ysm_Widget_Manager {
 			unset( $this->widgets[ $id ] );
 			$settings = $this->widgets;
 			$settings['counter'] = $this->counter;
-			update_option( $this->wp_option, $settings );
+			update_option( $this->wp_option, $settings, 'no' );
 
 			if ( $action ) {
 				echo 1;
@@ -281,7 +286,7 @@ class Ysm_Widget_Manager {
 				);
 			}
 
-			update_option( $this->wp_option, $settings );
+			update_option( $this->wp_option, $settings, 'no' );
 			$this->widgets = $settings;
 
 			ysm_add_message( __( 'Your settings have been saved.', 'smart_search' ) );

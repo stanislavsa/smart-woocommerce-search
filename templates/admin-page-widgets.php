@@ -49,13 +49,20 @@ if ( $action && 'edit' === $action && $id ) {
 				<tbody>
 				<?php
 				foreach ( ysm_get_default_widgets_ids() as $id ) {
+					$type = 'default' === $id ? '' : '_' . $id;
+					$enabled = ysm_get_option( $id, 'enable' . $type . '_search' );
 					echo '<tr>
 						<td>
 							<a href="' . esc_url( admin_url( 'admin.php?page=smart-search&action=edit&id=' . $id ) ) . '">
 								' . esc_html( ysm_get_default_widgets_names( $id ) ) . '
 							</a>
 						</td>
-						<td></td>
+						<td>' .
+						(
+						! empty( $enabled ) ?
+							'<span style="color:green">' . esc_html__( 'Enabled', 'smart_search' ) . '</span>' :
+							'<span style="color:#ccc">' . esc_html__( 'Disabled', 'smart_search' ) . '</span>'
+						) . '</td>
 						<td></td>
 						<td></td>
 					</tr>';

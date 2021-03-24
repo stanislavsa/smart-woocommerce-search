@@ -111,7 +111,7 @@ if ( ! class_exists( 'YMAPP\Plugin_Option' ) ) :
 				$settings = array_map( 'sanitize_text_field', $_POST['settings'] );
 
 				if ( ! empty( $settings ) ) {
-					update_option( $this->wp_option, $settings );
+					update_option( $this->wp_option, $settings, 'no' );
 				}
 
 				$this->settings = $settings;
