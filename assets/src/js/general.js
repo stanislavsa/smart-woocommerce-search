@@ -163,7 +163,6 @@
 					if ( trimmed !== this.value ) {
 						return false;
 					}
-					query.query = encodeURIComponent( query.query );
 					query.query = query.query.replace( /%20/g, ' ' );
 
 					$this.css({'background-image': 'url(' + options.loaderIcon + ')','background-repeat': 'no-repeat', 'background-position': '50% 50%'});
