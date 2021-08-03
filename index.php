@@ -38,7 +38,7 @@ if ( defined( 'YSM_PRO' ) ) {
  * Define main constants
  */
 if ( ! defined( 'YSM_VER' ) ) {
-	define( 'YSM_VER', 'ysm-2.2.4' );
+	define( 'YSM_VER', 'ysm-2.2.5' );
 }
 
 if ( ! defined( 'YSM_DIR' ) ) {
