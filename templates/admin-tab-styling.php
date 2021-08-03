@@ -52,6 +52,7 @@
 			ysm_setting( $w_id, 'input_icon_bg', array(
 				'type'  => 'pro',
 				'title' => __( 'Icon Background', 'smart_search' ),
+				'description' => __( 'Search field icon background', 'smart_search' ),
 			));
 
 			$cur_loader = ysm_get_option($w_id, 'loader');
@@ -61,6 +62,7 @@
 			ysm_setting( $w_id, 'loader', array(
 				'type'  => 'pro',
 				'title' => __( 'Loader', 'smart_search' ),
+				'description' => __( 'Select loader', 'smart_search' ),
 			));
 			?>
 
@@ -125,31 +127,37 @@
 		ysm_setting( $w_id, 'popup_out_of_stock_label_text_color', array(
 			'type'  => 'pro',
 			'title' => __('"Out of stock" Label Color', 'smart_search'),
+			'description' => __('"Out of stock" label text color in results popup', 'smart_search'),
 		));
 
 		ysm_setting( $w_id, 'popup_out_of_stock_label_bg_color', array(
 			'type'  => 'pro',
 			'title' => __('"Out of stock" Label Background Color', 'smart_search'),
+			'description' => __('"Out of stock" label background color in results popup', 'smart_search'),
 		));
 
 		ysm_setting( $w_id, 'popup_sale_label_text_color', array(
 			'type'  => 'pro',
 			'title' => __('"Sale" Label Color', 'smart_search'),
+			'description' => __('"Sale" label text color in results popup', 'smart_search'),
 		));
 
 		ysm_setting( $w_id, 'popup_sale_label_bg_color', array(
 			'type'  => 'pro',
 			'title' => __('"Sale" Label Background Color', 'smart_search'),
+			'description' => __('"Sale" label background color in results popup', 'smart_search'),
 		));
 
 		ysm_setting( $w_id, 'popup_featured_label_text_color', array(
 			'type'  => 'pro',
 			'title' => __('"Featured" Label Color', 'smart_search'),
+			'description' => __('"Featured" label text color in results popup', 'smart_search'),
 		));
 
 		ysm_setting( $w_id, 'popup_featured_label_bg_color', array(
 			'type'  => 'pro',
 			'title' => __('"Featured" Label Background Color', 'smart_search'),
+			'description' => __('"Featured" label background color in results popup', 'smart_search'),
 		));
 
 		?>

@@ -244,6 +244,9 @@ class Ysm_Setting {
 		<p class="description" style="color: red;">
 			<?php echo esc_html__( 'Available in PRO', 'smart_search' ); ?>
 		</p>
+		<p class="description">
+			<?php echo wp_kses_post( $args['description'] ); ?>
+		</p>
 		<?php
 
 		return ob_get_clean();

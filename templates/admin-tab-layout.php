@@ -48,21 +48,25 @@
 		ysm_setting( $w_id, 'display_out_of_stock_label', array(
 			'type'  => 'pro',
 			'title' => __( 'Display "Out of stock" Label', 'smart_search' ),
+			'description' => __( 'Display "Out of stock" label if product is not in stock', 'smart_search' ),
 		));
 
 		ysm_setting( $w_id, 'display_sale_label', array(
 			'type'  => 'pro',
 			'title' => __( 'Display "Sale" Label', 'smart_search' ),
+			'description' => __( 'Display "Sale" label for product', 'smart_search' ),
 		));
 
 		ysm_setting( $w_id, 'display_featured_label', array(
 			'type'  => 'pro',
 			'title' => __( 'Display "Featured" Label', 'smart_search' ),
+			'description' => __( 'Display "Featured" label for product', 'smart_search' ),
 		));
 
 		ysm_setting( $w_id, 'display_add_to_cart', array(
 			'type'  => 'pro',
 			'title' => __( 'Display "Add to Cart" Button', 'smart_search' ),
+			'description' => __( 'Display "Add to Cart" Button for product', 'smart_search' ),
 		));
 
 		ysm_setting( $w_id, 'popup_desc_pos', array(

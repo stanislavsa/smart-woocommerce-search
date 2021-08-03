@@ -76,6 +76,7 @@
 		ysm_setting( $w_id, 'view_all_link_found_posts', array(
 			'type'        => 'pro',
 			'title'       => __( 'Number of Found Posts in the "View all" Link', 'smart_search' ),
+			'description' => __( 'Display total number of found posts in the "View all" link<br>This is advanced option, use it only if you know what you do.<br>It may affect search performance', 'smart_search' ),
 		));
 
 		ysm_setting( $w_id, 'search_page_default_output', array(
@@ -121,26 +122,25 @@
 		ysm_setting( $w_id, 'product_variation_visibility', array(
 			'type'  => 'pro',
 			'title' => __('Visibility of Variable Products', 'smart_search'),
-		));
-
-		ysm_setting( $w_id, 'select_limit', array(
-			'type'  => 'pro',
-			'title' => __('Select Limit for DB Query', 'smart_search'),
+			'description' => __('Select visibility of variable products and variations', 'smart_search'),
 		));
 
 		ysm_setting( $w_id, 'enable_transient', array(
 			'type'  => 'pro',
 			'title' => __('Enable Transient', 'smart_search'),
+			'description' => __('Save query results in a transient', 'smart_search'),
 		));
 
 		ysm_setting( $w_id, 'search_sku_first', array(
 			'type'  => 'pro',
 			'title' => __('SKU Search Top Priority', 'smart_search'),
+			'description' => __('Search by SKU first if this option is checked and if request is numeric', 'smart_search'),
 		));
 
 		ysm_setting( $w_id, 'skip_punctuation', array(
 			'type'  => 'pro',
 			'title' => __('Skip Punctuation', 'smart_search'),
+			'description' => __('Skip punctuation in the search string', 'smart_search'),
 		));
 
 		?>

@@ -37,6 +37,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 		ysm_setting( $w_id, 'custom_post_types', array(
 			'type'  => 'pro',
 			'title' => __( 'Search in Custom Post Types', 'smart_search' ),
+			'description' => __( 'Searching will be provided in selected custom post types', 'smart_search' ),
 		));
 		?>
 
@@ -91,11 +92,13 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 		ysm_setting( $w_id, 'custom_tax', array(
 			'type'  => 'pro',
 			'title' => __( 'Search in Custom Taxonomies', 'smart_search' ),
+			'description' => __( 'Searching will be provided in selected custom taxonomies', 'smart_search' ),
 		));
 
 		ysm_setting( $w_id, 'custom_fields', array(
 			'type'  => 'pro',
 			'title' => __( 'Search in Custom Fields', 'smart_search' ),
+			'description' => __( 'Custom Fields slug separated by comma. Searching will be provided in custom fields values', 'smart_search' ),
 		));
 
 		/* Product categories */

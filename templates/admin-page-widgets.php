@@ -40,10 +40,10 @@ if ( $action && 'edit' === $action && $id ) {
 			<table>
 				<thead>
 				<tr>
-					<td width="25%"><?php esc_html_e( 'Name', 'smart_search' ); ?></td>
+					<td width="10%"><?php esc_html_e( 'ID', 'smart_search' ); ?></td>
+					<td width="40%"><?php esc_html_e( 'Name', 'smart_search' ); ?></td>
 					<td width="25%"></td>
-					<td width="25%"></td>
-					<td width="25%"></td>
+					<td width="15%"></td>
 				</tr>
 				</thead>
 				<tbody>
@@ -52,6 +52,7 @@ if ( $action && 'edit' === $action && $id ) {
 					$type = 'default' === $id ? '' : '_' . $id;
 					$enabled = ysm_get_option( $id, 'enable' . $type . '_search' );
 					echo '<tr>
+						<td>' . esc_html( $id ) . '</td>
 						<td>
 							<a href="' . esc_url( admin_url( 'admin.php?page=smart-search&action=edit&id=' . $id ) ) . '">
 								' . esc_html( ysm_get_default_widgets_names( $id ) ) . '
@@ -63,7 +64,6 @@ if ( $action && 'edit' === $action && $id ) {
 							'<span style="color:green">' . esc_html__( 'Enabled', 'smart_search' ) . '</span>' :
 							'<span style="color:#ccc">' . esc_html__( 'Disabled', 'smart_search' ) . '</span>'
 						) . '</td>
-						<td></td>
 						<td></td>
 					</tr>';
 				}
@@ -80,10 +80,10 @@ if ( $action && 'edit' === $action && $id ) {
 			<table>
 				<thead>
 				<tr>
-					<td><?php esc_html_e( 'ID', 'smart_search' ); ?></td>
-					<td><?php esc_html_e( 'Name', 'smart_search' ); ?></td>
-					<td><?php esc_html_e( 'Shortcode', 'smart_search' ); ?></td>
-					<td></td>
+					<td width="10%"><?php esc_html_e( 'ID', 'smart_search' ); ?></td>
+					<td width="40%"><?php esc_html_e( 'Name', 'smart_search' ); ?></td>
+					<td width="25%"><?php esc_html_e( 'Shortcode', 'smart_search' ); ?></td>
+					<td width="15%"></td>
 				</tr>
 				</thead>
 				<tbody>
