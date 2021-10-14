@@ -149,8 +149,8 @@ function ysm_get_default_widgets() {
  * @return string
  */
 function ysm_get_s() {
-	$s = filter_input( INPUT_GET, 's', FILTER_SANITIZE_STRING );
-	$woof_text = filter_input( INPUT_GET, 'woof_text', FILTER_SANITIZE_STRING );
+	$s = filter_input( INPUT_GET, 's', FILTER_DEFAULT );
+	$woof_text = filter_input( INPUT_GET, 'woof_text', FILTER_DEFAULT );
 	if ( ! empty( $woof_text ) ) {
 		$s = $woof_text;
 	}

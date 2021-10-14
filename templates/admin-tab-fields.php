@@ -45,9 +45,9 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 
 		<?php
 		ysm_setting( $w_id, 'post_type_product_variation', array(
-			'type'  => 'checkbox',
+			'type'  => 'pro',
 			'title' => __( 'Search in Variations', 'smart_search' ),
-			'description' => __( 'Deprecated: Will be available only in PRO version', 'smart_search' ),
+			'description' => __( 'Enable search through Variable Product Variations', 'smart_search' ),
 			'value' => 0,
 		));
 		?>
@@ -56,19 +56,19 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 
 		<?php
 		$fields = array(
-			'title'   => __('Title', 'smart_search'),
-			'content' => __('Content', 'smart_search'),
-			'excerpt' => __('Excerpt', 'smart_search'),
-			'tag' => __('Post Tag', 'smart_search'),
-			'category' => __('Post Category', 'smart_search'),
-			'product_tag' => __('Product Tag', 'smart_search'),
-			'product_cat' => __('Product Category', 'smart_search'),
-			'product_sku' => __('Product SKU', 'smart_search'),
+			'title'       => __( 'Title', 'smart_search' ),
+			'content'     => __( 'Content', 'smart_search' ),
+			'excerpt'     => __( 'Excerpt', 'smart_search' ),
+			'tag'         => __( 'Post Tag', 'smart_search' ),
+			'category'    => __( 'Post Category', 'smart_search' ),
+			'product_tag' => __( 'Product Tag', 'smart_search' ),
+			'product_cat' => __( 'Product Category', 'smart_search' ),
+			'product_sku' => __( 'Product SKU', 'smart_search' ),
 		);
 
-		if ($w_id === 'product') {
-			unset($fields['tag']);
-			unset($fields['category']);
+		if ( $w_id === 'product' ) {
+			unset( $fields['tag'] );
+			unset( $fields['category'] );
 		}
 
 		$search_in = array(
@@ -78,14 +78,12 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 		);
 
 		foreach ( $fields as $id => $field ) {
-
 			ysm_setting( $w_id, 'field_' . $id, array(
-				'type' => 'checkbox',
-				'title' => sprintf(  __('Search in %s', 'smart_search' ), $field ),
-				'description' => 'product_sku' === $id ? __( 'Deprecated: Will be available only in PRO version', 'smart_search' ) : sprintf( __('Enable search through "%s"', 'smart_search'), $field ),
-				'value' => isset( $search_in[$id] ) ? $search_in[$id] : '',
+				'type'        => 'product_sku' === $id ? 'pro' : 'checkbox',
+				'title'       => sprintf(  __( 'Search in %s', 'smart_search' ), $field ),
+				'description' => sprintf( __( 'Enable search through "%s"', 'smart_search' ), $field ),
+				'value'       => isset( $search_in[ $id ] ) ? $search_in[ $id ] : '',
 			));
-
 		}
 
 		/* Custom Tax */
@@ -117,19 +115,19 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 		}
 
 		ysm_setting( $w_id, 'allowed_product_cat', array(
-			'type' => 'select',
-			'title' => __('Allowed Product Categories', 'smart_search'),
-			'description' => __('Restrict product searching by chosen product categories', 'smart_search'),
-			'multiple' => true,
-			'choices' => $product_cats_list,
+			'type'        => 'select',
+			'title'       => __( 'Allowed Product Categories', 'smart_search' ),
+			'description' => __( 'Restrict product searching by chosen product categories', 'smart_search' ),
+			'multiple'    => true,
+			'choices'     => $product_cats_list,
 		));
 
 		ysm_setting( $w_id, 'disallowed_product_cat', array(
-			'type' => 'select',
-			'title' => __('Disallowed Product Categories', 'smart_search'),
-			'description' => __('Do not search in chosen product categories', 'smart_search'),
-			'multiple' => true,
-			'choices' => $product_cats_list,
+			'type'        => 'select',
+			'title'       => __( 'Disallowed Product Categories', 'smart_search' ),
+			'description' => __( 'Do not search in chosen product categories', 'smart_search' ),
+			'multiple'    => true,
+			'choices'     => $product_cats_list,
 		));
 
 		?>
