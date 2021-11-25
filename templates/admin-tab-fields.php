@@ -79,7 +79,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 
 		foreach ( $fields as $id => $field ) {
 			ysm_setting( $w_id, 'field_' . $id, array(
-				'type'        => 'product_sku' === $id ? 'pro' : 'checkbox',
+				'type'        => 'checkbox',
 				'title'       => sprintf(  __( 'Search in %s', 'smart_search' ), $field ),
 				'description' => sprintf( __( 'Enable search through "%s"', 'smart_search' ), $field ),
 				'value'       => isset( $search_in[ $id ] ) ? $search_in[ $id ] : '',

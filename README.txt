@@ -1,7 +1,7 @@
 === Smart WooCommerce Search ===
 Contributors: yummy-wp
 Tags: woocommerce search, ajax search, woocommerce, genesis, elementor, divi, avada, enfold, filters, product filter, woo search, relevanssi, jetpack, woocommerce search by sku, woocommerce search shortcod, product search, product filter, woocommerce search results, instant search, woocommerce search plugin, woocommerce search form, search for woocommerce, woocommerce search page, search, woocommerce product search, search woocommerce, shop, shop search, autocomplete, autosuggest, search for wp, search for wordpress, search plugin, woocommerce search by sku, search results,  woocommerce search shortcode, search products, search autocomplete, woocommerce advanced search, woocommerce predictive search, woocommerce live search, woocommerce single product, woocommerce site search, products, shop, category search, custom search, predictive search, relevant search, search product, woocommerce plugin, yith, woof, wp search, wordpress search
-Stable tag: 2.2.6
+Stable tag: 2.2.7
 Requires at least: 4.2
 Tested up to: 5.8
 License: GPLv2 or later
@@ -42,7 +42,6 @@ Give it a try and enjoy:)
  * Search by product SKU
  * Search in product Categories
  * Search in product Tags
- * Search in Variations
  * Multisite support
  * Allow/disallow searching in selected product categories
  * Exclude "Out of stock" products from search results
@@ -60,6 +59,7 @@ Give it a try and enjoy:)
   * Search in custom fields
   * Search in custom taxonomies
   * Search in product brands
+  * Search in product variations
   * Search in custom post types
   * **WPML compatible**
   * **Polylang compatible**
@@ -115,6 +115,11 @@ In example used widget with ID = 1, so don't forget to change widget ID to neede
 4. Smart WooCommerce Search Settings Page - Styling tab
 
 == Changelog ==
+
+
+= 2.2.7 =
+* restored SKU search
+* Compatibility: WooCommerce 5.9
 
 = 2.2.6 =
 * small fixes
