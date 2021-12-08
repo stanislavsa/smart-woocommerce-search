@@ -6,7 +6,7 @@
  * Tags: woocommerce search, ajax search, woocommerce, woocommerce search by sku, woocommerce search shortcod, product search, product filter, woocommerce search results, instant search, woocommerce search plugin, woocommerce search form, search for woocommerce, woocommerce search page, search, woocommerce product search, search woocommerce, shop, shop search, autocomplete, autosuggest, search for wp, search for WordPress, search plugin, woocommerce search by sku, search results,  woocommerce search shortcode, search products, search autocomplete, woocommerce advanced search, woocommerce predictive search, woocommerce live search, woocommerce single product, woocommerce site search, products, shop, category search, custom search, predictive search, relevant search, search product, woocommerce plugin, posts search, wp search, WordPress search
  * Author:      YummyWP
  * Author URI:  https://yummywp.com
- * Version:     2.2.7
+ * Version:     2.3.0
  * Domain Path: /languages
  * Text Domain: smart_search
  *
@@ -38,7 +38,7 @@ if ( defined( 'YSM_PRO' ) ) {
  * Define main constants
  */
 if ( ! defined( 'YSM_VER' ) ) {
-	define( 'YSM_VER', 'ysm-2.2.5' );
+	define( 'YSM_VER', 'ysm-2.3.0' );
 }
 
 if ( ! defined( 'YSM_DIR' ) ) {
@@ -131,34 +131,27 @@ if ( ! function_exists( 'ysm_enqueue_scripts' ) ) {
 	function ysm_enqueue_scripts() {
 		wp_enqueue_style( 'smart-search', YSM_URI . 'assets/dist/css/general.css', array(), YSM_VER );
 
-		if ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) {
-			wp_enqueue_script( 'smart-search-autocomplete', YSM_URI . 'assets/src/js/jquery.autocomplete.js', array( 'jquery' ), false, 1 );
-			wp_enqueue_script( 'smart-search-custom-scroll', YSM_URI . 'assets/src/js/jquery.nanoscroller.js', array( 'jquery' ), false, 1 );
-			wp_enqueue_script( 'smart-search-general', YSM_URI . 'assets/src/js/general.js', array( 'jquery' ), time(), 1 );
-		} else {
-			wp_enqueue_script( 'smart-search-general', YSM_URI . 'assets/dist/js/main.js', array( 'jquery' ), YSM_VER, 1 );
-		}
-
 		$rest_url = rest_url( 'ysm/v1/search' ) . '?';
 
 		$localized                          = array();
 		$localized['restUrl']               = $rest_url;
+		$localized['loader_icon']           = YSM_URI . 'assets/images/loader6.gif';
 
-		foreach ( ysm_get_default_widgets_ids() as $default_widget ) {
-			if ( 'default' === $default_widget ) {
-				$localized['enable_search'] = (int) ysm_get_option( 'default', 'enable_search' );
-			} else {
-				$localized[ 'enable_' . $default_widget . '_search' ] = (int) ysm_get_option( $default_widget, 'enable_' . $default_widget . '_search' );
+		$active_widgets  = ysm_get_custom_widgets();
+		$default_widgets = ysm_get_default_widgets();
+
+		$available_default_widgets_ids = ysm_get_default_widgets_ids();
+
+		foreach ( $default_widgets as $w_key => $default_widget ) {
+			if ( isset( $available_default_widgets_ids[ $w_key ] ) ) {
+				$enable_key = ( 'default' === $w_key ) ? 'enable_search' : 'enable_' . $w_key . '_search';
+				if ( ! empty( $default_widget['settings'][ $enable_key ] ) ) {
+					$active_widgets[ $w_key ] = $default_widget;
+				}
 			}
 		}
 
-		$localized['loader_icon']           = YSM_URI . 'assets/images/loader6.gif';
-
-		$custom_widgets = ysm_get_custom_widgets();
-		$def_widgets    = ysm_get_default_widgets();
-		$widgets        = $custom_widgets + $def_widgets;
-
-		foreach ( $widgets as $k => $v ) {
+		foreach ( $active_widgets as $k => $v ) {
 
 			if ( $k === 'default' ) {
 				$css_id  = '.widget_search.ysm-active';
@@ -172,6 +165,17 @@ if ( ! function_exists( 'ysm_enqueue_scripts' ) ) {
 			} else {
 				$css_id  = '.ysm-search-widget-' . $k;
 				$js_pref = 'custom_' . $k . '_';
+			}
+
+			if ( false === strpos( $js_pref, 'custom_' ) ) {
+				$localized[ 'enable_' . $js_pref . 'search' ] = 1;
+			}
+
+			// check if AJAX disabled
+			if ( ! empty( $v['settings']['disable_ajax'] ) ) {
+				$localized[ $js_pref . 'disable_ajax' ] = (bool) $v['settings']['disable_ajax'];
+			} else {
+				$localized[ $js_pref . 'disable_ajax' ] = false;
 			}
 
 			if ( isset( $v['settings']['char_count'] ) ) {
@@ -200,14 +204,26 @@ if ( ! function_exists( 'ysm_enqueue_scripts' ) ) {
 				$localized[ $js_pref . 'layout' ] = 'product';
 			}
 
+			if ( ! empty( $v['settings']['search_page_default_output'] ) ) {
+				$localized[ $js_pref . 'default_output' ] = (bool) $v['settings']['search_page_default_output'];
+			}
+
 			ysm_add_inline_styles_to_stack( $v, $css_id );
 		}
-
-		wp_localize_script( 'smart-search-general', 'ysm_L10n', $localized );
 
 		$styles = Ysm_Style_Generator::create();
 
 		wp_add_inline_style( 'smart-search', $styles );
+
+		if ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) {
+			wp_enqueue_script( 'smart-search-autocomplete', YSM_URI . 'assets/src/js/jquery.autocomplete.js', array( 'jquery' ), false, 1 );
+			wp_enqueue_script( 'smart-search-custom-scroll', YSM_URI . 'assets/src/js/jquery.nanoscroller.js', array( 'jquery' ), false, 1 );
+			wp_enqueue_script( 'smart-search-general', YSM_URI . 'assets/src/js/general.js', array( 'jquery' ), time(), 1 );
+		} else {
+			wp_enqueue_script( 'smart-search-general', YSM_URI . 'assets/dist/js/main.js', array( 'jquery' ), YSM_VER, 1 );
+		}
+
+		wp_localize_script( 'smart-search-general', 'ysm_L10n', $localized );
 
 	}
 	add_action( 'wp_enqueue_scripts', 'ysm_enqueue_scripts' );

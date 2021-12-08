@@ -48,10 +48,10 @@ class Ysm_Search {
 	public static function init() {
 		self::$time_start = microtime( true );
 
-		add_action( 'pre_get_posts', array( __CLASS__, 'search_filter' ), 99999999 );
-		add_action( 'woocommerce_product_query', array( __CLASS__, 'search_filter' ), 99999999 );
+		add_action( 'pre_get_posts', array( __CLASS__, 'search_filter' ), PHP_INT_MAX );
+		add_action( 'woocommerce_product_query', array( __CLASS__, 'search_filter' ), PHP_INT_MAX );
 		add_action( 'wp', array( __CLASS__, 'remove_search_filter' ), 9999 );
-		add_filter( 'found_posts', array( __CLASS__, 'alter_found_posts' ), 99999999, 2 );
+		add_filter( 'found_posts', array( __CLASS__, 'alter_found_posts' ), PHP_INT_MAX, 2 );
 
 		add_filter( 'the_title', 'ysm_accent_search_term', 9999, 1 );
 		add_filter( 'get_the_excerpt', 'ysm_accent_search_term', 9999, 1 );
@@ -361,6 +361,7 @@ class Ysm_Search {
 		foreach ( $posts as $post ) {
 			$post = get_post( $post );
 			$wc_product = null;
+			$product = null;
 			$output = '';
 			$image = '';
 			$post_excerpt = '';
@@ -446,17 +447,20 @@ class Ysm_Search {
 			}
 
 			if ( $wc_product ) {
+				global $product;
+				$product = $wc_product;
+
 				$output .= '<div class="smart-search-post-price-holder">';
 
 				/* product price */
 				if ( self::get_var( 'display_price' ) ) {
 					// @codingStandardsIgnoreStart
-					$output .= '<div class="smart-search-post-price">' . $wc_product->get_price_html() . '</div>';
+					$output .= '<div class="smart-search-post-price">' . $product->get_price_html() . '</div>';
 					// @codingStandardsIgnoreEnd
 				}
 				/* product sku */
 				if ( self::get_var( 'display_sku' ) ) {
-					$output .= '<div class="smart-search-post-sku">' . esc_html( $wc_product->get_sku() ) . '</div>';
+					$output .= '<div class="smart-search-post-sku">' . esc_html( $product->get_sku() ) . '</div>';
 				}
 
 				$output .= '</div>';
@@ -488,7 +492,7 @@ class Ysm_Search {
 				break;
 			}
 		}
-
+		wp_reset_postdata();
 	}
 
     /**

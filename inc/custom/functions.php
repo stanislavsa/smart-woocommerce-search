@@ -7,11 +7,11 @@ function ysm_get_default_widgets_ids() {
 	$list = array();
 
 	if ( defined( 'AVADA_VERSION' ) ) {
-		$list[] = 'avada';
+		$list['avada'] = 'avada';
 	}
 
-	$list[] = 'product';
-	$list[] = 'default';
+	$list['product'] = 'product';
+	$list['default'] = 'default';
 
 	return $list;
 }
