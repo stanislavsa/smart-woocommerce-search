@@ -6,17 +6,17 @@ if ( ! defined( 'ABSPATH' ) ) {
 wp_enqueue_script( 'postbox' );
 
 $tabs = array(
-	'general_tab'    => __( 'General', 'smart_search' ),
-	'fields_tab'     => __( 'Items to Search through', 'smart_search' ),
-	'layout_tab'     => __( 'Layout', 'smart_search' ),
-	'styles_tab'     => __( 'Styling', 'smart_search' ),
-	'spellcheck_tab' => __( 'Spell Correction', 'smart_search' ),
-	'stopwords_tab'  => __( 'Stop Words', 'smart_search' ),
+	'general_tab'    => __( 'General', 'smart-woocommerce-search' ),
+	'fields_tab'     => __( 'Items to Search through', 'smart-woocommerce-search' ),
+	'layout_tab'     => __( 'Layout', 'smart-woocommerce-search' ),
+	'styles_tab'     => __( 'Styling', 'smart-woocommerce-search' ),
+	'spellcheck_tab' => __( 'Spell Correction', 'smart-woocommerce-search' ),
+	'stopwords_tab'  => __( 'Stop Words', 'smart-woocommerce-search' ),
 );
 ?>
 <form method="post" action="" enctype="multipart/form-data">
 
-	<input type="submit" value="<?php esc_html_e( 'Save', 'smart_search' ); ?>" name="save" class="ymapp-button ymapp-hide-on-mobile" style="float:right;" />
+	<input type="submit" value="<?php esc_html_e( 'Save', 'smart-woocommerce-search' ); ?>" name="save" class="ymapp-button ymapp-hide-on-mobile" style="float:right;" />
 
 	<?php if ( in_array( $w_id, ysm_get_default_widgets_ids(), true ) ) { ?>
 		<?php wp_nonce_field( 'smart_search_default' ); ?>
@@ -26,7 +26,7 @@ $tabs = array(
 	<?php } else { ?>
 		<?php wp_nonce_field( 'smart_search_custom' ); ?>
 		<div class="ysm-widget-edit-title-wrap">
-			<input type="text" name="name" size="30" value="<?php echo isset( $widgets[ $w_id ] ) ? esc_html( $widgets[ $w_id ]['name'] ) : ''; ?>" placeholder="<?php esc_html_e( 'Enter name', 'smart_search' ); ?>" autocomplete="off">
+			<input type="text" name="name" size="30" value="<?php echo isset( $widgets[ $w_id ] ) ? esc_html( $widgets[ $w_id ]['name'] ) : ''; ?>" placeholder="<?php esc_html_e( 'Enter name', 'smart-woocommerce-search' ); ?>" autocomplete="off">
 		</div>
 	<?php } ?>
 
@@ -37,11 +37,11 @@ $tabs = array(
 		<div class="postbox ysm-widget-edit-settings">
 
 			<button type="button" class="handlediv button-link" aria-expanded="true">
-				<span class="screen-reader-text"><?php esc_html_e( 'Toggle panel: Settings', 'smart_search' ); ?></span>
+				<span class="screen-reader-text"><?php esc_html_e( 'Toggle panel: Settings', 'smart-woocommerce-search' ); ?></span>
 				<span class="toggle-indicator" aria-hidden="true"></span>
 			</button>
 
-			<h2 class="hndle ui-sortable-handle"><span><?php esc_html_e( 'Settings', 'smart_search' ); ?></span></h2>
+			<h2 class="hndle ui-sortable-handle"><span><?php esc_html_e( 'Settings', 'smart-woocommerce-search' ); ?></span></h2>
 
 			<div class="inside">
 
@@ -70,7 +70,7 @@ $tabs = array(
 	</div>
 
 	<p class="submit" style="float: right;">
-		<input type="submit" value="<?php esc_html_e( 'Save', 'smart_search' ); ?>" name="save" class="ymapp-button" />
+		<input type="submit" value="<?php esc_html_e( 'Save', 'smart-woocommerce-search' ); ?>" name="save" class="ymapp-button" />
 	</p>
 
 </form>

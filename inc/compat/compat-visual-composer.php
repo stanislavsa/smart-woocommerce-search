@@ -14,17 +14,17 @@ function extend() {
 
 	$widgets_list = ysm_get_custom_widgets();
 	$opts = array(
-		__( 'No value', 'smart_search' ) => '',
+		__( 'No value', 'smart-woocommerce-search' ) => '',
 	);
 
 	if ( ! empty( $widgets_list ) ) {
 		foreach ( $widgets_list as $id => $obj ) {
-			$opts[ __( $obj['name'], 'smart_search' ) ] = $id;
+			$opts[ __( $obj['name'], 'smart-woocommerce-search' ) ] = $id;
 		}
 	}
 
 	vc_map( array(
-		'name'        => __( 'Smart Search', 'smart_search' ),
+		'name'        => __( 'Smart Search', 'smart-woocommerce-search' ),
 		'description' => '',
 		'base'        => 'smart_search',
 		'icon'        => YSM_URI . 'assets/images/search-icon.png',
@@ -35,10 +35,10 @@ function extend() {
 				'type'        => 'dropdown',
 				'holder'      => 'hidden',
 				'class'       => '',
-				'heading'     => __( 'Widget name', 'smart_search' ),
+				'heading'     => __( 'Widget name', 'smart-woocommerce-search' ),
 				'param_name'  => 'id',
 				'value'       => $opts,
-				'description' => __( 'Select one of search widgets', 'smart_search' ),
+				'description' => __( 'Select one of search widgets', 'smart-woocommerce-search' ),
 			),
 		),
 	));

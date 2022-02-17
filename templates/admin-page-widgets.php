@@ -21,7 +21,7 @@ if ( $action && 'edit' === $action && $id ) {
 
 	<?php if ( $w_id ) { ?>
 
-		<h1><span><?php esc_html_e( 'Edit Widget', 'smart_search' ); ?></span></h1>
+		<h1><span><?php esc_html_e( 'Edit Widget', 'smart-woocommerce-search' ); ?></span></h1>
 
 		<?php ysm_message(); ?>
 
@@ -33,15 +33,15 @@ if ( $action && 'edit' === $action && $id ) {
 			<span><?php echo esc_html( get_admin_page_title() ); ?></span>
 		</h1>
 
-		<h2 class="ysm-widgets-title"><?php esc_html_e( 'Extend Default Widgets', 'smart_search' ); ?></h2>
+		<h2 class="ysm-widgets-title"><?php esc_html_e( 'Extend Default Widgets', 'smart-woocommerce-search' ); ?></h2>
 
 		<div class="ysm-widgets-list">
 
 			<table>
 				<thead>
 				<tr>
-					<td width="10%"><?php esc_html_e( 'ID', 'smart_search' ); ?></td>
-					<td width="40%"><?php esc_html_e( 'Name', 'smart_search' ); ?></td>
+					<td width="10%"><?php esc_html_e( 'ID', 'smart-woocommerce-search' ); ?></td>
+					<td width="40%"><?php esc_html_e( 'Name', 'smart-woocommerce-search' ); ?></td>
 					<td width="25%"></td>
 					<td width="15%"></td>
 				</tr>
@@ -61,8 +61,8 @@ if ( $action && 'edit' === $action && $id ) {
 						<td>' .
 						(
 						! empty( $enabled ) ?
-							'<span style="color:green">' . esc_html__( 'Enabled', 'smart_search' ) . '</span>' :
-							'<span style="color:#ccc">' . esc_html__( 'Disabled', 'smart_search' ) . '</span>'
+							'<span style="color:green">' . esc_html__( 'Enabled', 'smart-woocommerce-search' ) . '</span>' :
+							'<span style="color:#ccc">' . esc_html__( 'Disabled', 'smart-woocommerce-search' ) . '</span>'
 						) . '</td>
 						<td></td>
 					</tr>';
@@ -73,16 +73,16 @@ if ( $action && 'edit' === $action && $id ) {
 
 		</div>
 
-		<h2 class="ysm-widgets-title"><?php esc_html_e( 'Custom Widgets', 'smart_search' ); ?></h2>
+		<h2 class="ysm-widgets-title"><?php esc_html_e( 'Custom Widgets', 'smart-woocommerce-search' ); ?></h2>
 
 		<div class="ysm-widgets-list ysm-custom-widgets-list">
 
 			<table>
 				<thead>
 				<tr>
-					<td width="10%"><?php esc_html_e( 'ID', 'smart_search' ); ?></td>
-					<td width="40%"><?php esc_html_e( 'Name', 'smart_search' ); ?></td>
-					<td width="25%"><?php esc_html_e( 'Shortcode', 'smart_search' ); ?></td>
+					<td width="10%"><?php esc_html_e( 'ID', 'smart-woocommerce-search' ); ?></td>
+					<td width="40%"><?php esc_html_e( 'Name', 'smart-woocommerce-search' ); ?></td>
+					<td width="25%"><?php esc_html_e( 'Shortcode', 'smart-woocommerce-search' ); ?></td>
 					<td width="15%"></td>
 				</tr>
 				</thead>
@@ -104,7 +104,7 @@ if ( $action && 'edit' === $action && $id ) {
 		</div>
 
 		<br>
-		<a href="<?php echo esc_url( admin_url( 'admin.php?page=smart-search-custom-new' ) ); ?>" class="ymapp-button-small"><?php esc_html_e( 'Add New', 'smart_search' ); ?></a>
+		<a href="<?php echo esc_url( admin_url( 'admin.php?page=smart-search-custom-new' ) ); ?>" class="ymapp-button-small"><?php esc_html_e( 'Add New', 'smart-woocommerce-search' ); ?></a>
 
 	<?php } ?>
 

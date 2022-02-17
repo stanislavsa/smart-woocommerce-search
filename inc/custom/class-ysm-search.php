@@ -181,7 +181,7 @@ class Ysm_Search {
 	public static function search_filter( $query ) {
 		$s = ysm_get_s();
 
-		if ( $query->is_main_query() && ! is_admin() && ! empty( $query->query_vars['s'] ) && ! empty( $s ) && ! ( defined( 'DOING_AJAX' ) && DOING_AJAX ) ) {
+		if ( ! is_admin() && ! empty( $query->query_vars['s'] ) && ! empty( $s ) && ! ( defined( 'DOING_AJAX' ) && DOING_AJAX ) ) {
 
 			$w_id = filter_input( INPUT_GET, 'search_id', FILTER_SANITIZE_STRING );
 			if ( ! $w_id ) {
@@ -221,7 +221,14 @@ class Ysm_Search {
 				} else {
 					$posts_count = $per_page;
 				}
-				if ( 1 < $query->query_vars['paged'] ) {
+
+				$paged = $query->query_vars['paged'];
+				if ( ! $paged || 1 === $paged ) {
+					if ( isset( $_GET['fwp_paged'] ) ) {
+						$paged = (int) filter_input( INPUT_GET, 'fwp_paged', FILTER_SANITIZE_STRING );
+					}
+				}
+				if ( 1 < $paged ) {
 					$offset = ( $query->query_vars['paged'] - 1 ) * $posts_count;
 				} else {
 					$offset = 0;
@@ -256,7 +263,7 @@ class Ysm_Search {
 	}
 
 	public static function alter_found_posts( $found_posts, $query ) {
-		if ( $query->is_main_query() && ! empty( $query->query_vars['ysm_found_posts'] ) ) {
+		if ( ! empty( $query->query_vars['ysm_found_posts'] ) ) {
 			$found_posts = $query->query_vars['ysm_found_posts'];
 		}
 
@@ -520,7 +527,7 @@ class Ysm_Search {
 		$view_all_link = '';
 
 		if ( self::get_var( 'display_view_all_link' ) || self::get_var( 'view_all_link_text' ) ) {
-			$view_all_link = '<a class="smart-search-view-all" href="' . esc_url( self::get_viewall_link_url() ) . '">' . esc_html__( self::get_var( 'view_all_link_text' ) , 'smart_search') . '</a>';
+			$view_all_link = '<a class="smart-search-view-all" href="' . esc_url( self::get_viewall_link_url() ) . '">' . esc_html__( self::get_var( 'view_all_link_text' ), 'smart-woocommerce-search' ) . '</a>';
 		}
 
 		$res = array(

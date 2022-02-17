@@ -6,14 +6,14 @@
  * Tags: woocommerce search, ajax search, woocommerce, woocommerce search by sku, woocommerce search shortcod, product search, product filter, woocommerce search results, instant search, woocommerce search plugin, woocommerce search form, search for woocommerce, woocommerce search page, search, woocommerce product search, search woocommerce, shop, shop search, autocomplete, autosuggest, search for wp, search for WordPress, search plugin, woocommerce search by sku, search results,  woocommerce search shortcode, search products, search autocomplete, woocommerce advanced search, woocommerce predictive search, woocommerce live search, woocommerce single product, woocommerce site search, products, shop, category search, custom search, predictive search, relevant search, search product, woocommerce plugin, posts search, wp search, WordPress search
  * Author:      YummyWP
  * Author URI:  https://yummywp.com
- * Version:     2.3.0
+ * Version:     2.3.1
  * Domain Path: /languages
- * Text Domain: smart_search
+ * Text Domain: smart-woocommerce-search
  *
  * Requires PHP: 5.4
  *
  * WC requires at least: 3.0
- * WC tested up to: 5.9
+ * WC tested up to: 6.2
  */
 
 if ( ! defined( 'ABSPATH' ) ) exit;
@@ -25,7 +25,7 @@ if ( defined( 'YSM_PRO' ) ) {
 	function ysm_pro_version_installed_notice() {
 		?>
 		<div class="error">
-			<p><?php esc_html_e( 'To activate the free version of Smart WooCommerce Search you need to deactivate the Pro version.', 'smart_search' ); ?></p>
+			<p><?php esc_html_e( 'To activate the free version of Smart WooCommerce Search you need to deactivate the Pro version.', 'smart-woocommerce-search' ); ?></p>
 		</div>
 		<?php
 	}
@@ -56,7 +56,7 @@ include_once YSM_DIR . 'inc/index.php';
  */
 if ( ! function_exists( 'ysm_load_textdomain' ) ) {
 	function ysm_load_textdomain() {
-		load_plugin_textdomain( 'smart_search', false, plugin_basename( dirname( __FILE__ ) ) . '/languages' );
+		load_plugin_textdomain( 'smart-woocommerce-search', false, plugin_basename( dirname( __FILE__ ) ) . '/languages' );
 	}
 
 	add_action( 'plugins_loaded', 'ysm_load_textdomain' );
@@ -67,8 +67,8 @@ if ( ! function_exists( 'ysm_load_textdomain' ) ) {
  */
 if ( ! function_exists( 'ysm_add_menu_page' ) ) {
 	function ysm_add_menu_page() {
-		add_menu_page( __( 'Smart Search', 'smart_search' ),
-			__( 'Smart Search', 'smart_search' ),
+		add_menu_page( __( 'Smart Search', 'smart-woocommerce-search' ),
+			__( 'Smart Search', 'smart-woocommerce-search' ),
 			'manage_options',
 			'smart-search',
 			null,
@@ -77,24 +77,24 @@ if ( ! function_exists( 'ysm_add_menu_page' ) ) {
 		);
 
 		add_submenu_page( 'smart-search',
-			__( 'Search Widgets', 'smart_search' ),
-			__( 'Widgets', 'smart_search' ),
+			__( 'Search Widgets', 'smart-woocommerce-search' ),
+			__( 'Widgets', 'smart-woocommerce-search' ),
 			'manage_options',
 			'smart-search',
 			'ysm_display_admin_page_widgets'
 		);
 
 		add_submenu_page( 'smart-search',
-			__( 'Add New Search Widget', 'smart_search' ),
-			__( 'Add New', 'smart_search' ),
+			__( 'Add New Search Widget', 'smart-woocommerce-search' ),
+			__( 'Add New', 'smart-woocommerce-search' ),
 			'manage_options',
 			'smart-search-custom-new',
 			'ysm_display_admin_page_widget_new'
 		);
 
 		add_submenu_page( 'smart-search',
-			__( 'Upgrade to Pro', 'smart_search' ),
-			__( 'Upgrade to Pro', 'smart_search' ),
+			__( 'Upgrade to Pro', 'smart-woocommerce-search' ),
+			__( 'Upgrade to Pro', 'smart-woocommerce-search' ),
 			'manage_options',
 			'smart-search-update-to-pro',
 			'ysm_display_admin_page_update_to_pro'
@@ -183,7 +183,7 @@ if ( ! function_exists( 'ysm_enqueue_scripts' ) ) {
 			}
 
 			if ( isset( $v['settings']['no_results_text'] ) ) {
-				$localized[ $js_pref . 'no_results_text' ] = __( $v['settings']['no_results_text'], 'smart_search' );
+				$localized[ $js_pref . 'no_results_text' ] = __( $v['settings']['no_results_text'], 'smart-woocommerce-search' );
 			}
 
 			$pt_list = array();
@@ -254,9 +254,9 @@ if ( ! function_exists( 'ysm_admin_enqueue_scripts' ) ) {
 		), false, 1 );
 
 		wp_localize_script( 'smart-search-admin', 'ysm_L10n', array(
-			'column_delete' => __( 'Delete column?', 'smart_search' ),
-			'row_delete'    => __( 'Delete row?', 'smart_search' ),
-			'widget_delete' => __( 'Delete widget?', 'smart_search' ),
+			'column_delete' => __( 'Delete column?', 'smart-woocommerce-search' ),
+			'row_delete'    => __( 'Delete row?', 'smart-woocommerce-search' ),
+			'widget_delete' => __( 'Delete widget?', 'smart-woocommerce-search' ),
 		) );
 
 		// Select2
@@ -280,22 +280,25 @@ if ( ! function_exists( 'ysm_change_admin_title' ) ) {
 			if ( $action && 'edit' === $action && ! empty( $id ) ) {
 				$is_smart_search = true;
 				if ( ysm_get_default_widgets_names( $id ) ) {
-					$title = sprintf( __( 'Edit Widget: %s', 'smart_search' ), ysm_get_default_widgets_names( $id ) );
-				} else {
-					$title = sprintf( __( 'Edit Widget: %s', 'smart_search' ), $id );
+					$id = ysm_get_default_widgets_names( $id );
 				}
+				/* translators: %s: Name/id of a widget */
+				$title = sprintf( __( 'Edit Widget: %s', 'smart-woocommerce-search' ), $id );
 			}
 		}
 
 		if ( $is_smart_search ) {
 			if ( is_network_admin() ) {
-				$admin_title = sprintf( __( 'Network Admin: %s', 'smart_search' ), esc_html( get_current_site()->site_name ) );
+				/* translators: %s: Name of a site */
+				$admin_title = sprintf( __( 'Network Admin: %s', 'smart-woocommerce-search' ), esc_html( get_current_site()->site_name ) );
 			} elseif ( is_user_admin() ) {
-				$admin_title = sprintf( __( 'User Dashboard: %s', 'smart_search' ), esc_html( get_current_site()->site_name ) );
+				/* translators: %s: Name of a site */
+				$admin_title = sprintf( __( 'User Dashboard: %s', 'smart-woocommerce-search' ), esc_html( get_current_site()->site_name ) );
 			} else {
 				$admin_title = get_bloginfo( 'name' );
 			}
-			$admin_title = sprintf( __( '%1$s &lsaquo; %2$s &#8212; WordPress', 'smart_search' ), $title, $admin_title );
+			/* translators: Admin screen title. 1: Admin screen name, 2: Network or site name. */
+			$admin_title = sprintf( __( '%1$s &lsaquo; %2$s &#8212; WordPress', 'smart-woocommerce-search' ), $title, $admin_title );
 		}
 
 		return $admin_title;
@@ -335,8 +338,8 @@ if ( ! function_exists( 'ysm_change_admin_footer_text' ) ) {
  */
 if ( ! function_exists( 'ysm_plugin_action_links' ) ) {
 	function ysm_plugin_action_links( $links ) {
-		$links[] = sprintf( '<a href="%s">%s</a>', admin_url( 'admin.php?page=smart-search' ), __( 'Settings', 'smart_search' ) );
-		$links[] = sprintf( '<a href="%s" target="_blank" class="ysm-update-to-pro-link">%s</a>', 'https://yummywp.com/plugins/smart-woocommerce-search/#smart-search-compare', __( 'Upgrade to Pro', 'smart_search' ) );
+		$links[] = sprintf( '<a href="%s">%s</a>', admin_url( 'admin.php?page=smart-search' ), __( 'Settings', 'smart-woocommerce-search' ) );
+		$links[] = sprintf( '<a href="%s" target="_blank" class="ysm-update-to-pro-link">%s</a>', 'https://yummywp.com/plugins/smart-woocommerce-search/#smart-search-compare', __( 'Upgrade to Pro', 'smart-woocommerce-search' ) );
 
 		return $links;
 	}
@@ -355,6 +358,19 @@ function ysm_admin_head() {
 	<?php
 }
 add_filter( 'admin_head', 'ysm_admin_head' );
+
+function ysm_gettext( $translation, $text, $domain ) {
+	if ( ! $translation || $translation === $text ) {
+		$translations = get_translations_for_domain( 'smart_search' );
+		$fallback_translation  = $translations->translate( $text );
+		if ( $fallback_translation && $fallback_translation !== $text ) {
+			$translation = $fallback_translation;
+		}
+	}
+
+	return $translation;
+}
+add_filter( 'gettext_smart-woocommerce-search', 'ysm_gettext', 99, 3 );
 
 /**
  * Init Search

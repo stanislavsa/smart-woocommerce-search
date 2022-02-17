@@ -9,10 +9,10 @@ class Ysm_Search_Widget extends WP_Widget {
 	function __construct() {
 		parent::__construct(
 			'ysm_search_widget',
-			__( 'Smart Search', 'smart_search' ),
+			__( 'Smart Search', 'smart-woocommerce-search' ),
 			array(
 				'classname'   => 'ysm_search_widget',
-				'description' => __( 'Displays search box', 'smart_search' ),
+				'description' => __( 'Displays search box', 'smart-woocommerce-search' ),
 			)
 		);
 	}
@@ -44,11 +44,11 @@ class Ysm_Search_Widget extends WP_Widget {
 		}
 		?>
 		<p>
-			<label for="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>"><?php esc_html_e( 'Title:', 'smart_search' ); ?></label>
+			<label for="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>"><?php esc_html_e( 'Title:', 'smart-woocommerce-search' ); ?></label>
 			<input class="widefat" type="text" id="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'title' ) ); ?>" value="<?php echo esc_attr( $instance['title'] ); ?>" />
 		</p>
 		<p>
-			<label for="<?php echo esc_attr( $this->get_field_id( 'widget_id' ) ); ?>"><?php esc_html_e( 'Select Widget:', 'smart_search' ); ?></label>
+			<label for="<?php echo esc_attr( $this->get_field_id( 'widget_id' ) ); ?>"><?php esc_html_e( 'Select Widget:', 'smart-woocommerce-search' ); ?></label>
 			<select id="<?php echo esc_attr( $this->get_field_id( 'widget_id' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'widget_id' ) ); ?>" class="widefat">
 				<?php foreach ( $widgets as $id => $obj ) { ?>
 					<option <?php selected( $id, $instance['widget_id'] ); ?> value="<?php echo esc_attr( $id ); ?>">

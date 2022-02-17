@@ -4,9 +4,9 @@
 
 		<?php
 		ysm_setting( $w_id, 'synonyms', array(
-			'type'  => 'pro',
-			'title' => __( 'Synonyms', 'smart_search' ),
-			'description' => __( 'Add synonyms for the words that, for your opinion, can be entered with spell errors. Example Orange => Ornge', 'smart_search' ),
+			'type'        => 'pro',
+			'title'       => __( 'Synonyms', 'smart-woocommerce-search' ),
+			'description' => __( 'Add synonyms for the words that, for your opinion, can be entered with spell errors. Example Orange => Ornge', 'smart-woocommerce-search' ),
 		));
 		?>
 

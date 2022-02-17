@@ -23,10 +23,10 @@ function ysm_get_default_widgets_ids() {
  */
 function ysm_get_default_widgets_names( $id = '' ) {
 	$list = array(
-		'default' => __( 'WordPres Default Search', 'smart_search' ),
-		'product' => __( 'WooCommerce Product Search', 'smart_search' ),
-		'avada'   => __( 'Avada Search Bar', 'smart_search' ),
-		'divi'    => __( 'DIVI Search Bar', 'smart_search' ),
+		'default' => __( 'WordPres Default Search', 'smart-woocommerce-search' ),
+		'product' => __( 'WooCommerce Product Search', 'smart-woocommerce-search' ),
+		'avada'   => __( 'Avada Search Bar', 'smart-woocommerce-search' ),
+		'divi'    => __( 'DIVI Search Bar', 'smart-woocommerce-search' ),
 	);
 
 	if ( '' !== $id ) {
@@ -114,10 +114,10 @@ function ysm_get_widget_list_row_template( $args ) {
 						<input type="text" value="[smart_search id=&quot;' . esc_attr( $id ) . '&quot;]" readonly="" />
 					</td>
 					<td>
-						<a href="#" class="ysm-widget-duplicate" data-id="' . esc_attr( $id ) . '" title="' . __( 'Duplicate', 'smart_search' ) . '">
+						<a href="#" class="ysm-widget-duplicate" data-id="' . esc_attr( $id ) . '" title="' . __( 'Duplicate', 'smart-woocommerce-search' ) . '">
 							<span class="dashicons dashicons-admin-page"></span>
 						</a>
-						<a href="#" class="ysm-widget-remove" data-id="' . esc_attr( $id ) . '" title="' . __( 'Delete', 'smart_search' ) . '">
+						<a href="#" class="ysm-widget-remove" data-id="' . esc_attr( $id ) . '" title="' . __( 'Delete', 'smart-woocommerce-search' ) . '">
 							<span class="dashicons dashicons-trash"></span>
 						</a>
 					</td>

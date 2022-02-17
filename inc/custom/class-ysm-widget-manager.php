@@ -289,7 +289,7 @@ class Ysm_Widget_Manager {
 			update_option( $this->wp_option, $settings, 'no' );
 			$this->widgets = $settings;
 
-			ysm_add_message( __( 'Your settings have been saved.', 'smart_search' ) );
+			ysm_add_message( __( 'Your settings have been saved.', 'smart-woocommerce-search' ) );
 
 			/* redirect to edit widget page after new have been created */
 			if ( 'custom-new' === $this->mode ) {
@@ -355,8 +355,8 @@ class Ysm_Widget_Manager {
 		<div class="<?php echo esc_attr( $w_classes ); ?>">
 			<form data-id="<?php echo esc_attr( $w_id ); ?>" role="search" method="get" class="search-form" action="<?php echo esc_url( home_url( '/' ) ); ?>">
 				<label for="<?php echo esc_attr( $uniq_id ); ?>">
-					<span class="screen-reader-text"><?php esc_attr_e( $settings['placeholder'], 'smart_search' ); ?></span>
-					<input type="search" name="s" value="<?php echo get_search_query(); ?>" id="<?php echo esc_attr( $uniq_id ); ?>" class="search-field" placeholder="<?php esc_attr_e( $settings['placeholder'], 'smart_search' ); ?>" />
+					<span class="screen-reader-text"><?php esc_attr_e( $settings['placeholder'], 'smart-woocommerce-search' ); ?></span>
+					<input type="search" name="s" value="<?php echo get_search_query(); ?>" id="<?php echo esc_attr( $uniq_id ); ?>" class="search-field" placeholder="<?php esc_attr_e( $settings['placeholder'], 'smart-woocommerce-search' ); ?>" />
 					<input type="hidden" name="search_id" value="<?php echo esc_attr( $w_id ); ?>" />
 					<?php if ( 'product' === $layout ) : ?>
 						<input type="hidden" name="post_type" value="product" />
@@ -364,7 +364,7 @@ class Ysm_Widget_Manager {
 					<?php if ( function_exists( 'is_amp_endpoint' ) && is_amp_endpoint() ) : ?>
 						<input type="hidden" name="amp" value="1" />
 					<?php endif; ?>
-					<button type="submit" class="search-submit" aria-label="<?php echo esc_html_x( 'Search', 'submit button', 'smart_search' ); ?>"><span class="screen-reader-text"><?php echo esc_html_x( 'Search', 'submit button', 'smart_search' ); ?></span></button>
+					<button type="submit" class="search-submit" aria-label="<?php echo esc_html_x( 'Search', 'submit button', 'smart-woocommerce-search' ); ?>"><span class="screen-reader-text"><?php echo esc_html_x( 'Search', 'submit button', 'smart-woocommerce-search' ); ?></span></button>
 				</label>
 			</form>
 		</div>

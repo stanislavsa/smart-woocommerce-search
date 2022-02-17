@@ -242,7 +242,7 @@ class Ysm_Setting {
 		ob_start();
 		?>
 		<p class="description" style="color: red;">
-			<?php echo esc_html__( 'Available in PRO', 'smart_search' ); ?>
+			<?php echo esc_html__( 'Available in PRO', 'smart-woocommerce-search' ); ?>
 		</p>
 		<p class="description">
 			<?php echo wp_kses_post( $args['description'] ); ?>
