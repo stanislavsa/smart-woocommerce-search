@@ -359,18 +359,20 @@ function ysm_admin_head() {
 }
 add_filter( 'admin_head', 'ysm_admin_head' );
 
-function ysm_gettext( $translation, $text, $domain ) {
-	if ( ! $translation || $translation === $text ) {
-		$translations = get_translations_for_domain( 'smart_search' );
-		$fallback_translation  = $translations->translate( $text );
-		if ( $fallback_translation && $fallback_translation !== $text ) {
-			$translation = $fallback_translation;
+if ( ! function_exists( 'ysm_gettext' ) ) {
+	function ysm_gettext( $translation, $text, $domain ) {
+		if ( ! $translation || $translation === $text ) {
+			$translations = get_translations_for_domain( 'smart_search' );
+			$fallback_translation  = $translations->translate( $text );
+			if ( $fallback_translation && $fallback_translation !== $text ) {
+				$translation = $fallback_translation;
+			}
 		}
-	}
 
-	return $translation;
+		return $translation;
+	}
+	add_filter( 'gettext_smart-woocommerce-search', 'ysm_gettext', 99, 3 );
 }
-add_filter( 'gettext_smart-woocommerce-search', 'ysm_gettext', 99, 3 );
 
 /**
  * Init Search
