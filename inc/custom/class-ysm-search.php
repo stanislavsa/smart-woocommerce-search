@@ -558,7 +558,12 @@ class Ysm_Search {
 		$view_all_link = '';
 
 		if ( self::get_var( 'display_view_all_link' ) || self::get_var( 'view_all_link_text' ) ) {
-			$view_all_link = '<a class="smart-search-view-all" href="' . esc_url( self::get_viewall_link_url() ) . '">' . esc_html__( self::get_var( 'view_all_link_text' ), 'smart-woocommerce-search' ) . '</a>';
+			// target _blank
+			$target_blank = '';
+			if ( self::get_var( 'view_all_link_target_blank' ) ) {
+				$target_blank = ' target="_blank"';
+			}
+			$view_all_link = '<a class="smart-search-view-all"' . $target_blank . ' href="' . esc_url( self::get_viewall_link_url() ) . '">' . esc_html__( self::get_var( 'view_all_link_text' ), 'smart-woocommerce-search' ) . '</a>';
 		}
 
 		$res = array(

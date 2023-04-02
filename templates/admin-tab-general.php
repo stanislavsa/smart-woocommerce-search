@@ -73,6 +73,13 @@
 			'value'       => 'View all',
 		));
 
+		ysm_setting( $w_id, 'view_all_link_target_blank', array(
+			'type'        => 'checkbox',
+			'title'       => __( '"View all" Link in New Tab', 'smart-woocommerce-search' ),
+			'description' => __( 'Adds target="_blank" attribute to the "View all" link', 'smart-woocommerce-search' ),
+			'value'       => 0,
+		));
+
 		ysm_setting( $w_id, 'view_all_link_found_posts', array(
 			'type'        => 'pro',
 			'title'       => __( 'Number of Found Posts in the "View all" Link', 'smart-woocommerce-search' ),

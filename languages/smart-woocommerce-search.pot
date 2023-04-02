@@ -1,15 +1,15 @@
-# Copyright (C) 2022 YummyWP
+# Copyright (C) 2023 YummyWP
 # This file is distributed under the same license as the Smart WooCommerce Search plugin.
 msgid ""
 msgstr ""
-"Project-Id-Version: Smart WooCommerce Search 2.3.1\n"
+"Project-Id-Version: Smart WooCommerce Search 2.5.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/smart-woocommerce-search\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2022-02-21T08:39:43+00:00\n"
+"POT-Creation-Date: 2023-04-02T15:36:22+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.4.0\n"
 "X-Domain: smart-woocommerce-search\n"
@@ -421,102 +421,110 @@ msgid "If not empty displays a link at the bottom of results popup"
 msgstr ""
 
 #: templates/admin-tab-general.php:78
-msgid "Number of Found Posts in the \"View all\" Link"
+msgid "\"View all\" Link in New Tab"
 msgstr ""
 
 #: templates/admin-tab-general.php:79
-msgid "Display total number of found posts in the \"View all\" link<br>This is advanced option, use it only if you know what you do.<br>It may affect search performance"
+msgid "Adds target=\"_blank\" attribute to the \"View all\" link"
 msgstr ""
 
 #: templates/admin-tab-general.php:85
-msgid "Default Output on Search Page"
+msgid "Number of Found Posts in the \"View all\" Link"
 msgstr ""
 
 #: templates/admin-tab-general.php:86
-msgid "Disable altering search results by Smart Search plugin on the search results page.<br>By default the plugin modified search results according to selected options"
+msgid "Display total number of found posts in the \"View all\" link<br>This is advanced option, use it only if you know what you do.<br>It may affect search performance"
 msgstr ""
 
 #: templates/admin-tab-general.php:92
-msgid "Search Page Layout with Posts"
+msgid "Default Output on Search Page"
 msgstr ""
 
 #: templates/admin-tab-general.php:93
-msgid "Display posts with products using theme search results layout.<br>Usefull if you want to display posts with products.<br>By default if 'Search in Products' option selected only products displays using WooCommerce search results layout"
+msgid "Disable altering search results by Smart Search plugin on the search results page.<br>By default the plugin modified search results according to selected options"
 msgstr ""
 
 #: templates/admin-tab-general.php:99
-msgid "Accent Words on Search Page"
+msgid "Search Page Layout with Posts"
 msgstr ""
 
 #: templates/admin-tab-general.php:100
-msgid "Accent searchable words on search page. Works only if \"Default Output on Search Page\" option is disabled."
+msgid "Display posts with products using theme search results layout.<br>Usefull if you want to display posts with products.<br>By default if 'Search in Products' option selected only products displays using WooCommerce search results layout"
 msgstr ""
 
 #: templates/admin-tab-general.php:106
-msgid "Multiple Word Search"
+msgid "Accent Words on Search Page"
 msgstr ""
 
 #: templates/admin-tab-general.php:107
+msgid "Accent searchable words on search page. Works only if \"Default Output on Search Page\" option is disabled."
+msgstr ""
+
+#: templates/admin-tab-general.php:113
+msgid "Multiple Word Search"
+msgstr ""
+
+#: templates/admin-tab-general.php:114
 msgid "Enable multiple word search."
 msgstr ""
 
-#: templates/admin-tab-general.php:110
+#: templates/admin-tab-general.php:117
 msgid "No"
 msgstr ""
 
-#: templates/admin-tab-general.php:111
+#: templates/admin-tab-general.php:118
 msgid "\"alpha\" OR \"beta\""
 msgstr ""
 
-#: templates/admin-tab-general.php:112
+#: templates/admin-tab-general.php:119
 msgid "\"alpha\" AND \"beta\""
 msgstr ""
 
-#: templates/admin-tab-general.php:118
+#: templates/admin-tab-general.php:125
 msgid "Exclude \"Out of stock\""
 msgstr ""
 
-#: templates/admin-tab-general.php:119
+#: templates/admin-tab-general.php:126
 msgid "Exclude \"Out of stock\" products from results"
 msgstr ""
 
-#: templates/admin-tab-general.php:125
+#: templates/admin-tab-general.php:132
 msgid "Visibility of Variable Products"
 msgstr ""
 
-#: templates/admin-tab-general.php:126
+#: templates/admin-tab-general.php:133
 msgid "Select visibility of variable products and variations"
 msgstr ""
 
-#: templates/admin-tab-general.php:131
+#: templates/admin-tab-general.php:138
 msgid "Enable Transient"
 msgstr ""
 
-#: templates/admin-tab-general.php:132
+#: templates/admin-tab-general.php:139
 msgid "Save query results in a transient"
 msgstr ""
 
-#: templates/admin-tab-general.php:138
+#: templates/admin-tab-general.php:145
 msgid "SKU Search Top Priority"
 msgstr ""
 
-#: templates/admin-tab-general.php:139
+#: templates/admin-tab-general.php:146
 msgid "Search by SKU first if this option is checked and if request is numeric"
 msgstr ""
 
-#: templates/admin-tab-general.php:145
+#: templates/admin-tab-general.php:152
 msgid "Skip Punctuation"
 msgstr ""
 
-#: templates/admin-tab-general.php:146
+#: templates/admin-tab-general.php:153
 msgid "Skip punctuation in the search string"
 msgstr ""
 
-#: templates/admin-tab-general.php:152
+#: templates/admin-tab-general.php:159
 msgid "Disable AJAX"
 msgstr ""
 
-#: templates/admin-tab-general.php:153
+#: templates/admin-tab-general.php:160
 msgid "Disable AJAX functionality (results popup)"
 msgstr ""
 
