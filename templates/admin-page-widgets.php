@@ -102,7 +102,10 @@ if ( $action && 'edit' === $action && $id ) {
 			</table>
 
 		</div>
-
+		<?php wp_nonce_field(
+			'ysm_widgets_nonce_action',
+			'ysm_widgets_nonce'
+		); ?>
 		<br>
 		<a href="<?php echo esc_url( admin_url( 'admin.php?page=smart-search-custom-new' ) ); ?>" class="ymapp-button-small"><?php esc_html_e( 'Add New', 'smart-woocommerce-search' ); ?></a>
 

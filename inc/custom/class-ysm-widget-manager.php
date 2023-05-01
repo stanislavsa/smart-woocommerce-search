@@ -179,6 +179,16 @@ class Ysm_Widget_Manager {
 	public function duplicate( $id ) {
 		$w_id = filter_input( INPUT_POST, 'id', FILTER_SANITIZE_STRING );
 		$action = filter_input( INPUT_POST, 'action', FILTER_SANITIZE_STRING );
+		$nonce = filter_input( INPUT_POST, 'nonce', FILTER_SANITIZE_STRING );
+
+		if ( ! wp_verify_nonce( $nonce, 'ysm_widgets_nonce_action' ) ) {
+			exit;
+		}
+
+		// Verify permissions
+		if ( ! current_user_can( 'manage_options' ) ) {
+			exit;
+		}
 
 		if ( $action ) {
 			$id = (int) $w_id;
@@ -216,6 +226,17 @@ class Ysm_Widget_Manager {
 	public function remove( $id ) {
 		$w_id = filter_input( INPUT_POST, 'id', FILTER_SANITIZE_STRING );
 		$action = filter_input( INPUT_POST, 'action', FILTER_SANITIZE_STRING );
+		$nonce = filter_input( INPUT_POST, 'nonce', FILTER_SANITIZE_STRING );
+
+		if ( ! wp_verify_nonce( $nonce, 'ysm_widgets_nonce_action' ) ) {
+			exit;
+		}
+
+		// Verify permissions
+		if ( ! current_user_can( 'manage_options' ) ) {
+			exit;
+		}
+
 		if ( $action ) {
 			$id = (int) $w_id;
 		}

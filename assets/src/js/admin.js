@@ -30,7 +30,8 @@
 
 				$.post(ajaxurl, {
 					action: 'ysm_widget_delete',
-					id: id
+					id: id,
+					nonce: $('#ysm_widgets_nonce').val()
 				},
 				function($r) {
 					if ($r == 1) {
@@ -52,7 +53,8 @@
 
 			$.post(ajaxurl, {
 				action: 'ysm_widget_duplicate',
-				id: id
+				id: id,
+				nonce: $('#ysm_widgets_nonce').val()
 			},
 			function($r) {
 				if ($r && $r['id'] ) {
