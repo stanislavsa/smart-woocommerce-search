@@ -74,7 +74,7 @@ Give it a try and enjoy:)
   * Ultimate WooCommerce Brands plugin compatible
   * More customization and styling settings
 
-https://www.youtube.com/embed/db4FB2NUD-g?version=3&rel=1&showsearch=0&showinfo=1&iv_load_policy=1&fs=1&hl=en-US&autohide=2&wmode=transparent
+https://www.youtube.com/watch?v=EoMqNO8sDYg
 
 [Read More](https://yummywp.com/plugins/smart-woocommerce-search/).
 
