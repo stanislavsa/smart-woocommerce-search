@@ -154,9 +154,11 @@ function ysm_get_s() {
 	if ( ! empty( $woof_text ) ) {
 		$s = $woof_text;
 	}
-	$s = html_entity_decode( $s );
-	$s = wp_strip_all_tags( $s );
-	$s = sanitize_text_field( $s );
+	if ( $s ) {
+		$s = html_entity_decode( $s );
+		$s = wp_strip_all_tags( $s );
+		$s = sanitize_text_field( $s );
+	}
 
 	return $s;
 }
@@ -175,7 +177,7 @@ function ysm_accent_search_term( $text ) {
 		return $text;
 	}
 
-	$w_id = filter_input( INPUT_GET, 'search_id', FILTER_SANITIZE_STRING );
+	$w_id = filter_input( INPUT_GET, 'search_id', FILTER_SANITIZE_FULL_SPECIAL_CHARS );
 	$s    = ysm_get_s();
 
 	if ( empty( $w_id ) || empty( $s ) ) {

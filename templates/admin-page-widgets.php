@@ -5,8 +5,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 $widgets = ysm_get_custom_widgets();
 $w_id = 0;
-$action = filter_input( INPUT_GET, 'action', FILTER_SANITIZE_STRING );
-$id = filter_input( INPUT_GET, 'id', FILTER_SANITIZE_STRING );
+$action = filter_input( INPUT_GET, 'action', FILTER_SANITIZE_FULL_SPECIAL_CHARS );
+$id = filter_input( INPUT_GET, 'id', FILTER_SANITIZE_FULL_SPECIAL_CHARS );
 
 if ( $action && 'edit' === $action && $id ) {
 	if ( ! empty( ysm_get_default_widgets_names( $id ) ) ) {

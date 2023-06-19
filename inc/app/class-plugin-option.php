@@ -97,8 +97,8 @@ if ( ! class_exists( 'YMAPP\Plugin_Option' ) ) :
 		 * Save widget settings
 		 */
 		public function save() {
-			$is_save  = filter_input( INPUT_POST, 'save', FILTER_SANITIZE_STRING );
-			$_wpnonce = filter_input( INPUT_POST, '_wpnonce', FILTER_SANITIZE_STRING );
+			$is_save  = filter_input( INPUT_POST, 'save', FILTER_SANITIZE_FULL_SPECIAL_CHARS );
+			$_wpnonce = filter_input( INPUT_POST, '_wpnonce', FILTER_SANITIZE_FULL_SPECIAL_CHARS );
 
 			if ( ! $is_save ) {
 				return;

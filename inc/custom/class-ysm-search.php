@@ -183,7 +183,7 @@ class Ysm_Search {
 
 		if ( ! is_admin() && ! empty( $query->query_vars['s'] ) && ! empty( $s ) && ! ( defined( 'DOING_AJAX' ) && DOING_AJAX ) ) {
 
-			$w_id = filter_input( INPUT_GET, 'search_id', FILTER_SANITIZE_STRING );
+			$w_id = filter_input( INPUT_GET, 'search_id', FILTER_SANITIZE_FULL_SPECIAL_CHARS );
 			if ( ! $w_id ) {
 				$w_id = apply_filters( 'ysm_search_page_default_widget', 0 );
 			}
@@ -207,7 +207,7 @@ class Ysm_Search {
 				self::set_var( 'max_post_count', -1 );
 				self::set_s( $s );
 
-				$post_type = filter_input( INPUT_GET, 'post_type', FILTER_SANITIZE_STRING );
+				$post_type = filter_input( INPUT_GET, 'post_type', FILTER_SANITIZE_FULL_SPECIAL_CHARS );
 				$per_page = get_option( 'posts_per_page' );
 				if ( $post_type && 'product' === $post_type ) {
 					$columns = get_option( 'woocommerce_catalog_columns', 4 );
@@ -225,7 +225,7 @@ class Ysm_Search {
 				$paged = $query->query_vars['paged'];
 				if ( ! $paged || 1 === $paged ) {
 					if ( isset( $_GET['fwp_paged'] ) ) {
-						$paged = (int) filter_input( INPUT_GET, 'fwp_paged', FILTER_SANITIZE_STRING );
+						$paged = (int) filter_input( INPUT_GET, 'fwp_paged', FILTER_SANITIZE_FULL_SPECIAL_CHARS );
 					}
 				}
 				if ( 1 < $paged ) {
@@ -251,7 +251,7 @@ class Ysm_Search {
 				$query->set( 'offset', 0 );
 				$query->set( 'posts_per_page', $posts_count );
 
-				$product_orderby = filter_input( INPUT_GET, 'product_orderby', FILTER_SANITIZE_STRING );
+				$product_orderby = filter_input( INPUT_GET, 'product_orderby', FILTER_SANITIZE_FULL_SPECIAL_CHARS );
 				if ( empty( $product_orderby ) ) {
 					$orderby = $query->get( 'orderby' );
 					if ( 'relevance' === $orderby ) {
@@ -274,7 +274,7 @@ class Ysm_Search {
 	 * Remove hook that change posts set on search results page
 	 */
 	public static function remove_search_filter() {
-		if ( ! is_admin() && ! empty( filter_input( INPUT_GET, 's', FILTER_SANITIZE_STRING ) ) && ! ( defined( 'DOING_AJAX' ) && DOING_AJAX ) ) {
+		if ( ! is_admin() && ! empty( filter_input( INPUT_GET, 's', FILTER_DEFAULT ) ) && ! ( defined( 'DOING_AJAX' ) && DOING_AJAX ) ) {
 			remove_action( 'pre_get_posts', array( __CLASS__, 'search_filter' ), 99999999 );
 		}
 	}

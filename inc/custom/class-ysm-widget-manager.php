@@ -52,12 +52,12 @@ class Ysm_Widget_Manager {
 
 		add_action( 'init', array( $this, 'on_wp_init' ) );
 
-		$page = filter_input( INPUT_GET, 'page', FILTER_SANITIZE_STRING );
+		$page = filter_input( INPUT_GET, 'page', FILTER_SANITIZE_FULL_SPECIAL_CHARS );
 		/* custom widgets list or edit widget page */
 		if ( ! empty( $page ) && 'smart-search' === $page ) {
 			$this->mode = 'custom-list';
-			$action = filter_input( INPUT_GET, 'action', FILTER_SANITIZE_STRING );
-			$id = filter_input( INPUT_GET, 'id', FILTER_SANITIZE_STRING );
+			$action = filter_input( INPUT_GET, 'action', FILTER_SANITIZE_FULL_SPECIAL_CHARS );
+			$id = filter_input( INPUT_GET, 'id', FILTER_SANITIZE_FULL_SPECIAL_CHARS );
 
 			if ( isset( $action ) && 'edit' === $action && ! empty( $id ) ) {
 				$this->mode = 'custom-edit';
@@ -125,11 +125,11 @@ class Ysm_Widget_Manager {
 	}
 
 	public function on_wp_init() {
-		$page = filter_input( INPUT_GET, 'page', FILTER_SANITIZE_STRING );
+		$page = filter_input( INPUT_GET, 'page', FILTER_SANITIZE_FULL_SPECIAL_CHARS );
 		/* custom widgets list or edit widget page */
 		if ( ! empty( $page ) && in_array( $page, array( 'smart-search-custom-new', 'smart-search' ), true ) ) {
-			if ( filter_input( INPUT_POST, 'save', FILTER_SANITIZE_STRING ) ) {
-				$wpnonce = filter_input( INPUT_POST, '_wpnonce', FILTER_SANITIZE_STRING );
+			if ( filter_input( INPUT_POST, 'save', FILTER_SANITIZE_FULL_SPECIAL_CHARS ) ) {
+				$wpnonce = filter_input( INPUT_POST, '_wpnonce', FILTER_SANITIZE_FULL_SPECIAL_CHARS );
 				if ( ! empty( $wpnonce ) && wp_verify_nonce( $wpnonce, $this->wp_option ) ) {
 					$this->save();
 				}
@@ -177,9 +177,9 @@ class Ysm_Widget_Manager {
 	 * @param $id
 	 */
 	public function duplicate( $id ) {
-		$w_id = filter_input( INPUT_POST, 'id', FILTER_SANITIZE_STRING );
-		$action = filter_input( INPUT_POST, 'action', FILTER_SANITIZE_STRING );
-		$nonce = filter_input( INPUT_POST, 'nonce', FILTER_SANITIZE_STRING );
+		$w_id = filter_input( INPUT_POST, 'id', FILTER_SANITIZE_FULL_SPECIAL_CHARS );
+		$action = filter_input( INPUT_POST, 'action', FILTER_SANITIZE_FULL_SPECIAL_CHARS );
+		$nonce = filter_input( INPUT_POST, 'nonce', FILTER_SANITIZE_FULL_SPECIAL_CHARS );
 
 		if ( ! wp_verify_nonce( $nonce, 'ysm_widgets_nonce_action' ) ) {
 			exit;
@@ -224,9 +224,9 @@ class Ysm_Widget_Manager {
 	 * @param $id
 	 */
 	public function remove( $id ) {
-		$w_id = filter_input( INPUT_POST, 'id', FILTER_SANITIZE_STRING );
-		$action = filter_input( INPUT_POST, 'action', FILTER_SANITIZE_STRING );
-		$nonce = filter_input( INPUT_POST, 'nonce', FILTER_SANITIZE_STRING );
+		$w_id = filter_input( INPUT_POST, 'id', FILTER_SANITIZE_FULL_SPECIAL_CHARS );
+		$action = filter_input( INPUT_POST, 'action', FILTER_SANITIZE_FULL_SPECIAL_CHARS );
+		$nonce = filter_input( INPUT_POST, 'nonce', FILTER_SANITIZE_FULL_SPECIAL_CHARS );
 
 		if ( ! wp_verify_nonce( $nonce, 'ysm_widgets_nonce_action' ) ) {
 			exit;
@@ -283,7 +283,7 @@ class Ysm_Widget_Manager {
 	 */
 	protected function save() {
 		if ( in_array( $this->mode, array( 'custom-edit', 'custom-new' ), true ) ) {
-			$name = filter_input( INPUT_POST, 'name', FILTER_SANITIZE_STRING );
+			$name = filter_input( INPUT_POST, 'name', FILTER_SANITIZE_FULL_SPECIAL_CHARS );
 			$settings = $this->widgets;
 
 			if ( ysm_get_default_widgets_names( $this->widget_id ) ) {

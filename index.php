@@ -6,14 +6,14 @@
  * Tags: woocommerce search, ajax search, woocommerce, woocommerce search by sku, woocommerce search shortcod, product search, product filter, woocommerce search results, instant search, woocommerce search plugin, woocommerce search form, search for woocommerce, woocommerce search page, search, woocommerce product search, search woocommerce, shop, shop search, autocomplete, autosuggest, search for wp, search for WordPress, search plugin, woocommerce search by sku, search results,  woocommerce search shortcode, search products, search autocomplete, woocommerce advanced search, woocommerce predictive search, woocommerce live search, woocommerce single product, woocommerce site search, products, shop, category search, custom search, predictive search, relevant search, search product, woocommerce plugin, posts search, wp search, WordPress search
  * Author:      YummyWP
  * Author URI:  https://yummywp.com
- * Version:     2.5.1
+ * Version:     2.5.2
  * Domain Path: /languages
  * Text Domain: smart-woocommerce-search
  *
  * Requires PHP: 5.4
  *
  * WC requires at least: 4.0
- * WC tested up to: 7.6
+ * WC tested up to: 7.8
  */
 
 if ( ! defined( 'ABSPATH' ) ) exit;
@@ -117,7 +117,7 @@ if ( ! function_exists( 'ysm_display_admin_page_widget_new' ) ) {
 
 if ( ! function_exists( 'ysm_display_admin_page_update_to_pro' ) ) {
 	function ysm_display_admin_page_update_to_pro() {
-		if ( 'smart-search-update-to-pro' === filter_input( INPUT_GET, 'page', FILTER_SANITIZE_STRING ) ) {
+		if ( 'smart-search-update-to-pro' === filter_input( INPUT_GET, 'page', FILTER_SANITIZE_FULL_SPECIAL_CHARS ) ) {
 			wp_redirect( 'https://yummywp.com/plugins/smart-woocommerce-search/#smart-search-compare' );
 			die;
 		}
@@ -234,7 +234,7 @@ if ( ! function_exists( 'ysm_enqueue_scripts' ) ) {
  */
 if ( ! function_exists( 'ysm_admin_enqueue_scripts' ) ) {
 	function ysm_admin_enqueue_scripts() {
-		$cur_page = filter_input( INPUT_GET, 'page', FILTER_SANITIZE_STRING );
+		$cur_page = filter_input( INPUT_GET, 'page', FILTER_SANITIZE_FULL_SPECIAL_CHARS );
 
 		if ( ! $cur_page || false === strpos( $cur_page, 'smart-search' ) ) {
 			return;
@@ -272,11 +272,11 @@ if ( ! function_exists( 'ysm_admin_enqueue_scripts' ) ) {
 if ( ! function_exists( 'ysm_change_admin_title' ) ) {
 	function ysm_change_admin_title( $admin_title, $title ) {
 		$is_smart_search = false;
-		$cur_page = filter_input( INPUT_GET, 'page', FILTER_SANITIZE_STRING );
+		$cur_page = filter_input( INPUT_GET, 'page', FILTER_SANITIZE_FULL_SPECIAL_CHARS );
 
 		if ( $cur_page && 'smart-search' === $cur_page ) {
-			$action = filter_input( INPUT_GET, 'action', FILTER_SANITIZE_STRING );
-			$id = filter_input( INPUT_GET, 'id', FILTER_SANITIZE_STRING );
+			$action = filter_input( INPUT_GET, 'action', FILTER_SANITIZE_FULL_SPECIAL_CHARS );
+			$id = filter_input( INPUT_GET, 'id', FILTER_SANITIZE_FULL_SPECIAL_CHARS );
 			if ( $action && 'edit' === $action && ! empty( $id ) ) {
 				$is_smart_search = true;
 				if ( ysm_get_default_widgets_names( $id ) ) {
