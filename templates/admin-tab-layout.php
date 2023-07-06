@@ -31,6 +31,13 @@
 			'value'       => 1,
 		));
 
+		ysm_setting( $w_id, 'display_category', array(
+			'type'        => 'checkbox',
+			'title'       => __( 'Display Category', 'smart-woocommerce-search' ),
+			'description' => __( 'Display product / post category', 'smart-woocommerce-search' ),
+			'value'       => 0,
+		));
+
 		ysm_setting( $w_id, 'display_price', array(
 			'type'        => 'checkbox',
 			'title'       => __( 'Display Price', 'smart-woocommerce-search' ),

@@ -475,6 +475,9 @@ class Ysm_Search {
 			/* holder open */
 			$output .=      '<div class="smart-search-post-holder">';
 
+			// category
+			$output .= \YSM\Elements\category( $post );
+
 			/* title */
 			$post_title = wp_strip_all_tags( get_the_title( $post->ID ) );
 			$post_title = ysm_text_replace( $post_title );
@@ -533,43 +536,14 @@ class Ysm_Search {
 		wp_reset_postdata();
 	}
 
-    /**
-     * Retrieve the url of View All link or redirect url of form
-     * @return string
-     */
-	protected static function get_viewall_link_url () {
-		$param = implode( ' ', self::get_search_terms() );
-		$param = str_replace( '+', '%2b', $param );
-	    $url = add_query_arg( array( 's' => $param, 'search_id' => self::get_widget_id() ), home_url('/') );
-
-		if ( ! self::get_var( 'search_page_layout_posts' ) ) {
-			if ( self::get_post_types( 'product' ) ) {
-				$url = add_query_arg( array( 'post_type' => 'product' ), $url );
-			}
-		}
-
-		return $url;
-	}
-
 	/**
 	 * Output suggestions
 	 */
 	public static function output() {
-		$view_all_link = '';
-
-		if ( self::get_var( 'display_view_all_link' ) || self::get_var( 'view_all_link_text' ) ) {
-			// target _blank
-			$target_blank = '';
-			if ( self::get_var( 'view_all_link_target_blank' ) ) {
-				$target_blank = ' target="_blank"';
-			}
-			$view_all_link = '<a class="smart-search-view-all"' . $target_blank . ' href="' . esc_url( self::get_viewall_link_url() ) . '">' . esc_html__( self::get_var( 'view_all_link_text' ), 'smart-woocommerce-search' ) . '</a>';
-		}
-
-		$res = array(
+		$res = [
 			'suggestions' => self::$suggestions,
-			'view_all_link' => $view_all_link,
-		);
+			'view_all_link' => \YSM\Elements\view_all_button(),
+		];
 
 		//debug output
 		if ( self::$debug ) {
@@ -694,6 +668,14 @@ class Ysm_Search {
 	 */
 	public static function get_search_terms() {
 		return (array) self::$vars['search_terms'];
+	}
+
+	/**
+	 * Get found posts count
+	 * @return int
+	 */
+	public static function get_found_posts_count() {
+		return (int) self::$found_posts;
 	}
 
 	/**

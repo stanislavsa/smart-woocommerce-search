@@ -1,7 +1,7 @@
 === Smart WooCommerce Search ===
 Contributors: yummy-wp
 Tags: woocommerce search, ajax search, woocommerce, genesis, elementor, divi, avada, enfold, filters, product filter, woo search, relevanssi, jetpack, woocommerce search by sku, woocommerce search shortcod, product search, product filter, woocommerce search results, instant search, woocommerce search plugin, woocommerce search form, search for woocommerce, woocommerce search page, search, woocommerce product search, search woocommerce, shop, shop search, autocomplete, autosuggest, search for wp, search for wordpress, search plugin, woocommerce search by sku, search results,  woocommerce search shortcode, search products, search autocomplete, woocommerce advanced search, woocommerce predictive search, woocommerce live search, woocommerce single product, woocommerce site search, products, shop, category search, custom search, predictive search, relevant search, search product, woocommerce plugin, yith, woof, wp search, wordpress search
-Stable tag: 2.5.2
+Stable tag: 2.6.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Requires at least: 5.4
@@ -24,7 +24,7 @@ This plugin is indispensable for sites with a large number of product items.
 
 You can completely customize your **smart search**. In addition, the plugin integrates seamlessly into the **WooCommerce Product Search** widget.
 
-You have the opportunity to create your Smart Search widget and paste it on any of the pages of the site (to do this, use the "Code" widget in **DIVI**) using a shortcode [smart_search id = "1 ″]. You can also place it on the sidebar using the Smart Search widget. Replace the default theme search using a shortcode.
+You have the opportunity to create your Smart Search widget and paste it on any of the pages of the site (to do this, use the "Code" widget in **DIVI**) using a shortcode `[smart_search id="1"]`. You can also place it on the sidebar using the Smart Search widget. Replace the default theme search using a shortcode.
 
 An important advantage is that WooCommerce Search is compatible with **Elementor** (you can find the required widget in the list of Elementor widgets). It is also compatible with the **WPBakery Page Builder** plugin.
 
@@ -38,7 +38,8 @@ Give it a try and enjoy:)
  * Simple integration into default search widgets
  * Elementor compatible
  * DIVI compatible
- * WPBakery Page Builder ( Visual Composer ) compatible
+ * WPBakery Page Builder compatible
+ * Visual Composer compatible
  * Search by product SKU
  * Search in product Categories
  * Search in product Tags
@@ -88,7 +89,7 @@ https://www.youtube.com/watch?v=EoMqNO8sDYg
 2. Upload the plugin folder to the `wp-content/plugins/` directory of your WordPress site.
 3. Go to the 'Plugins' menu in WordPress and activate the Smart WooCommerce Search plugin.
 4. Configure the plugin (/wp-admin/admin.php?page=smart-search)
-5. Place the search plugin shortcode <?php echo do_shortcode('[smart_search id="1"]');  ?> into your template or simply use the built-in widget.
+5. Place the search plugin shortcode `<?php echo do_shortcode('[smart_search id="1"]');  ?>` into your template or simply use the built-in widget.
 
 == Frequently Asked Questions ==
 
@@ -106,7 +107,7 @@ Yes, when using products search or when you set option to search only through pr
 
 = How to add Smart Search widget into the theme template (a PHP file) =
 
-Just add these code <?php echo do_shortcode('[smart_search id="1"]');  ?>
+Just add these PHP code `<?php echo do_shortcode('[smart_search id="1"]');  ?>`
 In example used widget with ID = 1, so don't forget to change widget ID to needed value.
 
 == Screenshots ==
@@ -117,6 +118,9 @@ In example used widget with ID = 1, so don't forget to change widget ID to neede
 4. Smart WooCommerce Search Settings Page - Styling tab
 
 == Changelog ==
+
+= 2.6.0 =
+* Added: "Display Category" and "Category Color" options to output product/post category in the search results popup
 
 = 2.5.2 =
 * Fixed: deprecation warnings related to PHP 8

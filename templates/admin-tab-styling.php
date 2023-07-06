@@ -112,6 +112,13 @@
 			'description' => __( '"View all" link text background in results popup', 'smart-woocommerce-search' ),
 			'value'       => '',
 		));
+
+		ysm_setting( $w_id, 'category_text_color', array(
+			'type'        => 'color',
+			'title'       => __( 'Category Color', 'smart-woocommerce-search' ),
+			'description' => __( 'Category text color in results popup', 'smart-woocommerce-search' ),
+			'value'       => '',
+		));
 		?>
 
 		<th class="ymapp-settings__title"><?php esc_html_e( 'Product Elements', 'smart-woocommerce-search' ); ?></th>

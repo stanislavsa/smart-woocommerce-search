@@ -2,14 +2,14 @@
 # This file is distributed under the same license as the Smart WooCommerce Search plugin.
 msgid ""
 msgstr ""
-"Project-Id-Version: Smart WooCommerce Search 2.5.0\n"
+"Project-Id-Version: Smart WooCommerce Search 2.6.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/smart-woocommerce-search\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2023-04-02T15:36:22+00:00\n"
+"POT-Creation-Date: 2023-07-13T15:13:27+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.4.0\n"
 "X-Domain: smart-woocommerce-search\n"
@@ -72,11 +72,11 @@ msgstr ""
 msgid "Available in PRO"
 msgstr ""
 
-#: inc/custom/class-ysm-widget-manager.php:292
+#: inc/custom/class-ysm-widget-manager.php:313
 msgid "Your settings have been saved."
 msgstr ""
 
-#: inc/custom/class-ysm-widget-manager.php:367
+#: inc/custom/class-ysm-widget-manager.php:388
 msgctxt "submit button"
 msgid "Search"
 msgstr ""
@@ -122,7 +122,7 @@ msgid "Add New Search Widget"
 msgstr ""
 
 #: index.php:89
-#: templates/admin-page-widgets.php:107
+#: templates/admin-page-widgets.php:110
 msgid "Add New"
 msgstr ""
 
@@ -561,70 +561,78 @@ msgid "Display excerpt in results output"
 msgstr ""
 
 #: templates/admin-tab-layout.php:36
-msgid "Display Price"
+msgid "Display Category"
 msgstr ""
 
 #: templates/admin-tab-layout.php:37
-msgid "Display product price"
+msgid "Display product / post category"
 msgstr ""
 
 #: templates/admin-tab-layout.php:43
-msgid "Display SKU"
+msgid "Display Price"
 msgstr ""
 
 #: templates/admin-tab-layout.php:44
-msgid "Display product SKU"
+msgid "Display product price"
 msgstr ""
 
 #: templates/admin-tab-layout.php:50
-msgid "Display \"Out of stock\" Label"
+msgid "Display SKU"
 msgstr ""
 
 #: templates/admin-tab-layout.php:51
-msgid "Display \"Out of stock\" label if product is not in stock"
-msgstr ""
-
-#: templates/admin-tab-layout.php:56
-msgid "Display \"Sale\" Label"
+msgid "Display product SKU"
 msgstr ""
 
 #: templates/admin-tab-layout.php:57
-msgid "Display \"Sale\" label for product"
+msgid "Display \"Out of stock\" Label"
 msgstr ""
 
-#: templates/admin-tab-layout.php:62
-msgid "Display \"Featured\" Label"
+#: templates/admin-tab-layout.php:58
+msgid "Display \"Out of stock\" label if product is not in stock"
 msgstr ""
 
 #: templates/admin-tab-layout.php:63
-msgid "Display \"Featured\" label for product"
+msgid "Display \"Sale\" Label"
 msgstr ""
 
-#: templates/admin-tab-layout.php:68
-msgid "Display \"Add to Cart\" Button"
+#: templates/admin-tab-layout.php:64
+msgid "Display \"Sale\" label for product"
 msgstr ""
 
 #: templates/admin-tab-layout.php:69
-msgid "Display \"Add to Cart\" Button for product"
+msgid "Display \"Featured\" Label"
 msgstr ""
 
-#: templates/admin-tab-layout.php:74
-msgid "Excerpt Position"
+#: templates/admin-tab-layout.php:70
+msgid "Display \"Featured\" label for product"
 msgstr ""
 
 #: templates/admin-tab-layout.php:75
+msgid "Display \"Add to Cart\" Button"
+msgstr ""
+
+#: templates/admin-tab-layout.php:76
+msgid "Display \"Add to Cart\" Button for product"
+msgstr ""
+
+#: templates/admin-tab-layout.php:81
+msgid "Excerpt Position"
+msgstr ""
+
+#: templates/admin-tab-layout.php:82
 msgid "Excerpt position in results popup"
 msgstr ""
 
-#: templates/admin-tab-layout.php:78
+#: templates/admin-tab-layout.php:85
 msgid "Below image"
 msgstr ""
 
-#: templates/admin-tab-layout.php:79
+#: templates/admin-tab-layout.php:86
 msgid "Below title"
 msgstr ""
 
-#: templates/admin-tab-layout.php:80
+#: templates/admin-tab-layout.php:87
 msgid "Below price and SKU"
 msgstr ""
 
@@ -754,62 +762,70 @@ msgstr ""
 msgid "\"View all\" link text background in results popup"
 msgstr ""
 
-#: templates/admin-tab-styling.php:117
+#: templates/admin-tab-styling.php:118
+msgid "Category Color"
+msgstr ""
+
+#: templates/admin-tab-styling.php:119
+msgid "Category text color in results popup"
+msgstr ""
+
+#: templates/admin-tab-styling.php:124
 msgid "Product Elements"
 msgstr ""
 
-#: templates/admin-tab-styling.php:122
+#: templates/admin-tab-styling.php:129
 msgid "Price Color"
 msgstr ""
 
-#: templates/admin-tab-styling.php:123
+#: templates/admin-tab-styling.php:130
 msgid "Price text color in results popup"
 msgstr ""
 
-#: templates/admin-tab-styling.php:129
+#: templates/admin-tab-styling.php:136
 msgid "\"Out of stock\" Label Color"
 msgstr ""
 
-#: templates/admin-tab-styling.php:130
+#: templates/admin-tab-styling.php:137
 msgid "\"Out of stock\" label text color in results popup"
 msgstr ""
 
-#: templates/admin-tab-styling.php:135
+#: templates/admin-tab-styling.php:142
 msgid "\"Out of stock\" Label Background Color"
 msgstr ""
 
-#: templates/admin-tab-styling.php:136
+#: templates/admin-tab-styling.php:143
 msgid "\"Out of stock\" label background color in results popup"
 msgstr ""
 
-#: templates/admin-tab-styling.php:141
+#: templates/admin-tab-styling.php:148
 msgid "\"Sale\" Label Color"
 msgstr ""
 
-#: templates/admin-tab-styling.php:142
+#: templates/admin-tab-styling.php:149
 msgid "\"Sale\" label text color in results popup"
 msgstr ""
 
-#: templates/admin-tab-styling.php:147
+#: templates/admin-tab-styling.php:154
 msgid "\"Sale\" Label Background Color"
 msgstr ""
 
-#: templates/admin-tab-styling.php:148
+#: templates/admin-tab-styling.php:155
 msgid "\"Sale\" label background color in results popup"
 msgstr ""
 
-#: templates/admin-tab-styling.php:153
+#: templates/admin-tab-styling.php:160
 msgid "\"Featured\" Label Color"
 msgstr ""
 
-#: templates/admin-tab-styling.php:154
+#: templates/admin-tab-styling.php:161
 msgid "\"Featured\" label text color in results popup"
 msgstr ""
 
-#: templates/admin-tab-styling.php:159
+#: templates/admin-tab-styling.php:166
 msgid "\"Featured\" Label Background Color"
 msgstr ""
 
-#: templates/admin-tab-styling.php:160
+#: templates/admin-tab-styling.php:167
 msgid "\"Featured\" label background color in results popup"
 msgstr ""

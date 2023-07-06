@@ -160,6 +160,13 @@
 			'description' => __( 'Disable AJAX functionality (results popup)', 'smart-woocommerce-search' ),
 			'value'       => 0,
 		));
+
+		ysm_setting( $w_id, 'product_slug', array(
+			'type'        => 'pro',
+			'title'       => __( 'Set Product slug', 'smart-woocommerce-search' ),
+			'description' => __( 'Set slug for WooCommerce Product type. Uses in "view all" link "&search_id=1&post_type=product"', 'smart-woocommerce-search' ),
+			'value'       => 'product',
+		));
 		?>
 		</tbody>
 	</table>

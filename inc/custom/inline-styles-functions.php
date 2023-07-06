@@ -138,6 +138,17 @@ function ysm_add_inline_styles_to_stack( $v, $css_id ) {
 		) );
 	}
 
+	if ( isset( $v['settings']['category_text_color'] ) ) {
+		Ysm_Style_Generator::add_rule( $css_id, array(
+			'selectors' => array(
+				'.smart-search-post-category',
+			),
+			'props'     => array(
+				'color' => $v['settings']['category_text_color'],
+			),
+		) );
+	}
+
 	/* product styles*/
 
 	if ( isset( $v['settings']['popup_price_text_color'] ) ) {
