@@ -371,7 +371,6 @@ class Ysm_Search {
 			$product = null;
 			$output = '';
 			$image = '';
-			$post_excerpt = '';
 			$post_classes = array(
 				'smart-search-post',
 				'post-' . intval( $post->ID ),
@@ -426,44 +425,6 @@ class Ysm_Search {
 				}
 			}
 
-			/* excerpt */
-			if ( self::get_var( 'display_excerpt' ) ) {
-
-				if ( $post->post_excerpt != '' ) {
-					$post_excerpt = $post->post_excerpt;
-				} else {
-					$post_excerpt = $post->post_content;
-				}
-
-				if ( false !== strpos( $post_excerpt, '[et_pb_' ) ) {
-					// Add DIVI shortcodes to remove them by strip_shortcodes()
-					if ( ! shortcode_exists( 'et_pb_section' ) ) {
-						add_shortcode( 'et_pb_section', '__return_false');
-					}
-					if ( ! shortcode_exists( 'et_pb_row' ) ) {
-						add_shortcode( 'et_pb_row', '__return_false');
-					}
-					if ( ! shortcode_exists( 'et_pb_column' ) ) {
-						add_shortcode( 'et_pb_column', '__return_false');
-					}
-				}
-
-				$post_excerpt = wp_strip_all_tags( strip_shortcodes( $post_excerpt) );
-
-				$excerpt_symbols_count_max = self::get_var( 'excerpt_symbols_count' )  ? (int) self::get_var( 'excerpt_symbols_count' )  : 50;
-				$excerpt_symbols_count = strlen( $post_excerpt );
-
-				$post_excerpt = mb_substr( $post_excerpt, 0, $excerpt_symbols_count_max);
-
-				if ($excerpt_symbols_count > $excerpt_symbols_count_max) {
-					$post_excerpt .= ' ...';
-				}
-
-				$post_excerpt = ysm_text_replace( $post_excerpt );
-			} else {
-				$post_excerpt = '';
-			}
-
 			$output .= '<a href="' . esc_url( get_the_permalink( $post->ID ) ) . '">';
 			$output .= '<div class="' . esc_attr( implode( ' ', $post_classes ) ) . '">';
 
@@ -483,8 +444,11 @@ class Ysm_Search {
 			$post_title = ysm_text_replace( $post_title );
 			$output .=    '<div class="smart-search-post-title">' . wp_kses_post( $post_title ) . '</div>';
 
-			if ( ! empty( $post_excerpt ) && 'below_title' === self::get_var( 'popup_desc_pos' ) ) {
-				$output .= '<div class="smart-search-post-excerpt">' . wp_kses_post( $post_excerpt ) . '</div>';
+			/* excerpt */
+			$post_excerpt = \YSM\Elements\excerpt( $post );
+
+			if ( 'below_title' === self::get_var( 'popup_desc_pos' ) ) {
+				$output .= $post_excerpt;
 			}
 
 			if ( $wc_product ) {
@@ -507,16 +471,16 @@ class Ysm_Search {
 				$output .= '</div>';
 			}
 
-			if ( ! empty( $post_excerpt ) && 'below_price' === self::get_var( 'popup_desc_pos' ) ) {
-				$output .= '<div class="smart-search-post-excerpt">' . wp_kses_post( $post_excerpt ) . '</div>';
+			if ( 'below_price' === self::get_var( 'popup_desc_pos' ) ) {
+				$output .= $post_excerpt;
 			}
 
 			$output .= '<div class="smart-search-clear"></div>';
 			$output .= '</div><!--.smart-search-post-holder-->';
 			$output .= '<div class="smart-search-clear"></div>';
 
-			if ( ! empty( $post_excerpt ) && 'below_image' === self::get_var( 'popup_desc_pos' ) ) {
-				$output .= '<div class="smart-search-post-excerpt">' . wp_kses_post( $post_excerpt ) . '</div>';
+			if ( 'below_image' === self::get_var( 'popup_desc_pos' ) ) {
+				$output .= $post_excerpt;
 			}
 
 			$output .= '</div>';

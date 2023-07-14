@@ -6,7 +6,7 @@
  * Tags: woocommerce search, ajax search, woocommerce, woocommerce search by sku, woocommerce search shortcod, product search, product filter, woocommerce search results, instant search, woocommerce search plugin, woocommerce search form, search for woocommerce, woocommerce search page, search, woocommerce product search, search woocommerce, shop, shop search, autocomplete, autosuggest, search for wp, search for WordPress, search plugin, woocommerce search by sku, search results,  woocommerce search shortcode, search products, search autocomplete, woocommerce advanced search, woocommerce predictive search, woocommerce live search, woocommerce single product, woocommerce site search, products, shop, category search, custom search, predictive search, relevant search, search product, woocommerce plugin, posts search, wp search, WordPress search
  * Author:      YummyWP
  * Author URI:  https://yummywp.com
- * Version:     2.6.0
+ * Version:     2.6.1
  * Domain Path: /languages
  * Text Domain: smart-woocommerce-search
  *
@@ -372,6 +372,21 @@ if ( ! function_exists( 'ysm_gettext' ) ) {
 		return $translation;
 	}
 	add_filter( 'gettext_smart-woocommerce-search', 'ysm_gettext', 99, 3 );
+}
+
+/**
+ * Declaring plugin compatibility with WooCommerce Features
+ */
+if ( ! function_exists( 'ysm_wc_features_compatibility' ) ) {
+	function ysm_wc_features_compatibility() {
+		if ( class_exists( \Automattic\WooCommerce\Utilities\FeaturesUtil::class ) ) {
+			// High-Performance order storage (COT)
+			\Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility( 'custom_order_tables', __FILE__, true );
+			// New product editor
+			\Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility( 'product_block_editor', __FILE__, true );
+		}
+	}
+	add_action( 'before_woocommerce_init', 'ysm_wc_features_compatibility' );
 }
 
 /**

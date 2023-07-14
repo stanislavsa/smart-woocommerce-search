@@ -36,3 +36,4 @@ include_once __DIR__ . '/compat/compat-visual-composer.php';
 include_once __DIR__ . '/compat/compat-elementor.php';
 include_once __DIR__ . '/elements/view-all-button.php';
 include_once __DIR__ . '/elements/category.php';
+include_once __DIR__ . '/elements/excerpt.php';
