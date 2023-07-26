@@ -11,128 +11,104 @@ class Ysm_Widget_Manager {
 	 * Array of widgets
 	 * @var array|mixed|void
 	 */
-	protected $widgets = array();
+	protected static $widgets = [];
+	/**
+	 * Array of widgets
+	 * @var array|mixed|void
+	 */
+	protected static $options = [];
 	/**
 	 * Widget id
 	 * @var int|string
 	 */
-	protected $widget_id = 0;
-	/**
-	 * @var int
-	 */
-	protected $counter = 0;
+	protected static $widget_id = 0;
 	/**
 	 * Option in database with widget settings
 	 * @var string
 	 */
-	protected $wp_option = 'smart_search_custom'; // smart_search_default
+	protected static $wp_option = 'smart_search_custom'; // smart_search_default
 	/**
 	 * @var string
 	 */
-	protected $mode = 'custom-list';
-	/**
-	 * @var null
-	 */
-	private static $_instance = null;
+	protected static $mode = 'custom-list';
 
-	/**
-	 * Ysm_Widget_Manager constructor.
-	 */
-	private function __construct() {
+	private function __clone() {}
 
+	private function __construct() {}
+
+	public static function init() {
 		/* add ajax actions */
-		add_action( 'wp_ajax_ysm_widget_delete', array( $this, 'remove' ) );
-		add_action( 'wp_ajax_ysm_widget_duplicate', array( $this, 'duplicate' ) );
+		add_action( 'wp_ajax_ysm_widget_delete', array( __CLASS__, 'remove' ) );
+		add_action( 'wp_ajax_ysm_widget_duplicate', array( __CLASS__, 'duplicate' ) );
 
 		/* add shortcode */
-		add_shortcode( 'smart_search', array( $this, 'do_shortcode' ) );
+		add_shortcode( 'smart_search', array( __CLASS__, 'do_shortcode' ) );
 
 		/* register widgets */
-		add_action( 'widgets_init', array( $this, 'register_widgets' ) );
+		add_action( 'widgets_init', array( __CLASS__, 'register_widgets' ) );
 
-		add_action( 'init', array( $this, 'on_wp_init' ) );
+		add_action( 'admin_init', array( __CLASS__, 'on_admin_init' ) );
+	}
 
+	public static function on_admin_init() {
 		$page = filter_input( INPUT_GET, 'page', FILTER_SANITIZE_FULL_SPECIAL_CHARS );
-		/* custom widgets list or edit widget page */
-		if ( ! empty( $page ) && 'smart-search' === $page ) {
-			$this->mode = 'custom-list';
+
+		if ( empty( $page ) || ! in_array( $page, [ 'smart-search-custom-new', 'smart-search' ], true ) ) {
+			return;
+		}
+
+		// custom widgets list or edit widget page
+		if ( 'smart-search' === $page ) {
+			self::$mode = 'custom-list';
 			$action = filter_input( INPUT_GET, 'action', FILTER_SANITIZE_FULL_SPECIAL_CHARS );
 			$id = filter_input( INPUT_GET, 'id', FILTER_SANITIZE_FULL_SPECIAL_CHARS );
 
 			if ( isset( $action ) && 'edit' === $action && ! empty( $id ) ) {
-				$this->mode = 'custom-edit';
+				self::$mode = 'custom-edit';
 
 				if ( ysm_get_default_widgets_names( $id ) ) {
-					$this->wp_option = 'smart_search_default';
-					$this->widget_id = $id;
+					self::$wp_option = 'smart_search_default';
+					self::$widget_id = $id;
 				} else {
-					$this->widget_id = (int) $id;
+					self::$widget_id = (int) $id;
 				}
 			}
 		}
 
-		/* get widgets and counter */
-		$settings = get_option( $this->wp_option, null );
+		// get widgets
+		$settings = self::get_option( self::$wp_option );
 
 		if ( ! is_array( $settings ) ) {
-			$settings = array();
+			$settings = [];
 		}
 
-		if ( 'smart_search_default' === $this->wp_option ) {
+		if ( 'smart_search_default' === self::$wp_option ) {
 			foreach ( ysm_get_default_widgets_ids() as $default_widgets_id ) {
 				if ( ! isset( $settings[ $default_widgets_id ] ) ) {
-					$settings[ $default_widgets_id ] = array();
+					$settings[ $default_widgets_id ] = [];
 				}
 			}
 		}
 
-		if ( isset( $settings['counter'] ) ) {
-			$this->counter = (int) $settings['counter'];
-			unset( $settings['counter'] );
-		} else {
-			$this->counter = 0;
+		// add new custom widget
+		if ( 'smart-search-custom-new' === $page ) {
+			self::$mode = 'custom-new';
+			self::$widget_id = 0;
 		}
 
-		/* add new custom widget page */
-		if ( ! empty( $page ) && 'smart-search-custom-new' === $page ) {
-			$this->mode = 'custom-new';
-			$this->widget_id = 0;
-		}
-
-		/* check custom widget id and redirect to 'add new widget' page if wrong id */
-		if ( 'custom-edit' === $this->mode && ! ysm_get_default_widgets_names( $this->widget_id ) && ! isset( $settings[ $this->widget_id ] ) ) {
+		// check custom widget id and redirect to 'add new widget' page if wrong id
+		if ( 'custom-edit' === self::$mode && ! ysm_get_default_widgets_names( self::$widget_id ) && ! isset( $settings[ self::$widget_id ] ) ) {
 			header( 'Location: ' . admin_url( 'admin.php?page=smart-search' ) );
 			exit;
 		}
 
-		$this->widgets = $settings;
-	}
+		self::$widgets = $settings;
 
-	/**
-	 *
-	 */
-	private function __clone() {}
-
-	/**
-	 * @return null|Ysm_Widget_Manager
-	 */
-	public static function init() {
-		if ( null === self::$_instance ) {
-			self::$_instance = new self();
-		}
-
-		return self::$_instance;
-	}
-
-	public function on_wp_init() {
-		$page = filter_input( INPUT_GET, 'page', FILTER_SANITIZE_FULL_SPECIAL_CHARS );
-		/* custom widgets list or edit widget page */
-		if ( ! empty( $page ) && in_array( $page, array( 'smart-search-custom-new', 'smart-search' ), true ) ) {
-			if ( filter_input( INPUT_POST, 'save', FILTER_SANITIZE_FULL_SPECIAL_CHARS ) ) {
-				$wpnonce = filter_input( INPUT_POST, '_wpnonce', FILTER_SANITIZE_FULL_SPECIAL_CHARS );
-				if ( ! empty( $wpnonce ) && wp_verify_nonce( $wpnonce, $this->wp_option ) ) {
-					$this->save();
-				}
+		// save custom widget
+		if ( filter_input( INPUT_POST, 'save', FILTER_SANITIZE_FULL_SPECIAL_CHARS ) ) {
+			$wpnonce = filter_input( INPUT_POST, '_wpnonce', FILTER_SANITIZE_FULL_SPECIAL_CHARS );
+			if ( ! empty( $wpnonce ) && wp_verify_nonce( $wpnonce, self::$wp_option ) ) {
+				self::save();
 			}
 		}
 	}
@@ -143,8 +119,8 @@ class Ysm_Widget_Manager {
 	 * @param $id|string
 	 * @param array $args
 	 */
-	public function add( $w_id, $id, $args = array() ) {
-		$this->widgets[ $w_id ]['settings'][ $id ] = $args;
+	public static function add( $w_id, $id, $args = array() ) {
+		self::$widgets[ $w_id ]['settings'][ $id ] = $args;
 	}
 
 	/**
@@ -153,13 +129,13 @@ class Ysm_Widget_Manager {
 	 * @param $id|string
 	 * @return null|string
 	 */
-	public function get( $w_id, $id ) {
+	public static function get( $w_id, $id ) {
 		if ( ysm_get_default_widgets_names( $w_id ) ) {
 			$wp_option = 'smart_search_default';
 		} else {
-			$wp_option = $this->wp_option;
+			$wp_option = self::$wp_option;
 		}
-		$settings = get_option( $wp_option, null );
+		$settings = self::get_option( $wp_option );
 
 		if ( ! isset( $settings[ $w_id ] ) ) {
 			return null;
@@ -174,11 +150,9 @@ class Ysm_Widget_Manager {
 
 	/**
 	 * Duplicate widget
-	 * @param $id
 	 */
-	public function duplicate( $id ) {
-		$w_id = filter_input( INPUT_POST, 'id', FILTER_SANITIZE_FULL_SPECIAL_CHARS );
-		$action = filter_input( INPUT_POST, 'action', FILTER_SANITIZE_FULL_SPECIAL_CHARS );
+	public static function duplicate() {
+		$id = filter_input( INPUT_POST, 'id', FILTER_SANITIZE_FULL_SPECIAL_CHARS );
 		$nonce = filter_input( INPUT_POST, 'nonce', FILTER_SANITIZE_FULL_SPECIAL_CHARS );
 
 		if ( ! wp_verify_nonce( $nonce, 'ysm_widgets_nonce_action' ) ) {
@@ -190,42 +164,39 @@ class Ysm_Widget_Manager {
 			exit;
 		}
 
-		if ( $action ) {
-			$id = (int) $w_id;
-			$res = array(
-				'id' => 0,
-				'name' => '',
-			);
+		$id = (int) $id;
+		$res = [
+			'id' => 0,
+			'name' => '',
+		];
+
+		$settings = self::get_option( self::$wp_option );
+
+		if ( isset( $settings[ $id ] ) ) {
+			$copy = $settings[ $id ];
+			$copy['name'] .= ' copy';
+
+			$new_widget_id = ! empty( $settings ) && is_array( $settings ) ? max( array_keys( $settings ) ) + 1 : 1;
+			$settings[ $new_widget_id ] = $copy;
+			self::update_option( self::$wp_option, $settings );
+
+			$res['id'] = $new_widget_id;
+			$res['name'] = esc_html( $copy['name'] );
 		}
-
-		if ( isset( $this->widgets[ $id ] ) ) {
-			$original = $this->widgets[ $id ];
-			$original['name'] .= ' copy';
-
-			$settings = $this->widgets;
-			$settings['counter'] = ++$this->counter;
-			$settings[ $this->counter ] = $original;
-			update_option( $this->wp_option, $settings, 'no' );
-
-			if ( $action ) {
-				$res['id'] = $this->counter;
-				$res['name'] = esc_html( $original['name'] );
-			}
-		}
-
-		if ( $action ) {
-			echo json_encode( $res );
+		if ( ! $res['id'] ) {
 			exit;
 		}
+
+		echo wp_json_encode( $res );
+		exit;
 	}
 
 	/**
 	 * Remove widget
 	 * @param $id
 	 */
-	public function remove( $id ) {
-		$w_id = filter_input( INPUT_POST, 'id', FILTER_SANITIZE_FULL_SPECIAL_CHARS );
-		$action = filter_input( INPUT_POST, 'action', FILTER_SANITIZE_FULL_SPECIAL_CHARS );
+	public static function remove( $id ) {
+		$id = filter_input( INPUT_POST, 'id', FILTER_SANITIZE_FULL_SPECIAL_CHARS );
 		$nonce = filter_input( INPUT_POST, 'nonce', FILTER_SANITIZE_FULL_SPECIAL_CHARS );
 
 		if ( ! wp_verify_nonce( $nonce, 'ysm_widgets_nonce_action' ) ) {
@@ -237,39 +208,28 @@ class Ysm_Widget_Manager {
 			exit;
 		}
 
-		if ( $action ) {
-			$id = (int) $w_id;
+		$id = (int) $id;
+		$settings = self::get_option( self::$wp_option );
+
+		if ( isset( $settings[ $id ] ) ) {
+			unset( $settings[ $id ] );
+			self::update_option( self::$wp_option, $settings );
+
+			echo 1;
 		}
 
-		if ( isset( $this->widgets[ $id ] ) ) {
-			unset( $this->widgets[ $id ] );
-			$settings = $this->widgets;
-			$settings['counter'] = $this->counter;
-			update_option( $this->wp_option, $settings, 'no' );
-
-			if ( $action ) {
-				echo 1;
-			}
-		}
-
-		if ( $action ) {
-			exit;
-		}
+		exit;
 	}
 
 	/**
 	 * @return array
 	 */
-	public function get_all_widgets( $type = '' ) {
-		$wp_option = $this->wp_option;
+	public static function get_all_widgets( $type = '' ) {
+		$wp_option = self::$wp_option;
 		if ( 'default' === $type ) {
 			$wp_option = 'smart_search_default';
 		}
-		$widgets = get_option( $wp_option, null );
-
-		if ( isset( $widgets['counter'] ) ) {
-			unset( $widgets['counter'] );
-		}
+		$widgets = self::get_option( $wp_option );
 
 		if ( ! is_array( $widgets ) ) {
 			$widgets = array();
@@ -281,40 +241,34 @@ class Ysm_Widget_Manager {
 	/**
 	 * Save widget settings
 	 */
-	protected function save() {
-		if ( in_array( $this->mode, array( 'custom-edit', 'custom-new' ), true ) ) {
+	protected static function save() {
+		if ( in_array( self::$mode, array( 'custom-edit', 'custom-new' ), true ) ) {
 			$name = filter_input( INPUT_POST, 'name', FILTER_SANITIZE_FULL_SPECIAL_CHARS );
-			$settings = $this->widgets;
+			$settings = self::$widgets;
 
-			if ( ysm_get_default_widgets_names( $this->widget_id ) ) {
-				$settings[ $this->widget_id ] = array(
+			if ( ysm_get_default_widgets_names( self::$widget_id ) ) {
+				$settings[ self::$widget_id ] = array(
 					'settings' => ! empty( $_POST['settings'] ) ? (array) $_POST['settings'] : array(),
 				);
 			} else {
-				/* if new widget */
-				if ( ! $this->counter ) {
-					$this->counter = 0;
+				if ( ! self::$widget_id ) {
+					self::$widget_id = ! empty( $settings ) && is_array( $settings ) ? max( array_keys( $settings ) ) + 1 : 1;
 				}
 
-				if ( ! $this->widget_id ) {
-					$this->widget_id = ++$this->counter;
-				}
-				$settings['counter'] = $this->counter;
-
-				$settings[ $this->widget_id ] = array(
+				$settings[ self::$widget_id ] = array(
 					'name' => ! empty( $name ) ? sanitize_text_field( $name ) : '',
 					'settings' => ! empty( $_POST['settings'] ) ? (array) $_POST['settings'] : array(),
 				);
 			}
 
-			update_option( $this->wp_option, $settings, 'no' );
-			$this->widgets = $settings;
+			self::$widgets = $settings;
+			self::update_option( self::$wp_option, $settings );
 
 			ysm_add_message( __( 'Your settings have been saved.', 'smart-woocommerce-search' ) );
 
 			/* redirect to edit widget page after new have been created */
-			if ( 'custom-new' === $this->mode ) {
-				header( 'Location: ' . admin_url( 'admin.php?page=smart-search&action=edit&id=' . $this->widget_id ) );
+			if ( 'custom-new' === self::$mode ) {
+				header( 'Location: ' . admin_url( 'admin.php?page=smart-search&action=edit&id=' . self::$widget_id ) );
 				exit;
 			}
 		}
@@ -325,14 +279,14 @@ class Ysm_Widget_Manager {
 	 * @param $attr
 	 * @return string
 	 */
-	function do_shortcode( $attr ) {
+	public static function do_shortcode( $attr ) {
 		/* @codingStandardsIgnoreLine */
 		extract( shortcode_atts( array(
 			'id' => 0,
 		), $attr ) );
 
 		ob_start();
-		$this->display( $attr );
+		self::display( $attr );
 		return ob_get_clean();
 
 	}
@@ -342,19 +296,19 @@ class Ysm_Widget_Manager {
 	 * @param array $attr
 	 * @param string $content
 	 * @param string $key
-	 * @return string
+	 * @return void
 	 */
-	public function display( $attr = array(), $content = '', $key = '' ) {
+	public static function display( $attr = array(), $content = '', $key = '' ) {
 		$w_id = isset( $attr['id'] ) ? (int) $attr['id'] : 0;
 
 		if ( ! $w_id ) {
-			return '';
+			return;
 		}
 
 		$widgets = ysm_get_custom_widgets();
 
 		if ( ! isset( $widgets[ $w_id ]['settings'] ) ) {
-			return '';
+			return;
 		}
 
 		$settings = $widgets[ $w_id ]['settings'];
@@ -395,7 +349,46 @@ class Ysm_Widget_Manager {
 	/**
 	 * Register widget
 	 */
-	public function register_widgets() {
+	public static function register_widgets() {
 		register_widget( 'Ysm_Search_Widget' );
+	}
+
+	/**
+	 * Get widget settings from wp_options table or from cache
+	 * @param $name
+	 * @return false|mixed|void
+	 */
+	protected static function get_option( $name ) {
+		if ( isset( self::$options[ $name ] ) ) {
+			return self::$options[ $name ];
+		}
+		$cached = wp_cache_get( $name, 'ywp_sws_cache' );
+		if ( false !== $cached ) {
+			if ( isset( $value['counter'] ) ) {
+				unset( $value['counter'] );
+			}
+			$value = $cached;
+		} else {
+			$value = get_option( $name, null );
+			if ( isset( $value['counter'] ) ) {
+				unset( $value['counter'] );
+			}
+			wp_cache_set( $name, $value, 'ywp_sws_cache', MONTH_IN_SECONDS );
+		}
+		self::$options[ $name ] = $value;
+
+		return $value;
+	}
+
+	/**
+	 * Update widget settings in the wp_options table and in the cache
+	 * @param $name
+	 * @param $value
+	 * @return void
+	 */
+	protected static function update_option( $name, $value ) {
+		self::$options[ $name ] = $value;
+		update_option( $name, $value, 'no' );
+		wp_cache_set( $name, $value, 'ywp_sws_cache', MONTH_IN_SECONDS );
 	}
 }

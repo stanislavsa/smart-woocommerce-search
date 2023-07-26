@@ -1,5 +1,5 @@
 <?php
-namespace YSM\Compat\VC;
+namespace YSWS\Compat\VC;
 
 add_filter( 'init', __NAMESPACE__ . '\\extend' );
 

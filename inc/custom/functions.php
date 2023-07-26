@@ -47,10 +47,7 @@ function ysm_get_default_widgets_names( $id = '' ) {
  * @return string|null
  */
 function ysm_get_option( $w_id, $id ) {
-	$manager = Ysm_Widget_Manager::init();
-	$value   = $manager->get( $w_id, $id );
-
-	return $value;
+	return Ysm_Widget_Manager::get( $w_id, $id );
 }
 
 /**
@@ -67,16 +64,7 @@ function ysm_setting( $w_id, $id, $args ) {
 		$args['value'] = $value;
 	}
 
-	$setting = Ysm_Setting::init();
-	$setting->get_setting_html( $id, $args );
-}
-
-/**
- * Output messages
- */
-function ysm_message() {
-	$message = Ysm_Message::init();
-	$message->display();
+	\YSWS\Admin\Field::get_setting_html( $id, $args );
 }
 
 /**
@@ -85,13 +73,7 @@ function ysm_message() {
  * @param string $type
  */
 function ysm_add_message( $text, $type = 'message' ) {
-	$message = Ysm_Message::init();
-
-	if ( 'message' === $type ) {
-		$message->add_message( $text );
-	} elseif ( 'error' === $type ) {
-		$message->add_error( $text );
-	}
+	\YSWS\Admin\Notification::add( $text, $type );
 }
 
 /**
@@ -131,8 +113,7 @@ function ysm_get_widget_list_row_template( $args ) {
  * @return array
  */
 function ysm_get_custom_widgets() {
-	$widget_manager = Ysm_Widget_Manager::init();
-	return $widget_manager->get_all_widgets( 'custom' );
+	return Ysm_Widget_Manager::get_all_widgets( 'custom' );
 }
 
 /**
@@ -140,8 +121,7 @@ function ysm_get_custom_widgets() {
  * @return array
  */
 function ysm_get_default_widgets() {
-	$widget_manager = Ysm_Widget_Manager::init();
-	return $widget_manager->get_all_widgets( 'default' );
+	return Ysm_Widget_Manager::get_all_widgets( 'default' );
 }
 
 /**

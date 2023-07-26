@@ -22,8 +22,6 @@
       .repeater-move,
       .repeater-delete {
         position: absolute;
-        top: 50%;
-        margin-top: -10px;
         width: 50px;
         height: 100%;
         font-size: 20px;
@@ -33,6 +31,12 @@
       .repeater-move {
         left: -50px;
         cursor: move;
+
+        &:before {
+          content: "\f545";
+          top: 30%;
+          position: relative;
+        }
       }
 
       .repeater-delete {
@@ -40,6 +44,13 @@
         font-size: 22px;
         line-height: 22px;
         color: red;
+        cursor: pointer;
+
+        &:before {
+          content: "\f158";
+          top: 30%;
+          position: relative;
+        }
       }
     }
   }

@@ -123,11 +123,16 @@
 			e.preventDefault();
 
 			var holder = $( this ).siblings( '.repeater-holder' );
-			var row    = holder.find( 'li:last' ).clone();
-			row.find( 'input' ).val( '' );
-			holder.append( row );
 
-			$( '.repeater-holder' ).sortable( 'refresh' );
+			if ("content" in document.createElement("template")) {
+				var template = document.querySelector('#' + holder.attr('id') + '-tmpl');
+
+				if ( template ) {
+					holder.append( template.content.cloneNode(true) );
+				}
+			}
+
+			holder.sortable( 'refresh' );
 		} );
 
 		$( 'body' ).on( 'click', '.repeater-delete', function( e ) {

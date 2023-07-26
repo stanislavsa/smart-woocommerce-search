@@ -153,6 +153,28 @@ h2.ysm-widgets-title {
 	max-width: 400px;
 }
 
+.ysm-synonyms-holder,
+.ysm-stop-words-holder {
+	text-align: center;
+	margin: 50px 0;
+	font-size: 16px;
+
+	.description {
+		font-size: 16px;
+		color: inherit;
+		margin-top: 10px;
+	}
+
+	.description-pro {
+		display: none;
+	}
+
+	.ymapp-button {
+		margin-top: 35px;
+		margin-left: 0 !important;
+	}
+}
+
 /**
  * Media
  */

@@ -1,5 +1,5 @@
 <?php
-namespace YSM\Compat\Elementor;
+namespace YSWS\Compat\Elementor;
 
 /**
  * Elementor Smart Search Widget.
@@ -40,7 +40,7 @@ class Elementor_Smart_Search_Widget extends \Elementor\Widget_Base {
 	 * @return string Widget icon.
 	 */
 	public function get_icon() {
-		return 'fa fa-search';
+		return 'eicon-search';
 	}
 
 	/**

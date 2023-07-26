@@ -1,5 +1,5 @@
 <?php
-namespace YSM\Elements;
+namespace YSWS\Elements;
 
 /**
  * Element "View All Button" html

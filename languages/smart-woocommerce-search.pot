@@ -2,14 +2,14 @@
 # This file is distributed under the same license as the Smart WooCommerce Search plugin.
 msgid ""
 msgstr ""
-"Project-Id-Version: Smart WooCommerce Search 2.6.0\n"
+"Project-Id-Version: Smart WooCommerce Search 2.6.2\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/smart-woocommerce-search\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2023-07-13T15:13:27+00:00\n"
+"POT-Creation-Date: 2023-08-02T08:56:10+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.4.0\n"
 "X-Domain: smart-woocommerce-search\n"
@@ -34,12 +34,54 @@ msgstr ""
 msgid "https://yummywp.com"
 msgstr ""
 
+#: inc/admin/admin.php:19
+#: inc/admin/admin.php:20
 #: inc/compat/class-module-elementor.php:86
 #: inc/compat/compat-visual-composer.php:27
 #: inc/custom/class-ysm-search-widget.php:12
-#: index.php:70
-#: index.php:71
 msgid "Smart Search"
+msgstr ""
+
+#: inc/admin/admin.php:29
+msgid "Search Widgets"
+msgstr ""
+
+#: inc/admin/admin.php:30
+msgid "Widgets"
+msgstr ""
+
+#: inc/admin/admin.php:37
+msgid "Add New Search Widget"
+msgstr ""
+
+#: inc/admin/admin.php:38
+#: templates/admin-page-widgets.php:110
+msgid "Add New"
+msgstr ""
+
+#: inc/admin/admin.php:45
+#: inc/admin/admin.php:46
+#: templates/admin-tab-spellcheck.php:8
+msgid "Synonyms"
+msgstr ""
+
+#: inc/admin/admin.php:53
+#: inc/admin/admin.php:54
+#: templates/admin-page-form.php:14
+#: templates/admin-tab-stopwords.php:8
+msgid "Stop Words"
+msgstr ""
+
+#: inc/admin/admin.php:61
+#: inc/admin/admin.php:62
+#: index.php:280
+#: templates/admin-page-stop-words.php:22
+#: templates/admin-page-synonyms.php:25
+msgid "Upgrade to Pro"
+msgstr ""
+
+#: inc/admin/class-field.php:241
+msgid "Available in PRO"
 msgstr ""
 
 #: inc/compat/class-module-elementor.php:92
@@ -68,15 +110,11 @@ msgstr ""
 msgid "Select Widget:"
 msgstr ""
 
-#: inc/custom/class-ysm-setting.php:245
-msgid "Available in PRO"
-msgstr ""
-
-#: inc/custom/class-ysm-widget-manager.php:313
+#: inc/custom/class-ysm-widget-manager.php:293
 msgid "Your settings have been saved."
 msgstr ""
 
-#: inc/custom/class-ysm-widget-manager.php:388
+#: inc/custom/class-ysm-widget-manager.php:368
 msgctxt "submit button"
 msgid "Search"
 msgstr ""
@@ -97,11 +135,11 @@ msgstr ""
 msgid "DIVI Search Bar"
 msgstr ""
 
-#: inc/custom/functions.php:117
+#: inc/custom/functions.php:99
 msgid "Duplicate"
 msgstr ""
 
-#: inc/custom/functions.php:120
+#: inc/custom/functions.php:102
 msgid "Delete"
 msgstr ""
 
@@ -109,62 +147,39 @@ msgstr ""
 msgid "To activate the free version of Smart WooCommerce Search you need to deactivate the Pro version."
 msgstr ""
 
-#: index.php:80
-msgid "Search Widgets"
-msgstr ""
-
-#: index.php:81
-msgid "Widgets"
-msgstr ""
-
-#: index.php:88
-msgid "Add New Search Widget"
-msgstr ""
-
-#: index.php:89
-#: templates/admin-page-widgets.php:110
-msgid "Add New"
-msgstr ""
-
-#: index.php:96
-#: index.php:97
-#: index.php:342
-msgid "Upgrade to Pro"
-msgstr ""
-
-#: index.php:257
+#: index.php:195
 msgid "Delete column?"
 msgstr ""
 
-#: index.php:258
+#: index.php:196
 msgid "Delete row?"
 msgstr ""
 
-#: index.php:259
+#: index.php:197
 msgid "Delete widget?"
 msgstr ""
 
 #. translators: %s: Name/id of a widget
-#: index.php:286
+#: index.php:224
 msgid "Edit Widget: %s"
 msgstr ""
 
 #. translators: %s: Name of a site
-#: index.php:293
+#: index.php:231
 msgid "Network Admin: %s"
 msgstr ""
 
 #. translators: %s: Name of a site
-#: index.php:296
+#: index.php:234
 msgid "User Dashboard: %s"
 msgstr ""
 
 #. translators: Admin screen title. 1: Admin screen name, 2: Network or site name.
-#: index.php:301
+#: index.php:239
 msgid "%1$s &lsaquo; %2$s &#8212; WordPress"
 msgstr ""
 
-#: index.php:341
+#: index.php:279
 #: templates/admin-page-form.php:44
 msgid "Settings"
 msgstr ""
@@ -189,11 +204,6 @@ msgstr ""
 msgid "Spell Correction"
 msgstr ""
 
-#: templates/admin-page-form.php:14
-#: templates/admin-tab-stopwords.php:8
-msgid "Stop Words"
-msgstr ""
-
 #: templates/admin-page-form.php:19
 #: templates/admin-page-form.php:73
 msgid "Save"
@@ -205,6 +215,24 @@ msgstr ""
 
 #: templates/admin-page-form.php:40
 msgid "Toggle panel: Settings"
+msgstr ""
+
+#: templates/admin-page-stop-words.php:16
+#: templates/admin-page-synonyms.php:19
+msgid "Applies globally to all widgets."
+msgstr ""
+
+#: templates/admin-page-stop-words.php:17
+#: templates/admin-tab-stopwords.php:9
+msgid "Add a list of words that should be skipped from the search request."
+msgstr ""
+
+#: templates/admin-page-synonyms.php:17
+msgid "Spell Correction."
+msgstr ""
+
+#: templates/admin-page-synonyms.php:20
+msgid "Add synonyms for words you think could be misspelled.<br> Example Orange => Ornge"
 msgstr ""
 
 #: templates/admin-page-widgets.php:24
@@ -528,6 +556,14 @@ msgstr ""
 msgid "Disable AJAX functionality (results popup)"
 msgstr ""
 
+#: templates/admin-tab-general.php:166
+msgid "Set Product slug"
+msgstr ""
+
+#: templates/admin-tab-general.php:167
+msgid "Set slug for WooCommerce Product type. Uses in \"view all\" link \"&search_id=1&post_type=product\""
+msgstr ""
+
 #: templates/admin-tab-layout.php:9
 msgid "Display Image"
 msgstr ""
@@ -636,16 +672,8 @@ msgstr ""
 msgid "Below price and SKU"
 msgstr ""
 
-#: templates/admin-tab-spellcheck.php:8
-msgid "Synonyms"
-msgstr ""
-
 #: templates/admin-tab-spellcheck.php:9
 msgid "Add synonyms for the words that, for your opinion, can be entered with spell errors. Example Orange => Ornge"
-msgstr ""
-
-#: templates/admin-tab-stopwords.php:9
-msgid "Add a list of words that should be skipped from the search request."
 msgstr ""
 
 #: templates/admin-tab-styling.php:7

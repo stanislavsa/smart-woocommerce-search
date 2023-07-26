@@ -16,7 +16,7 @@ $tabs = array(
 ?>
 <form method="post" action="" enctype="multipart/form-data">
 
-	<input type="submit" value="<?php esc_html_e( 'Save', 'smart-woocommerce-search' ); ?>" name="save" class="ymapp-button ymapp-hide-on-mobile" style="float:right;" />
+	<input type="submit" value="<?php esc_attr_e( 'Save', 'smart-woocommerce-search' ); ?>" name="save" class="ymapp-button ymapp-hide-on-mobile" style="float:right;" />
 
 	<?php if ( in_array( $w_id, ysm_get_default_widgets_ids(), true ) ) { ?>
 		<?php wp_nonce_field( 'smart_search_default' ); ?>
@@ -47,7 +47,7 @@ $tabs = array(
 
 				<h2 class="nav-tab-wrapper" id="ymapp-settings__nav">
 					<?php foreach ( $tabs as $id => $title ) { ?>
-						<span data-href="#<?php echo esc_html( $id ); ?>" class="nav-tab<?php echo 'general_tab' === $id ? ' nav-tab-active' : ''; ?>"><?php echo esc_html( $title ); ?></span>
+						<span data-href="#<?php echo esc_attr( $id ); ?>" class="nav-tab<?php echo 'general_tab' === $id ? ' nav-tab-active' : ''; ?>"><?php echo esc_html( $title ); ?></span>
 					<?php } ?>
 				</h2>
 
@@ -70,7 +70,7 @@ $tabs = array(
 	</div>
 
 	<p class="submit" style="float: right;">
-		<input type="submit" value="<?php esc_html_e( 'Save', 'smart-woocommerce-search' ); ?>" name="save" class="ymapp-button" />
+		<input type="submit" value="<?php esc_attr_e( 'Save', 'smart-woocommerce-search' ); ?>" name="save" class="ymapp-button" />
 	</p>
 
 </form>

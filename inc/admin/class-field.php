@@ -1,17 +1,14 @@
 <?php
+namespace YSWS\Admin;
+
 /**
- * Class Ysm_Setting
+ * Field manager
  * @author YummyWP
  */
-class Ysm_Setting {
+class Field {
 
 	/**
-	 * @var null
-	 */
-	private static $_instance = null;
-
-	/**
-	 * Ysm_Setting constructor.
+	 * Constructor.
 	 */
 	private function __construct() {}
 
@@ -20,22 +17,11 @@ class Ysm_Setting {
 	 */
 	private function __clone() {}
 
-	/**
-	 * Get instance
-	 * @return null|Ysm_Setting
-	 */
-	public static function init() {
-		if ( null === self::$_instance ) {
-			self::$_instance = new self();
-		}
-		return self::$_instance;
-	}
-
 	/** Check args and retrieve setting html output
 	 * @param $id
 	 * @param $args
 	 */
-	public function get_setting_html( $id, $args ) {
+	public static function get_setting_html( $id, $args ) {
 
 		if ( isset( $args['choices'] ) ) {
 			$args['choices'] = (array) $args['choices'];
@@ -58,7 +44,7 @@ class Ysm_Setting {
 
 		$args = wp_parse_args( $args, $defaults );
 
-		if ( method_exists( $this, 'get_' . $args['type'] . '_html' ) ) {
+		if ( method_exists( __CLASS__, 'get_' . $args['type'] . '_html' ) ) {
 			?>
 			<tr valign="top">
 				<th scope="row">
@@ -67,7 +53,7 @@ class Ysm_Setting {
 				<td>
 					<fieldset class="<?php echo esc_attr( $args['class'] ); ?>">
 						<legend class="screen-reader-text"><span><?php echo wp_kses_post( $args['title'] ); ?></span></legend>
-						<?php echo $this->{'get_' . $args['type'] . '_html'}( $id, $args ); /* @codingStandardsIgnoreLine */ ?>
+						<?php echo self::{'get_' . $args['type'] . '_html'}( $id, $args ); /* @codingStandardsIgnoreLine */ ?>
 					</fieldset>
 				</td>
 			</tr>
@@ -81,12 +67,12 @@ class Ysm_Setting {
 	 * @param $args
 	 * @return string
 	 */
-	public function get_text_html( $id, $args ) {
+	public static function get_text_html( $id, $args ) {
 		ob_start();
 		?>
 		<label for="<?php echo esc_attr( $id ); ?>">
 			<input value="<?php echo esc_attr( $args['value'] ); ?>" placeholder="<?php echo esc_attr( $args['placeholder'] ); ?>" <?php disabled( $args['disabled'], true ); ?>
-				   type="<?php echo esc_attr( $args['type'] ); ?>" class="code" name="<?php echo esc_attr( $args['name'] ); ?>" id="<?php echo esc_attr( $id ); ?>" />
+			       type="<?php echo esc_attr( $args['type'] ); ?>" class="code" name="<?php echo esc_attr( $args['name'] ); ?>" id="<?php echo esc_attr( $id ); ?>" />
 		</label>
 		<p class="description">
 			<?php echo wp_kses_post( $args['description'] ); ?>
@@ -102,13 +88,13 @@ class Ysm_Setting {
 	 * @param $args
 	 * @return string
 	 */
-	public function get_checkbox_html($id, $args) {
+	public static function get_checkbox_html($id, $args) {
 		ob_start();
 		?>
 		<input type="hidden" name="<?php echo esc_attr( $args['name'] ); ?>" value="<?php echo (int) $args['value']; ?>">
 		<input value="1" <?php checked( (int) $args['value'], 1 ); ?> <?php disabled( $args['disabled'], true ); ?>
-			   type="<?php echo esc_attr( $args['type'] ); ?>"
-			   id="<?php echo esc_attr( $id ); ?>" class="ymapp-switcher" />
+		       type="<?php echo esc_attr( $args['type'] ); ?>"
+		       id="<?php echo esc_attr( $id ); ?>" class="ymapp-switcher" />
 		<label for="<?php echo esc_attr( $id ); ?>">
 			<?php echo wp_kses_post( $args['description'] ); ?>
 		</label>
@@ -123,7 +109,7 @@ class Ysm_Setting {
 	 * @param $args
 	 * @return string
 	 */
-	public function get_select_html( $id, $args ) {
+	public static function get_select_html( $id, $args ) {
 		if ( ! is_array( $args['value'] ) ) {
 			$args['value'] = explode( ',', $args['value'] );
 			$args['value'] = array_map( 'trim', $args['value'] );
@@ -155,12 +141,12 @@ class Ysm_Setting {
 	 * @param $args
 	 * @return string
 	 */
-	public function get_textarea_html( $id, $args ) {
+	public static function get_textarea_html( $id, $args ) {
 		ob_start();
 		?>
 		<textarea rows="3" cols="20" class="input-text wide-input"
-				  type="<?php echo esc_attr( $args['type'] ); ?>" name="<?php echo esc_attr( $args['name'] ); ?>" id="<?php echo esc_attr( $id ); ?>"
-				  placeholder="<?php echo esc_attr( $args['placeholder'] ); ?>" <?php disabled( $args['disabled'], true ); ?>><?php echo esc_textarea( $args['value'] ); ?></textarea>
+		          type="<?php echo esc_attr( $args['type'] ); ?>" name="<?php echo esc_attr( $args['name'] ); ?>" id="<?php echo esc_attr( $id ); ?>"
+		          placeholder="<?php echo esc_attr( $args['placeholder'] ); ?>" <?php disabled( $args['disabled'], true ); ?>><?php echo esc_textarea( $args['value'] ); ?></textarea>
 		<p class="description">
 			<?php echo wp_kses_post( $args['description'] ); ?>
 		</p>
@@ -175,7 +161,7 @@ class Ysm_Setting {
 	 * @param $args
 	 * @return string
 	 */
-	public function get_color_html( $id, $args ) {
+	public static function get_color_html( $id, $args ) {
 		ob_start();
 		?>
 		<input class="sm-color-picker" type="text" name="<?php echo esc_attr( $args['name'] ); ?>" id="<?php echo esc_attr( $id ); ?>" value="<?php echo esc_attr( $args['value'] ); ?>" />
@@ -193,7 +179,7 @@ class Ysm_Setting {
 	 * @param $args
 	 * @return string
 	 */
-	public function get_repeater_html( $id, $args ) {
+	public static function get_repeater_html( $id, $args ) {
 		if ( empty( $args['fields'] ) || ! is_array( $args['fields'] ) ) {
 			return '';
 		}
@@ -215,19 +201,29 @@ class Ysm_Setting {
 			<?php echo wp_kses_post( $args['description'] ); ?>
 		</p>
 		<br><br>
-		<ul class="repeater-holder">
+		<ul class="repeater-holder" id="repeater-<?php echo esc_attr( $id ); ?>">
 			<?php foreach ( current( $arr ) as $arr_key => $arr_val ) { ?>
 				<li>
-					<span class="repeater-move dashicons dashicons-move"></span>
+					<span class="repeater-move dashicons"></span>
 					<?php foreach ( $args['fields'] as $f_slug => $f_name ) { ?>
 						<label><?php echo esc_html( $f_name ); ?> <input name="<?php echo esc_attr( $args['name'] . '[' . $f_slug . '][]' ); ?>" value="<?php echo esc_attr( $arr[ $f_slug ][ $arr_key ] ); ?>" type="text" class="widefat" /></label>
 					<?php } ?>
-					<span class="repeater-delete dashicons dashicons-no"></span>
+					<span class="repeater-delete dashicons"></span>
 				</li>
 			<?php } ?>
 		</ul>
 		<div class="clear"></div>
 		<span class="repeater-add ymapp-button-small">Add</span>
+
+		<template id="repeater-<?php echo esc_attr( $id ); ?>-tmpl">
+			<li>
+				<span class="repeater-move dashicons"></span>
+				<?php foreach ( $args['fields'] as $f_slug => $f_name ) { ?>
+					<label><?php echo esc_html( $f_name ); ?> <input name="<?php echo esc_attr( $args['name'] . '[' . $f_slug . '][]' ); ?>" value="" type="text" class="widefat" /></label>
+				<?php } ?>
+				<span class="repeater-delete dashicons"></span>
+			</li>
+		</template>
 		<?php
 		return ob_get_clean();
 	}
@@ -238,10 +234,10 @@ class Ysm_Setting {
 	 * @param $args
 	 * @return string
 	 */
-	public function get_pro_html( $id, $args ) {
+	public static function get_pro_html( $id, $args ) {
 		ob_start();
 		?>
-		<p class="description" style="color: red;">
+		<p class="description description-pro" style="color: red;">
 			<?php echo esc_html__( 'Available in PRO', 'smart-woocommerce-search' ); ?>
 		</p>
 		<p class="description">
@@ -256,7 +252,7 @@ class Ysm_Setting {
 	 * @param $value
 	 * @return string
 	 */
-	public function validate_text( $value ) {
+	public static function validate_text( $value ) {
 		$value = trim( $value );
 		$value = strip_tags( stripslashes( $value ) );
 
@@ -267,7 +263,7 @@ class Ysm_Setting {
 	 * @param $value
 	 * @return bool|string
 	 */
-	public function validate_color( $value ) {
+	public static function validate_color( $value ) {
 		$value = trim( $value );
 		$value = strip_tags( stripslashes( $value ) );
 

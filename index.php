@@ -6,14 +6,14 @@
  * Tags: woocommerce search, ajax search, woocommerce, woocommerce search by sku, woocommerce search shortcod, product search, product filter, woocommerce search results, instant search, woocommerce search plugin, woocommerce search form, search for woocommerce, woocommerce search page, search, woocommerce product search, search woocommerce, shop, shop search, autocomplete, autosuggest, search for wp, search for WordPress, search plugin, woocommerce search by sku, search results,  woocommerce search shortcode, search products, search autocomplete, woocommerce advanced search, woocommerce predictive search, woocommerce live search, woocommerce single product, woocommerce site search, products, shop, category search, custom search, predictive search, relevant search, search product, woocommerce plugin, posts search, wp search, WordPress search
  * Author:      YummyWP
  * Author URI:  https://yummywp.com
- * Version:     2.6.1
+ * Version:     2.6.2
  * Domain Path: /languages
  * Text Domain: smart-woocommerce-search
  *
  * Requires PHP: 5.4
  *
  * WC requires at least: 4.0
- * WC tested up to: 7.8
+ * WC tested up to: 7.9
  */
 
 if ( ! defined( 'ABSPATH' ) ) exit;
@@ -38,7 +38,7 @@ if ( defined( 'YSM_PRO' ) ) {
  * Define main constants
  */
 if ( ! defined( 'YSM_VER' ) ) {
-	define( 'YSM_VER', 'ysm-2.6.0' );
+	define( 'YSM_VER', 'ysws-2.6.2' );
 }
 
 if ( ! defined( 'YSM_DIR' ) ) {
@@ -60,68 +60,6 @@ if ( ! function_exists( 'ysm_load_textdomain' ) ) {
 	}
 
 	add_action( 'plugins_loaded', 'ysm_load_textdomain' );
-}
-
-/**
- * Add Pages to Admin Menu
- */
-if ( ! function_exists( 'ysm_add_menu_page' ) ) {
-	function ysm_add_menu_page() {
-		add_menu_page( __( 'Smart Search', 'smart-woocommerce-search' ),
-			__( 'Smart Search', 'smart-woocommerce-search' ),
-			'manage_options',
-			'smart-search',
-			null,
-			'dashicons-search',
-			'39.9'
-		);
-
-		add_submenu_page( 'smart-search',
-			__( 'Search Widgets', 'smart-woocommerce-search' ),
-			__( 'Widgets', 'smart-woocommerce-search' ),
-			'manage_options',
-			'smart-search',
-			'ysm_display_admin_page_widgets'
-		);
-
-		add_submenu_page( 'smart-search',
-			__( 'Add New Search Widget', 'smart-woocommerce-search' ),
-			__( 'Add New', 'smart-woocommerce-search' ),
-			'manage_options',
-			'smart-search-custom-new',
-			'ysm_display_admin_page_widget_new'
-		);
-
-		add_submenu_page( 'smart-search',
-			__( 'Upgrade to Pro', 'smart-woocommerce-search' ),
-			__( 'Upgrade to Pro', 'smart-woocommerce-search' ),
-			'manage_options',
-			'smart-search-update-to-pro',
-			'ysm_display_admin_page_update_to_pro'
-		);
-	}
-	add_action( 'admin_menu', 'ysm_add_menu_page' );
-}
-
-if ( ! function_exists( 'ysm_display_admin_page_widgets' ) ) {
-	function ysm_display_admin_page_widgets() {
-		include_once YSM_DIR . 'templates/admin-page-widgets.php';
-	}
-}
-
-if ( ! function_exists( 'ysm_display_admin_page_widget_new' ) ) {
-	function ysm_display_admin_page_widget_new() {
-		include_once YSM_DIR . 'templates/admin-page-widget-new.php';
-	}
-}
-
-if ( ! function_exists( 'ysm_display_admin_page_update_to_pro' ) ) {
-	function ysm_display_admin_page_update_to_pro() {
-		if ( 'smart-search-update-to-pro' === filter_input( INPUT_GET, 'page', FILTER_SANITIZE_FULL_SPECIAL_CHARS ) ) {
-			wp_redirect( 'https://yummywp.com/plugins/smart-woocommerce-search/#smart-search-compare' );
-			die;
-		}
-	}
 }
 
 /**
@@ -241,7 +179,7 @@ if ( ! function_exists( 'ysm_admin_enqueue_scripts' ) ) {
 		}
 
 		wp_enqueue_style( 'wp-color-picker' );
-		wp_enqueue_style( 'smart-search-admin', YSM_URI . 'assets/dist/css/admin.css' );
+		wp_enqueue_style( 'smart-search-admin', YSM_URI . 'assets/dist/css/admin.css', [], YSM_VER );
 		wp_enqueue_script( 'postbox' );
 		wp_enqueue_script( 'smart-search-admin', YSM_URI . 'assets/dist/js/admin.js', array(
 			'jquery',
@@ -251,7 +189,7 @@ if ( ! function_exists( 'ysm_admin_enqueue_scripts' ) ) {
 			'underscore',
 			'wp-color-picker',
 			'wp-util',
-		), false, 1 );
+		), YSM_VER, 1 );
 
 		wp_localize_script( 'smart-search-admin', 'ysm_L10n', array(
 			'column_delete' => __( 'Delete column?', 'smart-woocommerce-search' ),
@@ -388,10 +326,3 @@ if ( ! function_exists( 'ysm_wc_features_compatibility' ) ) {
 	}
 	add_action( 'before_woocommerce_init', 'ysm_wc_features_compatibility' );
 }
-
-/**
- * Init Search
- */
-Ysm_Setting::init();
-Ysm_Widget_Manager::init();
-Ysm_Search::init();

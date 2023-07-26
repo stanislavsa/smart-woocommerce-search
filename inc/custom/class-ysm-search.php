@@ -275,7 +275,7 @@ class Ysm_Search {
 	 */
 	public static function remove_search_filter() {
 		if ( ! is_admin() && ! empty( filter_input( INPUT_GET, 's', FILTER_DEFAULT ) ) && ! ( defined( 'DOING_AJAX' ) && DOING_AJAX ) ) {
-			remove_action( 'pre_get_posts', array( __CLASS__, 'search_filter' ), 99999999 );
+			remove_action( 'pre_get_posts', array( __CLASS__, 'search_filter' ), PHP_INT_MAX );
 		}
 	}
 
@@ -366,106 +366,70 @@ class Ysm_Search {
 	public static function get_suggestions( $posts ) {
 		$ii = 0;
 		foreach ( $posts as $post ) {
-			$post = get_post( $post );
-			$wc_product = null;
-			$product = null;
 			$output = '';
-			$image = '';
+			$post = get_post( $post );
+			$product = null;
 			$post_classes = array(
 				'smart-search-post',
 				'post-' . intval( $post->ID ),
 			);
 
-			if ( ( 'product' === $post->post_type || 'product_variation' === $post->post_type ) && class_exists( 'WooCommerce' ) ) {
+			// is WooCommerce product or variation
+			if (
+				( 'product' === $post->post_type || 'product_variation' === $post->post_type )
+				&& class_exists( 'WooCommerce' )
+			) {
 				$wc_product = wc_get_product( $post->ID );
-			}
-
-			/* thumbnail */
-			if ( self::get_var( 'display_icon' ) && has_post_thumbnail( $post ) ) {
-				$the_post = $post;
-
-				/**
-				 * Overwrite image html in the suggestion
-				 *
-				 * @param $the_post WP_Post|WC_Product WordPress post object or WooCommerce product object
-				 *
-				 * @since 2.5.0
-				 */
-				$pre_image_output = apply_filters( 'ysm_suggestion_image_output', '', $the_post );
-				if ( ! empty( $pre_image_output ) ) {
-					$image = $pre_image_output;
-				} else {
-					$image = get_the_post_thumbnail(
-						$the_post,
-						/**
-						 * Overwrite image size in the suggestion
-						 * eg. 'post-thumbnail' or 'medium'
-						 *
-						 * @since 2.5.0
-						 */
-						apply_filters( 'ysm_suggestion_image_size',
-							// compatibility with old version
-							apply_filters( 'smart_search_suggestions_image_size', 'post-thumbnail' )
-						),
-						/**
-						 * Overwrite image attributes in the suggestion
-						 * eg. 'post-thumbnail' or 'medium'
-						 *
-						 * @since 2.5.0
-						 */
-						apply_filters( 'ysm_suggestion_image_attributes',
-							// compatibility with old version
-							apply_filters( 'smart_search_suggestions_image_attributes', array() )
-						)
-					);
-				}
-
-				if ( empty( $image ) ) {
-					$post_classes[] = 'smart-search-no-thumbnail';
+				if ( $wc_product ) {
+					global $product;
+					$product = $wc_product;
 				}
 			}
 
+			// thumbnail
+			$thumbnail = \YSWS\Elements\thumbnail( $post );
+			if ( ! $thumbnail ) {
+				$post_classes[] = 'smart-search-no-thumbnail';
+			}
+
+			// wrapper link open
 			$output .= '<a href="' . esc_url( get_the_permalink( $post->ID ) ) . '">';
 			$output .= '<div class="' . esc_attr( implode( ' ', $post_classes ) ) . '">';
 
-			/* thumbnail */
-			if ( ! empty( $image ) ) {
-				$output .= '<div class="smart-search-post-icon">' . $image . '</div>';
+			// thumbnail
+			if ( $thumbnail ) {
+				$output .= $thumbnail;
 			}
 
-			/* holder open */
-			$output .=      '<div class="smart-search-post-holder">';
+			// holder open
+			$output .= '<div class="smart-search-post-holder">';
 
 			// category
-			$output .= \YSM\Elements\category( $post );
+			$output .= \YSWS\Elements\category( $post );
 
-			/* title */
-			$post_title = wp_strip_all_tags( get_the_title( $post->ID ) );
-			$post_title = ysm_text_replace( $post_title );
-			$output .=    '<div class="smart-search-post-title">' . wp_kses_post( $post_title ) . '</div>';
+			// title
+			$output .= \YSWS\Elements\title( $post );
 
-			/* excerpt */
-			$post_excerpt = \YSM\Elements\excerpt( $post );
+			// excerpt
+			$post_excerpt = \YSWS\Elements\excerpt( $post );
 
 			if ( 'below_title' === self::get_var( 'popup_desc_pos' ) ) {
 				$output .= $post_excerpt;
 			}
 
-			if ( $wc_product ) {
-				global $product;
-				$product = $wc_product;
+			if ( $product ) {
+				$price = \YSWS\Elements\product_price( $product );
+				$sku   = \YSWS\Elements\product_sku( $product );
 
 				$output .= '<div class="smart-search-post-price-holder">';
 
-				/* product price */
-				if ( self::get_var( 'display_price' ) ) {
-					// @codingStandardsIgnoreStart
-					$output .= '<div class="smart-search-post-price">' . $product->get_price_html() . '</div>';
-					// @codingStandardsIgnoreEnd
+				// product price
+				if ( $price ) {
+					$output .= $price;
 				}
-				/* product sku */
-				if ( self::get_var( 'display_sku' ) ) {
-					$output .= '<div class="smart-search-post-sku">' . esc_html( $product->get_sku() ) . '</div>';
+				// product sku
+				if ( $sku ) {
+					$output .= $sku;
 				}
 
 				$output .= '</div>';
@@ -476,7 +440,7 @@ class Ysm_Search {
 			}
 
 			$output .= '<div class="smart-search-clear"></div>';
-			$output .= '</div><!--.smart-search-post-holder-->';
+			$output .= '</div><!--.smart-search-post-holder-->'; // holder closed
 			$output .= '<div class="smart-search-clear"></div>';
 
 			if ( 'below_image' === self::get_var( 'popup_desc_pos' ) ) {
@@ -484,7 +448,7 @@ class Ysm_Search {
 			}
 
 			$output .= '</div>';
-			$output .= '</a>';
+			$output .= '</a>'; // wrapper link closed
 
 			self::$suggestions[] = array(
 				'value' => esc_js( $post->post_title ),
@@ -506,7 +470,7 @@ class Ysm_Search {
 	public static function output() {
 		$res = [
 			'suggestions' => self::$suggestions,
-			'view_all_link' => \YSM\Elements\view_all_button(),
+			'view_all_link' => \YSWS\Elements\view_all_button(),
 		];
 
 		//debug output
