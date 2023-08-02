@@ -64,7 +64,7 @@ function ysm_setting( $w_id, $id, $args ) {
 		$args['value'] = $value;
 	}
 
-	\YSWS\Admin\Field::get_setting_html( $id, $args );
+	\YummyWP\App\Field::output( $id, $args );
 }
 
 /**
@@ -73,7 +73,7 @@ function ysm_setting( $w_id, $id, $args ) {
  * @param string $type
  */
 function ysm_add_message( $text, $type = 'message' ) {
-	\YSWS\Admin\Notification::add( $text, $type );
+	\YummyWP\App\Notification::add( $text, $type );
 }
 
 /**

@@ -23,10 +23,10 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 				if ( isset( $search_in[ $id ] ) ) {
 					ysm_setting( $w_id, 'post_type_' . $id, array(
 						'type'        => 'checkbox',
-						/* translators: %s: Name of a field to search in */
-						'title'       => sprintf( __( 'Search in %s', 'smart-woocommerce-search' ), $post_type->label ),
+						/* translators: %s: Name of a field to */
+						'title'       => sprintf( __( '%s', 'smart-woocommerce-search' ), $post_type->label ),
 						/* translators: %s: Name of a Post Type */
-						'description' => sprintf( __( 'Enable search through "%s" post type', 'smart-woocommerce-search' ), $post_type->labels->singular_name ),
+						'description' => sprintf( __( 'Enable search through %s', 'smart-woocommerce-search' ), $post_type->label ),
 						'value'       => $search_in[ $id ],
 					));
 				}
@@ -36,71 +36,100 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 		<?php } ?>
 
 		<?php
-		ysm_setting( $w_id, 'custom_post_types', array(
+		ysm_setting( $w_id, 'post_type_product_variation', array(
 			'type'        => 'pro',
-			'title'       => __( 'Search in Custom Post Types', 'smart-woocommerce-search' ),
-			'description' => __( 'Searching will be provided in selected custom post types', 'smart-woocommerce-search' ),
+			'title'       => __( 'Product Variations', 'smart-woocommerce-search' ),
+			'description' => __( 'Enable search through Product Variations', 'smart-woocommerce-search' ),
+			'value' => 0,
 		));
 		?>
 
-		<th class="ymapp-settings__title"><?php esc_html_e( 'Product Variations', 'smart-woocommerce-search' ); ?></th>
-
 		<?php
-		ysm_setting( $w_id, 'post_type_product_variation', array(
+		ysm_setting( $w_id, 'custom_post_types', array(
 			'type'        => 'pro',
-			'title'       => __( 'Search in Variations', 'smart-woocommerce-search' ),
-			'description' => __( 'Enable search through Product Variations', 'smart-woocommerce-search' ),
-			'value' => 0,
+			'title'       => __( 'Custom Post Types', 'smart-woocommerce-search' ),
+			'description' => __( 'Enable search through selected custom post types', 'smart-woocommerce-search' ),
 		));
 		?>
 
 		<th class="ymapp-settings__title"><?php esc_html_e( 'Fields', 'smart-woocommerce-search' ); ?></th>
 
 		<?php
-		$fields = array(
+
+		ysm_setting( $w_id, 'field_title', array(
+			'type'        => 'checkbox',
 			'title'       => __( 'Title', 'smart-woocommerce-search' ),
-			'content'     => __( 'Content', 'smart-woocommerce-search' ),
-			'excerpt'     => __( 'Excerpt', 'smart-woocommerce-search' ),
-			'tag'         => __( 'Post Tag', 'smart-woocommerce-search' ),
-			'category'    => __( 'Post Category', 'smart-woocommerce-search' ),
-			'product_tag' => __( 'Product Tag', 'smart-woocommerce-search' ),
-			'product_cat' => __( 'Product Category', 'smart-woocommerce-search' ),
-			'product_sku' => __( 'Product SKU', 'smart-woocommerce-search' ),
-		);
+			'description' => __( 'Enable search in post / product title', 'smart-woocommerce-search' ),
+			'value'       => 1,
+		));
 
-		if ( $w_id === 'product' ) {
-			unset( $fields['tag'] );
-			unset( $fields['category'] );
-		}
+		ysm_setting( $w_id, 'field_content', array(
+			'type'        => 'checkbox',
+			'title'       => __( 'Content', 'smart-woocommerce-search' ),
+			'description' => __( 'Enable search in post / product content', 'smart-woocommerce-search' ),
+			'value'       => 1,
+		));
 
-		$search_in = array(
-			'title' => 1,
-			'content' => 1,
-			'excerpt' => 1,
-		);
+		ysm_setting( $w_id, 'field_excerpt', array(
+			'type'        => 'checkbox',
+			'title'       => __( 'Excerpt', 'smart-woocommerce-search' ),
+			'description' => __( 'Enable search in post / product excerpt', 'smart-woocommerce-search' ),
+			'value'       => 1,
+		));
 
-		foreach ( $fields as $id => $field ) {
-			ysm_setting( $w_id, 'field_' . $id, array(
-				'type'        => 'checkbox',
-				/* translators: %s: Name of a field to search in */
-				'title'       => sprintf( __( 'Search in %s', 'smart-woocommerce-search' ), $field ),
-				/* translators: %s: Name of a field (title, description, tags, etc.) */
-				'description' => sprintf( __( 'Enable search through "%s"', 'smart-woocommerce-search' ), $field ),
-				'value'       => isset( $search_in[ $id ] ) ? $search_in[ $id ] : '',
-			));
-		}
-
-		/* Custom Tax */
-		ysm_setting( $w_id, 'custom_tax', array(
-			'type'        => 'pro',
-			'title'       => __( 'Search in Custom Taxonomies', 'smart-woocommerce-search' ),
-			'description' => __( 'Searching will be provided in selected custom taxonomies', 'smart-woocommerce-search' ),
+		ysm_setting( $w_id, 'field_product_sku', array(
+			'type'        => 'checkbox',
+			'title'       => __( 'Product SKU', 'smart-woocommerce-search' ),
+			'description' => __( 'Enable search in product SKU', 'smart-woocommerce-search' ),
+			'value'       => '',
 		));
 
 		ysm_setting( $w_id, 'custom_fields', array(
 			'type'        => 'pro',
-			'title'       => __( 'Search in Custom Fields', 'smart-woocommerce-search' ),
-			'description' => __( 'Custom Fields slug separated by comma. Searching will be provided in custom fields values', 'smart-woocommerce-search' ),
+			'title'       => __( 'Custom Fields', 'smart-woocommerce-search' ),
+			'description' => __( 'Enable search in Custom Fields. Fill in field slugs separated by comma', 'smart-woocommerce-search' ),
+		));
+
+		?>
+
+		<th class="ymapp-settings__title"><?php esc_html_e( 'Taxonomies', 'smart-woocommerce-search' ); ?></th>
+
+		<?php
+		if ( 'product' !== $w_id ) {
+			ysm_setting( $w_id, 'field_tag', array(
+				'type'        => 'checkbox',
+				'title'       => __( 'Post Tag', 'smart-woocommerce-search' ),
+				'description' => __( 'Enable search in post tag', 'smart-woocommerce-search' ),
+				'value'       => '',
+			));
+
+			ysm_setting( $w_id, 'field_category', array(
+				'type'        => 'checkbox',
+				'title'       => __( 'Post Category', 'smart-woocommerce-search' ),
+				'description' => __( 'Enable search in post category', 'smart-woocommerce-search' ),
+				'value'       => '',
+			));
+		}
+
+		ysm_setting( $w_id, 'field_product_tag', array(
+			'type'        => 'checkbox',
+			'title'       => __( 'Product Tag', 'smart-woocommerce-search' ),
+			'description' => __( 'Enable search in product tag', 'smart-woocommerce-search' ),
+			'value'       => '',
+		));
+
+		ysm_setting( $w_id, 'field_product_cat', array(
+			'type'        => 'checkbox',
+			'title'       => __( 'Product Category', 'smart-woocommerce-search' ),
+			'description' => __( 'Enable search in product category', 'smart-woocommerce-search' ),
+			'value'       => '',
+		));
+
+		/* Custom Tax */
+		ysm_setting( $w_id, 'custom_tax', array(
+			'type'        => 'pro',
+			'title'       => __( 'Custom Taxonomies', 'smart-woocommerce-search' ),
+			'description' => __( 'Enable search in selected custom taxonomies', 'smart-woocommerce-search' ),
 		));
 
 		/* Product categories */
@@ -121,7 +150,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 		ysm_setting( $w_id, 'allowed_product_cat', array(
 			'type'        => 'select',
 			'title'       => __( 'Allowed Product Categories', 'smart-woocommerce-search' ),
-			'description' => __( 'Search in chosen product categories', 'smart-woocommerce-search' ),
+			'description' => __( 'Limit customers\' search to selected product categories', 'smart-woocommerce-search' ),
 			'multiple'    => true,
 			'choices'     => $product_cats_list,
 		));
@@ -129,7 +158,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 		ysm_setting( $w_id, 'disallowed_product_cat', array(
 			'type'        => 'select',
 			'title'       => __( 'Disallowed Product Categories', 'smart-woocommerce-search' ),
-			'description' => __( 'Do not search in chosen product categories', 'smart-woocommerce-search' ),
+			'description' => __( 'Disallow search in selected product categories', 'smart-woocommerce-search' ),
 			'multiple'    => true,
 			'choices'     => $product_cats_list,
 		));

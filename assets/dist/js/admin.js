@@ -171,12 +171,6 @@
 	$(function() {
 
 		/**
-		 * Init colorpicker
-		 */
-
-		$( '.sm-color-picker' ).wpColorPicker();
-
-		/**
 		 * Init postboxes
 		 */
 

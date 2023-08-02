@@ -7,7 +7,7 @@ wp_enqueue_script( 'postbox' );
 
 $tabs = array(
 	'general_tab'    => __( 'General', 'smart-woocommerce-search' ),
-	'fields_tab'     => __( 'Items to Search through', 'smart-woocommerce-search' ),
+	'fields_tab'     => __( 'Items to Search Through', 'smart-woocommerce-search' ),
 	'layout_tab'     => __( 'Layout', 'smart-woocommerce-search' ),
 	'styles_tab'     => __( 'Styling', 'smart-woocommerce-search' ),
 	'spellcheck_tab' => __( 'Spell Correction', 'smart-woocommerce-search' ),

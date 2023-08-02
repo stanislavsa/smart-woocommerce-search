@@ -10,7 +10,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 			<div class="ysm-inside ysm-stop-words-holder">
 				<?php
-				\YSWS\Admin\Field::get_setting_html( 'stop_words', [
+				\YummyWP\App\Field::output( 'stop_words', [
 					'name'        => 'stop_words',
 					'type'        => 'pro',
 					'title'       => __( 'Applies globally to all widgets.', 'smart-woocommerce-search' ),

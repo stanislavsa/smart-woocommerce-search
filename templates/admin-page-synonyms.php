@@ -10,7 +10,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 		<div class="ysm-inside ysm-synonyms-holder">
 			<?php
-			\YSWS\Admin\Field::get_setting_html( 'synonyms', [
+			\YummyWP\App\Field::output( 'synonyms', [
 				'name'        => 'synonyms',
 				'type'        => 'pro',
 				'title'       =>

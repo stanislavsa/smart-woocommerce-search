@@ -264,9 +264,9 @@ class Ysm_Widget_Manager {
 			self::$widgets = $settings;
 			self::update_option( self::$wp_option, $settings );
 
-			ysm_add_message( __( 'Your settings have been saved.', 'smart-woocommerce-search' ) );
+			ysm_add_message( __( 'Your changes have been saved.', 'smart-woocommerce-search' ) );
 
-			/* redirect to edit widget page after new have been created */
+			/* redirect to edit widget page after new widget has been created */
 			if ( 'custom-new' === self::$mode ) {
 				header( 'Location: ' . admin_url( 'admin.php?page=smart-search&action=edit&id=' . self::$widget_id ) );
 				exit;

@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2023-08-02T18:06:06+00:00\n"
+"POT-Creation-Date: 2023-08-03T09:30:48+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.4.0\n"
 "X-Domain: smart-woocommerce-search\n"
@@ -81,7 +81,7 @@ msgstr ""
 msgid "Upgrade to Pro"
 msgstr ""
 
-#: inc/admin/class-field.php:241
+#: inc/admin/class-field.php:242
 msgid "Available in PRO"
 msgstr ""
 
@@ -112,7 +112,7 @@ msgid "Select Widget:"
 msgstr ""
 
 #: inc/custom/class-ysm-widget-manager.php:267
-msgid "Your settings have been saved."
+msgid "Your changes have been saved."
 msgstr ""
 
 #: inc/custom/class-ysm-widget-manager.php:342
@@ -190,7 +190,7 @@ msgid "General"
 msgstr ""
 
 #: templates/admin-page-form.php:10
-msgid "Items to Search through"
+msgid "Items to Search Through"
 msgstr ""
 
 #: templates/admin-page-form.php:11
@@ -274,38 +274,33 @@ msgstr ""
 msgid "Post Types"
 msgstr ""
 
-#. translators: %s: Name of a field to search in
+#. translators: %s: Name of a field to
 #: templates/admin-tab-fields.php:27
-#: templates/admin-tab-fields.php:86
-msgid "Search in %s"
+msgid "%s"
 msgstr ""
 
 #. translators: %s: Name of a Post Type
 #: templates/admin-tab-fields.php:29
-msgid "Enable search through \"%s\" post type"
+msgid "Enable search through %s"
 msgstr ""
 
 #: templates/admin-tab-fields.php:41
-msgid "Search in Custom Post Types"
-msgstr ""
-
-#: templates/admin-tab-fields.php:42
-msgid "Searching will be provided in selected custom post types"
-msgstr ""
-
-#: templates/admin-tab-fields.php:46
 msgid "Product Variations"
 msgstr ""
 
-#: templates/admin-tab-fields.php:51
-msgid "Search in Variations"
-msgstr ""
-
-#: templates/admin-tab-fields.php:52
+#: templates/admin-tab-fields.php:42
 msgid "Enable search through Product Variations"
 msgstr ""
 
-#: templates/admin-tab-fields.php:57
+#: templates/admin-tab-fields.php:50
+msgid "Custom Post Types"
+msgstr ""
+
+#: templates/admin-tab-fields.php:51
+msgid "Enable search through selected custom post types"
+msgstr ""
+
+#: templates/admin-tab-fields.php:55
 msgid "Fields"
 msgstr ""
 
@@ -314,68 +309,99 @@ msgid "Title"
 msgstr ""
 
 #: templates/admin-tab-fields.php:62
-msgid "Content"
-msgstr ""
-
-#: templates/admin-tab-fields.php:63
-msgid "Excerpt"
-msgstr ""
-
-#: templates/admin-tab-fields.php:64
-msgid "Post Tag"
-msgstr ""
-
-#: templates/admin-tab-fields.php:65
-msgid "Post Category"
-msgstr ""
-
-#: templates/admin-tab-fields.php:66
-msgid "Product Tag"
-msgstr ""
-
-#: templates/admin-tab-fields.php:67
-msgid "Product Category"
+msgid "Enable search in post / product title"
 msgstr ""
 
 #: templates/admin-tab-fields.php:68
+msgid "Content"
+msgstr ""
+
+#: templates/admin-tab-fields.php:69
+msgid "Enable search in post / product content"
+msgstr ""
+
+#: templates/admin-tab-fields.php:75
+msgid "Excerpt"
+msgstr ""
+
+#: templates/admin-tab-fields.php:76
+msgid "Enable search in post / product excerpt"
+msgstr ""
+
+#: templates/admin-tab-fields.php:82
 msgid "Product SKU"
 msgstr ""
 
-#. translators: %s: Name of a field (title, description, tags, etc.)
-#: templates/admin-tab-fields.php:88
-msgid "Enable search through \"%s\""
+#: templates/admin-tab-fields.php:83
+msgid "Enable search in product SKU"
 msgstr ""
 
-#: templates/admin-tab-fields.php:96
-msgid "Search in Custom Taxonomies"
+#: templates/admin-tab-fields.php:89
+msgid "Custom Fields"
 msgstr ""
 
-#: templates/admin-tab-fields.php:97
-msgid "Searching will be provided in selected custom taxonomies"
+#: templates/admin-tab-fields.php:90
+msgid "Enable search in Custom Fields. Fill in field slugs separated by comma"
+msgstr ""
+
+#: templates/admin-tab-fields.php:95
+msgid "Taxonomies"
+msgstr ""
+
+#: templates/admin-tab-fields.php:101
+msgid "Post Tag"
 msgstr ""
 
 #: templates/admin-tab-fields.php:102
-msgid "Search in Custom Fields"
+msgid "Enable search in post tag"
 msgstr ""
 
-#: templates/admin-tab-fields.php:103
-msgid "Custom Fields slug separated by comma. Searching will be provided in custom fields values"
+#: templates/admin-tab-fields.php:108
+msgid "Post Category"
+msgstr ""
+
+#: templates/admin-tab-fields.php:109
+msgid "Enable search in post category"
+msgstr ""
+
+#: templates/admin-tab-fields.php:116
+msgid "Product Tag"
+msgstr ""
+
+#: templates/admin-tab-fields.php:117
+msgid "Enable search in product tag"
 msgstr ""
 
 #: templates/admin-tab-fields.php:123
-msgid "Allowed Product Categories"
+msgid "Product Category"
 msgstr ""
 
 #: templates/admin-tab-fields.php:124
-msgid "Search in chosen product categories"
+msgid "Enable search in product category"
 msgstr ""
 
 #: templates/admin-tab-fields.php:131
-msgid "Disallowed Product Categories"
+msgid "Custom Taxonomies"
 msgstr ""
 
 #: templates/admin-tab-fields.php:132
-msgid "Do not search in chosen product categories"
+msgid "Enable search in selected custom taxonomies"
+msgstr ""
+
+#: templates/admin-tab-fields.php:152
+msgid "Allowed Product Categories"
+msgstr ""
+
+#: templates/admin-tab-fields.php:153
+msgid "Limit customers' search to selected product categories"
+msgstr ""
+
+#: templates/admin-tab-fields.php:160
+msgid "Disallowed Product Categories"
+msgstr ""
+
+#: templates/admin-tab-fields.php:161
+msgid "Disallow search in selected product categories"
 msgstr ""
 
 #: templates/admin-tab-general.php:8

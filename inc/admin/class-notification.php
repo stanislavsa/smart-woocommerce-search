@@ -1,5 +1,5 @@
 <?php
-namespace YSWS\Admin;
+namespace YummyWP\App;
 
 /**
  * Notification manager

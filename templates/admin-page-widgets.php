@@ -23,7 +23,7 @@ if ( $action && 'edit' === $action && $id ) {
 
 		<h1><span><?php esc_html_e( 'Edit Widget', 'smart-woocommerce-search' ); ?></span></h1>
 
-		<?php \YSWS\Admin\Notification::display(); ?>
+		<?php \YummyWP\App\Notification::display(); ?>
 
 		<?php include_once YSM_DIR . 'templates/admin-page-form.php'; ?>
 

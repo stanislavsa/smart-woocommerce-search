@@ -1,5 +1,5 @@
 <?php
-namespace YSWS\Admin;
+namespace YummyWP\App;
 
 /**
  * Field manager
@@ -17,11 +17,12 @@ class Field {
 	 */
 	private function __clone() {}
 
-	/** Check args and retrieve setting html output
+	/**
+	 * Check args and output field html
 	 * @param $id
 	 * @param $args
 	 */
-	public static function get_setting_html( $id, $args ) {
+	public static function output( $id, $args ) {
 
 		if ( isset( $args['choices'] ) ) {
 			$args['choices'] = (array) $args['choices'];
@@ -164,7 +165,7 @@ class Field {
 	public static function get_color_html( $id, $args ) {
 		ob_start();
 		?>
-		<input class="sm-color-picker" type="text" name="<?php echo esc_attr( $args['name'] ); ?>" id="<?php echo esc_attr( $id ); ?>" value="<?php echo esc_attr( $args['value'] ); ?>" />
+		<input class="ymapp-color-picker" type="text" name="<?php echo esc_attr( $args['name'] ); ?>" id="<?php echo esc_attr( $id ); ?>" value="<?php echo esc_attr( $args['value'] ); ?>" />
 		<p class="description">
 			<?php echo wp_kses_post( $args['description'] ); ?>
 		</p>
