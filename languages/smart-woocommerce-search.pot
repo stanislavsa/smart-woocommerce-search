@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2023-08-02T08:56:10+00:00\n"
+"POT-Creation-Date: 2023-08-02T18:06:06+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.4.0\n"
 "X-Domain: smart-woocommerce-search\n"
@@ -77,6 +77,7 @@ msgstr ""
 #: index.php:280
 #: templates/admin-page-stop-words.php:22
 #: templates/admin-page-synonyms.php:25
+#: templates/promo/promo-banners.php:29
 msgid "Upgrade to Pro"
 msgstr ""
 
@@ -110,11 +111,11 @@ msgstr ""
 msgid "Select Widget:"
 msgstr ""
 
-#: inc/custom/class-ysm-widget-manager.php:293
+#: inc/custom/class-ysm-widget-manager.php:267
 msgid "Your settings have been saved."
 msgstr ""
 
-#: inc/custom/class-ysm-widget-manager.php:368
+#: inc/custom/class-ysm-widget-manager.php:342
 msgctxt "submit button"
 msgid "Search"
 msgstr ""
@@ -856,4 +857,8 @@ msgstr ""
 
 #: templates/admin-tab-styling.php:167
 msgid "\"Featured\" label background color in results popup"
+msgstr ""
+
+#: templates/promo/promo-banners.php:27
+msgid "Premium version of Smart Search"
 msgstr ""
