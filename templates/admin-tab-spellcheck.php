@@ -6,7 +6,10 @@
 		ysm_setting( $w_id, 'synonyms', array(
 			'type'        => 'pro',
 			'title'       => __( 'Synonyms', 'smart-woocommerce-search' ),
-			'description' => __( 'Add synonyms for the words that, for your opinion, can be entered with spell errors. Example Orange => Ornge', 'smart-woocommerce-search' ),
+			'description' =>
+				__( 'Add synonyms for words you think could be misspelled.<br> Example Orange => Ornge', 'smart-woocommerce-search' )
+				. '<br>'
+				. __( 'Applies only to the current widget.', 'smart-woocommerce-search' ),
 		));
 		?>
 

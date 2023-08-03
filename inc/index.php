@@ -48,6 +48,4 @@ include_once __DIR__ . '/elements/product-price.php';
 include_once __DIR__ . '/elements/product-sku.php';
 
 // admin hooks
-include_once __DIR__ . '/admin/class-field.php';
-include_once __DIR__ . '/admin/class-notification.php';
 include_once __DIR__ . '/admin/admin.php';

@@ -73,7 +73,7 @@ class Field {
 		?>
 		<label for="<?php echo esc_attr( $id ); ?>">
 			<input value="<?php echo esc_attr( $args['value'] ); ?>" placeholder="<?php echo esc_attr( $args['placeholder'] ); ?>" <?php disabled( $args['disabled'], true ); ?>
-			       type="<?php echo esc_attr( $args['type'] ); ?>" class="code" name="<?php echo esc_attr( $args['name'] ); ?>" id="<?php echo esc_attr( $id ); ?>" />
+				   type="<?php echo esc_attr( $args['type'] ); ?>" class="code" name="<?php echo esc_attr( $args['name'] ); ?>" id="<?php echo esc_attr( $id ); ?>" />
 		</label>
 		<p class="description">
 			<?php echo wp_kses_post( $args['description'] ); ?>
@@ -94,8 +94,8 @@ class Field {
 		?>
 		<input type="hidden" name="<?php echo esc_attr( $args['name'] ); ?>" value="<?php echo (int) $args['value']; ?>">
 		<input value="1" <?php checked( (int) $args['value'], 1 ); ?> <?php disabled( $args['disabled'], true ); ?>
-		       type="<?php echo esc_attr( $args['type'] ); ?>"
-		       id="<?php echo esc_attr( $id ); ?>" class="ymapp-switcher" />
+			   type="<?php echo esc_attr( $args['type'] ); ?>"
+			   id="<?php echo esc_attr( $id ); ?>" class="ymapp-switcher" />
 		<label for="<?php echo esc_attr( $id ); ?>">
 			<?php echo wp_kses_post( $args['description'] ); ?>
 		</label>
@@ -146,8 +146,8 @@ class Field {
 		ob_start();
 		?>
 		<textarea rows="3" cols="20" class="input-text wide-input"
-		          type="<?php echo esc_attr( $args['type'] ); ?>" name="<?php echo esc_attr( $args['name'] ); ?>" id="<?php echo esc_attr( $id ); ?>"
-		          placeholder="<?php echo esc_attr( $args['placeholder'] ); ?>" <?php disabled( $args['disabled'], true ); ?>><?php echo esc_textarea( $args['value'] ); ?></textarea>
+				  type="<?php echo esc_attr( $args['type'] ); ?>" name="<?php echo esc_attr( $args['name'] ); ?>" id="<?php echo esc_attr( $id ); ?>"
+				  placeholder="<?php echo esc_attr( $args['placeholder'] ); ?>" <?php disabled( $args['disabled'], true ); ?>><?php echo esc_textarea( $args['value'] ); ?></textarea>
 		<p class="description">
 			<?php echo wp_kses_post( $args['description'] ); ?>
 		</p>
@@ -226,6 +226,44 @@ class Field {
 			</li>
 		</template>
 		<?php
+		return ob_get_clean();
+	}
+
+	/**
+	 * Retrieve image uploader html
+	 * @param $id
+	 * @param $args
+	 * @return string
+	 */
+	public static function get_image_html( $id, $args ) {
+		ob_start();
+		$url = wp_get_attachment_image_src( $args['value'], 'full' );
+
+		if ( $url && is_array( $url ) ) {
+			$url = $url[0];
+		} else {
+			$url = '';
+		}
+		?>
+		<div class="image-uploader<?php echo $url ? ' has-image' : ''; ?>">
+			<input type="hidden" name="<?php echo esc_attr( $args['name'] ); ?>" value="<?php echo esc_attr( $args['value'] ); ?>">
+			<div class="image-preview">
+				<div class="hover">
+					<span class="image-delete dashicons dashicons-no-alt"></span>
+					<span class="image-edit dashicons dashicons-edit"></span>
+				</div>
+				<img class="image-preview-img" src="<?php echo esc_url( $url ); ?>" alt="" scale="0">
+			</div>
+			<div class="no-image">
+				<?php esc_html_e( 'No image selected', 'yummywp-app' ); ?><input type="button" class="ymapp-button-small ymapp-button-grey image-add" value="<?php esc_html_e( 'Select', 'yummywp-app' ); ?>">
+			</div>
+		</div>
+		<div class="clear"></div>
+		<p class="description">
+			<?php echo wp_kses_post( $args['description'] ); ?>
+		</p>
+		<?php
+
 		return ob_get_clean();
 	}
 
