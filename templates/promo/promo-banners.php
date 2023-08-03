@@ -24,7 +24,7 @@
 	}
 </style>
 <div class="ym-ads-wrap">
-	<div class="header"><?php esc_html_e( 'Premium version of Smart Search', 'smart-woocommerce-search' ); ?></div>
+	<div class="header"><?php esc_html_e( 'Get Premium Version of Smart Search', 'smart-woocommerce-search' ); ?></div>
 	<a href="<?php echo esc_url( 'https://yummywp.com/plugins/smart-woocommerce-search/#smart-search-compare' ); ?>" class="ymapp-button" target="_blank">
 		<?php esc_html_e( 'Upgrade to Pro', 'smart-woocommerce-search' ); ?>
 	</a>
