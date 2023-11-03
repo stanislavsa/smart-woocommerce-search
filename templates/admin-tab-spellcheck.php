@@ -7,7 +7,7 @@
 			'type'        => 'pro',
 			'title'       => __( 'Synonyms', 'smart-woocommerce-search' ),
 			'description' =>
-				__( 'Add synonyms for words you think could be misspelled.<br> Example Orange => Ornge', 'smart-woocommerce-search' )
+				__( 'Add synonyms for words that you think could be misspelled.<br> Example Orange => Ornge', 'smart-woocommerce-search' )
 				. '<br>'
 				. __( 'Applies only to the current widget.', 'smart-woocommerce-search' ),
 		));

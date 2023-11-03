@@ -17,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 					__( 'Spell Correction.', 'smart-woocommerce-search' )
 					. ' '
 					. __( 'Applies globally to all widgets.', 'smart-woocommerce-search' ),
-				'description' => __( 'Add synonyms for words you think could be misspelled.<br> Example Orange => Ornge', 'smart-woocommerce-search' ),
+				'description' => __( 'Add synonyms for words that you think could be misspelled.<br> Example Orange => Ornge', 'smart-woocommerce-search' ),
 			] );
 			?>
 

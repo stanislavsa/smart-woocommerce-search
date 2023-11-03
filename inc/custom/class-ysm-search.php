@@ -64,6 +64,14 @@ class Ysm_Search {
 	 * Parse widget settings to define search behavior
 	 */
 	public static function parse_settings() {
+		static $static_vars;
+
+		$widget_id = self::get_widget_id();
+
+		if ( ! empty( $static_vars[ $widget_id ] ) ) {
+			self::$vars = $static_vars[ $widget_id ];
+			return;
+		}
 
 		$registered_pt = array(
 			'post',
@@ -74,8 +82,6 @@ class Ysm_Search {
 			$registered_pt[] = 'product';
 			$registered_pt[] = 'product_variation';
 		}
-
-		$widget_id = self::get_widget_id();
 
 		if ( in_array( $widget_id, ysm_get_default_widgets_ids(), true ) ) {
 			$widgets = ysm_get_default_widgets();
@@ -171,6 +177,7 @@ class Ysm_Search {
 		}
 
 		self::$vars = array_merge( self::$vars, $settings );
+		$static_vars[ $widget_id ] = self::$vars;
 	}
 
 	/**
