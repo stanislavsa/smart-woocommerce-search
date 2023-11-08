@@ -120,7 +120,7 @@ In example used widget with ID = 1, so don't forget to change widget ID to neede
 == Changelog ==
 
 = 2.7.0 =
-* Added: option to exclude variations from results if the parent product is "Out of stock"
+* Added: option to disable default WooCommerce redirect to product page if there is only one search result
 * Updates: small improvements
 
 = 2.6.3 =
