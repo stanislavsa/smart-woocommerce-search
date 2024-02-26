@@ -20,8 +20,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 				'description' => __( 'Add synonyms for words that you think could be misspelled.<br> Example Orange => Ornge', 'smart-woocommerce-search' ),
 			] );
 			?>
-
-			<a href="<?php echo esc_url( 'https://yummywp.com/plugins/smart-woocommerce-search/#smart-search-compare' ); ?>" class="ymapp-button" target="_blank">
+			<br><br>
+			<a href="<?php echo esc_url( sws_fs()->get_upgrade_url() ); ?>" class="ymapp-button">
 				<?php esc_html_e( 'Upgrade to Pro', 'smart-woocommerce-search' ); ?>
 			</a>
 

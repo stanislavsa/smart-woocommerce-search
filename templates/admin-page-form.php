@@ -74,5 +74,3 @@ $tabs = array(
 	</p>
 
 </form>
-
-<?php include_once __DIR__ . '/promo/promo-banners.php'; ?>

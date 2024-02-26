@@ -276,11 +276,11 @@ class Field {
 	public static function get_pro_html( $id, $args ) {
 		ob_start();
 		?>
-		<p class="description description-pro" style="color: red;">
-			<?php echo esc_html__( 'Available in PRO', 'smart-woocommerce-search' ); ?>
-		</p>
-		<p class="description">
+		<p class="description description-pro">
 			<?php echo wp_kses_post( $args['description'] ); ?>
+			<a href="<?php echo esc_url( sws_fs()->get_upgrade_url() ); ?>" style="color: red;margin-left: 10px;">
+				<?php esc_html_e( 'Upgrade to Pro', 'smart-woocommerce-search' ); ?>
+			</a>
 		</p>
 		<?php
 

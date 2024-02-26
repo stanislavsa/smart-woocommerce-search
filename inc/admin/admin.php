@@ -58,10 +58,10 @@ function add_menu_pages() {
 	);
 
 	add_submenu_page( 'smart-search',
-		__( 'Upgrade to Pro', 'smart-woocommerce-search' ),
-		__( 'Upgrade to Pro', 'smart-woocommerce-search' ),
+		__( 'Start Trial', 'smart-woocommerce-search' ),
+		__( 'Start Trial&nbsp;&nbsp;➤', 'smart-woocommerce-search' ),
 		'manage_options',
-		'smart-search-update-to-pro',
+		'smart-search-pro-trial',
 		__NAMESPACE__ . '\\display_admin_page_update_to_pro'
 	);
 }
@@ -83,8 +83,8 @@ function display_admin_page_stop_words() {
 }
 
 function display_admin_page_update_to_pro() {
-	if ( 'smart-search-update-to-pro' === filter_input( INPUT_GET, 'page', FILTER_SANITIZE_FULL_SPECIAL_CHARS ) ) {
-		wp_redirect( 'https://yummywp.com/plugins/smart-woocommerce-search/#smart-search-compare' );
+	if ( 'smart-search-pro-trial' === filter_input( INPUT_GET, 'page', FILTER_SANITIZE_FULL_SPECIAL_CHARS ) ) {
+		wp_redirect( sws_fs()->get_trial_url() );
 		die;
 	}
 }

@@ -21,6 +21,11 @@ class Ysm_Search {
 	 */
 	protected static $vars = array();
 	/**
+	 * List of search terms
+	 * @var array
+	 */
+	protected static $search_terms = array();
+	/**
 	 * Number of found posts
 	 * @var array
 	 */
@@ -602,7 +607,7 @@ class Ysm_Search {
 	 * @return array
 	 */
 	public static function get_search_terms() {
-		return (array) self::$vars['search_terms'];
+		return (array) self::$search_terms;
 	}
 
 	/**
@@ -618,12 +623,12 @@ class Ysm_Search {
 	 * @return string
 	 */
 	protected static function set_search_terms() {
-		self::$vars['search_terms'] = array();
+		self::$search_terms = [];
 		$search_terms = self::get_var( 'enable_fuzzy_search' ) ? explode( ' ', self::get_var( 's' ) ) : (array) self::get_var( 's' );
 		$search_terms = (array) apply_filters( 'ysm_check_words', $search_terms );
 		foreach ( $search_terms as $search_term ) {
 			if ( strlen( $search_term ) >= self::get_var( 'char_count' ) ) {
-				self::$vars['search_terms'][] = $search_term;
+				self::$search_terms[] = $search_term;
 			}
 		}
 	}

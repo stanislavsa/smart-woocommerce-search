@@ -1,38 +1,26 @@
 === Smart WooCommerce Search ===
 Contributors: yummy-wp
 Tags: woocommerce search, ajax search, woocommerce, genesis, elementor, divi, avada, enfold, filters, product filter, woo search, relevanssi, jetpack, woocommerce search by sku, woocommerce search shortcod, product search, product filter, woocommerce search results, instant search, woocommerce search plugin, woocommerce search form, search for woocommerce, woocommerce search page, search, woocommerce product search, search woocommerce, shop, shop search, autocomplete, autosuggest, search for wp, search for wordpress, search plugin, woocommerce search by sku, search results,  woocommerce search shortcode, search products, search autocomplete, woocommerce advanced search, woocommerce predictive search, woocommerce live search, woocommerce single product, woocommerce site search, products, shop, category search, custom search, predictive search, relevant search, search product, woocommerce plugin, yith, woof, wp search, wordpress search
-Stable tag: 2.7.0
+Stable tag: 2.8.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
-Requires at least: 5.4
+Requires at least: 5.9
 Tested up to: 6.4
-Requires PHP: 5.4
+Requires PHP: 7.0
 
-Smart WooCommerce Search allows you to instantly search products. Extends default Avada search bar.
+Smart WooCommerce Search enhances your users' experience with a sophisticated AJAX search bar featuring real-time suggestions.
 
 == Description ==
 
-= Improve customer experience and boost your sales with Smart WooCommerce Search plugin for WordPress websites. Powerful, amazing and efficient! =
+= Smart WooCommerce Search enhances your users' experience with a sophisticated AJAX search bar featuring real-time suggestions. =
 
-[Read more](https://yummywp.com/plugins/smart-woocommerce-search/).
+[Check Demo](https://smart-woocommerce-search.yummywp.com/)
 
-[View plugin Demo](https://smart-woocommerce-search.yummywp.com/).
+While WooCommerce's default search is basic, lacking live product search and SKU search functionality, **Smart WooCommerce Search** delivers advanced search capabilities along with live suggestions.
 
-With this Instant **Ajax** WooCommerce **search plugin**, your customers will be able to find any product on your online store. Just enter the required keyword and the plugin will start viewing all WooCommerce products one by one.
+In today's market, instant search suggestions are essential. According to the latest research, 96% of major e-commerce sites now offer search autocomplete, auto-suggest, or instant search features. This functionality is crucial for retaining customers and optimizing sales by saving users time and streamlining the shopping process.
 
-This plugin is indispensable for sites with a large number of product items.
-
-You can completely customize your **smart search**. In addition, the plugin integrates seamlessly into the **WooCommerce Product Search** widget.
-
-You have the opportunity to create your Smart Search widget and paste it on any of the pages of the site (to do this, use the "Code" widget in **DIVI**) using a shortcode `[smart_search id="1"]`. You can also place it on the sidebar using the Smart Search widget. Replace the default theme search using a shortcode.
-
-An important advantage is that WooCommerce Search is compatible with **Elementor** (you can find the required widget in the list of Elementor widgets). It is also compatible with the **WPBakery Page Builder** plugin.
-
-Also you can replace default **Avada** search with a smart search in an easy way.
-
-Give it a try and enjoy:)
-
-= Features =
+= Features Free: =
 
  * Search results with images and prices
  * Simple integration into default search widgets
@@ -47,41 +35,37 @@ Give it a try and enjoy:)
  * Allow/disallow searching in selected product categories
  * Exclude "Out of stock" products from search results
  * Multiple words search
- * Translation ready
  * Search Exclude plugin compatible
 
-[View plugin Demo](https://smart-woocommerce-search.yummywp.com/).
+This plugin is indispensable for sites with a large number of product items.
 
-[Plugin Documentation](https://yummywp.com/docs/smart-search/).
+You can completely customize your smart search. In addition, the plugin integrates seamlessly into the WooCommerce Product Search widget.
 
- = PRO Features =
+= Upgrade to PRO and boost your sales: =
 
-  * Search in **product attributes**
-  * Search in custom fields
-  * Search in custom taxonomies
-  * Search in product brands
-  * Search in product variations
-  * Search in custom post types
-  * **WPML compatible**
-  * **Polylang compatible**
-  * **Stop words**
-  * **Synonyms**
-  * Search results with "Out of stock" label
-  * Search results with "Sale" label
-  * Search results with "Featured" label
-  * Search results with "Add to Cart" button
-  * ACF plugin compatible
-  * Custom Post Type UI plugin compatible
-  * Ultimate WooCommerce Brands plugin compatible
-  * More customization and styling settings
+   * Search in Variations
+   * Search in Custom Post Types
+   * Search in Custom Taxonomies
+   * Search in Custom Fields
+   * Search in Product Attributes
+   * Search in Product Brands
+   * Product labels
+   * Synonyms
+   * Stop words
+   * Advanced caching
+   * WPML compatibility
+   * Polylang compatibility
+   * ACF plugin compatibility
+   * Custom Post Type UI plugin compatibility
+   * Ultimate WooCommerce Brands plugin compatibility
+   * Add to Cart button
+   * More customization and styling settings
+   * 1 year of support
+   * 1 year of updates
 
-https://www.youtube.com/watch?v=EoMqNO8sDYg
+[Plugin Documentation](https://yummywp.com/docs/smart-search/)
 
-[Read More](https://yummywp.com/plugins/smart-woocommerce-search/).
-
-[View plugin Demo](https://smart-woocommerce-search.yummywp.com/).
-
-[Plugin Documentation](https://yummywp.com/docs/smart-search/).
+Do you have any questions or concerns? Feel free to contact us via the [contact form](https://www.wpsmartsearch.com/contact/).
 
 == Installation ==
 
@@ -92,6 +76,11 @@ https://www.youtube.com/watch?v=EoMqNO8sDYg
 5. Place the search plugin shortcode `<?php echo do_shortcode('[smart_search id="1"]');  ?>` into your template or simply use the built-in widget.
 
 == Frequently Asked Questions ==
+
+= How to add Smart Search widget into the theme template (a PHP file) =
+
+Just add these PHP code `<?php echo do_shortcode('[smart_search id="1"]');  ?>`
+In example used widget with ID = 1, so don't forget to change widget ID to needed value.
 
 = Is it compatible with my WordPress themes? =
 
@@ -105,11 +94,6 @@ Please read a [documentation](http://yummywp.com/docs/smart-search/).
 
 Yes, when using products search or when you set option to search only through products in default or in custom search widget (shortcode) the search page displays WooCommerce product layout.
 
-= How to add Smart Search widget into the theme template (a PHP file) =
-
-Just add these PHP code `<?php echo do_shortcode('[smart_search id="1"]');  ?>`
-In example used widget with ID = 1, so don't forget to change widget ID to needed value.
-
 == Screenshots ==
 
 1. Smart WooCommerce Search Custom Widget
@@ -118,6 +102,10 @@ In example used widget with ID = 1, so don't forget to change widget ID to neede
 4. Smart WooCommerce Search Settings Page - Styling tab
 
 == Changelog ==
+
+= 2.8.0 =
+* Fixed: issue with the "Highlight Search Terms on the Search Results Page" setting
+* Tweak: Raised the minimum required PHP version to 7.0
 
 = 2.7.0 =
 * Added: option to disable default WooCommerce redirect to product page if there is only one search result

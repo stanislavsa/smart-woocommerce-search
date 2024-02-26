@@ -17,8 +17,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 					'description' => __( 'Add a list of words that should be skipped from the search request.', 'smart-woocommerce-search' ),
 				] );
 				?>
-
-				<a href="<?php echo esc_url( 'https://yummywp.com/plugins/smart-woocommerce-search/#smart-search-compare' ); ?>" class="ymapp-button" target="_blank">
+				<br><br>
+				<a href="<?php echo esc_url( sws_fs()->get_upgrade_url() ); ?>" class="ymapp-button">
 					<?php esc_html_e( 'Upgrade to Pro', 'smart-woocommerce-search' ); ?>
 				</a>
 
