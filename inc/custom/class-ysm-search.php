@@ -299,6 +299,10 @@ class Ysm_Search {
 
 		self::set_search_terms();
 
+		if ( ! self::get_search_terms() ) {
+			return [];
+		}
+
 		$limit = self::get_var( 'max_post_count' );
 
 		$posts = array();

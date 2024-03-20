@@ -3,70 +3,27 @@
 	"use strict";
 
 	$(function(){
+		var swsL10n = window.swsL10n || {};
 
-		if ( ysm_L10n.enable_search && ysm_L10n.enable_search == 1 ) {
-			$( '.widget_search' ).each(function () {
-				ysm_init_autocomplete( this, {
-					id: 'default',
-					serviceUrl: ysm_L10n.restUrl + 'id=default',
-					layout: ysm_L10n['layout'],
-					maxHeight: 400,
-					minChars: ysm_L10n.char_count,
-					disableAjax: ysm_L10n.disable_ajax,
-					no_results_text: ysm_L10n.no_results_text
-				} );
-			});
-		}
-
-		if ( ysm_L10n.enable_product_search && ysm_L10n.enable_product_search == 1 ) {
-			$( '.woocommerce.widget_product_search' ).each(function () {
-				ysm_init_autocomplete( this, {
-					id: 'product',
-					serviceUrl: ysm_L10n.restUrl + 'id=product',
-					layout: 'product',
-					maxHeight: 400,
-					minChars: ysm_L10n.product_char_count,
-					disableAjax: ysm_L10n.product_disable_ajax,
-					no_results_text: ysm_L10n.product_no_results_text
-				} );
-			});
-		}
-
-		if ( ysm_L10n.enable_avada_search && ysm_L10n.enable_avada_search == 1 ) {
-			$( '.fusion-search-form' ).each(function () {
-				ysm_init_autocomplete( this, {
-					id: 'avada',
-					serviceUrl: ysm_L10n.restUrl + 'id=avada',
-					layout: ysm_L10n.avada_layout,
-					maxHeight: ysm_L10n.avada_popup_height,
-					minChars: ysm_L10n.avada_char_count,
-					disableAjax: ysm_L10n.avada_disable_ajax,
-					no_results_text: ysm_L10n.avada_no_results_text,
-					loaderIcon: ysm_L10n.avada_loader_icon,
-					preventBadQueries: ysm_L10n.avada_prevent_bad_queries
-				} );
-			});
-		}
-
-		var $custom_widgets = $( '.ysm-search-widget' );
-
-		if ( $custom_widgets.length ) {
-
-			$custom_widgets.each(function () {
-				var id   = $( this ).find('form').data('id'),
-					attr = {
-						id: id,
-						serviceUrl: ysm_L10n.restUrl + 'id=' + encodeURIComponent( id ),
-						layout: ysm_L10n['custom_'+ id +'_layout'],
-						maxHeight: 400,
-						minChars: ysm_L10n['custom_'+ id +'_char_count'],
-						disableAjax: ysm_L10n[ 'custom_' + id + '_disable_ajax' ],
-						no_results_text: ysm_L10n['custom_'+ id +'_no_results_text']
-					};
-
-				ysm_init_autocomplete( this, attr );
-			});
-
+		if ( swsL10n ) {
+			for ( var wId in swsL10n.widgets ) {
+				if ( $( swsL10n.widgets[wId].selector ).length ) {
+					$( swsL10n.widgets[wId].selector ).each(function () {
+						sws_init_autocomplete( this, {
+							id: wId,
+							serviceUrl: swsL10n.restUrl + 'id=' + encodeURIComponent( wId ),
+							layout: swsL10n.widgets[wId].layout,
+							productSlug: swsL10n.widgets[wId].productSlug,
+							maxHeight: swsL10n.widgets[wId].popupHeight,
+							minChars: swsL10n.widgets[wId].charCount,
+							disableAjax: swsL10n.widgets[wId].disableAjax,
+							no_results_text: swsL10n.widgets[wId].noResultsText,
+							loaderIcon: swsL10n.widgets[wId].loaderIcon,
+							preventBadQueries: swsL10n.widgets[wId].preventBadQueries
+						} );
+					});
+				}
+			}
 		}
 
 		/**
@@ -75,28 +32,36 @@
 		 * @param el
 		 * @param attr
 		 */
-		function ysm_init_autocomplete(el, attr) {
+		function sws_init_autocomplete( el, attr ) {
 
-			var $this = $(el).find('input[type="search"]').length ? $(el).find('input[type="search"]') : $(el).find('input[type="text"]'),
+			var $this = $( el ).find( 'input[type="search"]' ).length ? $( el ).find( 'input[type="search"]' ) : $( el ).find( 'input[type="text"]' ),
 				$form = ( el.tagName === 'FORM' || el.tagName === 'form' ) ? $( el ) : $( el ).find( 'form' );
 
 			if ( ! $this.length ) {
 				return;
 			}
 
-			$(el).addClass('ysm-active');
+			if ( $( el ).hasClass('ysm-active') ) {
+				return;
+			}
+
+			$( el ).addClass( 'ysm-active' );
 
 			var defaults = {
 				id: '',
-				serviceUrl: ysm_L10n.restUrl,
+				serviceUrl: swsL10n.restUrl,
 				layout: '',
-				maxHeight: 600,
+				productSlug: 'product',
+				maxHeight: 400,
 				minChars: 3,
 				disableAjax: false,
-				loaderIcon: ysm_L10n.loader_icon
+				no_results_text: '',
+				loaderIcon: '',
+				preventBadQueries: true,
+				cache: true
 			};
 
-			var options = $.extend({}, defaults, attr);
+			var options = $.extend( {}, defaults, attr );
 
 			$form.on( 'submit', function( e ) {
 				var val = $this.val();
@@ -104,7 +69,7 @@
 				if ( val === '' || val.length < options.minChars ) {
 					return false;
 				} else {
-					var action = $( this ).attr('action');
+					var action = swsL10n.searchPageUrl;
 
 					val = val.replace( /\+/g, '%2b' );
 					val = val.replace( /\s/g, '+' );
@@ -112,7 +77,7 @@
 					action += 's=' + val + '&search_id=' + options.id;
 
 					if ( options.layout === 'product' ) {
-						action += '&post_type=product';
+						action += '&post_type=' + options.productSlug;
 					}
 
 					e.preventDefault();
@@ -124,23 +89,23 @@
 				return;
 			}
 
-			$('<div class="smart-search-results"></div>').appendTo($form);
+			$( '<div class="smart-search-results"></div>' ).appendTo( $form );
 
-			var $results_wrapper = $form.find('.smart-search-results').css({
+			var $results_wrapper = $form.find( '.smart-search-results' ).css({
 				maxHeight: options.maxHeight + 'px',
 				width: $this.outerWidth() + 'px'
 			});
 
-			if (navigator.userAgent.indexOf('Windows') !== -1 && navigator.userAgent.indexOf('Firefox') !== -1) {
-				$results_wrapper.addClass('smart-search-firefox');
+			if ( navigator.userAgent.indexOf( 'Windows' ) !== -1 && navigator.userAgent.indexOf( 'Firefox' ) !== -1 ) {
+				$results_wrapper.addClass( 'smart-search-firefox' );
 			}
 
-			$(window).on('resize', function () {
+			$( window ).on( 'resize', function () {
 				var _width = $this.outerWidth() + 'px';
 
 				$results_wrapper.css({
 					width: _width
-				}).find('.smart-search-suggestions').css({
+				}).find( '.smart-search-suggestions' ).css({
 					width: _width
 				});
 			});
@@ -152,12 +117,13 @@
 				maxHeight       : options.maxHeight,
 				dataType        : 'json',
 				deferRequestBy  : 100,
-				noCache         : false,
+				noCache         : ! options.cache,
 				containerClass  : 'smart-search-suggestions',
 				triggerSelectOnValidInput: false,
 				showNoSuggestionNotice: options.no_results_text.length ? true : false,
 				noSuggestionNotice: options.no_results_text,
-				formatResult: function (suggestion, currentValue) {
+				preventBadQueries: options.preventBadQueries,
+				formatResult: function ( suggestion, currentValue ) {
 					return suggestion.data;
 				},
 				onSearchStart   : function ( query ) {
@@ -170,27 +136,27 @@
 					}
 					query.query = query.query.replace( /%20/g, ' ' );
 
-					$this.css({'background-image': 'url(' + options.loaderIcon + ')','background-repeat': 'no-repeat', 'background-position': '50% 50%'});
+					$this.css( {'background-image': 'url(' + options.loaderIcon + ')','background-repeat': 'no-repeat', 'background-position': '50% 50%'} );
 				},
-				onSelect        : function (suggestion) {
-					if (suggestion.id != -1) {
+				onSelect        : function ( suggestion ) {
+					if ( suggestion.id != -1 && suggestion.url && ! suggestion.addToCart ) {
 						window.location.href = suggestion.url;
 					}
 				},
-				transformResult: function (response) {
-					var res = typeof response === 'string' ? $.parseJSON(response) : response,
+				transformResult: function ( response ) {
+					var res = typeof response === 'string' ? $.parseJSON( response ) : response,
 						val = $this.val();
 
-					if (res && res.view_all_link && res.view_all_link != '') {
-						if ( !$results_wrapper.find('.smart-search-view-all-holder').length ) {
-							$results_wrapper.addClass('has-viewall-button').append('<div class="smart-search-view-all-holder"></div>');
+					if ( res && res.view_all_link && res.view_all_link != '' ) {
+						if ( ! $results_wrapper.find( '.smart-search-view-all-holder' ).length ) {
+							$results_wrapper.addClass( 'has-viewall-button' ).append( '<div class="smart-search-view-all-holder"></div>' );
 						}
-						$results_wrapper.find('.smart-search-view-all-holder').html(res.view_all_link);
+						$results_wrapper.find( '.smart-search-view-all-holder' ).html( res.view_all_link );
 					}
 
 					return res;
 				},
-				onSearchComplete: function (query, suggestions) {
+				onSearchComplete: function ( query, suggestions ) {
 
 					$this.css( 'background-image', 'none' );
 
@@ -267,7 +233,7 @@
 					}
 
 				},
-				onSearchError: function (query, jqXHR, textStatus, errorThrown) {
+				onSearchError: function ( query, jqXHR, textStatus, errorThrown ) {
 					$results_wrapper.css({
 						maxHeight: 'auto',
 						height: 0
@@ -276,7 +242,7 @@
 						stop: true
 					});
 
-					$results_wrapper.find('.smart-search-view-all-holder').hide();
+					$results_wrapper.find( '.smart-search-view-all-holder' ).hide();
 				},
 				onInvalidateSelection: function () {
 
@@ -290,18 +256,18 @@
 						stop: true
 					});
 
-					$results_wrapper.find('.smart-search-view-all-holder').hide();
+					$results_wrapper.find( '.smart-search-view-all-holder' ).hide();
 				}
-			}).on('focus', function () {
+			}).on( 'focus', function () {
 				$this.devbridgeAutocomplete().onValueChange();
 			});
 
-			$(window).on( 'touchstart' , function(event) {
+			$( window ).on( 'touchstart' , function( event ) {
 				var $wrapper = $( event.target ).hasClass( 'ysm-active' ) ? $( event.target ) : $( event.target ).parents( '.ysm-active' );
 				if ( $wrapper.length ) {
 					$wrapper.removeClass( 'ysm-hide' );
 				} else {
-					$('.ysm-active').addClass( 'ysm-hide' );
+					$( '.ysm-active' ).addClass( 'ysm-hide' );
 				}
 			});
 

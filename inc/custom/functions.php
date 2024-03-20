@@ -189,3 +189,12 @@ function ysm_text_replace( $text ) {
 
 	return preg_replace( '/' . implode( '|', $words ) . '/i', '<strong>$0</strong>', $text );
 }
+
+/**
+ * Get woocommerce product rewrite base slug
+ * @param $w_id
+ * @return string|null
+ */
+function ysw_get_woocommerce_product_slug( $w_id ) {
+	return 'product';
+}

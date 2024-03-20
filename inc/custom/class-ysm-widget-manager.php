@@ -334,7 +334,7 @@ class Ysm_Widget_Manager {
 					<input type="search" name="s" value="<?php echo get_search_query(); ?>" id="<?php echo esc_attr( $uniq_id ); ?>" class="search-field" placeholder="<?php esc_attr_e( $settings['placeholder'], 'smart-woocommerce-search' ); ?>" />
 					<input type="hidden" name="search_id" value="<?php echo esc_attr( $w_id ); ?>" />
 					<?php if ( 'product' === $layout ) : ?>
-						<input type="hidden" name="post_type" value="product" />
+						<input type="hidden" name="post_type" value="<?php echo esc_attr( ysw_get_woocommerce_product_slug( $w_id ) ); ?>" />
 					<?php endif; ?>
 					<?php if ( function_exists( 'is_amp_endpoint' ) && is_amp_endpoint() ) : ?>
 						<input type="hidden" name="amp" value="1" />

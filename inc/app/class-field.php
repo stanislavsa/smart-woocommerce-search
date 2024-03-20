@@ -33,6 +33,7 @@ class Field {
 			'title'             => '',
 			'description'       => '',
 			'placeholder'       => '',
+			'is_pro'            => false,
 			'choices'           => array(),
 			'fields'            => array(),
 			'value'             => '',
@@ -44,6 +45,10 @@ class Field {
 		);
 
 		$args = wp_parse_args( $args, $defaults );
+
+		if ( $args['is_pro'] && ! sws_fs()->is_premium() ) {
+			$args['type'] = 'pro';
+		}
 
 		if ( method_exists( __CLASS__, 'get_' . $args['type'] . '_html' ) ) {
 			?>

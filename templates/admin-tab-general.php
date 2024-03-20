@@ -89,10 +89,11 @@
 		));
 
 		ysm_setting( $w_id, 'view_all_link_found_posts', array(
-			'type'        => 'pro',
+			'type'        => 'checkbox',
 			'title'       => __( 'Number of Found Posts in the "View All" Button', 'smart-woocommerce-search' ),
 			'description' => __( 'Display total number of found posts in the "View All" button.<br>This setting may affect search performance', 'smart-woocommerce-search' ),
 			'value'       => 0,
+			'is_pro'      => true,
 		));
 
 		ysm_setting( $w_id, 'disable_ajax', array(
@@ -125,24 +126,40 @@
 			'value'       => 0,
 		));
 
+		ysm_setting( $w_id, 'exclude_out_of_stock_parent_variations', array(
+			'type'        => 'checkbox',
+			'title'       => '',
+			'description' => __( 'Exclude variations from results if the parent product is "Out of stock"', 'smart-woocommerce-search' ),
+			'value'       => 0,
+			'is_pro'      => true,
+		));
+
 		ysm_setting( $w_id, 'product_variation_visibility', array(
-			'type'        => 'pro',
+			'type'        => 'select',
 			'title'       => __( 'Visibility of Variable Products', 'smart-woocommerce-search' ),
 			'description' => __( 'Select visibility of variable products and variations', 'smart-woocommerce-search' ),
+			'choices'     => array(
+				'all'        => __( 'Parent variable product with variations', 'smart-woocommerce-search' ),
+				'parent'     => __( 'Only parent variable product', 'smart-woocommerce-search' ),
+				'variations' => __( 'Only variations', 'smart-woocommerce-search' ),
+			),
+			'is_pro'      => true,
 		));
 
 		ysm_setting( $w_id, 'search_sku_first', array(
-			'type'        => 'pro',
+			'type'        => 'checkbox',
 			'title'       => __( 'SKU Search Top Priority', 'smart-woocommerce-search' ),
 			'description' => __( 'Search by SKU first. Only works if the request is numeric', 'smart-woocommerce-search' ),
 			'value'       => 0,
+			'is_pro'      => true,
 		));
 
 		ysm_setting( $w_id, 'skip_punctuation', array(
-			'type'        => 'pro',
+			'type'        => 'checkbox',
 			'title'       => __( 'Skip Punctuation', 'smart-woocommerce-search' ),
 			'description' => __( 'Skip punctuation in the search query', 'smart-woocommerce-search' ),
 			'value'       => 0,
+			'is_pro'      => true,
 		));
 		?>
 
@@ -182,17 +199,27 @@
 
 		<?php
 		ysm_setting( $w_id, 'enable_transient', array(
-			'type'        => 'pro',
+			'type'        => 'checkbox',
 			'title'       => __( 'Enable Transient', 'smart-woocommerce-search' ),
 			'description' => __( 'Save query results in a transient.<br>Might be useful if your server does not have Memcache/Redis', 'smart-woocommerce-search' ),
 			'value'       => 0,
+			'is_pro'      => true,
 		));
 
 		ysm_setting( $w_id, 'product_slug', array(
-			'type'        => 'pro',
+			'type'        => 'text',
 			'title'       => __( 'Product Slug Override', 'smart-woocommerce-search' ),
 			'description' => __( 'It may be helpful if you changed the base slug for WooCommerce products. The base slug is "product"', 'smart-woocommerce-search' ),
 			'value'       => 'product',
+			'is_pro'      => true,
+		));
+
+		ysm_setting( $w_id, 'select_limit', array(
+			'type'        => 'text',
+			'title'       => __( 'Set Limit for DB Query [Deprecated]', 'smart-woocommerce-search' ),
+			'description' => __( 'Set number of posts that should be retrieved from the database. This is advanced option', 'smart-woocommerce-search' ),
+			'value'       => '',
+			'is_pro'      => true,
 		));
 		?>
 		</tbody>

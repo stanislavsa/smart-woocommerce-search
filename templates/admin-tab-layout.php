@@ -5,6 +5,12 @@
 		<th class="ymapp-settings__title"><?php esc_html_e( 'Results Popup Elements', 'smart-woocommerce-search' ); ?></th>
 
 		<?php
+		ysm_setting( $w_id, 'popup_height', array(
+			'type'        => 'text',
+			'title'       => __( 'Popup Max Height, px', 'smart-woocommerce-search' ),
+			'description' => __( 'Popup max height in pixels. Default is 400px', 'smart-woocommerce-search' ),
+			'value'       => 400,
+		));
 
 		ysm_setting( $w_id, 'display_icon', array(
 			'type'        => 'checkbox',
@@ -14,9 +20,11 @@
 		));
 
 		ysm_setting( $w_id, 'variation_thumb_fallback', array(
-			'type'        => 'pro',
+			'type'        => 'checkbox',
 			'title'       => __( 'Variation Image Fallback', 'smart-woocommerce-search' ),
 			'description' => __( 'Fallback to parent product image if a variation does not have an image', 'smart-woocommerce-search' ),
+			'value'       => 1,
+			'is_pro'      => true,
 		));
 
 		ysm_setting( $w_id, 'popup_thumb_size', array(
@@ -67,27 +75,35 @@
 		));
 
 		ysm_setting( $w_id, 'display_out_of_stock_label', array(
-			'type'        => 'pro',
+			'type'        => 'checkbox',
 			'title'       => __( 'Display "Out of stock" Label', 'smart-woocommerce-search' ),
 			'description' => __( 'Display "Out of stock" label if product is out of stock', 'smart-woocommerce-search' ),
+			'value'       => 1,
+			'is_pro'      => true,
 		));
 
 		ysm_setting( $w_id, 'display_sale_label', array(
-			'type'        => 'pro',
+			'type'        => 'checkbox',
 			'title'       => __( 'Display "Sale" Label', 'smart-woocommerce-search' ),
 			'description' => __( 'Display "Sale" label if product is on sale', 'smart-woocommerce-search' ),
+			'value'       => 1,
+			'is_pro'      => true,
 		));
 
 		ysm_setting( $w_id, 'display_featured_label', array(
-			'type'        => 'pro',
+			'type'        => 'checkbox',
 			'title'       => __( 'Display "Featured" Label', 'smart-woocommerce-search' ),
 			'description' => __( 'Display "Featured" label if product marked as featured', 'smart-woocommerce-search' ),
+			'value'       => 1,
+			'is_pro'      => true,
 		));
 
 		ysm_setting( $w_id, 'display_add_to_cart', array(
-			'type'        => 'pro',
-			'title'       => __( 'Display "Add to Cart" Button', 'smart-woocommerce-search' ),
+			'type' => 'checkbox',
+			'title' => __( 'Display "Add to Cart" Button', 'smart-woocommerce-search' ),
 			'description' => __( 'Display "Add to Cart" button for product', 'smart-woocommerce-search' ),
+			'value' => 0,
+			'is_pro'      => true,
 		));
 
 		?>

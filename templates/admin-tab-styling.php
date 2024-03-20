@@ -2,7 +2,7 @@
 	<table class="form-table">
 		<tbody>
 
-		<?php if ( $w_id !== 'default' && $w_id !== 'product' ) { ?>
+		<?php if ( ! in_array( $w_id, ysm_get_default_widgets_ids(), true ) ) { ?>
 
 			<th class="ymapp-settings__title"><?php esc_html_e( 'Input Field', 'smart-woocommerce-search' ); ?></th>
 
@@ -50,19 +50,34 @@
 			));
 
 			ysm_setting( $w_id, 'input_icon_bg', array(
-				'type'        => 'pro',
+				'type'        => 'color',
 				'title'       => __( 'Icon Background', 'smart-woocommerce-search' ),
 				'description' => '',
+				'value' => '',
+				'is_pro'      => true,
 			));
 
-			$cur_loader = ysm_get_option($w_id, 'loader');
+			$cur_loader = ysm_get_option( $w_id, 'loader' );
 			if ( is_array( $cur_loader ) ) {
 				$cur_loader = $cur_loader[0];
 			}
 			ysm_setting( $w_id, 'loader', array(
-				'type'        => 'pro',
+				'type'        => 'select',
 				'title'       => __( 'Loader', 'smart-woocommerce-search' ),
-				'description' => __( 'Select loader', 'smart-woocommerce-search' ),
+				'description' => __( 'Select loader', 'smart-woocommerce-search' ) .
+					' <img style="margin-left:20px;" class="ysm-loader-preview" src="' .
+					SWS_PLUGIN_URI . 'assets/images/' .
+					( $cur_loader ? $cur_loader : 'loader1' ) .
+					'.gif">',
+				'value' => 'loader1',
+				'choices' => array(
+					'loader1' => __( 'Loader', 'smart-woocommerce-search' ) . ' 1',
+					'loader2' => __( 'Loader', 'smart-woocommerce-search' ) . ' 2',
+					'loader3' => __( 'Loader', 'smart-woocommerce-search' ) . ' 3',
+					'loader4' => __( 'Loader', 'smart-woocommerce-search' ) . ' 4',
+					'loader5' => __( 'Loader', 'smart-woocommerce-search' ) . ' 5',
+				),
+				'is_pro'      => true,
 			));
 			?>
 
@@ -132,39 +147,51 @@
 		));
 
 		ysm_setting( $w_id, 'popup_out_of_stock_label_text_color', array(
-			'type'        => 'pro',
+			'type'        => 'color',
 			'title'       => __( '"Out of stock" Label Text Color', 'smart-woocommerce-search' ),
 			'description' => '',
+			'value'       => '',
+			'is_pro'      => true,
 		));
 
 		ysm_setting( $w_id, 'popup_out_of_stock_label_bg_color', array(
-			'type'        => 'pro',
+			'type'        => 'color',
 			'title'       => __( '"Out of stock" Label Background Color', 'smart-woocommerce-search' ),
 			'description' => '',
+			'value'       => '',
+			'is_pro'      => true,
 		));
 
 		ysm_setting( $w_id, 'popup_sale_label_text_color', array(
-			'type'        => 'pro',
+			'type'        => 'color',
 			'title'       => __( '"Sale" Label Text Color', 'smart-woocommerce-search' ),
 			'description' => '',
+			'value'       => '',
+			'is_pro'      => true,
 		));
 
 		ysm_setting( $w_id, 'popup_sale_label_bg_color', array(
-			'type'        => 'pro',
+			'type'        => 'color',
 			'title'       => __( '"Sale" Label Background Color', 'smart-woocommerce-search' ),
 			'description' => '',
+			'value'       => '',
+			'is_pro'      => true,
 		));
 
 		ysm_setting( $w_id, 'popup_featured_label_text_color', array(
-			'type'        => 'pro',
+			'type'        => 'color',
 			'title'       => __( '"Featured" Label Text Color', 'smart-woocommerce-search' ),
 			'description' => '',
+			'value'       => '',
+			'is_pro'      => true,
 		));
 
 		ysm_setting( $w_id, 'popup_featured_label_bg_color', array(
-			'type'        => 'pro',
+			'type'        => 'color',
 			'title'       => __( '"Featured" Label Background Color', 'smart-woocommerce-search' ),
 			'description' => '',
+			'value'       => '',
+			'is_pro'      => true,
 		));
 
 		?>

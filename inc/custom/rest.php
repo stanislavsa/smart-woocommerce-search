@@ -25,6 +25,12 @@ function rest_route() {
 				'type'              => 'string',
 				'sanitize_callback' => 'sanitize_text_field',
 			),
+			'lang' => array(
+				'required'          => false,
+				'default'           => '',
+				'type'              => 'string',
+				'sanitize_callback' => 'sanitize_text_field',
+			),
 		),
 	) );
 }

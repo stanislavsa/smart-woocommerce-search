@@ -129,9 +129,13 @@ class Ysm_DB {
 	/**
 	 * Set indicator whether exclude fields from wp_posts or not
 	 * @param $val
+	 * @return bool
 	 */
-	public static function is_postmeta_only( $val ) {
-		self::$is_postmeta_only = (bool) $val;
+	public static function is_postmeta_only( $val = '' ) {
+		if ( $val ) {
+			self::$is_postmeta_only = (bool) $val;
+		}
+		return self::$is_postmeta_only;
 	}
 
 	/**
@@ -185,10 +189,15 @@ class Ysm_DB {
 				$relevance_query = array();
 
 				foreach ( $relevance as $k => $v ) {
-					$relevance_query[] = '( CASE WHEN (' . self::make_like_query( "lower($k)" ) . ') THEN ' . (int) $v . ' ELSE 0 END )';
+					$like_query_part = self::make_like_query( "lower($k)" );
+					if ( $like_query_part ) {
+						$relevance_query[] = '( CASE WHEN (' . $like_query_part . ') THEN ' . (int) $v . ' ELSE 0 END )';
+					}
 				}
 
-				$fields .= ', ( ' . implode( ' + ', $relevance_query ) . ' ) as relevance';
+				if ( $relevance_query ) {
+					$fields .= ', ( ' . implode( ' + ', $relevance_query ) . ' ) as relevance';
+				}
 			}
 		}
 

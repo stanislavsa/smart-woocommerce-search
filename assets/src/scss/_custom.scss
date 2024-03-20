@@ -3,6 +3,48 @@
 	display: block;
 }
 
+.ysm-postbox {
+	position: relative;
+	min-width: 255px;
+	border: 1px solid #c3c4c7;
+	box-shadow: 0 1px 1px rgba(0,0,0,.04);
+	background: #fff;
+	padding: 0;
+	line-height: 1;
+
+	.ysm-inside {
+		margin: 11px 0;
+		position: relative;
+		padding: 25px 25px;
+		line-height: 1.4;
+		font-size: 14px;
+		text-align: center;
+
+		.description {
+			font-size: 14px;
+			color: inherit;
+		}
+
+		.repeater-add {
+			margin-left: 0;
+		}
+	}
+
+	.ysm-stop-words-holder {
+		.repeater-holder {
+			max-width: 400px;
+			margin: 15px auto 25px;
+		}
+	}
+
+	.ysm-synonyms-holder {
+		.repeater-holder {
+			max-width: 800px;
+			margin: 15px auto 25px;
+		}
+	}
+}
+
 .ysm-widget-edit-settings,
 .ysm-widget-edit-constructor {
 	margin-top: 15px;
@@ -80,7 +122,7 @@
 }
 
 .ysm-loader {
-	background: url("../../images/loader6.gif") no-repeat 50% 50%;
+	background: url("../../images/loader1.gif") no-repeat 50% 50%;
 }
 
 h2.ysm-widgets-title {
@@ -153,31 +195,10 @@ h2.ysm-widgets-title {
 	max-width: 400px;
 }
 
-.ysm-synonyms-holder,
-.ysm-stop-words-holder {
-	text-align: center;
-	margin: 50px 0;
-	font-size: 16px;
-
-	.description {
-		font-size: 16px;
-		color: inherit;
-		margin-top: 10px;
-	}
-
-	.description-pro {
-		display: none;
-	}
-
-	.ymapp-button {
-		margin-top: 35px;
-		margin-left: 0 !important;
-	}
+#toplevel_page_smart-search a[href="admin.php?page=smart-search-pro-trial"] {
+	color: #eb2727;
+	font-weight: bold;
 }
-
-/**
- * Media
- */
 
 @media only screen and (max-width: 960px) {
 

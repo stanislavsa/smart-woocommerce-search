@@ -1,7 +1,7 @@
 {
   "name": "smart-woocommerce-search",
   "version": "1.0.0",
-  "description": "=== Smart WooCommerce Search === Contributors: yummy-wp Donate link: http://yummywp.com/donation/ Tags: woocommerce search, ajax search, woocommerce search by sku, search results, woocommerce search results, woocommerce search shortcode, search products, search autocomplete, woocommerce advanced search, woocommerce search category, woocommerce predictive search, woocommerce live search, woocommerce single product, woocommerce site search, search, woocommerce, products, shop, ajax search, instant search, autocomplete, autosuggest, category search, custom search, predictive search, product search, relevant search, search product, WooCommerce Plugin, woocommerce product search, posts search Requires at least: 4.2 Tested up to: 4.7 Stable tag: 1.0.0 License: GPLv2 or later License URI: http://www.gnu.org/licenses/gpl-2.0.html",
+  "description": "",
   "main": "gulpfile.js",
   "scripts": {
     "build": "npm run assets && npm run pot && npm run copy",
@@ -19,9 +19,10 @@
   "devDependencies": {
     "del": "^3.0.0",
     "gulp": "github:gulpjs/gulp#4.0",
-    "gulp-concat": "^2.6.1",
-    "gulp-sass": "^3.1.0",
-    "gulp-uglify": "^2.0.0"
+    "gulp-concat": "*",
+    "gulp-sass": "*",
+    "gulp-uglify": "*",
+    "sass": "^1.72.0"
   },
   "bugs": {
     "url": "https://github.com/stanislavsa/smart-woocommerce-search/issues"
@@ -29,8 +30,5 @@
   "dependencies": {
     "gulp-cli": "^2.3.0",
     "pump": "^1.0.2"
-  },
-  "engines" : {
-    "npm" : "10.12.0"
   }
 }

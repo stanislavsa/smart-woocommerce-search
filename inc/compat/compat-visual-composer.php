@@ -27,7 +27,7 @@ function extend() {
 		'name'        => __( 'Smart Search', 'smart-woocommerce-search' ),
 		'description' => '',
 		'base'        => 'smart_search',
-		'icon'        => YSM_URI . 'assets/images/search-icon.png',
+		'icon'        => SWS_PLUGIN_URI . 'assets/images/search-icon.png',
 		'category'    => __( 'Content', 'js_composer' ),
 		'params'      => array(
 			array(

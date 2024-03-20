@@ -2,7 +2,7 @@
 
 global.$ = {
 	gulp: require('gulp'),
-	sass: require('gulp-sass'),
+	sass: require('gulp-sass')(require('sass')),
 	concat: require('gulp-concat'),
 	uglify: require('gulp-uglify'),
 	del: require('del'),

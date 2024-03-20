@@ -24,7 +24,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 					ysm_setting( $w_id, 'post_type_' . $id, array(
 						'type'        => 'checkbox',
 						/* translators: %s: Name of a field to */
-						'title'       => sprintf( __( '%s', 'smart-woocommerce-search' ), $post_type->label ),
+						'title'       => $post_type->label,
 						/* translators: %s: Name of a Post Type */
 						'description' => sprintf( __( 'Enable search through %s', 'smart-woocommerce-search' ), $post_type->label ),
 						'value'       => $search_in[ $id ],
@@ -37,18 +37,43 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 
 		<?php
 		ysm_setting( $w_id, 'post_type_product_variation', array(
-			'type'        => 'pro',
+			'type'        => 'checkbox',
 			'title'       => __( 'Product Variations', 'smart-woocommerce-search' ),
 			'description' => __( 'Enable search through Product Variations', 'smart-woocommerce-search' ),
-			'value' => 0,
+			'value'       => 0,
+			'is_pro'      => true,
 		));
 		?>
 
 		<?php
+		$post_types_exclude = array(
+			// public
+			'post' => 1,
+			'page' => 1,
+			'attachment' => 1,
+			'product' => 1,
+			// not public
+			'revision' => 1,
+			'nav_menu_item' => 1,
+			'custom_css' => 1,
+			'customize_changeset' => 1,
+			'oembed_cache' => 1,
+			'user_request' => 1,
+			'acf' => 1,
+			'product_variation' => 1,
+			'shop_order' => 1,
+			'shop_order_refund' => 1,
+			'shop_coupon' => 1,
+		);
+		$cpt = array_diff_key( get_post_types( array( 'public' => true ) ), $post_types_exclude );
+
 		ysm_setting( $w_id, 'custom_post_types', array(
-			'type'        => 'pro',
+			'type'        => 'select',
 			'title'       => __( 'Custom Post Types', 'smart-woocommerce-search' ),
 			'description' => __( 'Enable search through selected custom post types', 'smart-woocommerce-search' ),
+			'multiple'    => true,
+			'choices'     => $cpt,
+			'is_pro'      => true,
 		));
 		?>
 
@@ -85,9 +110,11 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 		));
 
 		ysm_setting( $w_id, 'custom_fields', array(
-			'type'        => 'pro',
+			'type'        => 'text',
 			'title'       => __( 'Custom Fields', 'smart-woocommerce-search' ),
 			'description' => __( 'Enable search in Custom Fields. Fill in field slugs separated by comma', 'smart-woocommerce-search' ),
+			'value'       => '',
+			'is_pro'      => true,
 		));
 
 		?>
@@ -126,10 +153,32 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 		));
 
 		/* Custom Tax */
+		$tax_list = array();
+		$exclude_taxes = array(
+			'product_type' => 1,
+			'product_visibility' => 1,
+			'product_cat' => 1,
+			'product_tag' => 1,
+			'product_shipping_class' => 1,
+		);
+		$taxonomies = get_taxonomies( array(
+			'_builtin' => false,
+		) );
+
+		if ( ! is_wp_error( $taxonomies ) && $taxonomies ) {
+			foreach ( $taxonomies as $taxonomy ) {
+				if ( ! isset( $exclude_taxes[ $taxonomy ] ) ) {
+					$tax_list[ $taxonomy ] = $taxonomy;
+				}
+			}
+		}
 		ysm_setting( $w_id, 'custom_tax', array(
-			'type'        => 'pro',
+			'type'        => 'select',
 			'title'       => __( 'Custom Taxonomies', 'smart-woocommerce-search' ),
 			'description' => __( 'Enable search in selected custom taxonomies', 'smart-woocommerce-search' ),
+			'multiple'    => true,
+			'choices'     => $tax_list,
+			'is_pro'      => true,
 		));
 
 		/* Product categories */

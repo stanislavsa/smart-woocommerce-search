@@ -184,11 +184,11 @@
 	padding: 0;
 	color: #333;
 	line-height: 1.25em;
-	word-wrap: normal;
+    word-wrap: normal;
 }
 
 .smart-search-post-excerpt {
-	margin-top: 10px;
+	margin-top: 20px;
 	font-size: 12px;
 }
 
@@ -227,15 +227,15 @@
 }
 
 .smart-search-results.has-scrollbar.smart-search-firefox > .smart-search-suggestions {
-	border-left: none;
-	border-right: none;
-	width: calc(100% + 17px) !important;
-	right: 0 !important;
+    border-left: none;
+    border-right: none;
+    width: calc(100% + 17px) !important;
+    right: 0 !important;
 }
 
 .smart-search-results.has-scrollbar.smart-search-firefox .autocomplete-suggestion {
-	border-left: 1px solid #d6d6d6;
-	border-right: 1px solid #d6d6d6;
+    border-left: 1px solid #d6d6d6;
+    border-right: 1px solid #d6d6d6;
 }
 
 .smart-search-results > .smart-search-suggestions::-webkit-scrollbar {

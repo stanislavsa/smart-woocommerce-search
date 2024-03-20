@@ -44,6 +44,5 @@ function excerpt( $cur_post ) {
 		}
 	}
 
-
 	return $output;
 }

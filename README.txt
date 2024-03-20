@@ -1,11 +1,11 @@
 === Smart WooCommerce Search ===
 Contributors: yummy-wp
 Tags: woocommerce search, ajax search, woocommerce, genesis, elementor, divi, avada, enfold, filters, product filter, woo search, relevanssi, jetpack, woocommerce search by sku, woocommerce search shortcod, product search, product filter, woocommerce search results, instant search, woocommerce search plugin, woocommerce search form, search for woocommerce, woocommerce search page, search, woocommerce product search, search woocommerce, shop, shop search, autocomplete, autosuggest, search for wp, search for wordpress, search plugin, woocommerce search by sku, search results,  woocommerce search shortcode, search products, search autocomplete, woocommerce advanced search, woocommerce predictive search, woocommerce live search, woocommerce single product, woocommerce site search, products, shop, category search, custom search, predictive search, relevant search, search product, woocommerce plugin, yith, woof, wp search, wordpress search
-Stable tag: 2.8.0
+Stable tag: 2.9.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Requires at least: 5.9
-Tested up to: 6.4
+Tested up to: 6.5
 Requires PHP: 7.0
 
 Smart WooCommerce Search enhances your users' experience with a sophisticated AJAX search bar featuring real-time suggestions.
@@ -14,13 +14,15 @@ Smart WooCommerce Search enhances your users' experience with a sophisticated AJ
 
 = Smart WooCommerce Search enhances your users' experience with a sophisticated AJAX search bar featuring real-time suggestions. =
 
-[Check Demo](https://smart-woocommerce-search.yummywp.com/)
+[Check Demo](https://demo.wpsmartsearch.com/)
+
+Discover the PRO features of our plugin with a **14-day trial period**.
 
 While WooCommerce's default search is basic, lacking live product search and SKU search functionality, **Smart WooCommerce Search** delivers advanced search capabilities along with live suggestions.
 
 In today's market, instant search suggestions are essential. According to the latest research, 96% of major e-commerce sites now offer search autocomplete, auto-suggest, or instant search features. This functionality is crucial for retaining customers and optimizing sales by saving users time and streamlining the shopping process.
 
-= Features Free: =
+= Free Features: =
 
  * Search results with images and prices
  * Simple integration into default search widgets
@@ -102,6 +104,11 @@ Yes, when using products search or when you set option to search only through pr
 4. Smart WooCommerce Search Settings Page - Styling tab
 
 == Changelog ==
+
+= 2.9.0 =
+* Added: "Popup Max Height" option
+* Fixed: MYSQL query errors when search terms are incorrect
+* Tweak: changes for the default search bar added through Gutenberg
 
 = 2.8.0 =
 * Fixed: issue with the "Highlight Search Terms on the Search Results Page" setting

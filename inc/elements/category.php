@@ -56,6 +56,5 @@ function category( $cur_post ) {
 		$output = '<div class="smart-search-post-category">' . esc_html( $category->name ). '</div>';
 	}
 
-
 	return $output;
 }
