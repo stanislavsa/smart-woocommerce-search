@@ -15,6 +15,7 @@ Smart WooCommerce Search enhances your users' experience with a sophisticated AJ
 = Smart WooCommerce Search enhances your users' experience with a sophisticated AJAX search bar featuring real-time suggestions. =
 
 [Check Demo](https://demo.wpsmartsearch.com/)
+[Upgrade to PRO](https://www.wpsmartsearch.com/features/)
 
 Discover the PRO features of our plugin with a **14-day trial period**.
 
