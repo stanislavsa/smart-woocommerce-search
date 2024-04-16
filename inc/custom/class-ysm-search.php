@@ -61,8 +61,6 @@ class Ysm_Search {
 		add_filter( 'the_title', 'ysm_accent_search_term', 9999, 1 );
 		add_filter( 'get_the_excerpt', 'ysm_accent_search_term', 9999, 1 );
 		add_filter( 'the_content', 'ysm_accent_search_term', 9999, 1 );
-
-		add_filter( 'smart_search_query_results', array( __CLASS__, 'query_results_filter' ), 10 );
 	}
 
 	/**
@@ -204,8 +202,6 @@ class Ysm_Search {
 			}
 
 			if ( $w_id ) {
-				$wp_posts = array();
-
 				self::set_widget_id( $w_id );
 				self::parse_settings();
 
@@ -246,18 +242,14 @@ class Ysm_Search {
 					$offset = 0;
 				}
 
-				$posts = self::search_posts( $posts_count, $offset );
+				$post_ids = self::search_posts( $posts_count, $offset );
 
-				foreach ( $posts as $post ) {
-					$wp_posts[] = $post->ID;
-				}
-
-				if ( empty( $wp_posts ) ) {
-					$wp_posts[] = 0;
+				if ( empty( $post_ids ) ) {
+					$post_ids[] = 0;
 				}
 
 				$query->set( 's', '' );
-				$query->set( 'post__in', $wp_posts );
+				$query->set( 'post__in', $post_ids );
 				$query->set( 'post_type', self::get_post_types() );
 				$query->set( 'ysm_found_posts', self::$found_posts );
 				$query->set( 'offset', 0 );
@@ -372,18 +364,20 @@ class Ysm_Search {
 			}
 		}
 
-		return apply_filters( 'smart_search_query_results', $resulted_posts );
+		$resulted_posts = self::query_results_filter( $resulted_posts );
+
+		return apply_filters( 'sws_search_result_post_ids', wp_list_pluck( $resulted_posts, 'ID' ) );
 	}
 
 	/**
 	 * Prepare suggestions list
-	 * @param $posts
+	 * @param $post_ids
 	 */
-	public static function get_suggestions( $posts ) {
+	public static function get_suggestions( $post_ids ) {
 		$ii = 0;
-		foreach ( $posts as $post ) {
+		foreach ( $post_ids as $post_id ) {
 			$output = '';
-			$post = get_post( $post );
+			$post = get_post( $post_id );
 			$product = null;
 			$post_classes = array(
 				'smart-search-post',
@@ -478,6 +472,8 @@ class Ysm_Search {
 			}
 		}
 		wp_reset_postdata();
+
+		return self::$suggestions;
 	}
 
 	/**

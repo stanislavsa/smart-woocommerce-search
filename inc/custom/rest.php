@@ -41,21 +41,31 @@ function rest_route() {
  */
 function handle_request( \WP_REST_Request $request ) {
 	$query = $request['query'];
+	$res = [
+		'suggestions'   => [],
+		'view_all_link' => '',
+	];
+
 	if ( ! $query ) {
-		\Ysm_Search::output();
+		return rest_ensure_response( $res );
 	}
 
 	\Ysm_Search::set_widget_id( $request['id'] );
 	\Ysm_Search::parse_settings();
 
 	if ( ! count( \Ysm_Search::get_post_types() ) ) {
-		\Ysm_Search::output();
+		return rest_ensure_response( $res );
 	}
 
 	\Ysm_Search::set_s( $query );
-	$posts = \Ysm_Search::search_posts();
-	\Ysm_Search::get_suggestions( $posts );
-	\Ysm_Search::output();
 
-	die();
+	$post_ids = \Ysm_Search::search_posts();
+	$suggestions = \Ysm_Search::get_suggestions( $post_ids );
+
+	if ( $suggestions ) {
+		$res['suggestions'] = $suggestions;
+		$res['view_all_link'] = \YSWS\Elements\view_all_button();
+	}
+
+	return rest_ensure_response( $res );
 }
