@@ -125,6 +125,122 @@ function ysm_get_default_widgets() {
 }
 
 /**
+ * Get list of custom and default widgets
+ * @return array
+ */
+function ysm_get_all_widgets() {
+	static $all_widgets = [];
+
+	if ( ! empty( $all_widgets ) ) {
+		return $all_widgets;
+	}
+
+	$custom_widgets  = ysm_get_custom_widgets();
+	$default_widgets = ysm_get_default_widgets();
+
+	$all_widgets = $custom_widgets;
+
+	$available_default_widgets_ids = ysm_get_default_widgets_ids();
+
+	foreach ( $default_widgets as $w_key => $default_widget ) {
+		if ( isset( $available_default_widgets_ids[ $w_key ] ) ) {
+			$enable_key = ( 'default' === $w_key ) ? 'enable_search' : 'enable_' . $w_key . '_search';
+			if ( ! empty( $default_widget['settings'][ $enable_key ] ) ) {
+				$all_widgets[ $w_key ] = $default_widget;
+			}
+		}
+	}
+
+	return $all_widgets;
+}
+
+function ysm_get_post_types() {
+	$pt = [
+		'post' => 'post',
+		'page' => 'page',
+		'product' => 'product',
+	];
+
+	foreach ( ysm_get_all_widgets() as $v ) {
+		if ( ! empty( $v['settings']['custom_post_types'] ) ) {
+			$pt = array_merge( $pt, (array) $v['settings']['custom_post_types'] );
+		}
+	}
+
+	$pt = array_unique( $pt );
+
+	$pt_exists = [];
+	foreach ( $pt as $pt_name ) {
+		if ( $pt_name && 'product_variation' !== $pt_name && post_type_exists( $pt_name ) ) {
+			$pt_exists[ $pt_name ] = $pt_name;
+		}
+	}
+
+	return array_values( $pt_exists );
+}
+
+function ysm_get_all_widgets_custom_fields() {
+	static $custom_fields = [];
+
+	if ( ! empty( $custom_fields ) ) {
+		return $custom_fields;
+	}
+
+	foreach ( ysm_get_all_widgets() as $v ) {
+		if ( ! empty( $v['settings']['field_product_sku'] ) ) {
+			$custom_fields['_sku'] = '_sku';
+		}
+		if ( ! empty( $v['settings']['custom_fields'] ) ) {
+			$cf_list = explode( ',', $v['settings']['custom_fields'] );
+			foreach ( $cf_list as $cf ) {
+				$cf = trim( $cf );
+				if ( $cf ) {
+					$custom_fields[$cf] = $cf;
+				}
+			}
+		}
+	}
+
+	if ( isset( $custom_fields['_product_attributes'] ) ) {
+		unset( $custom_fields['_product_attributes'] );
+	}
+
+	return $custom_fields;
+}
+
+function ysm_get_all_widgets_taxonomy_terms() {
+	static $taxonomy_terms = [];
+
+	if ( ! empty( $taxonomy_terms ) ) {
+		return $taxonomy_terms;
+	}
+
+	foreach ( ysm_get_all_widgets() as $v ) {
+		if ( ! empty( $v['settings']['field_tag'] ) ) {
+			$taxonomy_terms['post_tag'] = 'post_tag';
+		}
+		if ( ! empty( $v['settings']['field_category'] ) ) {
+			$taxonomy_terms['category'] = 'category';
+		}
+		if ( ! empty( $v['settings']['field_product_tag'] ) ) {
+			$taxonomy_terms['product_tag'] = 'product_tag';
+		}
+		if ( ! empty( $v['settings']['field_product_cat'] ) ) {
+			$taxonomy_terms['product_cat'] = 'product_cat';
+		}
+		if ( ! empty( $v['settings']['custom_tax'] ) && is_array( $v['settings']['custom_tax'] ) ) {
+			foreach ( $v['settings']['custom_tax'] as $custom_t ) {
+				$taxonomy_terms[ $custom_t ] = $custom_t;
+			}
+		}
+	}
+
+	$taxonomy_terms['product_cat'] = 'product_cat';
+
+	return $taxonomy_terms;
+}
+
+/**
  * Get 's' query var
  * @return string
  */

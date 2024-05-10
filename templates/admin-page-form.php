@@ -8,6 +8,7 @@ wp_enqueue_script( 'postbox' );
 $tabs = array(
 	'general_tab'    => __( 'General', 'smart-woocommerce-search' ),
 	'fields_tab'     => __( 'Items to Search Through', 'smart-woocommerce-search' ),
+	'order_tab'      => __( 'Order', 'smart-woocommerce-search' ),
 	'layout_tab'     => __( 'Layout', 'smart-woocommerce-search' ),
 	'styles_tab'     => __( 'Styling', 'smart-woocommerce-search' ),
 	'spellcheck_tab' => __( 'Spell Correction', 'smart-woocommerce-search' ),
@@ -54,6 +55,8 @@ $tabs = array(
 				<?php include 'admin-tab-general.php'; ?>
 
 				<?php include 'admin-tab-fields.php'; ?>
+
+				<?php include 'admin-tab-order.php'; ?>
 
 				<?php include 'admin-tab-layout.php'; ?>
 

@@ -1,7 +1,7 @@
 === Smart WooCommerce Search ===
 Contributors: yummy-wp
-Tags: live search, ajax search, product search, woocommerce, search by sku
-Stable tag: 2.9.0
+Tags: search, ajax search, product search, smart search, search by sku
+Stable tag: 2.10.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Requires at least: 5.9
@@ -105,6 +105,11 @@ Yes, when using products search or when you set option to search only through pr
 4. Smart WooCommerce Search Settings Page - Styling tab
 
 == Changelog ==
+
+= 2.10.0 =
+* Added: results order settings
+* Added: blueprint.json file
+* Tweak: REST request small update
 
 = 2.9.0 =
 * Added: "Popup Max Height" option

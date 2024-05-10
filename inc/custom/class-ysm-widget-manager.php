@@ -264,6 +264,11 @@ class Ysm_Widget_Manager {
 			self::$widgets = $settings;
 			self::update_option( self::$wp_option, $settings );
 
+			/**
+			 * Actions after widget settings saved
+			 */
+			do_action( 'sws_widget_settings_saved' );
+
 			ysm_add_message( __( 'Your changes have been saved.', 'smart-woocommerce-search' ) );
 
 			/* redirect to edit widget page after new widget has been created */

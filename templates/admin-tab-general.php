@@ -146,14 +146,6 @@
 			'is_pro'      => true,
 		));
 
-		ysm_setting( $w_id, 'search_sku_first', array(
-			'type'        => 'checkbox',
-			'title'       => __( 'SKU Search Top Priority', 'smart-woocommerce-search' ),
-			'description' => __( 'Search by SKU first. Only works if the request is numeric', 'smart-woocommerce-search' ),
-			'value'       => 0,
-			'is_pro'      => true,
-		));
-
 		ysm_setting( $w_id, 'skip_punctuation', array(
 			'type'        => 'checkbox',
 			'title'       => __( 'Skip Punctuation', 'smart-woocommerce-search' ),
@@ -211,14 +203,6 @@
 			'title'       => __( 'Product Slug Override', 'smart-woocommerce-search' ),
 			'description' => __( 'It may be helpful if you changed the base slug for WooCommerce products. The base slug is "product"', 'smart-woocommerce-search' ),
 			'value'       => 'product',
-			'is_pro'      => true,
-		));
-
-		ysm_setting( $w_id, 'select_limit', array(
-			'type'        => 'text',
-			'title'       => __( 'Set Limit for DB Query [Deprecated]', 'smart-woocommerce-search' ),
-			'description' => __( 'Set number of posts that should be retrieved from the database. This is advanced option', 'smart-woocommerce-search' ),
-			'value'       => '',
 			'is_pro'      => true,
 		));
 		?>

@@ -43,6 +43,17 @@
 	height: 36px;
 }
 
+.ymapp-button-small.disabled {
+	background: gray;
+	border-color: gray;
+}
+
+.ymapp-button-small.disabled:hover,
+.ymapp-button-small.disabled:focus{
+	background: gray;
+	border-color: gray;
+}
+
 .ymapp-button-grey {
 	background: $button-grey-bg-color;
 	border-color: $button-grey-bg-color;

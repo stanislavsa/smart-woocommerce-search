@@ -4,9 +4,10 @@
   "description": "",
   "main": "gulpfile.js",
   "scripts": {
-    "build": "npm run assets && npm run pot && npm run copy",
+    "build": "npm run assets && npm run pot && npm run copy && npm run zip",
     "assets": "gulp default",
     "copy": "cp -r assets inc languages templates index.php README.txt ../../smart-woocommerce-search/trunk/",
+    "zip": "cd ../../smart-woocommerce-search/ && zip -r ~/Downloads/smart-search-free.zip trunk/",
     "pot": "wp i18n make-pot ./ languages/smart-woocommerce-search.pot"
   },
   "repository": {

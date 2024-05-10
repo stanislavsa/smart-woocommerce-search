@@ -115,14 +115,20 @@ class Ysm_DB {
 	 * @param $relevance
 	 */
 	public static function set_relevance( $relevance ) {
-		if (
-			\Ysm_Search::get_var( 'field_title' ) ||
-			\Ysm_Search::get_var( 'field_content' ) ||
-			\Ysm_Search::get_var( 'field_excerpt' )
-		) {
-			self::$relevance = (array) $relevance;
-		} else {
-			self::$relevance = array();
+		$order_by = 'relevance';
+		if ( \Ysm_Search::get_var( 'order_by' ) ) {
+			$order_by = \Ysm_Search::get_var( 'order_by' );
+		}
+		if ( 'relevance' === $order_by && $relevance ) {
+			if ( isset( $relevance['post_title'] ) && \Ysm_Search::get_var( 'field_title' ) ) {
+				self::$relevance['post_title'] = $relevance['post_title'];
+			}
+			if ( isset( $relevance['post_content'] ) && \Ysm_Search::get_var( 'field_content' ) ) {
+				self::$relevance['post_content'] = $relevance['post_content'];
+			}
+			if ( isset( $relevance['post_excerpt'] ) && \Ysm_Search::get_var( 'field_excerpt' ) ) {
+				self::$relevance['post_excerpt'] = $relevance['post_excerpt'];
+			}
 		}
 	}
 
@@ -173,16 +179,16 @@ class Ysm_DB {
 		if ( self::$relevance ) {
 			$relevance = array();
 
-			if ( \Ysm_Search::get_var( 'field_title' ) ) {
-				$relevance[ "{$wpdb->posts}.post_title" ] = 30;
+			if ( self::$relevance['post_title'] ) {
+				$relevance[ "{$wpdb->posts}.post_title" ] = self::$relevance['post_title'];
 			}
 
-			if ( \Ysm_Search::get_var( 'field_content' ) ) {
-				$relevance[ "{$wpdb->posts}.post_content" ] = 10;
+			if ( self::$relevance['post_content'] ) {
+				$relevance[ "{$wpdb->posts}.post_content" ] = self::$relevance['post_content'];
 			}
 
-			if ( \Ysm_Search::get_var( 'field_excerpt' ) ) {
-				$relevance[ "{$wpdb->posts}.post_excerpt" ] = 10;
+			if ( self::$relevance['post_excerpt'] ) {
+				$relevance[ "{$wpdb->posts}.post_excerpt" ] = self::$relevance['post_excerpt'];
 			}
 
 			if ( $relevance ) {
@@ -197,6 +203,8 @@ class Ysm_DB {
 
 				if ( $relevance_query ) {
 					$fields .= ', ( ' . implode( ' + ', $relevance_query ) . ' ) as relevance';
+				} else {
+					self::$relevance = [];
 				}
 			}
 		}
@@ -341,11 +349,21 @@ class Ysm_DB {
 	 * @return string
 	 */
 	public static function filter_posts_orderby( $orderby ) {
-		if ( self::$relevance ) {
-			$orderby = 'relevance DESC, ' . $orderby;
+		$order_by = 'relevance';
+		$order = 'DESC';
+		if ( \Ysm_Search::get_var( 'order_by' ) ) {
+			$order_by = \Ysm_Search::get_var( 'order_by' );
+		}
+		if ( \Ysm_Search::get_var( 'order' ) ) {
+			$order = \Ysm_Search::get_var( 'order' );
 		}
 
-		return $orderby;
+		if ( ! self::$relevance && 'relevance' === $order_by ) {
+			$order_by = 'post_title';
+			$order = 'ASC';
+		}
+
+		return $order_by . ' ' . $order;
 	}
 
 	/**
@@ -355,7 +373,12 @@ class Ysm_DB {
 	 */
 	public static function filter_posts_groupby( $groupby ) {
 		global $wpdb;
-		$groupby = $wpdb->posts . '.ID';
+
+		if ( self::$relevance ) {
+			$groupby = $wpdb->posts . '.ID, relevance';
+		} else {
+			$groupby = $wpdb->posts . '.ID';
+		}
 
 		return $groupby;
 	}
