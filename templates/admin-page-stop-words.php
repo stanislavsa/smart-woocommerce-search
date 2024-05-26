@@ -26,4 +26,5 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 		</div>
 
+	<a class="ymapp-settings__doc_link ymapp-button ymapp-button-grey" style="margin-top: 30px;" href="https://www.wpsmartsearch.com/docs/stop-words/" target="_blank">Documentation</a>
 </div>

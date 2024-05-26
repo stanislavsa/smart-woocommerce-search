@@ -2,14 +2,14 @@
 # This file is distributed under the same license as the Smart WooCommerce Search plugin.
 msgid ""
 msgstr ""
-"Project-Id-Version: Smart WooCommerce Search 2.10.0\n"
+"Project-Id-Version: Smart WooCommerce Search 2.10.1\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/smart-woocommerce-search\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2024-05-14T07:46:14+00:00\n"
+"POT-Creation-Date: 2024-05-28T06:35:43+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.10.0\n"
 "X-Domain: smart-woocommerce-search\n"
@@ -112,7 +112,7 @@ msgstr ""
 msgid "%1$s &lsaquo; %2$s &#8212; WordPress"
 msgstr ""
 
-#: inc/app/class-field.php:287
+#: inc/app/class-field.php:312
 #: templates/admin-page-stop-words.php:22
 #: templates/admin-page-synonyms.php:25
 msgid "Upgrade to Pro"
@@ -144,11 +144,11 @@ msgstr ""
 msgid "Select Widget:"
 msgstr ""
 
-#: inc/custom/class-ysm-widget-manager.php:272
+#: inc/custom/class-ysm-widget-manager.php:277
 msgid "Your changes have been saved."
 msgstr ""
 
-#: inc/custom/class-ysm-widget-manager.php:347
+#: inc/custom/class-ysm-widget-manager.php:352
 msgctxt "submit button"
 msgid "Search"
 msgstr ""
@@ -177,15 +177,15 @@ msgstr ""
 msgid "Delete"
 msgstr ""
 
-#: inc/custom/scripts.php:100
+#: inc/custom/scripts.php:101
 msgid "Delete column?"
 msgstr ""
 
-#: inc/custom/scripts.php:101
+#: inc/custom/scripts.php:102
 msgid "Delete row?"
 msgstr ""
 
-#: inc/custom/scripts.php:102
+#: inc/custom/scripts.php:103
 msgid "Delete widget?"
 msgstr ""
 
@@ -399,7 +399,7 @@ msgid "Custom Fields"
 msgstr ""
 
 #: templates/admin-tab-fields.php:115
-msgid "Enable search in Custom Fields. Fill in field slugs separated by comma"
+msgid "Enable search in Custom Fields. Fill in each field slug on a new line"
 msgstr ""
 
 #: templates/admin-tab-fields.php:122
@@ -507,6 +507,7 @@ msgid "Minimum number of characters required to start a search"
 msgstr ""
 
 #: templates/admin-tab-general.php:53
+#: templates/admin-tab-styling.php:86
 msgid "Results Popup"
 msgstr ""
 
@@ -643,51 +644,58 @@ msgid "Disable default WooCommerce redirect to product page if there is only one
 msgstr ""
 
 #: templates/admin-tab-general.php:170
-msgid "Disable Smart Search Feature on the Search Results Page"
+msgid "Suppress Query Altering"
 msgstr ""
 
 #: templates/admin-tab-general.php:171
-msgid "Disable altering search results by Smart Search plugin on the search results page.<br>By default the plugin modified search results according to selected options"
-msgstr ""
-
-#: templates/admin-tab-general.php:177
-msgid "Disable WooCommerce Layout on the Search Results Page"
+msgid "Prevent the theme or plugins from modifying the query on the search results page"
 msgstr ""
 
 #: templates/admin-tab-general.php:178
-msgid "Displays the default search results layout defined in the theme instead of WooCommerce template.<br>Useful if you want to display posts with products together"
+msgid "Disable Smart Search Feature on the Search Results Page"
 msgstr ""
 
-#: templates/admin-tab-general.php:184
-msgid "Highlight Search Terms on the Search Results Page"
+#: templates/admin-tab-general.php:179
+msgid "Disable altering search results by Smart Search plugin on the search results page.<br>By default the plugin modified search results according to selected options"
 msgstr ""
 
 #: templates/admin-tab-general.php:185
+msgid "Disable WooCommerce Layout on the Search Results Page"
+msgstr ""
+
+#: templates/admin-tab-general.php:186
+msgid "Displays the default search results layout defined in the theme instead of WooCommerce template.<br>Useful if you want to display posts with products together"
+msgstr ""
+
+#: templates/admin-tab-general.php:192
+msgid "Highlight Search Terms on the Search Results Page"
+msgstr ""
+
+#: templates/admin-tab-general.php:193
 msgid "Highlight words that match a search query on the search results page. Works only if the Smart Search Feature is not disabled on the search results page"
 msgstr ""
 
-#: templates/admin-tab-general.php:190
+#: templates/admin-tab-general.php:198
 msgid "Advanced"
 msgstr ""
 
-#: templates/admin-tab-general.php:195
+#: templates/admin-tab-general.php:203
 msgid "Enable Transient"
 msgstr ""
 
-#: templates/admin-tab-general.php:196
+#: templates/admin-tab-general.php:204
 msgid "Save query results in a transient.<br>Might be useful if your server does not have Memcache/Redis"
 msgstr ""
 
-#: templates/admin-tab-general.php:203
+#: templates/admin-tab-general.php:211
 msgid "Product Slug Override"
 msgstr ""
 
-#: templates/admin-tab-general.php:204
+#: templates/admin-tab-general.php:212
 msgid "It may be helpful if you changed the base slug for WooCommerce products. The base slug is \"product\""
 msgstr ""
 
 #: templates/admin-tab-layout.php:5
-#: templates/admin-tab-styling.php:86
 msgid "Results Popup Elements"
 msgstr ""
 
@@ -708,7 +716,7 @@ msgid "Variation Image Fallback"
 msgstr ""
 
 #: templates/admin-tab-layout.php:25
-msgid "Fallback to parent product image if a variation does not have an image"
+msgid "Use the parent product image if a variation has no image"
 msgstr ""
 
 #: templates/admin-tab-layout.php:32
@@ -721,6 +729,10 @@ msgstr ""
 
 #: templates/admin-tab-layout.php:39
 msgid "Display Excerpt"
+msgstr ""
+
+#: templates/admin-tab-layout.php:40
+msgid "Display product description"
 msgstr ""
 
 #: templates/admin-tab-layout.php:46
@@ -744,7 +756,7 @@ msgid "Display Category"
 msgstr ""
 
 #: templates/admin-tab-layout.php:59
-msgid "Display product / post category"
+msgid "Display product or post category"
 msgstr ""
 
 #: templates/admin-tab-layout.php:65
@@ -760,7 +772,7 @@ msgid "Display \"Out of stock\" Label"
 msgstr ""
 
 #: templates/admin-tab-layout.php:80
-msgid "Display \"Out of stock\" label if product is out of stock"
+msgid "Indicate if a product is out of stock"
 msgstr ""
 
 #: templates/admin-tab-layout.php:87
@@ -768,7 +780,7 @@ msgid "Display \"Sale\" Label"
 msgstr ""
 
 #: templates/admin-tab-layout.php:88
-msgid "Display \"Sale\" label if product is on sale"
+msgid "Highlight products on sale"
 msgstr ""
 
 #: templates/admin-tab-layout.php:95
@@ -776,7 +788,7 @@ msgid "Display \"Featured\" Label"
 msgstr ""
 
 #: templates/admin-tab-layout.php:96
-msgid "Display \"Featured\" label if product marked as featured"
+msgid "Mark featured products"
 msgstr ""
 
 #: templates/admin-tab-layout.php:103
@@ -784,7 +796,7 @@ msgid "Display \"Add to Cart\" Button"
 msgstr ""
 
 #: templates/admin-tab-layout.php:104
-msgid "Display \"Add to Cart\" button for product"
+msgid "Allow users to add products to their cart directly from the popup"
 msgstr ""
 
 #: templates/admin-tab-order.php:14
@@ -908,7 +920,7 @@ msgid "Category Color"
 msgstr ""
 
 #: templates/admin-tab-styling.php:139
-msgid "Product Elements in the Results Popup"
+msgid "Product Elements"
 msgstr ""
 
 #: templates/admin-tab-styling.php:144

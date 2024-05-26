@@ -65,3 +65,18 @@
 	border-color: $button-grey-hover-bg-color;
 	color: #fff;
 }
+
+.ymapp-settings__doc_link {
+	float: left;
+	margin-top: 90px;
+	margin-left: 0;
+}
+
+@media only screen and (max-width: 400px) {
+	.ymapp-settings__content {
+		.ymapp-settings__doc_link {
+			float: right;
+			margin-right: -30px;
+		}
+	}
+}

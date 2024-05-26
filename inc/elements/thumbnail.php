@@ -16,9 +16,10 @@ function thumbnail( $cur_post ) {
 
 	if ( has_post_thumbnail( $cur_post ) ) {
 		/**
-		 * Overwrite image html in the suggestion
+		 * Pre define image html in the suggestion
 		 *
-		 * @param $the_post \WP_Post|\WC_Product WordPress post object or WooCommerce product object
+		 * @param string $output Image html output.
+		 * @param \WP_Post|\WC_Product $the_post WordPress post object or WooCommerce product object
 		 *
 		 * @since 2.5.0
 		 */

@@ -245,6 +245,7 @@ class Ysm_Widget_Manager {
 		if ( in_array( self::$mode, array( 'custom-edit', 'custom-new' ), true ) ) {
 			$name = filter_input( INPUT_POST, 'name', FILTER_SANITIZE_FULL_SPECIAL_CHARS );
 			$settings = self::$widgets;
+			$old_settings = $settings;
 
 			if ( ysm_get_default_widgets_names( self::$widget_id ) ) {
 				$settings[ self::$widget_id ] = array(
@@ -266,8 +267,12 @@ class Ysm_Widget_Manager {
 
 			/**
 			 * Actions after widget settings saved
+			 *
+			 * @param string|int $widget_id Search widget id.
+			 * @param array $old_settings Settings before save.
+			 * @param array $settings Settings after save.
 			 */
-			do_action( 'sws_widget_settings_saved' );
+			do_action( 'sws_widget_settings_saved', self::$widget_id, $old_settings[self::$widget_id]['settings'], $settings[self::$widget_id]['settings'] );
 
 			ysm_add_message( __( 'Your changes have been saved.', 'smart-woocommerce-search' ) );
 

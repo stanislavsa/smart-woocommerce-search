@@ -50,6 +50,7 @@ function front_scripts() {
 		$widget_params['multipleWords'] = ! empty( $v['settings']['enable_fuzzy_search'] ) ? $v['settings']['enable_fuzzy_search'] : '';
         $widget_params['excludeOutOfStock'] = !empty( $v['settings']['exclude_out_of_stock_products'] );
 		$widget_params['layout'] = 'product' === $k ? 'product' : '';
+	    $widget_params['suppressQueryParams'] = (bool) ! empty( $v['settings']['search_page_suppress_filters'] );
 
         if ( !empty( $v['settings']['post_type_product'] ) && empty( $v['settings']['search_page_layout_posts'] ) ) {
             $widget_params['layout'] = 'product';

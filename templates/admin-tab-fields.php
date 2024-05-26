@@ -110,9 +110,9 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 		));
 
 		ysm_setting( $w_id, 'custom_fields', array(
-			'type'        => 'text',
+			'type'        => 'textarea_list',
 			'title'       => __( 'Custom Fields', 'smart-woocommerce-search' ),
-			'description' => __( 'Enable search in Custom Fields. Fill in field slugs separated by comma', 'smart-woocommerce-search' ),
+			'description' => __( 'Enable search in Custom Fields. Fill in each field slug on a new line', 'smart-woocommerce-search' ),
 			'value'       => '',
 			'is_pro'      => true,
 		));
@@ -216,4 +216,6 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 
 		</tbody>
 	</table>
+
+	<a class="ymapp-settings__doc_link ymapp-button ymapp-button-grey" href="https://www.wpsmartsearch.com/docs/content-types/" target="_blank">Documentation</a>
 </div>

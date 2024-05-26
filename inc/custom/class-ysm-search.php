@@ -59,7 +59,7 @@ class Ysm_Search {
 	public static function init() {
 		self::$time_start = microtime( true );
 		add_action( 'pre_get_posts', array(__CLASS__, 'search_filter'), PHP_INT_MAX );
-		add_action( 'woocommerce_product_query', array(__CLASS__, 'search_filter'), PHP_INT_MAX );
+//		add_action( 'woocommerce_product_query', array(__CLASS__, 'search_filter'), PHP_INT_MAX );
 		add_action( 'wp', array(__CLASS__, 'remove_search_filter'), 9999 );
 		add_filter( 'found_posts', array( __CLASS__, 'alter_found_posts' ), PHP_INT_MAX, 2 );
 
@@ -238,6 +238,57 @@ class Ysm_Search {
 				$query->set( 'ysm_found_posts', self::$found_posts );
 				$query->set( 'offset', 0 );
 				$query->set( 'posts_per_page', $posts_count );
+
+				if ( self::get_var( 'search_page_suppress_filters' ) ) {
+					$query->set( 'meta_query', [] );
+					$query->set( 'date_query', [] );
+					$query->set( 'tax_query', [] );
+
+					if ( $query->get('tag__in') ) {
+						$query->set( 'tag__in', [] );
+					}
+					if ( $query->get('tag_id') ) {
+						$query->set( 'tag_id', 0 );
+					}
+					if ( $query->get('tag') ) {
+						$query->set( 'tag', '' );
+					}
+					if ( $query->get('cat') ) {
+						$query->set( 'cat', 0 );
+					}
+					if ( $query->get('category_name') ) {
+						$query->set( 'category_name', '' );
+					}
+					if ( $query->get('category__in') ) {
+						$query->set( 'category__in', [] );
+					}
+
+					if ( $query->get('author') ) {
+						$query->set( 'author', 0 );
+					}
+					if ( $query->get('author_name') ) {
+						$query->set( 'author_name', '' );
+					}
+					if ( $query->get('author__in') ) {
+						$query->set( 'author__in', [] );
+					}
+
+					if ( $query->get('post_parent') ) {
+						$query->set( 'post_parent', 0 );
+					}
+					if ( $query->get('post_parent__in') ) {
+						$query->set( 'post_parent__in', [] );
+					}
+					if ( $query->get('post__not_in') ) {
+						$query->set( 'post__not_in', [] );
+					}
+
+					if ( $query->get('meta_key') ) {
+						$query->set( 'meta_key', '' );
+						$query->set( 'meta_value', '' );
+					}
+				}
+
 				$product_orderby = filter_input( INPUT_GET, 'product_orderby', FILTER_SANITIZE_FULL_SPECIAL_CHARS );
 				if ( empty( $product_orderby ) ) {
 					$orderby = $query->get( 'orderby' );
@@ -337,6 +388,11 @@ class Ysm_Search {
 
 //		$resulted_posts = self::query_results_filter( $resulted_posts );
 
+		/**
+		 * Modify the array of post ids
+		 *
+		 * @param array $post_ids List of post ids.
+		 */
 		return apply_filters( 'sws_search_result_post_ids', $resulted_posts );
 	}
 
@@ -570,7 +626,12 @@ class Ysm_Search {
 	protected static function set_search_terms() {
 		self::$search_terms = [];
 		$search_terms = self::get_var( 'enable_fuzzy_search' ) ? explode( ' ', self::get_var( 's' ) ) : (array) self::get_var( 's' );
-		$search_terms = (array) apply_filters( 'ysm_check_words', $search_terms );
+		/**
+		 * Modify the array of search terms
+		 *
+		 * @param array $search_terms List of search terms.
+		 */
+		$search_terms = (array) apply_filters( 'sws_filter_search_terms', $search_terms );
 		foreach ( $search_terms as $search_term ) {
 			if ( strlen( $search_term ) >= self::get_var( 'char_count' ) ) {
 				self::$search_terms[] = $search_term;

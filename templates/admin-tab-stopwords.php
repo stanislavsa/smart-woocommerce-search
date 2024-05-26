@@ -19,4 +19,6 @@
 
 		</tbody>
 	</table>
+
+	<a class="ymapp-settings__doc_link ymapp-button ymapp-button-grey" href="https://www.wpsmartsearch.com/docs/stop-words/" target="_blank">Documentation</a>
 </div>

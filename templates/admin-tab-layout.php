@@ -22,7 +22,7 @@
 		ysm_setting( $w_id, 'variation_thumb_fallback', array(
 			'type'        => 'checkbox',
 			'title'       => __( 'Variation Image Fallback', 'smart-woocommerce-search' ),
-			'description' => __( 'Fallback to parent product image if a variation does not have an image', 'smart-woocommerce-search' ),
+			'description' => __( 'Use the parent product image if a variation has no image', 'smart-woocommerce-search' ),
 			'value'       => 1,
 			'is_pro'      => true,
 		));
@@ -37,7 +37,7 @@
 		ysm_setting( $w_id, 'display_excerpt', array(
 			'type'        => 'checkbox',
 			'title'       => __( 'Display Excerpt', 'smart-woocommerce-search' ),
-			'description' => '',
+			'description' => __( 'Display product description', 'smart-woocommerce-search' ),
 			'value'       => 1,
 		));
 
@@ -56,7 +56,7 @@
 		ysm_setting( $w_id, 'display_category', array(
 			'type'        => 'checkbox',
 			'title'       => __( 'Display Category', 'smart-woocommerce-search' ),
-			'description' => __( 'Display product / post category', 'smart-woocommerce-search' ),
+			'description' => __( 'Display product or post category', 'smart-woocommerce-search' ),
 			'value'       => 0,
 		));
 
@@ -77,7 +77,7 @@
 		ysm_setting( $w_id, 'display_out_of_stock_label', array(
 			'type'        => 'checkbox',
 			'title'       => __( 'Display "Out of stock" Label', 'smart-woocommerce-search' ),
-			'description' => __( 'Display "Out of stock" label if product is out of stock', 'smart-woocommerce-search' ),
+			'description' => __( 'Indicate if a product is out of stock', 'smart-woocommerce-search' ),
 			'value'       => 1,
 			'is_pro'      => true,
 		));
@@ -85,7 +85,7 @@
 		ysm_setting( $w_id, 'display_sale_label', array(
 			'type'        => 'checkbox',
 			'title'       => __( 'Display "Sale" Label', 'smart-woocommerce-search' ),
-			'description' => __( 'Display "Sale" label if product is on sale', 'smart-woocommerce-search' ),
+			'description' => __( 'Highlight products on sale', 'smart-woocommerce-search' ),
 			'value'       => 1,
 			'is_pro'      => true,
 		));
@@ -93,7 +93,7 @@
 		ysm_setting( $w_id, 'display_featured_label', array(
 			'type'        => 'checkbox',
 			'title'       => __( 'Display "Featured" Label', 'smart-woocommerce-search' ),
-			'description' => __( 'Display "Featured" label if product marked as featured', 'smart-woocommerce-search' ),
+			'description' => __( 'Mark featured products', 'smart-woocommerce-search' ),
 			'value'       => 1,
 			'is_pro'      => true,
 		));
@@ -101,7 +101,7 @@
 		ysm_setting( $w_id, 'display_add_to_cart', array(
 			'type' => 'checkbox',
 			'title' => __( 'Display "Add to Cart" Button', 'smart-woocommerce-search' ),
-			'description' => __( 'Display "Add to Cart" button for product', 'smart-woocommerce-search' ),
+			'description' => __( 'Allow users to add products to their cart directly from the popup', 'smart-woocommerce-search' ),
 			'value' => 0,
 			'is_pro'      => true,
 		));
@@ -110,4 +110,6 @@
 
 		</tbody>
 	</table>
+
+	<a class="ymapp-settings__doc_link ymapp-button ymapp-button-grey" href="https://www.wpsmartsearch.com/docs/layout-settings/" target="_blank">Documentation</a>
 </div>

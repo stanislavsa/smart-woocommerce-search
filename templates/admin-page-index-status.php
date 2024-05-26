@@ -106,4 +106,6 @@ if ( sws_fs()->is_premium() ) {
 		</div>
 
 	</form>
+
+	<a class="ymapp-settings__doc_link ymapp-button ymapp-button-grey" style="margin-top: 30px;" href="https://www.wpsmartsearch.com/docs/data-indexing/" target="_blank">Documentation</a>
 </div>

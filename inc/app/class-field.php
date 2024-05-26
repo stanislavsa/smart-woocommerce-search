@@ -162,6 +162,31 @@ class Field {
 	}
 
 	/**
+	 * Retrieve <textarea> html
+	 * @param $id
+	 * @param $args
+	 * @return string
+	 */
+	public static function get_textarea_list_html( $id, $args ) {
+		ob_start();
+		$value = $args['value'];
+		if ( false !== strpos( $value, ',' ) ) {
+			$value = explode( ',', $value );
+			$value = implode( "\n", $value );
+		}
+		?>
+		<textarea rows="10" cols="40" class="input-text wide-input"
+				  type="<?php echo esc_attr( $args['type'] ); ?>" name="<?php echo esc_attr( $args['name'] ); ?>" id="<?php echo esc_attr( $id ); ?>"
+				  placeholder="<?php echo esc_attr( $args['placeholder'] ); ?>" <?php disabled( $args['disabled'], true ); ?>><?php echo esc_textarea( $value ); ?></textarea>
+		<p class="description">
+			<?php echo wp_kses_post( $args['description'] ); ?>
+		</p>
+		<?php
+
+		return ob_get_clean();
+	}
+
+	/**
 	 * Retrieve colorpicker html
 	 * @param $id
 	 * @param $args

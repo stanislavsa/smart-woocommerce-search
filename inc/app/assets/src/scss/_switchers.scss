@@ -58,6 +58,7 @@ input[type="checkbox"].ymapp-switcher {
 	input[type="checkbox"].ymapp-switcher + label {
 		padding-left: 65px;
 		padding-top: 10px;
+		height: auto;
 
 		&:before {
 			width: 50px;

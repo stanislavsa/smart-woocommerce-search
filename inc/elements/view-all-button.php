@@ -12,6 +12,18 @@ function view_all_button() {
 		// button text
 		$button_text = __( \Ysm_Search::get_var( 'view_all_link_text' ), 'smart-woocommerce-search' );
 
+		/**
+		 * Modify text in the "View All" button
+		 *
+		 * @param string $button_text Text in the button.
+		 * @param int $found_posts Number of found posts.
+		 */
+		$button_text = apply_filters( 'sws_view_all_button_text', $button_text, \Ysm_Search::get_found_posts_count() );
+
+		if ( ! $button_text ) {
+			return '';
+		}
+
 		// button url
 		$param = implode( ' ', \Ysm_Search::get_search_terms() );
 		$param = str_replace( '+', '%2b', $param );

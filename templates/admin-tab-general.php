@@ -165,6 +165,14 @@
 			'value'       => 0,
 		));
 
+		ysm_setting( $w_id, 'search_page_suppress_filters', array(
+			'type'        => 'checkbox',
+			'title'       => __( 'Suppress Query Altering', 'smart-woocommerce-search' ),
+			'description' => __( 'Prevent the theme or plugins from modifying the query on the search results page', 'smart-woocommerce-search' ),
+			'value'       => 0,
+			'is_pro'      => true,
+		));
+
 		ysm_setting( $w_id, 'search_page_default_output', array(
 			'type'        => 'checkbox',
 			'title'       => __( 'Disable Smart Search Feature on the Search Results Page', 'smart-woocommerce-search' ),
@@ -208,4 +216,6 @@
 		?>
 		</tbody>
 	</table>
+
+	<a class="ymapp-settings__doc_link ymapp-button ymapp-button-grey" href="https://www.wpsmartsearch.com/docs/general-settings/" target="_blank">Documentation</a>
 </div>

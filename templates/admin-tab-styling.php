@@ -65,10 +65,10 @@
 				'type'        => 'select',
 				'title'       => __( 'Loader', 'smart-woocommerce-search' ),
 				'description' => __( 'Select loader', 'smart-woocommerce-search' ) .
-					' <img style="margin-left:20px;" class="ysm-loader-preview" src="' .
-					SWS_PLUGIN_URI . 'assets/images/' .
-					( $cur_loader ? $cur_loader : 'loader1' ) .
-					'.gif">',
+				                 ' <img style="margin-left:20px;" class="ysm-loader-preview" src="' .
+				                 SWS_PLUGIN_URI . 'assets/images/' .
+				                 ( $cur_loader ? $cur_loader : 'loader1' ) .
+				                 '.gif">',
 				'value' => 'loader1',
 				'choices' => array(
 					'loader1' => __( 'Loader', 'smart-woocommerce-search' ) . ' 1',
@@ -83,7 +83,7 @@
 
 		<?php } ?>
 
-		<th class="ymapp-settings__title"><?php esc_html_e( 'Results Popup Elements', 'smart-woocommerce-search' ); ?></th>
+		<th class="ymapp-settings__title"><?php esc_html_e( 'Results Popup', 'smart-woocommerce-search' ); ?></th>
 
 		<?php
 		ysm_setting( $w_id, 'popup_border_color', array(
@@ -136,7 +136,7 @@
 		));
 		?>
 
-		<th class="ymapp-settings__title"><?php esc_html_e( 'Product Elements in the Results Popup', 'smart-woocommerce-search' ); ?></th>
+		<th class="ymapp-settings__title"><?php esc_html_e( 'Product Elements', 'smart-woocommerce-search' ); ?></th>
 
 		<?php
 		ysm_setting( $w_id, 'popup_price_text_color', array(
@@ -198,4 +198,6 @@
 
 		</tbody>
 	</table>
+
+	<a class="ymapp-settings__doc_link ymapp-button ymapp-button-grey" href="https://www.wpsmartsearch.com/docs/styling-settings/" target="_blank">Documentation</a>
 </div>

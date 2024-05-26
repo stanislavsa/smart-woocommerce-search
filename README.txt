@@ -1,7 +1,7 @@
 === Smart WooCommerce Search ===
 Contributors: yummy-wp
 Tags: search, ajax search, product search, smart search, search by sku
-Stable tag: 2.10.0
+Stable tag: 2.10.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Requires at least: 5.9
@@ -55,6 +55,7 @@ You can completely customize your smart search. In addition, the plugin integrat
    * Product labels
    * Synonyms
    * Stop words
+   * Data indexing
    * Advanced caching
    * WPML compatibility
    * Polylang compatibility
@@ -63,10 +64,8 @@ You can completely customize your smart search. In addition, the plugin integrat
    * Ultimate WooCommerce Brands plugin compatibility
    * Add to Cart button
    * More customization and styling settings
-   * 1 year of support
-   * 1 year of updates
 
-[Plugin Documentation](https://yummywp.com/docs/smart-search/)
+[Plugin Documentation](https://www.wpsmartsearch.com/docs/)
 
 Do you have any questions or concerns? Feel free to contact us via the [contact form](https://www.wpsmartsearch.com/contact/).
 
@@ -91,7 +90,7 @@ Plugin not tested with all themes, but it easily integrated in any theme, and ma
 
 = How to manage plugin settings? =
 
-Please read a [documentation](http://yummywp.com/docs/smart-search/).
+Please read a [documentation](https://www.wpsmartsearch.com/docs/general-settings/).
 
 = Is there a way to show the ‘shop search output’ from WooCommerce, for example 3 items per row? =
 
@@ -105,6 +104,12 @@ Yes, when using products search or when you set option to search only through pr
 4. Smart WooCommerce Search Settings Page - Styling tab
 
 == Changelog ==
+
+= 2.10.1 =
+* Added: setting "Suppress Query Altering" for the search results page
+* Added: filter 'sws_view_all_button_text'
+* Added: filter 'sws_filter_search_terms'
+* Tweak: small under the hood fixes
 
 = 2.10.0 =
 * Added: results order settings
