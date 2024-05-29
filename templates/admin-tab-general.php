@@ -170,7 +170,6 @@
 			'title'       => __( 'Suppress Query Altering', 'smart-woocommerce-search' ),
 			'description' => __( 'Prevent the theme or plugins from modifying the query on the search results page', 'smart-woocommerce-search' ),
 			'value'       => 0,
-			'is_pro'      => true,
 		));
 
 		ysm_setting( $w_id, 'search_page_default_output', array(
