@@ -114,7 +114,7 @@ Yes, when using products search or when you set option to search only through pr
 = 2.10.0 =
 * Added: results order settings
 * Added: blueprint.json file
-* Tweak: REST request small update
+* Tweak: REST request processing issue
 
 = 2.9.0 =
 * Added: "Popup Max Height" option
