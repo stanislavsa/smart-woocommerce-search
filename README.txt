@@ -1,7 +1,7 @@
 === Smart WooCommerce Search ===
 Contributors: yummy-wp
 Tags: search, ajax search, product search, smart search, search by sku
-Stable tag: 2.10.1
+Stable tag: 2.11.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Requires at least: 5.9
@@ -15,57 +15,60 @@ Smart WooCommerce Search enhances your users' experience with a sophisticated AJ
 = Smart WooCommerce Search enhances your users' experience with a sophisticated AJAX search bar featuring real-time suggestions. =
 
 [Check Demo](https://demo.wpsmartsearch.com/)
+
+[Documentation](https://www.wpsmartsearch.com/docs/)
+
 [Upgrade to PRO](https://www.wpsmartsearch.com/features/)
 
+While WooCommerce's default search is basic, lacking **live product search** and **SKU search** functionality, **Smart WooCommerce Search** delivers advanced search capabilities along with live suggestions.
+
+In today's market, instant search suggestions are essential. According to the latest research, 96% of major e-commerce sites now offer search autocomplete, auto-suggest, or **instant ajax search** features. This functionality is crucial for retaining customers and optimizing sales by saving users time and streamlining the shopping process.
+
 Discover the PRO features of our plugin with a **14-day trial period**.
-
-While WooCommerce's default search is basic, lacking live product search and SKU search functionality, **Smart WooCommerce Search** delivers advanced search capabilities along with live suggestions.
-
-In today's market, instant search suggestions are essential. According to the latest research, 96% of major e-commerce sites now offer search autocomplete, auto-suggest, or instant search features. This functionality is crucial for retaining customers and optimizing sales by saving users time and streamlining the shopping process.
 
 = Free Features: =
 
  * Search results with images and prices
  * Simple integration into default search widgets
- * Elementor compatible
- * DIVI compatible
- * WPBakery Page Builder compatible
- * Visual Composer compatible
- * Search by product SKU
+ * Search by product SKU(https://www.wpsmartsearch.com/docs/content-types/#2-toc-title)
  * Search in product Categories
  * Search in product Tags
  * Multisite support
  * Allow/disallow searching in selected product categories
  * Exclude "Out of stock" products from search results
  * Multiple words search
+ * Elementor compatible
+ * DIVI compatible
+ * WPBakery Page Builder compatible
+ * Visual Composer compatible
  * Search Exclude plugin compatible
 
 This plugin is indispensable for sites with a large number of product items.
 
-You can completely customize your smart search. In addition, the plugin integrates seamlessly into the WooCommerce Product Search widget.
+You can completely customize your **smart search**. In addition, the plugin integrates seamlessly into the **WooCommerce Product Search** widget.
 
 = Upgrade to PRO and boost your sales: =
 
-   * Search in Variations
-   * Search in Custom Post Types
-   * Search in Custom Taxonomies
-   * Search in Custom Fields
+   * Search in Variations(https://www.wpsmartsearch.com/docs/content-types/#1-toc-title)
+   * Search in Custom Post Types(https://www.wpsmartsearch.com/docs/content-types/#1-toc-title)
+   * Search in Custom Taxonomies(https://www.wpsmartsearch.com/docs/content-types/#3-toc-title)
+   * Search in Custom Fields(https://www.wpsmartsearch.com/docs/content-types/#2-toc-title)
    * Search in Product Attributes
    * Search in Product Brands
    * Product labels
-   * Synonyms
-   * Stop words
-   * Data indexing
+   * Synonyms(https://www.wpsmartsearch.com/docs/synonyms/)
+   * Stop words(https://www.wpsmartsearch.com/docs/stop-words/)
+   * Data indexing(https://www.wpsmartsearch.com/docs/data-indexing/)
    * Advanced caching
+   * Automatic plugin updates
+   * Grid layout(https://www.wpsmartsearch.com/docs/layout-settings/#1-toc-title)
+   * Add to Cart button
    * WPML compatibility
    * Polylang compatibility
    * ACF plugin compatibility
    * Custom Post Type UI plugin compatibility
    * Ultimate WooCommerce Brands plugin compatibility
-   * Add to Cart button
    * More customization and styling settings
-
-[Plugin Documentation](https://www.wpsmartsearch.com/docs/)
 
 Do you have any questions or concerns? Feel free to contact us via the [contact form](https://www.wpsmartsearch.com/contact/).
 
@@ -98,12 +101,20 @@ Yes, when using products search or when you set option to search only through pr
 
 == Screenshots ==
 
-1. Smart WooCommerce Search Custom Widget
-2. Smart WooCommerce Search Settings Page - General tab
-3. Smart WooCommerce Search Settings Page - Items to Search through tab
-4. Smart WooCommerce Search Settings Page - Styling tab
+1. Searching by SKU
+2. Extend Gutenberg's Search block
+3. Smart Search PRO - Grid layout
+4. Smart Search PRO - Index product data
 
 == Changelog ==
+
+= 2.11.0 =
+* Added: option to set Popup Max Height for mobiles
+* Added: option to select Image Size from defined media sizes
+* Added: option to set a gap between search bar and popup
+* Added: option to set Rounded Border for popup
+* Added: option to set Search Bar Height
+* Tweak: CSS styles updates
 
 = 2.10.1 =
 * Added: setting "Suppress Query Altering" for the search results page

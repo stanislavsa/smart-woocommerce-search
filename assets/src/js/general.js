@@ -13,8 +13,10 @@
 							id: wId,
 							serviceUrl: swsL10n.restUrl + 'id=' + encodeURIComponent( wId ),
 							layout: swsL10n.widgets[wId].layout,
+							columns: swsL10n.widgets[wId].columns,
 							productSlug: swsL10n.widgets[wId].productSlug,
 							maxHeight: swsL10n.widgets[wId].popupHeight,
+							maxHeightMobile: swsL10n.widgets[wId].popupHeightMobile,
 							minChars: swsL10n.widgets[wId].charCount,
 							disableAjax: swsL10n.widgets[wId].disableAjax,
 							no_results_text: swsL10n.widgets[wId].noResultsText,
@@ -34,25 +36,28 @@
 		 */
 		function sws_init_autocomplete( el, attr ) {
 
-			var $this = $( el ).find( 'input[type="search"]' ).length ? $( el ).find( 'input[type="search"]' ) : $( el ).find( 'input[type="text"]' ),
-				$form = ( el.tagName === 'FORM' || el.tagName === 'form' ) ? $( el ) : $( el ).find( 'form' );
+			var $el = $( el ),
+				$this = $el.find( 'input[type="search"]' ).length ? $el.find( 'input[type="search"]' ) : $el.find( 'input[type="text"]' ),
+				$form = ( el.tagName === 'FORM' || el.tagName === 'form' ) ? $el : $el.find( 'form' );
 
 			if ( ! $this.length ) {
 				return;
 			}
 
-			if ( $( el ).hasClass('ysm-active') ) {
+			if ( $el.hasClass('ysm-active') ) {
 				return;
 			}
 
-			$( el ).addClass( 'ysm-active' );
+			$el.addClass( 'ysm-active' ).addClass( 'ysm-hide' );
 
 			var defaults = {
 				id: '',
 				serviceUrl: swsL10n.restUrl,
 				layout: '',
+				columns: 1,
 				productSlug: 'product',
-				maxHeight: 400,
+				maxHeight: 500,
+				maxHeightMobile: 400,
 				minChars: 3,
 				disableAjax: false,
 				no_results_text: '',
@@ -89,11 +94,18 @@
 				return;
 			}
 
-			$( '<div class="smart-search-results"></div>' ).appendTo( $form );
+			$( '<div class="smart-search-popup"><div class="smart-search-results"><div class="smart-search-results-inner"></div></div></div>' ).appendTo( $form );
 
-			var $results_wrapper = $form.find( '.smart-search-results' ).css({
-				maxHeight: options.maxHeight + 'px',
+			var $popup = $form.find( '.smart-search-popup' ).css({
 				width: $this.outerWidth() + 'px'
+			});
+
+			var $results_wrapper = $form.find( '.smart-search-results' );
+			var $resultsWrapperInner = $results_wrapper.find( '.smart-search-results-inner' );
+			var maxHeightValue = ( Math.min(window.screen.width, window.screen.height) < 768 ) ? options.maxHeightMobile : options.maxHeight;
+
+			$results_wrapper.css({
+				maxHeight: maxHeightValue + 'px',
 			});
 
 			if ( navigator.userAgent.indexOf( 'Windows' ) !== -1 && navigator.userAgent.indexOf( 'Firefox' ) !== -1 ) {
@@ -101,20 +113,23 @@
 			}
 
 			$( window ).on( 'resize', function () {
-				var _width = $this.outerWidth() + 'px';
-
-				$results_wrapper.css({
-					width: _width
-				}).find( '.smart-search-suggestions' ).css({
-					width: _width
+				$popup.css({
+					width: $this.outerWidth() + 'px'
 				});
+			});
+
+			$( window ).on( 'touchstart' , function( event ) {
+				var $wrapper = $( event.target ).hasClass( 'ysm-active' ) ? $( event.target ) : $( event.target ).parents( '.ysm-active' );
+				if ( ! $wrapper.length ) {
+					$( '.ysm-active' ).addClass( 'ysm-hide' );
+				}
 			});
 
 			$this.devbridgeAutocomplete({
 				minChars        : options.minChars,
-				appendTo        : $results_wrapper,
+				appendTo        : $resultsWrapperInner,
 				serviceUrl      : options.serviceUrl,
-				maxHeight       : options.maxHeight,
+				maxHeight       : 100000,
 				dataType        : 'json',
 				deferRequestBy  : 100,
 				noCache         : ! options.cache,
@@ -123,20 +138,27 @@
 				showNoSuggestionNotice: options.no_results_text.length ? true : false,
 				noSuggestionNotice: options.no_results_text,
 				preventBadQueries: options.preventBadQueries,
+				ajaxSettings: {
+					beforeSend: function(xhr) {
+						if ( swsL10n.nonce ) {
+							xhr.setRequestHeader('X-WP-Nonce', swsL10n.nonce);
+						}
+					},
+				},
 				formatResult: function ( suggestion, currentValue ) {
 					return suggestion.data;
 				},
 				onSearchStart   : function ( query ) {
+
 					if ( this.value.indexOf( '  ' ) !== -1 ) {
 						this.value = this.value.replace( /\s+/g, ' ' );
 					}
-					var trimmed = $.trim( this.value );
-					if ( trimmed !== this.value ) {
-						return false;
-					}
+
 					query.query = query.query.replace( /%20/g, ' ' );
 
 					$this.css( {'background-image': 'url(' + options.loaderIcon + ')','background-repeat': 'no-repeat', 'background-position': '50% 50%'} );
+
+					$el.addClass( 'ysm-hide' ).removeClass( 'sws-no-results' );
 				},
 				onSelect        : function ( suggestion ) {
 					if ( suggestion.id != -1 && suggestion.url && ! suggestion.addToCart ) {
@@ -148,10 +170,10 @@
 						val = $this.val();
 
 					if ( res && res.view_all_link && res.view_all_link != '' ) {
-						if ( ! $results_wrapper.find( '.smart-search-view-all-holder' ).length ) {
-							$results_wrapper.addClass( 'has-viewall-button' ).append( '<div class="smart-search-view-all-holder"></div>' );
+						if ( ! $popup.find( '.smart-search-view-all-holder' ).length ) {
+							$popup.addClass( 'has-viewall-button' ).append( '<div class="smart-search-view-all-holder"></div>' );
 						}
-						$results_wrapper.find( '.smart-search-view-all-holder' ).html( res.view_all_link );
+						$popup.find( '.smart-search-view-all-holder' ).html( res.view_all_link );
 					}
 
 					return res;
@@ -162,42 +184,43 @@
 
 					if ( suggestions.length > 0 ) {
 
-						$results_wrapper.parents( '.ysm-active' ).removeClass( 'ysm-hide' );
+						$el.removeClass( 'ysm-hide' ).removeClass( 'sws-no-results' );
 
 						setTimeout( function() {
-							var content = $results_wrapper.find( '.smart-search-suggestions' ),
-								maxHeight = parseInt( $results_wrapper.css( "max-height" ), 10 ),
-								contentEl = content[0],
-								contentElChildren = $( contentEl ).find( '.autocomplete-suggestion' ),
-								contentElHeight = 0,
-								viewAllButton = $results_wrapper.find( '.smart-search-view-all-holder' );
+							var $wrapperWidth = $results_wrapper.outerWidth();
+							// var columns = suggestions.length < options.columns ? suggestions.length : options.columns;
+							var columns = options.columns;
+							var $viewAllEl = $popup.find( '.smart-search-view-all-holder' );
 
-							if ( contentElChildren.length ) {
-								contentElChildren.each(function () {
-									contentElHeight += this.scrollHeight + parseInt( $( this ).css( 'borderBottomWidth' ), 10 );
+							if ( $wrapperWidth === 0 ) {
+								$wrapperWidth = $this.outerWidth();
+								$results_wrapper.width( $wrapperWidth + 'px' );
+							}
+
+							if ( $wrapperWidth < columns * 200 ) {
+								columns = Math.floor( $wrapperWidth / 200 );
+							}
+
+							if ( ! $results_wrapper.outerHeight() ) {
+								var suggestionsHeight = $resultsWrapperInner.find('.smart-search-suggestions').outerHeight();
+
+								if ( suggestionsHeight ) {
+									suggestionsHeight = parseInt( suggestionsHeight, 10 );
+									$results_wrapper.height( suggestionsHeight > maxHeightValue ? maxHeightValue : suggestionsHeight );
+								}
+							}
+
+							$results_wrapper
+								.attr( 'data-columns', columns )
+								.nanoScroller({
+									contentClass: 'smart-search-results-inner',
+									alwaysVisible: false,
+									iOSNativeScrolling: true
 								});
-								contentElHeight += parseInt( $( contentEl ).css( 'borderTopWidth' ), 10 ); // border top of .smart-search-suggestions
-								contentElHeight += parseInt( $( contentEl ).css( 'borderBottomWidth' ), 10 ); // border bottom of .smart-search-suggestions
-							}
 
-							if ( $results_wrapper.outerWidth() == 0 ) {
-								$results_wrapper.width( $this.outerWidth() + 'px' );
-							}
-
-							$results_wrapper.nanoScroller({
-								contentClass: 'smart-search-suggestions',
-								alwaysVisible: false,
-								iOSNativeScrolling: true
-							});
-
-							$results_wrapper.height( contentElHeight > maxHeight ? maxHeight : contentElHeight );
-
-
-							$( contentEl ).height( 'auto' );
-
-							if ( viewAllButton.length ) {
+							if ( $viewAllEl.length ) {
 								if ( $this.val().length < options.minChars ) {
-									viewAllButton.hide();
+									$viewAllEl.hide();
 								} else {
 									var serviceUrl = options.serviceUrl,
 										cacheKey,
@@ -208,69 +231,46 @@
 									}
 									cacheKey = serviceUrl + '?' + $.param( { query: query } );
 									if ( that.cachedResponse && that.cachedResponse[cacheKey] ) {
-										viewAllButton.html( that.cachedResponse[cacheKey].view_all_link );
+										$viewAllEl.html( that.cachedResponse[cacheKey].view_all_link );
 									}
-									viewAllButton.show();
+									$viewAllEl.show();
 								}
 							}
 
-						}, 50);
+						}, 100);
 
 					} else if ( options.no_results_text.length ) {
-						$results_wrapper.css({
-							maxHeight: 'auto',
-							height: 42
-						}).nanoScroller({
-							contentClass: 'smart-search-suggestions',
-							stop: true
-						});
-
-						$results_wrapper.find( '.smart-search-suggestions' ).height( 40 );
-						$results_wrapper.find( '.smart-search-view-all-holder' ).hide();
+						$el.removeClass( 'ysm-hide' ).addClass( 'sws-no-results' );
 					} else {
-						$results_wrapper.find( '.smart-search-suggestions' ).height( 0 );
-						$results_wrapper.find( '.smart-search-view-all-holder' ).hide();
+						$el.addClass( 'ysm-hide' ).addClass( 'sws-no-results' );
 					}
 
 				},
 				onSearchError: function ( query, jqXHR, textStatus, errorThrown ) {
-					$results_wrapper.css({
-						maxHeight: 'auto',
-						height: 0
-					}).nanoScroller({
-						contentClass: 'smart-search-suggestions',
-						stop: true
-					});
+					if ( textStatus === 'error' && errorThrown === 'Forbidden' ) {
+						var nonceRefresh = jqXHR.getResponseHeader('X-Wp-Nonce');
 
-					$results_wrapper.find( '.smart-search-view-all-holder' ).hide();
+						if ( nonceRefresh && swsL10n.nonce !== nonceRefresh ) {
+							window.swsL10n.nonce = nonceRefresh;
+						} else if ( swsL10n.nonce ) {
+							window.swsL10n.nonce = '';
+						}
+
+						$this.devbridgeAutocomplete().onValueChange();
+						return;
+					}
+
+					$el.addClass( 'ysm-hide' ).removeClass( 'sws-no-results' );
 				},
 				onInvalidateSelection: function () {
 
 				},
 				onHide: function () {
-					$results_wrapper.css({
-						maxHeight: 'auto',
-						height: 0
-					}).nanoScroller({
-						contentClass: 'smart-search-suggestions',
-						stop: true
-					});
-
-					$results_wrapper.find( '.smart-search-view-all-holder' ).hide();
+					$el.addClass( 'ysm-hide' ).removeClass( 'sws-no-results' );
 				}
 			}).on( 'focus', function () {
 				$this.devbridgeAutocomplete().onValueChange();
 			});
-
-			$( window ).on( 'touchstart' , function( event ) {
-				var $wrapper = $( event.target ).hasClass( 'ysm-active' ) ? $( event.target ) : $( event.target ).parents( '.ysm-active' );
-				if ( $wrapper.length ) {
-					$wrapper.removeClass( 'ysm-hide' );
-				} else {
-					$( '.ysm-active' ).addClass( 'ysm-hide' );
-				}
-			});
-
 		}
 
 	});

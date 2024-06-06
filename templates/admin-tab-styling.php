@@ -7,6 +7,13 @@
 			<th class="ymapp-settings__title"><?php esc_html_e( 'Input Field', 'smart-woocommerce-search' ); ?></th>
 
 			<?php
+			ysm_setting( $w_id, 'input_height', array(
+				'type'        => 'text',
+				'title'       => __( 'Search Bar Height, px', 'smart-woocommerce-search' ),
+				'description' => __( 'Set the search bar height in pixels', 'smart-woocommerce-search' ),
+				'value'       => '',
+			));
+
 			ysm_setting( $w_id, 'input_round_border', array(
 				'type'        => 'checkbox',
 				'title'       => __( 'Rounded Border', 'smart-woocommerce-search' ),
@@ -86,6 +93,20 @@
 		<th class="ymapp-settings__title"><?php esc_html_e( 'Results Popup', 'smart-woocommerce-search' ); ?></th>
 
 		<?php
+		ysm_setting( $w_id, 'popup_top_gap', array(
+			'type'        => 'text',
+			'title'       => __( 'Top Gap', 'smart-woocommerce-search' ),
+			'description' => __( 'Distance between search bar and popup, px', 'smart-woocommerce-search' ),
+			'value'       => '',
+		));
+
+		ysm_setting( $w_id, 'popup_round_border', array(
+			'type'        => 'checkbox',
+			'title'       => __( 'Rounded Border', 'smart-woocommerce-search' ),
+			'description' => __( 'Display popup with rounded border', 'smart-woocommerce-search' ),
+			'value'       => '',
+		));
+
 		ysm_setting( $w_id, 'popup_border_color', array(
 			'type'        => 'color',
 			'title'       => __( 'Border Color', 'smart-woocommerce-search' ),

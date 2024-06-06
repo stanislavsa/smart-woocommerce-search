@@ -98,7 +98,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 		ysm_setting( $w_id, 'field_excerpt', array(
 			'type'        => 'checkbox',
 			'title'       => __( 'Excerpt', 'smart-woocommerce-search' ),
-			'description' => __( 'Enable search in post / product excerpt', 'smart-woocommerce-search' ),
+			'description' => __( 'Enable search in post / product short description', 'smart-woocommerce-search' ),
 			'value'       => 1,
 		));
 

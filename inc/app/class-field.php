@@ -132,7 +132,10 @@ class Field {
 			<?php
 			echo wp_kses(
 				$args['description'],
-				array( 'img' => array( 'src' => 1, 'style' => 1, 'class' => 1 ) )
+				[
+					'img' => [ 'src' => 1, 'style' => 1, 'class' => 1 ],
+					'br' => [],
+				]
 			);
 			?>
 		</p>

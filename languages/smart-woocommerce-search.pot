@@ -2,14 +2,14 @@
 # This file is distributed under the same license as the Smart WooCommerce Search plugin.
 msgid ""
 msgstr ""
-"Project-Id-Version: Smart WooCommerce Search 2.10.1\n"
+"Project-Id-Version: Smart WooCommerce Search 2.11.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/smart-woocommerce-search\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2024-05-29T09:13:09+00:00\n"
+"POT-Creation-Date: 2024-06-07T07:02:31+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.10.0\n"
 "X-Domain: smart-woocommerce-search\n"
@@ -112,7 +112,7 @@ msgstr ""
 msgid "%1$s &lsaquo; %2$s &#8212; WordPress"
 msgstr ""
 
-#: inc/app/class-field.php:312
+#: inc/app/class-field.php:315
 #: templates/admin-page-stop-words.php:22
 #: templates/admin-page-synonyms.php:25
 msgid "Upgrade to Pro"
@@ -177,15 +177,15 @@ msgstr ""
 msgid "Delete"
 msgstr ""
 
-#: inc/custom/scripts.php:101
+#: inc/custom/scripts.php:103
 msgid "Delete column?"
 msgstr ""
 
-#: inc/custom/scripts.php:102
+#: inc/custom/scripts.php:104
 msgid "Delete row?"
 msgstr ""
 
-#: inc/custom/scripts.php:103
+#: inc/custom/scripts.php:105
 msgid "Delete widget?"
 msgstr ""
 
@@ -383,7 +383,7 @@ msgid "Excerpt"
 msgstr ""
 
 #: templates/admin-tab-fields.php:101
-msgid "Enable search in post / product excerpt"
+msgid "Enable search in post / product short description"
 msgstr ""
 
 #: templates/admin-tab-fields.php:107
@@ -507,7 +507,7 @@ msgid "Minimum number of characters required to start a search"
 msgstr ""
 
 #: templates/admin-tab-general.php:53
-#: templates/admin-tab-styling.php:86
+#: templates/admin-tab-styling.php:93
 msgid "Results Popup"
 msgstr ""
 
@@ -700,102 +700,126 @@ msgid "Results Popup Elements"
 msgstr ""
 
 #: templates/admin-tab-layout.php:10
-msgid "Popup Max Height, px"
+msgid "Columns Layout"
 msgstr ""
 
 #: templates/admin-tab-layout.php:11
-msgid "Popup max height in pixels. Default is 400px"
-msgstr ""
-
-#: templates/admin-tab-layout.php:17
-msgid "Display Image"
-msgstr ""
-
-#: templates/admin-tab-layout.php:24
-msgid "Variation Image Fallback"
+msgid "Set the maximum number of columns to show in the popup.<br>To choose a Grid layout instead of List layout select columns number more than 1"
 msgstr ""
 
 #: templates/admin-tab-layout.php:25
-msgid "Use the parent product image if a variation has no image"
+msgid "Popup Max Height, px"
+msgstr ""
+
+#: templates/admin-tab-layout.php:26
+msgid "Popup max height in pixels. Default is 500px"
 msgstr ""
 
 #: templates/admin-tab-layout.php:32
-msgid "Image Size, px"
+msgid "Popup Max Height (mobile), px"
 msgstr ""
 
 #: templates/admin-tab-layout.php:33
-msgid "Image size in pixels"
+msgid "Popup max height in pixels for mobile screen (max-width: 768px). Default is 400px"
 msgstr ""
 
 #: templates/admin-tab-layout.php:39
-msgid "Display Excerpt"
-msgstr ""
-
-#: templates/admin-tab-layout.php:40
-msgid "Display product description"
+msgid "Display Image"
 msgstr ""
 
 #: templates/admin-tab-layout.php:46
+msgid "Variation Image Fallback"
+msgstr ""
+
+#: templates/admin-tab-layout.php:47
+msgid "Use the parent product image if a variation has no image"
+msgstr ""
+
+#: templates/admin-tab-layout.php:55
+msgid "Image Size"
+msgstr ""
+
+#: templates/admin-tab-layout.php:56
+msgid "Select image size"
+msgstr ""
+
+#: templates/admin-tab-layout.php:63
+msgid "Image Max Width, px"
+msgstr ""
+
+#: templates/admin-tab-layout.php:64
+msgid "Limit image maximal width in pixels"
+msgstr ""
+
+#: templates/admin-tab-layout.php:70
+msgid "Display Excerpt"
+msgstr ""
+
+#: templates/admin-tab-layout.php:71
+msgid "Display product description"
+msgstr ""
+
+#: templates/admin-tab-layout.php:77
 msgid "Excerpt Position"
 msgstr ""
 
-#: templates/admin-tab-layout.php:50
+#: templates/admin-tab-layout.php:81
 msgid "Below image"
 msgstr ""
 
-#: templates/admin-tab-layout.php:51
+#: templates/admin-tab-layout.php:82
 msgid "Below title"
 msgstr ""
 
-#: templates/admin-tab-layout.php:52
+#: templates/admin-tab-layout.php:83
 msgid "Below price and SKU"
 msgstr ""
 
-#: templates/admin-tab-layout.php:58
+#: templates/admin-tab-layout.php:89
 msgid "Display Category"
 msgstr ""
 
-#: templates/admin-tab-layout.php:59
+#: templates/admin-tab-layout.php:90
 msgid "Display product or post category"
 msgstr ""
 
-#: templates/admin-tab-layout.php:65
+#: templates/admin-tab-layout.php:96
 msgid "Display Product Price"
 msgstr ""
 
-#: templates/admin-tab-layout.php:72
+#: templates/admin-tab-layout.php:103
 msgid "Display Product SKU"
 msgstr ""
 
-#: templates/admin-tab-layout.php:79
+#: templates/admin-tab-layout.php:110
 msgid "Display \"Out of stock\" Label"
 msgstr ""
 
-#: templates/admin-tab-layout.php:80
+#: templates/admin-tab-layout.php:111
 msgid "Indicate if a product is out of stock"
 msgstr ""
 
-#: templates/admin-tab-layout.php:87
+#: templates/admin-tab-layout.php:118
 msgid "Display \"Sale\" Label"
 msgstr ""
 
-#: templates/admin-tab-layout.php:88
+#: templates/admin-tab-layout.php:119
 msgid "Highlight products on sale"
 msgstr ""
 
-#: templates/admin-tab-layout.php:95
+#: templates/admin-tab-layout.php:126
 msgid "Display \"Featured\" Label"
 msgstr ""
 
-#: templates/admin-tab-layout.php:96
+#: templates/admin-tab-layout.php:127
 msgid "Mark featured products"
 msgstr ""
 
-#: templates/admin-tab-layout.php:103
+#: templates/admin-tab-layout.php:134
 msgid "Display \"Add to Cart\" Button"
 msgstr ""
 
-#: templates/admin-tab-layout.php:104
+#: templates/admin-tab-layout.php:135
 msgid "Allow users to add products to their cart directly from the popup"
 msgstr ""
 
@@ -849,104 +873,125 @@ msgid "Wrong"
 msgstr ""
 
 #: templates/admin-tab-styling.php:12
-msgid "Rounded Border"
+msgid "Search Bar Height, px"
 msgstr ""
 
 #: templates/admin-tab-styling.php:13
-msgid "Display search field with rounded border"
+msgid "Set the search bar height in pixels"
 msgstr ""
 
 #: templates/admin-tab-styling.php:19
-#: templates/admin-tab-styling.php:91
-msgid "Border Color"
+#: templates/admin-tab-styling.php:105
+msgid "Rounded Border"
+msgstr ""
+
+#: templates/admin-tab-styling.php:20
+msgid "Display search field with rounded border"
 msgstr ""
 
 #: templates/admin-tab-styling.php:26
-msgid "Border Width, px"
-msgstr ""
-
-#: templates/admin-tab-styling.php:27
-msgid "Border width in pixels"
+#: templates/admin-tab-styling.php:112
+msgid "Border Color"
 msgstr ""
 
 #: templates/admin-tab-styling.php:33
-msgid "Text Color"
+msgid "Border Width, px"
+msgstr ""
+
+#: templates/admin-tab-styling.php:34
+msgid "Border width in pixels"
 msgstr ""
 
 #: templates/admin-tab-styling.php:40
-#: templates/admin-tab-styling.php:98
-msgid "Background Color"
+msgid "Text Color"
 msgstr ""
 
 #: templates/admin-tab-styling.php:47
-msgid "Icon Color"
+#: templates/admin-tab-styling.php:119
+msgid "Background Color"
 msgstr ""
 
 #: templates/admin-tab-styling.php:54
+msgid "Icon Color"
+msgstr ""
+
+#: templates/admin-tab-styling.php:61
 msgid "Icon Background"
 msgstr ""
 
-#: templates/admin-tab-styling.php:66
-#: templates/admin-tab-styling.php:74
-#: templates/admin-tab-styling.php:75
-#: templates/admin-tab-styling.php:76
-#: templates/admin-tab-styling.php:77
-#: templates/admin-tab-styling.php:78
+#: templates/admin-tab-styling.php:73
+#: templates/admin-tab-styling.php:81
+#: templates/admin-tab-styling.php:82
+#: templates/admin-tab-styling.php:83
+#: templates/admin-tab-styling.php:84
+#: templates/admin-tab-styling.php:85
 msgid "Loader"
 msgstr ""
 
-#: templates/admin-tab-styling.php:67
+#: templates/admin-tab-styling.php:74
 msgid "Select loader"
 msgstr ""
 
-#: templates/admin-tab-styling.php:105
-msgid "Title Text Color"
+#: templates/admin-tab-styling.php:98
+msgid "Top Gap"
 msgstr ""
 
-#: templates/admin-tab-styling.php:112
-msgid "Excerpt Text Color"
+#: templates/admin-tab-styling.php:99
+msgid "Distance between search bar and popup, px"
 msgstr ""
 
-#: templates/admin-tab-styling.php:119
-msgid "\"View all\" Link Text Color"
+#: templates/admin-tab-styling.php:106
+msgid "Display popup with rounded border"
 msgstr ""
 
 #: templates/admin-tab-styling.php:126
-msgid "\"View all\" Link Background Color"
+msgid "Title Text Color"
 msgstr ""
 
 #: templates/admin-tab-styling.php:133
+msgid "Excerpt Text Color"
+msgstr ""
+
+#: templates/admin-tab-styling.php:140
+msgid "\"View all\" Link Text Color"
+msgstr ""
+
+#: templates/admin-tab-styling.php:147
+msgid "\"View all\" Link Background Color"
+msgstr ""
+
+#: templates/admin-tab-styling.php:154
 msgid "Category Color"
 msgstr ""
 
-#: templates/admin-tab-styling.php:139
+#: templates/admin-tab-styling.php:160
 msgid "Product Elements"
 msgstr ""
 
-#: templates/admin-tab-styling.php:144
+#: templates/admin-tab-styling.php:165
 msgid "Price Color"
 msgstr ""
 
-#: templates/admin-tab-styling.php:151
+#: templates/admin-tab-styling.php:172
 msgid "\"Out of stock\" Label Text Color"
 msgstr ""
 
-#: templates/admin-tab-styling.php:159
+#: templates/admin-tab-styling.php:180
 msgid "\"Out of stock\" Label Background Color"
 msgstr ""
 
-#: templates/admin-tab-styling.php:167
+#: templates/admin-tab-styling.php:188
 msgid "\"Sale\" Label Text Color"
 msgstr ""
 
-#: templates/admin-tab-styling.php:175
+#: templates/admin-tab-styling.php:196
 msgid "\"Sale\" Label Background Color"
 msgstr ""
 
-#: templates/admin-tab-styling.php:183
+#: templates/admin-tab-styling.php:204
 msgid "\"Featured\" Label Text Color"
 msgstr ""
 
-#: templates/admin-tab-styling.php:191
+#: templates/admin-tab-styling.php:212
 msgid "\"Featured\" Label Background Color"
 msgstr ""

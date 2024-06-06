@@ -5,10 +5,32 @@
 		<th class="ymapp-settings__title"><?php esc_html_e( 'Results Popup Elements', 'smart-woocommerce-search' ); ?></th>
 
 		<?php
+		ysm_setting( $w_id, 'columns', array(
+			'type'        => 'select',
+			'title'       => __( 'Columns Layout', 'smart-woocommerce-search' ),
+			'description' =>  __( 'Set the maximum number of columns to show in the popup.<br>To choose a Grid layout instead of List layout select columns number more than 1', 'smart-woocommerce-search' ),
+			'value'       => '',
+			'is_pro'      => true,
+			'choices'     => array(
+				1 => 1,
+				2 => 2,
+				3 => 3,
+				4 => 4,
+				5 => 5,
+			),
+		));
+
 		ysm_setting( $w_id, 'popup_height', array(
 			'type'        => 'text',
 			'title'       => __( 'Popup Max Height, px', 'smart-woocommerce-search' ),
-			'description' => __( 'Popup max height in pixels. Default is 400px', 'smart-woocommerce-search' ),
+			'description' => __( 'Popup max height in pixels. Default is 500px', 'smart-woocommerce-search' ),
+			'value'       => 500,
+		));
+
+		ysm_setting( $w_id, 'popup_height_mobile', array(
+			'type'        => 'text',
+			'title'       => __( 'Popup Max Height (mobile), px', 'smart-woocommerce-search' ),
+			'description' => __( 'Popup max height in pixels for mobile screen (max-width: 768px). Default is 400px', 'smart-woocommerce-search' ),
 			'value'       => 400,
 		));
 
@@ -27,10 +49,19 @@
 			'is_pro'      => true,
 		));
 
+		$image_sizes = get_intermediate_image_sizes();
+		ysm_setting( $w_id, 'popup_thumb_media_size', array(
+			'type'        => 'select',
+			'title'       => __( 'Image Size', 'smart-woocommerce-search' ),
+			'description' => __( 'Select image size', 'smart-woocommerce-search' ),
+			'value'       => '',
+			'choices'     => array_combine( $image_sizes, $image_sizes ),
+		));
+
 		ysm_setting( $w_id, 'popup_thumb_size', array(
 			'type'        => 'text',
-			'title'       => __( 'Image Size, px', 'smart-woocommerce-search' ),
-			'description' => __( 'Image size in pixels', 'smart-woocommerce-search' ),
+			'title'       => __( 'Image Max Width, px', 'smart-woocommerce-search' ),
+			'description' => __( 'Limit image maximal width in pixels', 'smart-woocommerce-search' ),
 			'value'       => '50',
 		));
 

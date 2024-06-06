@@ -12,9 +12,11 @@ function thumbnail( $cur_post ) {
 	}
 
 	$output = '';
+
+	$has_thumbnail = has_post_thumbnail( $cur_post );
 	$the_post = $cur_post;
 
-	if ( has_post_thumbnail( $cur_post ) ) {
+	if ( $has_thumbnail ) {
 		/**
 		 * Pre define image html in the suggestion
 		 *
@@ -27,6 +29,13 @@ function thumbnail( $cur_post ) {
 		if ( ! empty( $pre_image_output ) ) {
 			$output = $pre_image_output;
 		} else {
+			$thumb_size = 'post-thumbnail';
+			if ( \Ysm_Search::get_var( 'popup_thumb_media_size' ) ) {
+				$selected_thumb_size = \Ysm_Search::get_var( 'popup_thumb_media_size' );
+				if ( ! empty( $selected_thumb_size[0] ) ) {
+					$thumb_size = $selected_thumb_size[0];
+				}
+			}
 			$output = get_the_post_thumbnail(
 				$the_post,
 				/**
@@ -35,14 +44,14 @@ function thumbnail( $cur_post ) {
 				 *
 				 * @since 2.5.0
 				 */
-				apply_filters( 'sws_suggestion_image_size', 'post-thumbnail' ),
+				apply_filters( 'sws_suggestion_image_size', $thumb_size, $the_post ),
 				/**
 				 * Overwrite image attributes in the suggestion
 				 * eg. 'post-thumbnail' or 'medium'
 				 *
 				 * @since 2.5.0
 				 */
-				apply_filters( 'sws_suggestion_image_attributes', [] )
+				apply_filters( 'sws_suggestion_image_attributes', [], $the_post )
 			);
 		}
 	}

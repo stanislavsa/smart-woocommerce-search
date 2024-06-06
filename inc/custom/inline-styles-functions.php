@@ -50,6 +50,17 @@ function ysm_add_inline_styles_to_stack( $v, $css_classes ) {
 			) );
 		}
 
+		if ( ! empty( $v['settings']['input_height'] ) ) {
+			Ysm_Style_Generator::add_rule( $css_class, array(
+				'selectors' => array(
+					'.search-field[type="search"]',
+				),
+				'props'     => array(
+					'height' => intval( $v['settings']['input_height'] ) . 'px',
+				),
+			) );
+		}
+
 		if ( isset( $v['settings']['input_icon_color'] ) ) {
 			Ysm_Style_Generator::add_rule( $css_class, array(
 				'selectors' => array(
@@ -78,7 +89,7 @@ function ysm_add_inline_styles_to_stack( $v, $css_classes ) {
 		if ( isset( $v['settings']['popup_border_color'] ) ) {
 			Ysm_Style_Generator::add_rule( $css_class, array(
 				'selectors' => array(
-					'.smart-search-suggestions',
+					'.smart-search-popup',
 				),
 				'props'     => array(
 					'border-color' => $v['settings']['popup_border_color'],
@@ -89,7 +100,7 @@ function ysm_add_inline_styles_to_stack( $v, $css_classes ) {
 		if ( isset( $v['settings']['popup_bg_color'] ) ) {
 			Ysm_Style_Generator::add_rule( $css_class, array(
 				'selectors' => array(
-					'.smart-search-suggestions',
+					'.smart-search-results',
 				),
 				'props'     => array(
 					'background-color' => $v['settings']['popup_bg_color'],
@@ -163,6 +174,31 @@ function ysm_add_inline_styles_to_stack( $v, $css_classes ) {
 				),
 				'props'     => array(
 					'color' => $v['settings']['popup_price_text_color'],
+				),
+			) );
+		}
+
+		if ( ! empty( $v['settings']['popup_round_border'] ) ) {
+			Ysm_Style_Generator::add_rule( $css_class, array(
+				'selectors' => array(
+					'.smart-search-popup',
+				),
+				'props'     => array(
+					'border-radius' => '10px',
+					'-webkit-border-radius' => '10px',
+					'-moz-border-radius' => '10px',
+					'-o-border-radius' => '10px',
+				),
+			) );
+		}
+
+		if ( ! empty( $v['settings']['popup_top_gap'] ) ) {
+			Ysm_Style_Generator::add_rule( $css_class, array(
+				'selectors' => array(
+					'.smart-search-popup',
+				),
+				'props'     => array(
+					'margin-top' => intval( $v['settings']['popup_top_gap'] ) . 'px',
 				),
 			) );
 		}
