@@ -30,7 +30,7 @@ Discover the PRO features of our plugin with a **14-day trial period**.
 
  * Search results with images and prices
  * Simple integration into default search widgets
- * Search by product SKU(https://www.wpsmartsearch.com/docs/content-types/#2-toc-title)
+ * [Search by product SKU](https://www.wpsmartsearch.com/docs/content-types/#2-toc-title)
  * Search in product Categories
  * Search in product Tags
  * Multisite support
@@ -49,19 +49,19 @@ You can completely customize your **smart search**. In addition, the plugin inte
 
 = Upgrade to PRO and boost your sales: =
 
-   * Search in Variations(https://www.wpsmartsearch.com/docs/content-types/#1-toc-title)
-   * Search in Custom Post Types(https://www.wpsmartsearch.com/docs/content-types/#1-toc-title)
-   * Search in Custom Taxonomies(https://www.wpsmartsearch.com/docs/content-types/#3-toc-title)
-   * Search in Custom Fields(https://www.wpsmartsearch.com/docs/content-types/#2-toc-title)
+   * [Search in Variations](https://www.wpsmartsearch.com/docs/content-types/#1-toc-title)
+   * [Search in Custom Post Types](https://www.wpsmartsearch.com/docs/content-types/#1-toc-title)
+   * [Search in Custom Taxonomies](https://www.wpsmartsearch.com/docs/content-types/#3-toc-title)
+   * [Search in Custom Fields](https://www.wpsmartsearch.com/docs/content-types/#2-toc-title)
    * Search in Product Attributes
    * Search in Product Brands
    * Product labels
-   * Synonyms(https://www.wpsmartsearch.com/docs/synonyms/)
-   * Stop words(https://www.wpsmartsearch.com/docs/stop-words/)
-   * Data indexing(https://www.wpsmartsearch.com/docs/data-indexing/)
+   * [Synonyms](https://www.wpsmartsearch.com/docs/synonyms/)
+   * [Stop words](https://www.wpsmartsearch.com/docs/stop-words/)
+   * [Data indexing](https://www.wpsmartsearch.com/docs/data-indexing/)
    * Advanced caching
    * Automatic plugin updates
-   * Grid layout(https://www.wpsmartsearch.com/docs/layout-settings/#1-toc-title)
+   * [Grid layout](https://www.wpsmartsearch.com/docs/layout-settings/#1-toc-title)
    * Add to Cart button
    * WPML compatibility
    * Polylang compatibility
