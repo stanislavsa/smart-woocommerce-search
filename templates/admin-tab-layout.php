@@ -29,7 +29,7 @@
 
 		ysm_setting( $w_id, 'popup_height_mobile', array(
 			'type'        => 'text',
-			'title'       => __( 'Popup Max Height (mobile), px', 'smart-woocommerce-search' ),
+			'title'       => __( 'Popup Max Height (on mobile screen), px', 'smart-woocommerce-search' ),
 			'description' => __( 'Popup max height in pixels for mobile screen (max-width: 768px). Default is 400px', 'smart-woocommerce-search' ),
 			'value'       => 400,
 		));
@@ -43,7 +43,7 @@
 
 		ysm_setting( $w_id, 'variation_thumb_fallback', array(
 			'type'        => 'checkbox',
-			'title'       => __( 'Variation Image Fallback', 'smart-woocommerce-search' ),
+			'title'       => 'Variation\'s Image Fallback',
 			'description' => __( 'Use the parent product image if a variation has no image', 'smart-woocommerce-search' ),
 			'value'       => 1,
 			'is_pro'      => true,
@@ -67,20 +67,20 @@
 
 		ysm_setting( $w_id, 'display_excerpt', array(
 			'type'        => 'checkbox',
-			'title'       => __( 'Display Excerpt', 'smart-woocommerce-search' ),
+			'title'       => __( 'Display Description', 'smart-woocommerce-search' ),
 			'description' => __( 'Display product description', 'smart-woocommerce-search' ),
 			'value'       => 1,
 		));
 
 		ysm_setting( $w_id, 'popup_desc_pos', array(
 			'type'        => 'select',
-			'title'       => __( 'Excerpt Position', 'smart-woocommerce-search' ),
+			'title'       => __( 'Description\'s Location', 'smart-woocommerce-search' ),
 			'description' => '',
 			'value'       => '',
 			'choices'     => array(
-				'below_image' => __( 'Below image', 'smart-woocommerce-search' ),
-				'below_title' => __( 'Below title', 'smart-woocommerce-search' ),
-				'below_price' => __( 'Below price and SKU', 'smart-woocommerce-search' ),
+				'below_image' => __( 'Under the image', 'smart-woocommerce-search' ),
+				'below_title' => __( 'Under the title', 'smart-woocommerce-search' ),
+				'below_price' => __( 'Under the price and SKU', 'smart-woocommerce-search' ),
 			),
 		));
 
@@ -108,7 +108,7 @@
 		ysm_setting( $w_id, 'display_out_of_stock_label', array(
 			'type'        => 'checkbox',
 			'title'       => __( 'Display "Out of stock" Label', 'smart-woocommerce-search' ),
-			'description' => __( 'Indicate if a product is out of stock', 'smart-woocommerce-search' ),
+			'description' => __( 'Indicates if a product is out of stock', 'smart-woocommerce-search' ),
 			'value'       => 1,
 			'is_pro'      => true,
 		));
@@ -116,7 +116,7 @@
 		ysm_setting( $w_id, 'display_sale_label', array(
 			'type'        => 'checkbox',
 			'title'       => __( 'Display "Sale" Label', 'smart-woocommerce-search' ),
-			'description' => __( 'Highlight products on sale', 'smart-woocommerce-search' ),
+			'description' => __( 'Indicates if product has discount price', 'smart-woocommerce-search' ),
 			'value'       => 1,
 			'is_pro'      => true,
 		));
@@ -124,7 +124,7 @@
 		ysm_setting( $w_id, 'display_featured_label', array(
 			'type'        => 'checkbox',
 			'title'       => __( 'Display "Featured" Label', 'smart-woocommerce-search' ),
-			'description' => __( 'Mark featured products', 'smart-woocommerce-search' ),
+			'description' => __( 'Indicates if product is marked as special', 'smart-woocommerce-search' ),
 			'value'       => 1,
 			'is_pro'      => true,
 		));
@@ -142,5 +142,5 @@
 		</tbody>
 	</table>
 
-	<a class="ymapp-settings__doc_link ymapp-button ymapp-button-grey" href="https://www.wpsmartsearch.com/docs/layout-settings/" target="_blank">Documentation</a>
+	<a class="ymapp-settings__doc_link ymapp-button ymapp-button-grey" href="https://www.wpsmartsearch.com/docs/layout-settings/" target="_blank"><?php esc_html_e( 'Documentation', 'smart-woocommerce-search' ); ?></a>
 </div>

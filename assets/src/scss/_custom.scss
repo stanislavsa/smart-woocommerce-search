@@ -62,6 +62,7 @@
 .ysm-widget-edit-settings .form-table th {
 	padding-top: 30px;
 	padding-bottom: 30px;
+	text-transform: capitalize;
 }
 
 .ysm-column-container {
@@ -237,4 +238,15 @@ h2.ysm-widgets-title {
 
 .sws-page-description {
 	margin: 30px;
+}
+
+.ymapp-settings__content .field-updated {
+	opacity: 0;
+	color: green;
+	padding: 1px 12px;
+	display: inline;
+	margin-left: 20px;
+	border: 1px solid #c3c4c7;
+	border-left-width: 4px;
+	border-left-color: #00a32a;
 }

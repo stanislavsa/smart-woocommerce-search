@@ -14,10 +14,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 				'name'        => 'synonyms',
 				'type'        => 'pro',
 				'title'       =>
-					__( 'Spell Correction.', 'smart-woocommerce-search' )
-					. ' '
+					__( 'Spelling Correction', 'smart-woocommerce-search' )
+					. '. '
 					. __( 'Applies globally to all widgets.', 'smart-woocommerce-search' ),
-				'description' => __( 'Add synonyms for words that you think could be misspelled.<br> Example Orange => Ornge', 'smart-woocommerce-search' ),
+				'description' => __( 'Add synonyms for words that you think could be misspelled', 'smart-woocommerce-search' )
+								 . '<br>'
+								 . __( 'Example', 'smart-woocommerce-search' ) . ' Orange => Ornge',
 			] );
 			?>
 			<br><br>
@@ -29,5 +31,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 	</div>
 
-	<a class="ymapp-settings__doc_link ymapp-button ymapp-button-grey" style="margin-top: 30px;" href="https://www.wpsmartsearch.com/docs/synonyms/" target="_blank">Documentation</a>
+
+	<a class="ymapp-settings__doc_link ymapp-button ymapp-button-grey" style="margin-top: 30px;" href="https://www.wpsmartsearch.com/docs/synonyms/" target="_blank"><?php esc_html_e( 'Documentation', 'smart-woocommerce-search' ); ?></a>
 </div>

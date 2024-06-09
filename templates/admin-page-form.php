@@ -8,10 +8,10 @@ wp_enqueue_script( 'postbox' );
 $tabs = array(
 	'general_tab'    => __( 'General', 'smart-woocommerce-search' ),
 	'fields_tab'     => __( 'Items to Search Through', 'smart-woocommerce-search' ),
-	'order_tab'      => __( 'Order', 'smart-woocommerce-search' ),
+	'order_tab'      => __( 'Sorting', 'smart-woocommerce-search' ),
 	'layout_tab'     => __( 'Layout', 'smart-woocommerce-search' ),
 	'styles_tab'     => __( 'Styling', 'smart-woocommerce-search' ),
-	'spellcheck_tab' => __( 'Spell Correction', 'smart-woocommerce-search' ),
+	'spellcheck_tab' => __( 'Spelling Correction', 'smart-woocommerce-search' ),
 	'stopwords_tab'  => __( 'Stop Words', 'smart-woocommerce-search' ),
 );
 ?>
@@ -27,7 +27,7 @@ $tabs = array(
 	<?php } else { ?>
 		<?php wp_nonce_field( 'smart_search_custom' ); ?>
 		<div class="ysm-widget-edit-title-wrap">
-			<input type="text" name="name" size="30" value="<?php echo isset( $widgets[ $w_id ] ) ? esc_html( $widgets[ $w_id ]['name'] ) : ''; ?>" placeholder="<?php esc_html_e( 'Enter name', 'smart-woocommerce-search' ); ?>" autocomplete="off">
+			<input type="text" name="name" size="30" value="<?php echo isset( $widgets[ $w_id ] ) ? esc_html( $widgets[ $w_id ]['name'] ) : ''; ?>" placeholder="<?php esc_html_e( 'Enter title', 'smart-woocommerce-search' ); ?>" autocomplete="off">
 		</div>
 	<?php } ?>
 

@@ -1,0 +1,972 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Smart WooCommerce Search\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2024-06-10 09:31+0300\n"
+"PO-Revision-Date: 2024-06-10 21:01+0300\n"
+"Language: fr_FR\n"
+"X-Generator: Poedit 3.4.4\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-Flags-xgettext: --add-comments=translators:\n"
+"X-Poedit-WPHeader: index.php\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: *.min.js\n"
+"X-Poedit-SearchPathExcluded-1: node_modules\n"
+
+#: inc/admin/admin.php:38
+msgid "Search Widgets"
+msgstr "Widgets Recherche"
+
+#: inc/admin/admin.php:39
+msgid "Widgets"
+msgstr "Widgets"
+
+#: inc/admin/admin.php:46
+msgid "Add New Search Widget"
+msgstr "Ajouter un nouveau widget de recherche"
+
+#: inc/admin/admin.php:47
+#: templates/admin-page-widgets.php:108
+msgid "Add New"
+msgstr "Ajouter"
+
+#: inc/admin/admin.php:54
+#: inc/admin/admin.php:55
+#: templates/admin-page-index-status.php:53
+msgid "Index Status"
+msgstr "Statut de l'indice"
+
+#: inc/admin/admin.php:62
+#: inc/admin/admin.php:63
+#: templates/admin-tab-spellcheck.php:8
+msgid "Synonyms"
+msgstr "Synonymes"
+
+#: inc/admin/admin.php:70
+#: inc/admin/admin.php:71
+#: templates/admin-page-form.php:15
+#: templates/admin-tab-stopwords.php:8
+msgid "Stop Words"
+msgstr "Mots d’arrêt"
+
+#: inc/admin/admin.php:79
+#: inc/admin/admin.php:80
+msgid "Start Trial"
+msgstr "Commencer l’essai"
+
+#: inc/admin/admin.php:121
+#: templates/admin-page-form.php:45
+msgid "Settings"
+msgstr "Paramètres"
+
+#. translators: %s: Name/id of a widget
+#: inc/admin/admin.php:139
+#, php-format
+msgid "Edit Widget: %s"
+msgstr "Modifier le widget : %s"
+
+#: inc/app/class-field.php:315
+msgid "Upgrade to Pro"
+msgstr "Passer à la version Pro"
+
+#: inc/compat/class-module-elementor.php:92
+#: inc/compat/compat-visual-composer.php:17
+msgid "No value"
+msgstr "Aucune valeur"
+
+#: inc/compat/class-module-elementor.php:104
+#: inc/compat/compat-visual-composer.php:41
+msgid "Select one of search widgets"
+msgstr "Choisir l’un des widgets de recherche"
+
+#: templates/admin-tab-fields.php:93
+msgid "Content"
+msgstr "Contenu"
+
+#: inc/compat/compat-visual-composer.php:38
+msgid "Widget name"
+msgstr "Nom Widget"
+
+#: inc/custom/class-ysm-search-widget.php:15
+msgid "Displays search widget"
+msgstr "Affiche le widget de recherche"
+
+#: inc/custom/class-ysm-search-widget.php:47
+msgid "Heading:"
+msgstr "Titre :"
+
+#: inc/custom/class-ysm-search-widget.php:51
+msgid "Select Widget:"
+msgstr "Choisir le widget :"
+
+#: inc/custom/class-ysm-widget-manager.php:277
+msgid "Your changes have been saved."
+msgstr "Vos modifications ont été sauvegardées."
+
+#: inc/custom/class-ysm-widget-manager.php:352
+msgctxt "submit button"
+msgid "Search"
+msgstr "Rechercher"
+
+#: inc/custom/functions.php:26
+msgid "WordPres Default Search Widget"
+msgstr "WordPres Widget de recherche par défaut"
+
+#: inc/custom/functions.php:27
+msgid "WooCommerce Product Search Widget"
+msgstr "WooCommerce Widget de recherche de produits"
+
+#: inc/custom/functions.php:28
+msgid "Avada Search Widget"
+msgstr "Widget de recherche Avada"
+
+#: inc/custom/functions.php:29
+msgid "DIVI Search Widget"
+msgstr "Widget de recherche DIVI"
+
+#: inc/custom/functions.php:99
+msgid "Duplicate"
+msgstr "Dupliquer"
+
+#: inc/custom/functions.php:102
+msgid "Delete"
+msgstr "Supprimer"
+
+#: inc/custom/scripts.php:155
+msgid "Delete column?"
+msgstr "Supprimer la colonne ?"
+
+#: inc/custom/scripts.php:156
+msgid "Delete row?"
+msgstr "Supprimer la rangée ?"
+
+#: inc/custom/scripts.php:157
+msgid "Delete widget?"
+msgstr "Supprimer le widget ?"
+
+#: inc/elements/product-label-featured.php:18
+msgid "Featured"
+msgstr "En vedette"
+
+#: inc/elements/product-label-out-of-stock.php:18
+msgid "Out of stock"
+msgstr "Rupture de stock"
+
+#: inc/elements/product-label-sale.php:18
+msgid "Sale"
+msgstr "Vente"
+
+#: inc/features/db-index.php:199
+#, php-format
+msgid "%s index is empty! We highly recommend to create index to improve search performance."
+msgstr "%s L'index est vide ! Nous vous recommandons vivement de créer un index pour améliorer les performances de recherche."
+
+#: inc/features/db-index.php:200
+msgid "Learn more here."
+msgstr "En savoir plus ici."
+
+#: inc/fs.php:60
+#: inc/fs.php:79
+msgid "We added this opt-in feature so you won't miss any important updates and to help us enhance the plugin's compatibility and performance on your site."
+msgstr "Nous avons ajouté cette fonction d'opt-in pour que vous ne manquiez aucune mise à jour importante et pour nous aider à améliorer la compatibilité et les performances du plugin sur votre site."
+
+#: inc/fs.php:61
+#: inc/fs.php:80
+#, php-format
+msgid "By opting in, you'll get email notifications about feature updates, educational content, promo offers, and you'll share some basic WordPress environment details. If you decide not to opt in, that's okay! %2$s will still function just as well."
+msgstr "En vous inscrivant, vous recevrez des notifications par e-mail sur les mises à jour des fonctionnalités, le contenu éducatif, les offres promotionnelles, et vous partagerez quelques détails de base sur votre environnement WordPress. Si vous décidez de ne pas vous inscrire, ce n'est pas grave ! %2$s fonctionnera tout aussi bien."
+
+#: templates/admin-page-form.php:9
+msgid "General"
+msgstr "Général"
+
+#: templates/admin-page-form.php:10
+msgid "Items to Search Through"
+msgstr "Éléments à rechercher"
+
+#: templates/admin-page-form.php:11
+#: templates/admin-tab-order.php:14
+msgid "Sorting"
+msgstr "Tri"
+
+#: templates/admin-page-form.php:12
+msgid "Layout"
+msgstr "Mise en page"
+
+#: templates/admin-page-form.php:13
+msgid "Styling"
+msgstr "Style"
+
+#: templates/admin-page-form.php:14
+#: templates/admin-page-synonyms.php:42
+msgid "Spelling Correction"
+msgstr "Correction orthographique"
+
+#: templates/admin-page-form.php:20
+#: templates/admin-page-form.php:76
+#: templates/admin-page-stop-words.php:21
+#: templates/admin-page-stop-words.php:45
+#: templates/admin-page-synonyms.php:32
+#: templates/admin-page-synonyms.php:63
+msgid "Save"
+msgstr "Sauvegarder"
+
+#: templates/admin-page-form.php:30
+msgid "Enter title"
+msgstr "Saisir le titre"
+
+#: templates/admin-page-form.php:41
+msgid "Toggle panel: Settings"
+msgstr "Permuter le panneau : réglages"
+
+#: templates/admin-page-index-status.php:8
+msgid "Empty"
+msgstr "Vide"
+
+#: templates/admin-page-index-status.php:29
+msgid "Failed"
+msgstr "Echec"
+
+#: templates/admin-page-index-status.php:32
+msgid "In progress"
+msgstr "En cours"
+
+#: templates/admin-page-index-status.php:35
+msgid "Ready"
+msgstr "Prêt"
+
+#: templates/admin-page-index-status.php:59
+msgid "Tables are created"
+msgstr "Les tables sont créées"
+
+#: templates/admin-page-index-status.php:60
+#: templates/admin-page-widgets.php:63
+msgid "yes"
+msgstr "oui"
+
+#: templates/admin-page-index-status.php:60
+#: templates/admin-page-widgets.php:64
+msgid "no"
+msgstr "non"
+
+#: templates/admin-page-index-status.php:63
+msgid "Indexed Post Types"
+msgstr "Types d'articles indexés"
+
+#: templates/admin-page-index-status.php:77
+msgid "Re-create index when settings updated"
+msgstr "Recréer l'index lorsque les paramètres sont mis à jour"
+
+#: templates/admin-page-index-status.php:78
+msgid "Re-create the data index automatically when the search widget settings were updated"
+msgstr "Recréer automatiquement l'index des données lorsque les paramètres du widget de recherche ont été mis à jour"
+
+#: templates/admin-page-index-status.php:96
+#: templates/admin-page-index-status.php:113
+msgid "Create Index"
+msgstr "Créer l’index"
+
+#: templates/admin-page-index-status.php:107
+msgid "Delete all indexed data and create a fresh index"
+msgstr "Supprimez toutes les données indexées et créez un nouvel index"
+
+#: templates/admin-page-index-status.php:109
+msgid "Delete Index"
+msgstr "Supprimer l'index"
+
+#: templates/admin-page-index-status.php:110
+msgid "Delete all indexed data"
+msgstr "Supprimer toutes les données indexées"
+
+#: templates/admin-page-index-status.php:120
+#: templates/admin-page-stop-words.php:52
+#: templates/admin-page-synonyms.php:70
+#: templates/admin-tab-fields.php:220
+#: templates/admin-tab-general.php:227
+#: templates/admin-tab-layout.php:145
+#: templates/admin-tab-spellcheck.php:26
+#: templates/admin-tab-stopwords.php:23
+#: templates/admin-tab-styling.php:223
+msgid "Documentation"
+msgstr "Documentation"
+
+#: templates/admin-page-stop-words.php:30
+#: templates/admin-page-synonyms.php:44
+msgid "Applies globally to all widgets."
+msgstr "S'applique globalement à tous les widgets."
+
+#: templates/admin-page-stop-words.php:31
+#: templates/admin-tab-stopwords.php:10
+msgid "Add a list of words that should be skipped from the search request."
+msgstr "Ajoutez une liste de mots à ignorer dans la requête de recherche."
+
+#: templates/admin-page-synonyms.php:45
+#: templates/admin-tab-spellcheck.php:10
+msgid "Add synonyms for words that you think could be misspelled"
+msgstr "Ajoutez des synonymes pour les mots que vous pensez être mal orthographiés"
+
+#: templates/admin-page-synonyms.php:47
+#: templates/admin-tab-spellcheck.php:12
+msgid "Example"
+msgstr "Exemple"
+
+#: templates/admin-page-synonyms.php:49
+#: templates/admin-tab-spellcheck.php:16
+msgid "Correct"
+msgstr "Correct"
+
+#: templates/admin-page-synonyms.php:50
+#: templates/admin-tab-spellcheck.php:17
+msgid "Wrong"
+msgstr "Faux"
+
+#: templates/admin-page-widgets.php:24
+msgid "Edit Widget"
+msgstr "Modifier le widget"
+
+#: templates/admin-page-widgets.php:36
+msgid "Enhance Standard Widgets"
+msgstr "Améliorer les widgets standard"
+
+#: templates/admin-page-widgets.php:43
+#: templates/admin-page-widgets.php:81
+msgid "ID"
+msgstr "ID"
+
+#: templates/admin-page-widgets.php:44
+#: templates/admin-page-widgets.php:82
+#: templates/admin-tab-fields.php:86
+#: templates/admin-tab-order.php:18
+msgid "Title"
+msgstr "Titre"
+
+#: templates/admin-page-widgets.php:74
+msgid "Custom Widgets"
+msgstr "Widgets Personnalisés"
+
+#: templates/admin-page-widgets.php:83
+msgid "Shortcode"
+msgstr "Shortcode"
+
+#: templates/admin-tab-fields.php:10
+msgid "Post Types"
+msgstr "Types d’article"
+
+#. translators: %s: Name of a Post Type
+#: templates/admin-tab-fields.php:29
+#, php-format
+msgid "Enable search in %s"
+msgstr "Activer la recherche en %s"
+
+#: templates/admin-tab-fields.php:41
+msgid "Product Variations"
+msgstr "Variations du produit"
+
+#: templates/admin-tab-fields.php:42
+msgid "Enable search through Product Variations"
+msgstr "Permettre la recherche dans les variations de produits"
+
+#: templates/admin-tab-fields.php:73
+msgid "Enable search through selected custom post types"
+msgstr "Activer la recherche dans les types d'articles personnalisés sélectionnés"
+
+#: templates/admin-tab-fields.php:80
+msgid "Fields"
+msgstr "Champs"
+
+#: templates/admin-tab-fields.php:87
+msgid "Enable search in the title"
+msgstr "Activer la recherche dans le titre"
+
+#: templates/admin-tab-fields.php:94
+msgid "Enable search in the content"
+msgstr "Activer la recherche dans le contenu"
+
+#: templates/admin-tab-fields.php:100
+msgid "Short description (Excerpt)"
+msgstr "Brève description (Extrait)"
+
+#: templates/admin-tab-fields.php:101
+msgid "Enable search in the short description"
+msgstr "Activer la recherche dans la description courte"
+
+#: templates/admin-tab-fields.php:107
+msgid "Product SKU"
+msgstr "SKU du produit"
+
+#: templates/admin-tab-fields.php:108
+msgid "Enable search in product SKU"
+msgstr "Activer la recherche dans l'UGS du produit"
+
+#: templates/admin-tab-fields.php:115
+msgid "Enable search in Custom Fields. Fill in each field slug on a new line"
+msgstr "Activez la recherche dans les champs personnalisés. Remplir chaque champ sur une nouvelle ligne"
+
+#: templates/admin-tab-fields.php:122
+msgid "Taxonomies"
+msgstr "Taxonomies"
+
+#: templates/admin-tab-fields.php:129
+msgid "Enable search in post tags"
+msgstr "Activer la recherche dans les balises de l'article"
+
+#: templates/admin-tab-fields.php:136
+msgid "Enable search in post categories"
+msgstr "Activer la recherche dans les catégories d'articles"
+
+#: templates/admin-tab-fields.php:144
+msgid "Enable search in product tags"
+msgstr "Activer la recherche dans les étiquettes de produits"
+
+#: templates/admin-tab-fields.php:151
+msgid "Enable search in product categories"
+msgstr "Activer la recherche dans les catégories de produits"
+
+#: templates/admin-tab-fields.php:178
+msgid "Enable search in selected custom taxonomies"
+msgstr "Activer la recherche dans les taxonomies personnalisées sélectionnées"
+
+#: templates/admin-tab-fields.php:201
+msgid "Allowed Product Categories"
+msgstr "Catégories de produits autorisées"
+
+#: templates/admin-tab-fields.php:202
+msgid "Limit customers' search to selected product categories"
+msgstr "Limiter la recherche des clients aux catégories de produits sélectionnées"
+
+#: templates/admin-tab-fields.php:209
+msgid "Disallowed Product Categories"
+msgstr "Catégories de produits interdites"
+
+#: templates/admin-tab-fields.php:210
+msgid "Disallow search in selected product categories"
+msgstr "Interdire la recherche dans les catégories de produits sélectionnées"
+
+#: templates/admin-tab-general.php:8
+#: templates/admin-tab-general.php:17
+#: templates/admin-tab-general.php:26
+#: templates/admin-tab-general.php:210
+msgid "Enable"
+msgstr "Activer"
+
+#: templates/admin-tab-general.php:9
+#: templates/admin-tab-general.php:18
+#: templates/admin-tab-general.php:27
+#, php-format
+msgid "Enhance the standard %s search widget with the %s features"
+msgstr "Améliorez le widget de recherche standard %s avec les fonctionnalités %s"
+
+#: templates/admin-tab-general.php:33
+#: templates/admin-tab-styling.php:7
+msgid "Input Field"
+msgstr "Champ de saisie"
+
+#: templates/admin-tab-general.php:41
+msgid "Search"
+msgstr "Rechercher"
+
+#: templates/admin-tab-general.php:47
+msgid "Minimum Number of Characters"
+msgstr "Nombre minimum de caractères"
+
+#: templates/admin-tab-general.php:48
+msgid "Minimum number of characters required to start a search"
+msgstr "Nombre minimum de caractères requis pour lancer une recherche"
+
+#: templates/admin-tab-general.php:53
+#: templates/admin-tab-styling.php:93
+msgid "Results Popup"
+msgstr "Résultats en fenêtre modale"
+
+#: templates/admin-tab-general.php:58
+msgid "Maximum Number of Results"
+msgstr "Nombre maximum de résultats"
+
+#: templates/admin-tab-general.php:59
+msgid "Maximum number of results that can be displayed in a popup"
+msgstr "Nombre maximal de résultats pouvant être affichés dans une fenêtre contextuelle"
+
+#: templates/admin-tab-general.php:65
+msgid "Description's Size"
+msgstr "Taille de la description"
+
+#: templates/admin-tab-general.php:66
+msgid "Maximum number of characters in the description"
+msgstr "Nombre maximum de caractères dans la description"
+
+#: templates/admin-tab-general.php:72
+msgid "Text of \"No Results\" notification"
+msgstr "Texte de la notification \"Pas de résultats”"
+
+#: templates/admin-tab-general.php:73
+msgid "Displays when no results are found"
+msgstr "S'affiche lorsqu'aucun résultat n'est trouvé"
+
+#: templates/admin-tab-general.php:79
+msgid "Text of \"View All\" Button"
+msgstr "Texte du bouton \"Tout voir”"
+
+#: templates/admin-tab-general.php:80
+msgid "The button is only displayed if the field is not empty"
+msgstr "Le bouton n'est affiché que si le champ n'est pas vide"
+
+#: templates/admin-tab-general.php:86
+msgid "New Tab when \"View All\" Button Clicked"
+msgstr "Nouvel onglet lorsque l'on clique sur le bouton \"Tout afficher\""
+
+#: templates/admin-tab-general.php:87
+msgid "Open results in a new tab when \"View All\" button clicked. Adds target=\"_blank\" attribute to the \"View All\" button"
+msgstr "Ouvre les résultats dans un nouvel onglet lorsque l'on clique sur le bouton \"Tout afficher\". Ajoute l'attribut target=\"_blank\" au bouton \"Tout afficher\""
+
+#: templates/admin-tab-general.php:93
+msgid "Number of Found Results in the \"View All\" Button"
+msgstr "Nombre de résultats trouvés dans le bouton \"Tout voir\""
+
+#: templates/admin-tab-general.php:94
+msgid "Display total number of found results in the \"View All\" button"
+msgstr "Affichez le nombre total de résultats trouvés dans le bouton \"Tout voir\""
+
+#: templates/admin-tab-general.php:101
+msgid "Disable AJAX"
+msgstr "Désactiver AJAX"
+
+#: templates/admin-tab-general.php:102
+msgid "Disables AJAX functionality. The results popup will not appear"
+msgstr "Désactive la fonctionnalité AJAX. La fenêtre contextuelle des résultats n'apparaîtra pas"
+
+#: templates/admin-tab-general.php:107
+msgid "Search Engine Features"
+msgstr "Caractéristiques du moteur de recherche"
+
+#: templates/admin-tab-general.php:112
+msgid "Multiple Word Search"
+msgstr "Recherche de mots multiples"
+
+#: templates/admin-tab-general.php:113
+msgid "Select how to handle multiple word search"
+msgstr "Choisissez comment gérer la recherche de mots multiples"
+
+#: templates/admin-tab-general.php:116
+msgid "Only exact match"
+msgstr "Correspondance exacte uniquement"
+
+#: templates/admin-tab-general.php:117
+msgid "\"A\" or \"B\""
+msgstr "\"A\" ou \"B\""
+
+#: templates/admin-tab-general.php:118
+msgid "\"A\" and \"B\""
+msgstr "\"A\" et \"B\""
+
+#: templates/admin-tab-general.php:124
+msgid "Exclude Out of Stock Products"
+msgstr "Exclure les produits en rupture de stock"
+
+#: templates/admin-tab-general.php:125
+msgid "Exclude out of stock products and variations from results"
+msgstr "Exclure les produits en rupture de stock et les variations des résultats"
+
+#: templates/admin-tab-general.php:132
+msgid "Exclude variations from results if the parent product is \"Out of stock\""
+msgstr "Exclure les variations des résultats si le produit parent est \"En rupture de stock\""
+
+#: templates/admin-tab-general.php:139
+msgid "Visibility of Products with Variations"
+msgstr "Visibilité des produits présentant des variations"
+
+#: templates/admin-tab-general.php:140
+msgid "Select visibility of parent products and variations"
+msgstr "Sélectionnez la visibilité des produits parents et des variations"
+
+#: templates/admin-tab-general.php:142
+msgid "Parent product with variations"
+msgstr "Produit parent avec variations"
+
+#: templates/admin-tab-general.php:143
+msgid "Only parent product"
+msgstr "Uniquement le produit parent"
+
+#: templates/admin-tab-general.php:144
+msgid "Only variations"
+msgstr "Seules les variations"
+
+#: templates/admin-tab-general.php:152
+msgid "Search by SKU first. Only works if the request is numeric"
+msgstr "Recherchez d'abord par UGS. Ne fonctionne que si la demande est numérique"
+
+#: templates/admin-tab-general.php:159
+msgid "Skip Punctuation"
+msgstr "Sauter la ponctuation"
+
+#: templates/admin-tab-general.php:160
+msgid "Skip punctuation in the search query"
+msgstr "Ne pas tenir compte de la ponctuation dans la requête de recherche"
+
+#: templates/admin-tab-general.php:166
+msgid "Search Results Page"
+msgstr "Page de résultats de la recherche"
+
+#: templates/admin-tab-general.php:171
+msgid "Disable Redirect to Product Page"
+msgstr "Désactiver la redirection vers la page produit"
+
+#: templates/admin-tab-general.php:172
+msgid "Prevent WooCommerce from automatically redirecting to a product page when there is only one search result."
+msgstr "Empêchez WooCommerce de rediriger automatiquement vers une page produit lorsqu'il n'y a qu'un seul résultat de recherche."
+
+#: templates/admin-tab-general.php:178
+msgid "Suppress Database Query Altering"
+msgstr "Suppression de la modification des requêtes de la base de données"
+
+#: templates/admin-tab-general.php:179
+msgid "Prevent the theme or plugins from modifying the database query on the search results page"
+msgstr "Empêcher le thème ou les plugins de modifier la requête de la base de données sur la page des résultats de la recherche"
+
+#: templates/admin-tab-general.php:185
+msgid "Disable Smart Search Feature on the Search Results Page"
+msgstr "Désactiver la fonction de recherche intelligente sur la page des résultats de la recherche"
+
+#: templates/admin-tab-general.php:186
+msgid "Disable altering search results by Smart Search plugin on the search results page.<br>By default the plugin modified search results according to selected options"
+msgstr "Désactiver la modification des résultats de recherche par l’extension sur la page des résultats de recherche.<br>Par défaut, l’extension a modifié les résultats de recherche en fonction des options choisies"
+
+#: templates/admin-tab-general.php:192
+msgid "Disable WooCommerce Template on the Search Results Page"
+msgstr "Désactiver le modèle WooCommerce sur la page des résultats de recherche"
+
+#: templates/admin-tab-general.php:193
+msgid "Displays the default search results template defined in the theme instead of WooCommerce template.<br>Useful if you want to display posts with products together"
+msgstr "Affiche le modèle de résultats de recherche par défaut défini dans le thème au lieu du modèle WooCommerce.<br>Utile si vous voulez afficher des articles avec des produits ensemble"
+
+#: templates/admin-tab-general.php:199
+msgid "Highlight Search Terms on the Search Results Page"
+msgstr "Mettre en évidence les termes de la recherche sur la page des résultats de la recherche"
+
+#: templates/admin-tab-general.php:200
+msgid "Highlight words that match a search query on the search results page. Works only if the Smart Search Feature is not disabled on the search results page"
+msgstr "Mettez en évidence les mots qui correspondent à une recherche sur la page des résultats de la recherche. Ne fonctionne que si la fonction de recherche intelligente n'est pas désactivée sur la page des résultats de la recherche"
+
+#: templates/admin-tab-general.php:205
+msgid "Advanced"
+msgstr "Avancé"
+
+#: templates/admin-tab-general.php:211
+msgid "Save search results in a WordPress Transient.<br>Might be useful if your server does not have Memcache/Redis"
+msgstr "Sauvegarder les résultats de la recherche dans un transitoire WordPress.<br>Peut être utile si votre serveur n'a pas de Memcache/Redis"
+
+#: templates/admin-tab-general.php:219
+msgid "It may be helpful if you changed the base slug for WooCommerce products. The base slug is \"product\""
+msgstr "Il peut être utile de modifier le nom de base des produits WooCommerce. La balise de base est \"product\""
+
+#: templates/admin-tab-layout.php:5
+msgid "Results Popup Elements"
+msgstr "Éléments de la fenêtre contextuelle des résultats"
+
+#: templates/admin-tab-layout.php:10
+msgid "Columns Layout"
+msgstr "Disposition des Colonnes"
+
+#: templates/admin-tab-layout.php:11
+msgid "Set the maximum number of columns to show in the popup.<br>To choose a Grid layout instead of List layout select columns number more than 1"
+msgstr "Définissez le nombre maximum de colonnes à afficher dans la fenêtre contextuelle.<br>Pour choisir une présentation en grille au lieu d'une présentation en liste, sélectionnez un nombre de colonnes supérieur à 1"
+
+#: templates/admin-tab-layout.php:25
+msgid "Popup Max Height, px"
+msgstr "Hauteur maximale de la fenêtre contextuelle, px"
+
+#: templates/admin-tab-layout.php:26
+msgid "Popup max height in pixels. Default is 500px"
+msgstr "Hauteur maximale de la fenêtre en pixels. La valeur par défaut est 500px"
+
+#: templates/admin-tab-layout.php:32
+msgid "Popup Max Height (on mobile screen), px"
+msgstr "Hauteur maximale de la fenêtre contextuelle (sur écran mobile), px"
+
+#: templates/admin-tab-layout.php:33
+msgid "Popup max height in pixels for mobile screen (max-width: 768px). Default is 400px"
+msgstr "Hauteur maximale de la fenêtre contextuelle en pixels pour les écrans mobiles (max-width : 768px). La valeur par défaut est de 400px"
+
+#: templates/admin-tab-layout.php:39
+msgid "Display Image"
+msgstr "Afficher l'image"
+
+#: templates/admin-tab-layout.php:47
+msgid "Use the parent product image if a variation has no image"
+msgstr "Utilisez l'image du produit parent si une variation n'a pas d'image"
+
+#: templates/admin-tab-layout.php:55
+msgid "Image Size"
+msgstr "Taille de l'image"
+
+#: templates/admin-tab-layout.php:56
+msgid "Select image size"
+msgstr "Sélectionnez la taille de l'image"
+
+#: templates/admin-tab-layout.php:63
+msgid "Image Max Width, px"
+msgstr "Largeur maximale de l'image, px"
+
+#: templates/admin-tab-layout.php:64
+msgid "Limit image maximal width in pixels"
+msgstr "Limiter la largeur maximale de l'image en pixels"
+
+#: templates/admin-tab-layout.php:70
+msgid "Display Description"
+msgstr "Afficher la description"
+
+#: templates/admin-tab-layout.php:71
+msgid "Display product description"
+msgstr "Afficher la description du produit"
+
+#: templates/admin-tab-layout.php:77
+msgid "Description's Location"
+msgstr "Emplacement de la description"
+
+#: templates/admin-tab-layout.php:81
+msgid "Under the image"
+msgstr "Sous l’image"
+
+#: templates/admin-tab-layout.php:82
+msgid "Under the title"
+msgstr "Sous le titre"
+
+#: templates/admin-tab-layout.php:83
+msgid "Under the price and SKU"
+msgstr "Sous le prix et l'UGS"
+
+#: templates/admin-tab-layout.php:89
+msgid "Display Category"
+msgstr "Afficher la catégorie"
+
+#: templates/admin-tab-layout.php:90
+msgid "Display product or post category"
+msgstr "Afficher la catégorie du produit ou de l'article"
+
+#: templates/admin-tab-layout.php:96
+msgid "Display Product Price"
+msgstr "Afficher le prix du produit"
+
+#: templates/admin-tab-layout.php:103
+msgid "Display Product SKU"
+msgstr "Afficher l'UGS du produit"
+
+#: templates/admin-tab-layout.php:110
+msgid "Display \"Out of stock\" Label"
+msgstr "Afficher l'étiquette \"En rupture de stock\""
+
+#: templates/admin-tab-layout.php:111
+msgid "Indicates if a product is out of stock"
+msgstr "Indique si un produit est en rupture de stock"
+
+#: templates/admin-tab-layout.php:118
+msgid "Display \"Sale\" Label"
+msgstr "Afficher l'étiquette \"Vente”"
+
+#: templates/admin-tab-layout.php:119
+msgid "Indicates if product has discount price"
+msgstr "Indique si le produit a un prix réduit"
+
+#: templates/admin-tab-layout.php:126
+msgid "Display \"Featured\" Label"
+msgstr "Afficher l'étiquette \"Featured”"
+
+#: templates/admin-tab-layout.php:127
+msgid "Indicates if product is marked as special"
+msgstr "Indique si le produit est marqué comme spécial"
+
+#: templates/admin-tab-layout.php:134
+msgid "Display \"Add to Cart\" Button"
+msgstr "Afficher le bouton \"Ajouter au panier"
+
+#: templates/admin-tab-layout.php:135
+msgid "Allow users to add products to their cart directly from the popup"
+msgstr "Permettre aux utilisateurs d'ajouter des produits à leur panier directement à partir de la fenêtre contextuelle"
+
+#: templates/admin-tab-order.php:15
+msgid "Sort retrieved results by parameter"
+msgstr "Trier les résultats par paramètre"
+
+#: templates/admin-tab-order.php:19
+msgid "Publish Date"
+msgstr "Date de publication"
+
+#: templates/admin-tab-order.php:20
+msgid "Modified Date"
+msgstr "Date de modification"
+
+#: templates/admin-tab-order.php:27
+msgid "Ascending means smallest to largest, 0 to 9, and/or A to Z and Descending means largest to smallest, 9 to 0, and/or Z to A"
+msgstr "Par ordre croissant, on entend du plus petit au plus grand, de 0 à 9, et/ou de A à Z, et par ordre décroissant, du plus grand au plus petit, de 9 à 0, et/ou de Z à A"
+
+#: templates/admin-tab-order.php:29
+msgid "ASC"
+msgstr "CROISSANT"
+
+#: templates/admin-tab-order.php:30
+msgid "DESC"
+msgstr "DECROISSANT"
+
+#: templates/admin-tab-spellcheck.php:14
+#: templates/admin-tab-stopwords.php:12
+msgid "Applies only to the current widget"
+msgstr "S'applique uniquement au widget actuel"
+
+#: templates/admin-tab-styling.php:12
+msgid "Search Field Height, px"
+msgstr "Hauteur du champ de recherche, px"
+
+#: templates/admin-tab-styling.php:13
+msgid "Set the search field height in pixels"
+msgstr "Définir la hauteur du champ de recherche en pixels"
+
+#: templates/admin-tab-styling.php:19
+#: templates/admin-tab-styling.php:105
+msgid "Rounded Border"
+msgstr "Limite moins arrondi"
+
+#: templates/admin-tab-styling.php:20
+msgid "Display search field with a rounded border (frame)"
+msgstr "Afficher le champ de recherche avec une bordure arrondie (cadre)"
+
+#: templates/admin-tab-styling.php:26
+#: templates/admin-tab-styling.php:112
+msgid "Border Color"
+msgstr "Couleur de la bordure"
+
+#: templates/admin-tab-styling.php:33
+msgid "Border Width, px"
+msgstr "Largeur de la bordure, px"
+
+#: templates/admin-tab-styling.php:34
+msgid "Border (frame) width in pixels"
+msgstr "Largeur de la bordure (cadre) en pixels"
+
+#: templates/admin-tab-styling.php:40
+msgid "Text Color"
+msgstr "Couleur du texte"
+
+#: templates/admin-tab-styling.php:47
+#: templates/admin-tab-styling.php:119
+msgid "Background Color"
+msgstr "Couleur d’arrière-plan"
+
+#: templates/admin-tab-styling.php:54
+msgid "Icon Color"
+msgstr "Couleur de l’icône"
+
+#: templates/admin-tab-styling.php:61
+msgid "Icon Background"
+msgstr "Icône - Arrière-plan"
+
+#: templates/admin-tab-styling.php:73
+#: templates/admin-tab-styling.php:81
+#: templates/admin-tab-styling.php:82
+#: templates/admin-tab-styling.php:83
+#: templates/admin-tab-styling.php:84
+#: templates/admin-tab-styling.php:85
+msgid "Loader"
+msgstr "Chargeur"
+
+#: templates/admin-tab-styling.php:74
+msgid "Select loader's image"
+msgstr "Sélectionner l'image du chargeur"
+
+#: templates/admin-tab-styling.php:98
+msgid "Top Indentation"
+msgstr "Indentation supérieure"
+
+#: templates/admin-tab-styling.php:99
+msgid "Indentation between search bar and popup, px"
+msgstr "Indentation entre la barre de recherche et la fenêtre contextuelle, px"
+
+#: templates/admin-tab-styling.php:106
+msgid "Display popup with a rounded border (frame)"
+msgstr "Afficher la fenêtre contextuelle avec une bordure arrondie (cadre)"
+
+#: templates/admin-tab-styling.php:126
+msgid "Title's Text Color"
+msgstr "Couleur du texte du titre"
+
+#: templates/admin-tab-styling.php:133
+msgid "Description's Text Color"
+msgstr "Couleur du texte de la description"
+
+#: templates/admin-tab-styling.php:140
+msgid "\"View all\" Button's Text Color"
+msgstr "Couleur du texte du bouton \"Tout voir”"
+
+#: templates/admin-tab-styling.php:147
+msgid "\"View all\" Button's Background Color"
+msgstr "Couleur d'arrière-plan du bouton \"Voir tout”"
+
+#: templates/admin-tab-styling.php:154
+msgid "Category Color"
+msgstr "Couleur de la Catégorie"
+
+#: templates/admin-tab-styling.php:160
+msgid "Product Elements"
+msgstr "Éléments du Produit"
+
+#: templates/admin-tab-styling.php:165
+msgid "Price Color"
+msgstr "Couleur du prix"
+
+#: templates/admin-tab-styling.php:172
+msgid "\"Out of stock\" Label Text Color"
+msgstr "Couleur du texte de l'étiquette \"En rupture de stock”"
+
+#: templates/admin-tab-styling.php:180
+msgid "\"Out of stock\" Label Background Color"
+msgstr "Couleur d'arrière-plan de l'étiquette \"En rupture de stock”"
+
+#: templates/admin-tab-styling.php:188
+msgid "\"Sale\" Label Text Color"
+msgstr "Couleur du texte de l'étiquette \"Sale”"
+
+#: templates/admin-tab-styling.php:196
+msgid "\"Sale\" Label Background Color"
+msgstr "Couleur d'arrière-plan de l'étiquette \"Sale”"
+
+#: templates/admin-tab-styling.php:204
+msgid "\"Featured\" Label Text Color"
+msgstr "Couleur du texte de l'étiquette \"Featured”"
+
+#: templates/admin-tab-styling.php:212
+msgid "\"Featured\" Label Background Color"
+msgstr "Couleur d'arrière-plan de l'étiquette \"Featured”"
+
+#. Plugin Name of the plugin
+#: index.php
+msgid "Smart WooCommerce Search"
+msgstr "Smart WooCommerce Search"
+
+#. Plugin URI of the plugin
+#. Author URI of the plugin
+#: index.php
+msgid "https://www.wpsmartsearch.com/"
+msgstr "https://www.wpsmartsearch.com/"
+
+#. Description of the plugin
+#: index.php
+msgid "Smart Ajax Search allows you to instantly search WooCommerce products."
+msgstr "Smart Ajax Search vous permet de rechercher instantanément des produits WooCommerce."
+
+#. Author of the plugin
+#: index.php
+msgid "YummyWP"
+msgstr "YummyWP"
+
+#: templates/admin-tab-general.php:40
+msgid "Placeholder text for the search field"
+msgstr "Texte d’espace réservé pour le champ de recherche"
+
+#: templates/admin-page-widgets.php:45
+msgid "Is active?"
+msgstr "Est actif?"

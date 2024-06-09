@@ -5,7 +5,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 $tables_exists = false;
 $status = '';
-$status_name = __( 'empty', 'smart-woocommerce-search' );
+$status_name = __( 'Empty', 'smart-woocommerce-search' );
 $styles = 'background-color:gray;color:#fff;';
 $post_types = ysm_get_post_types();
 $post_types_count = [];
@@ -13,27 +13,6 @@ $post_types_count = [];
 if ( $post_types ) {
 	foreach ( $post_types as $pt ) {
 		$post_types_count[ $pt ] = 0;
-	}
-}
-
-if ( sws_fs()->is_premium() ) {
-	$tables_exists = \YSWS\Features\DB_Index\tables_exists();
-	$status = \YSWS\Features\DB_Index\get_index_status();
-	if ( $post_types ) {
-		foreach ( $post_types as $pt ) {
-			$post_types_count[ $pt ] = \YSWS\Features\DB_Index\count_indexed_posts( $pt );
-		}
-	}
-
-	if ( 'failed' === $status ) {
-		$status_name = __( 'failed', 'smart-woocommerce-search' );
-		$styles = 'background-color:red;color:#fff;';
-	} elseif ( 'doing' === $status ) {
-		$status_name = __( 'doing', 'smart-woocommerce-search' );
-		$styles = 'background-color:blue;color:#fff;';
-	} elseif ( $tables_exists && 'ready' === $status ) {
-		$status_name = __( 'ready', 'smart-woocommerce-search' );
-		$styles = 'background-color:green;color:#fff;';
 	}
 }
 ?>
@@ -56,7 +35,7 @@ if ( sws_fs()->is_premium() ) {
 				</tr>
 
 				<tr valign="top">
-					<th scope="row"><?php esc_html_e( 'Tables created', 'smart-woocommerce-search' ); ?></th>
+					<th scope="row"><?php esc_html_e( 'Tables are created', 'smart-woocommerce-search' ); ?></th>
 					<td><?php echo $tables_exists ? esc_html__( 'yes', 'smart-woocommerce-search' ) : esc_html__( 'no', 'smart-woocommerce-search' ); ?></td>
 				</tr>
 				<tr valign="top">
@@ -83,7 +62,7 @@ if ( sws_fs()->is_premium() ) {
 					'sws_index_button_nonce'
 				); ?>
 				<div class="sws-index-now-button-holder">
-					<a href="#" id="sws-index-now-button" class="ymapp-button-small"><?php esc_html_e( 'Index Now', 'smart-woocommerce-search' ); ?></a>
+					<a href="#" id="sws-index-now-button" class="ymapp-button-small"><?php esc_html_e( 'Create Index', 'smart-woocommerce-search' ); ?></a>
 					<span class="sws-index-now-button-loader" style="display: none">
 						<img style="margin-left:20px;margin-top: 10px;" class="ysm-loader-preview" src="<?php echo esc_url( SWS_PLUGIN_URI . 'assets/images/loader5.gif' ); ?>">
 					</span>
@@ -94,18 +73,18 @@ if ( sws_fs()->is_premium() ) {
     margin-bottom: 15px;
 "></span>
 				</div>
-				<div class="sws-page-description">Delete all indexed data and create a fresh index.</div>
+				<div class="sws-page-description"><?php esc_html_e( 'Delete all indexed data and create a fresh index', 'smart-woocommerce-search' ); ?></div>
 				<br><br>
 				<a href="#" id="sws-index-now-delete" class="ymapp-button-small disabled"><?php esc_html_e( 'Delete Index', 'smart-woocommerce-search' ); ?></a>
-				<div class="sws-page-description">Delete all indexed data.</div>
+				<div class="sws-page-description"><?php esc_html_e( 'Delete all indexed data', 'smart-woocommerce-search' ); ?></div>
 
 			<?php } else { ?>
-				<button disabled class="button"><?php esc_html_e( 'Index Now', 'smart-woocommerce-search' ); ?></button>
+				<button disabled class="button"><?php esc_html_e( 'Create Index', 'smart-woocommerce-search' ); ?></button>
 			<?php } ?>
 
 		</div>
 
 	</form>
 
-	<a class="ymapp-settings__doc_link ymapp-button ymapp-button-grey" style="margin-top: 30px;" href="https://www.wpsmartsearch.com/docs/data-indexing/" target="_blank">Documentation</a>
+	<a class="ymapp-settings__doc_link ymapp-button ymapp-button-grey" style="margin-top: 30px;" href="https://www.wpsmartsearch.com/docs/data-indexing/" target="_blank"><?php esc_html_e( 'Documentation', 'smart-woocommerce-search' ); ?></a>
 </div>

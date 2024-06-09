@@ -9,10 +9,10 @@ class Ysm_Search_Widget extends WP_Widget {
 	function __construct() {
 		parent::__construct(
 			'ysm_search_widget',
-			__( 'Smart Search', 'smart-woocommerce-search' ),
+			'Smart Search',
 			array(
 				'classname'   => 'ysm_search_widget',
-				'description' => __( 'Displays search box', 'smart-woocommerce-search' ),
+				'description' => __( 'Displays search widget', 'smart-woocommerce-search' ),
 			)
 		);
 	}
@@ -44,7 +44,7 @@ class Ysm_Search_Widget extends WP_Widget {
 		}
 		?>
 		<p>
-			<label for="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>"><?php esc_html_e( 'Title:', 'smart-woocommerce-search' ); ?></label>
+			<label for="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>"><?php esc_html_e( 'Heading:', 'smart-woocommerce-search' ); ?></label>
 			<input class="widefat" type="text" id="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'title' ) ); ?>" value="<?php echo esc_attr( $instance['title'] ); ?>" />
 		</p>
 		<p>

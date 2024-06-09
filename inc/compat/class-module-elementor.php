@@ -2,7 +2,7 @@
 namespace YSWS\Compat\Elementor;
 
 /**
- * Elementor Smart Search Widget.
+ * Elementor Widget.
  *
  */
 class Elementor_Smart_Search_Widget extends \Elementor\Widget_Base {
@@ -83,7 +83,7 @@ class Elementor_Smart_Search_Widget extends \Elementor\Widget_Base {
 		$this->start_controls_section(
 			'section_smart_search',
 			[
-				'label' => __( 'Smart Search', 'smart-woocommerce-search' ),
+				'label' => 'Smart Search',
 			]
 		);
 

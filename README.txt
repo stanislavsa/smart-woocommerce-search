@@ -1,7 +1,7 @@
 === Smart WooCommerce Search ===
 Contributors: yummy-wp
 Tags: search, ajax search, product search, smart search, search by sku
-Stable tag: 2.11.0
+Stable tag: 2.11.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Requires at least: 5.9
@@ -107,6 +107,10 @@ Yes, when using products search or when you set option to search only through pr
 4. Smart Search PRO - Index product data
 
 == Changelog ==
+
+= 2.11.2 =
+* Added: French translation file
+* Added: Spanish translation file
 
 = 2.11.0 =
 * Added: option to set Popup Max Height for mobiles

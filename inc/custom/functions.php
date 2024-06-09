@@ -23,10 +23,10 @@ function ysm_get_default_widgets_ids() {
  */
 function ysm_get_default_widgets_names( $id = '' ) {
 	$list = array(
-		'default' => __( 'WordPres Default Search', 'smart-woocommerce-search' ),
-		'product' => __( 'WooCommerce Product Search', 'smart-woocommerce-search' ),
-		'avada'   => __( 'Avada Search Bar', 'smart-woocommerce-search' ),
-		'divi'    => __( 'DIVI Search Bar', 'smart-woocommerce-search' ),
+		'default' => __( 'WordPres Default Search Widget', 'smart-woocommerce-search' ),
+		'product' => __( 'WooCommerce Product Search Widget', 'smart-woocommerce-search' ),
+		'avada'   => __( 'Avada Search Widget', 'smart-woocommerce-search' ),
+		'divi'    => __( 'DIVI Search Widget', 'smart-woocommerce-search' ),
 	);
 
 	if ( '' !== $id ) {

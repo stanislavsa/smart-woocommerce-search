@@ -1,10 +1,10 @@
 /**
- *  Ajax Autocomplete for jQuery, version 1.2.24
- *  (c) 2015 Tomas Kirda
- *
- *  Ajax Autocomplete for jQuery is freely distributable under the terms of an MIT-style license.
- *  For details, see the web site: https://github.com/devbridge/jQuery-Autocomplete
- */
+*  Ajax Autocomplete for jQuery, version 1.2.24
+*  (c) 2015 Tomas Kirda
+*
+*  Ajax Autocomplete for jQuery is freely distributable under the terms of an MIT-style license.
+*  For details, see the web site: https://github.com/devbridge/jQuery-Autocomplete
+*/
 
 /*jslint  browser: true, white: true, plusplus: true, vars: true */
 /*global define, window, document, jQuery, exports, require */
@@ -128,7 +128,7 @@
 
     Autocomplete.formatResult = function (suggestion, currentValue) {
         var pattern = '(' + utils.escapeRegExChars(currentValue) + ')';
-
+        
         return suggestion.value
             .replace(new RegExp(pattern, 'gi'), '<strong>$1<\/strong>')
             .replace(/&/g, '&amp;')
@@ -153,8 +153,8 @@
             that.element.setAttribute('autocomplete', 'off');
 
             that.killerFn = function (e) {
-                /* fix for scroller*/
-                if ($(e.target).closest(options.appendTo).length === 0) {
+	            /* fix for scroller*/
+	            if ($(e.target).closest(options.appendTo).length === 0) {
                     that.killSuggestions();
                     that.disableKillerFn();
                 }
@@ -162,7 +162,7 @@
 
             // html() deals with many types: htmlString or Element or Array or jQuery
             that.noSuggestionsContainer = $('<div class="autocomplete-no-suggestion"></div>')
-                .html(this.options.noSuggestionNotice).get(0);
+                                          .html(this.options.noSuggestionNotice).get(0);
 
             that.suggestionsContainer = Autocomplete.utils.createNode(options.containerClass);
 
@@ -218,7 +218,7 @@
         onBlur: function () {
             this.enableKillerFn();
         },
-
+        
         abortAjax: function () {
             var that = this;
             if (that.currentRequest) {
@@ -312,9 +312,9 @@
                 var opacity = $container.css('opacity'),
                     parentOffsetDiff;
 
-                if (!that.visible){
-                    $container.css('opacity', 0).show();
-                }
+                    if (!that.visible){
+                        $container.css('opacity', 0).show();
+                    }
 
                 parentOffsetDiff = $container.offsetParent().offset();
                 styles.top -= parentOffsetDiff.top;
@@ -351,7 +351,7 @@
                     that.el.val(that.currentValue);
                     that.hide();
                 }
-
+                
                 that.stopKillSuggestions();
             }, 50);
         },
@@ -644,16 +644,16 @@
                 html = '',
                 category,
                 formatGroup = function (suggestion, index) {
-                    var currentCategory = suggestion.data[groupBy];
+                        var currentCategory = suggestion.data[groupBy];
 
-                    if (category === currentCategory){
-                        return '';
-                    }
+                        if (category === currentCategory){
+                            return '';
+                        }
 
-                    category = currentCategory;
+                        category = currentCategory;
 
-                    return '<div class="autocomplete-group"><strong>' + category + '</strong></div>';
-                };
+                        return '<div class="autocomplete-group"><strong>' + category + '</strong></div>';
+                    };
 
             if (options.triggerSelectOnValidInput && that.isExactMatch(value)) {
                 that.select(0);
@@ -693,9 +693,9 @@
         },
 
         noSuggestions: function() {
-            var that = this,
-                container = $(that.suggestionsContainer),
-                noSuggestionsContainer = $(that.noSuggestionsContainer);
+             var that = this,
+                 container = $(that.suggestionsContainer),
+                 noSuggestionsContainer = $(that.noSuggestionsContainer);
 
             this.adjustContainerWidth();
 

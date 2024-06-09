@@ -9,7 +9,7 @@
 			'description' =>
 				__( 'Add a list of words that should be skipped from the search request.', 'smart-woocommerce-search' )
 				. '<br>'
-				. __( 'Applies only to the current widget.', 'smart-woocommerce-search' ),
+				. __( 'Applies only to the current widget', 'smart-woocommerce-search' ),
 			'fields'      => [
 				'word' => '',
 			],
@@ -20,4 +20,5 @@
 		</tbody>
 	</table>
 
+	<a class="ymapp-settings__doc_link ymapp-button ymapp-button-grey" href="https://www.wpsmartsearch.com/docs/stop-words/" target="_blank"><?php esc_html_e( 'Documentation', 'smart-woocommerce-search' ); ?></a>
 </div>

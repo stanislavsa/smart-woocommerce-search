@@ -54,8 +54,8 @@ function sws_fs_custom_connect_message_on_update(
 	$freemius_link
 ) {
 	return sprintf(
-		__( 'Hey %1$s' ) . ',<br>' .
-		__( 'Please help us improve %2$s! If you opt-in, some data about your usage of %2$s will be sent to %5$s. If you skip this, that\'s okay! %2$s will still work just fine.', 'smart-woocommerce-search' ),
+		__( 'We added this opt-in feature so you won\'t miss any important updates and to help us enhance the plugin\'s compatibility and performance on your site.', 'smart-woocommerce-search' ) . '<br><br>' .
+		__( 'By opting in, you\'ll get email notifications about feature updates, educational content, promo offers, and you\'ll share some basic WordPress environment details. If you decide not to opt in, that\'s okay! %2$s will still function just as well.', 'smart-woocommerce-search' ),
 		$user_first_name,
 		'<b>' . $plugin_title . '</b>',
 		'<b>' . $user_login . '</b>',
@@ -73,8 +73,8 @@ function sws_fs_custom_connect_message(
 	$freemius_link
 ) {
 	return sprintf(
-		__( 'Hey %1$s' ) . ',<br>' .
-		__( 'Never miss an important update -- opt-in to our security and feature updates notifications, and non-sensitive diagnostic tracking with freemius.com.', 'smart-woocommerce-search' ),
+		__( 'We added this opt-in feature so you won\'t miss any important updates and to help us enhance the plugin\'s compatibility and performance on your site.', 'smart-woocommerce-search' ) . '<br><br>' .
+		__( 'By opting in, you\'ll get email notifications about feature updates, educational content, promo offers, and you\'ll share some basic WordPress environment details. If you decide not to opt in, that\'s okay! %2$s will still function just as well.', 'smart-woocommerce-search' ),
 		$user_first_name,
 		'<b>' . $plugin_title . '</b>',
 		'<b>' . $user_login . '</b>',

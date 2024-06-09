@@ -9,15 +9,15 @@
 			<?php
 			ysm_setting( $w_id, 'input_height', array(
 				'type'        => 'text',
-				'title'       => __( 'Search Bar Height, px', 'smart-woocommerce-search' ),
-				'description' => __( 'Set the search bar height in pixels', 'smart-woocommerce-search' ),
+				'title'       => __( 'Search Field Height, px', 'smart-woocommerce-search' ),
+				'description' => __( 'Set the search field height in pixels', 'smart-woocommerce-search' ),
 				'value'       => '',
 			));
 
 			ysm_setting( $w_id, 'input_round_border', array(
 				'type'        => 'checkbox',
 				'title'       => __( 'Rounded Border', 'smart-woocommerce-search' ),
-				'description' => __( 'Display search field with rounded border', 'smart-woocommerce-search' ),
+				'description' => __( 'Display search field with a rounded border (frame)', 'smart-woocommerce-search' ),
 				'value'       => '',
 			));
 
@@ -31,7 +31,7 @@
 			ysm_setting( $w_id, 'input_border_width', array(
 				'type'        => 'text',
 				'title'       => __( 'Border Width, px', 'smart-woocommerce-search' ),
-				'description' => __( 'Border width in pixels', 'smart-woocommerce-search' ),
+				'description' => __( 'Border (frame) width in pixels', 'smart-woocommerce-search' ),
 				'value'       => '1',
 			));
 
@@ -71,7 +71,7 @@
 			ysm_setting( $w_id, 'loader', array(
 				'type'        => 'select',
 				'title'       => __( 'Loader', 'smart-woocommerce-search' ),
-				'description' => __( 'Select loader', 'smart-woocommerce-search' ) .
+				'description' => __( 'Select loader\'s image', 'smart-woocommerce-search' ) .
 				                 ' <img style="margin-left:20px;" class="ysm-loader-preview" src="' .
 				                 SWS_PLUGIN_URI . 'assets/images/' .
 				                 ( $cur_loader ? $cur_loader : 'loader1' ) .
@@ -95,15 +95,15 @@
 		<?php
 		ysm_setting( $w_id, 'popup_top_gap', array(
 			'type'        => 'text',
-			'title'       => __( 'Top Gap', 'smart-woocommerce-search' ),
-			'description' => __( 'Distance between search bar and popup, px', 'smart-woocommerce-search' ),
+			'title'       => __( 'Top Indentation', 'smart-woocommerce-search' ),
+			'description' => __( 'Indentation between search bar and popup, px', 'smart-woocommerce-search' ),
 			'value'       => '',
 		));
 
 		ysm_setting( $w_id, 'popup_round_border', array(
 			'type'        => 'checkbox',
 			'title'       => __( 'Rounded Border', 'smart-woocommerce-search' ),
-			'description' => __( 'Display popup with rounded border', 'smart-woocommerce-search' ),
+			'description' => __( 'Display popup with a rounded border (frame)', 'smart-woocommerce-search' ),
 			'value'       => '',
 		));
 
@@ -123,28 +123,28 @@
 
 		ysm_setting( $w_id, 'popup_title_text_color', array(
 			'type'        => 'color',
-			'title'       => __( 'Title Text Color', 'smart-woocommerce-search' ),
+			'title'       => __( 'Title\'s Text Color', 'smart-woocommerce-search' ),
 			'description' => '',
 			'value'       => '',
 		));
 
 		ysm_setting( $w_id, 'popup_desc_text_color', array(
 			'type'        => 'color',
-			'title'       => __( 'Excerpt Text Color', 'smart-woocommerce-search' ),
+			'title'       => __( 'Description\'s Text Color', 'smart-woocommerce-search' ),
 			'description' => '',
 			'value'       => '',
 		));
 
 		ysm_setting( $w_id, 'popup_view_all_link_text_color', array(
 			'type'        => 'color',
-			'title'       => __( '"View all" Link Text Color', 'smart-woocommerce-search' ),
+			'title'       => __( '"View all" Button\'s Text Color', 'smart-woocommerce-search' ),
 			'description' => '',
 			'value'       => '',
 		));
 
 		ysm_setting( $w_id, 'popup_view_all_link_bg_color', array(
 			'type'        => 'color',
-			'title'       => __( '"View all" Link Background Color', 'smart-woocommerce-search' ),
+			'title'       => __( '"View all" Button\'s Background Color', 'smart-woocommerce-search' ),
 			'description' => '',
 			'value'       => '',
 		));
@@ -220,5 +220,5 @@
 		</tbody>
 	</table>
 
-	<a class="ymapp-settings__doc_link ymapp-button ymapp-button-grey" href="https://www.wpsmartsearch.com/docs/styling-settings/" target="_blank">Documentation</a>
+	<a class="ymapp-settings__doc_link ymapp-button ymapp-button-grey" href="https://www.wpsmartsearch.com/docs/styling-settings/" target="_blank"><?php esc_html_e( 'Documentation', 'smart-woocommerce-search' ); ?></a>
 </div>

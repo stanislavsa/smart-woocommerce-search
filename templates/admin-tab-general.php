@@ -5,8 +5,8 @@
 		if ( 'default' === $w_id ) {
 			ysm_setting( $w_id, 'enable_search', array(
 				'type'        => 'checkbox',
-				'title'       => __( 'Enable Smart Search', 'smart-woocommerce-search' ),
-				'description' => __( 'Extend the default WordPress "Search" widget with the Smart Search features.', 'smart-woocommerce-search' ),
+				'title'       => __( 'Enable', 'smart-woocommerce-search' ),
+				'description' => sprintf( __( 'Enhance the standard %s search widget with the %s features', 'smart-woocommerce-search' ), 'WordPress', 'Smart Search' ),
 				'value'       => 1,
 			));
 		}
@@ -14,8 +14,8 @@
 		if ( 'product' === $w_id ) {
 			ysm_setting( $w_id, 'enable_product_search', array(
 				'type'        => 'checkbox',
-				'title'       => __( 'Enable Smart Search', 'smart-woocommerce-search' ),
-				'description' => __( 'Extend the WooCommerce "Product Search" widget with the Smart Search features.', 'smart-woocommerce-search' ),
+				'title'       => __( 'Enable', 'smart-woocommerce-search' ),
+				'description' => sprintf( __( 'Enhance the standard %s search widget with the %s features', 'smart-woocommerce-search' ), 'WooCommerce', 'Smart Search' ),
 				'value'       => 1,
 			));
 		}
@@ -23,8 +23,8 @@
 		if ( 'avada' === $w_id ) {
 			ysm_setting( $w_id, 'enable_avada_search', array(
 				'type'        => 'checkbox',
-				'title'       => __( 'Enable Smart Search', 'smart-woocommerce-search' ),
-				'description' => __( 'Extend the Avada search bar with the Smart Search features.', 'smart-woocommerce-search' ),
+				'title'       => __( 'Enable', 'smart-woocommerce-search' ),
+				'description' => sprintf( __( 'Enhance the standard %s search widget with the %s features', 'smart-woocommerce-search' ), 'Avada', 'Smart Search' ),
 				'value'       => 1,
 			));
 		}
@@ -36,9 +36,9 @@
 		if ( ! in_array( $w_id, ysm_get_default_widgets_ids(), true ) ) {
 			ysm_setting( $w_id, 'placeholder', array(
 				'type'        => 'text',
-				'title'       => __( 'Placeholder', 'smart-woocommerce-search' ),
-				'description' => __( 'Custom search bar placeholder', 'smart-woocommerce-search' ),
-				'value'       => _x( 'Search &hellip;', 'placeholder', 'smart-woocommerce-search' ),
+				'title'       => 'Input Placeholder',
+				'description' => __( 'Placeholder text for the search field', 'smart-woocommerce-search' ),
+				'value'       => __( 'Search', 'smart-woocommerce-search' ) . '&hellip;',
 			));
 		}
 
@@ -62,36 +62,36 @@
 
 		ysm_setting( $w_id, 'excerpt_symbols_count', array(
 			'type'        => 'text',
-			'title'       => __( 'Excerpt Size Limit', 'smart-woocommerce-search' ),
-			'description' => __( 'Maximum number of characters in description', 'smart-woocommerce-search' ),
+			'title'       => __( 'Description\'s Size', 'smart-woocommerce-search' ),
+			'description' => __( 'Maximum number of characters in the description', 'smart-woocommerce-search' ),
 			'value'       => '50',
 		));
 
 		ysm_setting( $w_id, 'no_results_text', array(
 			'type'        => 'text',
-			'title'       => __( '"No Results" Text', 'smart-woocommerce-search' ),
+			'title'       => __( 'Text of "No Results" notification', 'smart-woocommerce-search' ),
 			'description' => __( 'Displays when no results are found', 'smart-woocommerce-search' ),
 			'value'       => 'No Results',
 		));
 
 		ysm_setting( $w_id, 'view_all_link_text', array(
 			'type'        => 'text',
-			'title'       => __( '"View All" Button Text', 'smart-woocommerce-search' ),
+			'title'       => __( 'Text of "View All" Button', 'smart-woocommerce-search' ),
 			'description' => __( 'The button is only displayed if the field is not empty', 'smart-woocommerce-search' ),
 			'value'       => 'View all',
 		));
 
 		ysm_setting( $w_id, 'view_all_link_target_blank', array(
 			'type'        => 'checkbox',
-			'title'       => __( 'New Tab on "View All" Button Click', 'smart-woocommerce-search' ),
+			'title'       => __( 'New Tab when "View All" Button Clicked', 'smart-woocommerce-search' ),
 			'description' => __( 'Open results in a new tab when "View All" button clicked. Adds target="_blank" attribute to the "View All" button', 'smart-woocommerce-search' ),
 			'value'       => 0,
 		));
 
 		ysm_setting( $w_id, 'view_all_link_found_posts', array(
 			'type'        => 'checkbox',
-			'title'       => __( 'Number of Found Posts in the "View All" Button', 'smart-woocommerce-search' ),
-			'description' => __( 'Display total number of found posts in the "View All" button.<br>This setting may affect search performance', 'smart-woocommerce-search' ),
+			'title'       => __( 'Number of Found Results in the "View All" Button', 'smart-woocommerce-search' ),
+			'description' => __( 'Display total number of found results in the "View All" button', 'smart-woocommerce-search' ),
 			'value'       => 0,
 			'is_pro'      => true,
 		));
@@ -104,25 +104,25 @@
 		));
 		?>
 
-		<th class="ymapp-settings__title"><?php esc_html_e( 'Search Features', 'smart-woocommerce-search' ); ?></th>
+		<th class="ymapp-settings__title"><?php echo esc_html__( 'Search Engine Features', 'smart-woocommerce-search' ); ?></th>
 
 		<?php
 		ysm_setting( $w_id, 'enable_fuzzy_search', array(
 			'type'        => 'select',
 			'title'       => __( 'Multiple Word Search', 'smart-woocommerce-search' ),
-			'description' => __( 'Enable multiple word search', 'smart-woocommerce-search' ),
+			'description' => __( 'Select how to handle multiple word search', 'smart-woocommerce-search' ),
 			'value'       => '',
 			'choices'     => array(
-				'0' => __( 'No', 'smart-woocommerce-search' ),
-				'1' => __( '"alpha" OR "beta"', 'smart-woocommerce-search' ),
-				'2' => __( '"alpha" AND "beta"', 'smart-woocommerce-search' ),
+				'0' => __( 'Only exact match', 'smart-woocommerce-search' ),
+				'1' => __( '"A" or "B"', 'smart-woocommerce-search' ),
+				'2' => __( '"A" and "B"', 'smart-woocommerce-search' ),
 			),
 		));
 
 		ysm_setting( $w_id, 'exclude_out_of_stock_products', array(
 			'type'        => 'checkbox',
-			'title'       => __( 'Exclude "Out of stock"', 'smart-woocommerce-search' ),
-			'description' => __( 'Exclude "Out of stock" products/variations from results', 'smart-woocommerce-search' ),
+			'title'       => __( 'Exclude Out of Stock Products', 'smart-woocommerce-search' ),
+			'description' => __( 'Exclude out of stock products and variations from results', 'smart-woocommerce-search' ),
 			'value'       => 0,
 		));
 
@@ -136,11 +136,11 @@
 
 		ysm_setting( $w_id, 'product_variation_visibility', array(
 			'type'        => 'select',
-			'title'       => __( 'Visibility of Variable Products', 'smart-woocommerce-search' ),
-			'description' => __( 'Select visibility of variable products and variations', 'smart-woocommerce-search' ),
+			'title'       => __( 'Visibility of Products with Variations', 'smart-woocommerce-search' ),
+			'description' => __( 'Select visibility of parent products and variations', 'smart-woocommerce-search' ),
 			'choices'     => array(
-				'all'        => __( 'Parent variable product with variations', 'smart-woocommerce-search' ),
-				'parent'     => __( 'Only parent variable product', 'smart-woocommerce-search' ),
+				'all'        => __( 'Parent product with variations', 'smart-woocommerce-search' ),
+				'parent'     => __( 'Only parent product', 'smart-woocommerce-search' ),
 				'variations' => __( 'Only variations', 'smart-woocommerce-search' ),
 			),
 			'is_pro'      => true,
@@ -161,14 +161,14 @@
 		ysm_setting( $w_id, 'search_page_disable_redirect_single_result', array(
 			'type'        => 'checkbox',
 			'title'       => __( 'Disable Redirect to Product Page', 'smart-woocommerce-search' ),
-			'description' => __( 'Disable default WooCommerce redirect to product page if there is only one search result', 'smart-woocommerce-search' ),
+			'description' => __( 'Prevent WooCommerce from automatically redirecting to a product page when there is only one search result.', 'smart-woocommerce-search' ),
 			'value'       => 0,
 		));
 
 		ysm_setting( $w_id, 'search_page_suppress_filters', array(
 			'type'        => 'checkbox',
-			'title'       => __( 'Suppress Query Altering', 'smart-woocommerce-search' ),
-			'description' => __( 'Prevent the theme or plugins from modifying the query on the search results page', 'smart-woocommerce-search' ),
+			'title'       => __( 'Suppress Database Query Altering', 'smart-woocommerce-search' ),
+			'description' => __( 'Prevent the theme or plugins from modifying the database query on the search results page', 'smart-woocommerce-search' ),
 			'value'       => 0,
 		));
 
@@ -181,8 +181,8 @@
 
 		ysm_setting( $w_id, 'search_page_layout_posts', array(
 			'type'        => 'checkbox',
-			'title'       => __( 'Disable WooCommerce Layout on the Search Results Page', 'smart-woocommerce-search' ),
-			'description' => __( "Displays the default search results layout defined in the theme instead of WooCommerce template.<br>Useful if you want to display posts with products together", 'smart-woocommerce-search' ),
+			'title'       => __( 'Disable WooCommerce Template on the Search Results Page', 'smart-woocommerce-search' ),
+			'description' => __( "Displays the default search results template defined in the theme instead of WooCommerce template.<br>Useful if you want to display posts with products together", 'smart-woocommerce-search' ),
 			'value'       => 0,
 		));
 
@@ -199,15 +199,15 @@
 		<?php
 		ysm_setting( $w_id, 'enable_transient', array(
 			'type'        => 'checkbox',
-			'title'       => __( 'Enable Transient', 'smart-woocommerce-search' ),
-			'description' => __( 'Save query results in a transient.<br>Might be useful if your server does not have Memcache/Redis', 'smart-woocommerce-search' ),
+			'title'       => __( 'Enable', 'smart-woocommerce-search' ) . ' Transient',
+			'description' => __( 'Save search results in a WordPress Transient.<br>Might be useful if your server does not have Memcache/Redis', 'smart-woocommerce-search' ),
 			'value'       => 0,
 			'is_pro'      => true,
 		));
 
 		ysm_setting( $w_id, 'product_slug', array(
 			'type'        => 'text',
-			'title'       => __( 'Product Slug Override', 'smart-woocommerce-search' ),
+			'title'       => 'Product Slug',
 			'description' => __( 'It may be helpful if you changed the base slug for WooCommerce products. The base slug is "product"', 'smart-woocommerce-search' ),
 			'value'       => 'product',
 			'is_pro'      => true,
@@ -216,5 +216,5 @@
 		</tbody>
 	</table>
 
-	<a class="ymapp-settings__doc_link ymapp-button ymapp-button-grey" href="https://www.wpsmartsearch.com/docs/general-settings/" target="_blank">Documentation</a>
+	<a class="ymapp-settings__doc_link ymapp-button ymapp-button-grey" href="https://www.wpsmartsearch.com/docs/general-settings/" target="_blank"><?php esc_html_e( 'Documentation', 'smart-woocommerce-search' ); ?></a>
 </div>

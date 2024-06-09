@@ -24,7 +24,7 @@ function extend() {
 	}
 
 	vc_map( array(
-		'name'        => __( 'Smart Search', 'smart-woocommerce-search' ),
+		'name'        => 'Smart Search',
 		'description' => '',
 		'base'        => 'smart_search',
 		'icon'        => SWS_PLUGIN_URI . 'assets/images/search-icon.png',

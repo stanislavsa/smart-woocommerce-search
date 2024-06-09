@@ -272,7 +272,7 @@ class Ysm_Widget_Manager {
 			 * @param array $old_settings Settings before save.
 			 * @param array $settings Settings after save.
 			 */
-			do_action( 'sws_widget_settings_saved', self::$widget_id, $old_settings[self::$widget_id]['settings'], $settings[self::$widget_id]['settings'] );
+			do_action( 'sws_widget_settings_saved', self::$widget_id, $old_settings[self::$widget_id]['settings'] ?? [], $settings[self::$widget_id]['settings'] );
 
 			ysm_add_message( __( 'Your changes have been saved.', 'smart-woocommerce-search' ) );
 
