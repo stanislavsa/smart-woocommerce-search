@@ -14,27 +14,24 @@ function front_scripts() {
         'restUrl'       => rest_url( 'ysm/v1/search' ) . '?',
         'searchPageUrl' => home_url( '/' ),
 		'type' => sws_fs()->is_trial() ? 't' : ( sws_fs()->is_premium() ? 'p' : 'f' ),
+        'v' => SWS_PLUGIN_VERSION,
         'widgets'       => [],
     ];
     foreach ( ysm_get_all_widgets() as $k => $v ) {
         $widget_params = [];
         $css_classes = [];
 
-        if ( $k === 'default' ) {
-            $css_class = '.widget_search';
-        } elseif ( $k === 'product' ) {
-            $css_class = '.widget_product_search';
-        } elseif ( $k === 'avada' ) {
-            $css_class = '.fusion-search-form';
-        } else {
-            $css_class = '.ysm-search-widget-' . $k;
-        }
-
-        $css_classes[$css_class] = $css_class;
-
-        if ( $k === 'default' ) {
-            $css_classes['.wp-block-search'] = '.wp-block-search';
-        }
+	    if ( $k === 'default' ) {
+		    $css_classes['.widget_search'] = '.widget_search';
+		    $css_classes['.wp-block-search.sws-search-block-default'] = '.wp-block-search.sws-search-block-default';
+	    } elseif ( $k === 'product' ) {
+		    $css_classes['.widget_product_search'] = '.widget_product_search';
+		    $css_classes['.wp-block-search.sws-search-block-product'] = '.wp-block-search.sws-search-block-product';
+	    } elseif ( $k === 'avada' ) {
+		    $css_classes['.fusion-search-form'] = '.fusion-search-form';
+	    } else {
+		    $css_classes[ '.ysm-search-widget-' . $k ] = '.ysm-search-widget-' . $k;
+	    }
 
 	    $widget_params['selector'] = implode( ', ', $css_classes );
 	    $widget_params['charCount'] = isset( $v['settings']['char_count'] ) ? (int) $v['settings']['char_count'] : 3;

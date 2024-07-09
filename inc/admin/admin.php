@@ -6,12 +6,14 @@ add_action( 'admin_menu', __NAMESPACE__ . '\\add_menu_pages' );
 add_filter( 'plugin_action_links_' . SWS_PLUGIN_BASENAME, __NAMESPACE__ . '\\add_action_links' );
 add_filter( 'admin_title', __NAMESPACE__ . '\\change_admin_title', 10, 2 );
 
+add_action( 'wp_ajax_sws_promo_dismiss', __NAMESPACE__ . '\\promo_dismiss' );
+
 /**
  * Admin init hook
  * @return void
  */
 function on_admin_init() {
-
+	\YummyWP\App\Notification::add_template( SWS_PLUGIN_DIR . 'templates/promo/discount.php' );
 }
 
 /**
@@ -134,4 +136,17 @@ function change_admin_title(  $admin_title, $title  ) {
 	}
 
 	return $admin_title;
+}
+
+function promo_dismiss() {
+	$nonce = filter_input( INPUT_POST, 'nonce', FILTER_SANITIZE_FULL_SPECIAL_CHARS );
+	$name = filter_input( INPUT_POST, 'name', FILTER_SANITIZE_FULL_SPECIAL_CHARS );
+
+	if ( ! wp_verify_nonce( $nonce, 'sws_promo_dismiss_nonce_action' ) ) {
+		exit;
+	}
+
+	update_option( $name, 1 );
+
+	exit;
 }

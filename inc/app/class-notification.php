@@ -15,6 +15,10 @@ class Notification {
 	 * @var array
 	 */
 	protected static $errors = [];
+	/**
+	 * @var array
+	 */
+	protected static $templates = [];
 
 	/**
 	 * Constructor.
@@ -37,6 +41,8 @@ class Notification {
 			self::add_message( $text );
 		} elseif ( 'error' === $type ) {
 			self::add_error( $text );
+		} elseif ( 'template' === $type ) {
+			self::add_template( $text );
 		}
 	}
 
@@ -57,6 +63,14 @@ class Notification {
 	}
 
 	/**
+	 * Add error to errors array
+	 * @param $text
+	 */
+	public static function add_template( $path ) {
+		self::$templates[ $path ] = $path;
+	}
+
+	/**
 	 * Display messages and errors
 	 */
 	public static function display() {
@@ -69,6 +83,14 @@ class Notification {
 		if ( ! empty( self::$messages ) ) {
 			foreach ( self::$messages as $message ) {
 				echo '<div class="updated notice is-dismissible"><p><strong>' . esc_html( $message ) . '</strong></p></div>';
+			}
+		}
+
+		if ( ! empty( self::$templates ) ) {
+			foreach ( self::$templates as $template_path ) {
+				if ( file_exists( $template_path ) ) {
+					include $template_path;
+				}
 			}
 		}
 	}

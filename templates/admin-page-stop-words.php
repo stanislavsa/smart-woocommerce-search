@@ -6,6 +6,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 <div class="wrap">
 	<h1><span><?php echo esc_html( get_admin_page_title() ); ?></span></h1>
 
+	<?php \YummyWP\App\Notification::display(); ?>
+
 		<div class="ysm-postbox ysm-widget-edit-settings ymapp-settings__content" style="display: block">
 
 			<div class="ysm-inside ysm-stop-words-holder">

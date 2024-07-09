@@ -1,843 +1,877 @@
-# Copyright (C) 2024 YummyWP
-# This file is distributed under the same license as the Smart WooCommerce Search plugin.
 msgid ""
 msgstr ""
-"Project-Id-Version: Smart WooCommerce Search 2.11.3\n"
-"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/smart-woocommerce-search\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"Project-Id-Version: Smart WooCommerce Search\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2024-07-09T21:40:28+00:00\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"X-Generator: WP-CLI 2.10.0\n"
-"X-Domain: smart-woocommerce-search\n"
+"POT-Creation-Date: 2024-06-10 21:43+0300\n"
+"PO-Revision-Date: 2024-06-10 21:46+0300\n"
+"Language: zh_CN\n"
+"X-Generator: Poedit 3.4.4\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-Flags-xgettext: --add-comments=translators:\n"
+"X-Poedit-WPHeader: index.php\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: *.min.js\n"
+"X-Poedit-SearchPathExcluded-1: node_modules\n"
 
-#. Plugin Name of the plugin
-#: index.php
-msgid "Smart WooCommerce Search"
-msgstr ""
-
-#. Plugin URI of the plugin
-#. Author URI of the plugin
-#: index.php
-msgid "https://www.wpsmartsearch.com/"
-msgstr ""
-
-#. Description of the plugin
-#: index.php
-msgid "Smart Ajax Search allows you to instantly search WooCommerce products."
-msgstr ""
-
-#. Author of the plugin
-#: index.php
-msgid "YummyWP"
-msgstr ""
-
-#: inc/admin/admin.php:34
+#: inc/admin/admin.php:38
 msgid "Search Widgets"
-msgstr ""
+msgstr "搜索小工具"
 
-#: inc/admin/admin.php:35
+#: inc/admin/admin.php:39
 msgid "Widgets"
-msgstr ""
+msgstr "小工具"
 
-#: inc/admin/admin.php:42
+#: inc/admin/admin.php:46
 msgid "Add New Search Widget"
-msgstr ""
+msgstr "添加新的搜索小部件"
 
-#: inc/admin/admin.php:43
-#: templates/admin-page-widgets.php:110
+#: inc/admin/admin.php:47
+#: templates/admin-page-widgets.php:108
 msgid "Add New"
-msgstr ""
+msgstr "新增"
 
-#: inc/admin/admin.php:50
-#: inc/admin/admin.php:51
-#: templates/admin-page-index-status.php:32
+#: inc/admin/admin.php:54
+#: inc/admin/admin.php:55
+#: templates/admin-page-index-status.php:57
 msgid "Index Status"
-msgstr ""
+msgstr "索引状态"
 
-#: inc/admin/admin.php:58
-#: inc/admin/admin.php:59
+#: inc/admin/admin.php:62
+#: inc/admin/admin.php:63
 #: templates/admin-tab-spellcheck.php:8
 msgid "Synonyms"
-msgstr ""
+msgstr "同义词"
 
-#: inc/admin/admin.php:66
-#: inc/admin/admin.php:67
+#: inc/admin/admin.php:70
+#: inc/admin/admin.php:71
 #: templates/admin-page-form.php:15
 #: templates/admin-tab-stopwords.php:8
 msgid "Stop Words"
-msgstr ""
+msgstr "停用词条"
 
-#: inc/admin/admin.php:75
-#: inc/admin/admin.php:76
+#: inc/admin/admin.php:79
+#: inc/admin/admin.php:80
 msgid "Start Trial"
-msgstr ""
+msgstr "开始试用"
 
-#: inc/admin/admin.php:117
+#: inc/admin/admin.php:121
 #: templates/admin-page-form.php:45
 msgid "Settings"
-msgstr ""
+msgstr "设置"
 
 #. translators: %s: Name/id of a widget
-#: inc/admin/admin.php:134
+#: inc/admin/admin.php:139
+#, php-format
 msgid "Edit Widget: %s"
-msgstr ""
+msgstr "编辑小部件：%s"
 
 #: inc/app/class-field.php:315
-#: templates/admin-page-stop-words.php:24
-#: templates/admin-page-synonyms.php:29
 msgid "Upgrade to Pro"
-msgstr ""
+msgstr "升级到专业版"
 
 #: inc/compat/class-module-elementor.php:92
 #: inc/compat/compat-visual-composer.php:17
 msgid "No value"
-msgstr ""
+msgstr "未设置"
 
 #: inc/compat/class-module-elementor.php:104
 #: inc/compat/compat-visual-composer.php:41
 msgid "Select one of search widgets"
-msgstr ""
+msgstr "选择其中一个搜索小部件"
+
+#: templates/admin-tab-fields.php:93
+msgid "Content"
+msgstr "内容"
 
 #: inc/compat/compat-visual-composer.php:38
 msgid "Widget name"
-msgstr ""
+msgstr "小部件名称"
 
 #: inc/custom/class-ysm-search-widget.php:15
 msgid "Displays search widget"
-msgstr ""
+msgstr "显示搜索小部件"
 
 #: inc/custom/class-ysm-search-widget.php:47
 msgid "Heading:"
-msgstr ""
+msgstr "标题："
 
 #: inc/custom/class-ysm-search-widget.php:51
 msgid "Select Widget:"
-msgstr ""
+msgstr "选择小部件："
 
 #: inc/custom/class-ysm-widget-manager.php:277
 msgid "Your changes have been saved."
-msgstr ""
+msgstr "你的修改已被保存。"
 
 #: inc/custom/class-ysm-widget-manager.php:352
 msgctxt "submit button"
 msgid "Search"
-msgstr ""
+msgstr "搜索"
 
 #: inc/custom/functions.php:26
 msgid "WordPres Default Search Widget"
-msgstr ""
+msgstr "WordPres 默认搜索小部件"
 
 #: inc/custom/functions.php:27
 msgid "WooCommerce Product Search Widget"
-msgstr ""
+msgstr "WooCommerce 产品搜索小部件"
 
 #: inc/custom/functions.php:28
 msgid "Avada Search Widget"
-msgstr ""
+msgstr "Avada 搜索小部件"
 
 #: inc/custom/functions.php:29
 msgid "DIVI Search Widget"
-msgstr ""
+msgstr "DIVI 搜索小部件"
 
 #: inc/custom/functions.php:99
 msgid "Duplicate"
-msgstr ""
+msgstr "复制"
 
 #: inc/custom/functions.php:102
 msgid "Delete"
-msgstr ""
+msgstr "删除"
 
-#: inc/custom/scripts.php:100
+#: inc/custom/scripts.php:152
 msgid "Delete column?"
-msgstr ""
+msgstr "删除列？"
 
-#: inc/custom/scripts.php:101
+#: inc/custom/scripts.php:153
 msgid "Delete row?"
-msgstr ""
+msgstr "删除行？"
 
-#: inc/custom/scripts.php:102
+#: inc/custom/scripts.php:154
 msgid "Delete widget?"
-msgstr ""
+msgstr "删除小部件？"
 
-#: inc/fs.php:57
-#: inc/fs.php:76
+#: inc/elements/product-label-featured.php:18
+msgid "Featured"
+msgstr "精选"
+
+#: inc/elements/product-label-out-of-stock.php:18
+msgid "Out of stock"
+msgstr "缺货"
+
+#: inc/elements/product-label-sale.php:18
+msgid "Sale"
+msgstr "促销"
+
+#: inc/features/db-index.php:213
+#, php-format
+msgid "%s index is empty! We highly recommend to create index to improve search performance."
+msgstr "%s 索引为空！我们强烈建议创建索引以提高搜索性能。"
+
+#: inc/features/db-index.php:214
+msgid "Learn more here."
+msgstr "在这里了解更多。"
+
+#: inc/fs.php:60
+#: inc/fs.php:79
 msgid "We added this opt-in feature so you won't miss any important updates and to help us enhance the plugin's compatibility and performance on your site."
-msgstr ""
+msgstr "我们添加了此选择加入功能，以便您不会错过任何重要的更新，并帮助我们增强插件在您网站上的兼容性和性能。"
 
-#: inc/fs.php:58
-#: inc/fs.php:77
+#: inc/fs.php:61
+#: inc/fs.php:80
+#, php-format
 msgid "By opting in, you'll get email notifications about feature updates, educational content, promo offers, and you'll share some basic WordPress environment details. If you decide not to opt in, that's okay! %2$s will still function just as well."
-msgstr ""
-
-#: index.php:30
-msgid "To activate the free version of Smart WooCommerce Search you need to deactivate the Pro version."
-msgstr ""
+msgstr "通过选择加入，您将收到有关功能更新、教育内容、促销优惠的电子邮件通知，并且您将分享一些基本的 WordPress 环境详细信息。如果您决定不选择加入，没关系！%2$s 仍将正常运行。"
 
 #: templates/admin-page-form.php:9
 msgid "General"
-msgstr ""
+msgstr "常规"
 
 #: templates/admin-page-form.php:10
 msgid "Items to Search Through"
-msgstr ""
+msgstr "搜索项目"
 
 #: templates/admin-page-form.php:11
 #: templates/admin-tab-order.php:14
 msgid "Sorting"
-msgstr ""
+msgstr "排序"
 
 #: templates/admin-page-form.php:12
 msgid "Layout"
-msgstr ""
+msgstr "布局"
 
 #: templates/admin-page-form.php:13
 msgid "Styling"
-msgstr ""
+msgstr "样式"
 
 #: templates/admin-page-form.php:14
-#: templates/admin-page-synonyms.php:19
+#: templates/admin-page-synonyms.php:42
 msgid "Spelling Correction"
-msgstr ""
+msgstr "拼写纠正"
 
 #: templates/admin-page-form.php:20
 #: templates/admin-page-form.php:76
+#: templates/admin-page-stop-words.php:21
+#: templates/admin-page-stop-words.php:45
+#: templates/admin-page-synonyms.php:32
+#: templates/admin-page-synonyms.php:63
 msgid "Save"
-msgstr ""
+msgstr "保存"
 
 #: templates/admin-page-form.php:30
 msgid "Enter title"
-msgstr ""
+msgstr "输入标题"
 
 #: templates/admin-page-form.php:41
 msgid "Toggle panel: Settings"
-msgstr ""
+msgstr "切换面板：设置"
 
-#: templates/admin-page-index-status.php:8
+#: templates/admin-page-index-status.php:10
 msgid "Empty"
-msgstr ""
+msgstr "空"
 
-#: templates/admin-page-index-status.php:38
+#: templates/admin-page-index-status.php:32
+msgid "Failed"
+msgstr "失败"
+
+#: templates/admin-page-index-status.php:35
+msgid "In progress"
+msgstr "进行中"
+
+#: templates/admin-page-index-status.php:39
+msgid "Ready"
+msgstr "就绪"
+
+#: templates/admin-page-index-status.php:63
 msgid "Tables are created"
-msgstr ""
+msgstr "已创建表"
 
-#: templates/admin-page-index-status.php:39
-#: templates/admin-page-widgets.php:65
+#: templates/admin-page-index-status.php:64
+#: templates/admin-page-widgets.php:63
 msgid "yes"
-msgstr ""
+msgstr "是"
 
-#: templates/admin-page-index-status.php:39
-#: templates/admin-page-widgets.php:66
+#: templates/admin-page-index-status.php:64
+#: templates/admin-page-widgets.php:64
 msgid "no"
-msgstr ""
+msgstr "否"
 
-#: templates/admin-page-index-status.php:42
+#: templates/admin-page-index-status.php:67
 msgid "Indexed Post Types"
-msgstr ""
+msgstr "索引文章类型"
 
-#: templates/admin-page-index-status.php:65
+#: templates/admin-page-index-status.php:81
+msgid "Re-create index when settings updated"
+msgstr "设置更新后重新创建索引"
+
 #: templates/admin-page-index-status.php:82
+msgid "Re-create the data index automatically when the search widget settings were updated"
+msgstr "搜索小部件设置更新时自动重新创建数据索引"
+
+#: templates/admin-page-index-status.php:101
+#: templates/admin-page-index-status.php:118
 msgid "Create Index"
-msgstr ""
+msgstr "创建索引"
 
-#: templates/admin-page-index-status.php:76
+#: templates/admin-page-index-status.php:112
 msgid "Delete all indexed data and create a fresh index"
-msgstr ""
+msgstr "删除所有索引数据并创建新索引"
 
-#: templates/admin-page-index-status.php:78
+#: templates/admin-page-index-status.php:114
 msgid "Delete Index"
-msgstr ""
+msgstr "删除索引"
 
-#: templates/admin-page-index-status.php:79
+#: templates/admin-page-index-status.php:115
 msgid "Delete all indexed data"
-msgstr ""
+msgstr "删除所有索引数据"
 
-#: templates/admin-page-index-status.php:89
-#: templates/admin-page-stop-words.php:31
-#: templates/admin-page-synonyms.php:37
+#: templates/admin-page-index-status.php:125
+#: templates/admin-page-stop-words.php:52
+#: templates/admin-page-synonyms.php:70
 #: templates/admin-tab-fields.php:220
-#: templates/admin-tab-general.php:219
+#: templates/admin-tab-general.php:227
 #: templates/admin-tab-layout.php:145
 #: templates/admin-tab-spellcheck.php:26
 #: templates/admin-tab-stopwords.php:23
 #: templates/admin-tab-styling.php:223
 msgid "Documentation"
-msgstr ""
+msgstr "文档"
 
-#: templates/admin-page-stop-words.php:18
-#: templates/admin-page-synonyms.php:21
+#: templates/admin-page-stop-words.php:30
+#: templates/admin-page-synonyms.php:44
 msgid "Applies globally to all widgets."
-msgstr ""
+msgstr "全局应用于所有小部件。"
 
-#: templates/admin-page-stop-words.php:19
+#: templates/admin-page-stop-words.php:31
 #: templates/admin-tab-stopwords.php:10
 msgid "Add a list of words that should be skipped from the search request."
-msgstr ""
+msgstr "添加搜索请求中应跳过的单词列表。"
 
-#: templates/admin-page-synonyms.php:22
+#: templates/admin-page-synonyms.php:45
 #: templates/admin-tab-spellcheck.php:10
 msgid "Add synonyms for words that you think could be misspelled"
-msgstr ""
+msgstr "添加您认为可能拼写错误的单词的同义词"
 
-#: templates/admin-page-synonyms.php:24
+#: templates/admin-page-synonyms.php:47
 #: templates/admin-tab-spellcheck.php:12
 msgid "Example"
-msgstr ""
+msgstr "例子"
+
+#: templates/admin-page-synonyms.php:49
+#: templates/admin-tab-spellcheck.php:16
+msgid "Correct"
+msgstr "正确"
+
+#: templates/admin-page-synonyms.php:50
+#: templates/admin-tab-spellcheck.php:17
+msgid "Wrong"
+msgstr "错误"
 
 #: templates/admin-page-widgets.php:24
 msgid "Edit Widget"
-msgstr ""
+msgstr "编辑小部件"
 
-#: templates/admin-page-widgets.php:38
+#: templates/admin-page-widgets.php:36
 msgid "Enhance Standard Widgets"
-msgstr ""
+msgstr "增强标准小部件"
 
-#: templates/admin-page-widgets.php:45
-#: templates/admin-page-widgets.php:83
+#: templates/admin-page-widgets.php:43
+#: templates/admin-page-widgets.php:81
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
-#: templates/admin-page-widgets.php:46
-#: templates/admin-page-widgets.php:84
+#: templates/admin-page-widgets.php:44
+#: templates/admin-page-widgets.php:82
 #: templates/admin-tab-fields.php:86
 #: templates/admin-tab-order.php:18
 msgid "Title"
-msgstr ""
+msgstr "标题"
 
-#: templates/admin-page-widgets.php:47
+#: templates/admin-page-widgets.php:45
 msgid "Is active?"
-msgstr ""
+msgstr "是否激活？"
 
-#: templates/admin-page-widgets.php:76
+#: templates/admin-page-widgets.php:74
 msgid "Custom Widgets"
-msgstr ""
+msgstr "自定义小部件"
 
-#: templates/admin-page-widgets.php:85
+#: templates/admin-page-widgets.php:83
 msgid "Shortcode"
-msgstr ""
+msgstr "短代码"
 
 #: templates/admin-tab-fields.php:10
 msgid "Post Types"
-msgstr ""
+msgstr "文章类型"
 
 #. translators: %s: Name of a Post Type
 #: templates/admin-tab-fields.php:29
+#, php-format
 msgid "Enable search in %s"
-msgstr ""
+msgstr "在 %s 中启用搜索"
 
 #: templates/admin-tab-fields.php:41
 msgid "Product Variations"
-msgstr ""
+msgstr "产品变量"
 
 #: templates/admin-tab-fields.php:42
 msgid "Enable search through Product Variations"
-msgstr ""
+msgstr "启用通过产品变体进行搜索"
 
 #: templates/admin-tab-fields.php:73
 msgid "Enable search through selected custom post types"
-msgstr ""
+msgstr "启用通过选定的自定义帖子类型进行的搜索"
 
 #: templates/admin-tab-fields.php:80
 msgid "Fields"
-msgstr ""
+msgstr "字段"
 
 #: templates/admin-tab-fields.php:87
 msgid "Enable search in the title"
-msgstr ""
-
-#: templates/admin-tab-fields.php:93
-msgid "Content"
-msgstr ""
+msgstr "在标题中启用搜索"
 
 #: templates/admin-tab-fields.php:94
 msgid "Enable search in the content"
-msgstr ""
+msgstr "启用内容搜索"
 
 #: templates/admin-tab-fields.php:100
 msgid "Short description (Excerpt)"
-msgstr ""
+msgstr "简短描述（摘录）"
 
 #: templates/admin-tab-fields.php:101
 msgid "Enable search in the short description"
-msgstr ""
+msgstr "在简短描述中启用搜索"
 
 #: templates/admin-tab-fields.php:107
 msgid "Product SKU"
-msgstr ""
+msgstr "产品SKU"
 
 #: templates/admin-tab-fields.php:108
 msgid "Enable search in product SKU"
-msgstr ""
+msgstr "启用产品 SKU 搜索"
 
 #: templates/admin-tab-fields.php:115
 msgid "Enable search in Custom Fields. Fill in each field slug on a new line"
-msgstr ""
+msgstr "在自定义字段中启用搜索。在新行中填写每个字段"
 
 #: templates/admin-tab-fields.php:122
 msgid "Taxonomies"
-msgstr ""
+msgstr "分类法"
 
 #: templates/admin-tab-fields.php:129
 msgid "Enable search in post tags"
-msgstr ""
+msgstr "启用帖子标签中的搜索功能"
 
 #: templates/admin-tab-fields.php:136
 msgid "Enable search in post categories"
-msgstr ""
+msgstr "启用帖子类别搜索"
 
 #: templates/admin-tab-fields.php:144
 msgid "Enable search in product tags"
-msgstr ""
+msgstr "启用产品标签搜索"
 
 #: templates/admin-tab-fields.php:151
 msgid "Enable search in product categories"
-msgstr ""
+msgstr "启用产品类别搜索"
 
 #: templates/admin-tab-fields.php:178
 msgid "Enable search in selected custom taxonomies"
-msgstr ""
+msgstr "在选定的自定义分类法中启用搜索"
 
 #: templates/admin-tab-fields.php:201
 msgid "Allowed Product Categories"
-msgstr ""
+msgstr "允许的产品分类"
 
 #: templates/admin-tab-fields.php:202
 msgid "Limit customers' search to selected product categories"
-msgstr ""
+msgstr "将客户的搜索限制在选定的产品类别内"
 
 #: templates/admin-tab-fields.php:209
 msgid "Disallowed Product Categories"
-msgstr ""
+msgstr "禁止的产品类别"
 
 #: templates/admin-tab-fields.php:210
 msgid "Disallow search in selected product categories"
-msgstr ""
+msgstr "禁止在选定的产品类别中进行搜索"
 
 #: templates/admin-tab-general.php:8
 #: templates/admin-tab-general.php:17
 #: templates/admin-tab-general.php:26
-#: templates/admin-tab-general.php:202
+#: templates/admin-tab-general.php:210
 msgid "Enable"
-msgstr ""
+msgstr "启用"
 
 #: templates/admin-tab-general.php:9
 #: templates/admin-tab-general.php:18
 #: templates/admin-tab-general.php:27
+#, php-format
 msgid "Enhance the standard %s search widget with the %s features"
-msgstr ""
+msgstr "使用 %s 功能增强标准 %s 搜索小部件"
 
 #: templates/admin-tab-general.php:33
 #: templates/admin-tab-styling.php:7
 msgid "Input Field"
-msgstr ""
+msgstr "输入字段"
 
 #: templates/admin-tab-general.php:40
 msgid "Placeholder text for the search field"
-msgstr ""
+msgstr "搜索字段的占位符文本"
 
 #: templates/admin-tab-general.php:41
 msgid "Search"
-msgstr ""
+msgstr "搜索"
 
 #: templates/admin-tab-general.php:47
 msgid "Minimum Number of Characters"
-msgstr ""
+msgstr "最小字符数"
 
 #: templates/admin-tab-general.php:48
 msgid "Minimum number of characters required to start a search"
-msgstr ""
+msgstr "开始搜索所需的最少字符数"
 
 #: templates/admin-tab-general.php:53
 #: templates/admin-tab-styling.php:93
 msgid "Results Popup"
-msgstr ""
+msgstr "结果弹出窗口"
 
 #: templates/admin-tab-general.php:58
 msgid "Maximum Number of Results"
-msgstr ""
+msgstr "最大结果数"
 
 #: templates/admin-tab-general.php:59
 msgid "Maximum number of results that can be displayed in a popup"
-msgstr ""
+msgstr "弹出窗口中可显示的最大结果数"
 
 #: templates/admin-tab-general.php:65
 msgid "Description's Size"
-msgstr ""
+msgstr "描述的大小"
 
 #: templates/admin-tab-general.php:66
 msgid "Maximum number of characters in the description"
-msgstr ""
+msgstr "描述中的最大字符数"
 
 #: templates/admin-tab-general.php:72
 msgid "Text of \"No Results\" notification"
-msgstr ""
+msgstr "“无结果”通知文本"
 
 #: templates/admin-tab-general.php:73
 msgid "Displays when no results are found"
-msgstr ""
+msgstr "未找到结果时显示"
 
 #: templates/admin-tab-general.php:79
 msgid "Text of \"View All\" Button"
-msgstr ""
+msgstr "“查看全部”按钮的文字"
 
 #: templates/admin-tab-general.php:80
 msgid "The button is only displayed if the field is not empty"
-msgstr ""
+msgstr "仅当字段不为空时才会显示该按钮"
 
 #: templates/admin-tab-general.php:86
 msgid "New Tab when \"View All\" Button Clicked"
-msgstr ""
+msgstr "单击“查看全部”按钮时显示新标签"
 
 #: templates/admin-tab-general.php:87
 msgid "Open results in a new tab when \"View All\" button clicked. Adds target=\"_blank\" attribute to the \"View All\" button"
-msgstr ""
+msgstr "单击“查看全部”按钮时在新选项卡中打开结果。将 target=\"_blank\" 属性添加到“查看全部”按钮"
 
 #: templates/admin-tab-general.php:93
 msgid "Number of Found Results in the \"View All\" Button"
-msgstr ""
+msgstr "“查看全部”按钮中找到的结果数"
 
 #: templates/admin-tab-general.php:94
 msgid "Display total number of found results in the \"View All\" button"
-msgstr ""
+msgstr "在“查看全部”按钮中显示找到的结果总数"
 
 #: templates/admin-tab-general.php:101
 msgid "Disable AJAX"
-msgstr ""
+msgstr "禁用AJAX"
 
 #: templates/admin-tab-general.php:102
 msgid "Disables AJAX functionality. The results popup will not appear"
-msgstr ""
+msgstr "禁用 AJAX 功能。结果弹出窗口不会出现"
 
 #: templates/admin-tab-general.php:107
 msgid "Search Engine Features"
-msgstr ""
+msgstr "搜索引擎功能"
 
 #: templates/admin-tab-general.php:112
 msgid "Multiple Word Search"
-msgstr ""
+msgstr "多关键词搜索"
 
 #: templates/admin-tab-general.php:113
 msgid "Select how to handle multiple word search"
-msgstr ""
+msgstr "选择如何处理多个单词搜索"
 
 #: templates/admin-tab-general.php:116
 msgid "Only exact match"
-msgstr ""
+msgstr "仅限精确匹配"
 
 #: templates/admin-tab-general.php:117
 msgid "\"A\" or \"B\""
-msgstr ""
+msgstr "“A” 或 “B”"
 
 #: templates/admin-tab-general.php:118
 msgid "\"A\" and \"B\""
-msgstr ""
+msgstr "“A” 和 “B”"
 
 #: templates/admin-tab-general.php:124
 msgid "Exclude Out of Stock Products"
-msgstr ""
+msgstr "排除缺货产品"
 
 #: templates/admin-tab-general.php:125
 msgid "Exclude out of stock products and variations from results"
-msgstr ""
+msgstr "从结果中排除缺货产品和变体"
 
 #: templates/admin-tab-general.php:132
 msgid "Exclude variations from results if the parent product is \"Out of stock\""
-msgstr ""
+msgstr "如果父产品“缺货”，则从结果中排除变体"
 
 #: templates/admin-tab-general.php:139
 msgid "Visibility of Products with Variations"
-msgstr ""
+msgstr "有变化的产品的可见性"
 
 #: templates/admin-tab-general.php:140
 msgid "Select visibility of parent products and variations"
-msgstr ""
+msgstr "选择父产品和变体的可见性"
 
 #: templates/admin-tab-general.php:142
 msgid "Parent product with variations"
-msgstr ""
+msgstr "具有变体的父产品"
 
 #: templates/admin-tab-general.php:143
 msgid "Only parent product"
-msgstr ""
+msgstr "仅限父产品"
 
 #: templates/admin-tab-general.php:144
 msgid "Only variations"
-msgstr ""
-
-#: templates/admin-tab-general.php:151
-msgid "Skip Punctuation"
-msgstr ""
+msgstr "仅限变体"
 
 #: templates/admin-tab-general.php:152
+msgid "Search by SKU first. Only works if the request is numeric"
+msgstr "首先按 SKU 搜索。仅当请求为数字时才有效"
+
+#: templates/admin-tab-general.php:159
+msgid "Skip Punctuation"
+msgstr "跳过标点符号"
+
+#: templates/admin-tab-general.php:160
 msgid "Skip punctuation in the search query"
-msgstr ""
+msgstr "跳过搜索查询中的标点符号"
 
-#: templates/admin-tab-general.php:158
+#: templates/admin-tab-general.php:166
 msgid "Search Results Page"
-msgstr ""
-
-#: templates/admin-tab-general.php:163
-msgid "Disable Redirect to Product Page"
-msgstr ""
-
-#: templates/admin-tab-general.php:164
-msgid "Prevent WooCommerce from automatically redirecting to a product page when there is only one search result."
-msgstr ""
-
-#: templates/admin-tab-general.php:170
-msgid "Suppress Database Query Altering"
-msgstr ""
+msgstr "搜索结果页"
 
 #: templates/admin-tab-general.php:171
-msgid "Prevent the theme or plugins from modifying the database query on the search results page"
-msgstr ""
+msgid "Disable Redirect to Product Page"
+msgstr "禁用重定向至产品页面"
 
-#: templates/admin-tab-general.php:177
-msgid "Disable Smart Search Feature on the Search Results Page"
-msgstr ""
+#: templates/admin-tab-general.php:172
+msgid "Prevent WooCommerce from automatically redirecting to a product page when there is only one search result."
+msgstr "当只有一个搜索结果时，防止 WooCommerce 自动重定向到产品页面。"
 
 #: templates/admin-tab-general.php:178
-msgid "Disable altering search results by Smart Search plugin on the search results page.<br>By default the plugin modified search results according to selected options"
-msgstr ""
+msgid "Suppress Database Query Altering"
+msgstr "抑制数据库查询更改"
 
-#: templates/admin-tab-general.php:184
-msgid "Disable WooCommerce Template on the Search Results Page"
-msgstr ""
+#: templates/admin-tab-general.php:179
+msgid "Prevent the theme or plugins from modifying the database query on the search results page"
+msgstr "防止主题或插件修改搜索结果页面上的数据库查询"
 
 #: templates/admin-tab-general.php:185
-msgid "Displays the default search results template defined in the theme instead of WooCommerce template.<br>Useful if you want to display posts with products together"
-msgstr ""
+msgid "Disable Smart Search Feature on the Search Results Page"
+msgstr "在搜索结果页面上禁用智能搜索功能"
 
-#: templates/admin-tab-general.php:191
-msgid "Highlight Search Terms on the Search Results Page"
-msgstr ""
+#: templates/admin-tab-general.php:186
+msgid "Disable altering search results by Smart Search plugin on the search results page.<br>By default the plugin modified search results according to selected options"
+msgstr "禁用在搜索结果页面上通过智能搜索插件更改搜索结果。<br>默认情况下，插件根据所选选项修改搜索结果"
 
 #: templates/admin-tab-general.php:192
+msgid "Disable WooCommerce Template on the Search Results Page"
+msgstr "在搜索结果页面上禁用 WooCommerce 模板"
+
+#: templates/admin-tab-general.php:193
+msgid "Displays the default search results template defined in the theme instead of WooCommerce template.<br>Useful if you want to display posts with products together"
+msgstr "显示主题中定义的默认搜索结果模板，而不是 WooCommerce 模板。<br>如果你想同时显示带有产品的帖子，这很有用"
+
+#: templates/admin-tab-general.php:199
+msgid "Highlight Search Terms on the Search Results Page"
+msgstr "在搜索结果页面上突出显示搜索词"
+
+#: templates/admin-tab-general.php:200
 msgid "Highlight words that match a search query on the search results page. Works only if the Smart Search Feature is not disabled on the search results page"
-msgstr ""
+msgstr "在搜索结果页面上突出显示与搜索查询匹配的单词。仅当在搜索结果页面上未禁用智能搜索功能时才有效"
 
-#: templates/admin-tab-general.php:197
+#: templates/admin-tab-general.php:205
 msgid "Advanced"
-msgstr ""
-
-#: templates/admin-tab-general.php:203
-msgid "Save search results in a WordPress Transient.<br>Might be useful if your server does not have Memcache/Redis"
-msgstr ""
+msgstr "高级"
 
 #: templates/admin-tab-general.php:211
+msgid "Save search results in a WordPress Transient.<br>Might be useful if your server does not have Memcache/Redis"
+msgstr "在 WordPress Transient 中保存搜索结果。<br>如果你的服务器没有 Memcache/Redis，这可能会有用"
+
+#: templates/admin-tab-general.php:219
 msgid "It may be helpful if you changed the base slug for WooCommerce products. The base slug is \"product\""
-msgstr ""
+msgstr "如果您更改了 WooCommerce 产品的基本 slug，可能会有所帮助。基本 slug 是“产品”"
 
 #: templates/admin-tab-layout.php:5
 msgid "Results Popup Elements"
-msgstr ""
+msgstr "结果弹窗文本元素"
 
 #: templates/admin-tab-layout.php:10
 msgid "Columns Layout"
-msgstr ""
+msgstr "列布局"
 
 #: templates/admin-tab-layout.php:11
 msgid "Set the maximum number of columns to show in the popup.<br>To choose a Grid layout instead of List layout select columns number more than 1"
-msgstr ""
+msgstr "设置弹出窗口中显示的最大列数。<br>要选择网格布局而不是列表布局，请选择列数大于 1"
 
 #: templates/admin-tab-layout.php:25
 msgid "Popup Max Height, px"
-msgstr ""
+msgstr "弹出窗口最大高度，px"
 
 #: templates/admin-tab-layout.php:26
 msgid "Popup max height in pixels. Default is 500px"
-msgstr ""
+msgstr "弹出窗口的最大高度（以像素为单位）。默认为 500px"
 
 #: templates/admin-tab-layout.php:32
 msgid "Popup Max Height (on mobile screen), px"
-msgstr ""
+msgstr "弹出窗口最大高度（在移动设备屏幕上），px"
 
 #: templates/admin-tab-layout.php:33
 msgid "Popup max height in pixels for mobile screen (max-width: 768px). Default is 400px"
-msgstr ""
+msgstr "移动屏幕弹出窗口的最大高度（以像素为单位）（最大宽度：768px）。默认值为 400px"
 
 #: templates/admin-tab-layout.php:39
 msgid "Display Image"
-msgstr ""
+msgstr "显示图片"
 
 #: templates/admin-tab-layout.php:47
 msgid "Use the parent product image if a variation has no image"
-msgstr ""
+msgstr "如果变体没有图片，则使用父产品图片"
 
 #: templates/admin-tab-layout.php:55
 msgid "Image Size"
-msgstr ""
+msgstr "图片大小"
 
 #: templates/admin-tab-layout.php:56
 msgid "Select image size"
-msgstr ""
+msgstr "选择图像大小"
 
 #: templates/admin-tab-layout.php:63
 msgid "Image Max Width, px"
-msgstr ""
+msgstr "图片最大宽度，px"
 
 #: templates/admin-tab-layout.php:64
 msgid "Limit image maximal width in pixels"
-msgstr ""
+msgstr "限制图像的最大宽度（以像素为单位）"
 
 #: templates/admin-tab-layout.php:70
 msgid "Display Description"
-msgstr ""
+msgstr "显示描述"
 
 #: templates/admin-tab-layout.php:71
 msgid "Display product description"
-msgstr ""
+msgstr "显示产品描述"
 
 #: templates/admin-tab-layout.php:77
 msgid "Description's Location"
-msgstr ""
+msgstr "描述的位置"
 
 #: templates/admin-tab-layout.php:81
 msgid "Under the image"
-msgstr ""
+msgstr "正在建设中图像"
 
 #: templates/admin-tab-layout.php:82
 msgid "Under the title"
-msgstr ""
+msgstr "在标题之下"
 
 #: templates/admin-tab-layout.php:83
 msgid "Under the price and SKU"
-msgstr ""
+msgstr "根据价格和SKU"
 
 #: templates/admin-tab-layout.php:89
 msgid "Display Category"
-msgstr ""
+msgstr "显示类别"
 
 #: templates/admin-tab-layout.php:90
 msgid "Display product or post category"
-msgstr ""
+msgstr "显示产品或帖子类别"
 
 #: templates/admin-tab-layout.php:96
 msgid "Display Product Price"
-msgstr ""
+msgstr "显示产品价格"
 
 #: templates/admin-tab-layout.php:103
 msgid "Display Product SKU"
-msgstr ""
+msgstr "显示产品 SKU"
 
 #: templates/admin-tab-layout.php:110
 msgid "Display \"Out of stock\" Label"
-msgstr ""
+msgstr "显示“缺货”标签"
 
 #: templates/admin-tab-layout.php:111
 msgid "Indicates if a product is out of stock"
-msgstr ""
+msgstr "指示产品是否缺货"
 
 #: templates/admin-tab-layout.php:118
 msgid "Display \"Sale\" Label"
-msgstr ""
+msgstr "显示“销售”标签"
 
 #: templates/admin-tab-layout.php:119
 msgid "Indicates if product has discount price"
-msgstr ""
+msgstr "表示产品是否有折扣价"
 
 #: templates/admin-tab-layout.php:126
 msgid "Display \"Featured\" Label"
-msgstr ""
+msgstr "显示“精选”标签"
 
 #: templates/admin-tab-layout.php:127
 msgid "Indicates if product is marked as special"
-msgstr ""
+msgstr "表示产品是否标记为特殊"
 
 #: templates/admin-tab-layout.php:134
 msgid "Display \"Add to Cart\" Button"
-msgstr ""
+msgstr "显示“添加到购物车”按钮"
 
 #: templates/admin-tab-layout.php:135
 msgid "Allow users to add products to their cart directly from the popup"
-msgstr ""
+msgstr "允许用户直接从弹出窗口将产品添加到购物车"
 
 #: templates/admin-tab-order.php:15
 msgid "Sort retrieved results by parameter"
-msgstr ""
+msgstr "按参数对检索到的结果进行排序"
 
 #: templates/admin-tab-order.php:19
 msgid "Publish Date"
-msgstr ""
+msgstr "发布日期"
 
 #: templates/admin-tab-order.php:20
 msgid "Modified Date"
-msgstr ""
+msgstr "修改日期"
 
 #: templates/admin-tab-order.php:27
 msgid "Ascending means smallest to largest, 0 to 9, and/or A to Z and Descending means largest to smallest, 9 to 0, and/or Z to A"
-msgstr ""
+msgstr "升序表示从小到大、0 到 9 和/或从 A 到 Z，降序表示从大到小、9 到 0 和/或从 Z 到 A"
 
 #: templates/admin-tab-order.php:29
 msgid "ASC"
-msgstr ""
+msgstr "升序"
 
 #: templates/admin-tab-order.php:30
 msgid "DESC"
-msgstr ""
+msgstr "降序"
 
 #: templates/admin-tab-spellcheck.php:14
 #: templates/admin-tab-stopwords.php:12
 msgid "Applies only to the current widget"
-msgstr ""
-
-#: templates/admin-tab-spellcheck.php:16
-msgid "Correct"
-msgstr ""
-
-#: templates/admin-tab-spellcheck.php:17
-msgid "Wrong"
-msgstr ""
+msgstr "仅适用于当前小部件"
 
 #: templates/admin-tab-styling.php:12
 msgid "Search Field Height, px"
-msgstr ""
+msgstr "搜索字段高度，px"
 
 #: templates/admin-tab-styling.php:13
 msgid "Set the search field height in pixels"
-msgstr ""
+msgstr "设置搜索字段高度（以像素为单位）"
 
 #: templates/admin-tab-styling.php:19
 #: templates/admin-tab-styling.php:105
 msgid "Rounded Border"
-msgstr ""
+msgstr "圆角边框"
 
 #: templates/admin-tab-styling.php:20
 msgid "Display search field with a rounded border (frame)"
-msgstr ""
+msgstr "显示带有圆角边框（框架）的搜索字段"
 
 #: templates/admin-tab-styling.php:26
 #: templates/admin-tab-styling.php:112
 msgid "Border Color"
-msgstr ""
+msgstr "边框颜色"
 
 #: templates/admin-tab-styling.php:33
 msgid "Border Width, px"
-msgstr ""
+msgstr "边框宽度，px"
 
 #: templates/admin-tab-styling.php:34
 msgid "Border (frame) width in pixels"
-msgstr ""
+msgstr "边框（框架）宽度（以像素为单位）"
 
 #: templates/admin-tab-styling.php:40
 msgid "Text Color"
-msgstr ""
+msgstr "文本颜色"
 
 #: templates/admin-tab-styling.php:47
 #: templates/admin-tab-styling.php:119
 msgid "Background Color"
-msgstr ""
+msgstr "背景颜色"
 
 #: templates/admin-tab-styling.php:54
 msgid "Icon Color"
-msgstr ""
+msgstr "图标颜色"
 
 #: templates/admin-tab-styling.php:61
 msgid "Icon Background"
-msgstr ""
+msgstr "图标背景"
 
 #: templates/admin-tab-styling.php:73
 #: templates/admin-tab-styling.php:81
@@ -846,72 +880,93 @@ msgstr ""
 #: templates/admin-tab-styling.php:84
 #: templates/admin-tab-styling.php:85
 msgid "Loader"
-msgstr ""
+msgstr "加载"
 
 #: templates/admin-tab-styling.php:74
 msgid "Select loader's image"
-msgstr ""
+msgstr "选择加载器的图像"
 
 #: templates/admin-tab-styling.php:98
 msgid "Top Indentation"
-msgstr ""
+msgstr "顶部缩进"
 
 #: templates/admin-tab-styling.php:99
 msgid "Indentation between search bar and popup, px"
-msgstr ""
+msgstr "搜索栏和弹出窗口之间的缩进，px"
 
 #: templates/admin-tab-styling.php:106
 msgid "Display popup with a rounded border (frame)"
-msgstr ""
+msgstr "显示带有圆角边框（框架）的弹出窗口"
 
 #: templates/admin-tab-styling.php:126
 msgid "Title's Text Color"
-msgstr ""
+msgstr "标题的文字颜色"
 
 #: templates/admin-tab-styling.php:133
 msgid "Description's Text Color"
-msgstr ""
+msgstr "描述的文字颜色"
 
 #: templates/admin-tab-styling.php:140
 msgid "\"View all\" Button's Text Color"
-msgstr ""
+msgstr "“查看全部”按钮的文字颜色"
 
 #: templates/admin-tab-styling.php:147
 msgid "\"View all\" Button's Background Color"
-msgstr ""
+msgstr "“查看全部”按钮的背景颜色"
 
 #: templates/admin-tab-styling.php:154
 msgid "Category Color"
-msgstr ""
+msgstr "分类颜色"
 
 #: templates/admin-tab-styling.php:160
 msgid "Product Elements"
-msgstr ""
+msgstr "产品元素"
 
 #: templates/admin-tab-styling.php:165
 msgid "Price Color"
-msgstr ""
+msgstr "价格颜色"
 
 #: templates/admin-tab-styling.php:172
 msgid "\"Out of stock\" Label Text Color"
-msgstr ""
+msgstr "“缺货”标签文字颜色"
 
 #: templates/admin-tab-styling.php:180
 msgid "\"Out of stock\" Label Background Color"
-msgstr ""
+msgstr "“缺货”标签背景颜色"
 
 #: templates/admin-tab-styling.php:188
 msgid "\"Sale\" Label Text Color"
-msgstr ""
+msgstr "“销售”标签文字颜色"
 
 #: templates/admin-tab-styling.php:196
 msgid "\"Sale\" Label Background Color"
-msgstr ""
+msgstr "“销售”标签背景颜色"
 
 #: templates/admin-tab-styling.php:204
 msgid "\"Featured\" Label Text Color"
-msgstr ""
+msgstr "“特色”标签文字颜色"
 
 #: templates/admin-tab-styling.php:212
 msgid "\"Featured\" Label Background Color"
-msgstr ""
+msgstr "“特色”标签背景颜色"
+
+#. Plugin Name of the plugin
+#: index.php
+msgid "Smart WooCommerce Search"
+msgstr "Smart WooCommerce Search"
+
+#. Plugin URI of the plugin
+#. Author URI of the plugin
+#: index.php
+msgid "https://www.wpsmartsearch.com/"
+msgstr "https://www.wpsmartsearch.com/"
+
+#. Description of the plugin
+#: index.php
+msgid "Smart Ajax Search allows you to instantly search WooCommerce products."
+msgstr "智能 Ajax 搜索允许您即时搜索 WooCommerce 产品。"
+
+#. Author of the plugin
+#: index.php
+msgid "YummyWP"
+msgstr "YummyWP"

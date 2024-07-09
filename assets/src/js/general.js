@@ -179,6 +179,9 @@
 					return res;
 				},
 				onSearchComplete: function ( query, suggestions ) {
+					if ( query !== $this.val() ) {
+						return;
+					}
 
 					$this.css( 'background-image', 'none' );
 
@@ -247,17 +250,18 @@
 
 				},
 				onSearchError: function ( query, jqXHR, textStatus, errorThrown ) {
-					if ( textStatus === 'error' && errorThrown === 'Forbidden' ) {
+					if ( textStatus === 'error' ) {
 						var nonceRefresh = jqXHR.getResponseHeader('X-Wp-Nonce');
 
 						if ( nonceRefresh && swsL10n.nonce !== nonceRefresh ) {
 							window.swsL10n.nonce = nonceRefresh;
+							$this.devbridgeAutocomplete().onValueChange();
+							return;
 						} else if ( swsL10n.nonce ) {
 							window.swsL10n.nonce = '';
+							$this.devbridgeAutocomplete().onValueChange();
+							return;
 						}
-
-						$this.devbridgeAutocomplete().onValueChange();
-						return;
 					}
 
 					$el.addClass( 'ysm-hide' ).removeClass( 'sws-no-results' );

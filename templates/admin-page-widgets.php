@@ -33,6 +33,8 @@ if ( $action && 'edit' === $action && $id ) {
 			<span><?php echo esc_html( get_admin_page_title() ); ?></span>
 		</h1>
 
+		<?php \YummyWP\App\Notification::display(); ?>
+
 		<h2 class="ysm-widgets-title"><?php esc_html_e( 'Enhance Standard Widgets', 'smart-woocommerce-search' ); ?></h2>
 
 		<div class="ysm-widgets-list">
