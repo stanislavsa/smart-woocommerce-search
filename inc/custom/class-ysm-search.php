@@ -33,6 +33,12 @@ class Ysm_Search {
 	 * @var array
 	 */
 	protected static $found_posts = 0;
+	/**
+	 * Found post ids
+	 * @var array
+	 */
+	public static $post_ids = [];
+	public static $processed = false;
 
 	/**
 	 * List of protected vars, that can't be overwritten
@@ -217,26 +223,24 @@ class Ysm_Search {
 				} else {
 					$posts_count = $per_page;
 				}
-				$paged = $query->query_vars['paged'];
-				if ( !$paged || 1 === $paged ) {
-					if ( isset( $_GET['fwp_paged'] ) ) {
-						$paged = (int) filter_input( INPUT_GET, 'fwp_paged', FILTER_SANITIZE_FULL_SPECIAL_CHARS );
-					}
-				}
-				if ( 1 < $paged ) {
-					$offset = ($paged - 1) * $posts_count;
-				} else {
-					$offset = 0;
-				}
-				$post_ids = self::search_posts( $posts_count, $offset );
+
+//				$paged = $query->query_vars['paged'];
+//				if ( !$paged || 1 === $paged ) {
+//					if ( isset( $_GET['fwp_paged'] ) ) {
+//						$paged = (int) filter_input( INPUT_GET, 'fwp_paged', FILTER_SANITIZE_FULL_SPECIAL_CHARS );
+//					}
+//				}
+
+				$post_ids = self::search_posts( $posts_count );
+
 				if ( empty( $post_ids ) ) {
 					$post_ids[] = 0;
 				}
+
 				$query->set( 's', '' );
 				$query->set( 'post__in', $post_ids );
 				$query->set( 'post_type', self::get_post_types() );
 				$query->set( 'ysm_found_posts', self::$found_posts );
-				$query->set( 'offset', 0 );
 				$query->set( 'posts_per_page', $posts_count );
 
 				if ( self::get_var( 'search_page_suppress_filters' ) ) {
@@ -289,12 +293,13 @@ class Ysm_Search {
 					}
 				}
 
-				$product_orderby = filter_input( INPUT_GET, 'product_orderby', FILTER_SANITIZE_FULL_SPECIAL_CHARS );
-				if ( empty( $product_orderby ) ) {
-					$orderby = $query->get( 'orderby' );
-					if ( 'relevance' === $orderby ) {
-						$query->set( 'orderby', 'post__in' );
-					}
+				$orderby_param = filter_input( INPUT_GET, 'product_orderby', FILTER_SANITIZE_FULL_SPECIAL_CHARS );
+				if ( ! $orderby_param ) {
+					$orderby_param = filter_input( INPUT_GET, 'orderby', FILTER_SANITIZE_FULL_SPECIAL_CHARS );
+				}
+				if ( ! $orderby_param || 'relevance' === $orderby_param ) {
+					$query->set( 'orderby', 'post__in' );
+					$query->set( 'order', 'ASC' );
 				}
 			}
 		}
@@ -321,10 +326,22 @@ class Ysm_Search {
 	 * @return array|null|object
 	 */
 	public static function search_posts( $posts_count = 0, $offset = 0 ) {
+
 		self::set_search_terms();
+
 		if ( !self::get_search_terms() ) {
 			return [];
 		}
+
+		if ( self::$processed ) {
+			/**
+			 * Modify the array of post ids
+			 *
+			 * @param array $post_ids List of post ids.
+			 */
+			return apply_filters( 'sws_search_result_post_ids', self::$post_ids );
+		}
+
 		$limit = self::get_var( 'max_post_count' );
 
 		$posts = array();
@@ -383,10 +400,10 @@ class Ysm_Search {
 					$posts_count = ysm_get_option( self::get_widget_id(), 'max_post_count' );
 				}
 			}
-			$resulted_posts = array_slice( $resulted_posts, $offset, $posts_count );
 		}
 
-//		$resulted_posts = self::query_results_filter( $resulted_posts );
+		self::$post_ids = $resulted_posts;
+		self::$processed = true;
 
 		/**
 		 * Modify the array of post ids
@@ -495,45 +512,6 @@ class Ysm_Search {
 		}
 		echo json_encode( $res );
 		exit;
-	}
-
-	/**
-	 * Sort results by relevance
-	 * @param $res_posts
-	 * @return array
-	 */
-	public static function query_results_filter( $res_posts ) {
-		$sorted = [];
-		$postmeta = self::get_var( 'postmeta' );
-		foreach ( $res_posts as $res_post ) {
-			$sorted[$res_post->ID] = $res_post;
-			if ( !isset( $sorted[$res_post->ID]->relevance ) ) {
-				$sorted[$res_post->ID]->relevance = 0;
-			} else {
-				$sorted[$res_post->ID]->relevance = (int) $sorted[$res_post->ID]->relevance;
-			}
-			foreach ( self::get_search_terms() as $w ) {
-				$pos = strpos( mb_strtolower( trim( $res_post->post_title ) ), $w );
-				if ( 0 === $pos ) {
-					$sorted[$res_post->ID]->relevance += 30;
-				} elseif ( 0 < $pos ) {
-					$sorted[$res_post->ID]->relevance += 20;
-				}
-				if ( !empty( $postmeta['_sku'] ) ) {
-					if ( isset( $res_post->meta_key ) && '_sku' === $res_post->meta_key ) {
-						$pos = strpos( mb_strtolower( trim( $res_post->meta_value ) ), $w );
-						if ( 0 === $pos ) {
-							$sorted[$res_post->ID]->relevance += 30;
-						} elseif ( 0 < $pos ) {
-							$sorted[$res_post->ID]->relevance += 20;
-						}
-					}
-				}
-			}
-		}
-		usort( $sorted, array(__CLASS__, 'cmp_title') );
-		usort( $sorted, array(__CLASS__, 'cmp_relevance') );
-		return $sorted;
 	}
 
 	/**

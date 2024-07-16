@@ -1,11 +1,11 @@
 === Smart WooCommerce Search ===
 Contributors: yummy-wp
 Tags: search, ajax search, product search, smart search, search by sku
-Stable tag: 2.11.3
+Stable tag: 2.11.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Requires at least: 5.9
-Tested up to: 6.5
+Tested up to: 6.6
 Requires PHP: 7.0
 
 Smart WooCommerce Search enhances your users' experience with a sophisticated AJAX search bar featuring real-time suggestions.
@@ -107,6 +107,16 @@ Yes, when using products search or when you set option to search only through pr
 4. Smart Search PRO - Index product data
 
 == Changelog ==
+
+= 2.11.5 =
+* Fixed: 'Product Collection' block's query fix on the search results page
+* Fixed: 'Query Loop' block's query fix on the search results page
+* Tweak: woocommerce order filters issue on the search results page
+* Tweak: updated custom search bar output to meet W3C requirements
+
+= 2.11.4 =
+* Fixed: search results page issue in a block-themes
+* Tweak: woocommerce order filters issue on the search results page
 
 = 2.11.3 =
 * Fixed: problem with expired nonce due to cached page

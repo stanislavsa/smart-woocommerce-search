@@ -197,14 +197,6 @@
 		<th class="ymapp-settings__title"><?php esc_html_e( 'Advanced', 'smart-woocommerce-search' ); ?></th>
 
 		<?php
-		ysm_setting( $w_id, 'enable_transient', array(
-			'type'        => 'checkbox',
-			'title'       => __( 'Enable', 'smart-woocommerce-search' ) . ' Transient',
-			'description' => __( 'Save search results in a WordPress Transient.<br>Might be useful if your server does not have Memcache/Redis', 'smart-woocommerce-search' ),
-			'value'       => 0,
-			'is_pro'      => true,
-		));
-
 		ysm_setting( $w_id, 'product_slug', array(
 			'type'        => 'text',
 			'title'       => 'Product Slug',
