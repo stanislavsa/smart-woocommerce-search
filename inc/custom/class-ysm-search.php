@@ -65,7 +65,7 @@ class Ysm_Search {
 	public static function init() {
 		self::$time_start = microtime( true );
 		add_action( 'pre_get_posts', array(__CLASS__, 'search_filter'), PHP_INT_MAX );
-//		add_action( 'woocommerce_product_query', array(__CLASS__, 'search_filter'), PHP_INT_MAX );
+//		add_action( 'woocommerce_product_query', array(__CLASS__, 'wc_product_query'), PHP_INT_MAX );
 		add_action( 'wp', array(__CLASS__, 'remove_search_filter'), 9999 );
 		add_filter( 'found_posts', array( __CLASS__, 'alter_found_posts' ), PHP_INT_MAX, 2 );
 
