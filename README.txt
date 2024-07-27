@@ -111,6 +111,7 @@ Yes, when using products search or when you set option to search only through pr
 = 2.11.5 =
 * Fixed: 'Product Collection' block's query fix on the search results page
 * Fixed: 'Query Loop' block's query fix on the search results page
+* Fixed: compatibility issue with "HUSKY - Products Filter Professional for WooCommerce" plugin
 * Tweak: woocommerce order filters issue on the search results page
 * Tweak: updated custom search bar output to meet W3C requirements
 

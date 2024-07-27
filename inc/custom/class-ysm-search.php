@@ -301,6 +301,10 @@ class Ysm_Search {
 					$query->set( 'orderby', 'post__in' );
 					$query->set( 'order', 'ASC' );
 				}
+				// woof plugin
+				if ( isset( $query->query_vars['woof_text_filter'] ) ) {
+					$query->query_vars['woof_text_filter'] = '';
+				}
 			}
 		}
 	}
