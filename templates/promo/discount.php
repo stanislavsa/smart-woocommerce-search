@@ -14,13 +14,13 @@ $summer_2024_promo_name = 'sws_promo_dismiss_summer_2024';
 		</div>
 		<div class="sws-promo-container__right">
 			<h3 class="sws-promo-container__heading">
-				30% off - Summer Sale
+				30% off - Endless Summer Sale
 			</h3>
 			<p>Make your site's search even faster with the PRO data indexing feature, synonyms and stop words.
 				Search in Variations, Custom Post Types, Custom Taxonomies, Custom Fields, Product Attributes.
 				Check how it works and looks on the <a href="https://demo.wpsmartsearch.com/" target="_blank">Demo</a>.
 				Pro is compatible with WPML and Polylang plugins.
-				<br><br>Save 30% off with the promo code <b>summer2024promo</b> at <a href="https://www.wpsmartsearch.com/features/" target="_blank">Checkout</a>. Hurry, offer ends 31 August!</p>
+				<br><br>Save 30% off with the promo code <b>summer2024promo</b> at <a href="https://www.wpsmartsearch.com/features/?utm_source=free_plugin&utm_medium=banner&utm_campaign=sale2024" target="_blank">Checkout</a>. Hurry, offer ends 30th September!</p>
 			<div class="sws-promo-container__dismiss">
 				<a href="#">Dismiss</a>
 			</div>

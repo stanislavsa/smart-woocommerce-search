@@ -33,6 +33,12 @@ function front_scripts() {
 		    $css_classes[ '.ysm-search-widget-' . $k ] = '.ysm-search-widget-' . $k;
 	    }
 
+	    $extra_bar_css_classes = apply_filters( 'sws_search_bar_css_selectors', [], $k );
+
+	    if ( $extra_bar_css_classes && is_array( $extra_bar_css_classes ) ) {
+		    $css_classes = array_merge( $css_classes, $extra_bar_css_classes );
+	    }
+
 	    $widget_params['selector'] = implode( ', ', $css_classes );
 	    $widget_params['charCount'] = isset( $v['settings']['char_count'] ) ? (int) $v['settings']['char_count'] : 3;
 	    $widget_params['disableAjax'] = ! empty( $v['settings']['disable_ajax'] );

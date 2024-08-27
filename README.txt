@@ -1,7 +1,7 @@
 === Smart WooCommerce Search ===
 Contributors: yummy-wp
 Tags: search, ajax search, product search, smart search, search by sku
-Stable tag: 2.11.5
+Stable tag: 2.11.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Requires at least: 5.9
@@ -18,7 +18,7 @@ Smart WooCommerce Search enhances your users' experience with a sophisticated AJ
 
 [Documentation](https://www.wpsmartsearch.com/docs/)
 
-[Upgrade to PRO](https://www.wpsmartsearch.com/features/)
+[Upgrade to PRO](https://www.wpsmartsearch.com/features/?utm_source=wporg&utm_medium=link&utm_campaign=upgrade_to_pro)
 
 While WooCommerce's default search is basic, lacking **live product search** and **SKU search** functionality, **Smart WooCommerce Search** delivers advanced search capabilities along with live suggestions.
 
@@ -107,6 +107,9 @@ Yes, when using products search or when you set option to search only through pr
 4. Smart Search PRO - Index product data
 
 == Changelog ==
+
+= 2.11.6 =
+* Added: WP filter 'sws_search_bar_css_selectors' to set CSS selectors to extend existing search bar with Smart Search features
 
 = 2.11.5 =
 * Fixed: 'Product Collection' block's query fix on the search results page
