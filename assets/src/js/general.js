@@ -44,11 +44,12 @@
 				return;
 			}
 
-			if ( $el.hasClass('ysm-active') ) {
+			if ( $el.hasClass('ysm-active') || $form.hasClass('ysm-active') ) {
 				return;
 			}
 
 			$el.addClass( 'ysm-active' ).addClass( 'ysm-hide' );
+			$form.addClass( 'ysm-active' );
 
 			var defaults = {
 				id: '',
@@ -96,9 +97,15 @@
 
 			$( '<div class="smart-search-popup"><div class="smart-search-results"><div class="smart-search-results-inner"></div></div></div>' ).appendTo( $form );
 
-			var $popup = $form.find( '.smart-search-popup' ).css({
-				width: $this.outerWidth() + 'px'
-			});
+			var $popup = $form.find( '.smart-search-popup' );
+			var popupWidth = 0;
+
+			if ( $this.outerWidth() ) {
+				popupWidth = $this.outerWidth();
+				$popup.css({
+					width: popupWidth + 'px'
+				});
+			}
 
 			var $results_wrapper = $form.find( '.smart-search-results' );
 			var $resultsWrapperInner = $results_wrapper.find( '.smart-search-results-inner' );
@@ -181,6 +188,13 @@
 				onSearchComplete: function ( query, suggestions ) {
 					if ( query !== $this.val() ) {
 						return;
+					}
+
+					if ( ! popupWidth ) {
+						popupWidth = $this.outerWidth();
+						$popup.css({
+							width: popupWidth + 'px'
+						});
 					}
 
 					$this.css( 'background-image', 'none' );

@@ -202,5 +202,9 @@ function ysm_add_inline_styles_to_stack( $v, $css_classes ) {
 				),
 			) );
 		}
+
+		if ( ! empty( $v['settings']['css_styles'] ) ) {
+			Ysm_Style_Generator::$inline_css .= $v['settings']['css_styles'];
+		}
 	}
 }

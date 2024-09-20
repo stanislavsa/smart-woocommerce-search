@@ -9,6 +9,7 @@ class Ysm_Style_Generator {
 	 * @var array
 	 */
 	private static $rules = array();
+	public static $inline_css = '';
 
 	/**
 	 * @param $widget_id
@@ -43,6 +44,10 @@ class Ysm_Style_Generator {
 					}
 				}
 			}
+		}
+
+		if ( ! empty( self::$inline_css ) ) {
+			$css .= self::$inline_css;
 		}
 
 		return $css;

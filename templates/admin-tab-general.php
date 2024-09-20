@@ -205,6 +205,27 @@
 			'is_pro'      => true,
 		));
 		?>
+
+		<?php
+		ysm_setting( $w_id, 'css_selectors', array(
+			'type'        => 'textarea_list',
+			'title'       => 'Custom CSS selectors',
+			'description' => __( 'To enhance existing search bar with the Smart Search features.', 'smart-woocommerce-search' )
+			                 . '<br>' .  __( 'Add a CSS selector (id or class) of the search bar\'s form element.', 'smart-woocommerce-search' )
+			                 . '<br>' .  __( 'Fill in each selector on a new line.', 'smart-woocommerce-search' )
+			                 . ' Eg. <code>form.header-search-bar</code>',
+			'value'       => '',
+		));
+		?>
+
+		<?php
+		ysm_setting( $w_id, 'css_styles', array(
+			'type'        => 'textarea_list',
+			'title'       => 'Custom CSS styles',
+			'description' =>  __( 'Add extra CSS styles', 'smart-woocommerce-search' ),
+			'value'       => '',
+		));
+		?>
 		</tbody>
 	</table>
 

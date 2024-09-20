@@ -2,14 +2,14 @@
 # This file is distributed under the same license as the Smart WooCommerce Search plugin.
 msgid ""
 msgstr ""
-"Project-Id-Version: Smart WooCommerce Search 2.11.6\n"
+"Project-Id-Version: Smart WooCommerce Search 2.11.7\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/smart-woocommerce-search\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2024-08-29T07:10:24+00:00\n"
+"POT-Creation-Date: 2024-09-20T18:19:59+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.10.0\n"
 "X-Domain: smart-woocommerce-search\n"
@@ -259,7 +259,7 @@ msgstr ""
 #: templates/admin-page-stop-words.php:31
 #: templates/admin-page-synonyms.php:37
 #: templates/admin-tab-fields.php:220
-#: templates/admin-tab-general.php:211
+#: templates/admin-tab-general.php:232
 #: templates/admin-tab-layout.php:145
 #: templates/admin-tab-spellcheck.php:26
 #: templates/admin-tab-stopwords.php:23
@@ -624,6 +624,22 @@ msgstr ""
 
 #: templates/admin-tab-general.php:203
 msgid "It may be helpful if you changed the base slug for WooCommerce products. The base slug is \"product\""
+msgstr ""
+
+#: templates/admin-tab-general.php:213
+msgid "To enhance existing search bar with the Smart Search features."
+msgstr ""
+
+#: templates/admin-tab-general.php:214
+msgid "Add a CSS selector (id or class) of the search bar's form element."
+msgstr ""
+
+#: templates/admin-tab-general.php:215
+msgid "Fill in each selector on a new line."
+msgstr ""
+
+#: templates/admin-tab-general.php:225
+msgid "Add extra CSS styles"
 msgstr ""
 
 #: templates/admin-tab-layout.php:5
