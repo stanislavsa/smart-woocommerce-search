@@ -29,9 +29,8 @@
 	background: #fff;
 	padding: 20px;
 	min-height: 200px;
-	border-left: 1px solid #ccc;
-	border-right: 1px solid #ccc;
-	border-bottom: 1px solid #ccc;
+	border-left: 1px solid #f0f0f1;
+
 	display: none;
 }
 
@@ -53,4 +52,155 @@
 	border-bottom: 2px solid #ccd0d4 !important;
 	color: #39392d !important;
 	text-transform: capitalize;
+}
+
+.postbox .sws_inside {
+	margin: 0;
+	padding: 0;
+}
+
+.sws_box {
+
+	&__title {
+		background-color: #fff;
+		color: #333;
+		font-size: 16px;
+		font-style: italic;
+		height: 40px;
+		line-height: 40px;
+		border-bottom: none;
+		margin-left: 40px;
+
+		span {
+			display: inline-block;
+			height: 100%;
+			padding: 0 20px;
+			background: #2727ce;
+			color: #fff;
+			position: relative;
+
+			&:before {
+				content: "";
+				width: 0;
+				height: 0;
+				border-bottom: 40px solid #2727ce;
+				border-left: 40px solid rgba(0, 0, 0, 0);
+				position: absolute;
+				top: 0;
+				left: -40px;
+			}
+
+			&:after{
+				content: "";
+				width: 0;
+				height: 0;
+				border-top: 40px solid #2727ce;
+				border-right: 40px solid rgba(0, 0, 0, 0);
+				position: absolute;
+				top: 0;
+				left: 100%;
+			}
+		}
+	}
+}
+
+.sws_tabs_wrapper {
+	display: flex;
+	align-items: stretch;
+
+	.ymapp-settings__doc_link {
+		float: none;
+	}
+}
+
+.sws_nav_sidebar {
+	flex: 0 0 200px;
+	padding: 12px;
+	background-color: #fff;
+
+	&__list {
+		margin: 0;
+	}
+
+	&__item {
+		display: flex;
+		align-items: center;
+		padding: 12px 6px;
+		margin: 0;
+		border-radius: 6px;
+		cursor: pointer;
+	}
+
+	&__icon {
+		width: 24px;
+		margin-right: 6px;
+	}
+}
+
+.sws_tabs_content {
+	width: 100%;
+}
+
+.sws_tab_mobile_heading {
+	display: none;
+
+	&__inner {
+		display: flex;
+		align-items: center;
+	}
+}
+
+@media (max-width: 960px) {
+	.sws_nav_sidebar {
+		display: none;
+	}
+
+	.sws_tab_mobile_heading {
+		display: block;
+
+		&__inner {
+			border-bottom: 1px solid #ccd0d4;
+			padding: 12px 20px;
+			margin: 0 -20px;
+
+			.sws_tab_mobile_heading--active & {
+				background-color: #f5f5f5;
+				font-weight: bold;
+			}
+		}
+
+	}
+
+	.sws_tabs_content {
+
+		.ymapp-settings__content {
+			display: block;
+			min-height: 0;
+			padding: 0 20px;
+			border-left: none;
+
+			.ymapp-settings__doc_link {
+				float: none;
+
+				margin-bottom: 30px;
+			}
+
+			.form-table:last-child {
+				margin-bottom: 30px;
+			}
+
+			&:last-child {
+				.sws_tab_mobile_heading__inner {
+					border-bottom: none;
+				}
+			}
+		}
+	}
+
+	.sws_tab_content {
+		display: none;
+		border-bottom: 1px solid #ccd0d4;
+		margin: 0 -20px;
+		padding: 0 20px;
+	}
 }

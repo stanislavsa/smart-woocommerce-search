@@ -7,16 +7,32 @@
 		/**
 		 * Widget settings tabs
 		 */
-		$( '#ymapp-settings__nav > .nav-tab' ).on( 'click', function() {
+		$( '.js-sws-nav-sidebar-item' ).on( 'click', function() {
 			var id = $( this ).data( 'href' ),
-				holder = $( this ).parent( '.nav-tab-wrapper' );
+				holder = $('.sws_nav_sidebar');
 
 			if ( ! $( this ).hasClass( 'nav-tab-active' ) ) {
-				holder.find( '.nav-tab' ).removeClass( 'nav-tab-active' );
+				holder.find( '.js-sws-nav-sidebar-item' ).removeClass( 'nav-tab-active' );
 				$( this ).addClass( 'nav-tab-active' );
 				holder.parent().find( '.ymapp-settings__content' ).hide();
+
 				$( id ).fadeIn();
 				location.hash = id.replace( '_tab', '_tab_active' ).replace( '#', '' );
+			}
+
+			return false;
+		} );
+
+		$( '.js-sws-tab-mobile-heading' ).on( 'click', function() {
+			// Close all sections except the clicked one
+			//$('.sws_tab_content').not($(this).next()).slideUp();
+			$('.js-sws-tab-mobile-heading').removeClass('sws_tab_mobile_heading--active');
+
+			// Toggle the clicked section
+			$(this).next('.sws_tab_content').slideToggle();
+
+			if ($(this).next('.sws_tab_content').is(':visible')) {
+				$(this).addClass('sws_tab_mobile_heading--active');
 			}
 
 			return false;
