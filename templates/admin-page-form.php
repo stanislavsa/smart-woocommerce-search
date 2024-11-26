@@ -57,14 +57,8 @@ $tabs = array(
 
 	<div class="meta-box-sortables">
 
-		<div class="postbox ysm-widget-edit-settings">
-
-			<button type="button" class="handlediv button-link" aria-expanded="true">
-				<span class="screen-reader-text"><?php esc_html_e( 'Toggle panel: Settings', 'smart-woocommerce-search' ); ?></span>
-				<span class="toggle-indicator" aria-hidden="true"></span>
-			</button>
-
-			<h2 class="hndle ui-sortable-handle"><span><?php esc_html_e( 'Settings', 'smart-woocommerce-search' ); ?></span></h2>
+		<div class="sws_box ysm-widget-edit-settings">
+			<h2 class="sws_box__title"><span><?php esc_html_e( 'Settings', 'smart-woocommerce-search' ); ?></span></h2>
 
 			<div class="inside sws_inside">
                 <div class="sws_tabs_wrapper">
