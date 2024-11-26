@@ -6,14 +6,36 @@ if ( ! defined( 'ABSPATH' ) ) {
 wp_enqueue_script( 'postbox' );
 
 $tabs = array(
-	'general_tab'    => __( 'General', 'smart-woocommerce-search' ),
-	'fields_tab'     => __( 'Items to Search Through', 'smart-woocommerce-search' ),
-	'order_tab'      => __( 'Sorting', 'smart-woocommerce-search' ),
-	'layout_tab'     => __( 'Layout', 'smart-woocommerce-search' ),
-	'styles_tab'     => __( 'Styling', 'smart-woocommerce-search' ),
-	'spellcheck_tab' => __( 'Spelling Correction', 'smart-woocommerce-search' ),
-	'stopwords_tab'  => __( 'Stop Words', 'smart-woocommerce-search' ),
+    'general_tab' => array(
+        'label' => __( 'General', 'smart-woocommerce-search' ),
+        'icon'  => 'home',
+    ),
+    'fields_tab' => array(
+        'label' => __( 'Items to Search Through', 'smart-woocommerce-search' ),
+        'icon'  => 'search',
+    ),
+    'order_tab' => array(
+        'label' => __( 'Sorting', 'smart-woocommerce-search' ),
+        'icon'  => 'sort',
+    ),
+    'layout_tab' => array(
+        'label' => __( 'Layout', 'smart-woocommerce-search' ),
+        'icon'  => 'responsive_layout',
+    ),
+    'styles_tab' => array(
+        'label' => __( 'Styling', 'smart-woocommerce-search' ),
+        'icon'  => 'palette',
+    ),
+    'spellcheck_tab' => array(
+        'label' => __( 'Spelling Correction', 'smart-woocommerce-search' ),
+        'icon'  => 'spellcheck',
+    ),
+    'stopwords_tab' => array(
+        'label' => __( 'Stop Words', 'smart-woocommerce-search' ),
+        'icon'  => 'search_off',
+    ),
 );
+
 ?>
 <form method="post" action="" enctype="multipart/form-data">
 
@@ -44,27 +66,43 @@ $tabs = array(
 
 			<h2 class="hndle ui-sortable-handle"><span><?php esc_html_e( 'Settings', 'smart-woocommerce-search' ); ?></span></h2>
 
-			<div class="inside">
+			<div class="inside sws_inside">
+                <div class="sws_tabs_wrapper">
+                    <nav class="sws_nav_sidebar">
+                        <ul class="sws_nav_sidebar__list">
+                            <?php foreach ( $tabs as $id => $item ) { ?>
+                                <li data-href="#<?php echo esc_attr( $id ); ?>" class="js-sws-nav-sidebar-item sws_nav_sidebar__item <?php echo 'general_tab' === $id ? ' nav-tab-active' : ''; ?>">
+                                    <span class="sws_nav_sidebar__icon material-symbols-rounded"><?php echo esc_html( $item['icon'] ); ?></span>
+                                    <span><?php echo esc_html( $item['label'] ); ?></span>
+                                </li>
+                            <?php } ?>
+                        </ul>
+                    </nav>
+                    <div class="sws_tabs_content">
+                        <?php include 'admin-tab-general.php'; ?>
 
-				<h2 class="nav-tab-wrapper" id="ymapp-settings__nav">
-					<?php foreach ( $tabs as $id => $title ) { ?>
-						<span data-href="#<?php echo esc_attr( $id ); ?>" class="nav-tab<?php echo 'general_tab' === $id ? ' nav-tab-active' : ''; ?>"><?php echo esc_html( $title ); ?></span>
-					<?php } ?>
-				</h2>
+                        <?php include 'admin-tab-fields.php'; ?>
 
-				<?php include 'admin-tab-general.php'; ?>
+                        <?php include 'admin-tab-order.php'; ?>
 
-				<?php include 'admin-tab-fields.php'; ?>
+                        <?php include 'admin-tab-layout.php'; ?>
 
-				<?php include 'admin-tab-order.php'; ?>
+                        <?php include 'admin-tab-styling.php'; ?>
 
-				<?php include 'admin-tab-layout.php'; ?>
+                        <?php include 'admin-tab-spellcheck.php'; ?>
 
-				<?php include 'admin-tab-styling.php'; ?>
+                        <?php include 'admin-tab-stopwords.php'; ?>
+                    </div>
+                </div>
 
-				<?php include 'admin-tab-spellcheck.php'; ?>
 
-				<?php include 'admin-tab-stopwords.php'; ?>
+<!--				<h2 class="nav-tab-wrapper" id="ymapp-settings__nav">-->
+<!--					--><?php //foreach ( $tabs as $id => $title ) { ?>
+<!--						<span data-href="#--><?php //echo esc_attr( $id ); ?><!--" class="nav-tab--><?php //echo 'general_tab' === $id ? ' nav-tab-active' : ''; ?><!--">--><?php //echo esc_html( $title ); ?><!--</span>-->
+<!--					--><?php //} ?>
+<!--				</h2>-->
+
+
 
 			</div>
 

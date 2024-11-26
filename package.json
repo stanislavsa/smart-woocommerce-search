@@ -19,7 +19,7 @@
   "homepage": "https://github.com/stanislavsa/smart-woocommerce-search",
   "devDependencies": {
     "del": "^3.0.0",
-    "gulp": "github:gulpjs/gulp#4.0",
+    "gulp": "^4.0.2",
     "gulp-concat": "*",
     "gulp-sass": "*",
     "gulp-uglify": "*",
