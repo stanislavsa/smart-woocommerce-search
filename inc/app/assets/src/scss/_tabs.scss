@@ -139,6 +139,11 @@
 
 .sws_tabs_content {
 	width: 100%;
+
+	.ymapp-settings__content {
+		height: 100%;
+		box-sizing: border-box;
+	}
 }
 
 .sws_tab_mobile_heading {
@@ -174,8 +179,9 @@
 	.sws_tabs_content {
 
 		.ymapp-settings__content {
-			display: block;
+			display: block !important; // showing all tabs by default on mobile
 			min-height: 0;
+			height: auto;
 			padding: 0 20px;
 			border-left: none;
 
