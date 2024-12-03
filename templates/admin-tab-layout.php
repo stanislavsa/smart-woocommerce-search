@@ -14,8 +14,8 @@
             <?php
             ysm_setting( $w_id, 'fullscreen_mode', array(
                 'type'        => 'select',
-                'title'       => __( 'Enable Full Screen Mode', 'smart-woocommerce-search' ),
-                'description' =>  __( 'Description for full screen mode', 'smart-woocommerce-search' ),
+                'title'       => __( 'Full Screen Mode', 'smart-woocommerce-search' ),
+                'description' =>  __( 'Enable fullscreen mode to display the search input and results within an expanded popup', 'smart-woocommerce-search' ),
                 'value'       => '',
                 'is_pro'      => false,
                 'choices'     => array(
