@@ -1,5 +1,5 @@
 <div id="general_tab" class="ymapp-settings__content">
-    <div class="sws_tab_mobile_heading js-sws-tab-mobile-heading sws_tab_mobile_heading--active">
+    <div data-href="#general_tab" class="sws_tab_mobile_heading js-sws-tab-mobile-heading sws_tab_mobile_heading--active">
         <div class="sws_tab_mobile_heading__inner">
             <span class="sws_nav_sidebar__icon material-symbols-rounded">home</span>
             <?php echo __( 'General', 'smart-woocommerce-search' ) ?>

@@ -1,5 +1,5 @@
 <div id="spellcheck_tab" class="ymapp-settings__content">
-    <div class="sws_tab_mobile_heading js-sws-tab-mobile-heading">
+    <div data-href="#spellcheck_tab" class="sws_tab_mobile_heading js-sws-tab-mobile-heading">
         <div class="sws_tab_mobile_heading__inner">
             <span class="sws_nav_sidebar__icon material-symbols-rounded">spellcheck</span>
             <?php echo __( 'Spelling Correction', 'smart-woocommerce-search' ) ?>

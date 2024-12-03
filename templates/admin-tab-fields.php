@@ -2,7 +2,7 @@
 if ( ! defined( 'ABSPATH' ) ) exit;
 ?>
 <div id="fields_tab" class="ymapp-settings__content">
-    <div class="sws_tab_mobile_heading js-sws-tab-mobile-heading">
+    <div data-href="#fields_tab" class="sws_tab_mobile_heading js-sws-tab-mobile-heading">
         <div class="sws_tab_mobile_heading__inner">
             <span class="sws_nav_sidebar__icon material-symbols-rounded">search</span>
             <?php echo __( 'Items to Search Through', 'smart-woocommerce-search' ) ?>

@@ -508,6 +508,7 @@ class Ysm_Search {
 		$res = [
 			'suggestions'   => self::$suggestions,
 			'view_all_link' => \YSWS\Elements\view_all_button(),
+            'fullscreen_popup' => \YSWS\Elements\fullscreen_popup(),
 		];
 		//debug output
 		if ( self::$debug ) {

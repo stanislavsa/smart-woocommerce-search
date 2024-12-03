@@ -55,9 +55,12 @@ function front_scripts() {
 	    $widget_params['excludeOutOfStock'] = ! empty( $v['settings']['exclude_out_of_stock_products'] );
 	    $widget_params['layout'] = 'product' === $k ? 'product' : '';
 	    $widget_params['suppressQueryParams'] = (bool) ! empty( $v['settings']['search_page_suppress_filters'] );
-	    $widget_params['columns'] = 1;
+        $widget_params['columns'] = 1;
+        $widget_params['fullScreenMode'] = ! empty( $v['settings']['fullscreen_mode'] ) ? $v['settings']['fullscreen_mode'] : '';
+        $widget_params['placeholder'] = ! empty( $v['settings']['placeholder'] ) ? __( $v['settings']['placeholder'], 'smart-woocommerce-search' ) : '';
 
-	    if ( !empty( $v['settings']['post_type_product'] ) && empty( $v['settings']['search_page_layout_posts'] ) ) {
+
+        if ( !empty( $v['settings']['post_type_product'] ) && empty( $v['settings']['search_page_layout_posts'] ) ) {
             $widget_params['layout'] = 'product';
         }
 
@@ -111,5 +114,5 @@ function admin_scripts() {
     // Select2
 	wp_enqueue_style( 'ysrs-select2', SWS_PLUGIN_URI . 'assets/dist/css/select2.min.css', array(), SWS_PLUGIN_VERSION );
 	wp_enqueue_script( 'ysrs-select2', SWS_PLUGIN_URI . 'assets/dist/js/select2.min.js', array(), SWS_PLUGIN_VERSION, true );
-    wp_enqueue_style('material-icons', 'https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded', array(), SWS_PLUGIN_VERSION);
+    //wp_enqueue_style('material-icons', 'https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded', array(), SWS_PLUGIN_VERSION);
 }

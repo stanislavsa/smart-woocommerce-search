@@ -25,7 +25,7 @@
 
 		$( '.js-sws-tab-mobile-heading' ).on( 'click', function() {
 			// Close all sections except the clicked one
-			//$('.sws_tab_content').not($(this).next()).slideUp();
+			var id = $( this ).data( 'href' );
 			$('.js-sws-tab-mobile-heading').removeClass('sws_tab_mobile_heading--active');
 
 			// Toggle the clicked section
@@ -34,6 +34,7 @@
 			if ($(this).next('.sws_tab_content').is(':visible')) {
 				$(this).addClass('sws_tab_mobile_heading--active');
 			}
+			location.hash = id.replace( '_tab', '_tab_active' ).replace( '#', '' );
 
 			return false;
 		} );
@@ -170,9 +171,18 @@
 		 */
 		if ( location.hash.match(/_tab_active/) ) {
 			var hash = location.hash.replace( '_tab_active', '_tab' ).replace( '#', '' ),
-				currentTab = $( '#ymapp-settings__nav > .nav-tab[data-href="#' + hash + '"]' );
+				currentTab = $( '.js-sws-nav-sidebar-item[data-href="#' + hash + '"]' ),
+				currentTabMobile = $( '.js-sws-tab-mobile-heading[data-href="#' + hash + '"]' );
 			if ( currentTab.length && ! currentTab.hasClass( 'nav-tab-active' ) ) {
 				currentTab.trigger( 'click' );
+			}
+
+
+			if ($(window).width() <= 960 && currentTabMobile.length && ! currentTabMobile.hasClass( 'sws_tab_mobile_heading--active' ) ) {
+				$('.sws_tab_content').hide();
+
+				console.log(currentTabMobile.next('.sws_tab_content'))
+				currentTabMobile.trigger( 'click' );
 			}
 		}
 

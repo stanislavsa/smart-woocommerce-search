@@ -1,5 +1,5 @@
 <div id="layout_tab" class="ymapp-settings__content">
-    <div class="sws_tab_mobile_heading js-sws-tab-mobile-heading">
+    <div data-href="#layout_tab" class="sws_tab_mobile_heading js-sws-tab-mobile-heading">
         <div class="sws_tab_mobile_heading__inner">
             <span class="sws_nav_sidebar__icon material-symbols-rounded">responsive_layout</span>
             <?php echo __( 'Layout', 'smart-woocommerce-search' ) ?>
@@ -12,6 +12,20 @@
             <th class="ymapp-settings__title"><?php esc_html_e( 'Results Popup Elements', 'smart-woocommerce-search' ); ?></th>
 
             <?php
+            ysm_setting( $w_id, 'fullscreen_mode', array(
+                'type'        => 'select',
+                'title'       => __( 'Full Screen Mode', 'smart-woocommerce-search' ),
+                'description' =>  __( 'Enable fullscreen mode to display the search input and results within an expanded popup', 'smart-woocommerce-search' ),
+                'value'       => '',
+                'is_pro'      => false,
+                'choices'     => array(
+                    'disable' => __( 'Disable', 'smart-woocommerce-search' ),
+                    'enable' => __( 'Enable', 'smart-woocommerce-search' ),
+                    'mobile_only' => __( 'Only on mobile', 'smart-woocommerce-search' ),
+                    'desktop_only' => __( 'Only on desktop', 'smart-woocommerce-search' ),
+                ),
+            ));
+
             ysm_setting( $w_id, 'columns', array(
                 'type'        => 'select',
                 'title'       => __( 'Columns Layout', 'smart-woocommerce-search' ),
