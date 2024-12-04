@@ -356,6 +356,16 @@
 					}, 100);
 				}
 
+				let closePopup = ()=>{
+					$fullscreen_wrapper.removeClass('ssf-active ssf-animated');
+					setTimeout(()=>{
+						$('.ssf-search-input').val('');
+						$results_wrapper.css({
+							maxHeight: 0,
+						});
+					}, 500)
+				}
+
 				$search_trigger.on('click', ()=> {
 					showPopup();
 				});
@@ -376,24 +386,21 @@
 						}, 0);
 					}
 					if (event.key === 'Escape') {
-						const $focusedElement = $(document.activeElement);
-						if ($focusedElement.is('input')) {
-							$fullscreen_wrapper.removeClass('ssf-active ssf-animated');
-						}
+						closePopup();
+
 					}
 				});
 
 
 				$fullscreen_backdrop.on('click', ()=> {
-					$fullscreen_wrapper.removeClass('ssf-active ssf-animated');
+					closePopup();
 				})
 
-			if ($clear_search.length > 0) {
-				$clear_search.on('click', function () {
-					$fullscreen_wrapper.removeClass('ssf-active ssf-animated')
-					$('.ssf-search-input').val('');
-				});
-			}
+				if ($clear_search.length > 0) {
+					$clear_search.on('click', function () {
+						closePopup();
+					});
+				}
 
 
 			var defaults = {
@@ -620,10 +627,10 @@
 
 				},
 				onHide: function () {
-					$this.val('');
-					$results_wrapper.css({
-						maxHeight: 0,
-					});
+					// $this.val('');
+					// $results_wrapper.css({
+					// 	maxHeight: 0,
+					// });
 
 				}
 			}).on( 'focus', function () {
