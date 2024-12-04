@@ -229,21 +229,21 @@
 
 	}
 
-	.smart-search-view-all-holder {
-		width: 100%;
-		z-index: 9999;
 
-		a {
-			display: block !important;
-			height: 40px;
-			line-height: 40px;
-			background: #ccc;
-			text-align: center;
-			text-decoration: none;
-		}
+}
+.smart-search-view-all-holder {
+	width: 100%;
+	z-index: 9999;
+
+	a {
+		display: block !important;
+		height: 40px;
+		line-height: 40px;
+		background: #ccc;
+		text-align: center;
+		text-decoration: none;
 	}
 }
-
 .smart-search-results {
 	position : relative;
 	overflow: hidden;

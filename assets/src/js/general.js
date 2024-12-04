@@ -333,8 +333,10 @@
 				'<span class="ssf-search-icon-search"><svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24" fill="currentColor"><path d="M784-120 532-372q-30 24-69 38t-83 14q-109 0-184.5-75.5T120-580q0-109 75.5-184.5T380-840q109 0 184.5 75.5T640-580q0 44-14 83t-38 69l252 252-56 56ZM380-400q75 0 127.5-52.5T560-580q0-75-52.5-127.5T380-760q-75 0-127.5 52.5T200-580q0 75 52.5 127.5T380-400Z"/></svg></span>'+
 				'<span class="ssf-search-icon-close" aria-label="close"><svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24" fill="currentColor"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg></span>'+
 				'</div>'+
+				'<div class="smart-search-results-main">'+
 				'<div class="smart-search-results">' +
 				'	<div class="smart-search-results-inner"></div>' +
+				'</div>' +
 				'</div>' +
 				'</div>' +
 				'</div>' ).appendTo( $form );
@@ -343,6 +345,7 @@
 				$fullscreen_backdrop = $form.find('.smart-search-fullscreen-backdrop'),
 				$search_trigger = $el.find( 'input[type="search"]' ).length ? $el.find( 'input[type="search"]' ) : $el.find( 'input[type="text"]' ),
 				$this = $el.find( '.ssf-search-input' ).length ? $el.find( '.ssf-search-input' ) : $el.find( '.ssf-search-input' ),
+				$results_main = $form.find( '.smart-search-results-main' ),
 				$results_wrapper = $form.find( '.smart-search-results' ),
 				$resultsWrapperInner = $results_wrapper.find( '.smart-search-results-inner' ),
 				$clear_search = $form.find( '.ssf-search-icon-close' ),
@@ -515,10 +518,10 @@
 						val = $this.val();
 
 					if ( res && res.view_all_link && res.view_all_link != '' ) {
-						if ( ! $popup.find( '.smart-search-view-all-holder' ).length ) {
-							$popup.addClass( 'has-viewall-button' ).append( '<div class="smart-search-view-all-holder"></div>' );
+						if ( ! $results_main.find( '.smart-search-view-all-holder' ).length ) {
+							$results_main.addClass( 'has-viewall-button' ).append( '<div class="smart-search-view-all-holder"></div>' );
 						}
-						$popup.find( '.smart-search-view-all-holder' ).html( res.view_all_link );
+						$results_main.find( '.smart-search-view-all-holder' ).html( res.view_all_link );
 					}
 
 					// if ( res && res.fullscreen_popup && res.fullscreen_popup != '' ) {
