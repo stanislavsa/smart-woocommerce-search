@@ -345,7 +345,7 @@ class Ysm_Widget_Manager {
                 <div class="ysm-smart-search-input-holder">
                     <label for="<?php echo esc_attr( $uniq_id ); ?>">
                         <span class="screen-reader-text"><?php esc_attr_e( $settings['placeholder'], 'smart-woocommerce-search' ); ?></span>
-                        <input type="search" name="s" value="<?php echo get_search_query(); ?>" id="<?php echo esc_attr( $uniq_id ); ?>" class="search-field <?php echo $settings['fullscreen_mode'][0] ? 'search-field-trigger-only' : '' ?>" placeholder="<?php esc_attr_e( $settings['placeholder'], 'smart-woocommerce-search' ); ?>" />
+                        <input type="search" name="s" value="<?php echo get_search_query(); ?>" id="<?php echo esc_attr( $uniq_id ); ?>" class="search-field" placeholder="<?php esc_attr_e( $settings['placeholder'], 'smart-woocommerce-search' ); ?>" />
                     </label>
                     <input type="hidden" name="search_id" value="<?php echo esc_attr( $w_id ); ?>" />
                     <?php if ( 'product' === $layout ) : ?>

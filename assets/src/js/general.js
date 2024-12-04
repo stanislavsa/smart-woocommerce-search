@@ -37,8 +37,10 @@
 							fullscreenMode == 'enable';
 
 						if (shouldFullscreen) {
+							console.log('fullscreen')
 							sws_init_autocomplete_fullscreen(this, params);
 						} else {
+							console.log('default')
 							sws_init_autocomplete(this, params);
 						}
 					});
@@ -316,6 +318,12 @@
 				$form = ( el.tagName === 'FORM' || el.tagName === 'form' ) ? $el : $el.find( 'form' ),
 				$popup = $form.find( '.smart-search-popup' );
 
+			if ( $el.hasClass('ysm-active') || $form.hasClass('ysm-active') ) {
+				return;
+			}
+
+			$el.addClass( 'ysm-active' ).addClass( 'ysm-hide' );
+			$form.addClass( 'ysm-active' );
 
 			$( '<div class="smart-search-fullscreen">' +
 				'<div class="smart-search-fullscreen-backdrop"></div>'+
@@ -323,7 +331,7 @@
 				'<div class="smart-search-input-wrapper">'+
 				'<input type="search" class="ssf-search-input" placeholder="'+placeholder+'" name="s" id="smart-search-fullscreen-'+attr.id+'">' +
 				'<span class="ssf-search-icon-search"><svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24" fill="currentColor"><path d="M784-120 532-372q-30 24-69 38t-83 14q-109 0-184.5-75.5T120-580q0-109 75.5-184.5T380-840q109 0 184.5 75.5T640-580q0 44-14 83t-38 69l252 252-56 56ZM380-400q75 0 127.5-52.5T560-580q0-75-52.5-127.5T380-760q-75 0-127.5 52.5T200-580q0 75 52.5 127.5T380-400Z"/></svg></span>'+
-				'<span class="ssf-search-icon-close"><svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24" fill="currentColor"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg></span>'+
+				'<span class="ssf-search-icon-close" aria-label="close"><svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24" fill="currentColor"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg></span>'+
 				'</div>'+
 				'<div class="smart-search-results">' +
 				'	<div class="smart-search-results-inner"></div>' +
@@ -333,41 +341,66 @@
 
 			let $fullscreen_wrapper = $form.find('.smart-search-fullscreen'),
 				$fullscreen_backdrop = $form.find('.smart-search-fullscreen-backdrop'),
-				$this = $el.find( '.ssf-search-input' ).length ? $el.find( '.ssf-search-input' ) : $el.find( 'input[type="text"]' ),
+				$search_trigger = $el.find( 'input[type="search"]' ).length ? $el.find( 'input[type="search"]' ) : $el.find( 'input[type="text"]' ),
+				$this = $el.find( '.ssf-search-input' ).length ? $el.find( '.ssf-search-input' ) : $el.find( '.ssf-search-input' ),
 				$results_wrapper = $form.find( '.smart-search-results' ),
 				$resultsWrapperInner = $results_wrapper.find( '.smart-search-results-inner' ),
 				$clear_search = $form.find( '.ssf-search-icon-close' ),
-				$search_trigger = $el.find( '.search-field-trigger-only' ).length ? $el.find( '.search-field-trigger-only' ) : '';
-
-
-			if ( $search_trigger.length ) {
-				$search_trigger.on('click', ()=> {
+				$btn_trigger = $el.find( '.search-submit' ).length ? $el.find( '.search-submit' ) : '';
+				let showPopup = ()=> {
 					$fullscreen_wrapper.addClass('ssf-active');
 
 					setTimeout(()=> {
 						$fullscreen_wrapper.addClass('ssf-animated');
-						$this.focus();
+						$('.ssf-search-input').focus();
 					}, 100);
-				})
+				}
+
+				let closePopup = ()=>{
+					$fullscreen_wrapper.removeClass('ssf-active ssf-animated');
+					setTimeout(()=>{
+						$('.ssf-search-input').val('');
+						$results_wrapper.css({
+							maxHeight: 0,
+						});
+					}, 500)
+				}
+
+				$search_trigger.on('click', ()=> {
+					showPopup();
+				});
+
+				if ($btn_trigger.length) {
+					$btn_trigger.on('click', ()=>{
+						showPopup();
+					});
+				}
+
+				$(document).on('keydown', (event) => {
+					if (event.key === 'Tab') {
+						setTimeout(() => {
+							const $focusedElement = $(document.activeElement);
+							if ($focusedElement.is($search_trigger)) {
+								showPopup();
+							}
+						}, 0);
+					}
+					if (event.key === 'Escape') {
+						closePopup();
+
+					}
+				});
+
 
 				$fullscreen_backdrop.on('click', ()=> {
-					$fullscreen_wrapper.removeClass('ssf-active ssf-animated');
+					closePopup();
 				})
-			}
 
-			if ($clear_search.length > 0) {
-				$clear_search.on('click', function () {
-					$fullscreen_wrapper.removeClass('ssf-active ssf-animated')
-					$('.ssf-search-input').val('');
-				});
-			}
-
-			if ( $el.hasClass('ysm-active') || $form.hasClass('ysm-active') ) {
-				return;
-			}
-
-			$el.addClass( 'ysm-active' ).addClass( 'ysm-hide' );
-			$form.addClass( 'ysm-active' );
+				if ($clear_search.length > 0) {
+					$clear_search.on('click', function () {
+						closePopup();
+					});
+				}
 
 
 			var defaults = {
@@ -594,10 +627,10 @@
 
 				},
 				onHide: function () {
-					$this.val('');
-					$results_wrapper.css({
-						maxHeight: 0,
-					});
+					// $this.val('');
+					// $results_wrapper.css({
+					// 	maxHeight: 0,
+					// });
 
 				}
 			}).on( 'focus', function () {
