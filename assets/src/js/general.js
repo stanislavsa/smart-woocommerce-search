@@ -341,12 +341,12 @@
 
 			let $fullscreen_wrapper = $form.find('.smart-search-fullscreen'),
 				$fullscreen_backdrop = $form.find('.smart-search-fullscreen-backdrop'),
-				$this = $el.find( 'input[type="search"]' ).length ? $el.find( 'input[type="search"]' ) : $el.find( 'input[type="text"]' ),
+				$search_trigger = $el.find( 'input[type="search"]' ).length ? $el.find( 'input[type="search"]' ) : $el.find( 'input[type="text"]' ),
+				$this = $el.find( '.ssf-search-input' ).length ? $el.find( '.ssf-search-input' ) : $el.find( '.ssf-search-input' ),
 				$results_wrapper = $form.find( '.smart-search-results' ),
 				$resultsWrapperInner = $results_wrapper.find( '.smart-search-results-inner' ),
 				$clear_search = $form.find( '.ssf-search-icon-close' ),
 				$btn_trigger = $el.find( '.search-submit' ).length ? $el.find( '.search-submit' ) : '';
-
 				let showPopup = ()=> {
 					$fullscreen_wrapper.addClass('ssf-active');
 
@@ -356,7 +356,7 @@
 					}, 100);
 				}
 
-				$this.on('click', ()=> {
+				$search_trigger.on('click', ()=> {
 					showPopup();
 				});
 
@@ -366,16 +366,23 @@
 					});
 				}
 
-			$(document).on('keydown', (event) => {
-				if (event.key === 'Tab') {
-					setTimeout(() => {
+				$(document).on('keydown', (event) => {
+					if (event.key === 'Tab') {
+						setTimeout(() => {
+							const $focusedElement = $(document.activeElement);
+							if ($focusedElement.is($search_trigger)) {
+								showPopup();
+							}
+						}, 0);
+					}
+					if (event.key === 'Escape') {
 						const $focusedElement = $(document.activeElement);
-						if ($focusedElement.is($this)) {
-							showPopup();
+						if ($focusedElement.is('input')) {
+							$fullscreen_wrapper.removeClass('ssf-active ssf-animated');
 						}
-					}, 0);
-				}
-			});
+					}
+				});
+
 
 				$fullscreen_backdrop.on('click', ()=> {
 					$fullscreen_wrapper.removeClass('ssf-active ssf-animated');
