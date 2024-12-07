@@ -26,6 +26,8 @@
 						preventBadQueries: swsL10n.widgets[wId].preventBadQueries,
 						fullScreenMode: swsL10n.widgets[wId].fullScreenMode,
 						placeholder: swsL10n.widgets[wId].placeholder,
+						recentSearches: swsL10n.widgets[wId].recentSearches,
+						recentSearchesTitle: swsL10n.widgets[wId].recentSearchesTitle,
 					}
 
 					$(widgets.selector).each(function () {
@@ -37,10 +39,8 @@
 							fullscreenMode == 'enable';
 
 						if (shouldFullscreen) {
-							console.log('fullscreen')
 							sws_init_autocomplete_fullscreen(this, params);
 						} else {
-							console.log('default')
 							sws_init_autocomplete(this, params);
 						}
 					});
@@ -349,7 +349,61 @@
 				$results_wrapper = $form.find( '.smart-search-results' ),
 				$resultsWrapperInner = $results_wrapper.find( '.smart-search-results-inner' ),
 				$clear_search = $form.find( '.ssf-search-icon-close' ),
-				$btn_trigger = $el.find( '.search-submit' ).length ? $el.find( '.search-submit' ) : '';
+				$btn_trigger = $el.find( '.search-submit' ).length ? $el.find( '.search-submit' ) : '',
+				currentArray = JSON.parse(localStorage.getItem("latestSearches")) || [];
+
+			let defaults = {
+				id: '',
+				serviceUrl: swsL10n.restUrl,
+				layout: '',
+				columns: 1,
+				productSlug: 'product',
+				maxHeight: 500,
+				maxHeightMobile: 400,
+				minChars: 3,
+				disableAjax: false,
+				no_results_text: '',
+				loaderIcon: '',
+				preventBadQueries: true,
+				cache: true
+			};
+
+			let options = $.extend( {}, defaults, attr );
+
+			let latestArrayUpdate = (currentArray)=> {
+				let latestFive = currentArray.slice(-5);
+				$('.sws-search-recent-list').empty();
+				latestFive.forEach(item => {
+					$('.sws-search-recent-list').append(`
+						<li class="sws-search-recent-list-item">
+							<span class="sws-search-recent-list-item-trigger">${item}</span>
+							<span class="sws-search-recent-list-item-delete" data-item="${item}" aria-label="close"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="currentColor"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg></span>
+						</li>
+					`);
+				});
+			}
+
+				if (currentArray.length) {
+
+					if ($('.sws-search-recent-wrapper').length == 0) {
+						$('<div class="sws-search-recent-wrapper"><h4 class="sws-search-recent-title">'+ options.recentSearchesTitle+'</h4><ul class="sws-search-recent-list"></ul></div>').prependTo($results_main);
+					}
+
+					latestArrayUpdate(currentArray);
+
+					$(document).on('click', '.sws-search-recent-list-item-trigger', (e)=> {
+						let targetText = $(e.target).text()
+						$this.val(targetText).focus();
+					})
+
+					$(document).on('click', '.sws-search-recent-list-item-delete', function() {
+						const itemToDelete = $(this).data('item');
+						currentArray = currentArray.filter(item => item !== itemToDelete);
+						localStorage.setItem("latestSearches", JSON.stringify(currentArray));
+						latestArrayUpdate(currentArray);
+					});
+				}
+
 				let showPopup = ()=> {
 					$fullscreen_wrapper.addClass('ssf-active');
 
@@ -366,6 +420,7 @@
 						$results_wrapper.css({
 							maxHeight: 0,
 						});
+						$('.smart-search-view-all-holder').hide();
 					}, 500)
 				}
 
@@ -406,23 +461,7 @@
 				}
 
 
-			var defaults = {
-				id: '',
-				serviceUrl: swsL10n.restUrl,
-				layout: '',
-				columns: 1,
-				productSlug: 'product',
-				maxHeight: 500,
-				maxHeightMobile: 400,
-				minChars: 3,
-				disableAjax: false,
-				no_results_text: '',
-				loaderIcon: '',
-				preventBadQueries: true,
-				cache: true
-			};
 
-			var options = $.extend( {}, defaults, attr );
 			var maxHeightValue = ( Math.min(window.screen.width, window.screen.height) < 768 ) ? options.maxHeightMobile : options.maxHeight;
 			$form.on( 'submit', function( e ) {
 				var val = $this.val();
@@ -493,7 +532,6 @@
 					return suggestion.data;
 				},
 				onSearchStart   : function ( query ) {
-
 					if ( this.value.indexOf( '  ' ) !== -1 ) {
 						this.value = this.value.replace( /\s+/g, ' ' );
 					}
@@ -537,6 +575,7 @@
 						return;
 					}
 
+
 					if ( ! popupWidth ) {
 						popupWidth = $this.outerWidth();
 						$popup.css({
@@ -554,7 +593,7 @@
 							var $wrapperWidth = $results_wrapper.outerWidth();
 							// var columns = suggestions.length < options.columns ? suggestions.length : options.columns;
 							var columns = options.columns;
-							var $viewAllEl = $popup.find( '.smart-search-view-all-holder' );
+							var $viewAllEl = $results_main.find( '.smart-search-view-all-holder' );
 
 							if ( $wrapperWidth === 0 ) {
 								$wrapperWidth = $this.outerWidth();
@@ -603,10 +642,59 @@
 
 						}, 100);
 
+						if ( options.recentSearches ) {
+							const currentSearchValue = query;
+
+							if (!currentArray.includes(currentSearchValue)) {
+								currentArray.push(currentSearchValue);
+								if (currentArray.length > 10) {
+									currentArray.shift(); // Remove the oldest item to keep the array size at 10
+								}
+								localStorage.setItem("latestSearches", JSON.stringify(currentArray));
+							}
+
+
+						}
+
+						if (currentArray.length) {
+
+							const currentSearchValue = query;
+
+							if (!currentArray.includes(currentSearchValue)) {
+								currentArray.push(currentSearchValue);
+								if (currentArray.length > 10) {
+									currentArray.shift(); // Remove the oldest item to keep the array size at 10
+								}
+								localStorage.setItem("latestSearches", JSON.stringify(currentArray));
+							}
+
+							if ($('.sws-search-recent-wrapper').length == 0) {
+								$('<div class="sws-search-recent-wrapper"><h4 class="sws-search-recent-title">+ options.recentSearchesTitle+</h4><ul class="sws-search-recent-list"></ul></div>').prependTo($results_main);
+							}
+
+							latestArrayUpdate(currentArray);
+
+							$(document).on('click', '.sws-search-recent-list-item-trigger', (e)=> {
+								let targetText = $(e.target).text()
+								$this.val(targetText).focus();
+							})
+
+							$(document).on('click', '.sws-search-recent-list-item-delete', function() {
+								const itemToDelete = $(this).data('item');
+
+								currentArray = currentArray.filter(item => item !== itemToDelete);
+								localStorage.setItem("latestSearches", JSON.stringify(currentArray));
+								latestArrayUpdate(currentArray);
+							});
+
+						}
+
+
+
 					} else if ( options.no_results_text.length ) {
-						//$el.removeClass( 'ysm-hide' ).addClass( 'sws-no-results' );
+						$el.removeClass( 'ysm-hide' ).addClass( 'sws-no-results' );
 					} else {
-						//$el.addClass( 'ysm-hide' ).addClass( 'sws-no-results' );
+						$el.addClass( 'ysm-hide' ).addClass( 'sws-no-results' );
 					}
 
 				},

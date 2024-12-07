@@ -114,6 +114,20 @@
             <th class="ymapp-settings__title"><?php echo esc_html__( 'Search Engine Features', 'smart-woocommerce-search' ); ?></th>
 
             <?php
+            ysm_setting( $w_id, 'recent_searches', array(
+                'type'        => 'checkbox',
+                'title'       => __( 'Recent Searches', 'smart-woocommerce-search' ),
+                'description' => __( 'text here', 'smart-woocommerce-search' ),
+                'value'       => 0,
+            ));
+
+            ysm_setting( $w_id, 'recent_searches_text', array(
+                'type'        => 'text',
+                'title'       => 'Recent Searches Title',
+                'description' => __( 'text here', 'smart-woocommerce-search' ),
+                'value'       => 'Latest searches:',
+            ));
+
             ysm_setting( $w_id, 'enable_fuzzy_search', array(
                 'type'        => 'select',
                 'title'       => __( 'Multiple Word Search', 'smart-woocommerce-search' ),

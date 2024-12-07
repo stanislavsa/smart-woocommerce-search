@@ -58,6 +58,8 @@ function front_scripts() {
         $widget_params['columns'] = 1;
         $widget_params['fullScreenMode'] = ! empty( $v['settings']['fullscreen_mode'] ) ? $v['settings']['fullscreen_mode'] : '';
         $widget_params['placeholder'] = ! empty( $v['settings']['placeholder'] ) ? __( $v['settings']['placeholder'], 'smart-woocommerce-search' ) : '';
+        $widget_params['recentSearches'] = ! empty( $v['settings']['recent_searches'] ) ? __( $v['settings']['recent_searches'], 'smart-woocommerce-search' ) : '';
+        $widget_params['recentSearchesTitle'] = ! empty( $v['settings']['recent_searches_text'] ) ? __( $v['settings']['recent_searches_text'], 'smart-woocommerce-search' ) : '';
 
 
         if ( !empty( $v['settings']['post_type_product'] ) && empty( $v['settings']['search_page_layout_posts'] ) ) {
