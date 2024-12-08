@@ -117,14 +117,14 @@
             ysm_setting( $w_id, 'recent_searches', array(
                 'type'        => 'checkbox',
                 'title'       => __( 'Recent Searches', 'smart-woocommerce-search' ),
-                'description' => __( 'text here', 'smart-woocommerce-search' ),
+                'description' => __( 'Display user’s recent searches below search bar', 'smart-woocommerce-search' ),
                 'value'       => 0,
             ));
 
             ysm_setting( $w_id, 'recent_searches_text', array(
                 'type'        => 'text',
-                'title'       => 'Recent Searches Title',
-                'description' => __( 'text here', 'smart-woocommerce-search' ),
+                'title'       => 'Recent searches label',
+                'description' => __( 'Displays label for recent searches if not empty', 'smart-woocommerce-search' ),
                 'value'       => 'Latest searches:',
             ));
 
