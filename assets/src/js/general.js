@@ -48,6 +48,22 @@
 			}
 		}
 
+		// let latestArrayUpdate = (currentArray)=> {
+		// 	let latestFive = currentArray.slice(-5);
+		// 	$('.sws-search-recent-list').empty();
+		// 	latestFive.forEach(item => {
+		// 		$('.sws-search-recent-list').append(`
+		// 			<li class="sws-search-recent-list-item">
+		// 				<span class="sws-search-recent-list-item-trigger">${item}</span>
+		// 				<span class="sws-search-recent-list-item-delete" data-item="${item}" aria-label="close"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="currentColor"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg></span>
+		// 			</li>
+		// 		`);
+		// 	});
+		//
+		//
+		// }
+
+
 		/**
 		 * Init autocomplete on search widget input
 		 *
@@ -61,19 +77,6 @@
 				$form = ( el.tagName === 'FORM' || el.tagName === 'form' ) ? $el : $el.find( 'form' ),
 				currentArray = JSON.parse(localStorage.getItem("latestSearches")) || [];
 
-
-			let latestArrayUpdate = (currentArray)=> {
-				let latestFive = currentArray.slice(-5);
-				$('.sws-search-recent-list').empty();
-				latestFive.forEach(item => {
-					$('.sws-search-recent-list').append(`
-						<li class="sws-search-recent-list-item">
-							<span class="sws-search-recent-list-item-trigger">${item}</span>
-							<span class="sws-search-recent-list-item-delete" data-item="${item}" aria-label="close"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="currentColor"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg></span>
-						</li>
-					`);
-				});
-			}
 
 			if ( ! $this.length ) {
 				return;
@@ -165,8 +168,6 @@
 						$('<div class="sws-search-recent-wrapper"><h4 class="sws-search-recent-title">'+ options.recentSearchesTitle+'</h4><ul class="sws-search-recent-list"></ul></div>').prependTo($popup);
 					}
 
-					latestArrayUpdate(currentArray);
-
 					$(document).on('click', '.sws-search-recent-list-item-trigger', (e)=> {
 						let targetText = $(e.target).text()
 						$this.val(targetText).focus();
@@ -177,6 +178,10 @@
 						currentArray = currentArray.filter(item => item !== itemToDelete);
 						localStorage.setItem("latestSearches", JSON.stringify(currentArray));
 						latestArrayUpdate(currentArray);
+
+						if (!currentArray.length) {
+							$('.smart-search-results-main').remove();
+						}
 					});
 				}
 			}
@@ -335,36 +340,11 @@
 							}
 
 							if (currentArray.length) {
-
-								const currentSearchValue = query;
-
-								if (!currentArray.includes(currentSearchValue)) {
-									currentArray.push(currentSearchValue);
-									if (currentArray.length > 10) {
-										currentArray.shift(); // Remove the oldest item to keep the array size at 10
-									}
-									localStorage.setItem("latestSearches", JSON.stringify(currentArray));
-								}
-
 								if ($('.sws-search-recent-wrapper').length == 0) {
-									$('<div class="sws-search-recent-wrapper"><h4 class="sws-search-recent-title">+ options.recentSearchesTitle+</h4><ul class="sws-search-recent-list"></ul></div>').prependTo($popup);
+									$('<div class="sws-search-recent-wrapper"><h4 class="sws-search-recent-title">'+ options.recentSearchesTitle+'</h4><ul class="sws-search-recent-list"></ul></div>').prependTo($popup);
 								}
 
 								latestArrayUpdate(currentArray);
-
-								$(document).on('click', '.sws-search-recent-list-item-trigger', (e)=> {
-									let targetText = $(e.target).text();
-									$this.val(targetText).focus();
-								})
-
-								$(document).on('click', '.sws-search-recent-list-item-delete', function() {
-									const itemToDelete = $(this).data('item');
-
-									currentArray = currentArray.filter(item => item !== itemToDelete);
-									localStorage.setItem("latestSearches", JSON.stringify(currentArray));
-									latestArrayUpdate(currentArray);
-								});
-
 							}
 						}
 
@@ -446,18 +426,7 @@
 				$clear_search = $form.find( '.ssf-search-icon-close' ),
 				$btn_trigger = $el.find( '.search-submit' ).length ? $el.find( '.search-submit' ) : '',
 				currentArray = JSON.parse(localStorage.getItem("latestSearches")) || [];
-				let latestArrayUpdate = (currentArray)=> {
-					let latestFive = currentArray.slice(-5);
-					$('.sws-search-recent-list').empty();
-					latestFive.forEach(item => {
-						$('.sws-search-recent-list').append(`
-							<li class="sws-search-recent-list-item">
-								<span class="sws-search-recent-list-item-trigger">${item}</span>
-								<span class="sws-search-recent-list-item-delete" data-item="${item}" aria-label="close"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="currentColor"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg></span>
-							</li>
-						`);
-					});
-				}
+			console.log(localStorage.getItem("latestSearches"))
 
 			let defaults = {
 				id: '',
@@ -484,20 +453,20 @@
 					if ($('.smart-search-results-main .sws-search-recent-wrapper').length == 0) {
 						$('<div class="sws-search-recent-wrapper"><h4 class="sws-search-recent-title">'+ options.recentSearchesTitle+'</h4><ul class="sws-search-recent-list"></ul></div>').prependTo($results_main);
 					}
-
-					latestArrayUpdate(currentArray);
-
-					$(document).on('click', '.sws-search-recent-list-item-trigger', (e)=> {
-						let targetText = $(e.target).text()
-						$this.val(targetText).focus();
-					})
-
-					$(document).on('click', '.sws-search-recent-list-item-delete', function() {
-						const itemToDelete = $(this).data('item');
-						currentArray = currentArray.filter(item => item !== itemToDelete);
-						localStorage.setItem("latestSearches", JSON.stringify(currentArray));
-						latestArrayUpdate(currentArray);
+					$('.sws-search-recent-title').removeClass('sws-search-recent-title--hidden_mod');
+					let latestFive = currentArray.slice(-5);
+					$('.sws-search-recent-list').empty();
+					latestFive.forEach(item => {
+						$('.sws-search-recent-list').append(`
+								<li class="sws-search-recent-list-item">
+									<span class="sws-search-recent-list-item-trigger">${item}</span>
+									<span class="sws-search-recent-list-item-delete" data-item="${item}" aria-label="close"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="currentColor"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg></span>
+								</li>
+							`);
 					});
+
+
+
 				}
 			}
 
@@ -510,6 +479,32 @@
 					setTimeout(()=> {
 						$fullscreen_wrapper.addClass('ssf-animated');
 						$('.ssf-search-input').focus();
+
+						$(document).on('click', '.sws-search-recent-list-item-trigger', (e)=> {
+							let targetText = $(e.target).text()
+							$this.val(targetText).focus();
+						})
+
+						$(document).on('click', '.sws-search-recent-list-item-delete', function() {
+							const itemToDelete = $(this).data('item');
+							currentArray = currentArray.filter(item => item !== itemToDelete);
+							localStorage.setItem("latestSearches", JSON.stringify(currentArray));
+							let latestFive = currentArray.slice(-5);
+							$('.sws-search-recent-list').empty();
+							latestFive.forEach(item => {
+								$('.sws-search-recent-list').append(`
+								<li class="sws-search-recent-list-item">
+									<span class="sws-search-recent-list-item-trigger">${item}</span>
+									<span class="sws-search-recent-list-item-delete" data-item="${item}" aria-label="close"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="currentColor"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg></span>
+								</li>
+							`);
+							});
+
+							if (currentArray.length == 0) {
+								$('.sws-search-recent-title').addClass('sws-search-recent-title--hidden_mod');
+							}
+
+						});
 					}, 100);
 				}
 
@@ -563,6 +558,7 @@
 
 
 			var maxHeightValue = ( Math.min(window.screen.width, window.screen.height) < 768 ) ? options.maxHeightMobile : options.maxHeight;
+
 			$form.on( 'submit', function( e ) {
 				var val = $this.val();
 
@@ -745,6 +741,7 @@
 						if ( options.recentSearches ) {
 							const currentSearchValue = query;
 
+
 							if (!currentArray.includes(currentSearchValue)) {
 								currentArray.push(currentSearchValue);
 								if (currentArray.length > 10) {
@@ -752,39 +749,39 @@
 								}
 								localStorage.setItem("latestSearches", JSON.stringify(currentArray));
 							}
-
 							if (currentArray.length) {
-
-								const currentSearchValue = query;
-
-								if (!currentArray.includes(currentSearchValue)) {
-									currentArray.push(currentSearchValue);
-									if (currentArray.length > 10) {
-										currentArray.shift(); // Remove the oldest item to keep the array size at 10
-									}
-									localStorage.setItem("latestSearches", JSON.stringify(currentArray));
-								}
-
 								if ($('.sws-search-recent-wrapper').length == 0) {
-									$('<div class="sws-search-recent-wrapper"><h4 class="sws-search-recent-title">+ options.recentSearchesTitle+</h4><ul class="sws-search-recent-list"></ul></div>').prependTo($results_main);
+
+									$('<div class="sws-search-recent-wrapper"><h4 class="sws-search-recent-title">'+ options.recentSearchesTitle+'</h4><ul class="sws-search-recent-list"></ul></div>').prependTo($results_main);
 								}
-
-								latestArrayUpdate(currentArray);
-
-								$(document).on('click', '.sws-search-recent-list-item-trigger', (e)=> {
-									let targetText = $(e.target).text()
-									$this.val(targetText).focus();
-								})
-
-								$(document).on('click', '.sws-search-recent-list-item-delete', function() {
-									const itemToDelete = $(this).data('item');
-
-									currentArray = currentArray.filter(item => item !== itemToDelete);
-									localStorage.setItem("latestSearches", JSON.stringify(currentArray));
-									latestArrayUpdate(currentArray);
+								$('.sws-search-recent-title').removeClass('sws-search-recent-title--hidden_mod');
+								let latestFive = currentArray.slice(-5);
+								$('.sws-search-recent-list').empty();
+								latestFive.forEach(item => {
+									$('.sws-search-recent-list').append(`
+										<li class="sws-search-recent-list-item">
+											<span class="sws-search-recent-list-item-trigger">${item}</span>
+											<span class="sws-search-recent-list-item-delete" data-item="${item}" aria-label="close"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="currentColor"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg></span>
+										</li>
+									`);
 								});
-
 							}
+							// $(document).on('click', '.sws-search-recent-list-item-trigger', (e)=> {
+							// 	let targetText = $(e.target).text()
+							// 	$this.val(targetText).focus();
+							// })
+							// $(document).on('click', '.sws-search-recent-list-item-delete', function() {
+							//
+							// 	const itemToDelete = $(this).data('item');
+							// 	currentArray = currentArray.filter(item => item !== itemToDelete);
+							// 	localStorage.setItem("latestSearches", JSON.stringify(currentArray));
+							// 	latestArrayUpdate(currentArray);
+							//
+							// 	if (currentArray.length == 0) {
+							// 		$('.sws-search-recent-title').addClass('sws-search-recent-title--hidden_mod');
+							// 	}
+							//
+							// });
 						}
 
 

@@ -612,6 +612,10 @@
 
 .sws-search-recent-title {
 	margin: 0 20px 0 0;
+
+	&--hidden_mod {
+		display: none;
+	}
 }
 
 .sws-search-recent-list-item {
