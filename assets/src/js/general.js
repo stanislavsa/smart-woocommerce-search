@@ -447,12 +447,10 @@
 			let options = $.extend( {}, defaults, attr );
 
 			if (options.recentSearches) {
-
+				if ($('.smart-search-results-main .sws-search-recent-wrapper').length == 0) {
+					$('<div class="sws-search-recent-wrapper"><h4 class="sws-search-recent-title">'+ options.recentSearchesTitle+'</h4><ul class="sws-search-recent-list"></ul></div>').prependTo($results_main);
+				}
 				if (currentArray.length) {
-
-					if ($('.smart-search-results-main .sws-search-recent-wrapper').length == 0) {
-						$('<div class="sws-search-recent-wrapper"><h4 class="sws-search-recent-title">'+ options.recentSearchesTitle+'</h4><ul class="sws-search-recent-list"></ul></div>').prependTo($results_main);
-					}
 					$('.sws-search-recent-title').removeClass('sws-search-recent-title--hidden_mod');
 					let latestFive = currentArray.slice(-5);
 					$('.sws-search-recent-list').empty();
@@ -638,21 +636,9 @@
 
 					$el.addClass( 'ysm-hide' ).removeClass( 'sws-no-results' );
 
-					let windowHeight = window.outerHeight
-					let marginsHeight = 250;
-					let buttonHeight = 60;
-					let recentSearchesHeight = $('.sws-search-recent-wrapper').height();
-					let maximumHeight = windowHeight - marginsHeight - buttonHeight - recentSearchesHeight;
-
-					if (maxHeightValue > maximumHeight) {
-						$results_wrapper.css({
-							maxHeight: maximumHeight + 'px',
-						});
-					} else {
-						$results_wrapper.css({
-							maxHeight: maxHeightValue + 'px',
-						});
-					}
+					$results_wrapper.css({
+						maxHeight: maxHeightValue + 'px',
+					});
 				},
 				onSelect        : function ( suggestion ) {
 					if ( suggestion.id != -1 && suggestion.url && ! suggestion.addToCart ) {
@@ -711,7 +697,21 @@
 							if ( $wrapperWidth < columns * 200 ) {
 								columns = Math.floor( $wrapperWidth / 200 );
 							}
+							let windowHeight = window.outerHeight
+							let marginsHeight = 250;
+							let buttonHeight = 60;
+							let recentSearchesHeight = $('.sws-search-recent-wrapper').height();
+							let maximumHeight = windowHeight - marginsHeight - buttonHeight - recentSearchesHeight;
 
+							if (maxHeightValue > maximumHeight) {
+								$results_wrapper.css({
+									maxHeight: maximumHeight + 'px',
+								});
+							} else {
+								$results_wrapper.css({
+									maxHeight: maxHeightValue + 'px',
+								});
+							}
 							if ( ! $results_wrapper.outerHeight() ) {
 								var suggestionsHeight = $resultsWrapperInner.find('.smart-search-suggestions').outerHeight();
 
