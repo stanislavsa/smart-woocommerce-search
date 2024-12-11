@@ -638,9 +638,21 @@
 
 					$el.addClass( 'ysm-hide' ).removeClass( 'sws-no-results' );
 
-					$results_wrapper.css({
-						maxHeight: maxHeightValue + 'px',
-					});
+					let windowHeight = window.outerHeight
+					let marginsHeight = 250;
+					let buttonHeight = 60;
+					let recentSearchesHeight = $('.sws-search-recent-wrapper').height();
+					let maximumHeight = windowHeight - marginsHeight - buttonHeight - recentSearchesHeight;
+
+					if (maxHeightValue > maximumHeight) {
+						$results_wrapper.css({
+							maxHeight: maximumHeight + 'px',
+						});
+					} else {
+						$results_wrapper.css({
+							maxHeight: maxHeightValue + 'px',
+						});
+					}
 				},
 				onSelect        : function ( suggestion ) {
 					if ( suggestion.id != -1 && suggestion.url && ! suggestion.addToCart ) {
