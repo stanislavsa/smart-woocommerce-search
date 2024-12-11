@@ -641,6 +641,10 @@
 		height: 14px;
 		transition: color .2s ease;
 
+		svg {
+			display: block;
+		}
+
 		&:hover {
 			color: #2727ce;
 		}
