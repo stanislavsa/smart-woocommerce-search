@@ -18,6 +18,12 @@ $tabs = array(
         'label' => __( 'Sorting', 'smart-woocommerce-search' ),
         'icon'  => 'sort',
     ),
+
+    'fullscreen_tab' => array(
+        'label' => __( 'Fullscreen Mode', 'smart-woocommerce-search' ),
+        'icon'  => 'fullscreen',
+    ),
+
     'layout_tab' => array(
         'label' => __( 'Layout', 'smart-woocommerce-search' ),
         'icon'  => 'responsive_layout',
@@ -78,6 +84,8 @@ $tabs = array(
                         <?php include 'admin-tab-fields.php'; ?>
 
                         <?php include 'admin-tab-order.php'; ?>
+
+                        <?php include 'admin-tab-fullscreen.php'; ?>
 
                         <?php include 'admin-tab-layout.php'; ?>
 
