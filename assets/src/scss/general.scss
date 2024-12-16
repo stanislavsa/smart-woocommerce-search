@@ -616,6 +616,7 @@
 
 .sws-search-recent-title {
 	margin: 0 20px 0 0 !important;
+	padding-bottom: 0 !important;
 	font-size: 14px !important;
 }
 
@@ -676,4 +677,9 @@
 	.ysm-hide & {
 		display: none;
 	}
+}
+
+// Divi theme fix
+.ysm-widget-opened .et_builder_inner_content{
+	z-index: 99999;
 }
