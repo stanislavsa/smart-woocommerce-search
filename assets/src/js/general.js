@@ -74,6 +74,20 @@
 			$el.addClass( 'ysm-active' ).addClass( 'ysm-hide' );
 			$form.addClass( 'ysm-active' );
 
+			// Body class if widget on page
+			if (!$(document.body).toggleClass('ysm-widget-active', !$(document.body).hasClass('ysm-widget-active'))) {
+				return false;
+			}
+
+			// Divi theme compatibility
+			if ($(document.body).hasClass('ysm-widget-active')) {
+				$el.parents('.et_pb_column').css({
+					overflow: 'visible',
+					zIndex: '10'
+				});
+				$el.parents('.et_pb_module').css('overflow', 'visible');
+			}
+
 			var defaults = {
 				id: '',
 				serviceUrl: swsL10n.restUrl,
@@ -414,6 +428,20 @@
 			$el.addClass( 'ysm-active' ).addClass( 'ysm-hide' );
 			$form.addClass( 'ysm-active' );
 
+			// Body class if widget on page
+			if (!$(document.body).toggleClass('ysm-widget-active', !$(document.body).hasClass('ysm-widget-active'))) {
+				return false;
+			}
+
+			// Divi theme compatibility
+			if ($(document.body).hasClass('ysm-widget-active')) {
+				$el.parents('.et_pb_column').css({
+					overflow: 'visible',
+					zIndex: '10'
+				});
+				$el.parents('.et_pb_module').css('overflow', 'visible');
+			}
+
 			$( '<div class="smart-search-fullscreen">' +
 				'<div class="smart-search-fullscreen-backdrop"></div>'+
 				'<div class="smart-search-fullscreen-inner">'+
@@ -485,8 +513,12 @@
 				$fullscreen_wrapper.addClass('ssf-active');
 
 				setTimeout(()=> {
+
 					$fullscreen_wrapper.addClass('ssf-animated');
+					// Body class if fullscreen widget is opened
+					$(document.body).addClass('ysm-widget-opened')
 					$('.ssf-search-input').focus();
+
 
 					$(document).on('click', '.sws-search-recent-list-item-trigger', (e)=> {
 						let targetText = $(e.target).text()
@@ -518,6 +550,7 @@
 
 			let closePopup = ()=>{
 				$fullscreen_wrapper.removeClass('ssf-active ssf-animated');
+				$(document.body).removeClass('ysm-widget-opened')
 				setTimeout(()=>{
 					$('.ssf-search-input').val('');
 					$results_wrapper.css({

@@ -42,6 +42,18 @@
 			max-width: 800px;
 			margin: 15px auto 25px;
 		}
+
+		&__option {
+			margin-bottom: 40px;
+			font-size: 18px;
+			input {
+				opacity: 0;
+			}
+
+			input[type=checkbox].ymapp-switcher+label {
+				padding-top: 2px;
+			}
+		}
 	}
 }
 
