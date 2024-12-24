@@ -29,6 +29,7 @@
 						recentSearches: swsL10n.widgets[wId].recentSearches,
 						recentSearchesTitle: swsL10n.widgets[wId].recentSearchesTitle,
 						keywords: swsL10n.widgets[wId].keywords,
+						keywordsLabel: swsL10n.widgets[wId].keywordsLabel,
 					}
 
 					$(widgets.selector).each(function () {
@@ -66,7 +67,7 @@
 
 
 			if ( ! $this.length ) {
-				return;ґ
+				return;
 			}
 
 			if ( $el.hasClass('ysm-active') || $form.hasClass('ysm-active') ) {
@@ -370,7 +371,7 @@
 								});
 
 								if ( ! $popup.find( '.smart-search-keywords-wrapper' ).length ) {
-									$popup.addClass( 'sws-has-keywords' ).prepend( '<div class="smart-search-keywords-wrapper"><h3 class="smart-search-keywords-title">Did you mean</h3><ul class="smart-search-keywords-list"></ul></div>' );
+									$popup.addClass( 'sws-has-keywords' ).prepend( '<div class="smart-search-keywords-wrapper"><h3 class="smart-search-keywords-title">'+ options.keywordsLabel+'</h3><ul class="smart-search-keywords-list"></ul></div>' );
 								}
 
 								$('.smart-search-keywords-list').empty();
@@ -569,10 +570,11 @@
 					$(document.body).addClass('ysm-widget-opened')
 					$('.ssf-search-input').focus();
 
-					$(document).on('click', '.sws-search-recent-list-item-trigger', (e)=> {
+					$(document).off('click', '.sws-search-recent-list-item-trigger').on('click', '.sws-search-recent-list-item-trigger', (e)=> {
 						e.stopPropagation();
 						let targetText = $(e.target).text()
 						$(e.currentTarget).parents('form').find( 'input[type="search"]' ).val(targetText).focus();
+						console.log($(e.currentTarget))
 					});
 
 					$(document).on('click', '.sws-search-recent-list-item-delete', function(e) {
@@ -860,18 +862,21 @@
 									});
 
 									if ( ! $results_main.find( '.smart-search-keywords-wrapper' ).length ) {
-										$results_main.addClass( 'sws-has-keywords' ).prepend( '<div class="smart-search-keywords-wrapper"><h3 class="smart-search-keywords-title">Did you mean</h3><ul class="smart-search-keywords-list"></ul></div>' );
+										$results_main.addClass( 'sws-has-keywords' ).prepend( '<div class="smart-search-keywords-wrapper smart-search-keywords-wrapper--hidden_mod"><h3 class="smart-search-keywords-title">'+ options.keywordsLabel+'</h3><ul class="smart-search-keywords-list"></ul></div>' );
 									}
 
 									$('.smart-search-keywords-list').empty();
-									$('.smart-search-keywords-wrapper').removeClass('smart-search-keywords-wrapper--hidden_mod');
-									$keywords.forEach(item => {
-										$('.smart-search-keywords-list').append(`
+
+									if ($keywords.length) {
+										$('.smart-search-keywords-wrapper').removeClass('smart-search-keywords-wrapper--hidden_mod');
+										$keywords.forEach(item => {
+											$('.smart-search-keywords-list').append(`
 											<li class="sws-search-recent-list-item">
 												<span class="sws-search-recent-list-item-trigger">${item}</span>
 											</li>
 										`);
-									});
+										});
+									}
 
 									if ($recentWrapper.length) {
 										if (!$keywords.length) {
