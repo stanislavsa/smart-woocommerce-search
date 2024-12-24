@@ -62,8 +62,8 @@
 			let $el = $( el ),
 				$this = $el.find( 'input[type="search"]' ).length ? $el.find( 'input[type="search"]' ) : $el.find( 'input[type="text"]' ),
 				$form = ( el.tagName === 'FORM' || el.tagName === 'form' ) ? $el : $el.find( 'form' ),
-				currentArray = JSON.parse(localStorage.getItem("latestSearches")) || [],
-				$keywords = [];
+				swsCurrentArray = JSON.parse(localStorage.getItem("swsLatestSearches")) || [],
+				$swsKeywords = [];
 
 
 			if ( ! $this.length ) {
@@ -160,16 +160,16 @@
 			}
 
 			if (options.recentSearches) {
-				currentArray = JSON.parse(localStorage.getItem("latestSearches")) || [];
-				if (currentArray.length) {
+				swsCurrentArray = JSON.parse(localStorage.getItem("swsLatestSearches")) || [];
+				if (swsCurrentArray.length) {
 
 					if ($('.smart-search-results-main .sws-search-recent-wrapper').length == 0) {
 						$('<div class="sws-search-recent-wrapper"><h4 class="sws-search-recent-title">'+ options.recentSearchesTitle+'</h4><ul class="sws-search-recent-list"></ul></div>').prependTo($popup);
 					}
 					$('.sws-search-recent-wrapper').removeClass('sws-search-recent-wrapper--hidden_mod');
-					let latestFive = currentArray.slice(-5);
+					let swsLatestFive = swsCurrentArray.slice(-5);
 					$('.sws-search-recent-list').empty();
-					latestFive.forEach(item => {
+					swsLatestFive.forEach(item => {
 						$('.sws-search-recent-list').append(`
 								<li class="sws-search-recent-list-item">
 									<span class="sws-search-recent-list-item-trigger">${item}</span>
@@ -187,12 +187,12 @@
 					$(document).on('click', '.sws-search-recent-list-item-delete', function(e) {
 						e.stopPropagation();
 						const itemToDelete = $(this).data('item');
-						currentArray = currentArray.filter(item => item !== itemToDelete);
-						localStorage.setItem("latestSearches", JSON.stringify(currentArray));
-						let latestFive = currentArray.slice(-5);
+						swsCurrentArray = swsCurrentArray.filter(item => item !== itemToDelete);
+						localStorage.setItem("swsLatestSearches", JSON.stringify(swsCurrentArray));
+						let swsLatestFive = swsCurrentArray.slice(-5);
 						$('.sws-search-recent-list').empty();
 
-						latestFive.forEach(item => {
+						swsLatestFive.forEach(item => {
 							$('.sws-search-recent-list').append(`
 								<li class="sws-search-recent-list-item">
 									<span class="sws-search-recent-list-item-trigger">${item}</span>
@@ -201,7 +201,7 @@
 							`);
 						});
 
-						if (currentArray.length == 0) {
+						if (swsCurrentArray.length == 0) {
 							$('.sws-search-recent-wrapper').addClass('sws-search-recent-wrapper--hidden_mod');
 						}
 
@@ -298,7 +298,7 @@
 
 						$el.removeClass( 'ysm-hide' ).removeClass( 'sws-no-results' );
 
-						const $keywordsWrapper = $('.smart-search-keywords-wrapper');
+						const $swsKeywordsWrapper = $('.smart-search-keywords-wrapper');
 						const $recentWrapper = $('.sws-search-recent-wrapper');
 						var $viewAllEl = $popup.find( '.smart-search-view-all-holder' );
 
@@ -366,8 +366,8 @@
 							}
 
 							if (options.keywords) {
-								handleVisibility($keywordsWrapper, query, (cachedResponse) => {
-									$keywords = cachedResponse.keywords;
+								handleVisibility($swsKeywordsWrapper, query, (cachedResponse) => {
+									$swsKeywords = cachedResponse.keywords;
 								});
 
 								if ( ! $popup.find( '.smart-search-keywords-wrapper' ).length ) {
@@ -375,8 +375,8 @@
 								}
 
 								$('.smart-search-keywords-list').empty();
-								$keywordsWrapper.removeClass('smart-search-keywords-wrapper--hidden_mod');
-								$keywords.forEach(item => {
+								$swsKeywordsWrapper.removeClass('smart-search-keywords-wrapper--hidden_mod');
+								$swsKeywords.forEach(item => {
 									$('.smart-search-keywords-list').append(`
 											<li class="sws-search-recent-list-item">
 												<span class="sws-search-recent-list-item-trigger">${item}</span>
@@ -385,11 +385,11 @@
 								});
 
 								if ($recentWrapper.length) {
-									if (!$keywords.length) {
-										$keywordsWrapper.addClass('smart-search-keywords-wrapper--hidden_mod');
+									if (!$swsKeywords.length) {
+										$swsKeywordsWrapper.addClass('smart-search-keywords-wrapper--hidden_mod');
 										$recentWrapper.removeClass('sws-search-recent-wrapper--hidden_by_keywords');
 									} else {
-										$keywordsWrapper.removeClass('smart-search-keywords-wrapper--hidden_mod');
+										$swsKeywordsWrapper.removeClass('smart-search-keywords-wrapper--hidden_mod');
 										$recentWrapper.addClass('sws-search-recent-wrapper--hidden_by_keywords');
 									}
 								}
@@ -400,22 +400,22 @@
 							const currentSearchValue = query;
 
 
-							if (!currentArray.includes(currentSearchValue)) {
-								currentArray.push(currentSearchValue);
-								if (currentArray.length > 10) {
-									currentArray.shift(); // Remove the oldest item to keep the array size at 10
+							if (!swsCurrentArray.includes(currentSearchValue)) {
+								swsCurrentArray.push(currentSearchValue);
+								if (swsCurrentArray.length > 10) {
+									swsCurrentArray.shift(); // Remove the oldest item to keep the array size at 10
 								}
-								localStorage.setItem("latestSearches", JSON.stringify(currentArray));
+								localStorage.setItem("swsLatestSearches", JSON.stringify(swsCurrentArray));
 							}
-							if (currentArray.length) {
+							if (swsCurrentArray.length) {
 								if ($recentWrapper.length == 0) {
 
 									$('<div class="sws-search-recent-wrapper"><h4 class="sws-search-recent-title">'+ options.recentSearchesTitle+'</h4><ul class="sws-search-recent-list"></ul></div>').prependTo($popup);
 								}
 								$recentWrapper.removeClass('sws-search-recent-wrapper--hidden_mod');
-								let latestFive = currentArray.slice(-5);
+								let swsLatestFive = swsCurrentArray.slice(-5);
 								$('.sws-search-recent-list').empty();
-								latestFive.forEach(item => {
+								swsLatestFive.forEach(item => {
 									$('.sws-search-recent-list').append(`
 										<li class="sws-search-recent-list-item">
 											<span class="sws-search-recent-list-item-trigger">${item}</span>
@@ -518,8 +518,8 @@
 				$resultsWrapperInner = $results_wrapper.find( '.smart-search-results-inner' ),
 				$clear_search = $form.find( '.ssf-search-icon-close' ),
 				$btn_trigger = $el.find( '.search-submit' ).length ? $el.find( '.search-submit' ) : '',
-				currentArray = JSON.parse(localStorage.getItem("latestSearches")) || [],
-				$keywords = [];
+				swsCurrentArray = JSON.parse(localStorage.getItem("swsLatestSearches")) || [],
+				$swsKeywords = [];
 
 			let defaults = {
 				id: '',
@@ -540,13 +540,13 @@
 			let options = $.extend( {}, defaults, attr );
 
 			if (options.recentSearches) {
-				currentArray = JSON.parse(localStorage.getItem("latestSearches")) || [];
+				swsCurrentArray = JSON.parse(localStorage.getItem("swsLatestSearches")) || [];
 				$('<div class="sws-search-recent-wrapper sws-search-recent-wrapper--hidden_mod"><h4 class="sws-search-recent-title">'+ options.recentSearchesTitle+'</h4><ul class="sws-search-recent-list"></ul></div>').prependTo($results_main);
-				if (currentArray.length) {
+				if (swsCurrentArray.length) {
 					$('.sws-search-recent-wrapper').removeClass('sws-search-recent-wrapper--hidden_mod');
-					let latestFive = currentArray.slice(-5);
+					let swsLatestFive = swsCurrentArray.slice(-5);
 					$('.sws-search-recent-list').empty();
-					latestFive.forEach(item => {
+					swsLatestFive.forEach(item => {
 						$('.sws-search-recent-list').append(`
 							<li class="sws-search-recent-list-item">
 								<span class="sws-search-recent-list-item-trigger">${item}</span>
@@ -558,10 +558,38 @@
 				}
 			}
 
+			$(document).off('click', '.sws-search-recent-list-item-trigger').on('click', '.sws-search-recent-list-item-trigger', (e)=> {
+				e.stopPropagation();
+				let targetText = $(e.target).text()
+				$(e.currentTarget).parents('form').find( 'input[type="search"]' ).val(targetText).focus();
+			});
+
+			$(document).on('click', '.sws-search-recent-list-item-delete', function(e) {
+				e.stopPropagation();
+				const itemToDelete = $(this).data('item');
+				swsCurrentArray = swsCurrentArray.filter(item => item !== itemToDelete);
+				localStorage.setItem("swsLatestSearches", JSON.stringify(swsCurrentArray));
+				let swsLatestFive = swsCurrentArray.slice(-5);
+				$('.sws-search-recent-list').empty();
+				swsLatestFive.forEach(item => {
+					$('.sws-search-recent-list').append(`
+								<li class="sws-search-recent-list-item">
+									<span class="sws-search-recent-list-item-trigger">${item}</span>
+									<span class="sws-search-recent-list-item-delete" data-item="${item}" aria-label="close"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="currentColor"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg></span>
+								</li>
+							`);
+				});
+
+				if (swsCurrentArray.length == 0) {
+					$('.sws-search-recent-wrapper').addClass('sws-search-recent-wrapper--hidden_mod');
+				}
+
+			});
+
 			let showPopup = ()=> {
 				$fullscreen_wrapper.addClass('ssf-active');
 
-				currentArray = JSON.parse(localStorage.getItem("latestSearches")) || [];
+				swsCurrentArray = JSON.parse(localStorage.getItem("swsLatestSearches")) || [];
 
 				setTimeout(()=> {
 
@@ -570,34 +598,6 @@
 					$(document.body).addClass('ysm-widget-opened')
 					$('.ssf-search-input').focus();
 
-					$(document).off('click', '.sws-search-recent-list-item-trigger').on('click', '.sws-search-recent-list-item-trigger', (e)=> {
-						e.stopPropagation();
-						let targetText = $(e.target).text()
-						$(e.currentTarget).parents('form').find( 'input[type="search"]' ).val(targetText).focus();
-						console.log($(e.currentTarget))
-					});
-
-					$(document).on('click', '.sws-search-recent-list-item-delete', function(e) {
-						e.stopPropagation();
-						const itemToDelete = $(this).data('item');
-						currentArray = currentArray.filter(item => item !== itemToDelete);
-						localStorage.setItem("latestSearches", JSON.stringify(currentArray));
-						let latestFive = currentArray.slice(-5);
-						$('.sws-search-recent-list').empty();
-						latestFive.forEach(item => {
-							$('.sws-search-recent-list').append(`
-								<li class="sws-search-recent-list-item">
-									<span class="sws-search-recent-list-item-trigger">${item}</span>
-									<span class="sws-search-recent-list-item-delete" data-item="${item}" aria-label="close"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="currentColor"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg></span>
-								</li>
-							`);
-						});
-
-						if (currentArray.length == 0) {
-							$('.sws-search-recent-wrapper').addClass('sws-search-recent-wrapper--hidden_mod');
-						}
-
-					});
 				}, 100);
 			}
 
@@ -854,10 +854,10 @@
 								}
 
 								if (options.keywords) {
-									const $keywordsWrapper = $('.smart-search-keywords-wrapper');
+									const $swsKeywordsWrapper = $('.smart-search-keywords-wrapper');
 									const $recentWrapper = $('.sws-search-recent-wrapper');
-									handleVisibility($keywordsWrapper, query, (cachedResponse) => {
-										$keywords = cachedResponse.keywords;
+									handleVisibility($swsKeywordsWrapper, query, (cachedResponse) => {
+										$swsKeywords = cachedResponse.keywords;
 
 									});
 
@@ -867,9 +867,9 @@
 
 									$('.smart-search-keywords-list').empty();
 
-									if ($keywords.length) {
+									if ($swsKeywords.length) {
 										$('.smart-search-keywords-wrapper').removeClass('smart-search-keywords-wrapper--hidden_mod');
-										$keywords.forEach(item => {
+										$swsKeywords.forEach(item => {
 											$('.smart-search-keywords-list').append(`
 											<li class="sws-search-recent-list-item">
 												<span class="sws-search-recent-list-item-trigger">${item}</span>
@@ -879,11 +879,11 @@
 									}
 
 									if ($recentWrapper.length) {
-										if (!$keywords.length) {
-											$keywordsWrapper.addClass('smart-search-keywords-wrapper--hidden_mod');
+										if (!$swsKeywords.length) {
+											$swsKeywordsWrapper.addClass('smart-search-keywords-wrapper--hidden_mod');
 											$recentWrapper.removeClass('sws-search-recent-wrapper--hidden_by_keywords');
 										} else {
-											$keywordsWrapper.removeClass('smart-search-keywords-wrapper--hidden_mod');
+											$swsKeywordsWrapper.removeClass('smart-search-keywords-wrapper--hidden_mod');
 											$recentWrapper.addClass('sws-search-recent-wrapper--hidden_by_keywords');
 										}
 									}
@@ -897,22 +897,22 @@
 							const currentSearchValue = query;
 
 
-							if (!currentArray.includes(currentSearchValue)) {
-								currentArray.push(currentSearchValue);
-								if (currentArray.length > 10) {
-									currentArray.shift(); // Remove the oldest item to keep the array size at 10
+							if (!swsCurrentArray.includes(currentSearchValue)) {
+								swsCurrentArray.push(currentSearchValue);
+								if (swsCurrentArray.length > 10) {
+									swsCurrentArray.shift(); // Remove the oldest item to keep the array size at 10
 								}
-								localStorage.setItem("latestSearches", JSON.stringify(currentArray));
+								localStorage.setItem("swsLatestSearches", JSON.stringify(swsCurrentArray));
 							}
-							if (currentArray.length) {
+							if (swsCurrentArray.length) {
 								if ($('.sws-search-recent-wrapper').length == 0) {
 
 									$('<div class="sws-search-recent-wrapper"><h4 class="sws-search-recent-title">'+ options.recentSearchesTitle+'</h4><ul class="sws-search-recent-list"></ul></div>').prependTo($results_main);
 								}
 								$('.sws-search-recent-wrapper').removeClass('sws-search-recent-wrapper--hidden_mod');
-								let latestFive = currentArray.slice(-5);
+								let swsLatestFive = swsCurrentArray.slice(-5);
 								$('.sws-search-recent-list').empty();
-								latestFive.forEach(item => {
+								swsLatestFive.forEach(item => {
 									$('.sws-search-recent-list').append(`
 										<li class="sws-search-recent-list-item">
 											<span class="sws-search-recent-list-item-trigger">${item}</span>
