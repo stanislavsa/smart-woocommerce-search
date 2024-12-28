@@ -604,7 +604,7 @@
 	margin: 15px 0;
 
 	.ysm-hide & {
-		margin-bottom: -5px;
+		//margin-bottom: 5px;
 	}
 
 	.smart-search-popup & {
@@ -615,6 +615,10 @@
 	&--hidden_by_keywords{
 		display: none !important;
 	}
+}
+
+.hidden-searches .sws-search-recent-wrapper {
+	display: none !important;
 }
 
 .sws-search-recent-title,
@@ -686,4 +690,8 @@
 // Divi theme fix
 .ysm-widget-opened .et_builder_inner_content{
 	z-index: 99999;
+}
+
+.ssf-search-input {
+	background-position: 50% 50% !important;
 }
