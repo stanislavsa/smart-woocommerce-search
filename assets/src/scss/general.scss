@@ -41,6 +41,7 @@
 	outline: none;
 	border: 1px solid #d6d6d6;
 	background-color: transparent;
+	background-position: 50% 50% !important;
 	color: #aeaeae;
 	-webkit-box-shadow: none;
 	-moz-box-shadow: none;
@@ -637,10 +638,15 @@
 	display: flex;
 	align-items: center;
 	border: 1px solid #d6d6d6;
-	padding: 2px 8px;
+	padding: 2px 0;
 	margin: 5px 0;
 	border-radius: 20px;
 	font-size: 13px;
+	overflow: hidden;
+
+	.sws-search-recent-wrapper & {
+		padding-right: 8px;
+	}
 
 	cursor: pointer;
 
@@ -660,9 +666,13 @@
 	}
 
 	&-trigger {
-		padding: 4px 6px 4px 0;
-		margin: 0 0 0 4px;
+		padding: 4px 12px 4px 12px;
+		margin: 0;
 		transition: color .2s ease;
+
+		.sws-search-recent-wrapper & {
+			padding-right: 6px;
+		}
 
 		&:hover {
 			color: #2727ce;
@@ -694,4 +704,11 @@
 
 .ssf-search-input {
 	background-position: 50% 50% !important;
+}
+
+.smart-search-results-main.sws-hiding-results {
+	.smart-search-results,
+	.smart-search-view-all-holder {
+		display: none;
+	}
 }

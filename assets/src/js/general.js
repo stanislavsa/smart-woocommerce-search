@@ -273,6 +273,8 @@
 						$popup.find( '.smart-search-view-all-holder' ).html( res.view_all_link );
 					}
 
+					$this.css( 'background-image', 'none' );
+
 					if (res.keywords.length) {
 						$popup.addClass( 'hidden-searches' )
 
@@ -606,11 +608,14 @@
 				$('.smart-search-keywords-wrapper').addClass('smart-search-keywords-wrapper--hidden_mod');
 				setTimeout(()=>{
 					$('.ssf-search-input').val('');
+
 					$results_wrapper.css({
 						maxHeight: 0,
 					});
+
 					$('.smart-search-view-all-holder').hide();
 					$('.smart-search-suggestions').empty();
+					$el.addClass( 'ysm-hide' )
 				}, 500)
 			}
 
@@ -733,9 +738,7 @@
 
 					$el.addClass( 'ysm-hide' ).removeClass( 'sws-no-results' );
 
-					$results_wrapper.css({
-						maxHeight: maxHeightValue + 'px',
-					});
+					$results_main.addClass('sws-hiding-results');
 
 				},
 				onSelect        : function ( suggestion ) {
@@ -777,125 +780,125 @@
 
 						$el.removeClass( 'ysm-hide' ).removeClass( 'sws-no-results' );
 
-						setTimeout( function() {
-							var $wrapperWidth = $results_wrapper.outerWidth();
-							// var columns = suggestions.length < options.columns ? suggestions.length : options.columns;
-							var columns = options.columns;
-							var $viewAllEl = $results_main.find( '.smart-search-view-all-holder' );
+						$results_main.removeClass('sws-hiding-results');
 
-							if ( $wrapperWidth === 0 ) {
-								$wrapperWidth = $this.outerWidth();
-								$results_wrapper.width( $wrapperWidth + 'px' );
+						var $wrapperWidth = $results_wrapper.outerWidth();
+						// var columns = suggestions.length < options.columns ? suggestions.length : options.columns;
+						var columns = options.columns;
+						var $viewAllEl = $results_main.find( '.smart-search-view-all-holder' );
+
+						if ( $wrapperWidth === 0 ) {
+							$wrapperWidth = $this.outerWidth();
+							$results_wrapper.width( $wrapperWidth + 'px' );
+						}
+
+						if ( $wrapperWidth < columns * 200 ) {
+							columns = Math.floor( $wrapperWidth / 200 );
+						}
+
+						let swsWindowHeight = window.innerHeight
+						let swsMarginsHeight = 180;
+						let swsButtonHeight = $viewAllEl.length ? 60 : 0;
+						let swsRecentSearchesHeight = 0;
+						if (options.recentSearches || options.keywords) {
+							swsRecentSearchesHeight = $(window).width() >= 768 ? 45 : 110;
+						}
+						let swsMaximumHeight = swsWindowHeight - swsMarginsHeight - swsButtonHeight - swsRecentSearchesHeight;
+
+						if (maxHeightValue > swsMaximumHeight) {
+							$results_wrapper.css({
+								maxHeight: swsMaximumHeight + 'px',
+							});
+						} else {
+							$results_wrapper.css({
+								maxHeight: maxHeightValue + 'px',
+							});
+						}
+
+						if ( ! $results_wrapper.outerHeight() ) {
+							var suggestionsHeight = $resultsWrapperInner.find('.smart-search-suggestions').outerHeight();
+
+							if ( suggestionsHeight ) {
+								suggestionsHeight = parseInt( suggestionsHeight, 10 );
+								$results_wrapper.height( suggestionsHeight > maxHeightValue ? maxHeightValue : suggestionsHeight );
 							}
+						}
 
-							if ( $wrapperWidth < columns * 200 ) {
-								columns = Math.floor( $wrapperWidth / 200 );
-							}
+						$results_wrapper
+							.attr( 'data-columns', columns )
+							.nanoScroller({
+								contentClass: 'smart-search-results-inner',
+								alwaysVisible: false,
+								iOSNativeScrolling: true
+							});
 
-							let windowHeight = window.innerHeight
-							let marginsHeight = 180;
-							let buttonHeight = $viewAllEl.length ? 60 : 0;
-							let recentSearchesHeight = $('.sws-search-recent-wrapper').height();
-							let maximumHeight = windowHeight - marginsHeight - buttonHeight - recentSearchesHeight;
+						if ($viewAllEl.length || options.keywords) {
 
-							if (maxHeightValue > maximumHeight) {
-								$results_wrapper.css({
-									maxHeight: maximumHeight + 'px',
-								});
-							} else {
-								$results_wrapper.css({
-									maxHeight: maxHeightValue + 'px',
-								});
-							}
+							const handleVisibility = (element, query, callback) => {
+								if ($this.val().length < options.minChars) {
+									element.hide();
+								} else {
+									const that = $this.devbridgeAutocomplete();
+									let serviceUrl = options.serviceUrl;
 
-							if ( ! $results_wrapper.outerHeight() ) {
-								var suggestionsHeight = $resultsWrapperInner.find('.smart-search-suggestions').outerHeight();
-
-								if ( suggestionsHeight ) {
-									suggestionsHeight = parseInt( suggestionsHeight, 10 );
-									$results_wrapper.height( suggestionsHeight > maxHeightValue ? maxHeightValue : suggestionsHeight );
-								}
-							}
-
-							$results_wrapper
-								.attr( 'data-columns', columns )
-								.nanoScroller({
-									contentClass: 'smart-search-results-inner',
-									alwaysVisible: false,
-									iOSNativeScrolling: true
-								});
-
-							if ($viewAllEl.length || options.keywords) {
-
-								const handleVisibility = (element, query, callback) => {
-									if ($this.val().length < options.minChars) {
-										element.hide();
-									} else {
-										const that = $this.devbridgeAutocomplete();
-										let serviceUrl = options.serviceUrl;
-
-										if ($.isFunction(serviceUrl)) {
-											serviceUrl = serviceUrl.call(that.element, query);
-										}
-
-										const cacheKey = serviceUrl + '?' + $.param({ query: query });
-
-										if (that.cachedResponse && that.cachedResponse[cacheKey]) {
-											callback(that.cachedResponse[cacheKey]);
-										}
-										element.show();
-									}
-								};
-
-								if ($viewAllEl.length) {
-									handleVisibility($viewAllEl, query, (cachedResponse) => {
-										$viewAllEl.html(cachedResponse.view_all_link);
-									});
-								}
-
-								if (options.keywords) {
-									const $recentWrapper = $('.sws-search-recent-wrapper');
-									handleVisibility($('.smart-search-keywords-wrapper'), query, (cachedResponse) => {
-										$swsKeywords = cachedResponse.keywords;
-
-									});
-
-									if ( ! $results_main.find( '.smart-search-keywords-wrapper' ).length ) {
-										$results_main.addClass( 'sws-has-keywords' ).prepend( '<div class="smart-search-keywords-wrapper smart-search-keywords-wrapper--hidden_mod"><h3 class="smart-search-keywords-title">'+ options.keywordsLabel+'</h3><ul class="smart-search-keywords-list"></ul></div>' );
+									if ($.isFunction(serviceUrl)) {
+										serviceUrl = serviceUrl.call(that.element, query);
 									}
 
-									if ($swsKeywords.length) {
-										$('.smart-search-keywords-list').empty();
-										$('.smart-search-keywords-wrapper').removeClass('smart-search-keywords-wrapper--hidden_mod');
-										$swsKeywords.forEach(item => {
-											$('.smart-search-keywords-list').append(`
+									const cacheKey = serviceUrl + '?' + $.param({ query: query });
+
+									if (that.cachedResponse && that.cachedResponse[cacheKey]) {
+										callback(that.cachedResponse[cacheKey]);
+									}
+									element.show();
+								}
+							};
+
+							if ($viewAllEl.length) {
+								handleVisibility($viewAllEl, query, (cachedResponse) => {
+									$viewAllEl.html(cachedResponse.view_all_link);
+								});
+							}
+
+							if (options.keywords) {
+								const $recentWrapper = $('.sws-search-recent-wrapper');
+								handleVisibility($('.smart-search-keywords-wrapper'), query, (cachedResponse) => {
+									$swsKeywords = cachedResponse.keywords;
+
+								});
+
+								if ( ! $results_main.find( '.smart-search-keywords-wrapper' ).length ) {
+									$results_main.addClass( 'sws-has-keywords' ).prepend( '<div class="smart-search-keywords-wrapper smart-search-keywords-wrapper--hidden_mod"><h3 class="smart-search-keywords-title">'+ options.keywordsLabel+'</h3><ul class="smart-search-keywords-list"></ul></div>' );
+								}
+
+								if ($swsKeywords.length) {
+									$('.smart-search-keywords-list').empty();
+									$('.smart-search-keywords-wrapper').removeClass('smart-search-keywords-wrapper--hidden_mod');
+									$swsKeywords.forEach(item => {
+										$('.smart-search-keywords-list').append(`
 											<li class="sws-search-recent-list-item">
 												<span class="sws-search-recent-list-item-trigger">${item}</span>
 											</li>
 										`);
-										});
-									}
+									});
+								}
 
-									if ($recentWrapper.length) {
+								if ($recentWrapper.length) {
 
-										if ($swsKeywords.length) {
-											$('.smart-search-keywords-wrapper').removeClass('smart-search-keywords-wrapper--hidden_mod');
-											$recentWrapper.addClass('sws-search-recent-wrapper--hidden_by_keywords');
+									if ($swsKeywords.length) {
+										$('.smart-search-keywords-wrapper').removeClass('smart-search-keywords-wrapper--hidden_mod');
+										$recentWrapper.addClass('sws-search-recent-wrapper--hidden_by_keywords');
 
-										} else {
-											$('.smart-search-keywords-wrapper').addClass('smart-search-keywords-wrapper--hidden_mod');
-											$recentWrapper.removeClass('sws-search-recent-wrapper--hidden_by_keywords');
-										}
+									} else {
+										$('.smart-search-keywords-wrapper').addClass('smart-search-keywords-wrapper--hidden_mod');
+										$recentWrapper.removeClass('sws-search-recent-wrapper--hidden_by_keywords');
 									}
 								}
 							}
-
-
-						}, 100);
+						}
 
 						if ( options.recentSearches ) {
 							const currentSearchValue = query;
-
 
 							if (!swsCurrentArray.includes(currentSearchValue)) {
 								swsCurrentArray.push(currentSearchValue);
@@ -911,6 +914,7 @@
 
 					} else if ( options.no_results_text.length ) {
 						$el.removeClass( 'ysm-hide' ).addClass( 'sws-no-results' );
+						$results_main.removeClass('sws-hiding-results');
 					} else {
 						$el.addClass( 'ysm-hide' ).addClass( 'sws-no-results' );
 					}
