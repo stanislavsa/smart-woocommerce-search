@@ -9,6 +9,7 @@ add_filter( 'admin_title', __NAMESPACE__ . '\\change_admin_title', 10, 2 );
 add_action( 'wp_ajax_sws_promo_dismiss', __NAMESPACE__ . '\\promo_dismiss' );
 add_action( 'wp_ajax_sws_notice_dismiss', __NAMESPACE__ . '\\update_notice_dismiss' );
 
+
 /**
  * Admin init hook
  * @return void
