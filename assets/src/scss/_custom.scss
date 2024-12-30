@@ -297,6 +297,11 @@ h2.ysm-widgets-title {
 			font-size: 13px;
 			top: 10px;
 			right: 10px;
+			span {
+				cursor: pointer;
+				color: #2271b1;
+				text-decoration: underline;
+			}
 		}
 	}
 }
