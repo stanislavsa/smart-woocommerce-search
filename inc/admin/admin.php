@@ -14,8 +14,10 @@ add_action( 'wp_ajax_sws_notice_dismiss', __NAMESPACE__ . '\\update_notice_dismi
  * @return void
  */
 function on_admin_init() {
-    \YummyWP\App\Notification::add_template( SWS_PLUGIN_DIR . 'templates/promo/discount.php' );
+//    \YummyWP\App\Notification::add_template( SWS_PLUGIN_DIR . 'templates/promo/discount.php' );
     \YummyWP\App\Notification::add_template( SWS_PLUGIN_DIR . 'templates/promo/updates.php' );
+
+	add_action( 'admin_notices', __NAMESPACE__ . '\\display_admin_notices' );
 }
 
 /**
@@ -164,4 +166,8 @@ function update_notice_dismiss() {
     update_option( 'sws_update_notice', $version );
 
     exit;
+}
+
+function display_admin_notices() {
+	\YummyWP\App\Notification::display_templates();
 }
