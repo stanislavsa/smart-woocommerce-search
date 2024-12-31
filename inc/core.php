@@ -28,6 +28,7 @@ include_once __DIR__ . '/elements/excerpt.php';
 include_once __DIR__ . '/elements/thumbnail.php';
 include_once __DIR__ . '/elements/product-price.php';
 include_once __DIR__ . '/elements/product-sku.php';
+include_once __DIR__ . '/elements/fullscreen-popup.php';
 
 // admin hooks
 include_once __DIR__ . '/admin/admin.php';

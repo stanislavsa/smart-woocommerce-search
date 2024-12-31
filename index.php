@@ -51,6 +51,17 @@ if ( function_exists( 'sws_fs' ) ) {
 	define( 'SWS_PLUGIN_URI', plugin_dir_url( __FILE__ ) );
 	define( 'SWS_PLUGIN_BASENAME', plugin_basename( __FILE__ ) );
 
+    if ( ! defined( 'SWS_PLUGIN_UPDATE_NOTICE' ) ) {
+        $update_notice_option = get_option( 'sws_update_notice', null );
+
+        if ( $update_notice_option === null ) {
+            $update_notice_default = 1;
+            add_option( 'sws_update_notice', $update_notice_default );
+        }
+
+        define( 'SWS_PLUGIN_UPDATE_NOTICE', 2);
+    }
+
 	/**
 	 * Load plugin textdomain.
 	 */

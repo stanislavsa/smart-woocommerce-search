@@ -38,6 +38,11 @@ $.gulp.task('js:select2', function() {
 		.pipe($.gulp.dest($.distPath + '/js'));
 });
 
+$.gulp.task('copy:fonts', function() {
+	return $.gulp.src('./inc/app/assets/src/fonts/**/*') // Adjust the path to your fonts directory
+		.pipe($.gulp.dest($.distPath + '/fonts'));
+});
+
 $.gulp.task('clean', function() {
 	return $.del([$.distPath]);
 });
@@ -71,6 +76,7 @@ $.gulp.task('default', $.gulp.series(
 		'js:front',
 		'js:admin',
 		'js:select2',
-		'css:select2'
+		'css:select2',
+		'copy:fonts'
 	)
 ));
