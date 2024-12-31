@@ -128,6 +128,19 @@
                 'value'       => 'Latest searches:',
             ));
 
+            ysm_setting( $w_id, 'display_keywords_below_input', array(
+	            'type'        => 'checkbox',
+	            'title'       => __( 'Display “Did you mean“ Keywords', 'smart-woocommerce-search' ),
+	            'description' =>
+		            __( 'Display synonyms in the search results popup below the search bar', 'smart-woocommerce-search' )
+		            . ( ! get_option('ywp_smart_search_enable_synonyms_indexing')
+			            ? '<br><span style="color:red">Requirement:</span> <a target="_blank" href="' . esc_url( admin_url( 'admin.php?page=smart-search-synonyms' ) ) . '">' . __( 'Enable Automatic Synonyms Feature', 'smart-woocommerce-search' ) . '</a>'
+			            : '' )
+            ,
+	            'value'       => 0,
+	            'is_pro'      => true,
+            ));
+
             ysm_setting( $w_id, 'enable_fuzzy_search', array(
                 'type'        => 'select',
                 'title'       => __( 'Multiple Word Search', 'smart-woocommerce-search' ),

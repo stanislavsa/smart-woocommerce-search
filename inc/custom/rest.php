@@ -44,7 +44,7 @@ function handle_request( \WP_REST_Request $request ) {
 	$res = [
 		'suggestions'   => [],
 		'view_all_link' => '',
-        'fullscreen_popup' => ''
+		'keywords' => []
 	];
 
 	if ( ! $query ) {
@@ -65,8 +65,7 @@ function handle_request( \WP_REST_Request $request ) {
 
 	if ( $suggestions ) {
 		$res['suggestions'] = $suggestions;
-        $res['view_all_link'] = \YSWS\Elements\view_all_button();
-        $res['fullscreen_popup'] = \YSWS\Elements\fullscreen_popup();
+		$res['view_all_link'] = \YSWS\Elements\view_all_button();
 	}
 
 	return rest_ensure_response( $res );

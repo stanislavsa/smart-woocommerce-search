@@ -1,11 +1,11 @@
 === Smart WooCommerce Search ===
 Contributors: yummy-wp
 Tags: search, ajax search, product search, smart search, search by sku
-Stable tag: 2.11.8
+Stable tag: 2.12.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Requires at least: 5.9
-Tested up to: 6.6
+Tested up to: 6.7
 Requires PHP: 7.0
 
 Smart WooCommerce Search enhances your users' experience with a sophisticated AJAX search bar featuring real-time suggestions.
@@ -33,6 +33,8 @@ Discover the PRO features of our plugin with a **14-day trial period**.
  * [Search by product SKU](https://www.wpsmartsearch.com/docs/content-types/#2-toc-title)
  * Search in product Categories
  * Search in product Tags
+ * Full Screen Mode
+ * Recent Searches
  * Multisite support
  * Allow/disallow searching in selected product categories
  * Exclude "Out of stock" products from search results
@@ -56,7 +58,7 @@ You can completely customize your **smart search**. In addition, the plugin inte
    * Search in Product Attributes
    * Search in Product Brands
    * Product labels
-   * [Synonyms](https://www.wpsmartsearch.com/docs/synonyms/)
+   * ["Did you mean" Keywords/Synonyms](https://www.wpsmartsearch.com/docs/synonyms/)
    * [Stop words](https://www.wpsmartsearch.com/docs/stop-words/)
    * [Data indexing](https://www.wpsmartsearch.com/docs/data-indexing/)
    * Advanced caching
@@ -101,12 +103,19 @@ Yes, when using products search or when you set option to search only through pr
 
 == Screenshots ==
 
-1. Searching by SKU
-2. Extend Gutenberg's Search block
-3. Smart Search PRO - Grid layout
-4. Smart Search PRO - Index product data
+1. Latest Searches
+2. Smart Search PRO - Grid layout
+3. Smart Search PRO - Did you mean / Synonyms
+4. Fullscreen Popup
+5. Searching by SKU
 
 == Changelog ==
+
+= 2.12.0 =
+* Added: setting 'Full Screen Mode' to display results in a full screen popup
+* Added: setting 'Recent Searches' to display user's latest searches
+* Tweak: compatibility issue with DIVI builder
+* Updated: admin settings styling
 
 = 2.11.7 =
 * Added: Setting 'Custom CSS selectors' to set CSS selectors to enhance existing search bar with Smart Search features
