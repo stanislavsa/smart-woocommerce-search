@@ -41,6 +41,7 @@
 	outline: none;
 	border: 1px solid #d6d6d6;
 	background-color: transparent;
+	background-position: 50% 50% !important;
 	color: #aeaeae;
 	-webkit-box-shadow: none;
 	-moz-box-shadow: none;
@@ -585,8 +586,9 @@
 	}
 }
 
-.sws-search-recent-list {
-	display: flex;
+.sws-search-recent-list,
+.smart-search-keywords-list{
+	display: flex !important;
 	align-items: center;
 	flex-wrap: wrap;
 	list-style: none;
@@ -594,32 +596,40 @@
 	margin: 0;
 }
 
-.sws-search-recent-wrapper {
-	display: flex;
+.sws-search-recent-wrapper,
+.smart-search-keywords-wrapper{
+	display: flex !important;
 	align-items: center;
 	flex-wrap: wrap;
 
 	margin: 15px 0;
 
 	.ysm-hide & {
-		margin-bottom: -5px;
+		//margin-bottom: 5px;
 	}
 
 	.smart-search-popup & {
 		padding-left: 12px;
 	}
 
-	&--hidden_mod {
-		display: none;
+	&--hidden_mod,
+	&--hidden_by_keywords{
+		display: none !important;
 	}
 }
 
-.sws-search-recent-title {
+.hidden-searches .sws-search-recent-wrapper {
+	display: none !important;
+}
+
+.sws-search-recent-title,
+.smart-search-keywords-title{
 	margin: 0 20px 0 0 !important;
 	font-size: 14px !important;
 }
 
-.sws-search-recent-list {
+.sws-search-recent-list,
+.smart-search-keywords-list{
 	margin: 0 !important;
 	padding: 0 !important;
 }
@@ -628,10 +638,15 @@
 	display: flex;
 	align-items: center;
 	border: 1px solid #d6d6d6;
-	padding: 2px 8px;
+	padding: 2px 0;
 	margin: 5px 0;
 	border-radius: 20px;
 	font-size: 13px;
+	overflow: hidden;
+
+	.sws-search-recent-wrapper & {
+		padding-right: 8px;
+	}
 
 	cursor: pointer;
 
@@ -651,9 +666,13 @@
 	}
 
 	&-trigger {
-		padding: 4px 6px 4px 0;
-		margin: 0 0 0 4px;
+		padding: 4px 12px 4px 12px;
+		margin: 0;
 		transition: color .2s ease;
+
+		.sws-search-recent-wrapper & {
+			padding-right: 6px;
+		}
 
 		&:hover {
 			color: #2727ce;
@@ -674,6 +693,22 @@
 	height: 100%;
 
 	.ysm-hide & {
+		display: none;
+	}
+}
+
+// Divi theme fix
+.ysm-widget-opened .et_builder_inner_content{
+	z-index: 99999;
+}
+
+.ssf-search-input {
+	background-position: 50% 50% !important;
+}
+
+.smart-search-results-main.sws-hiding-results {
+	.smart-search-results,
+	.smart-search-view-all-holder {
 		display: none;
 	}
 }

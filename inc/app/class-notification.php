@@ -62,10 +62,6 @@ class Notification {
 		self::$errors[] = $text;
 	}
 
-	/**
-	 * Add error to errors array
-	 * @param $text
-	 */
 	public static function add_template( $path ) {
 		self::$templates[ $path ] = $path;
 	}
@@ -85,11 +81,16 @@ class Notification {
 				echo '<div class="updated notice is-dismissible"><p><strong>' . esc_html( $message ) . '</strong></p></div>';
 			}
 		}
+	}
 
+	/**
+	 * Display messages and errors
+	 */
+	public static function display_templates() {
 		if ( ! empty( self::$templates ) ) {
 			foreach ( self::$templates as $template_path ) {
 				if ( file_exists( $template_path ) ) {
-					include $template_path;
+					include_once $template_path;
 				}
 			}
 		}

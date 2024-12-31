@@ -28,6 +28,8 @@
 						placeholder: swsL10n.widgets[wId].placeholder,
 						recentSearches: swsL10n.widgets[wId].recentSearches,
 						recentSearchesTitle: swsL10n.widgets[wId].recentSearchesTitle,
+						keywords: swsL10n.widgets[wId].keywords,
+						keywordsLabel: swsL10n.widgets[wId].keywordsLabel,
 					}
 
 					$(widgets.selector).each(function () {
@@ -60,7 +62,8 @@
 			let $el = $( el ),
 				$this = $el.find( 'input[type="search"]' ).length ? $el.find( 'input[type="search"]' ) : $el.find( 'input[type="text"]' ),
 				$form = ( el.tagName === 'FORM' || el.tagName === 'form' ) ? $el : $el.find( 'form' ),
-				currentArray = JSON.parse(localStorage.getItem("latestSearches")) || [];
+				swsCurrentArray = JSON.parse(localStorage.getItem("swsLatestSearches")) || [],
+				$swsKeywords = [];
 
 
 			if ( ! $this.length ) {
@@ -73,6 +76,20 @@
 
 			$el.addClass( 'ysm-active' ).addClass( 'ysm-hide' );
 			$form.addClass( 'ysm-active' );
+
+			// Body class if widget on page
+			if (!$(document.body).toggleClass('ysm-widget-active', !$(document.body).hasClass('ysm-widget-active'))) {
+				return false;
+			}
+
+			// Divi theme compatibility
+			if ($(document.body).hasClass('ysm-widget-active')) {
+				$el.parents('.et_pb_column').css({
+					overflow: 'visible',
+					zIndex: '10'
+				});
+				$el.parents('.et_pb_module').css('overflow', 'visible');
+			}
 
 			var defaults = {
 				id: '',
@@ -132,7 +149,6 @@
 
 			var $results_wrapper = $form.find( '.smart-search-results' );
 			var $resultsWrapperInner = $results_wrapper.find( '.smart-search-results-inner' );
-			var $popupBackdrop = $form.find('.smart-search-popup-backdrop');
 			var maxHeightValue = ( Math.min(window.screen.width, window.screen.height) < 768 ) ? options.maxHeightMobile : options.maxHeight;
 
 			$results_wrapper.css({
@@ -143,50 +159,48 @@
 				$results_wrapper.addClass( 'smart-search-firefox' );
 			}
 
+			let swsUpdateRecentSearches = (removeHiddenClass = false)=> {
 
-			if (options.recentSearches) {
-
-				if (currentArray.length) {
-
-					if ($('.smart-search-results-main .sws-search-recent-wrapper').length == 0) {
-						$('<div class="sws-search-recent-wrapper"><h4 class="sws-search-recent-title">'+ options.recentSearchesTitle+'</h4><ul class="sws-search-recent-list"></ul></div>').prependTo($popup);
-					}
+				if (removeHiddenClass === true) {
 					$('.sws-search-recent-wrapper').removeClass('sws-search-recent-wrapper--hidden_mod');
-					let latestFive = currentArray.slice(-5);
-					$('.sws-search-recent-list').empty();
-					latestFive.forEach(item => {
-						$('.sws-search-recent-list').append(`
-								<li class="sws-search-recent-list-item">
-									<span class="sws-search-recent-list-item-trigger">${item}</span>
-									<span class="sws-search-recent-list-item-delete" data-item="${item}" aria-label="close"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="currentColor"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg></span>
-								</li>
-							`);
-					});
-					$(document).on('click', '.sws-search-recent-list-item-trigger', (e)=> {
-						let targetText = $(e.target).text()
-						$this.val(targetText).focus();
-					})
+				}
+				let swsLatestFive = JSON.parse(localStorage.getItem("swsLatestSearches")).slice(-5);
+				$('.sws-search-recent-list').empty();
+				swsLatestFive.forEach(item => {
+					$('.sws-search-recent-list').append(`
+							<li class="sws-search-recent-list-item">
+								<span class="sws-search-recent-list-item-trigger">${item}</span>
+								<span class="sws-search-recent-list-item-delete" data-item="${item}" aria-label="close"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="currentColor"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg></span>
+							</li>
+						`);
+				});
+			}
+			$(document).off('click', '.sws-search-recent-list-item-trigger').on('click', '.sws-search-recent-list-item-trigger', (e) => {
+				e.stopPropagation();
+				let targetText = $(e.target).text();
+				$(e.currentTarget).parents('form').find('input[type="search"]').val(targetText).focus();
+			});
 
-					$(document).on('click', '.sws-search-recent-list-item-delete', function() {
-						const itemToDelete = $(this).data('item');
-						currentArray = currentArray.filter(item => item !== itemToDelete);
-						localStorage.setItem("latestSearches", JSON.stringify(currentArray));
-						let latestFive = currentArray.slice(-5);
-						$('.sws-search-recent-list').empty();
-						latestFive.forEach(item => {
-							$('.sws-search-recent-list').append(`
-								<li class="sws-search-recent-list-item">
-									<span class="sws-search-recent-list-item-trigger">${item}</span>
-									<span class="sws-search-recent-list-item-delete" data-item="${item}" aria-label="close"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="currentColor"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg></span>
-								</li>
-							`);
-						});
+			$(document).off('click', '.sws-search-recent-list-item-delete').on('click', '.sws-search-recent-list-item-delete', function(e) {
+				e.stopPropagation();
+				const itemToDelete = $(this).data('item');
+				let currentStorage = JSON.parse(localStorage.getItem("swsLatestSearches")).filter(item => item !== itemToDelete)
+				localStorage.setItem("swsLatestSearches", JSON.stringify(currentStorage));
 
-						if (currentArray.length == 0) {
-							$('.sws-search-recent-wrapper').addClass('sws-search-recent-wrapper--hidden_mod');
-						}
+				swsCurrentArray = JSON.parse(localStorage.getItem("swsLatestSearches"));
 
-					});
+				swsUpdateRecentSearches(true);
+
+				if (swsCurrentArray.length == 0) {
+					$('.sws-search-recent-wrapper').addClass('sws-search-recent-wrapper--hidden_mod');
+				}
+
+			});
+			if (options.recentSearches) {
+				$('<div class="sws-search-recent-wrapper"><h4 class="sws-search-recent-title">'+ options.recentSearchesTitle+'</h4><ul class="sws-search-recent-list"></ul></div>').prependTo($popup);
+
+				if (swsCurrentArray.length) {
+					swsUpdateRecentSearches(true);
 				}
 			}
 
@@ -259,6 +273,15 @@
 						$popup.find( '.smart-search-view-all-holder' ).html( res.view_all_link );
 					}
 
+					$this.css( 'background-image', 'none' );
+
+					if (res.keywords.length) {
+						$popup.addClass( 'hidden-searches' )
+
+					} else {
+						$popup.removeClass( 'hidden-searches' )
+					}
+
 					return res;
 				},
 				onSearchComplete: function ( query, suggestions ) {
@@ -279,11 +302,14 @@
 
 						$el.removeClass( 'ysm-hide' ).removeClass( 'sws-no-results' );
 
+						const $recentWrapper = $('.sws-search-recent-wrapper');
+						var $viewAllEl = $popup.find( '.smart-search-view-all-holder' );
+
 						setTimeout( function() {
 							var $wrapperWidth = $results_wrapper.outerWidth();
 							// var columns = suggestions.length < options.columns ? suggestions.length : options.columns;
 							var columns = options.columns;
-							var $viewAllEl = $popup.find( '.smart-search-view-all-holder' );
+
 
 							if ( $wrapperWidth === 0 ) {
 								$wrapperWidth = $this.outerWidth();
@@ -311,54 +337,91 @@
 									iOSNativeScrolling: true
 								});
 
-							if ( $viewAllEl.length ) {
-								if ( $this.val().length < options.minChars ) {
-									$viewAllEl.hide();
-								} else {
-									var serviceUrl = options.serviceUrl,
-										cacheKey,
-										that = $this.devbridgeAutocomplete();
 
-									if ( $.isFunction( serviceUrl ) ) {
-										serviceUrl = serviceUrl.call( that.element, query );
-									}
-									cacheKey = serviceUrl + '?' + $.param( { query: query } );
-									if ( that.cachedResponse && that.cachedResponse[cacheKey] ) {
-										$viewAllEl.html( that.cachedResponse[cacheKey].view_all_link );
-									}
-									$viewAllEl.show();
-								}
-							}
 
 						}, 100);
+
+						if ($viewAllEl.length || options.keywords) {
+
+							const handleVisibility = (element, query, callback) => {
+								if ($this.val().length < options.minChars) {
+									element.hide();
+								} else {
+									const that = $this.devbridgeAutocomplete();
+									let serviceUrl = options.serviceUrl;
+
+									if ($.isFunction(serviceUrl)) {
+										serviceUrl = serviceUrl.call(that.element, query);
+									}
+
+									const cacheKey = serviceUrl + '?' + $.param({ query: query });
+
+									if (that.cachedResponse && that.cachedResponse[cacheKey]) {
+										callback(that.cachedResponse[cacheKey]);
+									}
+									element.show();
+								}
+							};
+
+							if ($viewAllEl.length) {
+								handleVisibility($viewAllEl, query, (cachedResponse) => {
+									$viewAllEl.html(cachedResponse.view_all_link);
+								});
+							}
+
+							if (options.keywords) {
+								const $recentWrapper = $('.sws-search-recent-wrapper');
+								handleVisibility($('.smart-search-keywords-wrapper'), query, (cachedResponse) => {
+									$swsKeywords = cachedResponse.keywords;
+
+								});
+
+								if ( ! $popup.find( '.smart-search-keywords-wrapper' ).length ) {
+									$popup.addClass( 'sws-has-keywords' ).prepend( '<div class="smart-search-keywords-wrapper smart-search-keywords-wrapper--hidden_mod"><h3 class="smart-search-keywords-title">'+ options.keywordsLabel+'</h3><ul class="smart-search-keywords-list"></ul></div>' );
+								}
+
+								if ($swsKeywords.length) {
+									$('.smart-search-keywords-list').empty();
+									$('.smart-search-keywords-wrapper').removeClass('smart-search-keywords-wrapper--hidden_mod');
+									$swsKeywords.forEach(item => {
+										$('.smart-search-keywords-list').append(`
+											<li class="sws-search-recent-list-item">
+												<span class="sws-search-recent-list-item-trigger">${item}</span>
+											</li>
+										`);
+									});
+								}
+
+								if ($recentWrapper.length) {
+									if ($swsKeywords.length) {
+										$('.smart-search-keywords-wrapper').removeClass('smart-search-keywords-wrapper--hidden_mod');
+										$('.sws-search-recent-wrapper').addClass('sws-search-recent-wrapper--hidden_by_keywords');
+
+									} else {
+										$('.smart-search-keywords-wrapper').addClass('smart-search-keywords-wrapper--hidden_mod');
+										$('.sws-search-recent-wrapper').removeClass('sws-search-recent-wrapper--hidden_by_keywords');
+									}
+								}
+							}
+						}
 
 						if ( options.recentSearches ) {
 							const currentSearchValue = query;
 
 
-							if (!currentArray.includes(currentSearchValue)) {
-								currentArray.push(currentSearchValue);
-								if (currentArray.length > 10) {
-									currentArray.shift(); // Remove the oldest item to keep the array size at 10
+							if (!swsCurrentArray.includes(currentSearchValue)) {
+								swsCurrentArray.push(currentSearchValue);
+								if (swsCurrentArray.length > 10) {
+									swsCurrentArray.shift(); // Remove the oldest item to keep the array size at 10
 								}
-								localStorage.setItem("latestSearches", JSON.stringify(currentArray));
+								localStorage.setItem("swsLatestSearches", JSON.stringify(swsCurrentArray));
 							}
-							if (currentArray.length) {
-								if ($('.sws-search-recent-wrapper').length == 0) {
+							if (swsCurrentArray.length) {
+								if ($recentWrapper.length == 0) {
 
 									$('<div class="sws-search-recent-wrapper"><h4 class="sws-search-recent-title">'+ options.recentSearchesTitle+'</h4><ul class="sws-search-recent-list"></ul></div>').prependTo($popup);
 								}
-								$('.sws-search-recent-wrapper').removeClass('sws-search-recent-wrapper--hidden_mod');
-								let latestFive = currentArray.slice(-5);
-								$('.sws-search-recent-list').empty();
-								latestFive.forEach(item => {
-									$('.sws-search-recent-list').append(`
-										<li class="sws-search-recent-list-item">
-											<span class="sws-search-recent-list-item-trigger">${item}</span>
-											<span class="sws-search-recent-list-item-delete" data-item="${item}" aria-label="close"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="currentColor"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg></span>
-										</li>
-									`);
-								});
+								swsUpdateRecentSearches(true);
 							}
 						}
 
@@ -407,12 +470,27 @@
 				$form = ( el.tagName === 'FORM' || el.tagName === 'form' ) ? $el : $el.find( 'form' ),
 				$popup = $form.find( '.smart-search-popup' );
 
+
 			if ( $el.hasClass('ysm-active') || $form.hasClass('ysm-active') ) {
 				return;
 			}
 
 			$el.addClass( 'ysm-active' ).addClass( 'ysm-hide' );
 			$form.addClass( 'ysm-active' );
+
+			// Body class if widget on page
+			if (!$(document.body).toggleClass('ysm-widget-active', !$(document.body).hasClass('ysm-widget-active'))) {
+				return false;
+			}
+
+			// Divi theme compatibility
+			if ($(document.body).hasClass('ysm-widget-active')) {
+				$el.parents('.et_pb_column').css({
+					overflow: 'visible',
+					zIndex: '10'
+				});
+				$el.parents('.et_pb_module').css('overflow', 'visible');
+			}
 
 			$( '<div class="smart-search-fullscreen">' +
 				'<div class="smart-search-fullscreen-backdrop"></div>'+
@@ -439,7 +517,8 @@
 				$resultsWrapperInner = $results_wrapper.find( '.smart-search-results-inner' ),
 				$clear_search = $form.find( '.ssf-search-icon-close' ),
 				$btn_trigger = $el.find( '.search-submit' ).length ? $el.find( '.search-submit' ) : '',
-				currentArray = JSON.parse(localStorage.getItem("latestSearches")) || [];
+				swsCurrentArray = JSON.parse(localStorage.getItem("swsLatestSearches")) || [],
+				$swsKeywords = [];
 
 			let defaults = {
 				id: '',
@@ -459,71 +538,84 @@
 
 			let options = $.extend( {}, defaults, attr );
 
-			if (options.recentSearches) {
-				if ($('.smart-search-results-main .sws-search-recent-wrapper').length == 0) {
-					$('<div class="sws-search-recent-wrapper sws-search-recent-wrapper--hidden_mod"><h4 class="sws-search-recent-title">'+ options.recentSearchesTitle+'</h4><ul class="sws-search-recent-list"></ul></div>').prependTo($results_main);
-				}
-				if (currentArray.length) {
+			let swsUpdateRecentSearches = (removeHiddenClass = false)=> {
+
+				if (removeHiddenClass === true) {
 					$('.sws-search-recent-wrapper').removeClass('sws-search-recent-wrapper--hidden_mod');
-					let latestFive = currentArray.slice(-5);
-					$('.sws-search-recent-list').empty();
-					latestFive.forEach(item => {
-						$('.sws-search-recent-list').append(`
-								<li class="sws-search-recent-list-item">
-									<span class="sws-search-recent-list-item-trigger">${item}</span>
-									<span class="sws-search-recent-list-item-delete" data-item="${item}" aria-label="close"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="currentColor"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg></span>
-								</li>
-							`);
-					});
+				}
 
+				let swsLatestFive = JSON.parse(localStorage.getItem("swsLatestSearches")).slice(-5);
+				$('.sws-search-recent-list').empty();
+				swsLatestFive.forEach(item => {
+					$('.sws-search-recent-list').append(`
+							<li class="sws-search-recent-list-item">
+								<span class="sws-search-recent-list-item-trigger">${item}</span>
+								<span class="sws-search-recent-list-item-delete" data-item="${item}" aria-label="close"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="currentColor"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg></span>
+							</li>
+						`);
+				});
+			}
 
+			if (options.recentSearches) {
+				$('<div class="sws-search-recent-wrapper sws-search-recent-wrapper--hidden_mod"><h4 class="sws-search-recent-title">'+ options.recentSearchesTitle+'</h4><ul class="sws-search-recent-list"></ul></div>').prependTo($results_main);
 
+				if (swsCurrentArray.length) {
+					swsUpdateRecentSearches(true);
 				}
 			}
+
+			$(document).off('click', '.sws-search-recent-list-item-trigger').on('click', '.sws-search-recent-list-item-trigger', (e)=> {
+				e.stopPropagation();
+				let targetText = $(e.target).text()
+				$(e.currentTarget).parents('form').find( 'input[type="search"]' ).val(targetText).focus();
+			});
+
+			$(document).off('click', '.sws-search-recent-list-item-delete').on('click', '.sws-search-recent-list-item-delete', function(e) {
+				e.stopPropagation();
+				const itemToDelete = $(this).data('item');
+				let currentStorage = JSON.parse(localStorage.getItem("swsLatestSearches")).filter(item => item !== itemToDelete)
+				localStorage.setItem("swsLatestSearches", JSON.stringify(currentStorage));
+
+				swsCurrentArray = JSON.parse(localStorage.getItem("swsLatestSearches"));
+
+				swsUpdateRecentSearches(true);
+
+				if (swsCurrentArray.length == 0) {
+					$('.sws-search-recent-wrapper').addClass('sws-search-recent-wrapper--hidden_mod');
+				}
+
+			});
 
 			let showPopup = ()=> {
 				$fullscreen_wrapper.addClass('ssf-active');
 
+				swsCurrentArray = JSON.parse(localStorage.getItem("swsLatestSearches")) || [];
+
 				setTimeout(()=> {
+
 					$fullscreen_wrapper.addClass('ssf-animated');
+					// Body class if fullscreen widget is opened
+					$(document.body).addClass('ysm-widget-opened')
 					$('.ssf-search-input').focus();
 
-					$(document).on('click', '.sws-search-recent-list-item-trigger', (e)=> {
-						let targetText = $(e.target).text()
-						$this.val(targetText).focus();
-					})
-
-					$(document).on('click', '.sws-search-recent-list-item-delete', function() {
-						const itemToDelete = $(this).data('item');
-						currentArray = currentArray.filter(item => item !== itemToDelete);
-						localStorage.setItem("latestSearches", JSON.stringify(currentArray));
-						let latestFive = currentArray.slice(-5);
-						$('.sws-search-recent-list').empty();
-						latestFive.forEach(item => {
-							$('.sws-search-recent-list').append(`
-								<li class="sws-search-recent-list-item">
-									<span class="sws-search-recent-list-item-trigger">${item}</span>
-									<span class="sws-search-recent-list-item-delete" data-item="${item}" aria-label="close"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="currentColor"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg></span>
-								</li>
-							`);
-						});
-
-						if (currentArray.length == 0) {
-							$('.sws-search-recent-wrapper').addClass('sws-search-recent-wrapper--hidden_mod');
-						}
-
-					});
 				}, 100);
 			}
 
 			let closePopup = ()=>{
 				$fullscreen_wrapper.removeClass('ssf-active ssf-animated');
+				$(document.body).removeClass('ysm-widget-opened')
+				$('.sws-search-recent-wrapper').removeClass('sws-search-recent-wrapper--hidden_by_keywords');
+				$('.smart-search-keywords-wrapper').addClass('smart-search-keywords-wrapper--hidden_mod');
 				setTimeout(()=>{
 					$('.ssf-search-input').val('');
+
 					$results_wrapper.css({
 						maxHeight: 0,
 					});
+
 					$('.smart-search-view-all-holder').hide();
+					$('.smart-search-suggestions').empty();
+					$el.addClass( 'ysm-hide' )
 				}, 500)
 			}
 
@@ -646,9 +738,7 @@
 
 					$el.addClass( 'ysm-hide' ).removeClass( 'sws-no-results' );
 
-					$results_wrapper.css({
-						maxHeight: maxHeightValue + 'px',
-					});
+					$results_main.addClass('sws-hiding-results');
 
 				},
 				onSelect        : function ( suggestion ) {
@@ -667,11 +757,7 @@
 						$results_main.find( '.smart-search-view-all-holder' ).html( res.view_all_link );
 					}
 
-					// if ( res && res.fullscreen_popup && res.fullscreen_popup != '' ) {
-					//
-					// 	$popup.append( res.fullscreen_popup);
-					//
-					// }
+					$this.css( 'background-image', 'none' );
 
 					return res;
 				},
@@ -679,7 +765,6 @@
 					if ( query !== $this.val() ) {
 						return;
 					}
-
 
 					if ( ! popupWidth ) {
 						popupWidth = $this.outerWidth();
@@ -690,115 +775,146 @@
 
 					$this.css( 'background-image', 'none' );
 
+
 					if ( suggestions.length > 0 ) {
 
 						$el.removeClass( 'ysm-hide' ).removeClass( 'sws-no-results' );
 
-						setTimeout( function() {
-							var $wrapperWidth = $results_wrapper.outerWidth();
-							// var columns = suggestions.length < options.columns ? suggestions.length : options.columns;
-							var columns = options.columns;
-							var $viewAllEl = $results_main.find( '.smart-search-view-all-holder' );
+						$results_main.removeClass('sws-hiding-results');
 
-							if ( $wrapperWidth === 0 ) {
-								$wrapperWidth = $this.outerWidth();
-								$results_wrapper.width( $wrapperWidth + 'px' );
+						var $wrapperWidth = $results_wrapper.outerWidth();
+						// var columns = suggestions.length < options.columns ? suggestions.length : options.columns;
+						var columns = options.columns;
+						var $viewAllEl = $results_main.find( '.smart-search-view-all-holder' );
+
+						if ( $wrapperWidth === 0 ) {
+							$wrapperWidth = $this.outerWidth();
+							$results_wrapper.width( $wrapperWidth + 'px' );
+						}
+
+						if ( $wrapperWidth < columns * 200 ) {
+							columns = Math.floor( $wrapperWidth / 200 );
+						}
+
+						let swsWindowHeight = window.innerHeight
+						let swsMarginsHeight = 180;
+						let swsButtonHeight = $viewAllEl.length ? 60 : 0;
+						let swsRecentSearchesHeight = 0;
+						if (options.recentSearches || options.keywords) {
+							swsRecentSearchesHeight = $(window).width() >= 768 ? 45 : 110;
+						}
+						let swsMaximumHeight = swsWindowHeight - swsMarginsHeight - swsButtonHeight - swsRecentSearchesHeight;
+
+						if (maxHeightValue > swsMaximumHeight) {
+							$results_wrapper.css({
+								maxHeight: swsMaximumHeight + 'px',
+							});
+						} else {
+							$results_wrapper.css({
+								maxHeight: maxHeightValue + 'px',
+							});
+						}
+
+						if ( ! $results_wrapper.outerHeight() ) {
+							var suggestionsHeight = $resultsWrapperInner.find('.smart-search-suggestions').outerHeight();
+
+							if ( suggestionsHeight ) {
+								suggestionsHeight = parseInt( suggestionsHeight, 10 );
+								$results_wrapper.height( suggestionsHeight > maxHeightValue ? maxHeightValue : suggestionsHeight );
 							}
+						}
 
-							if ( $wrapperWidth < columns * 200 ) {
-								columns = Math.floor( $wrapperWidth / 200 );
-							}
+						$results_wrapper
+							.attr( 'data-columns', columns )
+							.nanoScroller({
+								contentClass: 'smart-search-results-inner',
+								alwaysVisible: false,
+								iOSNativeScrolling: true
+							});
 
-							let windowHeight = window.innerHeight
-							let marginsHeight = 180;
-							let buttonHeight = $viewAllEl.length ? 60 : 0;
-							let recentSearchesHeight = $('.sws-search-recent-wrapper').height();
-							let maximumHeight = windowHeight - marginsHeight - buttonHeight - recentSearchesHeight;
+						if ($viewAllEl.length || options.keywords) {
 
-							if (maxHeightValue > maximumHeight) {
-								$results_wrapper.css({
-									maxHeight: maximumHeight + 'px',
-								});
-							} else {
-								$results_wrapper.css({
-									maxHeight: maxHeightValue + 'px',
-								});
-							}
-
-							if ( ! $results_wrapper.outerHeight() ) {
-								var suggestionsHeight = $resultsWrapperInner.find('.smart-search-suggestions').outerHeight();
-
-								if ( suggestionsHeight ) {
-									suggestionsHeight = parseInt( suggestionsHeight, 10 );
-									$results_wrapper.height( suggestionsHeight > maxHeightValue ? maxHeightValue : suggestionsHeight );
-								}
-							}
-
-							$results_wrapper
-								.attr( 'data-columns', columns )
-								.nanoScroller({
-									contentClass: 'smart-search-results-inner',
-									alwaysVisible: false,
-									iOSNativeScrolling: true
-								});
-
-							if ( $viewAllEl.length ) {
-								if ( $this.val().length < options.minChars ) {
-									$viewAllEl.hide();
+							const handleVisibility = (element, query, callback) => {
+								if ($this.val().length < options.minChars) {
+									element.hide();
 								} else {
-									var serviceUrl = options.serviceUrl,
-										cacheKey,
-										that = $this.devbridgeAutocomplete();
+									const that = $this.devbridgeAutocomplete();
+									let serviceUrl = options.serviceUrl;
 
-									if ( $.isFunction( serviceUrl ) ) {
-										serviceUrl = serviceUrl.call( that.element, query );
+									if ($.isFunction(serviceUrl)) {
+										serviceUrl = serviceUrl.call(that.element, query);
 									}
-									cacheKey = serviceUrl + '?' + $.param( { query: query } );
-									if ( that.cachedResponse && that.cachedResponse[cacheKey] ) {
-										$viewAllEl.html( that.cachedResponse[cacheKey].view_all_link );
+
+									const cacheKey = serviceUrl + '?' + $.param({ query: query });
+
+									if (that.cachedResponse && that.cachedResponse[cacheKey]) {
+										callback(that.cachedResponse[cacheKey]);
 									}
-									$viewAllEl.show();
+									element.show();
 								}
+							};
+
+							if ($viewAllEl.length) {
+								handleVisibility($viewAllEl, query, (cachedResponse) => {
+									$viewAllEl.html(cachedResponse.view_all_link);
+								});
 							}
 
-						}, 100);
+							if (options.keywords) {
+								const $recentWrapper = $('.sws-search-recent-wrapper');
+								handleVisibility($('.smart-search-keywords-wrapper'), query, (cachedResponse) => {
+									$swsKeywords = cachedResponse.keywords;
+
+								});
+
+								if ( ! $results_main.find( '.smart-search-keywords-wrapper' ).length ) {
+									$results_main.addClass( 'sws-has-keywords' ).prepend( '<div class="smart-search-keywords-wrapper smart-search-keywords-wrapper--hidden_mod"><h3 class="smart-search-keywords-title">'+ options.keywordsLabel+'</h3><ul class="smart-search-keywords-list"></ul></div>' );
+								}
+
+								if ($swsKeywords.length) {
+									$('.smart-search-keywords-list').empty();
+									$('.smart-search-keywords-wrapper').removeClass('smart-search-keywords-wrapper--hidden_mod');
+									$swsKeywords.forEach(item => {
+										$('.smart-search-keywords-list').append(`
+											<li class="sws-search-recent-list-item">
+												<span class="sws-search-recent-list-item-trigger">${item}</span>
+											</li>
+										`);
+									});
+								}
+
+								if ($recentWrapper.length) {
+
+									if ($swsKeywords.length) {
+										$('.smart-search-keywords-wrapper').removeClass('smart-search-keywords-wrapper--hidden_mod');
+										$recentWrapper.addClass('sws-search-recent-wrapper--hidden_by_keywords');
+
+									} else {
+										$('.smart-search-keywords-wrapper').addClass('smart-search-keywords-wrapper--hidden_mod');
+										$recentWrapper.removeClass('sws-search-recent-wrapper--hidden_by_keywords');
+									}
+								}
+							}
+						}
 
 						if ( options.recentSearches ) {
 							const currentSearchValue = query;
 
-
-							if (!currentArray.includes(currentSearchValue)) {
-								currentArray.push(currentSearchValue);
-								if (currentArray.length > 10) {
-									currentArray.shift(); // Remove the oldest item to keep the array size at 10
+							if (!swsCurrentArray.includes(currentSearchValue)) {
+								swsCurrentArray.push(currentSearchValue);
+								if (swsCurrentArray.length > 10) {
+									swsCurrentArray.shift();
 								}
-								localStorage.setItem("latestSearches", JSON.stringify(currentArray));
+								localStorage.setItem("swsLatestSearches", JSON.stringify(swsCurrentArray));
 							}
-							if (currentArray.length) {
-								if ($('.sws-search-recent-wrapper').length == 0) {
-
-									$('<div class="sws-search-recent-wrapper"><h4 class="sws-search-recent-title">'+ options.recentSearchesTitle+'</h4><ul class="sws-search-recent-list"></ul></div>').prependTo($results_main);
-								}
-								$('.sws-search-recent-wrapper').removeClass('sws-search-recent-wrapper--hidden_mod');
-								let latestFive = currentArray.slice(-5);
-								$('.sws-search-recent-list').empty();
-								latestFive.forEach(item => {
-									$('.sws-search-recent-list').append(`
-										<li class="sws-search-recent-list-item">
-											<span class="sws-search-recent-list-item-trigger">${item}</span>
-											<span class="sws-search-recent-list-item-delete" data-item="${item}" aria-label="close"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="currentColor"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg></span>
-										</li>
-									`);
-								});
+							if (swsCurrentArray.length) {
+								swsUpdateRecentSearches(true);
 							}
 						}
 
-
-
-
-
 					} else if ( options.no_results_text.length ) {
 						$el.removeClass( 'ysm-hide' ).addClass( 'sws-no-results' );
+						$results_main.removeClass('sws-hiding-results');
 					} else {
 						$el.addClass( 'ysm-hide' ).addClass( 'sws-no-results' );
 					}
@@ -823,13 +939,7 @@
 				onInvalidateSelection: function () {
 
 				},
-				onHide: function () {
-					// $this.val('');
-					// $results_wrapper.css({
-					// 	maxHeight: 0,
-					// });
-
-				}
+				onHide: function () {}
 			}).on( 'focus', function () {
 				$this.devbridgeAutocomplete().onValueChange();
 			});

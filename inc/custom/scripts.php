@@ -2,6 +2,7 @@
 namespace YSWS\Core\Scripts;
 
 add_action( 'admin_enqueue_scripts', __NAMESPACE__ . '\\admin_scripts' );
+add_action( 'admin_enqueue_scripts', __NAMESPACE__ . '\\admin_notification_styles' );
 add_action( 'wp_enqueue_scripts', __NAMESPACE__ . '\\front_scripts' );
 
 /**
@@ -117,4 +118,9 @@ function admin_scripts() {
 	wp_enqueue_style( 'ysrs-select2', SWS_PLUGIN_URI . 'assets/dist/css/select2.min.css', array(), SWS_PLUGIN_VERSION );
 	wp_enqueue_script( 'ysrs-select2', SWS_PLUGIN_URI . 'assets/dist/js/select2.min.js', array(), SWS_PLUGIN_VERSION, true );
     //wp_enqueue_style('material-icons', 'https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded', array(), SWS_PLUGIN_VERSION);
+}
+
+
+function admin_notification_styles() {
+    wp_enqueue_style( 'sws-notification', SWS_PLUGIN_URI . 'assets/dist/css/notification.css', array(), SWS_PLUGIN_VERSION );
 }

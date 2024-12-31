@@ -7,13 +7,18 @@ add_filter( 'plugin_action_links_' . SWS_PLUGIN_BASENAME, __NAMESPACE__ . '\\add
 add_filter( 'admin_title', __NAMESPACE__ . '\\change_admin_title', 10, 2 );
 
 add_action( 'wp_ajax_sws_promo_dismiss', __NAMESPACE__ . '\\promo_dismiss' );
+add_action( 'wp_ajax_sws_notice_dismiss', __NAMESPACE__ . '\\update_notice_dismiss' );
+
 
 /**
  * Admin init hook
  * @return void
  */
 function on_admin_init() {
-	\YummyWP\App\Notification::add_template( SWS_PLUGIN_DIR . 'templates/promo/discount.php' );
+//    \YummyWP\App\Notification::add_template( SWS_PLUGIN_DIR . 'templates/promo/discount.php' );
+    \YummyWP\App\Notification::add_template( SWS_PLUGIN_DIR . 'templates/promo/updates.php' );
+
+	add_action( 'admin_notices', __NAMESPACE__ . '\\display_admin_notices' );
 }
 
 /**
@@ -149,4 +154,21 @@ function promo_dismiss() {
 	update_option( $name, 1 );
 
 	exit;
+}
+
+function update_notice_dismiss() {
+    $nonce = filter_input( INPUT_POST, 'nonce', FILTER_SANITIZE_FULL_SPECIAL_CHARS );
+    $version = filter_input( INPUT_POST, 'version', FILTER_SANITIZE_FULL_SPECIAL_CHARS );
+
+    if ( ! wp_verify_nonce( $nonce, 'sws_update_notice_dismiss_nonce_action' ) ) {
+        exit;
+    }
+
+    update_option( 'sws_update_notice', $version );
+
+    exit;
+}
+
+function display_admin_notices() {
+	\YummyWP\App\Notification::display_templates();
 }
