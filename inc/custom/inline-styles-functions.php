@@ -2,7 +2,7 @@
 function ysm_add_inline_styles_to_stack( $v, $css_classes ) {
 
 	foreach ( $css_classes as $css_class ) {
-		$css_class = trim( $css_class ) . '.ysm-active';
+		$css_class = trim( $css_class );
 
 		/* input styles */
 

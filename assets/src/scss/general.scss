@@ -12,9 +12,9 @@
 }
 
 /* search input */
-.ysm_search_widget.ysm-active,
-.widget_product_search.ysm-active,
-.widget_search.ysm-active {
+.ysm_search_widget .ysm-active,
+.widget_product_search .ysm-active,
+.widget_search .ysm-active {
 	overflow: visible;
 }
 
@@ -53,6 +53,10 @@
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
+
+	@media (max-width: 767px) {
+		font-size: 16px;
+	}
 }
 
 .ysm-search-widget .search-field::-webkit-input-placeholder {color: inherit;}
@@ -704,7 +708,12 @@
 
 .ssf-search-input {
 	background-position: 50% 50% !important;
+
+	@media (max-width: 767px) {
+		font-size: 16px !important;
+	}
 }
+
 
 .smart-search-results-main.sws-hiding-results {
 	.smart-search-results,
