@@ -134,7 +134,7 @@
 				return;
 			}
 
-			$( '<div class="smart-search-popup-backdrop"></div><div class="smart-search-popup"><div class="smart-search-results"><div class="smart-search-results-inner"></div></div></div>' ).appendTo( $form );
+			$( '<div class="smart-search-popup"><div class="smart-search-results"><div class="smart-search-results-inner"></div></div></div>' ).appendTo( $form );
 
 			var $popup = $form.find( '.smart-search-popup' );
 			var popupWidth = 0;
@@ -452,7 +452,7 @@
 
 				},
 				onHide: function (e) {
-					//$form.addClass( 'ysm-hide' ).removeClass( 'sws-no-results' );
+					$form.addClass( 'ysm-hide' ).removeClass( 'sws-no-results' );
 				}
 			}).on( 'focus', function () {
 				$this.devbridgeAutocomplete().onValueChange();
