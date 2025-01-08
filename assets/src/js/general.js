@@ -453,7 +453,7 @@
 
 				},
 				onHide: function (e) {
-					//$el.addClass( 'ysm-hide' ).removeClass( 'sws-no-results' );
+					$el.addClass( 'ysm-hide' ).removeClass( 'sws-no-results' );
 				}
 			}).on( 'focus', function () {
 				$this.devbridgeAutocomplete().onValueChange();
