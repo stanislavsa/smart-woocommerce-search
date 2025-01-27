@@ -6,14 +6,14 @@
  * Tags: woocommerce search, ajax search, woocommerce, woocommerce search by sku, woocommerce search shortcode, product search, product filter, woocommerce search results, instant search, woocommerce search plugin, woocommerce search form, search for woocommerce, woocommerce search page, search, woocommerce product search, search woocommerce, shop, shop search, autocomplete, autosuggest, search for wp, search for WordPress, search plugin, woocommerce search by sku, search results,  woocommerce search shortcode, search products, search autocomplete, woocommerce advanced search, woocommerce predictive search, woocommerce live search, woocommerce single product, woocommerce site search, products, shop, category search, custom search, predictive search, relevant search, search product, woocommerce plugin, posts search, wp search, WordPress search
  * Author:      YummyWP
  * Author URI:  https://www.wpsmartsearch.com/
- * Version:     2.12.0
+ * Version:     2.12.1
  * Domain Path: /languages
  * Text Domain: smart-woocommerce-search
  * Requires at least: 5.9
  * Requires PHP: 7.0
  *
  * WC requires at least: 4.0
- * WC tested up to: 9.5
+ * WC tested up to: 9.6
  */
 
 if ( ! defined( 'ABSPATH' ) ) {

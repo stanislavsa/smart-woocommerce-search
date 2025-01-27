@@ -1,18 +1,18 @@
 === Smart WooCommerce Search ===
 Contributors: yummy-wp
-Tags: search, ajax search, product search, smart search, search by sku
-Stable tag: 2.12.0
+Tags: search, ajax search, product search, search by sku, woocommerce search
+Stable tag: 2.12.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Requires at least: 5.9
 Tested up to: 6.7
 Requires PHP: 7.0
 
-Smart WooCommerce Search enhances your users' experience with a sophisticated AJAX search bar featuring real-time suggestions.
+Ideal Product Search plugin for WooCommerce shops that enhances users' experience with a live search feature.
 
 == Description ==
 
-= Smart WooCommerce Search enhances your users' experience with a sophisticated AJAX search bar featuring real-time suggestions. =
+= Ideal Product Search plugin for WooCommerce shops that enhances users' experience with a live search feature. =
 
 [Check Demo](https://demo.wpsmartsearch.com/)
 
@@ -20,21 +20,19 @@ Smart WooCommerce Search enhances your users' experience with a sophisticated AJ
 
 [Upgrade to PRO](https://www.wpsmartsearch.com/features/?utm_source=wporg&utm_medium=link&utm_campaign=upgrade_to_pro)
 
-While WooCommerce's default search is basic, lacking **live product search** and **SKU search** functionality, **Smart WooCommerce Search** delivers advanced search capabilities along with live suggestions.
+Improve default **WooCommerce search** or create a custom search widget in a few simple steps. The **Smart Search** plugin provides real-time suggestions in a fullscreen popup with synonyms and latest searches.
 
-In today's market, instant search suggestions are essential. According to the latest research, 96% of major e-commerce sites now offer search autocomplete, auto-suggest, or **instant ajax search** features. This functionality is crucial for retaining customers and optimizing sales by saving users time and streamlining the shopping process.
-
-Discover the PRO features of our plugin with a **14-day trial period**.
+You can completely customize your **smart woocommerce search**. In addition, the plugin integrates seamlessly into many themes and page builders.
 
 = Free Features: =
 
+ * Full Screen Mode
+ * Recent Searches
  * Search results with images and prices
  * Simple integration into default search widgets
  * [Search by product SKU](https://www.wpsmartsearch.com/docs/content-types/#2-toc-title)
  * Search in product Categories
  * Search in product Tags
- * Full Screen Mode
- * Recent Searches
  * Multisite support
  * Allow/disallow searching in selected product categories
  * Exclude "Out of stock" products from search results
@@ -45,12 +43,11 @@ Discover the PRO features of our plugin with a **14-day trial period**.
  * Visual Composer compatible
  * Search Exclude plugin compatible
 
-This plugin is indispensable for sites with a large number of product items.
-
-You can completely customize your **smart search**. In addition, the plugin integrates seamlessly into the **WooCommerce Product Search** widget.
+Discover the PRO features of our plugin with a **14-day trial period**.
 
 = Upgrade to PRO and boost your sales: =
 
+   * ["Did you mean" Keywords/Synonyms](https://www.wpsmartsearch.com/docs/synonyms/)
    * [Search in Variations](https://www.wpsmartsearch.com/docs/content-types/#1-toc-title)
    * [Search in Custom Post Types](https://www.wpsmartsearch.com/docs/content-types/#1-toc-title)
    * [Search in Custom Taxonomies](https://www.wpsmartsearch.com/docs/content-types/#3-toc-title)
@@ -58,7 +55,6 @@ You can completely customize your **smart search**. In addition, the plugin inte
    * Search in Product Attributes
    * Search in Product Brands
    * Product labels
-   * ["Did you mean" Keywords/Synonyms](https://www.wpsmartsearch.com/docs/synonyms/)
    * [Stop words](https://www.wpsmartsearch.com/docs/stop-words/)
    * [Data indexing](https://www.wpsmartsearch.com/docs/data-indexing/)
    * Advanced caching
@@ -110,6 +106,9 @@ Yes, when using products search or when you set option to search only through pr
 5. Searching by SKU
 
 == Changelog ==
+
+= 2.12.1 =
+* Updated: Freemius SDK
 
 = 2.12.0 =
 * Added: setting 'Full Screen Mode' to display results in a full screen popup
