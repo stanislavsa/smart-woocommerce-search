@@ -30,6 +30,11 @@
 						recentSearchesTitle: swsL10n.widgets[wId].recentSearchesTitle,
 						keywords: swsL10n.widgets[wId].keywords,
 						keywordsLabel: swsL10n.widgets[wId].keywordsLabel,
+						selectedCategories: swsL10n.widgets[wId].selectedCategories,
+						selectedCategoriesLabel: swsL10n.widgets[wId].selectedCategoriesLabel,
+						selectedCategoriesLocation: swsL10n.widgets[wId].selectedCategoriesLocation,
+						selectedCategoriesMobile: swsL10n.widgets[wId].selectedCategoriesMobile,
+						selectedCategoriesCount: swsL10n.widgets[wId].selectedCategoriesCount,
 					}
 
 					$(widgets.selector).each(function () {
@@ -551,6 +556,41 @@
 								<span class="sws-search-recent-list-item-delete" data-item="${item}" aria-label="close"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="currentColor"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg></span>
 							</li>
 						`);
+				});
+			}
+
+			if (options.selectedCategories) {
+
+				$results_main.addClass('smart-search-results-main--column_mod');
+
+
+				$('<div class="sws-sidebar sws-sidebar--left-mod"></div>').prependTo($results_main);
+				$('<div class="sws-sidebar sws-sidebar--right-mod"></div>').appendTo($results_main);
+
+				let selectedCategoriesHtml = $('<div class="sws-selected-categories ">' +
+					'<h4 class="sws-selected-categories-title">'+ options.selectedCategoriesLabel +'</h4>' +
+					'<ul class="sws-selected-categories-list"></ul>' +
+					'</div>')
+
+				//selectedCategoriesHtml.prependTo($results_main);
+				console.log(options.selectedCategoriesLocation);
+				if (options.selectedCategoriesLocation == 'left_slot') {
+					selectedCategoriesHtml.prependTo($('.sws-sidebar--left-mod'));
+				}
+				else if (options.selectedCategoriesLocation == 'right_slot') {
+					selectedCategoriesHtml.prependTo($('.sws-sidebar--right-mod'));
+				}
+
+				options.selectedCategories.forEach(item => {
+
+					$('.sws-selected-categories-list').append(`
+						<li class="sws-selected-categories-item">
+							<a class="sws-selected-categories-link" href="${item.url}">
+								${item.name}
+								${(options.selectedCategoriesCount && item.count > 0) ? `(${item.count})` : ''}
+							</a>
+						</li>
+					`);
 				});
 			}
 

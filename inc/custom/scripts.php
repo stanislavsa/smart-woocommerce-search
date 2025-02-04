@@ -40,6 +40,7 @@ function front_scripts() {
 		    $css_classes = array_merge( $css_classes, $extra_bar_css_classes );
 	    }
 
+
 	    $widget_params['selector'] = implode( ', ', $css_classes );
 	    $widget_params['charCount'] = isset( $v['settings']['char_count'] ) ? (int) $v['settings']['char_count'] : 3;
 	    $widget_params['disableAjax'] = ! empty( $v['settings']['disable_ajax'] );
@@ -61,6 +62,34 @@ function front_scripts() {
         $widget_params['placeholder'] = ! empty( $v['settings']['placeholder'] ) ? __( $v['settings']['placeholder'], 'smart-woocommerce-search' ) : '';
         $widget_params['recentSearches'] = ! empty( $v['settings']['recent_searches'] ) ? __( $v['settings']['recent_searches'], 'smart-woocommerce-search' ) : '';
         $widget_params['recentSearchesTitle'] = ! empty( $v['settings']['recent_searches_text'] ) ? __( $v['settings']['recent_searches_text'], 'smart-woocommerce-search' ) : '';
+
+        $widget_params['selectedCategoriesLabel'] = ! empty( $v['settings']['selected_categories_label'] ) ? __( $v['settings']['selected_categories_label'], 'smart-woocommerce-search' ) : '';
+        $widget_params['selectedCategoriesLocation'] = ! empty( $v['settings']['selected_categories_location'] ) ? $v['settings']['selected_categories_location'] : '';
+        $widget_params['selectedCategoriesMobile'] = ! empty( $v['settings']['selected_categories_mobile'] ) ? $v['settings']['selected_categories_mobile'] : '';
+        $widget_params['selectedCategoriesCount'] = ! empty( $v['settings']['selected_categories_count'] ) ? $v['settings']['selected_categories_count'] : '';
+
+        if ( ! empty( $v['settings']['selected_categories'] ) ) {
+            $sws_selected_categories_ids = $v['settings']['selected_categories'];
+            $sws_categories_data = [];
+            foreach ($sws_selected_categories_ids as $sws_category_id) {
+                $sws_category = get_term($sws_category_id, 'product_cat');
+
+                if (!is_wp_error($sws_category) && $sws_category) {
+                    $sws_categories_data[] = [
+                        'id' => $sws_category->term_id,
+                        'name' => $sws_category->name,
+                        'slug' => $sws_category->slug,
+                        'description' => $sws_category->description,
+                        'url' => get_term_link($sws_category),
+                        'count' => $sws_category->count,
+                    ];
+                }
+            }
+            $widget_params['selectedCategories'] = $sws_categories_data;
+
+        } else {
+            $widget_params['selectedCategories'] = '';
+        }
 
 
         if ( !empty( $v['settings']['post_type_product'] ) && empty( $v['settings']['search_page_layout_posts'] ) ) {
