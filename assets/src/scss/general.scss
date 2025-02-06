@@ -738,6 +738,14 @@
 	flex-wrap: wrap;
 }
 
+.smart-search-results-main--hidden_mobile_mod {
+	.sws-sidebar {
+		@media (max-width: 767px) {
+			display: none !important;
+		}
+	}
+}
+
 .smart-search-results-main--column_mod .smart-search-results{
 	width: calc(100% - 200px);
 

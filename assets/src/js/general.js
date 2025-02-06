@@ -563,6 +563,10 @@
 
 				$results_main.addClass('smart-search-results-main--column_mod');
 
+				if(options.selectedCategoriesMobile) {
+					$results_main.addClass('smart-search-results-main--hidden_mobile_mod');
+				}
+
 
 				$('<div class="sws-sidebar sws-sidebar--left-mod"></div>').prependTo($results_main);
 				$('<div class="sws-sidebar sws-sidebar--right-mod"></div>').appendTo($results_main);
