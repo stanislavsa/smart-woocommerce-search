@@ -67,6 +67,7 @@ function front_scripts() {
         $widget_params['selectedCategoriesLocation'] = ! empty( $v['settings']['selected_categories_location'] ) ? $v['settings']['selected_categories_location'] : '';
         $widget_params['selectedCategoriesMobile'] = ! empty( $v['settings']['selected_categories_mobile'] ) ? $v['settings']['selected_categories_mobile'] : '';
         $widget_params['selectedCategoriesCount'] = ! empty( $v['settings']['selected_categories_count'] ) ? $v['settings']['selected_categories_count'] : '';
+        $widget_params['selectedCategoriesOnOpen'] = ! empty( $v['settings']['selected_categories_on_open'] ) ? $v['settings']['selected_categories_on_open'] : '';
 
         if ( ! empty( $v['settings']['selected_categories'] ) ) {
             $sws_selected_categories_ids = $v['settings']['selected_categories'];

@@ -35,6 +35,7 @@
 						selectedCategoriesLocation: swsL10n.widgets[wId].selectedCategoriesLocation,
 						selectedCategoriesMobile: swsL10n.widgets[wId].selectedCategoriesMobile,
 						selectedCategoriesCount: swsL10n.widgets[wId].selectedCategoriesCount,
+						selectedCategoriesOnOpen: swsL10n.widgets[wId].selectedCategoriesOnOpen,
 					}
 
 					$(widgets.selector).each(function () {
@@ -567,6 +568,10 @@
 					$results_main.addClass('smart-search-results-main--hidden_mobile_mod');
 				}
 
+				if(options.selectedCategoriesOnOpen) {
+					$results_main.addClass('smart-search-results-main--on_open_mod');
+				}
+
 
 				$('<div class="sws-sidebar sws-sidebar--left-mod"></div>').prependTo($results_main);
 				$('<div class="sws-sidebar sws-sidebar--right-mod"></div>').appendTo($results_main);
@@ -577,17 +582,16 @@
 					'</div>')
 
 				//selectedCategoriesHtml.prependTo($results_main);
-				console.log(options.selectedCategoriesLocation);
 				if (options.selectedCategoriesLocation == 'left_slot') {
-					selectedCategoriesHtml.prependTo($('.sws-sidebar--left-mod'));
+					selectedCategoriesHtml.prependTo($results_main.find('.sws-sidebar--left-mod'));
 				}
 				else if (options.selectedCategoriesLocation == 'right_slot') {
-					selectedCategoriesHtml.prependTo($('.sws-sidebar--right-mod'));
+					selectedCategoriesHtml.prependTo($results_main.find('.sws-sidebar--right-mod'));
 				}
 
 				options.selectedCategories.forEach(item => {
 
-					$('.sws-selected-categories-list').append(`
+					$results_main.find('.sws-selected-categories-list').append(`
 						<li class="sws-selected-categories-item">
 							<a class="sws-selected-categories-link" href="${item.url}">
 								${item.name}

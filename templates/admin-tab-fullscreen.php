@@ -24,7 +24,7 @@
             ));
             ?>
 
-            <th class="ymapp-settings__title"><?php esc_html_e( 'Selected Categories', 'smart-woocommerce-search' ); ?></th>
+            <th class="ymapp-settings__title"><?php esc_html_e( 'Categories', 'smart-woocommerce-search' ); ?></th>
 
             <?php
 
@@ -40,7 +40,7 @@
 
                 ysm_setting( $w_id, 'selected_categories', array(
                     'type'        => 'select',
-                    'title'       => __( 'Display selected categories when popup initially opened', 'smart-woocommerce-search' ),
+                    'title'       => __( 'Display selected categories', 'smart-woocommerce-search' ),
                     'value'       => '',
                     'is_pro'      => false,
                     'multiple'    => true,
@@ -50,8 +50,8 @@
 
                 ysm_setting( $w_id, 'selected_categories_label', array(
                     'type'        => 'text',
-                    'title'       => __( 'Text of "Selected Categories" Title', 'smart-woocommerce-search' ),
-                    'value'       => 'Selected Categories',
+                    'title'       => __( '"Selected Categories" Label', 'smart-woocommerce-search' ),
+                    'value'       => 'Categories',
                 ));
 
                 ysm_setting( $w_id, 'selected_categories_location', array(
@@ -73,7 +73,12 @@
 
                 ysm_setting( $w_id, 'selected_categories_count', array(
                     'type'        => 'checkbox',
-                    'title'       => __( 'Products counter', 'smart-woocommerce-search' ),
+                    'title'       => __( 'Show Products Count', 'smart-woocommerce-search' ),
+                    'value'       => 1,
+                ));
+                ysm_setting( $w_id, 'selected_categories_on_open', array(
+                    'type'        => 'checkbox',
+                    'title'       => __( 'Display Selected Categories when Popup Initially Opened', 'smart-woocommerce-search' ),
                     'value'       => 1,
                 ));
             ?>

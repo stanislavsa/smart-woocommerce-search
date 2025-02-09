@@ -736,6 +736,28 @@
 .smart-search-results-main--column_mod {
 	display: flex;
 	flex-wrap: wrap;
+	
+	@media (max-width: 767px) {
+		.sws-search-recent-wrapper {
+			order: 1;
+		}
+		.smart-search-keywords-wrapper {
+			order: 2;
+		}
+		.sws-sidebar {
+			order: 3;
+		}
+		.smart-search-results {
+			order: 4;
+		}
+		.smart-search-view-all-holder {
+			order: 5;
+		}
+	}
+}
+
+.ysm-hide .smart-search-results-main--on_open_mod .sws-selected-categories {
+	display: block;
 }
 
 .smart-search-results-main--hidden_mobile_mod {
@@ -766,6 +788,12 @@
 		padding-left: 0 !important;
 	}
 
+}
+
+.sws-sidebar:not(:last-child) {
+	@media (max-width: 767px) {
+		margin-bottom: 20px;
+	}
 }
 
 .sws-sidebar--left-mod:not(:empty) {
