@@ -790,6 +790,14 @@
 
 }
 
+.sws-sidebar-holder {
+	width: calc(100% - 200px);
+
+	@media (max-width: 767px) {
+		display: none;
+	}
+}
+
 .sws-sidebar:not(:last-child) {
 	@media (max-width: 767px) {
 		margin-bottom: 20px;

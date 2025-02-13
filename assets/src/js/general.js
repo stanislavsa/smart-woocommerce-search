@@ -575,7 +575,7 @@
 
 				$('<div class="sws-sidebar sws-sidebar--left-mod"></div>').prependTo($results_main);
 				$('<div class="sws-sidebar sws-sidebar--right-mod"></div>').appendTo($results_main);
-
+				$('<div class="sws-sidebar-holder"></div>').prependTo($results_main);
 				let selectedCategoriesHtml = $('<div class="sws-selected-categories ">' +
 					'<h4 class="sws-selected-categories-title">'+ options.selectedCategoriesLabel +'</h4>' +
 					'<ul class="sws-selected-categories-list"></ul>' +
@@ -586,6 +586,7 @@
 					selectedCategoriesHtml.prependTo($results_main.find('.sws-sidebar--left-mod'));
 				}
 				else if (options.selectedCategoriesLocation == 'right_slot') {
+
 					selectedCategoriesHtml.prependTo($results_main.find('.sws-sidebar--right-mod'));
 				}
 
