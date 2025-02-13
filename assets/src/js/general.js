@@ -583,6 +583,7 @@
 
 				//selectedCategoriesHtml.prependTo($results_main);
 				if (options.selectedCategoriesLocation == 'left_slot') {
+					$('.sws-sidebar-holder').hide();
 					selectedCategoriesHtml.prependTo($results_main.find('.sws-sidebar--left-mod'));
 				}
 				else if (options.selectedCategoriesLocation == 'right_slot') {
