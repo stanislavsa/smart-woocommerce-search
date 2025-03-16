@@ -83,6 +83,44 @@
                 ));
             ?>
 
+            <th class="ymapp-settings__title"><?php esc_html_e( 'Promo banner', 'smart-woocommerce-search' ); ?></th>
+
+            <?php
+            ysm_setting( $w_id, 'promo_banner_location', array(
+	            'type'        => 'select',
+	            'title'       => __( 'Location', 'smart-woocommerce-search' ),
+	            'value'       => '',
+	            'is_pro'      => false,
+	            'choices'     => array(
+		            'left_slot' => __( 'Left Sidebar Slot', 'smart-woocommerce-search' ),
+		            'right_slot' => __( 'Right Sidebar Slot', 'smart-woocommerce-search' ),
+		            'left_slot_2' => __( 'Left Sidebar Slot 2', 'smart-woocommerce-search' ),
+		            'right_slot_2' => __( 'Right Sidebar Slot 2', 'smart-woocommerce-search' ),
+	            ),
+            ));
+
+            ysm_setting( $w_id, 'promo_banner_image', array(
+	            'type'        => 'image',
+	            'title'       => __( 'Banner Image', 'smart-woocommerce-search' ),
+	            'value'       => '',
+	            'is_pro'      => false,
+            ));
+
+            ysm_setting( $w_id, 'promo_banner_link', array(
+	            'type'        => 'text',
+	            'title'       => __( 'Promo Banner Link', 'smart-woocommerce-search' ),
+	            'value'       => '',
+            ));
+
+            ysm_setting( $w_id, 'promo_banner_on_open', array(
+	            'type'        => 'checkbox',
+	            'title'       => __( 'Display Promo Banner when Popup Initially Opened', 'smart-woocommerce-search' ),
+	            'value'       => 1,
+            ));
+
+
+            ?>
+
 
             </tbody>
         </table>

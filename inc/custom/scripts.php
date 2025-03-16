@@ -69,6 +69,11 @@ function front_scripts() {
         $widget_params['selectedCategoriesCount'] = ! empty( $v['settings']['selected_categories_count'] ) ? $v['settings']['selected_categories_count'] : '';
         $widget_params['selectedCategoriesOnOpen'] = ! empty( $v['settings']['selected_categories_on_open'] ) ? $v['settings']['selected_categories_on_open'] : '';
 
+	    $widget_params['promoBannerLocation'] = ! empty( $v['settings']['promo_banner_location'] ) ? $v['settings']['promo_banner_location'] : '';
+	    $widget_params['promoBannerImage'] = ! empty( $v['settings']['promo_banner_image'] ) ? wp_get_attachment_image($v['settings']['promo_banner_image'], 'large', false) : '';
+	    $widget_params['promoBannerLink'] = ! empty( $v['settings']['promo_banner_link'] ) ? $v['settings']['promo_banner_link'] : '';
+	    $widget_params['promoBannerOnOpen'] = ! empty( $v['settings']['promo_banner_on_open'] ) ? $v['settings']['promo_banner_on_open'] : '';
+
         if ( ! empty( $v['settings']['selected_categories'] ) ) {
             $sws_selected_categories_ids = $v['settings']['selected_categories'];
             $sws_categories_data = [];
@@ -148,6 +153,7 @@ function admin_scripts() {
 	wp_enqueue_style( 'ysrs-select2', SWS_PLUGIN_URI . 'assets/dist/css/select2.min.css', array(), SWS_PLUGIN_VERSION );
 	wp_enqueue_script( 'ysrs-select2', SWS_PLUGIN_URI . 'assets/dist/js/select2.min.js', array(), SWS_PLUGIN_VERSION, true );
     //wp_enqueue_style('material-icons', 'https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded', array(), SWS_PLUGIN_VERSION);
+	wp_enqueue_media();
 }
 
 

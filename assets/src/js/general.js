@@ -36,6 +36,11 @@
 						selectedCategoriesMobile: swsL10n.widgets[wId].selectedCategoriesMobile,
 						selectedCategoriesCount: swsL10n.widgets[wId].selectedCategoriesCount,
 						selectedCategoriesOnOpen: swsL10n.widgets[wId].selectedCategoriesOnOpen,
+
+						promoBannerLocation: swsL10n.widgets[wId].promoBannerLocation,
+						promoBannerImage: swsL10n.widgets[wId].promoBannerImage,
+						promoBannerLink: swsL10n.widgets[wId].promoBannerLink,
+						promoBannerOnOpen: swsL10n.widgets[wId].promoBannerOnOpen,
 					}
 
 					$(widgets.selector).each(function () {
@@ -560,7 +565,7 @@
 				});
 			}
 
-			if (options.selectedCategories) {
+			if (options.selectedCategories || options.promoBannerImage) {
 
 				$results_main.addClass('smart-search-results-main--column_mod');
 
@@ -572,24 +577,60 @@
 					$results_main.addClass('smart-search-results-main--on_open_mod');
 				}
 
-
-				$('<div class="sws-sidebar sws-sidebar--left-mod"></div>').prependTo($results_main);
-				$('<div class="sws-sidebar sws-sidebar--right-mod"></div>').appendTo($results_main);
 				$('<div class="sws-sidebar-holder"></div>').prependTo($results_main);
+				$('<div class="sws-sidebar sws-sidebar--left-mod"><div class="sws-sidebar-widget sws-sidebar--left_slot"></div><div class="sws-sidebar-widget sws-sidebar--left_slot_2"></div></div>').prependTo($results_main);
+
+				$('<div class="sws-sidebar sws-sidebar--right-mod"><div class="sws-sidebar-widget sws-sidebar--right_slot"></div><div class="sws-sidebar-widget sws-sidebar--right_slot_2"></div></div>').appendTo($results_main);
+
 				let selectedCategoriesHtml = $('<div class="sws-selected-categories ">' +
 					'<h4 class="sws-selected-categories-title">'+ options.selectedCategoriesLabel +'</h4>' +
 					'<ul class="sws-selected-categories-list"></ul>' +
-					'</div>')
+					'</div>');
 
-				//selectedCategoriesHtml.prependTo($results_main);
-				if (options.selectedCategoriesLocation == 'left_slot') {
-					$('.sws-sidebar-holder').hide();
-					selectedCategoriesHtml.prependTo($results_main.find('.sws-sidebar--left-mod'));
-				}
-				else if (options.selectedCategoriesLocation == 'right_slot') {
+				let left_slot = $results_main.find('.sws-sidebar--left-mod .sws-sidebar--left_slot');
+				let left_slot_2 = $results_main.find('.sws-sidebar--left-mod .sws-sidebar--left_slot_2');
+				let right_slot = $results_main.find('.sws-sidebar--right-mod .sws-sidebar--right_slot');
+				let right_slot_2 = $results_main.find('.sws-sidebar--right-mod .sws-sidebar--right_slot_2');
 
-					selectedCategoriesHtml.prependTo($results_main.find('.sws-sidebar--right-mod'));
+
+				let promoBanner = '';
+				if (options.promoBannerLink.length) {
+					promoBanner = $('<div class="sws-promo-banner">' +
+					'<a href="'+ options.promoBannerLink +'" target="_blank"> ' +
+					options.promoBannerImage +
+					'</a>'+
+					'</div>');
+				} else {
+					promoBanner = $('<div class="sws-promo-banner">' +
+					options.promoBannerImage +
+					'</div>');
 				}
+
+				$('.sws-sidebar-holder').hide();
+
+				selectedCategoriesHtml.prependTo($results_main.find('.sws-sidebar--'+options.selectedCategoriesLocation+''));
+
+
+				if (options.promoBannerImage) {
+
+					if(options.promoBannerOnOpen) {
+						$results_main.addClass('smart-search-results-main--banner_on_open_mod');
+					}
+
+					promoBanner.prependTo($results_main.find('.sws-sidebar--'+options.promoBannerLocation+''));
+				}
+
+				if (right_slot.is(':empty') && right_slot_2.is(':empty')) {
+					$results_main.addClass('smart-search-results-main--widgets-on-left--mod');
+				}
+
+				if (left_slot.is(':empty') && left_slot_2.is(':empty')) {
+					$('.sws-sidebar-holder').show();
+					$results_main.addClass('smart-search-results-main--widgets-on-right--mod');
+				}
+
+
+
 
 				options.selectedCategories.forEach(item => {
 

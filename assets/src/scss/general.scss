@@ -736,6 +736,7 @@
 .smart-search-results-main--column_mod {
 	display: flex;
 	flex-wrap: wrap;
+	justify-content: space-between;
 	
 	@media (max-width: 767px) {
 		.sws-search-recent-wrapper {
@@ -768,11 +769,56 @@
 	}
 }
 
+.sws-sidebar-widget {
+	display: flex;
+	flex-direction: column;
+}
+
+.sws-sidebar--first-slot:empty,
+.sws-sidebar--second-slot:empty {
+	display: none;
+}
+
+.sws-sidebar-widget .sws-selected-categories:not(:last-child) {
+	order: 1;
+}
+
+.sws-sidebar-widget .sws-promo-banner:not(:last-child) {
+	order: 2;
+	margin-top: 20px;
+}
+
+.sws-sidebar-widget:not(:empty) {
+	margin-top: 20px;
+}
+
+.sws-sidebar-widget:first-child {
+	margin-top: 0;
+}
+
+
+
 .smart-search-results-main--column_mod .smart-search-results{
-	width: calc(100% - 200px);
+	width: calc(100% - 400px);
 
 	@media (max-width: 767px) {
 		width: 100%;
+	}
+}
+
+.smart-search-results-main--widgets-on-left--mod .sws-sidebar--right-mod {
+	display: none !important;
+}
+
+.smart-search-results-main--widgets-on-right--mod .sws-sidebar--left-mod {
+	display: none !important;
+}
+
+.smart-search-results-main--widgets-on-left--mod .smart-search-results,
+.smart-search-results-main--widgets-on-right--mod .smart-search-results {
+
+	@media (min-width: 768px) {
+		width: calc(100% - 200px);
 	}
 }
 
@@ -791,18 +837,15 @@
 }
 
 .sws-sidebar-holder {
-	width: calc(100% - 200px);
+	width: calc(100% - 400px);
+	height: 1px;
 
 	@media (max-width: 767px) {
 		display: none;
 	}
 }
 
-.sws-sidebar:not(:last-child) {
-	@media (max-width: 767px) {
-		margin-bottom: 20px;
-	}
-}
+
 
 .sws-sidebar--left-mod:not(:empty) {
 	padding-right: 20px;
@@ -847,5 +890,30 @@
 			column-gap: 10px;
 			flex-wrap: wrap;
 		}
+	}
+}
+
+.sws-promo-banner {
+	img {
+		max-width: 100%;
+		height: auto;
+	}
+}
+
+.ysm-hide .sws-promo-banner {
+	display: none;
+}
+
+.ysm-hide .smart-search-results-main--banner_on_open_mod .sws-promo-banner {
+	display: block;
+}
+
+@media (max-width: 767px) {
+	.smart-search-results-main--banner_on_open_mod .sws-promo-banner {
+		display: none;
+	}
+
+	.smart-search-results[data-columns="2"] .smart-search-suggestions {
+		padding: 0;
 	}
 }
