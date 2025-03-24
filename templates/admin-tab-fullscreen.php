@@ -90,7 +90,7 @@
 	            'type'        => 'select',
 	            'title'       => __( 'Location', 'smart-woocommerce-search' ),
 	            'value'       => '',
-	            'is_pro'      => false,
+	            'is_pro'      => 1,
 	            'choices'     => array(
 		            'left_slot' => __( 'Left Sidebar Slot', 'smart-woocommerce-search' ),
 		            'right_slot' => __( 'Right Sidebar Slot', 'smart-woocommerce-search' ),
@@ -103,19 +103,21 @@
 	            'type'        => 'image',
 	            'title'       => __( 'Banner Image', 'smart-woocommerce-search' ),
 	            'value'       => '',
-	            'is_pro'      => false,
+	            'is_pro'      => 1,
             ));
 
             ysm_setting( $w_id, 'promo_banner_link', array(
 	            'type'        => 'text',
 	            'title'       => __( 'Promo Banner Link', 'smart-woocommerce-search' ),
 	            'value'       => '',
+	            'is_pro'      => 1,
             ));
 
             ysm_setting( $w_id, 'promo_banner_on_open', array(
 	            'type'        => 'checkbox',
 	            'title'       => __( 'Display Promo Banner when Popup Initially Opened', 'smart-woocommerce-search' ),
 	            'value'       => 1,
+	            'is_pro'      => 1,
             ));
 
 
