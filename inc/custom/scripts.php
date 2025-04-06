@@ -69,10 +69,10 @@ function front_scripts() {
         $widget_params['selectedCategoriesCount'] = ! empty( $v['settings']['selected_categories_count'] ) ? $v['settings']['selected_categories_count'] : '';
         $widget_params['selectedCategoriesOnOpen'] = ! empty( $v['settings']['selected_categories_on_open'] ) ? $v['settings']['selected_categories_on_open'] : '';
 
-	    $widget_params['promoBannerLocation'] = ! empty( $v['settings']['promo_banner_location'] ) ? $v['settings']['promo_banner_location'] : '';
-	    $widget_params['promoBannerImage'] = ! empty( $v['settings']['promo_banner_image'] ) ? wp_get_attachment_image($v['settings']['promo_banner_image'], 'large', false) : '';
-	    $widget_params['promoBannerLink'] = ! empty( $v['settings']['promo_banner_link'] ) ? $v['settings']['promo_banner_link'] : '';
-	    $widget_params['promoBannerOnOpen'] = ! empty( $v['settings']['promo_banner_on_open'] ) ? $v['settings']['promo_banner_on_open'] : '';
+	    $widget_params['promoBannerLocation'] = '';
+	    $widget_params['promoBannerImage'] = '';
+	    $widget_params['promoBannerLink'] = '';
+	    $widget_params['promoBannerOnOpen'] = '';
 
         if ( ! empty( $v['settings']['selected_categories'] ) ) {
             $sws_selected_categories_ids = $v['settings']['selected_categories'];

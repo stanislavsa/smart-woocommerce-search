@@ -762,7 +762,7 @@
 }
 
 .smart-search-results-main--hidden_mobile_mod {
-	.sws-sidebar {
+	.sws-selected-categories  {
 		@media (max-width: 767px) {
 			display: none !important;
 		}
@@ -824,6 +824,10 @@
 
 .ysm-hide .sws-selected-categories {
 	display: none;
+}
+
+.sws-sidebar {
+	box-sizing: border-box;
 }
 
 .sws-sidebar:not(:empty) {
