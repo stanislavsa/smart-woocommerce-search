@@ -2,14 +2,14 @@
 # This file is distributed under the same license as the Smart WooCommerce Search plugin.
 msgid ""
 msgstr ""
-"Project-Id-Version: Smart WooCommerce Search 2.12.3\n"
+"Project-Id-Version: Smart WooCommerce Search 2.13.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/smart-woocommerce-search\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-01-27T19:48:01+00:00\n"
+"POT-Creation-Date: 2025-04-06T18:45:50+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.10.0\n"
 "X-Domain: smart-woocommerce-search\n"
@@ -152,15 +152,15 @@ msgstr ""
 msgid "Delete"
 msgstr ""
 
-#: inc/custom/scripts.php:112
+#: inc/custom/scripts.php:147
 msgid "Delete column?"
 msgstr ""
 
-#: inc/custom/scripts.php:113
+#: inc/custom/scripts.php:148
 msgid "Delete row?"
 msgstr ""
 
-#: inc/custom/scripts.php:114
+#: inc/custom/scripts.php:149
 msgid "Delete widget?"
 msgstr ""
 
@@ -267,7 +267,7 @@ msgstr ""
 #: templates/admin-page-stop-words.php:31
 #: templates/admin-page-synonyms.php:37
 #: templates/admin-tab-fields.php:227
-#: templates/admin-tab-fullscreen.php:29
+#: templates/admin-tab-fullscreen.php:129
 #: templates/admin-tab-general.php:265
 #: templates/admin-tab-layout.php:152
 #: templates/admin-tab-spellcheck.php:32
@@ -450,6 +450,69 @@ msgstr ""
 
 #: templates/admin-tab-fullscreen.php:22
 msgid "Only on desktop"
+msgstr ""
+
+#: templates/admin-tab-fullscreen.php:27
+msgid "Categories"
+msgstr ""
+
+#: templates/admin-tab-fullscreen.php:43
+msgid "Display selected categories"
+msgstr ""
+
+#: templates/admin-tab-fullscreen.php:53
+msgid "\"Selected Categories\" Label"
+msgstr ""
+
+#: templates/admin-tab-fullscreen.php:59
+#: templates/admin-tab-fullscreen.php:91
+msgid "Location"
+msgstr ""
+
+#: templates/admin-tab-fullscreen.php:63
+#: templates/admin-tab-fullscreen.php:95
+msgid "Left Sidebar Slot"
+msgstr ""
+
+#: templates/admin-tab-fullscreen.php:64
+#: templates/admin-tab-fullscreen.php:96
+msgid "Right Sidebar Slot"
+msgstr ""
+
+#: templates/admin-tab-fullscreen.php:70
+msgid "Hide on mobile"
+msgstr ""
+
+#: templates/admin-tab-fullscreen.php:76
+msgid "Show Products Count"
+msgstr ""
+
+#: templates/admin-tab-fullscreen.php:81
+msgid "Display Selected Categories when Popup Initially Opened"
+msgstr ""
+
+#: templates/admin-tab-fullscreen.php:86
+msgid "Promo banner"
+msgstr ""
+
+#: templates/admin-tab-fullscreen.php:97
+msgid "Left Sidebar Slot 2"
+msgstr ""
+
+#: templates/admin-tab-fullscreen.php:98
+msgid "Right Sidebar Slot 2"
+msgstr ""
+
+#: templates/admin-tab-fullscreen.php:104
+msgid "Banner Image"
+msgstr ""
+
+#: templates/admin-tab-fullscreen.php:111
+msgid "Promo Banner Link"
+msgstr ""
+
+#: templates/admin-tab-fullscreen.php:118
+msgid "Display Promo Banner when Popup Initially Opened"
 msgstr ""
 
 #: templates/admin-tab-general.php:16
