@@ -36,6 +36,8 @@
 						selectedCategoriesMobile: swsL10n.widgets[wId].selectedCategoriesMobile,
 						selectedCategoriesCount: swsL10n.widgets[wId].selectedCategoriesCount,
 						selectedCategoriesOnOpen: swsL10n.widgets[wId].selectedCategoriesOnOpen,
+						selectedProducts: swsL10n.widgets[wId].selectedProducts,
+						selectedProductsLabel: swsL10n.widgets[wId].selectedProductsLabel,
 
 						promoBannerLocation: swsL10n.widgets[wId].promoBannerLocation,
 						promoBannerImage: swsL10n.widgets[wId].promoBannerImage,
@@ -501,6 +503,7 @@
 				$el.parents('.et_pb_module').css('overflow', 'visible');
 			}
 
+
 			$( '<div class="smart-search-fullscreen">' +
 				'<div class="smart-search-fullscreen-backdrop"></div>'+
 				'<div class="smart-search-fullscreen-inner">'+
@@ -586,7 +589,9 @@
 					'<h4 class="sws-selected-categories-title">'+ options.selectedCategoriesLabel +'</h4>' +
 					'<ul class="sws-selected-categories-list"></ul>' +
 					'</div>');
-
+				if (!options.selectedCategories) {
+					selectedCategoriesHtml = '';
+				}
 				let left_slot = $results_main.find('.sws-sidebar--left-mod .sws-sidebar--left_slot');
 				let left_slot_2 = $results_main.find('.sws-sidebar--left-mod .sws-sidebar--left_slot_2');
 				let right_slot = $results_main.find('.sws-sidebar--right-mod .sws-sidebar--right_slot');
@@ -608,7 +613,10 @@
 
 				$('.sws-sidebar-holder').hide();
 
-				selectedCategoriesHtml.prependTo($results_main.find('.sws-sidebar--'+options.selectedCategoriesLocation+''));
+				if (options.selectedCategories) {
+					selectedCategoriesHtml.prependTo($results_main.find('.sws-sidebar--'+options.selectedCategoriesLocation+''));
+				}
+
 
 
 				if (options.promoBannerImage) {
@@ -630,11 +638,10 @@
 				}
 
 
+				if (options.selectedCategories) {
+					options.selectedCategories.forEach(item => {
 
-
-				options.selectedCategories.forEach(item => {
-
-					$results_main.find('.sws-selected-categories-list').append(`
+						$results_main.find('.sws-selected-categories-list').append(`
 						<li class="sws-selected-categories-item">
 							<a class="sws-selected-categories-link" href="${item.url}">
 								${item.name}
@@ -642,7 +649,9 @@
 							</a>
 						</li>
 					`);
-				});
+					});
+				}
+
 			}
 
 			if (options.recentSearches) {
@@ -652,6 +661,69 @@
 					swsUpdateRecentSearches(true);
 				}
 			}
+
+			if (options.selectedProducts) {
+				$results_main.addClass('smart-search-results-recent-products--mod');
+				$results_wrapper.addClass('smart-search-results-hidden');
+
+				// Insert the Swiper container after the search results
+				$('<div class="sws-recent-products-wrapper"><h3 class="sws-recent-products-heading">'+options.selectedProductsLabel+'</h3><div class="swiper swsProductsSwiper sws-recent-products"><div class="swiper-wrapper"></div></div><div class="swiper-button-next"></div><div class="swiper-button-prev"></div></div>')
+					.insertBefore($results_main.find('.smart-search-results'));
+
+				// Loop through selected products and create swiper slides
+				options.selectedProducts.forEach(item => {
+					const slideHTML = `
+					  <div class="swiper-slide">
+						  <div class="sws-selected-products-item">
+							<a class="sws-selected-products-picture" href="${item.permalink}"><picture>${item.image}</picture></a>
+							<div class="smart-search-post-category">${item.category}</div>
+							<a class="sws-selected-products-title" href="${item.permalink}">${item.name}</a>
+							<div class="sws-selected-products-meta">
+								${item.price}
+								${ item.type === 'variable' 
+								? 
+									`<a href="${item.permalink}" class="button product_type_variable" target="_blank" rel="nofollow">
+								   		<img src="${item.icon_variable}" alt="">
+									</a>`
+								:
+									`<a href="?add-to-cart=${item.id}" 
+										class="button add_to_cart_button ajax_add_to_cart" 
+										data-product_id="${item.id}" 
+										aria-label="Add “${item.name}” to your cart" 
+										rel="nofollow">
+										<img src="${item.icon}" alt="">
+								 	</a>`
+								}
+							</div>
+						  </div>
+					  </div>
+					`;
+					$results_main.find('.swiper-wrapper').append(slideHTML);
+				});
+				const swiperScript = document.createElement('script');
+				swiperScript.src = 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js';
+				swiperScript.async = true;
+
+				swiperScript.onload = function () {
+					new Swiper('.swsProductsSwiper', {
+						slidesPerView: 'auto',
+						spaceBetween: 0,
+						navigation: {
+							nextEl: '.swiper-button-next',
+							prevEl: '.swiper-button-prev'
+						},
+						pagination: {
+							el: '.swiper-pagination',
+							clickable: true
+						}
+					});
+				};
+
+				document.body.appendChild(swiperScript);
+
+
+			}
+
 
 			$(document).off('click', '.sws-search-recent-list-item-trigger').on('click', '.sws-search-recent-list-item-trigger', (e)=> {
 				e.stopPropagation();
@@ -705,6 +777,13 @@
 					$('.smart-search-view-all-holder').hide();
 					$('.smart-search-suggestions').empty();
 					$form.addClass( 'ysm-hide' )
+					$form.removeClass('sws-no-results');
+
+					if (options.selectedProducts) {
+						$('.sws-recent-products-wrapper').show();
+						$results_wrapper.addClass('smart-search-results-hidden');
+					}
+
 				}, 500)
 			}
 
@@ -828,6 +907,7 @@
 					$form.addClass( 'ysm-hide' ).removeClass( 'sws-no-results' );
 
 					$results_main.addClass('sws-hiding-results');
+					$results_wrapper.removeClass('smart-search-results-hidden');
 
 				},
 				onSelect        : function ( suggestion ) {
@@ -870,6 +950,7 @@
 						$form.removeClass( 'ysm-hide' ).removeClass( 'sws-no-results' );
 
 						$results_main.removeClass('sws-hiding-results');
+						$results_wrapper.removeClass('smart-search-results-hidden');
 
 						var $wrapperWidth = $results_wrapper.outerWidth();
 						// var columns = suggestions.length < options.columns ? suggestions.length : options.columns;
@@ -1001,9 +1082,14 @@
 							}
 						}
 
+						if (options.selectedProducts) {
+							$('.sws-recent-products-wrapper').hide();
+						}
+
 					} else if ( options.no_results_text.length ) {
 						$form.removeClass( 'ysm-hide' ).addClass( 'sws-no-results' );
 						$results_main.removeClass('sws-hiding-results');
+
 					} else {
 						$form.addClass( 'ysm-hide' ).addClass( 'sws-no-results' );
 					}

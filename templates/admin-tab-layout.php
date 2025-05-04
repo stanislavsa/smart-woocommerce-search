@@ -49,6 +49,13 @@
                 'value'       => 1,
             ));
 
+            ysm_setting( $w_id, 'display_rating', array(
+	            'type'        => 'checkbox',
+	            'title'       => __( 'Display Rating', 'smart-woocommerce-search' ),
+	            'description' => '',
+	            'value'       => 1,
+            ));
+
             ysm_setting( $w_id, 'variation_thumb_fallback', array(
                 'type'        => 'checkbox',
                 'title'       => 'Variation\'s Image Fallback',
