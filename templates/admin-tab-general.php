@@ -64,14 +64,14 @@
                 'type'        => 'text',
                 'title'       => __( 'Maximum Number of Results', 'smart-woocommerce-search' ),
                 'description' => __( 'Maximum number of results that can be displayed in a popup', 'smart-woocommerce-search' ),
-                'value'       => 3,
+                'value'       => 12,
             ));
 
             ysm_setting( $w_id, 'excerpt_symbols_count', array(
                 'type'        => 'text',
                 'title'       => __( 'Description\'s Size', 'smart-woocommerce-search' ),
                 'description' => __( 'Maximum number of characters in the description', 'smart-woocommerce-search' ),
-                'value'       => '50',
+                'value'       => 50,
             ));
 
             ysm_setting( $w_id, 'no_results_text', array(
