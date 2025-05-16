@@ -23,99 +23,30 @@
                 ),
             ));
             ?>
-
-            <th class="ymapp-settings__title"><?php esc_html_e( 'Categories', 'smart-woocommerce-search' ); ?></th>
-
+            <th class="ymapp-settings__title"><?php esc_html_e( 'Recommended Products', 'smart-woocommerce-search' ); ?></th>
             <?php
 
-                $ysm_categories = get_categories( array(
-                    'taxonomy'   => 'product_cat',
-                    'orderby' => 'name',
-                    'order'   => 'ASC'
-                ) );
-                $ysm_category_choices = array();
-                foreach ($ysm_categories as $ysm_category) {
-                    $ysm_category_choices[$ysm_category->term_id] = $ysm_category->name;
-                }
-
-                ysm_setting( $w_id, 'selected_categories', array(
-                    'type'        => 'select',
-                    'title'       => __( 'Display selected categories', 'smart-woocommerce-search' ),
-                    'value'       => '',
-                    'is_pro'      => false,
-                    'multiple'    => true,
-                    'choices'     => $ysm_category_choices,
-
-                ));
-
-                ysm_setting( $w_id, 'selected_categories_label', array(
-                    'type'        => 'text',
-                    'title'       => __( '"Selected Categories" Label', 'smart-woocommerce-search' ),
-                    'value'       => 'Categories',
-                ));
-
-                ysm_setting( $w_id, 'selected_categories_location', array(
-                    'type'        => 'select',
-                    'title'       => __( 'Location', 'smart-woocommerce-search' ),
-                    'value'       => '',
-                    'is_pro'      => false,
-                    'choices'     => array(
-                        'left_slot' => __( 'Left Sidebar Slot', 'smart-woocommerce-search' ),
-                        'right_slot' => __( 'Right Sidebar Slot', 'smart-woocommerce-search' ),
-                    ),
-                ));
-
-                ysm_setting( $w_id, 'selected_categories_mobile', array(
-                    'type'        => 'checkbox',
-                    'title'       => __( 'Hide on mobile', 'smart-woocommerce-search' ),
-                    'value'       => 1,
-                ));
-
-                ysm_setting( $w_id, 'selected_categories_count', array(
-                    'type'        => 'checkbox',
-                    'title'       => __( 'Show Products Count', 'smart-woocommerce-search' ),
-                    'value'       => 1,
-                ));
-                ysm_setting( $w_id, 'selected_categories_on_open', array(
-                    'type'        => 'checkbox',
-                    'title'       => __( 'Display Selected Categories when Popup Initially Opened', 'smart-woocommerce-search' ),
-                    'value'       => 1,
-                ));
-            ?>
-
-            <th class="ymapp-settings__title"><?php esc_html_e( 'Promo banner', 'smart-woocommerce-search' ); ?></th>
-
-            <?php
-            ysm_setting( $w_id, 'promo_banner_location', array(
+            ysm_setting($w_id, 'selected_products', array(
 	            'type'        => 'select',
-	            'title'       => __( 'Location', 'smart-woocommerce-search' ),
+	            'title'       => __('Select Products', 'smart-woocommerce-search'),
 	            'value'       => '',
-	            'is_pro'      => 1,
-	            'choices'     => array(
-		            'left_slot' => __( 'Left Sidebar Slot', 'smart-woocommerce-search' ),
-		            'right_slot' => __( 'Right Sidebar Slot', 'smart-woocommerce-search' ),
-		            'left_slot_2' => __( 'Left Sidebar Slot 2', 'smart-woocommerce-search' ),
-		            'right_slot_2' => __( 'Right Sidebar Slot 2', 'smart-woocommerce-search' ),
-	            ),
-            ));
-
-            ysm_setting( $w_id, 'promo_banner_image', array(
-	            'type'        => 'image',
-	            'title'       => __( 'Banner Image', 'smart-woocommerce-search' ),
-	            'value'       => '',
+	            'multiple'    => true,
+	            'is_pro'      => false,
+	            'choices'     => [],
+	            'placeholder' => __('Start typing product name...', 'smart-woocommerce-search'),
 	            'is_pro'      => 1,
             ));
 
-            ysm_setting( $w_id, 'promo_banner_link', array(
+            ysm_setting( $w_id, 'selected_products_label', array(
 	            'type'        => 'text',
-	            'title'       => __( 'Promo Banner Link', 'smart-woocommerce-search' ),
-	            'value'       => '',
+	            'title'       => __( '"Selected Products" Label', 'smart-woocommerce-search' ),
+	            'value'       => 'Recent Products',
 	            'is_pro'      => 1,
             ));
 
-            ysm_setting( $w_id, 'promo_banner_on_open', array(
+            ysm_setting( $w_id, 'selected_products_mobile', array(
 	            'type'        => 'checkbox',
-	            'title'       => __( 'Display Promo Banner when Popup Initially Opened', 'smart-woocommerce-search' ),
+	            'title'       => __( 'Hide on mobile', 'smart-woocommerce-search' ),
 	            'value'       => 1,
 	            'is_pro'      => 1,
             ));
@@ -123,6 +54,111 @@
 
             ?>
 
+            <th class="ymapp-settings__title"><?php esc_html_e( 'Categories', 'smart-woocommerce-search' ); ?></th>
+
+            <?php
+
+            $ysm_categories = get_categories( array(
+                'taxonomy'   => 'product_cat',
+                'orderby' => 'name',
+                'order'   => 'ASC'
+            ) );
+            $ysm_category_choices = array();
+            foreach ($ysm_categories as $ysm_category) {
+                $ysm_category_choices[$ysm_category->term_id] = $ysm_category->name;
+            }
+
+            ysm_setting( $w_id, 'selected_categories', array(
+                'type'        => 'select',
+                'title'       => __( 'Display selected categories', 'smart-woocommerce-search' ),
+                'value'       => '',
+                'is_pro'      => false,
+                'multiple'    => true,
+                'choices'     => $ysm_category_choices,
+
+            ));
+
+            ysm_setting( $w_id, 'selected_categories_label', array(
+                'type'        => 'text',
+                'title'       => __( '"Selected Categories" Label', 'smart-woocommerce-search' ),
+                'value'       => 'Categories',
+            ));
+
+            ysm_setting( $w_id, 'selected_categories_location', array(
+                'type'        => 'select',
+                'title'       => __( 'Location', 'smart-woocommerce-search' ),
+                'value'       => '',
+                'is_pro'      => false,
+                'choices'     => array(
+                    'left_slot' => __( 'Left Sidebar Slot', 'smart-woocommerce-search' ),
+                    'right_slot' => __( 'Right Sidebar Slot', 'smart-woocommerce-search' ),
+                ),
+            ));
+
+            ysm_setting( $w_id, 'selected_categories_count', array(
+                'type'        => 'checkbox',
+                'title'       => __( 'Show Products Count', 'smart-woocommerce-search' ),
+                'value'       => 1,
+            ));
+            ysm_setting( $w_id, 'selected_categories_on_open', array(
+                'type'        => 'checkbox',
+                'title'       => __( 'Display Selected Categories when Popup Initially Opened', 'smart-woocommerce-search' ),
+                'value'       => 1,
+            ));
+
+            ysm_setting( $w_id, 'selected_categories_mobile', array(
+	            'type'        => 'checkbox',
+	            'title'       => __( 'Hide on mobile', 'smart-woocommerce-search' ),
+	            'value'       => 1,
+            ));
+            ?>
+
+            <th class="ymapp-settings__title"><?php esc_html_e( 'Promo banner', 'smart-woocommerce-search' ); ?></th>
+
+            <?php
+                ysm_setting( $w_id, 'promo_banner_location', array(
+                    'type'        => 'select',
+                    'title'       => __( 'Location', 'smart-woocommerce-search' ),
+                    'value'       => '',
+                    'is_pro'      => 1,
+                    'choices'     => array(
+                        'left_slot' => __( 'Left Sidebar Slot', 'smart-woocommerce-search' ),
+                        'right_slot' => __( 'Right Sidebar Slot', 'smart-woocommerce-search' ),
+                        'left_slot_2' => __( 'Left Sidebar Slot 2', 'smart-woocommerce-search' ),
+                        'right_slot_2' => __( 'Right Sidebar Slot 2', 'smart-woocommerce-search' ),
+                    ),
+                ));
+
+                ysm_setting( $w_id, 'promo_banner_image', array(
+                    'type'        => 'image',
+                    'title'       => __( 'Banner Image', 'smart-woocommerce-search' ),
+                    'value'       => '',
+	            	'is_pro'      => 1,
+                ));
+
+                ysm_setting( $w_id, 'promo_banner_link', array(
+                    'type'        => 'text',
+                    'title'       => __( 'Promo Banner Link', 'smart-woocommerce-search' ),
+                    'value'       => '',
+	            	'is_pro'      => 1,
+                ));
+
+                ysm_setting( $w_id, 'promo_banner_on_open', array(
+                    'type'        => 'checkbox',
+                    'title'       => __( 'Display Promo Banner when Popup Initially Opened', 'smart-woocommerce-search' ),
+                    'value'       => 1,
+                    'is_pro'      => 1,
+                ));
+
+                ysm_setting( $w_id, 'selected_promo_banner_mobile', array(
+                    'type'        => 'checkbox',
+                    'title'       => __( 'Hide on mobile', 'smart-woocommerce-search' ),
+                    'value'       => 0,
+                    'is_pro'      => 1,
+                ));
+
+
+            ?>
 
             </tbody>
         </table>

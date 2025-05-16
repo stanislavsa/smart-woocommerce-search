@@ -179,15 +179,15 @@ class Ysm_DB {
 		if ( self::$relevance ) {
 			$relevance = array();
 
-			if ( self::$relevance['post_title'] ) {
+			if ( ! empty( self::$relevance['post_title'] ) ) {
 				$relevance[ "{$wpdb->posts}.post_title" ] = self::$relevance['post_title'];
 			}
 
-			if ( self::$relevance['post_content'] ) {
+			if ( ! empty( self::$relevance['post_content'] ) ) {
 				$relevance[ "{$wpdb->posts}.post_content" ] = self::$relevance['post_content'];
 			}
 
-			if ( self::$relevance['post_excerpt'] ) {
+			if ( ! empty( self::$relevance['post_excerpt'] ) ) {
 				$relevance[ "{$wpdb->posts}.post_excerpt" ] = self::$relevance['post_excerpt'];
 			}
 

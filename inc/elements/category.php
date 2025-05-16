@@ -13,6 +13,7 @@ function category( $cur_post ) {
 
 	$output = '';
 	$category = '';
+	$post_id = $cur_post->ID;
 
 	if (
 		class_exists( 'WooCommerce' )
@@ -25,7 +26,7 @@ function category( $cur_post ) {
 
 	// get Yoast primary category
 	if ( defined( 'WPSEO_VERSION' ) ) {
-		$primary_term_id = (int) get_post_meta( $cur_post->ID, '_yoast_wpseo_primary_' . $taxonomy, true );
+		$primary_term_id = (int) get_post_meta( $post_id, '_yoast_wpseo_primary_' . $taxonomy, true );
 
 		if ( $primary_term_id ) {
 			$primary_term = get_term_by( 'id', $primary_term_id, $taxonomy );
@@ -42,7 +43,7 @@ function category( $cur_post ) {
 
 	// get first category
 	if ( ! $category ) {
-		$terms = get_the_terms( $cur_post->ID, $taxonomy );
+		$terms = get_the_terms( $post_id, $taxonomy );
 		if (
 			! is_wp_error( $terms )
 			&& ! empty( $terms[0] )

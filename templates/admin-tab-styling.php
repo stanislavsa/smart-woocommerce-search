@@ -1,5 +1,5 @@
 <div id="styles_tab" class="ymapp-settings__content">
-    <div data-href="#styling_tab" class="sws_tab_mobile_heading js-sws-tab-mobile-heading">
+    <div data-href="#styles_tab" class="sws_tab_mobile_heading js-sws-tab-mobile-heading">
         <div class="sws_tab_mobile_heading__inner">
             <span class="sws_nav_sidebar__icon material-symbols-rounded">palette</span>
             <?php echo __( 'Styling', 'smart-woocommerce-search' ) ?>

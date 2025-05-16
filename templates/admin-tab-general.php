@@ -64,14 +64,14 @@
                 'type'        => 'text',
                 'title'       => __( 'Maximum Number of Results', 'smart-woocommerce-search' ),
                 'description' => __( 'Maximum number of results that can be displayed in a popup', 'smart-woocommerce-search' ),
-                'value'       => 3,
+                'value'       => 12,
             ));
 
             ysm_setting( $w_id, 'excerpt_symbols_count', array(
                 'type'        => 'text',
                 'title'       => __( 'Description\'s Size', 'smart-woocommerce-search' ),
                 'description' => __( 'Maximum number of characters in the description', 'smart-woocommerce-search' ),
-                'value'       => '50',
+                'value'       => 50,
             ));
 
             ysm_setting( $w_id, 'no_results_text', array(
@@ -114,6 +114,7 @@
             <th class="ymapp-settings__title"><?php echo esc_html__( 'Search Engine Features', 'smart-woocommerce-search' ); ?></th>
 
             <?php
+
             ysm_setting( $w_id, 'recent_searches', array(
                 'type'        => 'checkbox',
                 'title'       => __( 'Recent Searches', 'smart-woocommerce-search' ),
@@ -129,28 +130,40 @@
             ));
 
             ysm_setting( $w_id, 'display_keywords_below_input', array(
-	            'type'        => 'checkbox',
-	            'title'       => __( 'Display “Did you mean“ Keywords', 'smart-woocommerce-search' ),
-	            'description' =>
-		            __( 'Display synonyms in the search results popup below the search bar', 'smart-woocommerce-search' )
-		            . ( ! get_option('ywp_smart_search_enable_synonyms_indexing')
-			            ? '<br><span style="color:red">Requirement:</span> <a target="_blank" href="' . esc_url( admin_url( 'admin.php?page=smart-search-synonyms' ) ) . '">' . __( 'Enable Automatic Synonyms Feature', 'smart-woocommerce-search' ) . '</a>'
-			            : '' )
+                'type'        => 'checkbox',
+                'title'       => __( 'Display “Did you mean“ Keywords', 'smart-woocommerce-search' ),
+                'description' =>
+                    __( 'Display synonyms in the search results popup below the search bar', 'smart-woocommerce-search' )
+                    . ( ! get_option('ywp_smart_search_enable_synonyms_indexing')
+                        ? '<br><span style="color:red">Requirement:</span> <a target="_blank" href="' . esc_url( admin_url( 'admin.php?page=smart-search-synonyms' ) ) . '">' . __( 'Enable Automatic Synonyms Feature', 'smart-woocommerce-search' ) . '</a>'
+                        : '' )
             ,
-	            'value'       => 0,
-	            'is_pro'      => true,
+                'value'       => 0,
+                'is_pro'      => true,
+            ));
+
+            ysm_setting( $w_id, 'keywords_label', array(
+                'type'        => 'text',
+                'title'       => '“Did you mean“ label',
+                'description' => __( 'Displays label for “Did you mean“ if not empty', 'smart-woocommerce-search' ),
+                'value'       => 'Did you mean',
+                'is_pro'      => true,
             ));
 
             ysm_setting( $w_id, 'enable_fuzzy_search', array(
                 'type'        => 'select',
                 'title'       => __( 'Multiple Word Search', 'smart-woocommerce-search' ),
-                'description' => __( 'Select how to handle multiple word search', 'smart-woocommerce-search' ),
                 'value'       => '',
                 'choices'     => array(
                     '0' => __( 'Only exact match', 'smart-woocommerce-search' ),
                     '1' => __( '"A" or "B"', 'smart-woocommerce-search' ),
-                    '2' => __( '"A" and "B"', 'smart-woocommerce-search' ),
+                    '2' => __( '"A" and "B" in one field', 'smart-woocommerce-search' ),
                 ),
+                'description' => __( 'Define how to handle multiple words search:', 'smart-woocommerce-search' )
+				. '<br>- ' . __( 'Only exact match', 'smart-woocommerce-search' ) . ' - ' . __( 'results containing the exact phrase as entered by the user, preserving the word order', 'smart-woocommerce-search' )
+				. '<br>- ' . __( '"A" or "B"', 'smart-woocommerce-search' ) . ' - ' . __( 'results containing at least one of the entered words, regardless of their order or location', 'smart-woocommerce-search' )
+				. '<br>- ' . __( '"A" and "B" in one field', 'smart-woocommerce-search' ) . ' - ' . __( 'results where all entered words appear together within the same field (e.g., product title or description)', 'smart-woocommerce-search' )
+				,
             ));
 
             ysm_setting( $w_id, 'exclude_out_of_stock_products', array(

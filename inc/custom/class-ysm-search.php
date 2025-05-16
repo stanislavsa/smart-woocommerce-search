@@ -473,6 +473,11 @@ class Ysm_Search {
 					$output .= $sku;
 				}
 				$output .= '</div>';
+				$sws_product_rating = '';
+				$sws_product_rating = \YSWS\Elements\rating( $product );
+				if ( $sws_product_rating ) {
+					$output .= $sws_product_rating;
+				}
 			}
 			if ( 'below_price' === self::get_var( 'popup_desc_pos' ) ) {
 				$output .= $post_excerpt;
@@ -486,6 +491,7 @@ class Ysm_Search {
 			}
 			$output .= '</div>';
 			$output .= '</a>';
+			
 			// wrapper link closed
 			self::$suggestions[] = array(
 				'value'     => esc_js( $post->post_title ),

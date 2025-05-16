@@ -12,7 +12,6 @@
             <th class="ymapp-settings__title"><?php esc_html_e( 'Results Popup Elements', 'smart-woocommerce-search' ); ?></th>
 
             <?php
-
             ysm_setting( $w_id, 'columns', array(
                 'type'        => 'select',
                 'title'       => __( 'Columns Layout', 'smart-woocommerce-search' ),
@@ -47,6 +46,13 @@
                 'title'       => __( 'Display Image', 'smart-woocommerce-search' ),
                 'description' => '',
                 'value'       => 1,
+            ));
+
+            ysm_setting( $w_id, 'display_rating', array(
+	            'type'        => 'checkbox',
+	            'title'       => __( 'Display Rating', 'smart-woocommerce-search' ),
+	            'description' => '',
+	            'value'       => 0,
             ));
 
             ysm_setting( $w_id, 'variation_thumb_fallback', array(

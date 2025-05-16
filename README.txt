@@ -1,11 +1,11 @@
 === Smart WooCommerce Search ===
 Contributors: yummy-wp
 Tags: search, ajax search, product search, search by sku, woocommerce search
-Stable tag: 2.13.0
+Stable tag: 2.14.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Requires at least: 5.9
-Tested up to: 6.7
+Tested up to: 6.8
 Requires PHP: 7.0
 
 Ideal Product Search plugin for WooCommerce shops that enhances users' experience with a live search feature.
@@ -107,6 +107,10 @@ Yes, when using products search or when you set option to search only through pr
 5. Searching by SKU
 
 == Changelog ==
+
+= 2.14.0 =
+* Added: Option to display product rating
+* Under the hood improvements
 
 = 2.13.0 =
 * Added: Option to display selected product categories in the fullscreen popup
