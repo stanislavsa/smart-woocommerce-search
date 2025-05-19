@@ -32,16 +32,7 @@ $tabs = array(
         'label' => __( 'Styling', 'smart-woocommerce-search' ),
         'icon'  => 'palette',
     ),
-    'spellcheck_tab' => array(
-        'label' => __( 'Spelling Correction', 'smart-woocommerce-search' ),
-        'icon'  => 'spellcheck',
-    ),
-    'stopwords_tab' => array(
-        'label' => __( 'Stop Words', 'smart-woocommerce-search' ),
-        'icon'  => 'search_off',
-    ),
 );
-
 ?>
 <form method="post" action="" enctype="multipart/form-data">
 
@@ -63,10 +54,10 @@ $tabs = array(
 
 	<div class="meta-box-sortables">
 
-		<div class="sws_box ysm-widget-edit-settings">
-			<h2 class="sws_box__title"><span><?php esc_html_e( 'Settings', 'smart-woocommerce-search' ); ?></span></h2>
+        <div class="sws_box ysm-widget-edit-settings">
+            <h2 class="sws_box__title"><span><?php esc_html_e( 'Settings', 'smart-woocommerce-search' ); ?></span></h2>
 
-			<div class="inside sws_inside">
+            <div class="inside sws_inside">
                 <div class="sws_tabs_wrapper">
                     <nav class="sws_nav_sidebar">
                         <ul class="sws_nav_sidebar__list">
@@ -91,26 +82,24 @@ $tabs = array(
 
                         <?php include 'admin-tab-styling.php'; ?>
 
-                        <?php include 'admin-tab-spellcheck.php'; ?>
-
-                        <?php include 'admin-tab-stopwords.php'; ?>
                     </div>
                 </div>
 
 
-<!--				<h2 class="nav-tab-wrapper" id="ymapp-settings__nav">-->
-<!--					--><?php //foreach ( $tabs as $id => $title ) { ?>
-<!--						<span data-href="#--><?php //echo esc_attr( $id ); ?><!--" class="nav-tab--><?php //echo 'general_tab' === $id ? ' nav-tab-active' : ''; ?><!--">--><?php //echo esc_html( $title ); ?><!--</span>-->
-<!--					--><?php //} ?>
-<!--				</h2>-->
+                <!--				<h2 class="nav-tab-wrapper" id="ymapp-settings__nav">-->
+                <!--					--><?php //foreach ( $tabs as $id => $title ) { ?>
+                <!--						<span data-href="#--><?php //echo esc_attr( $id ); ?><!--" class="nav-tab--><?php //echo 'general_tab' === $id ? ' nav-tab-active' : ''; ?><!--">--><?php //echo esc_html( $title ); ?><!--</span>-->
+                <!--					--><?php //} ?>
+                <!--				</h2>-->
 
 
 
-			</div>
+            </div>
 
-		</div>
+        </div>
 
-	</div>
+
+    </div>
 
 	<p class="submit" style="float: right;">
 		<input type="submit" value="<?php esc_attr_e( 'Save', 'smart-woocommerce-search' ); ?>" name="save" class="ymapp-button" />

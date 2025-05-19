@@ -38,11 +38,13 @@
 						selectedCategoriesOnOpen: swsL10n.widgets[wId].selectedCategoriesOnOpen,
 						selectedProducts: swsL10n.widgets[wId].selectedProducts,
 						selectedProductsLabel: swsL10n.widgets[wId].selectedProductsLabel,
+						selectedProductsMobile: swsL10n.widgets[wId].selectedProductsMobile,
 
 						promoBannerLocation: swsL10n.widgets[wId].promoBannerLocation,
 						promoBannerImage: swsL10n.widgets[wId].promoBannerImage,
 						promoBannerLink: swsL10n.widgets[wId].promoBannerLink,
 						promoBannerOnOpen: swsL10n.widgets[wId].promoBannerOnOpen,
+						selectedPromoBannerMobile: swsL10n.widgets[wId].selectedPromoBannerMobile,
 					}
 
 					$(widgets.selector).each(function () {
@@ -626,6 +628,10 @@
 					}
 
 					promoBanner.prependTo($results_main.find('.sws-sidebar--'+options.promoBannerLocation+''));
+
+					if(options.selectedPromoBannerMobile) {
+						$('.sws-promo-banner').addClass('sws-promo-banner--hidden_mobile_mod');
+					}
 				}
 
 				if (right_slot.is(':empty') && right_slot_2.is(':empty')) {
@@ -669,6 +675,10 @@
 				// Insert the Swiper container after the search results
 				$('<div class="sws-recent-products-wrapper"><h3 class="sws-recent-products-heading">'+options.selectedProductsLabel+'</h3><div class="swiper swsProductsSwiper sws-recent-products"><div class="swiper-wrapper"></div></div><div class="swiper-button-next"></div><div class="swiper-button-prev"></div></div>')
 					.insertBefore($results_main.find('.smart-search-results'));
+
+				if(options.selectedProductsMobile) {
+					$('.sws-recent-products-wrapper').addClass('sws-recent-products-wrapper--hidden_mobile_mod');
+				}
 
 				// Loop through selected products and create swiper slides
 				options.selectedProducts.forEach(item => {

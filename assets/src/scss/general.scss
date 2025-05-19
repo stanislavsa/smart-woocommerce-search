@@ -915,6 +915,12 @@
 		max-width: 100%;
 		height: auto;
 	}
+
+	@media (max-width: 767px) {
+		&.sws-promo-banner--hidden_mobile_mod {
+			display: none !important;
+		}
+	}
 }
 
 .ysm-hide .sws-promo-banner {
@@ -939,11 +945,16 @@
 	width: 100%;
 	position: relative;
 	padding: 0 20px;
+	box-sizing: border-box;
 
 	@media (max-width: 767px) {
 		width: 100%;
 		order: 5;
 		margin-top: 20px;
+
+		&.sws-recent-products-wrapper--hidden_mobile_mod {
+			display: none !important;
+		}
 	}
 }
 
@@ -1017,6 +1028,12 @@
 	display: block;
 	margin: 0 auto 10px !important;
 	text-align: center;
+
+	img {
+		max-width: 100% !important;
+		object-fit: contain !important;
+		height: auto;
+	}
 }
 
 .sws-selected-products-meta {

@@ -23,7 +23,7 @@ function ysm_get_default_widgets_ids() {
  */
 function ysm_get_default_widgets_names( $id = '' ) {
 	$list = array(
-		'default' => __( 'WordPres Default Search Widget', 'smart-woocommerce-search' ),
+		'default' => __( 'WordPress Default Search Widget', 'smart-woocommerce-search' ),
 		'product' => __( 'WooCommerce Product Search Widget', 'smart-woocommerce-search' ),
 		'avada'   => __( 'Avada Search Widget', 'smart-woocommerce-search' ),
 		'divi'    => __( 'DIVI Search Widget', 'smart-woocommerce-search' ),
@@ -155,6 +155,12 @@ function ysm_get_all_widgets() {
 }
 
 function ysm_get_post_types() {
+	static $saved_pt;
+
+	if ( $saved_pt && is_array( $saved_pt ) ) {
+		return $saved_pt;
+	}
+
 	$pt = [
 		'post' => 'post',
 		'page' => 'page',
@@ -176,7 +182,10 @@ function ysm_get_post_types() {
 		}
 	}
 
-	return array_values( $pt_exists );
+	$pt_exists = array_values( $pt_exists );
+	$saved_pt = $pt_exists;
+
+	return $pt_exists;
 }
 
 function ysm_get_all_widgets_custom_fields() {
