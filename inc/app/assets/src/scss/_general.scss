@@ -65,6 +65,12 @@
 	float: left;
 }
 
+#fs_pricing_wrapper .fs-app-header {
+	.fs-page-title {
+		display: none !important;
+	}
+}
+
 /**
  * Media
  */

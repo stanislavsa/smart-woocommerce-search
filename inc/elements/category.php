@@ -20,6 +20,10 @@ function category( $cur_post ) {
 		&& in_array( $cur_post->post_type, [ 'product', 'product_variation' ], true )
 	) {
 		$taxonomy = 'product_cat';
+
+		if ( 'product_variation' === $cur_post->post_type ) {
+			$post_id = $cur_post->post_parent;
+		}
 	} else {
 		$taxonomy = 'category';
 	}

@@ -91,8 +91,14 @@
                         'loader4' => __( 'Loader', 'smart-woocommerce-search' ) . ' 4',
                         'loader5' => __( 'Loader', 'smart-woocommerce-search' ) . ' 5',
                     ),
-                    'is_pro'      => true,
+                    'is_pro'      => false,
                 ));
+                ysm_setting( $w_id, 'loader_image', array(
+		            'type'        => 'image',
+		            'title'       => __( 'Loader Custom Image', 'smart-woocommerce-search' ),
+		            'value'       => '',
+		            'is_pro'      => false,
+	            ));
                 ?>
 
             <?php } ?>

@@ -51,7 +51,6 @@ msgstr "Синоніми"
 
 #: inc/admin/admin.php:76
 #: inc/admin/admin.php:77
-#: templates/admin-page-form.php:40
 #: templates/admin-tab-stopwords.php:5
 #: templates/admin-tab-stopwords.php:15
 msgid "Stop Words"
@@ -131,15 +130,15 @@ msgstr "Дублювати"
 msgid "Delete"
 msgstr "Видалити"
 
-#: inc/custom/scripts.php:252
+#: inc/custom/scripts.php:257
 msgid "Delete column?"
 msgstr "Видалити стовпець?"
 
-#: inc/custom/scripts.php:253
+#: inc/custom/scripts.php:258
 msgid "Delete row?"
 msgstr "Видалити рядок?"
 
-#: inc/custom/scripts.php:254
+#: inc/custom/scripts.php:259
 msgid "Delete widget?"
 msgstr "Видалити віджет?"
 
@@ -155,7 +154,7 @@ msgstr "Немає в наявності"
 msgid "Sale"
 msgstr "Розпродаж"
 
-#: inc/features/db-index.php:280
+#: inc/features/db-index.php:295
 msgid "Learn more here."
 msgstr "Дізнайтеся більше тут."
 
@@ -376,7 +375,7 @@ msgid "Minimum number of characters required to start a search"
 msgstr "Мінімальна кількість символів, необхідна для початку пошуку"
 
 #: templates/admin-tab-general.php:60
-#: templates/admin-tab-styling.php:100
+#: templates/admin-tab-styling.php:107
 msgid "Results Popup"
 msgstr "Спливаюче вікно результатів"
 
@@ -434,43 +433,35 @@ msgstr "Виключити варіації з результатів, якщо 
 msgid "Only variations"
 msgstr "Тільки варіації"
 
-#: templates/admin-tab-general.php:199
-msgid "Skip Punctuation"
-msgstr "Пропустити пунктуацію"
-
-#: templates/admin-tab-general.php:200
-msgid "Skip punctuation in the search query"
-msgstr "Пропуск розділових знаків у пошуковому запиті"
-
-#: templates/admin-tab-general.php:206
+#: templates/admin-tab-general.php:198
 msgid "Search Results Page"
 msgstr "Сторінка результатів пошуку"
 
-#: templates/admin-tab-general.php:211
+#: templates/admin-tab-general.php:203
 msgid "Disable Redirect to Product Page"
 msgstr "Вимкнути редірект на сторінку товару"
 
-#: templates/admin-tab-general.php:225
+#: templates/admin-tab-general.php:217
 msgid "Disable Smart Search Feature on the Search Results Page"
 msgstr "Вимкнути функцію Smart Search на сторінці результатів пошуку"
 
-#: templates/admin-tab-general.php:226
+#: templates/admin-tab-general.php:218
 msgid "Disable altering search results by Smart Search plugin on the search results page.<br>By default the plugin modified search results according to selected options"
 msgstr "Вимкніть зміну результатів пошуку плагіном Smart Search на сторінці результатів пошуку.<br>За замовчуванням плагін змінює результати пошуку відповідно до вибраних параметрів"
 
-#: templates/admin-tab-general.php:239
+#: templates/admin-tab-general.php:231
 msgid "Highlight Search Terms on the Search Results Page"
 msgstr "Виділіть пошукові слова на сторінці результатів пошуку"
 
-#: templates/admin-tab-general.php:240
+#: templates/admin-tab-general.php:232
 msgid "Highlight words that match a search query on the search results page. Works only if the Smart Search Feature is not disabled on the search results page"
 msgstr "Виділення слів, які відповідають пошуковому запиту на сторінці результатів пошуку. Працює, якщо на сторінці результатів пошуку не вимкнено функцію Smart Search"
 
-#: templates/admin-tab-general.php:245
+#: templates/admin-tab-general.php:237
 msgid "Advanced"
 msgstr "Розширені"
 
-#: templates/admin-tab-general.php:251
+#: templates/admin-tab-general.php:243
 msgid "It may be helpful if you changed the base slug for WooCommerce products. The base slug is \"product\""
 msgstr "Можливо, вам буде корисно змінити базовий слаг для продуктів WooCommerce. Базовий слаг - \"product\""
 
@@ -583,12 +574,12 @@ msgid "DESC"
 msgstr "За спаданням"
 
 #: templates/admin-tab-styling.php:26
-#: templates/admin-tab-styling.php:112
+#: templates/admin-tab-styling.php:119
 msgid "Rounded Border"
 msgstr "Округлена рамка"
 
 #: templates/admin-tab-styling.php:33
-#: templates/admin-tab-styling.php:119
+#: templates/admin-tab-styling.php:126
 msgid "Border Color"
 msgstr "Колір рамки"
 
@@ -601,7 +592,7 @@ msgid "Text Color"
 msgstr "Колір тексту"
 
 #: templates/admin-tab-styling.php:54
-#: templates/admin-tab-styling.php:126
+#: templates/admin-tab-styling.php:133
 msgid "Background Color"
 msgstr "Колір фону"
 
@@ -622,39 +613,39 @@ msgstr "Фон піктограми"
 msgid "Loader"
 msgstr "Завантажувач"
 
-#: templates/admin-tab-styling.php:161
+#: templates/admin-tab-styling.php:168
 msgid "Category Color"
 msgstr "Колір категорії"
 
-#: templates/admin-tab-styling.php:167
+#: templates/admin-tab-styling.php:174
 msgid "Product Elements"
 msgstr "Елементи продукту"
 
-#: templates/admin-tab-styling.php:172
+#: templates/admin-tab-styling.php:179
 msgid "Price Color"
 msgstr "Колір ціни"
 
-#: templates/admin-tab-styling.php:179
+#: templates/admin-tab-styling.php:186
 msgid "\"Out of stock\" Label Text Color"
 msgstr "Колір тексту етикетки “Немає в наявності”"
 
-#: templates/admin-tab-styling.php:187
+#: templates/admin-tab-styling.php:194
 msgid "\"Out of stock\" Label Background Color"
 msgstr "Колір фону етикетки \"Немає в наявності\""
 
-#: templates/admin-tab-styling.php:195
+#: templates/admin-tab-styling.php:202
 msgid "\"Sale\" Label Text Color"
 msgstr "Колір тексту етикетки \"Розпродаж\""
 
-#: templates/admin-tab-styling.php:203
+#: templates/admin-tab-styling.php:210
 msgid "\"Sale\" Label Background Color"
 msgstr "Колір фону етикетки \"Розпродаж\""
 
-#: templates/admin-tab-styling.php:211
+#: templates/admin-tab-styling.php:218
 msgid "\"Featured\" Label Text Color"
 msgstr "Колір тексту етикетки “Особливий”"
 
-#: templates/admin-tab-styling.php:219
+#: templates/admin-tab-styling.php:226
 msgid "\"Featured\" Label Background Color"
 msgstr "Колір фону етикетки “Особливий”"
 
@@ -755,19 +746,19 @@ msgstr "Батьківський продукт з варіаціями"
 msgid "Only parent product"
 msgstr "Тільки батьківський продукт"
 
-#: templates/admin-tab-general.php:218
+#: templates/admin-tab-general.php:210
 msgid "Suppress Database Query Altering"
 msgstr "Заборона зміни запитів до бази даних"
 
-#: templates/admin-tab-general.php:219
+#: templates/admin-tab-general.php:211
 msgid "Prevent the theme or plugins from modifying the database query on the search results page"
 msgstr "Заборонити темі або плагінам змінювати запит до бази даних на сторінці результатів пошуку"
 
-#: templates/admin-tab-general.php:232
+#: templates/admin-tab-general.php:224
 msgid "Disable WooCommerce Template on the Search Results Page"
 msgstr "Вимкнути шаблон WooCommerce на сторінці результатів пошуку"
 
-#: templates/admin-tab-general.php:233
+#: templates/admin-tab-general.php:225
 msgid "Displays the default search results template defined in the theme instead of WooCommerce template.<br>Useful if you want to display posts with products together"
 msgstr "Відображає шаблон результатів пошуку за замовчуванням, визначений у темі, замість шаблону WooCommerce.<br>Корисно, якщо ви хочете відображати публікації з товарами разом"
 
@@ -779,23 +770,23 @@ msgstr "Максимальна висота спливаючого вікна (�
 msgid "Maximum number of characters in the description"
 msgstr "Максимальна кількість символів в описі"
 
-#: templates/admin-tab-general.php:212
+#: templates/admin-tab-general.php:204
 msgid "Prevent WooCommerce from automatically redirecting to a product page when there is only one search result."
 msgstr "Заборонити WooCommerce автоматично перенаправляти на сторінку продукту, коли є лише один результат пошуку."
 
-#: templates/admin-tab-styling.php:133
+#: templates/admin-tab-styling.php:140
 msgid "Title's Text Color"
 msgstr "Колір тексту заголовка"
 
-#: templates/admin-tab-styling.php:140
+#: templates/admin-tab-styling.php:147
 msgid "Description's Text Color"
 msgstr "Колір тексту опису"
 
-#: templates/admin-tab-styling.php:147
+#: templates/admin-tab-styling.php:154
 msgid "\"View all\" Button's Text Color"
 msgstr "Колір тексту кнопки \"Переглянути все\""
 
-#: templates/admin-tab-styling.php:154
+#: templates/admin-tab-styling.php:161
 msgid "\"View all\" Button's Background Color"
 msgstr "Колір фону кнопки \"Переглянути все”"
 
@@ -845,7 +836,6 @@ msgstr "Під ціною та SKU"
 msgid "Sorting"
 msgstr "Сортування"
 
-#: templates/admin-page-form.php:36
 #: templates/admin-tab-spellcheck.php:5
 msgid "Spelling Correction"
 msgstr "Виправлення орфографії"
@@ -859,7 +849,7 @@ msgstr "Відображення опису"
 msgid "Create Index"
 msgstr "Створити індекс"
 
-#: inc/features/db-index.php:279
+#: inc/features/db-index.php:294
 msgid "%s index is empty! We highly recommend to create index to improve search performance."
 msgstr "%s індекс порожній! Ми наполегливо рекомендуємо створити індекс для покращення ефективності пошуку."
 
@@ -869,11 +859,11 @@ msgstr "%s індекс порожній! Ми наполегливо реком
 msgid "Enhance the standard %s search widget with the %s features"
 msgstr "Покращення стандартного віджету пошуку %s за допомогою функцій %s"
 
-#: templates/admin-tab-styling.php:105
+#: templates/admin-tab-styling.php:112
 msgid "Top Indentation"
 msgstr "Верхній відступ"
 
-#: templates/admin-tab-styling.php:106
+#: templates/admin-tab-styling.php:113
 msgid "Indentation between search bar and popup, px"
 msgstr "Відступ між рядком пошуку та спливаючим вікном, px"
 
@@ -881,7 +871,7 @@ msgstr "Відступ між рядком пошуку та спливаючи�
 msgid "Display search field with a rounded border (frame)"
 msgstr "Відображати поле пошуку із закругленою рамкою (фреймом)"
 
-#: templates/admin-tab-styling.php:113
+#: templates/admin-tab-styling.php:120
 msgid "Display popup with a rounded border (frame)"
 msgstr "Відображати спливаюче вікно із заокругленою рамкою (фреймом)"
 
@@ -923,9 +913,9 @@ msgstr "Порожньо"
 #: templates/admin-page-synonyms.php:93
 #: templates/admin-tab-fields.php:227
 #: templates/admin-tab-fullscreen.php:176
-#: templates/admin-tab-general.php:279
+#: templates/admin-tab-general.php:271
 #: templates/admin-tab-layout.php:158
-#: templates/admin-tab-styling.php:229
+#: templates/admin-tab-styling.php:236
 msgid "Documentation"
 msgstr "Документація"
 
@@ -937,19 +927,19 @@ msgstr "Текст-заповнювач для поля пошуку"
 msgid "Is active?"
 msgstr "Ввімкнено?"
 
-#: templates/admin-tab-general.php:261
+#: templates/admin-tab-general.php:253
 msgid "To enhance existing search bar with the Smart Search features."
 msgstr ""
 
-#: templates/admin-tab-general.php:262
+#: templates/admin-tab-general.php:254
 msgid "Add a CSS selector (id or class) of the search bar's form element."
 msgstr ""
 
-#: templates/admin-tab-general.php:263
+#: templates/admin-tab-general.php:255
 msgid "Fill in each selector on a new line."
 msgstr ""
 
-#: templates/admin-tab-general.php:273
+#: templates/admin-tab-general.php:265
 msgid "Add extra CSS styles"
 msgstr ""
 
@@ -1069,18 +1059,6 @@ msgstr ""
 msgid "These settings have been moved to a global settings. Please check "
 msgstr ""
 
-#: templates/admin-tab-fullscreen.php:69
-msgid "Categories"
-msgstr ""
-
-#: templates/admin-tab-fullscreen.php:85
-msgid "Display selected categories"
-msgstr ""
-
-#: templates/admin-tab-fullscreen.php:95
-msgid "\"Selected Categories\" Label"
-msgstr ""
-
 #: templates/admin-tab-fullscreen.php:101
 #: templates/admin-tab-fullscreen.php:135
 msgid "Location"
@@ -1116,24 +1094,12 @@ msgstr ""
 msgid "Show Products Count"
 msgstr ""
 
-#: templates/admin-tab-fullscreen.php:119
-msgid "Display Selected Categories when Popup Initially Opened"
-msgstr ""
-
 #: templates/admin-tab-fullscreen.php:130
 msgid "Promo banner"
 msgstr ""
 
 #: templates/admin-tab-fullscreen.php:148
 msgid "Banner Image"
-msgstr ""
-
-#: templates/admin-tab-fullscreen.php:155
-msgid "Promo Banner Link"
-msgstr ""
-
-#: templates/admin-tab-fullscreen.php:161
-msgid "Display Promo Banner when Popup Initially Opened"
 msgstr ""
 
 #: inc/custom/functions.php:26
@@ -1152,10 +1118,32 @@ msgstr ""
 msgid "Start typing product name..."
 msgstr ""
 
-#: templates/admin-tab-fullscreen.php:56
-msgid "\"Selected Products\" Label"
-msgstr ""
-
 #: templates/admin-tab-layout.php:53
 msgid "Display Rating"
+msgstr ""
+
+#: templates/admin-tab-fullscreen.php:56
+#: templates/admin-tab-fullscreen.php:95
+msgid "Label"
+msgstr ""
+
+#: templates/admin-tab-fullscreen.php:69
+msgid "Selected Categories"
+msgstr ""
+
+#: templates/admin-tab-fullscreen.php:85
+msgid "Select categories"
+msgstr ""
+
+#: templates/admin-tab-fullscreen.php:119
+#: templates/admin-tab-fullscreen.php:161
+msgid "Display when Popup Initially Opened"
+msgstr ""
+
+#: templates/admin-tab-fullscreen.php:155
+msgid "Banner Link"
+msgstr ""
+
+#: templates/admin-tab-styling.php:99
+msgid "Loader Custom Image"
 msgstr ""

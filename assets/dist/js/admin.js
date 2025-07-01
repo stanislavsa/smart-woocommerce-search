@@ -264,6 +264,45 @@
 			$('.ysm-loader-preview').attr('src', new_val);
 		});
 
+
+		// JS for autocomplete
+		$('#selected_products').select2({
+			ajax: {
+				url: ysmProductSearch.ajax_url,
+				type: 'GET',
+				dataType: 'json',
+				delay: 250,
+				data: function (params) {
+					console.log('Select2 Search Params:', params);
+					return {
+						action: 'ysm_search_products',
+						term: params.term
+					};
+				},
+				processResults: function (data) {
+					console.log('Select2 Received Data:', data);
+					return {
+						results: data || []
+					};
+				},
+				error: function(jqXHR, textStatus, errorThrown) {
+					console.error('AJAX Error:', {
+						status: jqXHR.status,
+						statusText: jqXHR.statusText,
+						responseText: jqXHR.responseText
+					});
+				}
+			},
+			minimumInputLength: 1,
+			placeholder: 'Search products',
+			templateResult: function(data) {
+				return data.text;
+			},
+			templateSelection: function(data) {
+				return data.text;
+			}
+		});
+
 	});
 
 })(jQuery);

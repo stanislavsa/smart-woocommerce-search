@@ -391,9 +391,10 @@ class Ysm_DB {
 	protected static function make_like_query( $field ) {
 		global $wpdb;
 		$query = array();
+		$field = esc_sql( $field );
 
 		foreach ( \Ysm_Search::get_search_terms() as $s_word ) {
-			$query[] = $wpdb->prepare( esc_sql( $field ) . ' LIKE %s', '%' . trim( $s_word ) . '%' );
+			$query[] = $wpdb->prepare( $field . ' LIKE %s', '%' . trim( $s_word ) . '%' ); // @codingStandardsIgnoreStart - escaped previously
 		}
 
 		if ( '2' === \Ysm_Search::get_var( 'enable_fuzzy_search' ) ) {

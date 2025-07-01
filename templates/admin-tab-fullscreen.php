@@ -27,20 +27,19 @@
             <?php
 
             ysm_setting($w_id, 'selected_products', array(
-	            'type'        => 'select',
-	            'title'       => __('Select Products', 'smart-woocommerce-search'),
-	            'value'       => '',
-	            'multiple'    => true,
-	            'is_pro'      => false,
+                'type'        => 'select',
+                'title'       => __('Select Products', 'smart-woocommerce-search'),
+                'value'       => '',
+                'multiple'    => true,
 	            'choices'     => [],
-	            'placeholder' => __('Start typing product name...', 'smart-woocommerce-search'),
+                'placeholder' => __('Start typing product name...', 'smart-woocommerce-search'),
 	            'is_pro'      => 1,
             ));
 
             ysm_setting( $w_id, 'selected_products_label', array(
 	            'type'        => 'text',
-	            'title'       => __( '"Selected Products" Label', 'smart-woocommerce-search' ),
-	            'value'       => 'Recent Products',
+	            'title'       => __( 'Label', 'smart-woocommerce-search' ),
+	            'value'       => 'Recommended Products',
 	            'is_pro'      => 1,
             ));
 
@@ -54,7 +53,7 @@
 
             ?>
 
-            <th class="ymapp-settings__title"><?php esc_html_e( 'Categories', 'smart-woocommerce-search' ); ?></th>
+            <th class="ymapp-settings__title"><?php esc_html_e( 'Selected Categories', 'smart-woocommerce-search' ); ?></th>
 
             <?php
 
@@ -70,7 +69,7 @@
 
             ysm_setting( $w_id, 'selected_categories', array(
                 'type'        => 'select',
-                'title'       => __( 'Display selected categories', 'smart-woocommerce-search' ),
+                'title'       => __( 'Select categories', 'smart-woocommerce-search' ),
                 'value'       => '',
                 'is_pro'      => false,
                 'multiple'    => true,
@@ -80,7 +79,7 @@
 
             ysm_setting( $w_id, 'selected_categories_label', array(
                 'type'        => 'text',
-                'title'       => __( '"Selected Categories" Label', 'smart-woocommerce-search' ),
+                'title'       => __( 'Label', 'smart-woocommerce-search' ),
                 'value'       => 'Categories',
             ));
 
@@ -102,7 +101,7 @@
             ));
             ysm_setting( $w_id, 'selected_categories_on_open', array(
                 'type'        => 'checkbox',
-                'title'       => __( 'Display Selected Categories when Popup Initially Opened', 'smart-woocommerce-search' ),
+                'title'       => __( 'Display when Popup Initially Opened', 'smart-woocommerce-search' ),
                 'value'       => 1,
             ));
 
@@ -138,14 +137,14 @@
 
                 ysm_setting( $w_id, 'promo_banner_link', array(
                     'type'        => 'text',
-                    'title'       => __( 'Promo Banner Link', 'smart-woocommerce-search' ),
+                    'title'       => __( 'Banner Link', 'smart-woocommerce-search' ),
                     'value'       => '',
 	            	'is_pro'      => 1,
                 ));
 
                 ysm_setting( $w_id, 'promo_banner_on_open', array(
                     'type'        => 'checkbox',
-                    'title'       => __( 'Display Promo Banner when Popup Initially Opened', 'smart-woocommerce-search' ),
+                    'title'       => __( 'Display when Popup Initially Opened', 'smart-woocommerce-search' ),
                     'value'       => 1,
                     'is_pro'      => 1,
                 ));
@@ -162,7 +161,7 @@
 
             </tbody>
         </table>
-        <a class="ymapp-settings__doc_link ymapp-button ymapp-button-grey" href="https://www.wpsmartsearch.com/docs/layout-settings/" target="_blank"><?php esc_html_e( 'Documentation', 'smart-woocommerce-search' ); ?></a>
+        <a class="ymapp-settings__doc_link ymapp-button ymapp-button-grey" href="https://www.wpsmartsearch.com/docs/fullscreen-mode/" target="_blank"><?php esc_html_e( 'Documentation', 'smart-woocommerce-search' ); ?></a>
     </div>
 
 

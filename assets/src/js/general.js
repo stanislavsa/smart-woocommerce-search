@@ -23,6 +23,7 @@
 						disableAjax: swsL10n.widgets[wId].disableAjax,
 						no_results_text: swsL10n.widgets[wId].noResultsText,
 						loaderIcon: swsL10n.widgets[wId].loaderIcon,
+						loaderImage: swsL10n.widgets[wId].loaderImage,
 						preventBadQueries: swsL10n.widgets[wId].preventBadQueries,
 						fullScreenMode: swsL10n.widgets[wId].fullScreenMode,
 						placeholder: swsL10n.widgets[wId].placeholder,
@@ -236,6 +237,10 @@
 				}
 			});
 
+			if (options.loaderImage.length) {
+				$this.parent().append('<img src='+options.loaderImage+' class="sws-loader-image" alt="Loading...">');
+			}
+
 			$this.devbridgeAutocomplete({
 				minChars        : options.minChars,
 				appendTo        : $resultsWrapperInner,
@@ -267,7 +272,14 @@
 
 					query.query = query.query.replace( /%20/g, ' ' );
 
-					$this.css( {'background-image': 'url(' + options.loaderIcon + ')','background-repeat': 'no-repeat', 'background-position': '50% 50%'} );
+					if (this.value == query.query + ' ') {
+						return;
+					}
+
+					if (!options.loaderImage.length) {
+						$this.css( {'background-image': 'url(' + options.loaderIcon + ')','background-repeat': 'no-repeat', 'background-position': '50% 50%'} );
+					}
+					$('.sws-loader-image').addClass('sws-loader-image--visible');
 
 					$form.addClass( 'ysm-hide' ).removeClass( 'sws-no-results' );
 				},
@@ -288,6 +300,7 @@
 					}
 
 					$this.css( 'background-image', 'none' );
+					$('.sws-loader-image').removeClass('sws-loader-image--visible');
 
 					if (res.keywords.length) {
 						$popup.addClass( 'hidden-searches' )
@@ -299,7 +312,7 @@
 					return res;
 				},
 				onSearchComplete: function ( query, suggestions ) {
-					if ( query !== $this.val() ) {
+					if ( $.trim( query ) !== $.trim( $this.val() ) ) {
 						return;
 					}
 
@@ -311,6 +324,7 @@
 					}
 
 					$this.css( 'background-image', 'none' );
+					$('.sws-loader-image').removeClass('sws-loader-image--visible');
 
 					if ( suggestions.length > 0 ) {
 
@@ -668,6 +682,10 @@
 				}
 			}
 
+			if (options.loaderImage.length) {
+				$this.parent().append('<img src='+options.loaderImage+' class="sws-loader-image" alt="Loading...">');
+			}
+
 			if (options.selectedProducts) {
 				$results_main.addClass('smart-search-results-recent-products--mod');
 				$results_wrapper.addClass('smart-search-results-hidden');
@@ -689,6 +707,18 @@
 							<div class="smart-search-post-category">${item.category}</div>
 							<a class="sws-selected-products-title" href="${item.permalink}">${item.name}</a>
 							<div class="sws-selected-products-meta">
+								${item.rating_count > 0
+								? `<div class="sws-product-rating" style="display: flex; gap: 2px; float: left;">
+									${[...Array(5)].map((_, i) => {
+										const index = i + 1;
+										return item.average_rating >= index
+											? `<span style="color: #ffc107; font-size: 20px;">★</span>`
+											: item.average_rating >= index - 0.5
+												? `<span style="color: #ffc107; font-size: 20px;">☆</span>`
+												: `<span style="color: #ddd; font-size: 20px;">☆</span>`;
+									}).join('')}
+								</div>`
+								: ''}
 								${item.price}
 								${ item.type === 'variable' 
 								? 
@@ -912,8 +942,15 @@
 
 					query.query = query.query.replace( /%20/g, ' ' );
 
-					$this.css( {'background-image': 'url(' + options.loaderIcon + ')','background-repeat': 'no-repeat', 'background-position': '50% 50%'} );
+					if (this.value == query.query + ' ') {
+						return;
+					}
 
+					if (!options.loaderImage.length) {
+						$this.css( {'background-image': 'url(' + options.loaderIcon + ')','background-repeat': 'no-repeat', 'background-position': '50% 50%'} );
+
+					}
+					$('.sws-loader-image').addClass('sws-loader-image--visible');
 					$form.addClass( 'ysm-hide' ).removeClass( 'sws-no-results' );
 
 					$results_main.addClass('sws-hiding-results');
@@ -938,10 +975,12 @@
 
 					$this.css( 'background-image', 'none' );
 
+					$('.sws-loader-image').removeClass('sws-loader-image--visible');
+
 					return res;
 				},
 				onSearchComplete: function ( query, suggestions ) {
-					if ( query !== $this.val() ) {
+					if ( $.trim( query ) !== $.trim( $this.val() ) ) {
 						return;
 					}
 
@@ -953,6 +992,76 @@
 					}
 
 					$this.css( 'background-image', 'none' );
+					$('.sws-loader-image').removeClass('sws-loader-image--visible');
+
+
+					const handleVisibility = (element, query, callback) => {
+						if ($this.val().length < options.minChars) {
+							element.hide();
+						} else {
+							const that = $this.devbridgeAutocomplete();
+							let serviceUrl = options.serviceUrl;
+
+							if ($.isFunction(serviceUrl)) {
+								serviceUrl = serviceUrl.call(that.element, query);
+							}
+
+							const cacheKey = serviceUrl + '?' + $.param({ query: query });
+
+							if (that.cachedResponse && that.cachedResponse[cacheKey]) {
+								callback(that.cachedResponse[cacheKey]);
+							}
+							element.show();
+						}
+					};
+
+					var $viewAllEl = $results_main.find( '.smart-search-view-all-holder' );
+
+					if ($viewAllEl.length || options.keywords) {
+
+						if ($viewAllEl.length) {
+							handleVisibility($viewAllEl, query, (cachedResponse) => {
+								$viewAllEl.html(cachedResponse.view_all_link);
+							});
+						}
+
+						if (options.keywords) {
+							const $recentWrapper = $('.sws-search-recent-wrapper');
+							handleVisibility($('.smart-search-keywords-wrapper'), query, (cachedResponse) => {
+								$swsKeywords = cachedResponse.keywords;
+								console.log('triggered keywords');
+							});
+
+							if ( ! $results_main.find( '.smart-search-keywords-wrapper' ).length ) {
+								$results_main.addClass( 'sws-has-keywords' ).prepend( '<div class="smart-search-keywords-wrapper smart-search-keywords-wrapper--hidden_mod"><h3 class="smart-search-keywords-title">'+ options.keywordsLabel+'</h3><ul class="smart-search-keywords-list"></ul></div>' );
+							}
+
+							if ($swsKeywords.length) {
+
+								$('.smart-search-keywords-list').empty();
+								$('.smart-search-keywords-wrapper').removeClass('smart-search-keywords-wrapper--hidden_mod');
+								$swsKeywords.forEach(item => {
+									$('.smart-search-keywords-list').append(`
+											<li class="sws-search-recent-list-item">
+												<span class="sws-search-recent-list-item-trigger">${item}</span>
+											</li>
+										`);
+								});
+							}
+
+							if ($recentWrapper.length) {
+
+								if ($swsKeywords.length) {
+									$('.smart-search-keywords-wrapper').removeClass('smart-search-keywords-wrapper--hidden_mod');
+									$recentWrapper.addClass('sws-search-recent-wrapper--hidden_by_keywords');
+
+								} else {
+									$('.smart-search-keywords-wrapper').addClass('smart-search-keywords-wrapper--hidden_mod');
+									$recentWrapper.removeClass('sws-search-recent-wrapper--hidden_by_keywords');
+								}
+							}
+						}
+					}
 
 
 					if ( suggestions.length > 0 ) {
@@ -965,7 +1074,7 @@
 						var $wrapperWidth = $results_wrapper.outerWidth();
 						// var columns = suggestions.length < options.columns ? suggestions.length : options.columns;
 						var columns = options.columns;
-						var $viewAllEl = $results_main.find( '.smart-search-view-all-holder' );
+
 
 						if ( $wrapperWidth === 0 ) {
 							$wrapperWidth = $this.outerWidth();
@@ -1012,70 +1121,7 @@
 								iOSNativeScrolling: true
 							});
 
-						if ($viewAllEl.length || options.keywords) {
 
-							const handleVisibility = (element, query, callback) => {
-								if ($this.val().length < options.minChars) {
-									element.hide();
-								} else {
-									const that = $this.devbridgeAutocomplete();
-									let serviceUrl = options.serviceUrl;
-
-									if ($.isFunction(serviceUrl)) {
-										serviceUrl = serviceUrl.call(that.element, query);
-									}
-
-									const cacheKey = serviceUrl + '?' + $.param({ query: query });
-
-									if (that.cachedResponse && that.cachedResponse[cacheKey]) {
-										callback(that.cachedResponse[cacheKey]);
-									}
-									element.show();
-								}
-							};
-
-							if ($viewAllEl.length) {
-								handleVisibility($viewAllEl, query, (cachedResponse) => {
-									$viewAllEl.html(cachedResponse.view_all_link);
-								});
-							}
-
-							if (options.keywords) {
-								const $recentWrapper = $('.sws-search-recent-wrapper');
-								handleVisibility($('.smart-search-keywords-wrapper'), query, (cachedResponse) => {
-									$swsKeywords = cachedResponse.keywords;
-
-								});
-
-								if ( ! $results_main.find( '.smart-search-keywords-wrapper' ).length ) {
-									$results_main.addClass( 'sws-has-keywords' ).prepend( '<div class="smart-search-keywords-wrapper smart-search-keywords-wrapper--hidden_mod"><h3 class="smart-search-keywords-title">'+ options.keywordsLabel+'</h3><ul class="smart-search-keywords-list"></ul></div>' );
-								}
-
-								if ($swsKeywords.length) {
-									$('.smart-search-keywords-list').empty();
-									$('.smart-search-keywords-wrapper').removeClass('smart-search-keywords-wrapper--hidden_mod');
-									$swsKeywords.forEach(item => {
-										$('.smart-search-keywords-list').append(`
-											<li class="sws-search-recent-list-item">
-												<span class="sws-search-recent-list-item-trigger">${item}</span>
-											</li>
-										`);
-									});
-								}
-
-								if ($recentWrapper.length) {
-
-									if ($swsKeywords.length) {
-										$('.smart-search-keywords-wrapper').removeClass('smart-search-keywords-wrapper--hidden_mod');
-										$recentWrapper.addClass('sws-search-recent-wrapper--hidden_by_keywords');
-
-									} else {
-										$('.smart-search-keywords-wrapper').addClass('smart-search-keywords-wrapper--hidden_mod');
-										$recentWrapper.removeClass('sws-search-recent-wrapper--hidden_by_keywords');
-									}
-								}
-							}
-						}
 
 						if ( options.recentSearches ) {
 							const currentSearchValue = query;

@@ -27,7 +27,7 @@ if ( ! function_exists( 'sws_fs' ) ) {
 				'menu'                => array(
 					'slug'           => 'smart-search',
 					'account'        => false,
-					'contact'        => false,
+					'contact'        => true,
 					'support'        => false,
 				),
 			) );

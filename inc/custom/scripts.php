@@ -18,6 +18,9 @@ function front_scripts() {
 		'v' => SWS_PLUGIN_VERSION,
 		'widgets' => [],
 	];
+
+	$l10n['nonce'] = wp_create_nonce( 'wp_rest' );
+
 	foreach ( ysm_get_all_widgets() as $k => $v ) {
 		$widget_params = [];
 		$css_classes = [];
@@ -40,6 +43,25 @@ function front_scripts() {
 			$css_classes = array_merge( $css_classes, $extra_bar_css_classes );
 		}
 
+		if ( ! empty( $v['settings']['css_selectors'] ) ) {
+			$css_selectors = $v['settings']['css_selectors'];
+			if ( false !== strpos( $css_selectors, ',' ) ) {
+				$css_selectors = explode( ',', $css_selectors );
+				$css_selectors = implode( "\n", $css_selectors );
+			}
+			$css_selectors = explode( "\n", $css_selectors );
+
+			$css_selectors_parsed = [];
+
+			foreach ( $css_selectors as $css_selector ) {
+				$css_selector = trim( $css_selector );
+				if ( $css_selector ) {
+					$css_selectors_parsed[ $css_selector ] = $css_selector;
+				}
+			}
+
+			$css_classes = array_merge( $css_classes, $css_selectors_parsed );
+		}
 
 		$widget_params['selector'] = implode( ', ', $css_classes );
 		$widget_params['charCount'] = isset( $v['settings']['char_count'] ) ? (int) $v['settings']['char_count'] : 3;
@@ -52,6 +74,7 @@ function front_scripts() {
 		$widget_params['productSlug'] = 'product';
 		$widget_params['preventBadQueries'] = true;
 		$widget_params['loaderIcon'] = SWS_PLUGIN_URI . 'assets/images/loader1.gif';
+		$widget_params['loaderImage'] = '';
 		$widget_params['productSku'] = ! empty( $v['settings']['field_product_sku'] );
 		$widget_params['multipleWords'] = ! empty( $v['settings']['enable_fuzzy_search'] ) ? $v['settings']['enable_fuzzy_search'] : '';
 		$widget_params['excludeOutOfStock'] = ! empty( $v['settings']['exclude_out_of_stock_products'] );
@@ -106,6 +129,18 @@ function front_scripts() {
 
         if ( ! empty( $v['settings']['post_type_product'] ) && empty( $v['settings']['search_page_layout_posts'] ) ) {
 			$widget_params['layout'] = 'product';
+		}
+
+		if ( ! empty( $v['settings']['loader'] ) ) {
+			if ( is_array( $v['settings']['loader'] ) ) {
+				$v['settings']['loader'] = $v['settings']['loader'][0];
+			}
+			$widget_params['loaderIcon'] = esc_url( SWS_PLUGIN_URI . 'assets/images/' . $v['settings']['loader'] . '.gif' );
+		}
+
+		if ( ! empty( $v['settings']['loader_image'] ) ) {
+			$widget_params['loaderImage'] = ! empty( $v['settings']['loader_image'] ) ? wp_get_attachment_url($v['settings']['loader_image']) : '';
+
 		}
 
 		$l10n['widgets'][ $k ] = $widget_params;

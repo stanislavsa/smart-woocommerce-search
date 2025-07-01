@@ -12,7 +12,16 @@ function excerpt( $cur_post ) {
 	}
 
 	$output = '';
-	$post_excerpt = ! empty( $cur_post->post_excerpt ) ? $cur_post->post_excerpt : $cur_post->post_content;
+
+	if ( 'product_variation' === $cur_post->post_type ) {
+		$post_excerpt = get_post_meta( $cur_post->ID, '_variation_description', true );
+		if ( ! $post_excerpt && $cur_post->post_parent ) {
+			$post_parent = get_post( $cur_post->post_parent );
+			$post_excerpt = ! empty( $post_parent->post_excerpt ) ? $post_parent->post_excerpt : $post_parent->post_content;
+		}
+	} else {
+		$post_excerpt = ! empty( $cur_post->post_excerpt ) ? $cur_post->post_excerpt : $cur_post->post_content;
+	}
 
 	if ( $post_excerpt ) {
 		if ( false !== strpos( $post_excerpt, '[et_pb_' ) ) {

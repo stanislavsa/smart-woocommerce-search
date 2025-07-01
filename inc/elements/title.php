@@ -7,7 +7,13 @@ namespace YSWS\Elements;
  * @return string
  */
 function title( $cur_post ) {
-	$post_title = get_the_title( $cur_post );
+
+	if ( 'product_variation' === $cur_post->post_type ) {
+		$post_title = get_variation_title( $cur_post );
+	} else {
+		$post_title = get_the_title( $cur_post );
+	}
+
 	$post_title = wp_strip_all_tags( $post_title );
 	$post_title = ysm_text_replace( $post_title );
 

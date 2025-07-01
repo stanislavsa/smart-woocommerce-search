@@ -44,8 +44,8 @@ function handle_request( \WP_REST_Request $request ) {
 	$res = [
 		'suggestions'   => [],
 		'view_all_link' => '',
-		'keywords' => []
-	];
+        'keywords' => []
+    ];
 
 	if ( ! $query ) {
 		return rest_ensure_response( $res );
@@ -69,4 +69,33 @@ function handle_request( \WP_REST_Request $request ) {
 	}
 
 	return rest_ensure_response( $res );
+}
+
+add_filter( 'rest_post_dispatch', __NAMESPACE__ . '\\set_nonce_header', 10, 3 );
+
+/**
+ * Filters the REST API response.
+ *
+ * Allows modification of the response before returning.
+ *
+ * @since 4.4.0
+ * @since 4.5.0 Applied to embedded responses.
+ *
+ * @param \WP_HTTP_Response $result  Result to send to the client. Usually a `WP_REST_Response`.
+ * @param \WP_REST_Server   $server  Server instance.
+ * @param \WP_REST_Request  $request Request used to generate the response.
+ */
+function set_nonce_header( $result, $server, $request ) {
+	if (
+		defined( 'REST_REQUEST' )
+		&& REST_REQUEST
+		&& isset( $_SERVER['REQUEST_URI'] ) && false !== strpos( $_SERVER['REQUEST_URI'], '/ysm/v1/search' )
+	) {
+		$res_data = $result->get_data();
+		if ( isset( $res_data['code'] ) && 'rest_cookie_invalid_nonce' === $res_data['code'] ) {
+			$result->header( 'X-Wp-Nonce', wp_create_nonce( 'wp_rest' ) );
+		}
+	}
+
+	return $result;
 }

@@ -2,16 +2,16 @@
 # This file is distributed under the same license as the Smart WooCommerce Search plugin.
 msgid ""
 msgstr ""
-"Project-Id-Version: Smart WooCommerce Search 2.14.0\n"
+"Project-Id-Version: Smart WooCommerce Search 2.15.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/smart-woocommerce-search\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-05-16T19:30:40+00:00\n"
+"POT-Creation-Date: 2025-07-01T19:15:27+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"X-Generator: WP-CLI 2.10.0\n"
+"X-Generator: WP-CLI 2.11.0\n"
 "X-Domain: smart-woocommerce-search\n"
 
 #. Plugin Name of the plugin
@@ -35,51 +35,46 @@ msgstr ""
 msgid "YummyWP"
 msgstr ""
 
-#: inc/admin/admin.php:39
+#: inc/admin/admin.php:38
 msgid "Search Widgets"
 msgstr ""
 
-#: inc/admin/admin.php:40
+#: inc/admin/admin.php:39
 msgid "Widgets"
 msgstr ""
 
-#: inc/admin/admin.php:47
+#: inc/admin/admin.php:46
 msgid "Add New Search Widget"
 msgstr ""
 
-#: inc/admin/admin.php:48
+#: inc/admin/admin.php:47
 #: templates/admin-page-widgets.php:108
 msgid "Add New"
 msgstr ""
 
+#: inc/admin/admin.php:54
 #: inc/admin/admin.php:55
-#: inc/admin/admin.php:56
 #: templates/admin-page-index-status.php:32
 msgid "Index Status"
 msgstr ""
 
+#: inc/admin/admin.php:62
 #: inc/admin/admin.php:63
-#: inc/admin/admin.php:64
 msgid "Synonyms"
 msgstr ""
 
+#: inc/admin/admin.php:70
 #: inc/admin/admin.php:71
-#: inc/admin/admin.php:72
 msgid "Stop Words"
 msgstr ""
 
-#: inc/admin/admin.php:80
-#: inc/admin/admin.php:81
-msgid "Start Trial"
-msgstr ""
-
-#: inc/admin/admin.php:122
+#: inc/admin/admin.php:104
 #: templates/admin-page-form.php:58
 msgid "Settings"
 msgstr ""
 
 #. translators: %s: Name/id of a widget
-#: inc/admin/admin.php:139
+#: inc/admin/admin.php:121
 msgid "Edit Widget: %s"
 msgstr ""
 
@@ -148,15 +143,15 @@ msgstr ""
 msgid "Delete"
 msgstr ""
 
-#: inc/custom/scripts.php:153
+#: inc/custom/scripts.php:188
 msgid "Delete column?"
 msgstr ""
 
-#: inc/custom/scripts.php:154
+#: inc/custom/scripts.php:189
 msgid "Delete row?"
 msgstr ""
 
-#: inc/custom/scripts.php:155
+#: inc/custom/scripts.php:190
 msgid "Delete widget?"
 msgstr ""
 
@@ -257,10 +252,10 @@ msgstr ""
 #: templates/admin-page-stop-words.php:31
 #: templates/admin-page-synonyms.php:69
 #: templates/admin-tab-fields.php:227
-#: templates/admin-tab-fullscreen.php:165
+#: templates/admin-tab-fullscreen.php:164
 #: templates/admin-tab-general.php:278
 #: templates/admin-tab-layout.php:158
-#: templates/admin-tab-styling.php:229
+#: templates/admin-tab-styling.php:235
 msgid "Documentation"
 msgstr ""
 
@@ -476,77 +471,71 @@ msgstr ""
 msgid "Select Products"
 msgstr ""
 
-#: templates/admin-tab-fullscreen.php:36
+#: templates/admin-tab-fullscreen.php:35
 msgid "Start typing product name..."
 msgstr ""
 
-#: templates/admin-tab-fullscreen.php:42
-msgid "\"Selected Products\" Label"
+#: templates/admin-tab-fullscreen.php:41
+#: templates/admin-tab-fullscreen.php:82
+msgid "Label"
 msgstr ""
 
-#: templates/admin-tab-fullscreen.php:49
-#: templates/admin-tab-fullscreen.php:111
-#: templates/admin-tab-fullscreen.php:155
+#: templates/admin-tab-fullscreen.php:48
+#: templates/admin-tab-fullscreen.php:110
+#: templates/admin-tab-fullscreen.php:154
 msgid "Hide on mobile"
 msgstr ""
 
-#: templates/admin-tab-fullscreen.php:57
-msgid "Categories"
+#: templates/admin-tab-fullscreen.php:56
+msgid "Selected Categories"
 msgstr ""
 
-#: templates/admin-tab-fullscreen.php:73
-msgid "Display selected categories"
+#: templates/admin-tab-fullscreen.php:72
+msgid "Select categories"
 msgstr ""
 
-#: templates/admin-tab-fullscreen.php:83
-msgid "\"Selected Categories\" Label"
-msgstr ""
-
-#: templates/admin-tab-fullscreen.php:89
-#: templates/admin-tab-fullscreen.php:121
+#: templates/admin-tab-fullscreen.php:88
+#: templates/admin-tab-fullscreen.php:120
 msgid "Location"
+msgstr ""
+
+#: templates/admin-tab-fullscreen.php:92
+#: templates/admin-tab-fullscreen.php:124
+msgid "Left Sidebar Slot"
 msgstr ""
 
 #: templates/admin-tab-fullscreen.php:93
 #: templates/admin-tab-fullscreen.php:125
-msgid "Left Sidebar Slot"
-msgstr ""
-
-#: templates/admin-tab-fullscreen.php:94
-#: templates/admin-tab-fullscreen.php:126
 msgid "Right Sidebar Slot"
 msgstr ""
 
-#: templates/admin-tab-fullscreen.php:100
+#: templates/admin-tab-fullscreen.php:99
 msgid "Show Products Count"
 msgstr ""
 
-#: templates/admin-tab-fullscreen.php:105
-msgid "Display Selected Categories when Popup Initially Opened"
+#: templates/admin-tab-fullscreen.php:104
+#: templates/admin-tab-fullscreen.php:147
+msgid "Display when Popup Initially Opened"
 msgstr ""
 
-#: templates/admin-tab-fullscreen.php:116
+#: templates/admin-tab-fullscreen.php:115
 msgid "Promo banner"
 msgstr ""
 
-#: templates/admin-tab-fullscreen.php:127
+#: templates/admin-tab-fullscreen.php:126
 msgid "Left Sidebar Slot 2"
 msgstr ""
 
-#: templates/admin-tab-fullscreen.php:128
+#: templates/admin-tab-fullscreen.php:127
 msgid "Right Sidebar Slot 2"
 msgstr ""
 
-#: templates/admin-tab-fullscreen.php:134
+#: templates/admin-tab-fullscreen.php:133
 msgid "Banner Image"
 msgstr ""
 
-#: templates/admin-tab-fullscreen.php:141
-msgid "Promo Banner Link"
-msgstr ""
-
-#: templates/admin-tab-fullscreen.php:148
-msgid "Display Promo Banner when Popup Initially Opened"
+#: templates/admin-tab-fullscreen.php:140
+msgid "Banner Link"
 msgstr ""
 
 #: templates/admin-tab-general.php:16
@@ -577,7 +566,7 @@ msgid "Minimum number of characters required to start a search"
 msgstr ""
 
 #: templates/admin-tab-general.php:60
-#: templates/admin-tab-styling.php:100
+#: templates/admin-tab-styling.php:106
 msgid "Results Popup"
 msgstr ""
 
@@ -973,7 +962,7 @@ msgid "Set the search field height in pixels"
 msgstr ""
 
 #: templates/admin-tab-styling.php:26
-#: templates/admin-tab-styling.php:112
+#: templates/admin-tab-styling.php:118
 msgid "Rounded Border"
 msgstr ""
 
@@ -982,7 +971,7 @@ msgid "Display search field with a rounded border (frame)"
 msgstr ""
 
 #: templates/admin-tab-styling.php:33
-#: templates/admin-tab-styling.php:119
+#: templates/admin-tab-styling.php:125
 msgid "Border Color"
 msgstr ""
 
@@ -999,7 +988,7 @@ msgid "Text Color"
 msgstr ""
 
 #: templates/admin-tab-styling.php:54
-#: templates/admin-tab-styling.php:126
+#: templates/admin-tab-styling.php:132
 msgid "Background Color"
 msgstr ""
 
@@ -1024,66 +1013,70 @@ msgstr ""
 msgid "Select loader's image"
 msgstr ""
 
-#: templates/admin-tab-styling.php:105
+#: templates/admin-tab-styling.php:98
+msgid "Loader Custom Image"
+msgstr ""
+
+#: templates/admin-tab-styling.php:111
 msgid "Top Indentation"
 msgstr ""
 
-#: templates/admin-tab-styling.php:106
+#: templates/admin-tab-styling.php:112
 msgid "Indentation between search bar and popup, px"
 msgstr ""
 
-#: templates/admin-tab-styling.php:113
+#: templates/admin-tab-styling.php:119
 msgid "Display popup with a rounded border (frame)"
 msgstr ""
 
-#: templates/admin-tab-styling.php:133
+#: templates/admin-tab-styling.php:139
 msgid "Title's Text Color"
 msgstr ""
 
-#: templates/admin-tab-styling.php:140
+#: templates/admin-tab-styling.php:146
 msgid "Description's Text Color"
 msgstr ""
 
-#: templates/admin-tab-styling.php:147
+#: templates/admin-tab-styling.php:153
 msgid "\"View all\" Button's Text Color"
 msgstr ""
 
-#: templates/admin-tab-styling.php:154
+#: templates/admin-tab-styling.php:160
 msgid "\"View all\" Button's Background Color"
 msgstr ""
 
-#: templates/admin-tab-styling.php:161
+#: templates/admin-tab-styling.php:167
 msgid "Category Color"
 msgstr ""
 
-#: templates/admin-tab-styling.php:167
+#: templates/admin-tab-styling.php:173
 msgid "Product Elements"
 msgstr ""
 
-#: templates/admin-tab-styling.php:172
+#: templates/admin-tab-styling.php:178
 msgid "Price Color"
 msgstr ""
 
-#: templates/admin-tab-styling.php:179
+#: templates/admin-tab-styling.php:185
 msgid "\"Out of stock\" Label Text Color"
 msgstr ""
 
-#: templates/admin-tab-styling.php:187
+#: templates/admin-tab-styling.php:193
 msgid "\"Out of stock\" Label Background Color"
 msgstr ""
 
-#: templates/admin-tab-styling.php:195
+#: templates/admin-tab-styling.php:201
 msgid "\"Sale\" Label Text Color"
 msgstr ""
 
-#: templates/admin-tab-styling.php:203
+#: templates/admin-tab-styling.php:209
 msgid "\"Sale\" Label Background Color"
 msgstr ""
 
-#: templates/admin-tab-styling.php:211
+#: templates/admin-tab-styling.php:217
 msgid "\"Featured\" Label Text Color"
 msgstr ""
 
-#: templates/admin-tab-styling.php:219
+#: templates/admin-tab-styling.php:225
 msgid "\"Featured\" Label Background Color"
 msgstr ""

@@ -9,7 +9,6 @@ add_filter( 'admin_title', __NAMESPACE__ . '\\change_admin_title', 10, 2 );
 add_action( 'wp_ajax_sws_promo_dismiss', __NAMESPACE__ . '\\promo_dismiss' );
 add_action( 'wp_ajax_sws_notice_dismiss', __NAMESPACE__ . '\\update_notice_dismiss' );
 
-
 /**
  * Admin init hook
  * @return void
@@ -74,16 +73,6 @@ function add_menu_pages() {
 		'smart-search-stop-words',
 		__NAMESPACE__ . '\\display_admin_page_stop_words'
 	);
-	if ( ! sws_fs()->is_premium() ) {
-        add_submenu_page(
-            'smart-search',
-			__( 'Start Trial', 'smart-woocommerce-search' ),
-			__( 'Start Trial', 'smart-woocommerce-search' ) . '&nbsp;&nbsp;➤',
-			'manage_options',
-			'smart-search-pro-trial',
-			__NAMESPACE__ . '\\display_admin_page_update_to_pro'
-		);
-	}
 }
 
 function display_admin_page_widgets() {
@@ -104,13 +93,6 @@ function display_admin_page_stop_words() {
 
 function display_admin_page_index_status() {
 	include_once SWS_PLUGIN_DIR . 'templates/admin-page-index-status.php';
-}
-
-function display_admin_page_update_to_pro() {
-	if ( 'smart-search-pro-trial' === filter_input( INPUT_GET, 'page', FILTER_SANITIZE_FULL_SPECIAL_CHARS ) ) {
-		wp_redirect( sws_fs()->get_trial_url() );
-		die;
-	}
 }
 
 /**
