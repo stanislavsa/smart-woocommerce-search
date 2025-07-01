@@ -192,14 +192,6 @@
                 ),
                 'is_pro'      => true,
             ));
-
-            ysm_setting( $w_id, 'skip_punctuation', array(
-                'type'        => 'checkbox',
-                'title'       => __( 'Skip Punctuation', 'smart-woocommerce-search' ),
-                'description' => __( 'Skip punctuation in the search query', 'smart-woocommerce-search' ),
-                'value'       => 0,
-                'is_pro'      => true,
-            ));
             ?>
 
             <th class="ymapp-settings__title"><?php esc_html_e( 'Search Results Page', 'smart-woocommerce-search' ); ?></th>
