@@ -24,8 +24,7 @@ function on_admin_init() {
  * Add Pages to Admin Menu
  */
 function add_menu_pages() {
-	add_menu_page(
-		'Smart Search',
+	add_menu_page( 'Smart Search',
 		'Smart Search' . ( sws_fs()->is_premium() ? ' <sup>PRO</sup>' : '' ),
 		'manage_options',
 		'smart-search',
@@ -33,40 +32,35 @@ function add_menu_pages() {
 		'dashicons-search',
 		'39.9'
 	);
-    add_submenu_page(
-        'smart-search',
+    add_submenu_page( 'smart-search',
 		__( 'Search Widgets', 'smart-woocommerce-search' ),
 		__( 'Widgets', 'smart-woocommerce-search' ),
 		'manage_options',
 		'smart-search',
 		__NAMESPACE__ . '\\display_admin_page_widgets'
 	);
-    add_submenu_page(
-        'smart-search',
+    add_submenu_page( 'smart-search',
 		__( 'Add New Search Widget', 'smart-woocommerce-search' ),
 		__( 'Add New', 'smart-woocommerce-search' ),
 		'manage_options',
 		'smart-search-custom-new',
 		__NAMESPACE__ . '\\display_admin_page_widget_new'
 	);
-    add_submenu_page(
-        'smart-search',
+    add_submenu_page( 'smart-search',
 		__( 'Index Status', 'smart-woocommerce-search' ),
 		__( 'Index Status', 'smart-woocommerce-search' ),
 		'manage_options',
 		'smart-search-index-status',
 		__NAMESPACE__ . '\\display_admin_page_index_status'
 	);
-    add_submenu_page(
-        'smart-search',
+    add_submenu_page( 'smart-search',
 		__( 'Synonyms', 'smart-woocommerce-search' ),
 		__( 'Synonyms', 'smart-woocommerce-search' ),
 		'manage_options',
 		'smart-search-synonyms',
 		__NAMESPACE__ . '\\display_admin_page_synonyms'
 	);
-    add_submenu_page(
-        'smart-search',
+    add_submenu_page( 'smart-search',
 		__( 'Stop Words', 'smart-woocommerce-search' ),
 		__( 'Stop Words', 'smart-woocommerce-search' ),
 		'manage_options',
@@ -102,6 +96,7 @@ function display_admin_page_index_status() {
  */
 function add_action_links( $links ) {
 	$links[] = sprintf( '<a href="%s">%s</a>', admin_url( 'admin.php?page=smart-search' ), __( 'Settings', 'smart-woocommerce-search' ) );
+
 	return $links;
 }
 
@@ -139,16 +134,16 @@ function promo_dismiss() {
 }
 
 function update_notice_dismiss() {
-    $nonce = filter_input( INPUT_POST, 'nonce', FILTER_SANITIZE_FULL_SPECIAL_CHARS );
-    $version = filter_input( INPUT_POST, 'version', FILTER_SANITIZE_FULL_SPECIAL_CHARS );
+	$nonce = filter_input( INPUT_POST, 'nonce', FILTER_SANITIZE_FULL_SPECIAL_CHARS );
+	$version = filter_input( INPUT_POST, 'version', FILTER_SANITIZE_FULL_SPECIAL_CHARS );
 
-    if ( ! wp_verify_nonce( $nonce, 'sws_update_notice_dismiss_nonce_action' ) ) {
-        exit;
-    }
+	if ( ! wp_verify_nonce( $nonce, 'sws_update_notice_dismiss_nonce_action' ) ) {
+		exit;
+	}
 
-    update_option( 'sws_update_notice', $version );
+	update_option( 'sws_update_notice', $version );
 
-    exit;
+	exit;
 }
 
 function display_admin_notices() {

@@ -1,7 +1,7 @@
 === Smart WooCommerce Search ===
 Contributors: yummy-wp
 Tags: search, ajax search, product search, search by sku, woocommerce search
-Stable tag: 2.15.0
+Stable tag: 2.15.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Requires at least: 5.9
@@ -107,6 +107,9 @@ Yes, when using products search or when you set option to search only through pr
 5. Searching by SKU
 
 == Changelog ==
+
+= 2.15.1 =
+* Updated: spanish translations
 
 = 2.15.0 =
 * Added: Option to select predefined loader

@@ -56,18 +56,13 @@ msgstr "Synonyme"
 msgid "Stop Words"
 msgstr "Stopp-Wörter"
 
-#: inc/admin/admin.php:85
-#: inc/admin/admin.php:86
-msgid "Start Trial"
-msgstr "Testversion starten"
-
-#: inc/admin/admin.php:127
+#: inc/admin/admin.php:110
 #: templates/admin-page-form.php:66
 msgid "Settings"
 msgstr "Einstellungen"
 
 #. translators: %s: Name/id of a widget
-#: inc/admin/admin.php:145
+#: inc/admin/admin.php:128
 #, php-format
 msgid "Edit Widget: %s"
 msgstr "Widget bearbeiten: %s"
@@ -135,15 +130,15 @@ msgstr "Duplizieren"
 msgid "Delete"
 msgstr "Löschen"
 
-#: inc/custom/scripts.php:257
+#: inc/custom/scripts.php:258
 msgid "Delete column?"
 msgstr "Spalte löschen?"
 
-#: inc/custom/scripts.php:258
+#: inc/custom/scripts.php:259
 msgid "Delete row?"
 msgstr "Zeile löschen?"
 
-#: inc/custom/scripts.php:259
+#: inc/custom/scripts.php:260
 msgid "Delete widget?"
 msgstr "Widget löschen?"
 
@@ -285,10 +280,10 @@ msgstr "Alle indizierten Daten löschen"
 #: templates/admin-page-stop-words.php:52
 #: templates/admin-page-synonyms.php:93
 #: templates/admin-tab-fields.php:227
-#: templates/admin-tab-fullscreen.php:176
+#: templates/admin-tab-fullscreen.php:181
 #: templates/admin-tab-general.php:271
 #: templates/admin-tab-layout.php:158
-#: templates/admin-tab-styling.php:236
+#: templates/admin-tab-styling.php:235
 msgid "Documentation"
 msgstr "Dokumentation"
 
@@ -470,7 +465,7 @@ msgid "Minimum number of characters required to start a search"
 msgstr "Minimale Anzahl von Zeichen, um eine Suche zu starten"
 
 #: templates/admin-tab-general.php:60
-#: templates/admin-tab-styling.php:107
+#: templates/admin-tab-styling.php:106
 msgid "Results Popup"
 msgstr "Ergebnisse Popup"
 
@@ -789,7 +784,7 @@ msgid "Set the search field height in pixels"
 msgstr "Legen Sie die Höhe des Suchfeldes in Pixeln fest"
 
 #: templates/admin-tab-styling.php:26
-#: templates/admin-tab-styling.php:119
+#: templates/admin-tab-styling.php:118
 msgid "Rounded Border"
 msgstr "Abgerundeter Rahmen"
 
@@ -798,7 +793,7 @@ msgid "Display search field with a rounded border (frame)"
 msgstr "Suchfeld mit einem abgerundeten Rand (Rahmen) anzeigen"
 
 #: templates/admin-tab-styling.php:33
-#: templates/admin-tab-styling.php:126
+#: templates/admin-tab-styling.php:125
 msgid "Border Color"
 msgstr "Rahmenfarbe"
 
@@ -815,7 +810,7 @@ msgid "Text Color"
 msgstr "Textfarbe"
 
 #: templates/admin-tab-styling.php:54
-#: templates/admin-tab-styling.php:133
+#: templates/admin-tab-styling.php:132
 msgid "Background Color"
 msgstr "Hintergrundfarbe"
 
@@ -840,67 +835,67 @@ msgstr "Lader"
 msgid "Select loader's image"
 msgstr "Wählen Sie das Image des Loaders"
 
-#: templates/admin-tab-styling.php:112
+#: templates/admin-tab-styling.php:111
 msgid "Top Indentation"
 msgstr "Obere Einrückung"
 
-#: templates/admin-tab-styling.php:113
+#: templates/admin-tab-styling.php:112
 msgid "Indentation between search bar and popup, px"
 msgstr "Einrückung zwischen Suchleiste und Popup, px"
 
-#: templates/admin-tab-styling.php:120
+#: templates/admin-tab-styling.php:119
 msgid "Display popup with a rounded border (frame)"
 msgstr "Popup mit einem abgerundeten Rahmen anzeigen"
 
-#: templates/admin-tab-styling.php:140
+#: templates/admin-tab-styling.php:139
 msgid "Title's Text Color"
 msgstr "Textfarbe des Titels"
 
-#: templates/admin-tab-styling.php:147
+#: templates/admin-tab-styling.php:146
 msgid "Description's Text Color"
 msgstr "Textfarbe der Beschreibung"
 
-#: templates/admin-tab-styling.php:154
+#: templates/admin-tab-styling.php:153
 msgid "\"View all\" Button's Text Color"
 msgstr "\"Textfarbe für die Schaltfläche \"Alle anzeigen"
 
-#: templates/admin-tab-styling.php:161
+#: templates/admin-tab-styling.php:160
 msgid "\"View all\" Button's Background Color"
 msgstr "\"Hintergrundfarbe für die Schaltfläche \"Alle anzeigen"
 
-#: templates/admin-tab-styling.php:168
+#: templates/admin-tab-styling.php:167
 msgid "Category Color"
 msgstr "Kategorie Farbe"
 
-#: templates/admin-tab-styling.php:174
+#: templates/admin-tab-styling.php:173
 msgid "Product Elements"
 msgstr "Produktelemente"
 
-#: templates/admin-tab-styling.php:179
+#: templates/admin-tab-styling.php:178
 msgid "Price Color"
 msgstr "Preis Farbe"
 
-#: templates/admin-tab-styling.php:186
+#: templates/admin-tab-styling.php:185
 msgid "\"Out of stock\" Label Text Color"
 msgstr "textfarbe des Etiketts \"Nicht auf Lager\""
 
-#: templates/admin-tab-styling.php:194
+#: templates/admin-tab-styling.php:193
 msgid "\"Out of stock\" Label Background Color"
 msgstr "hintergrundfarbe des Etiketts \"Nicht auf Lager\""
 
-#: templates/admin-tab-styling.php:202
+#: templates/admin-tab-styling.php:201
 msgid "\"Sale\" Label Text Color"
 msgstr "textfarbe des Etiketts \"Verkauf\""
 
-#: templates/admin-tab-styling.php:210
+#: templates/admin-tab-styling.php:209
 msgid "\"Sale\" Label Background Color"
 msgstr "hintergrundfarbe des Etiketts \"Verkauf\""
 
-#: templates/admin-tab-styling.php:218
+#: templates/admin-tab-styling.php:217
 msgid "\"Featured\" Label Text Color"
 msgstr "textfarbe für das Etikett \"Ausgewählt\""
 
-#: templates/admin-tab-styling.php:226
+#: templates/admin-tab-styling.php:225
 msgid "\"Featured\" Label Background Color"
 msgstr "hintergrundfarbe des Labels \"Featured\""
 
@@ -1061,46 +1056,46 @@ msgstr ""
 msgid "These settings have been moved to a global settings. Please check "
 msgstr ""
 
-#: templates/admin-tab-fullscreen.php:101
-#: templates/admin-tab-fullscreen.php:135
+#: templates/admin-tab-fullscreen.php:103
+#: templates/admin-tab-fullscreen.php:137
 msgid "Location"
-msgstr ""
-
-#: templates/admin-tab-fullscreen.php:105
-#: templates/admin-tab-fullscreen.php:139
-msgid "Left Sidebar Slot"
-msgstr ""
-
-#: templates/admin-tab-fullscreen.php:106
-#: templates/admin-tab-fullscreen.php:140
-msgid "Right Sidebar Slot"
 msgstr ""
 
 #: templates/admin-tab-fullscreen.php:107
 #: templates/admin-tab-fullscreen.php:141
-msgid "Left Sidebar Slot 2"
+msgid "Left Sidebar Slot"
 msgstr ""
 
 #: templates/admin-tab-fullscreen.php:108
 #: templates/admin-tab-fullscreen.php:142
+msgid "Right Sidebar Slot"
+msgstr ""
+
+#: templates/admin-tab-fullscreen.php:109
+#: templates/admin-tab-fullscreen.php:143
+msgid "Left Sidebar Slot 2"
+msgstr ""
+
+#: templates/admin-tab-fullscreen.php:110
+#: templates/admin-tab-fullscreen.php:144
 msgid "Right Sidebar Slot 2"
 msgstr ""
 
-#: templates/admin-tab-fullscreen.php:62
-#: templates/admin-tab-fullscreen.php:125
-#: templates/admin-tab-fullscreen.php:167
+#: templates/admin-tab-fullscreen.php:63
+#: templates/admin-tab-fullscreen.php:127
+#: templates/admin-tab-fullscreen.php:171
 msgid "Hide on mobile"
 msgstr ""
 
-#: templates/admin-tab-fullscreen.php:114
+#: templates/admin-tab-fullscreen.php:116
 msgid "Show Products Count"
 msgstr ""
 
-#: templates/admin-tab-fullscreen.php:130
+#: templates/admin-tab-fullscreen.php:132
 msgid "Promo banner"
 msgstr ""
 
-#: templates/admin-tab-fullscreen.php:148
+#: templates/admin-tab-fullscreen.php:150
 msgid "Banner Image"
 msgstr ""
 
@@ -1116,7 +1111,7 @@ msgstr ""
 msgid "Select Products"
 msgstr ""
 
-#: templates/admin-tab-fullscreen.php:51
+#: templates/admin-tab-fullscreen.php:50
 msgid "Start typing product name..."
 msgstr ""
 
@@ -1125,27 +1120,31 @@ msgid "Display Rating"
 msgstr ""
 
 #: templates/admin-tab-fullscreen.php:56
-#: templates/admin-tab-fullscreen.php:95
+#: templates/admin-tab-fullscreen.php:97
 msgid "Label"
 msgstr ""
 
-#: templates/admin-tab-fullscreen.php:69
+#: templates/admin-tab-fullscreen.php:71
 msgid "Selected Categories"
 msgstr ""
 
-#: templates/admin-tab-fullscreen.php:85
+#: templates/admin-tab-fullscreen.php:87
 msgid "Select categories"
 msgstr ""
 
-#: templates/admin-tab-fullscreen.php:119
-#: templates/admin-tab-fullscreen.php:161
+#: templates/admin-tab-fullscreen.php:121
+#: templates/admin-tab-fullscreen.php:164
 msgid "Display when Popup Initially Opened"
 msgstr ""
 
-#: templates/admin-tab-fullscreen.php:155
+#: templates/admin-tab-fullscreen.php:157
 msgid "Banner Link"
 msgstr ""
 
-#: templates/admin-tab-styling.php:99
+#: templates/admin-tab-styling.php:98
 msgid "Loader Custom Image"
+msgstr ""
+
+#: inc/app/class-field.php:291
+msgid "No image selected"
 msgstr ""

@@ -2,14 +2,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Smart WooCommerce Search\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-06-09 09:17+0300\n"
-"PO-Revision-Date: 2025-07-01 10:55+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
-"Language: ru_RU\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2024-06-09 09:17+0300\n"
+"PO-Revision-Date: 2025-07-01 10:55+0300\n"
+"Language: ru_RU\n"
 "X-Generator: Poedit 3.6\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-Flags-xgettext: --add-comments=translators:\n"
@@ -32,31 +32,37 @@ msgstr "Виджеты"
 msgid "Add New Search Widget"
 msgstr "Добавить новый поисковый виджет"
 
-#: inc/admin/admin.php:53 templates/admin-page-widgets.php:108
+#: inc/admin/admin.php:53
+#: templates/admin-page-widgets.php:108
 msgid "Add New"
 msgstr "Добавить новый"
 
-#: inc/admin/admin.php:60 inc/admin/admin.php:61
+#: inc/admin/admin.php:60
+#: inc/admin/admin.php:61
 #: templates/admin-page-index-status.php:55
 msgid "Index Status"
 msgstr "Статус индекса"
 
-#: inc/admin/admin.php:68 inc/admin/admin.php:69
+#: inc/admin/admin.php:68
+#: inc/admin/admin.php:69
 #: templates/admin-tab-spellcheck.php:15
 msgid "Synonyms"
 msgstr "Синонимы"
 
-#: inc/admin/admin.php:76 inc/admin/admin.php:77
-#: templates/admin-tab-stopwords.php:5 templates/admin-tab-stopwords.php:15
+#: inc/admin/admin.php:76
+#: inc/admin/admin.php:77
+#: templates/admin-tab-stopwords.php:5
+#: templates/admin-tab-stopwords.php:15
 msgid "Stop Words"
 msgstr "Стоп-слова"
 
-#: inc/admin/admin.php:127 templates/admin-page-form.php:66
+#: inc/admin/admin.php:110
+#: templates/admin-page-form.php:66
 msgid "Settings"
 msgstr "Настройки"
 
 #. translators: %s: Name/id of a widget
-#: inc/admin/admin.php:145
+#: inc/admin/admin.php:128
 #, php-format
 msgid "Edit Widget: %s"
 msgstr "Редактировать виджет: %s"
@@ -124,15 +130,15 @@ msgstr "Дублировать"
 msgid "Delete"
 msgstr "Удалить"
 
-#: inc/custom/scripts.php:257
+#: inc/custom/scripts.php:258
 msgid "Delete column?"
 msgstr "Удалить колонку?"
 
-#: inc/custom/scripts.php:258
+#: inc/custom/scripts.php:259
 msgid "Delete row?"
 msgstr "Удалить строку?"
 
-#: inc/custom/scripts.php:259
+#: inc/custom/scripts.php:260
 msgid "Delete widget?"
 msgstr "Удалить виджет?"
 
@@ -152,34 +158,42 @@ msgstr "Распродажа"
 msgid "Learn more here."
 msgstr "Узнайте больше здесь."
 
-#: inc/fs.php:60 inc/fs.php:79
+#: inc/fs.php:60
+#: inc/fs.php:79
 msgid "We added this opt-in feature so you won't miss any important updates and to help us enhance the plugin's compatibility and performance on your site."
 msgstr "Мы добавили эту функцию, чтобы Вы не пропустили важные обновления и чтобы помочь нам улучшить совместимость и производительность плагина на Вашем сайте."
 
-#: inc/fs.php:61 inc/fs.php:80
+#: inc/fs.php:61
+#: inc/fs.php:80
 #, php-format
 msgid "By opting in, you'll get email notifications about feature updates, educational content, promo offers, and you'll share some basic WordPress environment details. If you decide not to opt in, that's okay! %2$s will still function just as well."
 msgstr "Подписавшись, Вы будете получать по электронной почте уведомления об обновлениях функций, образовательном контенте, акционных предложениях, а также поделитесь некоторыми основными сведениями о среде WordPress. Если Вы решите не подписываться, ничего страшного! %2$s все равно будет работать так же хорошо."
 
-#: templates/admin-page-form.php:10 templates/admin-tab-general.php:5
+#: templates/admin-page-form.php:10
+#: templates/admin-tab-general.php:5
 msgid "General"
 msgstr "Общие"
 
-#: templates/admin-page-form.php:14 templates/admin-tab-fields.php:8
+#: templates/admin-page-form.php:14
+#: templates/admin-tab-fields.php:8
 msgid "Items to Search Through"
 msgstr "Предметы для поиска"
 
-#: templates/admin-page-form.php:28 templates/admin-tab-layout.php:5
+#: templates/admin-page-form.php:28
+#: templates/admin-tab-layout.php:5
 msgid "Layout"
 msgstr "Макет"
 
-#: templates/admin-page-form.php:32 templates/admin-tab-styling.php:5
+#: templates/admin-page-form.php:32
+#: templates/admin-tab-styling.php:5
 msgid "Styling"
 msgstr "Стилизация"
 
-#: templates/admin-page-form.php:47 templates/admin-page-form.php:116
+#: templates/admin-page-form.php:47
+#: templates/admin-page-form.php:116
 #: templates/admin-page-stop-words.php:21
-#: templates/admin-page-stop-words.php:45 templates/admin-page-synonyms.php:35
+#: templates/admin-page-stop-words.php:45
+#: templates/admin-page-synonyms.php:35
 #: templates/admin-page-synonyms.php:86
 msgid "Save"
 msgstr "Сохранить"
@@ -204,11 +218,13 @@ msgstr "Готово"
 msgid "Tables are created"
 msgstr "Таблицы созданы"
 
-#: templates/admin-page-index-status.php:62 templates/admin-page-widgets.php:63
+#: templates/admin-page-index-status.php:62
+#: templates/admin-page-widgets.php:63
 msgid "yes"
 msgstr "да"
 
-#: templates/admin-page-index-status.php:62 templates/admin-page-widgets.php:64
+#: templates/admin-page-index-status.php:62
+#: templates/admin-page-widgets.php:64
 msgid "no"
 msgstr "нет"
 
@@ -264,12 +280,15 @@ msgstr "Редактировать Виджет"
 msgid "Enhance Standard Widgets"
 msgstr "Улучшение стандартных виджетов"
 
-#: templates/admin-page-widgets.php:43 templates/admin-page-widgets.php:81
+#: templates/admin-page-widgets.php:43
+#: templates/admin-page-widgets.php:81
 msgid "ID"
 msgstr "ID"
 
-#: templates/admin-page-widgets.php:44 templates/admin-page-widgets.php:82
-#: templates/admin-tab-fields.php:93 templates/admin-tab-order.php:25
+#: templates/admin-page-widgets.php:44
+#: templates/admin-page-widgets.php:82
+#: templates/admin-tab-fields.php:93
+#: templates/admin-tab-order.php:25
 msgid "Title"
 msgstr "Заголовок"
 
@@ -375,12 +394,15 @@ msgstr "Запрещенные категории продуктов"
 msgid "Disallow search in selected product categories"
 msgstr "Запретите поиск в выбранных категориях товаров"
 
-#: templates/admin-tab-fullscreen.php:20 templates/admin-tab-general.php:15
-#: templates/admin-tab-general.php:24 templates/admin-tab-general.php:33
+#: templates/admin-tab-fullscreen.php:20
+#: templates/admin-tab-general.php:15
+#: templates/admin-tab-general.php:24
+#: templates/admin-tab-general.php:33
 msgid "Enable"
 msgstr "Включить"
 
-#: templates/admin-tab-general.php:40 templates/admin-tab-styling.php:14
+#: templates/admin-tab-general.php:40
+#: templates/admin-tab-styling.php:14
 msgid "Input Field"
 msgstr "Поле Ввода"
 
@@ -396,7 +418,8 @@ msgstr "Минимальное количество символов"
 msgid "Minimum number of characters required to start a search"
 msgstr "Минимальное количество символов, необходимое для начала поиска"
 
-#: templates/admin-tab-general.php:60 templates/admin-tab-styling.php:107
+#: templates/admin-tab-general.php:60
+#: templates/admin-tab-styling.php:106
 msgid "Results Popup"
 msgstr "Всплывающее окно результатов"
 
@@ -452,11 +475,13 @@ msgstr "Особенности поисковой системы"
 msgid "Multiple Word Search"
 msgstr "Поиск по нескольким словам"
 
-#: templates/admin-tab-general.php:157 templates/admin-tab-general.php:163
+#: templates/admin-tab-general.php:157
+#: templates/admin-tab-general.php:163
 msgid "Only exact match"
 msgstr "Только точное соответствие"
 
-#: templates/admin-tab-general.php:158 templates/admin-tab-general.php:164
+#: templates/admin-tab-general.php:158
+#: templates/admin-tab-general.php:164
 msgid "\"A\" or \"B\""
 msgstr "\"A\" или \"B\""
 
@@ -688,11 +713,13 @@ msgstr "Высота поля поиска, px"
 msgid "Set the search field height in pixels"
 msgstr "Установите высоту поля поиска в пикселях"
 
-#: templates/admin-tab-styling.php:26 templates/admin-tab-styling.php:119
+#: templates/admin-tab-styling.php:26
+#: templates/admin-tab-styling.php:118
 msgid "Rounded Border"
 msgstr "Округлая граница"
 
-#: templates/admin-tab-styling.php:33 templates/admin-tab-styling.php:126
+#: templates/admin-tab-styling.php:33
+#: templates/admin-tab-styling.php:125
 msgid "Border Color"
 msgstr "Цвет границы"
 
@@ -704,7 +731,8 @@ msgstr "Ширина рамки, px"
 msgid "Text Color"
 msgstr "Цвет текста"
 
-#: templates/admin-tab-styling.php:54 templates/admin-tab-styling.php:133
+#: templates/admin-tab-styling.php:54
+#: templates/admin-tab-styling.php:132
 msgid "Background Color"
 msgstr "Цвет фона"
 
@@ -716,9 +744,12 @@ msgstr "Цвет иконки"
 msgid "Icon Background"
 msgstr "Фон иконки"
 
-#: templates/admin-tab-styling.php:80 templates/admin-tab-styling.php:88
-#: templates/admin-tab-styling.php:89 templates/admin-tab-styling.php:90
-#: templates/admin-tab-styling.php:91 templates/admin-tab-styling.php:92
+#: templates/admin-tab-styling.php:80
+#: templates/admin-tab-styling.php:88
+#: templates/admin-tab-styling.php:89
+#: templates/admin-tab-styling.php:90
+#: templates/admin-tab-styling.php:91
+#: templates/admin-tab-styling.php:92
 msgid "Loader"
 msgstr "Загрузчик"
 
@@ -726,55 +757,55 @@ msgstr "Загрузчик"
 msgid "Select loader's image"
 msgstr "Выберите изображение загрузчика"
 
-#: templates/admin-tab-styling.php:140
+#: templates/admin-tab-styling.php:139
 msgid "Title's Text Color"
 msgstr "Цвет текста заголовка"
 
-#: templates/admin-tab-styling.php:147
+#: templates/admin-tab-styling.php:146
 msgid "Description's Text Color"
 msgstr "Цвет текста описания"
 
-#: templates/admin-tab-styling.php:154
+#: templates/admin-tab-styling.php:153
 msgid "\"View all\" Button's Text Color"
 msgstr "цвет текста кнопки \"Просмотреть все\""
 
-#: templates/admin-tab-styling.php:161
+#: templates/admin-tab-styling.php:160
 msgid "\"View all\" Button's Background Color"
 msgstr "цвет фона кнопки \"Просмотреть все\""
 
-#: templates/admin-tab-styling.php:168
+#: templates/admin-tab-styling.php:167
 msgid "Category Color"
 msgstr "Цвет категории"
 
-#: templates/admin-tab-styling.php:174
+#: templates/admin-tab-styling.php:173
 msgid "Product Elements"
 msgstr "Элементы товара"
 
-#: templates/admin-tab-styling.php:179
+#: templates/admin-tab-styling.php:178
 msgid "Price Color"
 msgstr "Цвет цены"
 
-#: templates/admin-tab-styling.php:186
+#: templates/admin-tab-styling.php:185
 msgid "\"Out of stock\" Label Text Color"
 msgstr "цвет текста ярлыка \"Нет в наличии\""
 
-#: templates/admin-tab-styling.php:194
+#: templates/admin-tab-styling.php:193
 msgid "\"Out of stock\" Label Background Color"
 msgstr "цвет фона ярлыка \"Нет в наличии\""
 
-#: templates/admin-tab-styling.php:202
+#: templates/admin-tab-styling.php:201
 msgid "\"Sale\" Label Text Color"
 msgstr "цвет текста ярлыка \"Распродажа\""
 
-#: templates/admin-tab-styling.php:210
+#: templates/admin-tab-styling.php:209
 msgid "\"Sale\" Label Background Color"
 msgstr "цвет фона ярлыка \"Распродажа\""
 
-#: templates/admin-tab-styling.php:218
+#: templates/admin-tab-styling.php:217
 msgid "\"Featured\" Label Text Color"
 msgstr "цвет текста ярлыка \"Featured\""
 
-#: templates/admin-tab-styling.php:226
+#: templates/admin-tab-styling.php:225
 msgid "\"Featured\" Label Background Color"
 msgstr "цвет фона ярлыка \"Featured\""
 
@@ -799,7 +830,8 @@ msgstr "Smart Ajax Search позволяет Вам мгновенно иска�
 msgid "YummyWP"
 msgstr "YummyWP"
 
-#: templates/admin-page-form.php:18 templates/admin-tab-order.php:8
+#: templates/admin-page-form.php:18
+#: templates/admin-tab-order.php:8
 #: templates/admin-tab-order.php:21
 msgid "Sorting"
 msgstr "Сортировка"
@@ -821,16 +853,17 @@ msgstr "Создать индекс"
 msgid "%s index is empty! We highly recommend to create index to improve search performance."
 msgstr "%s Индекс пуст! Мы настоятельно рекомендуем создать индекс, чтобы улучшить производительность поиска."
 
-#: templates/admin-tab-general.php:16 templates/admin-tab-general.php:25
+#: templates/admin-tab-general.php:16
+#: templates/admin-tab-general.php:25
 #: templates/admin-tab-general.php:34
 msgid "Enhance the standard %s search widget with the %s features"
 msgstr "Дополните стандартный виджет поиска %s функциями %s"
 
-#: templates/admin-tab-styling.php:112
+#: templates/admin-tab-styling.php:111
 msgid "Top Indentation"
 msgstr "Верхний отступ"
 
-#: templates/admin-tab-styling.php:113
+#: templates/admin-tab-styling.php:112
 msgid "Indentation between search bar and popup, px"
 msgstr "Отступ между строкой поиска и всплывающим окном, px"
 
@@ -838,7 +871,7 @@ msgstr "Отступ между строкой поиска и всплываю�
 msgid "Display search field with a rounded border (frame)"
 msgstr "Отображайте поле поиска с закругленной границей (рамкой)"
 
-#: templates/admin-tab-styling.php:120
+#: templates/admin-tab-styling.php:119
 msgid "Display popup with a rounded border (frame)"
 msgstr "Отображение всплывающего окна с закругленной границей (рамкой)"
 
@@ -866,19 +899,18 @@ msgstr "Текст уведомления \"Нет результатов\""
 msgid "Text of \"View All\" Button"
 msgstr "Текст кнопки \"Просмотреть все\""
 
-#: inc/admin/admin.php:85 inc/admin/admin.php:86
-msgid "Start Trial"
-msgstr "Начать пробный период"
-
 #: templates/admin-page-index-status.php:9
 msgid "Empty"
 msgstr "Пусто"
 
 #: templates/admin-page-index-status.php:123
-#: templates/admin-page-stop-words.php:52 templates/admin-page-synonyms.php:93
-#: templates/admin-tab-fields.php:227 templates/admin-tab-fullscreen.php:176
-#: templates/admin-tab-general.php:271 templates/admin-tab-layout.php:158
-#: templates/admin-tab-styling.php:236
+#: templates/admin-page-stop-words.php:52
+#: templates/admin-page-synonyms.php:93
+#: templates/admin-tab-fields.php:227
+#: templates/admin-tab-fullscreen.php:181
+#: templates/admin-tab-general.php:271
+#: templates/admin-tab-layout.php:158
+#: templates/admin-tab-styling.php:235
 msgid "Documentation"
 msgstr "Документация"
 
@@ -906,7 +938,8 @@ msgstr "Заполняйте каждый селектор с новой стр�
 msgid "Add extra CSS styles"
 msgstr "Добавьте дополнительные стили CSS"
 
-#: templates/admin-page-form.php:23 templates/admin-tab-fullscreen.php:5
+#: templates/admin-page-form.php:23
+#: templates/admin-tab-fullscreen.php:5
 msgid "Fullscreen Mode"
 msgstr "Полноэкранный режим"
 
@@ -986,11 +1019,13 @@ msgstr "Включить функцию автоматического доба�
 msgid "Displays label for “Did you mean“ if not empty"
 msgstr "Отображать метку «Вы имели в виду», если она не пуста"
 
-#: templates/admin-tab-general.php:159 templates/admin-tab-general.php:165
+#: templates/admin-tab-general.php:159
+#: templates/admin-tab-general.php:165
 msgid "\"A\" and \"B\" in one field"
 msgstr "«A» и «Б» в одном поле"
 
-#: templates/admin-tab-general.php:160 templates/admin-tab-general.php:166
+#: templates/admin-tab-general.php:160
+#: templates/admin-tab-general.php:166
 msgid "\"A\" and \"B\" anywhere"
 msgstr "«A» и «Б» в любом месте"
 
@@ -1014,49 +1049,51 @@ msgstr "результаты, в которых все введённые сло
 msgid "results where all entered words appear anywhere in the content, even if they are in different fields"
 msgstr "результаты, в которых все введённые слова встречаются в любом месте содержимого, даже если они находятся в разных полях"
 
-#: templates/admin-tab-spellcheck.php:13 templates/admin-tab-stopwords.php:13
+#: templates/admin-tab-spellcheck.php:13
+#: templates/admin-tab-stopwords.php:13
 msgid "These settings have been moved to a global settings. Please check "
 msgstr "Эти настройки были перенесены в глобальные настройки. Пожалуйста, проверьте "
 
-#: templates/admin-tab-fullscreen.php:101
-#: templates/admin-tab-fullscreen.php:135
+#: templates/admin-tab-fullscreen.php:103
+#: templates/admin-tab-fullscreen.php:137
 msgid "Location"
 msgstr "Расположение"
 
-#: templates/admin-tab-fullscreen.php:105
-#: templates/admin-tab-fullscreen.php:139
+#: templates/admin-tab-fullscreen.php:107
+#: templates/admin-tab-fullscreen.php:141
 msgid "Left Sidebar Slot"
 msgstr "Слот в левой боковой панели"
 
-#: templates/admin-tab-fullscreen.php:106
-#: templates/admin-tab-fullscreen.php:140
+#: templates/admin-tab-fullscreen.php:108
+#: templates/admin-tab-fullscreen.php:142
 msgid "Right Sidebar Slot"
 msgstr "Слот в правой боковой панели"
 
-#: templates/admin-tab-fullscreen.php:107
-#: templates/admin-tab-fullscreen.php:141
+#: templates/admin-tab-fullscreen.php:109
+#: templates/admin-tab-fullscreen.php:143
 msgid "Left Sidebar Slot 2"
 msgstr "Слот №2 в левой боковой панели"
 
-#: templates/admin-tab-fullscreen.php:108
-#: templates/admin-tab-fullscreen.php:142
+#: templates/admin-tab-fullscreen.php:110
+#: templates/admin-tab-fullscreen.php:144
 msgid "Right Sidebar Slot 2"
 msgstr "Слот №2 в правой боковой панели"
 
-#: templates/admin-tab-fullscreen.php:62 templates/admin-tab-fullscreen.php:125
-#: templates/admin-tab-fullscreen.php:167
+#: templates/admin-tab-fullscreen.php:63
+#: templates/admin-tab-fullscreen.php:127
+#: templates/admin-tab-fullscreen.php:171
 msgid "Hide on mobile"
 msgstr "Скрыть на мобильном"
 
-#: templates/admin-tab-fullscreen.php:114
+#: templates/admin-tab-fullscreen.php:116
 msgid "Show Products Count"
 msgstr "Показать количество продуктов"
 
-#: templates/admin-tab-fullscreen.php:130
+#: templates/admin-tab-fullscreen.php:132
 msgid "Promo banner"
 msgstr "Рекламный баннер"
 
-#: templates/admin-tab-fullscreen.php:148
+#: templates/admin-tab-fullscreen.php:150
 msgid "Banner Image"
 msgstr "Изображение баннера"
 
@@ -1072,7 +1109,7 @@ msgstr "Рекомендуемые товары"
 msgid "Select Products"
 msgstr "Выбрать товары"
 
-#: templates/admin-tab-fullscreen.php:51
+#: templates/admin-tab-fullscreen.php:50
 msgid "Start typing product name..."
 msgstr "Начните вводить название товара..."
 
@@ -1080,27 +1117,32 @@ msgstr "Начните вводить название товара..."
 msgid "Display Rating"
 msgstr "Отображать рейтинг"
 
-#: templates/admin-tab-fullscreen.php:56 templates/admin-tab-fullscreen.php:95
+#: templates/admin-tab-fullscreen.php:56
+#: templates/admin-tab-fullscreen.php:97
 msgid "Label"
 msgstr "Название"
 
-#: templates/admin-tab-fullscreen.php:69
+#: templates/admin-tab-fullscreen.php:71
 msgid "Selected Categories"
 msgstr "Выбранные категории"
 
-#: templates/admin-tab-fullscreen.php:85
+#: templates/admin-tab-fullscreen.php:87
 msgid "Select categories"
 msgstr "Выберите категории"
 
-#: templates/admin-tab-fullscreen.php:119
-#: templates/admin-tab-fullscreen.php:161
+#: templates/admin-tab-fullscreen.php:121
+#: templates/admin-tab-fullscreen.php:164
 msgid "Display when Popup Initially Opened"
 msgstr "Отображать при первоначальном открытии всплывающего окна"
 
-#: templates/admin-tab-fullscreen.php:155
+#: templates/admin-tab-fullscreen.php:157
 msgid "Banner Link"
 msgstr "Ссылка баннера"
 
-#: templates/admin-tab-styling.php:99
+#: templates/admin-tab-styling.php:98
 msgid "Loader Custom Image"
 msgstr "Выберите изображение загрузчика"
+
+#: inc/app/class-field.php:291
+msgid "No image selected"
+msgstr ""

@@ -288,7 +288,7 @@ class Field {
 				<img class="image-preview-img" src="<?php echo esc_url( $url ); ?>" alt="" scale="0">
 			</div>
 			<div class="no-image">
-				<?php esc_html_e( 'No image selected', 'yummywp-app' ); ?><input type="button" class="ymapp-button-small ymapp-button-grey image-add" value="<?php esc_html_e( 'Select', 'yummywp-app' ); ?>">
+				<?php esc_html_e( 'No image selected', 'smart-woocommerce-search' ); ?><input type="button" class="ymapp-button-small ymapp-button-grey image-add" value="<?php esc_html_e( 'Select', 'yummywp-app' ); ?>">
 			</div>
 		</div>
 		<div class="clear"></div>
