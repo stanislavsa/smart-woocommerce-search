@@ -316,6 +316,31 @@ function ysm_text_replace( $text ) {
 }
 
 /**
+ * Get variation title
+ * @param $product
+ * @return string
+ */
+function get_variation_title( $product ) {
+	$product = get_post( $product );
+	$title = '';
+	if ( $product && 'product_variation' === $product->post_type && class_exists( 'WooCommerce' ) ) {
+		$wc_product = wc_get_product( $product->ID );
+		if ( $wc_product ) {
+			$title = get_the_title( $product->post_parent );
+			$variation_attributes = $wc_product->get_variation_attributes( false );
+			if ( ! empty( $variation_attributes ) && is_array( $variation_attributes ) ) {
+				$title .= ' - ';
+				foreach ( $variation_attributes as $key => $attribute ) {
+					$title .= $wc_product->get_attribute( str_replace( 'pa_', '', $key ) ) . ', ';
+				}
+				$title = trim( $title, ', ' );
+			}
+		}
+	}
+	return $title;
+}
+
+/**
  * Get woocommerce product rewrite base slug
  * @param $w_id
  * @return string|null

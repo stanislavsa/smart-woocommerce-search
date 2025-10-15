@@ -1,7 +1,7 @@
 === Smart WooCommerce Search ===
 Contributors: yummy-wp
 Tags: search, ajax search, product search, search by sku, woocommerce search
-Stable tag: 2.15.1
+Stable tag: 2.15.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Requires at least: 5.9
@@ -34,7 +34,6 @@ You can completely customize your **smart woocommerce search**. In addition, the
  * Search in product Categories
  * Search in product Tags
  * Selected product categories
- * Multisite support
  * Allow/disallow searching in selected product categories
  * Exclude "Out of stock" products from search results
  * Multiple words search
@@ -107,6 +106,9 @@ Yes, when using products search or when you set option to search only through pr
 5. Searching by SKU
 
 == Changelog ==
+
+= 2.15.2 =
+* Fixed: error related to title output
 
 = 2.15.1 =
 * Updated: spanish translations
