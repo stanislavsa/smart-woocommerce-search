@@ -15,6 +15,15 @@ function thumbnail( $cur_post ) {
 
 	$has_thumbnail = has_post_thumbnail( $cur_post );
 	$the_post = $cur_post;
+	if ( ! $has_thumbnail && 'product_variation' === $cur_post->post_type && \Ysm_Search::get_var( 'variation_thumb_fallback' ) ) {
+		$has_thumbnail = has_post_thumbnail( $cur_post->post_parent );
+		if ( $has_thumbnail ) {
+			$the_post = get_post( $cur_post->post_parent );
+			if ( ! $the_post ) {
+				return '';
+			}
+		}
+	}
 
 	if ( $has_thumbnail ) {
 		/**

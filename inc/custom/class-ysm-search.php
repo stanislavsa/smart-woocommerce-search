@@ -443,7 +443,7 @@ class Ysm_Search {
 				$post_classes[] = 'smart-search-no-thumbnail';
 			}
 			// wrapper link open
-			$output .= '<a href="' . esc_url( get_the_permalink( $post->ID ) ) . '">';
+			$output .= '<a class="smart-search-post-url" href="' . esc_url( get_the_permalink( $post->ID ) ) . '">';
 			$output .= '<div class="' . esc_attr( implode( ' ', $post_classes ) ) . '">';
 			// thumbnail
 			if ( $thumbnail ) {

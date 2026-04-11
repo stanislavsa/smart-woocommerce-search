@@ -1,15 +1,15 @@
-# Copyright (C) 2025 YummyWP
+# Copyright (C) 2026 YummyWP
 # This file is distributed under the same license as the Smart WooCommerce Search plugin.
 msgid ""
 msgstr ""
-"Project-Id-Version: Smart WooCommerce Search 2.15.1\n"
+"Project-Id-Version: Smart WooCommerce Search 2.16.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/smart-woocommerce-search\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-07-28T09:31:52+00:00\n"
+"POT-Creation-Date: 2026-04-11T15:38:46+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.11.0\n"
 "X-Domain: smart-woocommerce-search\n"
@@ -35,46 +35,51 @@ msgstr ""
 msgid "YummyWP"
 msgstr ""
 
-#: inc/admin/admin.php:36
+#: inc/admin/admin.php:40
 msgid "Search Widgets"
 msgstr ""
 
-#: inc/admin/admin.php:37
+#: inc/admin/admin.php:41
 msgid "Widgets"
 msgstr ""
 
-#: inc/admin/admin.php:43
+#: inc/admin/admin.php:48
 msgid "Add New Search Widget"
 msgstr ""
 
-#: inc/admin/admin.php:44
+#: inc/admin/admin.php:49
 #: templates/admin-page-widgets.php:108
 msgid "Add New"
 msgstr ""
 
-#: inc/admin/admin.php:50
-#: inc/admin/admin.php:51
-#: templates/admin-page-index-status.php:32
-msgid "Index Status"
-msgstr ""
-
+#: inc/admin/admin.php:56
 #: inc/admin/admin.php:57
-#: inc/admin/admin.php:58
-msgid "Synonyms"
+msgid "Analytics"
 msgstr ""
 
 #: inc/admin/admin.php:64
 #: inc/admin/admin.php:65
+#: templates/admin-page-index-status.php:32
+msgid "Index Status"
+msgstr ""
+
+#: inc/admin/admin.php:71
+#: inc/admin/admin.php:72
+msgid "Synonyms"
+msgstr ""
+
+#: inc/admin/admin.php:78
+#: inc/admin/admin.php:79
 msgid "Stop Words"
 msgstr ""
 
-#: inc/admin/admin.php:98
+#: inc/admin/admin.php:116
 #: templates/admin-page-form.php:58
 msgid "Settings"
 msgstr ""
 
 #. translators: %s: Name/id of a widget
-#: inc/admin/admin.php:116
+#: inc/admin/admin.php:133
 msgid "Edit Widget: %s"
 msgstr ""
 
@@ -147,15 +152,15 @@ msgstr ""
 msgid "Delete"
 msgstr ""
 
-#: inc/custom/scripts.php:188
+#: inc/custom/scripts.php:171
 msgid "Delete column?"
 msgstr ""
 
-#: inc/custom/scripts.php:189
+#: inc/custom/scripts.php:172
 msgid "Delete row?"
 msgstr ""
 
-#: inc/custom/scripts.php:190
+#: inc/custom/scripts.php:173
 msgid "Delete widget?"
 msgstr ""
 
@@ -171,6 +176,56 @@ msgstr ""
 
 #: index.php:30
 msgid "To activate the free version of Smart WooCommerce Search you need to deactivate the Pro version."
+msgstr ""
+
+#: templates/admin-page-analytics.php:27
+msgid "Google Analytics 4"
+msgstr ""
+
+#: templates/admin-page-analytics.php:36
+msgid "Enable Google Analytics 4 tracking"
+msgstr ""
+
+#: templates/admin-page-analytics.php:46
+msgid "Analytics Event:"
+msgstr ""
+
+#: templates/admin-page-analytics.php:50
+msgid "Event category values:"
+msgstr ""
+
+#: templates/admin-page-analytics.php:54
+msgid "When user saw search results"
+msgstr ""
+
+#: templates/admin-page-analytics.php:57
+msgid "When user saw \"no results\" message"
+msgstr ""
+
+#: templates/admin-page-analytics.php:60
+msgid "When user clicked on a suggestion"
+msgstr ""
+
+#: templates/admin-page-analytics.php:65
+msgid "When user clicked on a \"View All\" button"
+msgstr ""
+
+#: templates/admin-page-analytics.php:77
+#: templates/admin-page-form.php:39
+#: templates/admin-page-form.php:105
+msgid "Save"
+msgstr ""
+
+#: templates/admin-page-analytics.php:85
+#: templates/admin-page-index-status.php:89
+#: templates/admin-page-stop-words.php:31
+#: templates/admin-page-synonyms.php:69
+#: templates/admin-tab-fields.php:227
+#: templates/admin-tab-fullscreen.php:164
+#: templates/admin-tab-general.php:270
+#: templates/admin-tab-layout.php:158
+#: templates/admin-tab-styling.php:235
+msgid "Documentation"
 msgstr ""
 
 #: templates/admin-page-form.php:10
@@ -202,11 +257,6 @@ msgstr ""
 #: templates/admin-page-form.php:32
 #: templates/admin-tab-styling.php:5
 msgid "Styling"
-msgstr ""
-
-#: templates/admin-page-form.php:39
-#: templates/admin-page-form.php:105
-msgid "Save"
 msgstr ""
 
 #: templates/admin-page-form.php:49
@@ -250,17 +300,6 @@ msgstr ""
 
 #: templates/admin-page-index-status.php:79
 msgid "Delete all indexed data"
-msgstr ""
-
-#: templates/admin-page-index-status.php:89
-#: templates/admin-page-stop-words.php:31
-#: templates/admin-page-synonyms.php:69
-#: templates/admin-tab-fields.php:227
-#: templates/admin-tab-fullscreen.php:164
-#: templates/admin-tab-general.php:270
-#: templates/admin-tab-layout.php:158
-#: templates/admin-tab-styling.php:235
-msgid "Documentation"
 msgstr ""
 
 #: templates/admin-page-stop-words.php:18

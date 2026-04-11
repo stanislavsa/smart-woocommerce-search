@@ -1,11 +1,11 @@
 === Smart WooCommerce Search ===
 Contributors: yummy-wp
 Tags: search, ajax search, product search, search by sku, woocommerce search
-Stable tag: 2.15.2
+Stable tag: 2.16.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Requires at least: 5.9
-Tested up to: 6.8
+Tested up to: 6.9
 Requires PHP: 7.0
 
 Ideal Product Search plugin for WooCommerce shops that enhances users' experience with a live search feature.
@@ -29,6 +29,7 @@ You can completely customize your **smart woocommerce search**. In addition, the
  * Full Screen Mode
  * Recent Searches
  * Search results with images and prices
+ * Google Analytics integration [GA4](https://www.wpsmartsearch.com/docs/analytics/)
  * Simple integration into default search widgets
  * [Search by product SKU](https://www.wpsmartsearch.com/docs/content-types/#2-toc-title)
  * Search in product Categories
@@ -57,7 +58,7 @@ Discover the PRO features of our plugin with a **14-day trial period**.
    * Product labels
    * [Stop words](https://www.wpsmartsearch.com/docs/stop-words/)
    * [Data indexing](https://www.wpsmartsearch.com/docs/data-indexing/)
-   * Advanced caching
+   * Advanced caching (Memcache, Redis)
    * Automatic plugin updates
    * [Grid layout](https://www.wpsmartsearch.com/docs/layout-settings/#1-toc-title)
    * Add to Cart button
@@ -106,6 +107,10 @@ Yes, when using products search or when you set option to search only through pr
 5. Searching by SKU
 
 == Changelog ==
+
+= 2.16.0 =
+* Added: option to enable events tracking (Google Analytics 4)
+* Compatibility: WooCommerce 10.6
 
 = 2.15.2 =
 * Fixed: error related to title output

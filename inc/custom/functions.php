@@ -188,6 +188,49 @@ function ysm_get_post_types() {
 	return $pt_exists;
 }
 
+function ysm_get_post_types_enabled() {
+	static $saved_pt;
+
+	if ( $saved_pt && is_array( $saved_pt ) ) {
+		return $saved_pt;
+	}
+
+	$pt = [];
+
+	foreach ( ysm_get_all_widgets() as $v ) {
+		if ( ! empty( $v['settings']['post_type_post'] ) ) {
+			$pt[] = 'post';
+		}
+		if ( ! empty( $v['settings']['post_type_page'] ) ) {
+			$pt[] = 'page';
+		}
+		if ( ! empty( $v['settings']['post_type_product'] ) ) {
+			$pt[] = 'product';
+		}
+		if ( ! empty( $v['settings']['custom_post_types'] ) ) {
+			$pt = array_merge( $pt, (array) $v['settings']['custom_post_types'] );
+		}
+	}
+
+	$pt = array_unique( $pt );
+
+	if ( ! $pt ) {
+		$pt[] = 'product';
+	}
+
+	$pt_exists = [];
+	foreach ( $pt as $pt_name ) {
+		if ( $pt_name && 'product_variation' !== $pt_name && post_type_exists( $pt_name ) ) {
+			$pt_exists[ $pt_name ] = $pt_name;
+		}
+	}
+
+	$pt_exists = array_values( $pt_exists );
+	$saved_pt = $pt_exists;
+
+	return $pt_exists;
+}
+
 function ysm_get_all_widgets_custom_fields() {
 	static $custom_fields = [];
 
@@ -200,7 +243,12 @@ function ysm_get_all_widgets_custom_fields() {
 			$custom_fields['_sku'] = '_sku';
 		}
 		if ( ! empty( $v['settings']['custom_fields'] ) ) {
-			$cf_list = explode( ',', $v['settings']['custom_fields'] );
+			$cf_list = $v['settings']['custom_fields'];
+			if ( false !== strpos( $cf_list, ',' ) ) {
+				$cf_list = explode( ',', $cf_list );
+				$cf_list = implode( "\n", $cf_list );
+			}
+			$cf_list = explode( "\n", $cf_list );
 			foreach ( $cf_list as $cf ) {
 				$cf = trim( $cf );
 				if ( $cf ) {
@@ -300,6 +348,41 @@ function ysm_accent_search_term( $text ) {
 }
 
 /**
+ * Replace variation title on search page
+ * @param $text
+ * @param $id
+ * @return string
+ */
+function ysm_replace_variation_title( $text, $id ) {
+	if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
+		return $text;
+	}
+
+	if ( ! is_search() ) {
+		return $text;
+	}
+
+	$w_id = filter_input( INPUT_GET, 'search_id', FILTER_SANITIZE_FULL_SPECIAL_CHARS );
+	$s    = ysm_get_s();
+
+	if ( empty( $w_id ) || empty( $s ) ) {
+		return $text;
+	}
+
+	\Ysm_Search::set_widget_id( $w_id );
+	\Ysm_Search::parse_settings();
+
+	if ( empty( \Ysm_Search::get_var( 'search_page_default_output' ) ) ) {
+		if ( 'product_variation' === get_post_type( $id ) ) {
+			$text = get_variation_title( $id );
+		}
+	}
+
+	return $text;
+}
+
+
+/**
  * Wrap search terms in <strong> tag
  * @param $text
  * @return string
@@ -346,5 +429,56 @@ function get_variation_title( $product ) {
  * @return string|null
  */
 function ysw_get_woocommerce_product_slug( $w_id ) {
-	return 'product';
+	// product_slug
+	$product_slug = ysm_get_option( $w_id, 'product_slug' );
+	if ( ! $product_slug ) {
+		$product_slug = 'product';
+	}
+
+	return $product_slug;
 }
+
+add_action('wp_ajax_ysm_search_products', 'ysm_search_products_callback');
+
+function ysm_search_products_callback() {
+
+	$search_term = isset( $_GET['term'] ) ? sanitize_text_field( $_GET['term'] ) : '';
+
+	$args = [
+		'post_type'      => 'product',
+		'posts_per_page' => 10,
+		'post_status'    => 'publish',
+		'order'          => 'DESC',
+		'orderby'        => 'relevance',
+		's'              => $search_term,
+	];
+
+	$query = new WP_Query( $args );
+
+	$results = [];
+
+	if ( $query->have_posts() ) {
+		while ( $query->have_posts() ) {
+			$query->the_post();
+
+			// Get WooCommerce product object
+			$product = wc_get_product( get_the_ID() );
+
+			if ( $product ) {
+				$results[] = [
+					'id'   => $product->get_id(),
+					'text' => sprintf(
+						'%s',
+						$product->get_name(),
+					)
+				];
+			}
+		}
+		wp_reset_postdata();
+	}
+
+	// Send results
+	wp_send_json( $results );
+	wp_die();
+}
+

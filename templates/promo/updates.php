@@ -23,27 +23,38 @@ if ( SWS_PLUGIN_UPDATE_NOTICE > get_option( $notice_option ) ) {
 				</h3>
 				<p>We’ve just made the search experience even better! Here's what’s new in this update:</p>
 				<p>
-					<strong>Fullscreen Mode:</strong> the search bar and results now look stunning in a fullscreen popup.
+					<strong>Google Analytics (GA4) Integration:</strong> Track user interaction events within the search popup.
 					<br>
-					<a href="https://www.wpsmartsearch.com/docs/fullscreen-mode/" target="_blank">Learn more</a>
+					<a href="https://www.wpsmartsearch.com/docs/analytics/" target="_blank">Learn more</a>
 				</p>
+
+				<?php /* ?>
+
 				<p>
-					<strong>Recent Searches:</strong> recent search keywords displayed below the search bar.
-					<br>
-					<a href="https://www.wpsmartsearch.com/docs/general-settings/#12-toc-title" target="_blank">Learn more</a>
-				</p>
-				<p>
-					<strong>"Did You Mean?": </strong> smart keyword suggestions below the search bar based on the search query.
-				</p>
-				<p style="display:flex;align-items: center; column-gap: 10px">
-					<a href="https://www.wpsmartsearch.com/docs/synonyms/" target="_blank">Learn more</a>
-					<?php if (!sws_fs()->is_premium()) { ?>
-						<i>Available only in PRO version</i>
-						<strong>
-							<a href="https://www.wpsmartsearch.com/features/?utm_source=free_plugin&utm_medium=banner&utm_campaign=new_features" target="_blank">Upgrade to Pro</a>
-						</strong>
-					<?php } ?>
-				</p>
+                    <strong>Fullscreen Mode:</strong> the search bar and results now look stunning in a fullscreen popup.
+                    <br>
+                    <a href="https://www.wpsmartsearch.com/docs/fullscreen-mode/" target="_blank">Learn more</a>
+                </p>
+                <p>
+                    <strong>Recent Searches:</strong> recent search keywords displayed below the search bar.
+                    <br>
+                    <a href="https://www.wpsmartsearch.com/docs/general-settings/#12-toc-title" target="_blank">Learn more</a>
+                </p>
+                <p>
+                    <strong>"Did You Mean?": </strong> smart keyword suggestions below the search bar based on the search query.
+                </p>
+                <p style="display:flex;align-items: center; column-gap: 10px">
+                    <a href="https://www.wpsmartsearch.com/docs/synonyms/" target="_blank">Learn more</a>
+                    <?php if (!sws_fs()->is_premium()) { ?>
+                        <i>Available only in PRO version</i>
+                       <strong>
+                           <a href="https://www.wpsmartsearch.com/features/?utm_source=free_plugin&utm_medium=banner&utm_campaign=new_features" target="_blank">Upgrade to Pro</a>
+                       </strong>
+                    <?php } ?>
+                </p>
+
+				<?php */ ?>
+
 				<div class="sws-promo-container__dismiss">
 					<span class="js-notice-updates-dismiss">Dismiss</span>
 				</div>

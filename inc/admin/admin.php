@@ -1,4 +1,5 @@
 <?php
+
 namespace YSWS\Admin;
 
 add_action( 'admin_init', __NAMESPACE__ . '\\on_admin_init' );
@@ -14,45 +15,58 @@ add_action( 'wp_ajax_sws_notice_dismiss', __NAMESPACE__ . '\\update_notice_dismi
  * @return void
  */
 function on_admin_init() {
-//    \YummyWP\App\Notification::add_template( SWS_PLUGIN_DIR . 'templates/promo/discount.php' );
+    if ( !empty( $_SERVER['REQUEST_URI'] ) && strpos( $_SERVER['REQUEST_URI'], '?page=smart-search-analytics' ) ) {
+        \YSWS\Core\Analytics::save();
+    }
     \YummyWP\App\Notification::add_template( SWS_PLUGIN_DIR . 'templates/promo/updates.php' );
-
-	add_action( 'admin_notices', __NAMESPACE__ . '\\display_admin_notices' );
+    add_action( 'admin_notices', __NAMESPACE__ . '\\display_admin_notices' );
 }
 
 /**
  * Add Pages to Admin Menu
  */
 function add_menu_pages() {
-	add_menu_page( 'Smart Search',
-		'Smart Search' . ( sws_fs()->is_premium() ? ' <sup>PRO</sup>' : '' ),
-		'manage_options',
-		'smart-search',
-		null,
-		'dashicons-search',
-		'39.9'
-	);
-    add_submenu_page( 'smart-search',
-		__( 'Search Widgets', 'smart-woocommerce-search' ),
-		__( 'Widgets', 'smart-woocommerce-search' ),
-		'manage_options',
-		'smart-search',
-		__NAMESPACE__ . '\\display_admin_page_widgets'
-	);
-    add_submenu_page( 'smart-search',
-		__( 'Add New Search Widget', 'smart-woocommerce-search' ),
-		__( 'Add New', 'smart-woocommerce-search' ),
-		'manage_options',
-		'smart-search-custom-new',
-		__NAMESPACE__ . '\\display_admin_page_widget_new'
-	);
-    add_submenu_page( 'smart-search',
-		__( 'Index Status', 'smart-woocommerce-search' ),
-		__( 'Index Status', 'smart-woocommerce-search' ),
-		'manage_options',
-		'smart-search-index-status',
-		__NAMESPACE__ . '\\display_admin_page_index_status'
-	);
+    add_menu_page(
+        'Smart Search',
+        'Smart Search' . (( sws_fs()->is_premium() ? ' <sup>PRO</sup>' : '' )),
+        'manage_options',
+        'smart-search',
+        null,
+        'dashicons-search',
+        '39.9'
+    );
+    add_submenu_page(
+        'smart-search',
+        __( 'Search Widgets', 'smart-woocommerce-search' ),
+        __( 'Widgets', 'smart-woocommerce-search' ),
+        'manage_options',
+        'smart-search',
+        __NAMESPACE__ . '\\display_admin_page_widgets'
+    );
+    add_submenu_page(
+        'smart-search',
+        __( 'Add New Search Widget', 'smart-woocommerce-search' ),
+        __( 'Add New', 'smart-woocommerce-search' ),
+        'manage_options',
+        'smart-search-custom-new',
+        __NAMESPACE__ . '\\display_admin_page_widget_new'
+    );
+    add_submenu_page(
+        'smart-search',
+        __( 'Analytics', 'smart-woocommerce-search' ),
+        __( 'Analytics', 'smart-woocommerce-search' ),
+        'manage_options',
+        'smart-search-analytics',
+        __NAMESPACE__ . '\\display_admin_page_analytics'
+    );
+    add_submenu_page(
+        'smart-search',
+        __( 'Index Status', 'smart-woocommerce-search' ),
+        __( 'Index Status', 'smart-woocommerce-search' ),
+        'manage_options',
+        'smart-search-index-status',
+        __NAMESPACE__ . '\\display_admin_page_index_status'
+    );
     add_submenu_page( 'smart-search',
 		__( 'Synonyms', 'smart-woocommerce-search' ),
 		__( 'Synonyms', 'smart-woocommerce-search' ),
@@ -70,23 +84,27 @@ function add_menu_pages() {
 }
 
 function display_admin_page_widgets() {
-	include_once SWS_PLUGIN_DIR . 'templates/admin-page-widgets.php';
+    include_once SWS_PLUGIN_DIR . 'templates/admin-page-widgets.php';
 }
 
 function display_admin_page_widget_new() {
-	include_once SWS_PLUGIN_DIR . 'templates/admin-page-widget-new.php';
+    include_once SWS_PLUGIN_DIR . 'templates/admin-page-widget-new.php';
+}
+
+function display_admin_page_analytics() {
+    include_once SWS_PLUGIN_DIR . 'templates/admin-page-analytics.php';
 }
 
 function display_admin_page_synonyms() {
-	include_once SWS_PLUGIN_DIR . 'templates/admin-page-synonyms.php';
+    include_once SWS_PLUGIN_DIR . 'templates/admin-page-synonyms.php';
 }
 
 function display_admin_page_stop_words() {
-	include_once SWS_PLUGIN_DIR . 'templates/admin-page-stop-words.php';
+    include_once SWS_PLUGIN_DIR . 'templates/admin-page-stop-words.php';
 }
 
 function display_admin_page_index_status() {
-	include_once SWS_PLUGIN_DIR . 'templates/admin-page-index-status.php';
+    include_once SWS_PLUGIN_DIR . 'templates/admin-page-index-status.php';
 }
 
 /**
@@ -94,30 +112,28 @@ function display_admin_page_index_status() {
  * @param $links
  * @return array
  */
-function add_action_links( $links ) {
-	$links[] = sprintf( '<a href="%s">%s</a>', admin_url( 'admin.php?page=smart-search' ), __( 'Settings', 'smart-woocommerce-search' ) );
-
-	return $links;
+function add_action_links(  $links  ) {
+    $links[] = sprintf( '<a href="%s">%s</a>', admin_url( 'admin.php?page=smart-search' ), __( 'Settings', 'smart-woocommerce-search' ) );
+    return $links;
 }
 
 /**
  * Filter Admin title
  */
 function change_admin_title(  $admin_title, $title  ) {
-	$cur_page = filter_input( INPUT_GET, 'page', FILTER_SANITIZE_FULL_SPECIAL_CHARS );
-	if ( $cur_page && 'smart-search' === $cur_page ) {
-		$action = filter_input( INPUT_GET, 'action', FILTER_SANITIZE_FULL_SPECIAL_CHARS );
-		$id = filter_input( INPUT_GET, 'id', FILTER_SANITIZE_FULL_SPECIAL_CHARS );
-		if ( $action && 'edit' === $action && !empty( $id ) ) {
-			if ( ysm_get_default_widgets_names( $id ) ) {
-				$id = ysm_get_default_widgets_names( $id );
-			}
-			/* translators: %s: Name/id of a widget */
-			$admin_title = sprintf( __( 'Edit Widget: %s', 'smart-woocommerce-search' ), $id );
-		}
-	}
-
-	return $admin_title;
+    $cur_page = filter_input( INPUT_GET, 'page', FILTER_SANITIZE_FULL_SPECIAL_CHARS );
+    if ( $cur_page && 'smart-search' === $cur_page ) {
+        $action = filter_input( INPUT_GET, 'action', FILTER_SANITIZE_FULL_SPECIAL_CHARS );
+        $id = filter_input( INPUT_GET, 'id', FILTER_SANITIZE_FULL_SPECIAL_CHARS );
+        if ( $action && 'edit' === $action && !empty( $id ) ) {
+            if ( ysm_get_default_widgets_names( $id ) ) {
+                $id = ysm_get_default_widgets_names( $id );
+            }
+            /* translators: %s: Name/id of a widget */
+            $admin_title = sprintf( __( 'Edit Widget: %s', 'smart-woocommerce-search' ), $id );
+        }
+    }
+    return $admin_title;
 }
 
 function promo_dismiss() {
@@ -134,18 +150,15 @@ function promo_dismiss() {
 }
 
 function update_notice_dismiss() {
-	$nonce = filter_input( INPUT_POST, 'nonce', FILTER_SANITIZE_FULL_SPECIAL_CHARS );
-	$version = filter_input( INPUT_POST, 'version', FILTER_SANITIZE_FULL_SPECIAL_CHARS );
-
-	if ( ! wp_verify_nonce( $nonce, 'sws_update_notice_dismiss_nonce_action' ) ) {
-		exit;
-	}
-
-	update_option( 'sws_update_notice', $version );
-
-	exit;
+    $nonce = filter_input( INPUT_POST, 'nonce', FILTER_SANITIZE_FULL_SPECIAL_CHARS );
+    $version = filter_input( INPUT_POST, 'version', FILTER_SANITIZE_FULL_SPECIAL_CHARS );
+    if ( !wp_verify_nonce( $nonce, 'sws_update_notice_dismiss_nonce_action' ) ) {
+        exit;
+    }
+    update_option( 'sws_update_notice', $version );
+    exit;
 }
 
 function display_admin_notices() {
-	\YummyWP\App\Notification::display_templates();
+    \YummyWP\App\Notification::display_templates();
 }

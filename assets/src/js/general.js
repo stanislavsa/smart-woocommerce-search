@@ -3,6 +3,7 @@
 	"use strict";
 
 	$(function(){
+
 		var swsL10n = window.swsL10n || {};
 
 		if ( swsL10n ) {
@@ -142,6 +143,17 @@
 					}
 
 					e.preventDefault();
+
+					if (window.swsL10n.analytics.ga4) {
+						swsUtils.pushToAnalytics({
+							term: val,
+							category: swsUtils.analyticCategoryTypes.view_all_click,
+							wId: options.id
+						});
+						window.open( action, '_blank' );
+						return;
+					}
+
 					location.href = action;
 				}
 			} );
@@ -174,22 +186,6 @@
 				$results_wrapper.addClass( 'smart-search-firefox' );
 			}
 
-			let swsUpdateRecentSearches = (removeHiddenClass = false)=> {
-
-				if (removeHiddenClass === true) {
-					$('.sws-search-recent-wrapper').removeClass('sws-search-recent-wrapper--hidden_mod');
-				}
-				let swsLatestFive = JSON.parse(localStorage.getItem("swsLatestSearches")).slice(-5);
-				$('.sws-search-recent-list').empty();
-				swsLatestFive.forEach(item => {
-					$('.sws-search-recent-list').append(`
-							<li class="sws-search-recent-list-item">
-								<span class="sws-search-recent-list-item-trigger">${item}</span>
-								<span class="sws-search-recent-list-item-delete" data-item="${item}" aria-label="close"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="currentColor"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg></span>
-							</li>
-						`);
-				});
-			}
 			$(document).off('click', '.sws-search-recent-list-item-trigger').on('click', '.sws-search-recent-list-item-trigger', (e) => {
 				e.stopPropagation();
 				let targetText = $(e.target).text();
@@ -204,7 +200,7 @@
 
 				swsCurrentArray = JSON.parse(localStorage.getItem("swsLatestSearches"));
 
-				swsUpdateRecentSearches(true);
+				swsUtils.updateRecentSearches(true);
 
 				if (swsCurrentArray.length == 0) {
 					$('.sws-search-recent-wrapper').addClass('sws-search-recent-wrapper--hidden_mod');
@@ -215,7 +211,7 @@
 				$('<div class="sws-search-recent-wrapper"><h4 class="sws-search-recent-title">'+ options.recentSearchesTitle+'</h4><ul class="sws-search-recent-list"></ul></div>').prependTo($popup);
 
 				if (swsCurrentArray.length) {
-					swsUpdateRecentSearches(true);
+					swsUtils.updateRecentSearches(true);
 				}
 			}
 
@@ -288,7 +284,23 @@
 						window.location.href = suggestion.url;
 					}
 				},
-				transformResult: function ( response ) {
+				transformResult: function ( response, query ) {
+					// console.log('SWS transformResult', query, response);
+
+					if ( response && response.suggestions && response.suggestions.length > 0 ) {
+						swsUtils.pushToAnalytics({
+							term: query,
+							category: swsUtils.analyticCategoryTypes.search_term_has_results,
+							wId: options.id
+						});
+					} else {
+						swsUtils.pushToAnalytics({
+							term: query,
+							category: swsUtils.analyticCategoryTypes.search_term_no_results,
+							wId: options.id
+						});
+					}
+
 					var res = typeof response === 'string' ? $.parseJSON( response ) : response,
 						val = $this.val();
 
@@ -327,7 +339,6 @@
 					$('.sws-loader-image').removeClass('sws-loader-image--visible');
 
 					if ( suggestions.length > 0 ) {
-
 						$form.removeClass( 'ysm-hide' ).removeClass( 'sws-no-results' );
 
 						const $recentWrapper = $('.sws-search-recent-wrapper');
@@ -449,7 +460,7 @@
 
 									$('<div class="sws-search-recent-wrapper"><h4 class="sws-search-recent-title">'+ options.recentSearchesTitle+'</h4><ul class="sws-search-recent-list"></ul></div>').prependTo($popup);
 								}
-								swsUpdateRecentSearches(true);
+								swsUtils.updateRecentSearches(true);
 							}
 						}
 
@@ -566,24 +577,6 @@
 
 			let options = $.extend( {}, defaults, attr );
 
-			let swsUpdateRecentSearches = (removeHiddenClass = false)=> {
-
-				if (removeHiddenClass === true) {
-					$('.sws-search-recent-wrapper').removeClass('sws-search-recent-wrapper--hidden_mod');
-				}
-
-				let swsLatestFive = JSON.parse(localStorage.getItem("swsLatestSearches")).slice(-5);
-				$('.sws-search-recent-list').empty();
-				swsLatestFive.forEach(item => {
-					$('.sws-search-recent-list').append(`
-							<li class="sws-search-recent-list-item">
-								<span class="sws-search-recent-list-item-trigger">${item}</span>
-								<span class="sws-search-recent-list-item-delete" data-item="${item}" aria-label="close"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="currentColor"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg></span>
-							</li>
-						`);
-				});
-			}
-
 			if (options.selectedCategories || options.promoBannerImage) {
 
 				$results_main.addClass('smart-search-results-main--column_mod');
@@ -663,7 +656,7 @@
 
 						$results_main.find('.sws-selected-categories-list').append(`
 						<li class="sws-selected-categories-item">
-							<a class="sws-selected-categories-link" href="${item.url}">
+							<a class="sws-selected-categories-link" href="${item.url}" target="_blank">
 								${item.name}
 								${(options.selectedCategoriesCount && item.count > 0) ? `(${item.count})` : ''}
 							</a>
@@ -678,7 +671,7 @@
 				$('<div class="sws-search-recent-wrapper sws-search-recent-wrapper--hidden_mod"><h4 class="sws-search-recent-title">'+ options.recentSearchesTitle+'</h4><ul class="sws-search-recent-list"></ul></div>').prependTo($results_main);
 
 				if (swsCurrentArray.length) {
-					swsUpdateRecentSearches(true);
+					swsUtils.updateRecentSearches(true);
 				}
 			}
 
@@ -779,7 +772,7 @@
 
 				swsCurrentArray = JSON.parse(localStorage.getItem("swsLatestSearches"));
 
-				swsUpdateRecentSearches(true);
+				swsUtils.updateRecentSearches(true);
 
 				if (swsCurrentArray.length == 0) {
 					$('.sws-search-recent-wrapper').addClass('sws-search-recent-wrapper--hidden_mod');
@@ -885,6 +878,17 @@
 					}
 
 					e.preventDefault();
+
+					if (window.swsL10n.analytics.ga4) {
+						swsUtils.pushToAnalytics({
+							term: val,
+							category: swsUtils.analyticCategoryTypes.view_all_click,
+							wId: options.id
+						});
+						window.open( action, '_blank' );
+						return;
+					}
+
 					location.href = action;
 				}
 			} );
@@ -962,7 +966,23 @@
 						window.location.href = suggestion.url;
 					}
 				},
-				transformResult: function ( response ) {
+				transformResult: function ( response, query ) {
+					// console.log('SWS transformResult', query, response);
+
+					if ( response && response.suggestions && response.suggestions.length > 0 ) {
+						swsUtils.pushToAnalytics({
+							term: query,
+							category: swsUtils.analyticCategoryTypes.search_term_has_results,
+							wId: options.id
+						});
+					} else {
+						swsUtils.pushToAnalytics({
+							term: query,
+							category: swsUtils.analyticCategoryTypes.search_term_no_results,
+							wId: options.id
+						});
+					}
+
 					var res = typeof response === 'string' ? $.parseJSON( response ) : response,
 						val = $this.val();
 
@@ -1029,7 +1049,7 @@
 							const $recentWrapper = $('.sws-search-recent-wrapper');
 							handleVisibility($('.smart-search-keywords-wrapper'), query, (cachedResponse) => {
 								$swsKeywords = cachedResponse.keywords;
-								console.log('triggered keywords');
+								// console.log('triggered keywords');
 							});
 
 							if ( ! $results_main.find( '.smart-search-keywords-wrapper' ).length ) {
@@ -1065,7 +1085,6 @@
 
 
 					if ( suggestions.length > 0 ) {
-
 						$form.removeClass( 'ysm-hide' ).removeClass( 'sws-no-results' );
 
 						$results_main.removeClass('sws-hiding-results');
@@ -1134,7 +1153,7 @@
 								localStorage.setItem("swsLatestSearches", JSON.stringify(swsCurrentArray));
 							}
 							if (swsCurrentArray.length) {
-								swsUpdateRecentSearches(true);
+								swsUtils.updateRecentSearches(true);
 							}
 						}
 

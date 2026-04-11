@@ -833,7 +833,7 @@
 
         select: function (i, e) {
             var that = this;
-            if ( !$(e.target).hasClass('smart-search-add_to_cart') ) {
+            if ( e && e.target && !$(e.target).hasClass('smart-search-add_to_cart') ) {
                 that.hide();
                 that.onSelect(i);
             }
@@ -901,11 +901,14 @@
                 onSelectCallback = that.options.onSelect,
                 suggestion = that.suggestions[index];
 
-            that.currentValue = that.getValue(suggestion.value);
-
-            if (that.currentValue !== that.el.val() && !that.options.preserveInput) {
-                that.el.val(that.currentValue);
+            if (!suggestion) {
+                return;
             }
+            // that.currentValue = that.getValue(suggestion.value);
+            //
+            // if (that.currentValue !== that.el.val() && !that.options.preserveInput) {
+            //     that.el.val(that.currentValue);
+            // }
 
             that.signalHint(null);
             that.suggestions = [];
