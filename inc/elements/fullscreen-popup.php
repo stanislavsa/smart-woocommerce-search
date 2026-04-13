@@ -8,7 +8,7 @@ namespace YSWS\Elements;
 function fullscreen_popup() {
     $output = '';
 
-    if ( \Ysm_Search::get_var( 'fullscreen_mode' ) ) {
+    if ( ysws_get_var( 'fullscreen_mode' ) ) {
         $output = '<div class="sws_fullscreen_popup">fullscreen-popup</div>';
     }
 

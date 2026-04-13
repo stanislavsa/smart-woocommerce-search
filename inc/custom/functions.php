@@ -340,7 +340,7 @@ function ysm_accent_search_term( $text ) {
 	\Ysm_Search::set_widget_id( $w_id );
 	\Ysm_Search::parse_settings();
 
-	if ( empty( \Ysm_Search::get_var( 'search_page_default_output' ) ) && ! empty( \Ysm_Search::get_var( 'accent_words_on_search_page' ) ) ) {
+	if ( empty( ysws_get_var( 'search_page_default_output' ) ) && ! empty( ysws_get_var( 'accent_words_on_search_page' ) ) ) {
 		$text = ysm_text_replace( wp_strip_all_tags( $text ) );
 	}
 
@@ -372,9 +372,9 @@ function ysm_replace_variation_title( $text, $id ) {
 	\Ysm_Search::set_widget_id( $w_id );
 	\Ysm_Search::parse_settings();
 
-	if ( empty( \Ysm_Search::get_var( 'search_page_default_output' ) ) ) {
+	if ( empty( ysws_get_var( 'search_page_default_output' ) ) ) {
 		if ( 'product_variation' === get_post_type( $id ) ) {
-			$text = get_variation_title( $id );
+			$text = ysws_get_variation_title( $id );
 		}
 	}
 
@@ -403,7 +403,7 @@ function ysm_text_replace( $text ) {
  * @param $product
  * @return string
  */
-function get_variation_title( $product ) {
+function ysws_get_variation_title( $product ) {
 	$product = get_post( $product );
 	$title = '';
 	if ( $product && 'product_variation' === $product->post_type && class_exists( 'WooCommerce' ) ) {
@@ -480,5 +480,13 @@ function ysm_search_products_callback() {
 	// Send results
 	wp_send_json( $results );
 	wp_die();
+}
+
+function ysws_get_var($name) {
+	return \Ysm_Search::get_var($name);
+}
+
+function ysws_set_var($name, $value) {
+	\Ysm_Search::set_var($name, $value);
 }
 

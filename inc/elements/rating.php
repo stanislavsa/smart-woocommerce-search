@@ -9,7 +9,7 @@ namespace YSWS\Elements;
  * @return string
  */
 function rating( $product ): string {
-	if ( ! \Ysm_Search::get_var( 'display_rating' ) ) {
+	if ( ! ysws_get_var( 'display_rating' ) ) {
 		return '';
 	}
 

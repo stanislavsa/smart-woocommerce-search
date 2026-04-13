@@ -7,7 +7,7 @@ namespace YSWS\Elements;
  * @return string
  */
 function thumbnail( $cur_post ) {
-	if ( ! \Ysm_Search::get_var( 'display_icon' ) ) {
+	if ( ! ysws_get_var( 'display_icon' ) ) {
 		return '';
 	}
 
@@ -15,7 +15,7 @@ function thumbnail( $cur_post ) {
 
 	$has_thumbnail = has_post_thumbnail( $cur_post );
 	$the_post = $cur_post;
-	if ( ! $has_thumbnail && 'product_variation' === $cur_post->post_type && \Ysm_Search::get_var( 'variation_thumb_fallback' ) ) {
+	if ( ! $has_thumbnail && 'product_variation' === $cur_post->post_type && ysws_get_var( 'variation_thumb_fallback' ) ) {
 		$has_thumbnail = has_post_thumbnail( $cur_post->post_parent );
 		if ( $has_thumbnail ) {
 			$the_post = get_post( $cur_post->post_parent );
@@ -39,8 +39,8 @@ function thumbnail( $cur_post ) {
 			$output = $pre_image_output;
 		} else {
 			$thumb_size = 'post-thumbnail';
-			if ( \Ysm_Search::get_var( 'popup_thumb_media_size' ) ) {
-				$selected_thumb_size = \Ysm_Search::get_var( 'popup_thumb_media_size' );
+			if ( ysws_get_var( 'popup_thumb_media_size' ) ) {
+				$selected_thumb_size = ysws_get_var( 'popup_thumb_media_size' );
 				if ( ! empty( $selected_thumb_size[0] ) ) {
 					$thumb_size = $selected_thumb_size[0];
 				}

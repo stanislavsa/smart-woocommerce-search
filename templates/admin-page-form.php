@@ -15,7 +15,7 @@ $tabs = array(
         'icon'  => 'search',
     ),
     'order_tab' => array(
-        'label' => __( 'Sorting', 'smart-woocommerce-search' ),
+        'label' => __( 'Relevance & Sorting', 'smart-woocommerce-search' ),
         'icon'  => 'sort',
     ),
 
@@ -81,7 +81,6 @@ $tabs = array(
                         <?php include 'admin-tab-layout.php'; ?>
 
                         <?php include 'admin-tab-styling.php'; ?>
-
                     </div>
                 </div>
 

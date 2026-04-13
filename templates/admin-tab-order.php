@@ -5,7 +5,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
     <div data-href="#order_tab" class="sws_tab_mobile_heading js-sws-tab-mobile-heading">
         <div class="sws_tab_mobile_heading__inner">
             <span class="sws_nav_sidebar__icon material-symbols-rounded">sort</span>
-            <?php echo __( 'Sorting', 'smart-woocommerce-search' ) ?>
+            <?php echo __( 'Relevance & Sorting', 'smart-woocommerce-search' ) ?>
         </div>
     </div>
     <div class="sws_tab_content">
@@ -37,6 +37,13 @@ if ( ! defined( 'ABSPATH' ) ) exit;
                     'DESC' => __( 'DESC', 'smart-woocommerce-search' ),
                 ),
                 'value'       => 'DESC',
+            ));
+
+            ysm_setting( $w_id, 'relevance_config', array(
+	            'type'        => 'sortable_fields',
+	            'title'       => __( 'Relevance Configurator', 'smart-woocommerce-search' ),
+	            'description' => __( 'Drag fields to reorder relevance priority. Items at the top carry the highest weight when sorting results by relevance.', 'smart-woocommerce-search' ),
+	            'is_pro'      => true,
             ));
 
             ?>

@@ -9,7 +9,7 @@ namespace YSWS\Elements;
 function title( $cur_post ) {
 
 	if ( 'product_variation' === $cur_post->post_type ) {
-		$post_title = get_variation_title( $cur_post );
+		$post_title = ysws_get_variation_title( $cur_post );
 	} else {
 		$post_title = get_the_title( $cur_post );
 	}

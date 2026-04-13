@@ -7,7 +7,7 @@ namespace YSWS\Elements;
  * @return string
  */
 function product_sku( $product ) {
-	if ( ! \Ysm_Search::get_var( 'display_sku' ) ) {
+	if ( ! ysws_get_var( 'display_sku' ) ) {
 		return '';
 	}
 

@@ -167,6 +167,36 @@
 		}
 
 		/**
+		 * Sortable Fields — Relevance Configurator
+		 */
+		if ( $( '.sws-sortable-fields' ).length ) {
+			$( '.sws-sortable-fields' ).each( function() {
+				var $list  = $( this );
+				var $input = $list.siblings( 'input[type="hidden"]' );
+
+				function updateOrder() {
+					var order = [];
+					var total = $list.find( 'li' ).length;
+					$list.find( 'li' ).each( function( index ) {
+						var key    = $( this ).data( 'key' );
+						var weight = ( total - index ) * 10;
+						$( this ).find( '.sws-sortable-fields__weight' ).text( weight );
+						order.push( key );
+					} );
+					$input.val( JSON.stringify( order ) );
+				}
+
+				$list.sortable( {
+					axis:   'y',
+					handle: '.sws-sortable-fields__handle',
+					update: function() {
+						updateOrder();
+					}
+				} );
+			} );
+		}
+
+		/**
 		 * Tabs
 		 */
 		if ( location.hash.match(/_tab_active/) ) {

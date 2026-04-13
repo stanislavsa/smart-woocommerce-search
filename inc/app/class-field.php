@@ -321,6 +321,69 @@ class Field {
 	}
 
 	/**
+	 * Retrieve sortable fields (Relevance Configurator) html
+	 * @param $id
+	 * @param $args
+	 * @return string
+	 */
+	public static function get_sortable_fields_html( $id, $args ) {
+		$all_fields = [
+			'title'    => __( 'Title', 'smart-woocommerce-search' ),
+			'content'  => __( 'Content', 'smart-woocommerce-search' ),
+			'excerpt'  => __( 'Product short description', 'smart-woocommerce-search' ),
+			'sku'      => __( 'Product SKU', 'smart-woocommerce-search' ),
+//			'category' => __( 'Product Category', 'smart-woocommerce-search' ),
+//			'tag'      => __( 'Product Tag', 'smart-woocommerce-search' ),
+			'onsale'   => __( 'On Sale Products', 'smart-woocommerce-search' ),
+			'featured' => __( 'Featured Products', 'smart-woocommerce-search' ),
+		];
+
+		// Parse saved value — JSON-encoded ordered array of keys
+		$saved = $args['value'];
+
+		if ( is_string( $saved ) && ! empty( $saved ) ) {
+			$decoded = json_decode( stripslashes($saved), true );
+			$saved   = is_array( $decoded ) ? $decoded : array_keys( $all_fields );
+		} elseif ( ! is_array( $saved ) || empty( $saved ) ) {
+			$saved = array_keys( $all_fields );
+		}
+
+		// Append any fields not yet in the saved order
+		foreach ( array_keys( $all_fields ) as $key ) {
+			if ( ! in_array( $key, $saved, true ) ) {
+				$saved[] = $key;
+			}
+		}
+
+		$total = count( $saved );
+
+		ob_start();
+		?>
+		<ul class="sws-sortable-fields" id="sws-sortable-<?php echo esc_attr( $id ); ?>">
+			<?php foreach ( $saved as $index => $field_key ) :
+				if ( ! isset( $all_fields[ $field_key ] ) ) continue;
+				$weight = ( $total - $index ) * 10;
+			?>
+				<li class="sws-sortable-fields__item" data-key="<?php echo esc_attr( $field_key ); ?>">
+					<span class="sws-sortable-fields__handle dashicons dashicons-move"></span>
+					<span class="sws-sortable-fields__label"><?php echo esc_html( $all_fields[ $field_key ] ); ?></span>
+					<span class="sws-sortable-fields__weight"><?php echo esc_html( $weight ); ?></span>
+				</li>
+			<?php endforeach; ?>
+		</ul>
+		<input type="hidden"
+			   name="<?php echo esc_attr( $args['name'] ); ?>"
+			   id="<?php echo esc_attr( $id ); ?>"
+			   value="<?php echo esc_attr( wp_json_encode( $saved ) ); ?>" />
+		<p class="description">
+			<?php echo wp_kses_post( $args['description'] ); ?>
+		</p>
+		<?php
+
+		return ob_get_clean();
+	}
+
+	/**
 	 * @param $value
 	 * @return string
 	 */

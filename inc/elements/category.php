@@ -7,7 +7,7 @@ namespace YSWS\Elements;
  * @return string
  */
 function category( $cur_post ) {
-	if ( ! \Ysm_Search::get_var( 'display_category' ) ) {
+	if ( ! ysws_get_var( 'display_category' ) ) {
 		return '';
 	}
 

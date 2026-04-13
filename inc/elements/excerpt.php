@@ -7,7 +7,7 @@ namespace YSWS\Elements;
  * @return string
  */
 function excerpt( $cur_post ) {
-	if ( ! \Ysm_Search::get_var( 'display_excerpt' ) ) {
+	if ( ! ysws_get_var( 'display_excerpt' ) ) {
 		return '';
 	}
 
@@ -38,7 +38,7 @@ function excerpt( $cur_post ) {
 		}
 
 		$post_excerpt = wp_strip_all_tags( strip_shortcodes( $post_excerpt ) );
-		$excerpt_symbols_count_max = \Ysm_Search::get_var( 'excerpt_symbols_count' ) ? (int) \Ysm_Search::get_var( 'excerpt_symbols_count' ) : 50;
+		$excerpt_symbols_count_max = ysws_get_var( 'excerpt_symbols_count' ) ? (int) ysws_get_var( 'excerpt_symbols_count' ) : 50;
 		$excerpt_symbols_count = strlen( $post_excerpt );
 		$post_excerpt = mb_substr( $post_excerpt, 0, $excerpt_symbols_count_max );
 

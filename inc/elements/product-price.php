@@ -7,7 +7,7 @@ namespace YSWS\Elements;
  * @return string
  */
 function product_price( $product ) {
-	if ( ! \Ysm_Search::get_var( 'display_price' ) ) {
+	if ( ! ysws_get_var( 'display_price' ) ) {
 		return '';
 	}
 

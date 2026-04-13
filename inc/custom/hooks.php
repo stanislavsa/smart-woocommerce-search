@@ -25,7 +25,7 @@ function disable_product_redirect( $val ) {
 		\Ysm_Search::set_widget_id( $w_id );
 		\Ysm_Search::parse_settings();
 
-		if ( \Ysm_Search::get_var( 'search_page_disable_redirect_single_result' ) ) {
+		if ( ysws_get_var( 'search_page_disable_redirect_single_result' ) ) {
 			$val = false;
 		}
 	}

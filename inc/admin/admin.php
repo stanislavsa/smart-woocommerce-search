@@ -5,11 +5,14 @@ namespace YSWS\Admin;
 add_action( 'admin_init', __NAMESPACE__ . '\\on_admin_init' );
 add_action( 'admin_menu', __NAMESPACE__ . '\\add_menu_pages' );
 add_filter( 'plugin_action_links_' . SWS_PLUGIN_BASENAME, __NAMESPACE__ . '\\add_action_links' );
-add_filter( 'admin_title', __NAMESPACE__ . '\\change_admin_title', 10, 2 );
-
+add_filter(
+    'admin_title',
+    __NAMESPACE__ . '\\change_admin_title',
+    10,
+    2
+);
 add_action( 'wp_ajax_sws_promo_dismiss', __NAMESPACE__ . '\\promo_dismiss' );
 add_action( 'wp_ajax_sws_notice_dismiss', __NAMESPACE__ . '\\update_notice_dismiss' );
-
 /**
  * Admin init hook
  * @return void
@@ -67,20 +70,22 @@ function add_menu_pages() {
         'smart-search-index-status',
         __NAMESPACE__ . '\\display_admin_page_index_status'
     );
-    add_submenu_page( 'smart-search',
-		__( 'Synonyms', 'smart-woocommerce-search' ),
-		__( 'Synonyms', 'smart-woocommerce-search' ),
-		'manage_options',
-		'smart-search-synonyms',
-		__NAMESPACE__ . '\\display_admin_page_synonyms'
-	);
-    add_submenu_page( 'smart-search',
-		__( 'Stop Words', 'smart-woocommerce-search' ),
-		__( 'Stop Words', 'smart-woocommerce-search' ),
-		'manage_options',
-		'smart-search-stop-words',
-		__NAMESPACE__ . '\\display_admin_page_stop_words'
-	);
+    add_submenu_page(
+        'smart-search',
+        __( 'Synonyms', 'smart-woocommerce-search' ),
+        __( 'Synonyms', 'smart-woocommerce-search' ),
+        'manage_options',
+        'smart-search-synonyms',
+        __NAMESPACE__ . '\\display_admin_page_synonyms'
+    );
+    add_submenu_page(
+        'smart-search',
+        __( 'Stop Words', 'smart-woocommerce-search' ),
+        __( 'Stop Words', 'smart-woocommerce-search' ),
+        'manage_options',
+        'smart-search-stop-words',
+        __NAMESPACE__ . '\\display_admin_page_stop_words'
+    );
 }
 
 function display_admin_page_widgets() {
@@ -137,16 +142,13 @@ function change_admin_title(  $admin_title, $title  ) {
 }
 
 function promo_dismiss() {
-	$nonce = filter_input( INPUT_POST, 'nonce', FILTER_SANITIZE_FULL_SPECIAL_CHARS );
-	$name = filter_input( INPUT_POST, 'name', FILTER_SANITIZE_FULL_SPECIAL_CHARS );
-
-	if ( ! wp_verify_nonce( $nonce, 'sws_promo_dismiss_nonce_action' ) ) {
-		exit;
-	}
-
-	update_option( $name, 1 );
-
-	exit;
+    $nonce = filter_input( INPUT_POST, 'nonce', FILTER_SANITIZE_FULL_SPECIAL_CHARS );
+    $name = filter_input( INPUT_POST, 'name', FILTER_SANITIZE_FULL_SPECIAL_CHARS );
+    if ( !wp_verify_nonce( $nonce, 'sws_promo_dismiss_nonce_action' ) ) {
+        exit;
+    }
+    update_option( $name, 1 );
+    exit;
 }
 
 function update_notice_dismiss() {

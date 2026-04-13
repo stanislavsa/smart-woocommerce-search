@@ -31,6 +31,7 @@ You can completely customize your **smart woocommerce search**. In addition, the
  * Search results with images and prices
  * Google Analytics integration [GA4](https://www.wpsmartsearch.com/docs/analytics/)
  * Simple integration into default search widgets
+ * Advanced caching (Memcache, Redis)
  * [Search by product SKU](https://www.wpsmartsearch.com/docs/content-types/#2-toc-title)
  * Search in product Categories
  * Search in product Tags
@@ -58,7 +59,6 @@ Discover the PRO features of our plugin with a **14-day trial period**.
    * Product labels
    * [Stop words](https://www.wpsmartsearch.com/docs/stop-words/)
    * [Data indexing](https://www.wpsmartsearch.com/docs/data-indexing/)
-   * Advanced caching (Memcache, Redis)
    * Automatic plugin updates
    * [Grid layout](https://www.wpsmartsearch.com/docs/layout-settings/#1-toc-title)
    * Add to Cart button
