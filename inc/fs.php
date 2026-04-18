@@ -24,6 +24,7 @@ if ( ! function_exists( 'sws_fs' ) ) {
 					'days'               => 14,
 					'is_require_payment' => true,
 				),
+				'has_affiliation'     => 'all',
 				'menu'                => array(
 					'slug'           => 'smart-search',
 					'account'        => false,

@@ -59,7 +59,7 @@ if ( function_exists( 'sws_fs' ) ) {
             add_option( 'sws_update_notice', $update_notice_default );
         }
 
-        define( 'SWS_PLUGIN_UPDATE_NOTICE', 3);
+        define( 'SWS_PLUGIN_UPDATE_NOTICE', 4);
     }
 
 	/**

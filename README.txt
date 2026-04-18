@@ -1,112 +1,114 @@
 === Smart WooCommerce Search ===
 Contributors: yummy-wp
 Tags: search, ajax search, product search, search by sku, woocommerce search
-Stable tag: 2.16.0
+Stable tag: 2.16.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Requires at least: 5.9
 Tested up to: 6.9
 Requires PHP: 7.0
 
-Ideal Product Search plugin for WooCommerce shops that enhances users' experience with a live search feature.
+Boost WooCommerce sales with instant Ajax product search — live suggestions, fullscreen popup, SKU search, and GA4 analytics, all in one plugin.
 
 == Description ==
 
-= Ideal Product Search plugin for WooCommerce shops that enhances users' experience with a live search feature. =
+= Boost WooCommerce sales with instant Ajax product search — live suggestions, fullscreen popup, SKU search, and GA4 analytics. =
 
-[Check Demo](https://demo.wpsmartsearch.com/)
+[Check Demo](https://demo.wpsmartsearch.com/) | [Documentation](https://www.wpsmartsearch.com/docs/) | [Upgrade to PRO](https://www.wpsmartsearch.com/features/?utm_source=wporg&utm_medium=link&utm_campaign=upgrade_to_pro)
 
-[Documentation](https://www.wpsmartsearch.com/docs/)
+WooCommerce's default search loses you sales. **Smart WooCommerce Search** replaces it with a fast, intelligent Ajax search that shows real-time product suggestions — with images, prices, and categories — before your customer even finishes typing.
 
-[Upgrade to PRO](https://www.wpsmartsearch.com/features/?utm_source=wporg&utm_medium=link&utm_campaign=upgrade_to_pro)
-
-Improve default **WooCommerce search** or create a custom search widget in a few simple steps. The **Smart Search** plugin provides real-time suggestions in a fullscreen popup with synonyms and latest searches.
-
-You can completely customize your **smart woocommerce search**. In addition, the plugin integrates seamlessly into many themes and page builders.
+Improve the default **WooCommerce search** or create a fully custom search widget in a few steps. The **Smart Search** plugin delivers real-time suggestions in a beautiful fullscreen popup with support for synonyms and recent searches — seamlessly integrated into any theme or page builder.
 
 = Free Features: =
 
- * Full Screen Mode
- * Recent Searches
- * Search results with images and prices
- * Google Analytics integration [GA4](https://www.wpsmartsearch.com/docs/analytics/)
- * Simple integration into default search widgets
- * Advanced caching (Memcache, Redis)
- * [Search by product SKU](https://www.wpsmartsearch.com/docs/content-types/#2-toc-title)
- * Search in product Categories
- * Search in product Tags
- * Selected product categories
- * Allow/disallow searching in selected product categories
- * Exclude "Out of stock" products from search results
- * Multiple words search
- * Elementor compatible
- * DIVI compatible
- * WPBakery Page Builder compatible
- * Visual Composer compatible
- * Search Exclude plugin compatible
+* Full Screen Mode
+* Recent Searches
+* Search results with images and prices
+* [Google Analytics integration (GA4)](https://www.wpsmartsearch.com/docs/analytics/)
+* Simple integration into default search widgets
+* Advanced caching (Memcache, Redis)
+* [Search by product SKU](https://www.wpsmartsearch.com/docs/content-types/#2-toc-title)
+* Search in product Categories
+* Search in product Tags
+* Selected product categories
+* Allow/disallow searching in selected product categories
+* Exclude "Out of stock" products from search results
+* Multiple words search
+* Elementor compatible
+* DIVI compatible
+* WPBakery Page Builder compatible
+* Visual Composer compatible
+* Search Exclude plugin compatible
 
-Discover the PRO features of our plugin with a **14-day trial period**.
+Discover all PRO features with a **14-day free trial** — no risk, cancel anytime.
 
 = Upgrade to PRO and boost your sales: =
 
-   * ["Did you mean" Keywords/Synonyms](https://www.wpsmartsearch.com/docs/synonyms/)
-   * [Search in Variations](https://www.wpsmartsearch.com/docs/content-types/#1-toc-title)
-   * [Search in Custom Post Types](https://www.wpsmartsearch.com/docs/content-types/#1-toc-title)
-   * [Search in Custom Taxonomies](https://www.wpsmartsearch.com/docs/content-types/#3-toc-title)
-   * [Search in Custom Fields](https://www.wpsmartsearch.com/docs/content-types/#2-toc-title)
-   * Search in Product Attributes
-   * Search in Product Brands
-   * Product labels
-   * [Stop words](https://www.wpsmartsearch.com/docs/stop-words/)
-   * [Data indexing](https://www.wpsmartsearch.com/docs/data-indexing/)
-   * Automatic plugin updates
-   * [Grid layout](https://www.wpsmartsearch.com/docs/layout-settings/#1-toc-title)
-   * Add to Cart button
-   * WPML compatibility
-   * Polylang compatibility
-   * ACF plugin compatibility
-   * Custom Post Type UI plugin compatibility
-   * Ultimate WooCommerce Brands plugin compatibility
-   * More customization and styling settings
+* ["Did you mean" Keywords / Synonyms](https://www.wpsmartsearch.com/docs/synonyms/)
+* [Search in Variations](https://www.wpsmartsearch.com/docs/content-types/#1-toc-title)
+* [Search in Custom Post Types](https://www.wpsmartsearch.com/docs/content-types/#1-toc-title)
+* [Search in Custom Taxonomies](https://www.wpsmartsearch.com/docs/content-types/#3-toc-title)
+* [Search in Custom Fields](https://www.wpsmartsearch.com/docs/content-types/#2-toc-title)
+* Search in Product Attributes
+* Search in Product Brands
+* Product labels (Featured, Sale, Out of Stock badges)
+* Add to Cart button in search results
+* [Stop words](https://www.wpsmartsearch.com/docs/stop-words/)
+* [Data indexing](https://www.wpsmartsearch.com/docs/data-indexing/)
+* [Grid layout](https://www.wpsmartsearch.com/docs/layout-settings/#1-toc-title)
+* Relevance configurator
+* WPML compatibility
+* Polylang compatibility
+* ACF plugin compatibility
+* Custom Post Type UI plugin compatibility
+* Ultimate WooCommerce Brands plugin compatibility
+* Automatic plugin updates
+* More customization and styling settings
 
-Do you have any questions or concerns? Feel free to contact us via the [contact form](https://www.wpsmartsearch.com/contact/).
+Have questions? [Contact us](https://www.wpsmartsearch.com/contact/).
 
 == Installation ==
 
 1. Unzip the downloaded .zip file.
 2. Upload the plugin folder to the `wp-content/plugins/` directory of your WordPress site.
-3. Go to the 'Plugins' menu in WordPress and activate the Smart WooCommerce Search plugin.
-4. Configure the plugin (/wp-admin/admin.php?page=smart-search)
-5. Place the search plugin shortcode `<?php echo do_shortcode('[smart_search id="1"]');  ?>` into your template or simply use the built-in widget.
+3. Go to **Plugins** in your WordPress dashboard and activate **Smart WooCommerce Search**.
+4. Configure the plugin at `/wp-admin/admin.php?page=smart-search`.
+5. Place the search shortcode `<?php echo do_shortcode('[smart_search id="1"]'); ?>` into your theme template, or use the built-in widget.
 
 == Frequently Asked Questions ==
 
-= How to add Smart Search widget into the theme template (a PHP file) =
+= How do I add the Smart Search widget to a theme template (PHP file)? =
 
-Just add these PHP code `<?php echo do_shortcode('[smart_search id="1"]');  ?>`
-In example used widget with ID = 1, so don't forget to change widget ID to needed value.
+Add this code: `<?php echo do_shortcode('[smart_search id="1"]'); ?>`
 
-= Is it compatible with my WordPress themes? =
+The example uses widget ID = 1. Make sure to change the ID to match the widget you configured in the plugin settings.
 
-Plugin not tested with all themes, but it easily integrated in any theme, and may be require some styling to make it match nicely.
+= Is it compatible with my WordPress theme? =
 
-= How to manage plugin settings? =
+The plugin integrates cleanly into virtually any theme. It may require minor CSS tweaks to match your exact design, but it works out of the box with all major themes and page builders (Elementor, DIVI, WPBakery, Visual Composer, Avada).
 
-Please read a [documentation](https://www.wpsmartsearch.com/docs/general-settings/).
+= How do I manage the plugin settings? =
 
-= Is there a way to show the ‘shop search output’ from WooCommerce, for example 3 items per row? =
+Please refer to the [full documentation](https://www.wpsmartsearch.com/docs/general-settings/).
 
-Yes, when using products search or when you set option to search only through products in default or in custom search widget (shortcode) the search page displays WooCommerce product layout.
+= Can I display WooCommerce product layout (e.g. 3 items per row) on the search results page? =
 
-== Screenshots ==
+Yes. When searching through products — either via the default widget or a custom shortcode configured to search only products — the search results page renders the standard WooCommerce product grid layout.
 
-1. Latest Searches
-2. Smart Search PRO - Grid layout
-3. Smart Search PRO - Did you mean / Synonyms
-4. Fullscreen Popup
-5. Searching by SKU
+= Does it work with WPML or Polylang for multilingual stores? =
+
+Multilingual support (WPML and Polylang) is available in the PRO version.
+
+= Is there a free trial for PRO? =
+
+Yes — you can try all PRO features free for 14 days. Start your trial from the plugin settings page inside your WordPress dashboard.
 
 == Changelog ==
+
+= 2.16.1 =
+* Updated: search results caching
+* Compatibility: WooCommerce 10.7
 
 = 2.16.0 =
 * Added: option to enable events tracking (Google Analytics 4)
