@@ -67,16 +67,38 @@
 }
 
 .ymapp-settings__doc_link {
-	float: left;
-	margin-top: 90px;
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	margin-top: 28px;
 	margin-left: 0;
-}
+	padding: 7px 16px;
+	border: 1.5px solid $main-color;
+	border-radius: 4px;
+	background: transparent;
+	color: $main-color;
+	font-size: 16px;
+	font-weight: 500;
+	line-height: 1.4;
+	text-decoration: none !important;
+	text-transform: none;
+	height: auto;
+	white-space: nowrap;
+	transition: background 0.15s ease, color 0.15s ease;
+	box-sizing: border-box;
 
-@media only screen and (max-width: 400px) {
-	.ymapp-settings__content {
-		.ymapp-settings__doc_link {
-			float: right;
-			margin-right: -30px;
-		}
+	.dashicons {
+		font-size: 15px;
+		width: 15px;
+		height: 15px;
+		line-height: 1;
+		margin-top: 1px;
+	}
+
+	&:hover,
+	&:focus {
+		background: $main-color;
+		border-color: $main-color;
+		color: #fff;
 	}
 }

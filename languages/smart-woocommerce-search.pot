@@ -2,14 +2,14 @@
 # This file is distributed under the same license as the Smart WooCommerce Search plugin.
 msgid ""
 msgstr ""
-"Project-Id-Version: Smart WooCommerce Search 2.16.1\n"
+"Project-Id-Version: Smart WooCommerce Search 2.16.2\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/smart-woocommerce-search\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-04-18T16:57:00+00:00\n"
+"POT-Creation-Date: 2026-04-21T07:26:40+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.11.0\n"
 "X-Domain: smart-woocommerce-search\n"
@@ -183,25 +183,25 @@ msgstr ""
 msgid "Delete"
 msgstr ""
 
-#: inc/custom/scripts.php:217
+#: inc/custom/scripts.php:215
 msgid "Delete column?"
 msgstr ""
 
-#: inc/custom/scripts.php:218
+#: inc/custom/scripts.php:216
 msgid "Delete row?"
 msgstr ""
 
-#: inc/custom/scripts.php:219
+#: inc/custom/scripts.php:217
 msgid "Delete widget?"
 msgstr ""
 
-#: inc/fs.php:57
-#: inc/fs.php:76
+#: inc/fs.php:55
+#: inc/fs.php:73
 msgid "We added this opt-in feature so you won't miss any important updates and to help us enhance the plugin's compatibility and performance on your site."
 msgstr ""
 
-#: inc/fs.php:58
-#: inc/fs.php:77
+#: inc/fs.php:55
+#: inc/fs.php:73
 msgid "By opting in, you'll get email notifications about feature updates, educational content, promo offers, and you'll share some basic WordPress environment details. If you decide not to opt in, that's okay! %2$s will still function just as well."
 msgstr ""
 
@@ -247,15 +247,15 @@ msgstr ""
 msgid "Save"
 msgstr ""
 
-#: templates/admin-page-analytics.php:85
-#: templates/admin-page-index-status.php:89
-#: templates/admin-page-stop-words.php:31
-#: templates/admin-page-synonyms.php:69
-#: templates/admin-tab-fields.php:227
-#: templates/admin-tab-fullscreen.php:164
-#: templates/admin-tab-general.php:270
-#: templates/admin-tab-layout.php:158
-#: templates/admin-tab-styling.php:235
+#: templates/admin-page-analytics.php:87
+#: templates/admin-page-index-status.php:91
+#: templates/admin-page-stop-words.php:34
+#: templates/admin-page-synonyms.php:72
+#: templates/admin-tab-fields.php:229
+#: templates/admin-tab-fullscreen.php:158
+#: templates/admin-tab-general.php:273
+#: templates/admin-tab-layout.php:160
+#: templates/admin-tab-styling.php:237
 msgid "Documentation"
 msgstr ""
 
@@ -275,7 +275,7 @@ msgid "Relevance & Sorting"
 msgstr ""
 
 #: templates/admin-page-form.php:23
-#: templates/admin-tab-fullscreen.php:5
+#: templates/admin-tab-fullscreen.php:6
 msgid "Fullscreen Mode"
 msgstr ""
 
@@ -494,57 +494,57 @@ msgstr ""
 msgid "Disallow search in selected product categories"
 msgstr ""
 
-#: templates/admin-tab-fullscreen.php:14
+#: templates/admin-tab-fullscreen.php:16
 msgid "Full Screen Mode"
 msgstr ""
 
-#: templates/admin-tab-fullscreen.php:15
+#: templates/admin-tab-fullscreen.php:17
 msgid "Enable fullscreen mode to display the search input and results within an expanded popup"
 msgstr ""
 
-#: templates/admin-tab-fullscreen.php:19
+#: templates/admin-tab-fullscreen.php:21
 msgid "Disable"
 msgstr ""
 
-#: templates/admin-tab-fullscreen.php:20
+#: templates/admin-tab-fullscreen.php:22
 #: templates/admin-tab-general.php:15
 #: templates/admin-tab-general.php:24
 #: templates/admin-tab-general.php:33
 msgid "Enable"
 msgstr ""
 
-#: templates/admin-tab-fullscreen.php:21
+#: templates/admin-tab-fullscreen.php:23
 msgid "Only on mobile"
 msgstr ""
 
-#: templates/admin-tab-fullscreen.php:22
+#: templates/admin-tab-fullscreen.php:24
 msgid "Only on desktop"
 msgstr ""
 
-#: templates/admin-tab-fullscreen.php:26
+#: templates/admin-tab-fullscreen.php:29
 msgid "Recommended Products"
 msgstr ""
 
-#: templates/admin-tab-fullscreen.php:31
+#: templates/admin-tab-fullscreen.php:35
 msgid "Select Products"
 msgstr ""
 
-#: templates/admin-tab-fullscreen.php:35
+#: templates/admin-tab-fullscreen.php:39
 msgid "Start typing product name..."
 msgstr ""
 
-#: templates/admin-tab-fullscreen.php:41
-#: templates/admin-tab-fullscreen.php:82
+#: templates/admin-tab-fullscreen.php:44
+#: templates/admin-tab-fullscreen.php:80
 msgid "Label"
 msgstr ""
 
-#: templates/admin-tab-fullscreen.php:48
-#: templates/admin-tab-fullscreen.php:110
-#: templates/admin-tab-fullscreen.php:154
+#: templates/admin-tab-fullscreen.php:50
+#: templates/admin-tab-fullscreen.php:105
+#: templates/admin-tab-fullscreen.php:147
 msgid "Hide on mobile"
 msgstr ""
 
-#: templates/admin-tab-fullscreen.php:56
+#: templates/admin-tab-fullscreen.php:57
 msgid "Selected Categories"
 msgstr ""
 
@@ -552,47 +552,47 @@ msgstr ""
 msgid "Select categories"
 msgstr ""
 
-#: templates/admin-tab-fullscreen.php:88
-#: templates/admin-tab-fullscreen.php:120
+#: templates/admin-tab-fullscreen.php:85
+#: templates/admin-tab-fullscreen.php:117
 msgid "Location"
 msgstr ""
 
-#: templates/admin-tab-fullscreen.php:92
-#: templates/admin-tab-fullscreen.php:124
+#: templates/admin-tab-fullscreen.php:89
+#: templates/admin-tab-fullscreen.php:121
 msgid "Left Sidebar Slot"
 msgstr ""
 
-#: templates/admin-tab-fullscreen.php:93
-#: templates/admin-tab-fullscreen.php:125
+#: templates/admin-tab-fullscreen.php:90
+#: templates/admin-tab-fullscreen.php:122
 msgid "Right Sidebar Slot"
 msgstr ""
 
-#: templates/admin-tab-fullscreen.php:99
+#: templates/admin-tab-fullscreen.php:95
 msgid "Show Products Count"
 msgstr ""
 
-#: templates/admin-tab-fullscreen.php:104
-#: templates/admin-tab-fullscreen.php:147
+#: templates/admin-tab-fullscreen.php:100
+#: templates/admin-tab-fullscreen.php:141
 msgid "Display when Popup Initially Opened"
 msgstr ""
 
-#: templates/admin-tab-fullscreen.php:115
+#: templates/admin-tab-fullscreen.php:111
 msgid "Promo banner"
 msgstr ""
 
-#: templates/admin-tab-fullscreen.php:126
+#: templates/admin-tab-fullscreen.php:123
 msgid "Left Sidebar Slot 2"
 msgstr ""
 
-#: templates/admin-tab-fullscreen.php:127
+#: templates/admin-tab-fullscreen.php:124
 msgid "Right Sidebar Slot 2"
 msgstr ""
 
-#: templates/admin-tab-fullscreen.php:133
+#: templates/admin-tab-fullscreen.php:129
 msgid "Banner Image"
 msgstr ""
 
-#: templates/admin-tab-fullscreen.php:140
+#: templates/admin-tab-fullscreen.php:135
 msgid "Banner Link"
 msgstr ""
 
@@ -783,71 +783,71 @@ msgstr ""
 msgid "Only variations"
 msgstr ""
 
-#: templates/admin-tab-general.php:197
+#: templates/admin-tab-general.php:198
 msgid "Search Results Page"
 msgstr ""
 
-#: templates/admin-tab-general.php:202
+#: templates/admin-tab-general.php:203
 msgid "Disable Redirect to Product Page"
 msgstr ""
 
-#: templates/admin-tab-general.php:203
+#: templates/admin-tab-general.php:204
 msgid "Prevent WooCommerce from automatically redirecting to a product page when there is only one search result."
 msgstr ""
 
-#: templates/admin-tab-general.php:209
+#: templates/admin-tab-general.php:210
 msgid "Suppress Database Query Altering"
 msgstr ""
 
-#: templates/admin-tab-general.php:210
+#: templates/admin-tab-general.php:211
 msgid "Prevent the theme or plugins from modifying the database query on the search results page"
 msgstr ""
 
-#: templates/admin-tab-general.php:216
+#: templates/admin-tab-general.php:217
 msgid "Disable Smart Search Feature on the Search Results Page"
 msgstr ""
 
-#: templates/admin-tab-general.php:217
+#: templates/admin-tab-general.php:218
 msgid "Disable altering search results by Smart Search plugin on the search results page.<br>By default the plugin modified search results according to selected options"
 msgstr ""
 
-#: templates/admin-tab-general.php:223
+#: templates/admin-tab-general.php:224
 msgid "Disable WooCommerce Template on the Search Results Page"
 msgstr ""
 
-#: templates/admin-tab-general.php:224
+#: templates/admin-tab-general.php:225
 msgid "Displays the default search results template defined in the theme instead of WooCommerce template.<br>Useful if you want to display posts with products together"
 msgstr ""
 
-#: templates/admin-tab-general.php:230
+#: templates/admin-tab-general.php:231
 msgid "Highlight Search Terms on the Search Results Page"
 msgstr ""
 
-#: templates/admin-tab-general.php:231
+#: templates/admin-tab-general.php:232
 msgid "Highlight words that match a search query on the search results page. Works only if the Smart Search Feature is not disabled on the search results page"
 msgstr ""
 
-#: templates/admin-tab-general.php:236
+#: templates/admin-tab-general.php:237
 msgid "Advanced"
 msgstr ""
 
-#: templates/admin-tab-general.php:242
+#: templates/admin-tab-general.php:243
 msgid "It may be helpful if you changed the base slug for WooCommerce products. The base slug is \"product\""
 msgstr ""
 
-#: templates/admin-tab-general.php:252
+#: templates/admin-tab-general.php:253
 msgid "To enhance existing search bar with the Smart Search features."
 msgstr ""
 
-#: templates/admin-tab-general.php:253
+#: templates/admin-tab-general.php:254
 msgid "Add a CSS selector (id or class) of the search bar's form element."
 msgstr ""
 
-#: templates/admin-tab-general.php:254
+#: templates/admin-tab-general.php:255
 msgid "Fill in each selector on a new line."
 msgstr ""
 
-#: templates/admin-tab-general.php:264
+#: templates/admin-tab-general.php:265
 msgid "Add extra CSS styles"
 msgstr ""
 

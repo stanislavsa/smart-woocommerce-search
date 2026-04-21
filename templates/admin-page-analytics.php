@@ -81,7 +81,10 @@ esc_attr_e( 'Save', 'smart-woocommerce-search' );
 
 	</form>
 
-	<a class="ymapp-settings__doc_link ymapp-button ymapp-button-grey" style="margin-top: 30px;" href="https://www.wpsmartsearch.com/docs/analytics/" target="_blank"><?php 
+	<a class="ymapp-settings__doc_link" href="https://www.wpsmartsearch.com/docs/analytics/" target="_blank">
+		<span class="dashicons dashicons-editor-help" aria-hidden="true"></span>
+		<?php 
 esc_html_e( 'Documentation', 'smart-woocommerce-search' );
-?></a>
+?>
+	</a>
 </div>

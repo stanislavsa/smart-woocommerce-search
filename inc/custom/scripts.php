@@ -90,25 +90,23 @@ function front_scripts() {
 		$widget_params['layout'] = 'product' === $k ? 'product' : '';
 		$widget_params['suppressQueryParams'] = (bool) ! empty( $v['settings']['search_page_suppress_filters'] );
         $widget_params['columns'] = 1;
-        $widget_params['fullScreenMode'] = ! empty( $v['settings']['fullscreen_mode'] ) ? $v['settings']['fullscreen_mode'] : '';
-        $widget_params['placeholder'] = ! empty( $v['settings']['placeholder'] ) ? __( $v['settings']['placeholder'], 'smart-woocommerce-search' ) : '';
-        $widget_params['recentSearches'] = ! empty( $v['settings']['recent_searches'] ) ? $v['settings']['recent_searches'] : '';
-        $widget_params['recentSearchesTitle'] = ! empty( $v['settings']['recent_searches_text'] ) ? __( $v['settings']['recent_searches_text'], 'smart-woocommerce-search' ) : '';
+        $widget_params['fullScreenMode'] = ( !empty( $v['settings']['fullscreen_mode'] ) ? ( is_array( $v['settings']['fullscreen_mode'] ) ? $v['settings']['fullscreen_mode'][0] : '' ) : '' );
+        $widget_params['placeholder'] = ( !empty( $v['settings']['placeholder'] ) ? __( $v['settings']['placeholder'], 'smart-woocommerce-search' ) : '' );
+        $widget_params['recentSearches'] = ( !empty( $v['settings']['recent_searches'] ) ? $v['settings']['recent_searches'] : '' );
+        $widget_params['recentSearchesTitle'] = ( !empty( $v['settings']['recent_searches_text'] ) ? __( $v['settings']['recent_searches_text'], 'smart-woocommerce-search' ) : '' );
         $widget_params['keywords'] = '';
         $widget_params['keywordsLabel'] = '';
-        $widget_params['selectedCategoriesLabel'] = ! empty( $v['settings']['selected_categories_label'] ) ? __( $v['settings']['selected_categories_label'], 'smart-woocommerce-search' ) : '';
-        $widget_params['selectedCategoriesLocation'] = ! empty( $v['settings']['selected_categories_location'] ) ? $v['settings']['selected_categories_location'] : '';
-        $widget_params['selectedCategoriesMobile'] = ! empty( $v['settings']['selected_categories_mobile'] ) ? $v['settings']['selected_categories_mobile'] : '';
-        $widget_params['selectedCategoriesCount'] = ! empty( $v['settings']['selected_categories_count'] ) ? $v['settings']['selected_categories_count'] : '';
-        $widget_params['selectedCategoriesOnOpen'] = ! empty( $v['settings']['selected_categories_on_open'] ) ? $v['settings']['selected_categories_on_open'] : '';
+        $widget_params['selectedCategoriesLabel'] = ( !empty( $v['settings']['selected_categories_label'] ) ? __( $v['settings']['selected_categories_label'], 'smart-woocommerce-search' ) : '' );
+        $widget_params['selectedCategoriesLocation'] = ( !empty( $v['settings']['selected_categories_location'] ) ? ( is_array( $v['settings']['selected_categories_location'] ) ? $v['settings']['selected_categories_location'][0] : '' ) : '' );
+        $widget_params['selectedCategoriesMobile'] = ( !empty( $v['settings']['selected_categories_mobile'] ) ? $v['settings']['selected_categories_mobile'] : '' );
+        $widget_params['selectedCategoriesCount'] = ( !empty( $v['settings']['selected_categories_count'] ) ? $v['settings']['selected_categories_count'] : '' );
+        $widget_params['selectedCategoriesOnOpen'] = ( !empty( $v['settings']['selected_categories_on_open'] ) ? $v['settings']['selected_categories_on_open'] : '' );
 
 		$widget_params['promoBannerLocation'] = '';
-		$widget_params['promoBannerImage'] = '';
-		$widget_params['promoBannerLink'] = '';
-		$widget_params['promoBannerOnOpen'] = '';
-		$widget_params['selectedPromoBannerMobile'] = '';
-
-
+        $widget_params['promoBannerImage'] = '';
+        $widget_params['promoBannerLink'] = '';
+        $widget_params['promoBannerOnOpen'] = '';
+        $widget_params['selectedPromoBannerMobile'] = '';
 
         if ( !empty( $v['settings']['selected_categories'] ) ) {
             $sws_selected_categories_ids = $v['settings']['selected_categories'];
@@ -130,8 +128,8 @@ function front_scripts() {
         } else {
             $widget_params['selectedCategories'] = '';
         }
-	    $widget_params['selectedProducts'] = '';
-	    $widget_params['selectedProductsLabel'] = '';
+        $widget_params['selectedProducts'] = '';
+        $widget_params['selectedProductsLabel'] = '';
         if ( !empty( $v['settings']['post_type_product'] ) && empty( $v['settings']['search_page_layout_posts'] ) ) {
             $widget_params['layout'] = 'product';
         }

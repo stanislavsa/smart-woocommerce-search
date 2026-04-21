@@ -11,5 +11,5 @@ function product_sku( $product ) {
 		return '';
 	}
 
-	return '<div class="smart-search-post-sku">' . esc_html( $product->get_sku() ) . '</div>';
+	return '<div class="smart-search-post-sku">SKU: ' . esc_html( $product->get_sku() ) . '</div>';
 }

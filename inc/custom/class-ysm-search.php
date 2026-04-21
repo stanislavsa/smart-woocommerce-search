@@ -374,7 +374,6 @@ class Ysm_Search {
         }
         // fallback to old functionality
         $limit = ysws_get_var( 'max_post_count' );
-
         $key = md5( ysws_get_var( 's' ) ) . '_' . self::get_widget_id() . '_' . ysws_get_var( 'lang' );
         $cached = \YSWS\Core\Cache\get_query_cache( $key );
         if ( false !== $cached ) {

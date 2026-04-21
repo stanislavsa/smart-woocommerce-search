@@ -18,7 +18,7 @@
                     'type'        => 'text',
                     'title'       => __( 'Search Field Height, px', 'smart-woocommerce-search' ),
                     'description' => __( 'Set the search field height in pixels', 'smart-woocommerce-search' ),
-                    'value'       => '',
+                    'value'       => '40',
                 ));
 
                 ysm_setting( $w_id, 'input_round_border', array(
@@ -232,7 +232,10 @@
 
             </tbody>
         </table>
-        <a class="ymapp-settings__doc_link ymapp-button ymapp-button-grey" href="https://www.wpsmartsearch.com/docs/styling-settings/" target="_blank"><?php esc_html_e( 'Documentation', 'smart-woocommerce-search' ); ?></a>
+        <a class="ymapp-settings__doc_link" href="https://www.wpsmartsearch.com/docs/styling-settings/" target="_blank">
+            <span class="dashicons dashicons-editor-help" aria-hidden="true"></span>
+            <?php esc_html_e( 'Documentation', 'smart-woocommerce-search' ); ?>
+        </a>
     </div>
 
 

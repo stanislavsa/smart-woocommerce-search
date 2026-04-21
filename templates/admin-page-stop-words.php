@@ -28,5 +28,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 		</div>
 
-	<a class="ymapp-settings__doc_link ymapp-button ymapp-button-grey" style="margin-top: 30px;" href="https://www.wpsmartsearch.com/docs/stop-words/" target="_blank"><?php esc_html_e( 'Documentation', 'smart-woocommerce-search' ); ?></a>
+	<a class="ymapp-settings__doc_link" href="https://www.wpsmartsearch.com/docs/stop-words/" target="_blank">
+		<span class="dashicons dashicons-editor-help" aria-hidden="true"></span>
+		<?php
+		esc_html_e( 'Documentation', 'smart-woocommerce-search' );
+		?>
+	</a>
 </div>

@@ -71,7 +71,7 @@
                 'type'        => 'text',
                 'title'       => __( 'Description\'s Size', 'smart-woocommerce-search' ),
                 'description' => __( 'Maximum number of characters in the description', 'smart-woocommerce-search' ),
-                'value'       => 50,
+                'value'       => 150,
             ));
 
             ysm_setting( $w_id, 'no_results_text', array(
@@ -119,7 +119,7 @@
                 'type'        => 'checkbox',
                 'title'       => __( 'Recent Searches', 'smart-woocommerce-search' ),
                 'description' => __( 'Display user’s recent searches below search bar', 'smart-woocommerce-search' ),
-                'value'       => 0,
+                'value'       => 1,
             ));
 
             ysm_setting( $w_id, 'recent_searches_text', array(
@@ -138,7 +138,7 @@
                         ? '<br><span style="color:red">Requirement:</span> <a target="_blank" href="' . esc_url( admin_url( 'admin.php?page=smart-search-synonyms' ) ) . '">' . __( 'Enable Automatic Synonyms Feature', 'smart-woocommerce-search' ) . '</a>'
                         : '' )
             ,
-                'value'       => 0,
+                'value'       => 1,
                 'is_pro'      => true,
             ));
 
@@ -190,6 +190,7 @@
                     'parent'     => __( 'Only parent product', 'smart-woocommerce-search' ),
                     'variations' => __( 'Only variations', 'smart-woocommerce-search' ),
                 ),
+				'value' => 'parent',
                 'is_pro'      => true,
             ));
             ?>
@@ -267,7 +268,10 @@
             ?>
             </tbody>
         </table>
-        <a class="ymapp-settings__doc_link ymapp-button ymapp-button-grey" href="https://www.wpsmartsearch.com/docs/general-settings/" target="_blank"><?php esc_html_e( 'Documentation', 'smart-woocommerce-search' ); ?></a>
+        <a class="ymapp-settings__doc_link" href="https://www.wpsmartsearch.com/docs/general-settings/" target="_blank">
+            <span class="dashicons dashicons-editor-help" aria-hidden="true"></span>
+            <?php esc_html_e( 'Documentation', 'smart-woocommerce-search' ); ?>
+        </a>
     </div>
 
 </div>

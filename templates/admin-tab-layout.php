@@ -16,7 +16,7 @@
                 'type'        => 'select',
                 'title'       => __( 'Columns Layout', 'smart-woocommerce-search' ),
                 'description' =>  __( 'Set the maximum number of columns to show in the popup.<br>To choose a Grid layout instead of List layout select columns number more than 1', 'smart-woocommerce-search' ),
-                'value'       => '',
+                'value'       => 2,
                 'is_pro'      => true,
                 'choices'     => array(
                     1 => 1,
@@ -68,7 +68,7 @@
                 'type'        => 'select',
                 'title'       => __( 'Image Size', 'smart-woocommerce-search' ),
                 'description' => __( 'Select image size', 'smart-woocommerce-search' ),
-                'value'       => '',
+                'value'       => 'large',
                 'choices'     => array_combine( $image_sizes, $image_sizes ),
             ));
 
@@ -76,21 +76,21 @@
                 'type'        => 'text',
                 'title'       => __( 'Image Max Width, px', 'smart-woocommerce-search' ),
                 'description' => __( 'Limit image maximal width in pixels', 'smart-woocommerce-search' ),
-                'value'       => '50',
+                'value'       => '150',
             ));
 
             ysm_setting( $w_id, 'display_excerpt', array(
                 'type'        => 'checkbox',
                 'title'       => __( 'Display Description', 'smart-woocommerce-search' ),
                 'description' => __( 'Display product description', 'smart-woocommerce-search' ),
-                'value'       => 1,
+                'value'       => 0,
             ));
 
             ysm_setting( $w_id, 'popup_desc_pos', array(
                 'type'        => 'select',
                 'title'       => __( 'Description\'s Location', 'smart-woocommerce-search' ),
                 'description' => '',
-                'value'       => '',
+                'value'       => 'below_image',
                 'choices'     => array(
                     'below_image' => __( 'Under the image', 'smart-woocommerce-search' ),
                     'below_title' => __( 'Under the title', 'smart-woocommerce-search' ),
@@ -102,7 +102,7 @@
                 'type'        => 'checkbox',
                 'title'       => __( 'Display Category', 'smart-woocommerce-search' ),
                 'description' => __( 'Display product or post category', 'smart-woocommerce-search' ),
-                'value'       => 0,
+                'value'       => 1,
             ));
 
             ysm_setting( $w_id, 'display_price', array(
@@ -155,7 +155,10 @@
 
             </tbody>
         </table>
-        <a class="ymapp-settings__doc_link ymapp-button ymapp-button-grey" href="https://www.wpsmartsearch.com/docs/layout-settings/" target="_blank"><?php esc_html_e( 'Documentation', 'smart-woocommerce-search' ); ?></a>
+        <a class="ymapp-settings__doc_link" href="https://www.wpsmartsearch.com/docs/layout-settings/" target="_blank">
+            <span class="dashicons dashicons-editor-help" aria-hidden="true"></span>
+            <?php esc_html_e( 'Documentation', 'smart-woocommerce-search' ); ?>
+        </a>
     </div>
 
 

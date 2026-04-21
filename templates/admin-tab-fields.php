@@ -224,7 +224,10 @@ if ( ! defined( 'ABSPATH' ) ) exit;
             </tbody>
         </table>
 
-        <a class="ymapp-settings__doc_link ymapp-button ymapp-button-grey" href="https://www.wpsmartsearch.com/docs/content-types/" target="_blank"><?php esc_html_e( 'Documentation', 'smart-woocommerce-search' ); ?></a>
+        <a class="ymapp-settings__doc_link" href="https://www.wpsmartsearch.com/docs/content-types/" target="_blank">
+            <span class="dashicons dashicons-editor-help" aria-hidden="true"></span>
+            <?php esc_html_e( 'Documentation', 'smart-woocommerce-search' ); ?>
+        </a>
     </div>
 
 </div>

@@ -1,7 +1,7 @@
 === Smart WooCommerce Search ===
 Contributors: yummy-wp
 Tags: search, ajax search, product search, search by sku, woocommerce search
-Stable tag: 2.16.1
+Stable tag: 2.16.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Requires at least: 5.9
@@ -105,6 +105,10 @@ Multilingual support (WPML and Polylang) is available in the PRO version.
 Yes — you can try all PRO features free for 14 days. Start your trial from the plugin settings page inside your WordPress dashboard.
 
 == Changelog ==
+
+= 2.16.2 =
+* Improved: UI/UX for search popup
+* Improved: code optimizations
 
 = 2.16.1 =
 * Updated: search results caching
