@@ -659,7 +659,6 @@ class Ysm_Search {
         $string = ( function_exists( 'mb_strtolower' ) ? mb_strtolower( $string, 'UTF-8' ) : strtolower( $string ) );
         $string = strip_shortcodes( $string );
         $string = wp_strip_all_tags( $string );
-        $string = preg_replace( '/[[:punct:]]+/u', ' ', $string );
 		$string = preg_replace('/\s+/', ' ', $string);
         $string = trim( $string );
         $search_terms = explode( ' ', $string );
