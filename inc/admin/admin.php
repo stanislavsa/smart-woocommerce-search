@@ -18,9 +18,6 @@ add_action( 'wp_ajax_sws_notice_dismiss', __NAMESPACE__ . '\\update_notice_dismi
  * @return void
  */
 function on_admin_init() {
-    if ( !empty( $_SERVER['REQUEST_URI'] ) && strpos( $_SERVER['REQUEST_URI'], '?page=smart-search-analytics' ) ) {
-        \YSWS\Core\Analytics::save();
-    }
     \YummyWP\App\Notification::add_template( SWS_PLUGIN_DIR . 'templates/promo/updates.php' );
     add_action( 'admin_notices', __NAMESPACE__ . '\\display_admin_notices' );
 }

@@ -119,6 +119,13 @@
                 'value'       => 1,
             ));
 
+            ysm_setting( $w_id, 'sku_label', array(
+	            'type'        => 'text',
+	            'title'       => __( 'SKU label', 'smart-woocommerce-search' ),
+	            'description' => __( 'Displays label before SKU. Leave this field empty to hide the label', 'smart-woocommerce-search' ),
+	            'value'       => 'SKU',
+            ));
+
             ysm_setting( $w_id, 'display_out_of_stock_label', array(
                 'type'        => 'checkbox',
                 'title'       => __( 'Display "Out of stock" Label', 'smart-woocommerce-search' ),

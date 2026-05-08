@@ -83,7 +83,10 @@ function ysm_add_message( $text, $type = 'message' ) {
  */
 function ysm_get_widget_list_row_template( $args ) {
 
-	$id = $args['id'];
+	$id               = $args['id'];
+	$enhance_checked  = ! empty( $args['enhance_checked'] );
+	$enhance_disabled = ! empty( $args['enhance_disabled'] );
+	$enhance_id       = 'sws-enhance-' . $id;
 
 	$template = '<tr>
 					<td>' . esc_html( $id ) . '</td>
@@ -93,7 +96,20 @@ function ysm_get_widget_list_row_template( $args ) {
 						</a>
 					</td>
 					<td>
-						<input type="text" value="[smart_search id=&quot;' . esc_attr( $id ) . '&quot;]" readonly="" />
+						<span class="sws-shortcode-wrap">
+							<input type="text" class="sws-shortcode-input" value="[smart_search id=&quot;' . esc_attr( $id ) . '&quot;]" readonly title="' . esc_attr__( 'Click to copy', 'smart-woocommerce-search' ) . '" />
+							<span class="sws-shortcode-copied">' . esc_html__( 'Copied!', 'smart-woocommerce-search' ) . '</span>
+						</span>
+					</td>
+					<td>
+						<input type="checkbox" value="1"
+						       id="' . esc_attr( $enhance_id ) . '"
+						       class="ymapp-switcher sws-enhance-toggle' . ( $enhance_disabled ? ' sws-enhance-locked' : '' ) . '"
+						       data-widget-id="' . esc_attr( $id ) . '"
+						       ' . ( $enhance_checked ? 'checked' : '' ) . '
+						/>
+						<label for="' . esc_attr( $enhance_id ) . '"></label>
+						<span class="sws-enhance-spinner spinner"></span>
 					</td>
 					<td>
 						<a href="#" class="ysm-widget-duplicate" data-id="' . esc_attr( $id ) . '" title="' . __( 'Duplicate', 'smart-woocommerce-search' ) . '">
@@ -102,6 +118,7 @@ function ysm_get_widget_list_row_template( $args ) {
 						<a href="#" class="ysm-widget-remove" data-id="' . esc_attr( $id ) . '" title="' . __( 'Delete', 'smart-woocommerce-search' ) . '">
 							<span class="dashicons dashicons-trash"></span>
 						</a>
+						<span class="spinner ysm-action-spinner"></span>
 					</td>
 				</tr>';
 
@@ -488,5 +505,28 @@ function ysws_get_var($name) {
 
 function ysws_set_var($name, $value) {
 	\Ysm_Search::set_var($name, $value);
+}
+
+function ysws_strip_punctuation( $string ) {
+	$replace_map = [
+		'&amp;' => '&',
+		'&#038;' => '&',
+		'&nbsp;' => ' ',
+		'&#8217;' => "'",
+	];
+	$preserve_map = [
+		'-' => 'DDDSSS',
+		'_' => 'UUUSSS',
+		'.' => 'DDDTTT',
+		'/' => 'SSSLLL',
+	];
+	$string = str_replace( array_keys( $replace_map ), array_values( $replace_map ), $string );
+	$string = str_replace( array_keys( $preserve_map ), array_values( $preserve_map ), $string );
+	$string = preg_replace('/[[:punct:]]+/u', ' ', $string);
+	$string = str_replace( array_values( $preserve_map ), array_keys( $preserve_map ), $string );
+	$string = preg_replace('/\s+/', ' ', $string );
+	$string = trim( $string );
+
+	return $string;
 }
 

@@ -1,7 +1,7 @@
 === Smart WooCommerce Search ===
 Contributors: yummy-wp
 Tags: search, ajax search, product search, search by sku, woocommerce search
-Stable tag: 2.16.3
+Stable tag: 2.16.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Requires at least: 5.9
@@ -105,6 +105,13 @@ Multilingual support (WPML and Polylang) is available in the PRO version.
 Yes — you can try all PRO features free for 14 days. Start your trial from the plugin settings page inside your WordPress dashboard.
 
 == Changelog ==
+
+= 2.16.4 =
+* Added: toggles to on/off category events for Google Analytics
+* Added: possibility to remove default widgets
+* Added: toggle 'Enhance Default' to enhance default theme's search bar
+* Added: option 'SKU label'
+* Updated: logic for stripping punctuation symbols
 
 = 2.16.3 =
 * Fixed: punctuation issue in search terms

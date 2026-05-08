@@ -236,13 +236,41 @@
 		 * Widget list actions
 		 */
 
-		$('.ysm-custom-widgets-list').on('click', '.ysm-widget-remove', function(){
-			var $td = $(this).parents('td'),
-				id = $(this).data('id');
-
-			$td.addClass('ysm-loader');
+		$('.ysm-default-widgets-list').on('click', '.ysm-widget-remove', function(){
+			var $td      = $(this).parents('td'),
+				$spinner = $td.find('.ysm-action-spinner'),
+				id       = $(this).data('id');
 
 			if ( confirm(ysm_L10n.widget_delete) ) {
+
+				$spinner.addClass('is-active');
+
+				$.post(ajaxurl, {
+					action: 'ysm_default_widget_delete',
+					id: id,
+					nonce: $('#ysm_widgets_nonce').val()
+				},
+				function($r) {
+					if ($r == 1) {
+						$td.parent().remove();
+					} else {
+						$spinner.removeClass('is-active');
+					}
+				});
+
+			}
+
+			return false;
+		});
+
+		$('.ysm-custom-widgets-list').on('click', '.ysm-widget-remove', function(){
+			var $td      = $(this).parents('td'),
+				$spinner = $td.find('.ysm-action-spinner'),
+				id       = $(this).data('id');
+
+			if ( confirm(ysm_L10n.widget_delete) ) {
+
+				$spinner.addClass('is-active');
 
 				$.post(ajaxurl, {
 					action: 'ysm_widget_delete',
@@ -251,7 +279,9 @@
 				},
 				function($r) {
 					if ($r == 1) {
-						$td.removeClass('ysm-loader').parent().remove();
+						$td.parent().remove();
+					} else {
+						$spinner.removeClass('is-active');
 					}
 				});
 
@@ -261,11 +291,12 @@
 		});
 
 		$('.ysm-custom-widgets-list').on('click', '.ysm-widget-duplicate', function(){
-			var $td = $(this).parents('td'),
-				id = $(this).data('id'),
-				tmpl = wp.template('ysm-widget-list-row');
+			var $td      = $(this).parents('td'),
+				$spinner = $td.find('.ysm-action-spinner'),
+				id       = $(this).data('id'),
+				tmpl     = wp.template('ysm-widget-list-row');
 
-			$td.addClass('ysm-loader');
+			$spinner.addClass('is-active');
 
 			$.post(ajaxurl, {
 				action: 'ysm_widget_duplicate',
@@ -273,19 +304,147 @@
 				nonce: $('#ysm_widgets_nonce').val()
 			},
 			function($r) {
+				$spinner.removeClass('is-active');
+
 				if ($r && $r['id'] ) {
 					var data = {
 							id: $r['id'],
 							name: $r['name']
 						},
-						output = tmpl(data);
+						output = tmpl(data),
+						$row   = $(output);
 
-					$td.removeClass('ysm-loader');
-					$('.ysm-custom-widgets-list').find('tbody').append(output);
+					$row.find('.sws-enhance-toggle').addClass('sws-enhance-locked');
+
+					$('.ysm-custom-widgets-list').find('tbody').append($row);
 				}
 			}, 'json');
 
 			return false;
+		});
+
+		/**
+		 * Enhance Default search bar toggle.
+		 * Behaves like a radio group: enabling one disables all others.
+		 * "Locked" toggles (sws-enhance-locked) are visually dimmed but still
+		 * clickable — clicking one switches the selection to that widget.
+		 */
+		$(document).on('change', '.sws-enhance-toggle', function() {
+			var $toggle  = $(this),
+				$spinner = $toggle.siblings('.sws-enhance-spinner'),
+				widgetId = $toggle.data('widget-id'),
+				enabled  = $toggle.is(':checked');
+
+			// Disable all toggles and show spinner while saving
+			$('.sws-enhance-toggle').prop('disabled', true);
+			$spinner.addClass('is-active');
+
+			$.post(ajaxurl, {
+				action:    'sws_enhance_default_toggle',
+				widget_id: widgetId,
+				enabled:   enabled ? 1 : 0,
+				nonce:     $('#ysm_widgets_nonce').val()
+			}, function(response) {
+				$spinner.removeClass('is-active');
+				$('.sws-enhance-toggle').prop('disabled', false);
+
+				if ( ! response.success ) {
+					$toggle.prop('checked', ! enabled);
+					return;
+				}
+
+				if ( enabled ) {
+					// Uncheck and lock every other toggle
+					$('.sws-enhance-toggle').not($toggle).each(function() {
+						$(this).prop('checked', false)
+						       .addClass('sws-enhance-locked')
+						       .removeClass('sws-enhance-active');
+					});
+					$toggle.addClass('sws-enhance-active').removeClass('sws-enhance-locked');
+				} else {
+					// No widget active — unlock everything
+					$('.sws-enhance-toggle').removeClass('sws-enhance-locked sws-enhance-active');
+				}
+			}, 'json');
+		});
+
+		/**
+		 * Shortcode column: click to copy to clipboard.
+		 */
+		$(document).on('click', '.sws-shortcode-input', function() {
+			var $input = $(this),
+				$msg   = $input.siblings('.sws-shortcode-copied'),
+				text   = $input.val();
+
+			function showCopied() {
+				$msg.addClass('is-visible');
+				setTimeout(function() { $msg.removeClass('is-visible'); }, 2000);
+			}
+
+			if ( navigator.clipboard && navigator.clipboard.writeText ) {
+				navigator.clipboard.writeText(text).then(showCopied);
+			} else {
+				$input[0].select();
+				document.execCommand('copy');
+				showCopied();
+			}
+		});
+
+		/**
+		 * GA4 master toggle: enable/disable Google Analytics 4 tracking.
+		 * Shows/hides the event categories section without a page reload.
+		 */
+		$(document).on('change', '.sws-ga4-toggle', function() {
+			var $toggle  = $(this),
+				$spinner = $toggle.siblings('.sws-ga4-spinner'),
+				enabled  = $toggle.is(':checked');
+
+			$toggle.prop('disabled', true);
+			$spinner.addClass('is-active');
+
+			$.post(ajaxurl, {
+				action:  'sws_ga4_toggle',
+				enabled: enabled ? 1 : 0,
+				nonce:   $('#ysm_analytics_nonce').val()
+			}, function(response) {
+				$spinner.removeClass('is-active');
+				$toggle.prop('disabled', false);
+
+				if ( ! response.success ) {
+					$toggle.prop('checked', ! enabled);
+					return;
+				}
+
+				$('.sws-ga-event-details').toggle(enabled);
+			}, 'json');
+		});
+
+		/**
+		 * GA event toggles: enable/disable individual analytics events.
+		 */
+		$(document).on('change', '.sws-ga-event-toggle', function() {
+			var $toggle  = $(this),
+				$row     = $toggle.closest('.sws-ga-event-row'),
+				$spinner = $row.find('.sws-ga-event-spinner'),
+				eventKey = $toggle.data('event'),
+				enabled  = $toggle.is(':checked');
+
+			$toggle.prop('disabled', true);
+			$spinner.addClass('is-active');
+
+			$.post(ajaxurl, {
+				action:    'sws_ga_event_toggle',
+				event_key: eventKey,
+				enabled:   enabled ? 1 : 0,
+				nonce:     $('#ysm_widgets_nonce').val()
+			}, function(response) {
+				$spinner.removeClass('is-active');
+				$toggle.prop('disabled', false);
+
+				if ( ! response.success ) {
+					$toggle.prop('checked', ! enabled);
+				}
+			}, 'json');
 		});
 
 		$('.ymapp-settings__content #loader').on('change', function(){

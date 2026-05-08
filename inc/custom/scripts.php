@@ -21,8 +21,8 @@ function front_scripts() {
         'type'          => ( sws_fs()->is_trial() ? 't' : (( sws_fs()->is_premium() ? 'p' : 'f' )) ),
         'v'             => SWS_PLUGIN_VERSION,
         'analytics'     => [
-            'ga4'  => (bool) get_option( 'sws_enable_google_analytics' ),
-            'opts' => [],
+            'ga4'           => (bool) get_option( 'sws_enable_google_analytics' ),
+            'enabledEvents' => (array) get_option( 'sws_ga_enabled_events', [] ),
         ],
         'nonce'         => wp_create_nonce( 'wp_rest' ),
         'widgets'       => [],
@@ -38,6 +38,7 @@ function front_scripts() {
         ), $l10n['restUrl'] ) . '&';
         $l10n['searchPageUrl'] = apply_filters( 'wpml_home_url', $l10n['searchPageUrl'] );
     }
+    $enhance_default_id = get_option( 'sws_enhance_default' );
     foreach ( ysm_get_all_widgets() as $k => $v ) {
         $widget_params = [];
         $css_classes = [];
@@ -51,6 +52,12 @@ function front_scripts() {
             $css_classes['.fusion-search-form'] = '.fusion-search-form';
         } else {
             $css_classes['.ysm-search-widget-' . $k] = '.ysm-search-widget-' . $k;
+        }
+        if ( $enhance_default_id && (string) $k === (string) $enhance_default_id ) {
+            $css_classes['.widget_search'] = '.widget_search';
+            $css_classes['.wp-block-search'] = '.wp-block-search';
+            $css_classes['.widget_product_search'] = '.widget_product_search';
+            $css_classes['.fusion-search-form'] = '.fusion-search-form';
         }
         $extra_bar_css_classes = apply_filters( 'sws_search_bar_css_selectors', [], $k );
         if ( $extra_bar_css_classes && is_array( $extra_bar_css_classes ) ) {
@@ -87,27 +94,18 @@ function front_scripts() {
         $widget_params['productSku'] = !empty( $v['settings']['field_product_sku'] );
         $widget_params['multipleWords'] = ( !empty( $v['settings']['enable_fuzzy_search'] ) ? $v['settings']['enable_fuzzy_search'] : '' );
         $widget_params['excludeOutOfStock'] = !empty( $v['settings']['exclude_out_of_stock_products'] );
-		$widget_params['layout'] = 'product' === $k ? 'product' : '';
-		$widget_params['suppressQueryParams'] = (bool) ! empty( $v['settings']['search_page_suppress_filters'] );
-        $widget_params['columns'] = 1;
+        $widget_params['layout'] = ( 'product' === $k ? 'product' : '' );
+        $widget_params['suppressQueryParams'] = (bool) (!empty( $v['settings']['search_page_suppress_filters'] ));
         $widget_params['fullScreenMode'] = ( !empty( $v['settings']['fullscreen_mode'] ) ? ( is_array( $v['settings']['fullscreen_mode'] ) ? $v['settings']['fullscreen_mode'][0] : '' ) : '' );
         $widget_params['placeholder'] = ( !empty( $v['settings']['placeholder'] ) ? __( $v['settings']['placeholder'], 'smart-woocommerce-search' ) : '' );
         $widget_params['recentSearches'] = ( !empty( $v['settings']['recent_searches'] ) ? $v['settings']['recent_searches'] : '' );
         $widget_params['recentSearchesTitle'] = ( !empty( $v['settings']['recent_searches_text'] ) ? __( $v['settings']['recent_searches_text'], 'smart-woocommerce-search' ) : '' );
-        $widget_params['keywords'] = '';
-        $widget_params['keywordsLabel'] = '';
         $widget_params['selectedCategoriesLabel'] = ( !empty( $v['settings']['selected_categories_label'] ) ? __( $v['settings']['selected_categories_label'], 'smart-woocommerce-search' ) : '' );
         $widget_params['selectedCategoriesLocation'] = ( !empty( $v['settings']['selected_categories_location'] ) ? ( is_array( $v['settings']['selected_categories_location'] ) ? $v['settings']['selected_categories_location'][0] : '' ) : '' );
         $widget_params['selectedCategoriesMobile'] = ( !empty( $v['settings']['selected_categories_mobile'] ) ? $v['settings']['selected_categories_mobile'] : '' );
         $widget_params['selectedCategoriesCount'] = ( !empty( $v['settings']['selected_categories_count'] ) ? $v['settings']['selected_categories_count'] : '' );
         $widget_params['selectedCategoriesOnOpen'] = ( !empty( $v['settings']['selected_categories_on_open'] ) ? $v['settings']['selected_categories_on_open'] : '' );
-
-		$widget_params['promoBannerLocation'] = '';
-        $widget_params['promoBannerImage'] = '';
-        $widget_params['promoBannerLink'] = '';
-        $widget_params['promoBannerOnOpen'] = '';
-        $widget_params['selectedPromoBannerMobile'] = '';
-
+        $widget_params['selectedCategories'] = '';
         if ( !empty( $v['settings']['selected_categories'] ) ) {
             $sws_selected_categories_ids = $v['settings']['selected_categories'];
             $sws_categories_data = [];
@@ -125,9 +123,15 @@ function front_scripts() {
                 }
             }
             $widget_params['selectedCategories'] = $sws_categories_data;
-        } else {
-            $widget_params['selectedCategories'] = '';
         }
+        $widget_params['columns'] = 1;
+        $widget_params['keywords'] = '';
+        $widget_params['keywordsLabel'] = '';
+        $widget_params['promoBannerLocation'] = '';
+        $widget_params['promoBannerImage'] = '';
+        $widget_params['promoBannerLink'] = '';
+        $widget_params['promoBannerOnOpen'] = '';
+        $widget_params['selectedPromoBannerMobile'] = '';
         $widget_params['selectedProducts'] = '';
         $widget_params['selectedProductsLabel'] = '';
         if ( !empty( $v['settings']['post_type_product'] ) && empty( $v['settings']['search_page_layout_posts'] ) ) {

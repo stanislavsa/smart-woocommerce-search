@@ -6,7 +6,7 @@
  * Tags: woocommerce search, ajax search, woocommerce, woocommerce search by sku, woocommerce search shortcode, product search, product filter, woocommerce search results, instant search, woocommerce search plugin, woocommerce search form, search for woocommerce, woocommerce search page, search, woocommerce product search, search woocommerce, shop, shop search, autocomplete, autosuggest, search for wp, search for WordPress, search plugin, woocommerce search by sku, search results,  woocommerce search shortcode, search products, search autocomplete, woocommerce advanced search, woocommerce predictive search, woocommerce live search, woocommerce single product, woocommerce site search, products, shop, category search, custom search, predictive search, relevant search, search product, woocommerce plugin, posts search, wp search, WordPress search
  * Author:      YummyWP
  * Author URI:  https://www.wpsmartsearch.com/
- * Version:     2.16.3
+ * Version:     2.16.4
  * Domain Path: /languages
  * Text Domain: smart-woocommerce-search
  * Requires at least: 5.9
@@ -43,24 +43,16 @@ if ( function_exists( 'sws_fs' ) ) {
 		require_once __DIR__ . '/inc/fs.php';
 	}
 
-	/**
-	 * Define main constants
-	 */
-	define( 'SWS_PLUGIN_VERSION', '2.16.2' );
+	// plugin version
+	define( 'SWS_PLUGIN_VERSION', '2.16.4' );
+
 	define( 'SWS_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 	define( 'SWS_PLUGIN_URI', plugin_dir_url( __FILE__ ) );
 	define( 'SWS_PLUGIN_BASENAME', plugin_basename( __FILE__ ) );
-
-    if ( ! defined( 'SWS_PLUGIN_UPDATE_NOTICE' ) ) {
-        $update_notice_option = get_option( 'sws_update_notice', null );
-
-        if ( $update_notice_option === null ) {
-            $update_notice_default = 1;
-            add_option( 'sws_update_notice', $update_notice_default );
-        }
-
-        define( 'SWS_PLUGIN_UPDATE_NOTICE', 4);
-    }
+	// update popup version
+	define( 'SWS_PLUGIN_UPDATE_NOTICE', 4 );
+	// DB version
+	define( 'SWS_DB_VERSION', '1.2' );
 
 	/**
 	 * Load plugin textdomain.

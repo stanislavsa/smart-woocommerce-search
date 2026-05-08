@@ -68,7 +68,6 @@
                     'title'       => __( 'Icon Background', 'smart-woocommerce-search' ),
                     'description' => '',
                     'value' => '',
-                    'is_pro'      => true,
                 ));
 
                 $cur_loader = ysm_get_option( $w_id, 'loader' );

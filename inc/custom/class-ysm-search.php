@@ -219,6 +219,9 @@ class Ysm_Search {
             $w_id = filter_input( INPUT_GET, 'search_id', FILTER_SANITIZE_FULL_SPECIAL_CHARS );
             if ( !$w_id ) {
                 $w_id = apply_filters( 'sws_search_page_default_widget', apply_filters( 'ysm_search_page_default_widget', 0 ) );
+                if ( !$w_id ) {
+                    $w_id = get_option( 'sws_enhance_default' );
+                }
             }
             if ( !in_array( $w_id, ysm_get_default_widgets_ids(), true ) ) {
                 $w_id = (int) $w_id;
@@ -659,8 +662,7 @@ class Ysm_Search {
         $string = ( function_exists( 'mb_strtolower' ) ? mb_strtolower( $string, 'UTF-8' ) : strtolower( $string ) );
         $string = strip_shortcodes( $string );
         $string = wp_strip_all_tags( $string );
-		$string = preg_replace('/\s+/', ' ', $string);
-        $string = trim( $string );
+        $string = ysws_strip_punctuation( $string );
         $search_terms = explode( ' ', $string );
         /**
          * Modify the array of search terms

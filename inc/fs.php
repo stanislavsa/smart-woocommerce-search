@@ -15,7 +15,6 @@ if ( !function_exists( 'sws_fs' ) ) {
                 'public_key'       => 'pk_2fb41ff7a485924db487b74f6ebe5',
                 'is_premium'       => false,
                 'premium_suffix'   => 'Pro',
-//                'has_premium_version' => true,
                 'has_addons'       => false,
                 'has_paid_plans'   => true,
                 'trial'            => array(
@@ -52,7 +51,8 @@ function sws_fs_custom_connect_message_on_update(
     $freemius_link
 ) {
     return sprintf(
-        __( 'We added this opt-in feature so you won\'t miss any important updates and to help us enhance the plugin\'s compatibility and performance on your site.', 'smart-woocommerce-search' ) . '<br><br>' . __( 'By opting in, you\'ll get email notifications about feature updates, educational content, promo offers, and you\'ll share some basic WordPress environment details. If you decide not to opt in, that\'s okay! %2$s will still function just as well.', 'smart-woocommerce-search' ),
+        __( 'Opt in to receive feature updates and tips, and to share basic site details (WordPress version, PHP version, active plugin names) so we can ensure compatibility.
+<br>No spam. Unsubscribe any time. The plugin works the same either way.', 'smart-woocommerce-search' ),
         $user_first_name,
         '<b>' . $plugin_title . '</b>',
         '<b>' . $user_login . '</b>',
@@ -70,7 +70,8 @@ function sws_fs_custom_connect_message(
     $freemius_link
 ) {
     return sprintf(
-        __( 'We added this opt-in feature so you won\'t miss any important updates and to help us enhance the plugin\'s compatibility and performance on your site.', 'smart-woocommerce-search' ) . '<br><br>' . __( 'By opting in, you\'ll get email notifications about feature updates, educational content, promo offers, and you\'ll share some basic WordPress environment details. If you decide not to opt in, that\'s okay! %2$s will still function just as well.', 'smart-woocommerce-search' ),
+        __( 'Opt in to receive feature updates and tips, and to share basic site details (WordPress version, PHP version, active plugin names) so we can ensure compatibility.
+<br>No spam. Unsubscribe any time. The plugin works the same either way.', 'smart-woocommerce-search' ),
         $user_first_name,
         '<b>' . $plugin_title . '</b>',
         '<b>' . $user_login . '</b>',

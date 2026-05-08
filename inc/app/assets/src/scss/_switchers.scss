@@ -1,7 +1,8 @@
 // Checkbox Switchers
 input[type="checkbox"].ymapp-switcher {
 	position: absolute;
-	margin: 8px 0 0 16px;
+	margin:5px 0 0 16px;
+	height: 5px;
 
 	& + label {
 		position: relative;
