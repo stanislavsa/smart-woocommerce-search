@@ -260,18 +260,22 @@ class Ysm_Search {
                 } else {
                     $posts_count = $per_page;
                 }
-                //				$paged = $query->query_vars['paged'];
-                //				if ( ! $paged || 1 === $paged ) {
-                //					if ( isset( $_GET['fwp_paged'] ) ) {
-                //						$paged = (int) filter_input( INPUT_GET, 'fwp_paged', FILTER_SANITIZE_FULL_SPECIAL_CHARS );
-                //					}
-                //				}
-                $post_ids = self::search_posts( $posts_count );
+                $offset = 0;
+                if ( isset( $_GET['fwp_paged'] ) ) {
+                    $paged = (int) filter_input( INPUT_GET, 'fwp_paged', FILTER_SANITIZE_FULL_SPECIAL_CHARS );
+                } else {
+                    $paged = $query->query_vars['paged'];
+                }
+                if ( $paged && 1 < $paged ) {
+                    $offset = $posts_count * ($paged - 1);
+                }
+                $post_ids = self::search_posts( $posts_count, $offset );
                 if ( empty( $post_ids ) ) {
                     $post_ids[] = 0;
                 }
                 $query->set( 's', '' );
                 $query->set( 'post__in', $post_ids );
+                $query->set( 'offset', 0 );
                 $query->set( 'post_type', self::get_post_types() );
                 $query->set( 'ysm_found_posts', self::$found_posts );
                 $query->set( 'posts_per_page', $posts_count );
@@ -338,7 +342,7 @@ class Ysm_Search {
 
     public static function alter_found_posts( $found_posts, $query ) {
         if ( !empty( $query->query_vars['ysm_found_posts'] ) ) {
-            $found_posts = $query->query_vars['ysm_found_posts'];
+            $found_posts = (int) $query->query_vars['ysm_found_posts'];
         }
         return $found_posts;
     }
@@ -374,6 +378,70 @@ class Ysm_Search {
             if ( -1 === $posts_count ) {
                 $posts_count = ysm_get_option( self::get_widget_id(), 'max_post_count' );
             }
+        }
+        if ( 'ready' === \YSWS\Core\DB_Index\get_index_status() ) {
+            $relevance = [];
+            $order_by = 'relevance';
+            $order = 'DESC';
+            if ( ysws_get_var( 'order_by' ) ) {
+                $order_by = ysws_get_var( 'order_by' );
+            }
+            if ( ysws_get_var( 'order' ) ) {
+                $order = ysws_get_var( 'order' );
+            }
+            $args = [
+                'search_terms' => self::get_search_terms(),
+                'max_count'    => $posts_count,
+                'offset'       => $offset,
+                'post_type'    => self::get_post_types(),
+                'orderby'      => $order_by,
+                'order'        => $order,
+                'lang'         => ysws_get_var( 'lang' ),
+                'relevance'    => $relevance,
+                'search_in'    => [
+                    'fields'        => [],
+                    'custom_fields' => [],
+                    'taxonomies'    => [],
+                ],
+            ];
+            if ( ysws_get_var( 'field_title' ) ) {
+                $args['search_in']['fields']['post_title'] = 160;
+            }
+            if ( ysws_get_var( 'field_content' ) ) {
+                $args['search_in']['fields']['post_content'] = 80;
+            }
+            if ( ysws_get_var( 'field_excerpt' ) ) {
+                $args['search_in']['fields']['post_excerpt'] = 80;
+            }
+            if ( ysws_get_var( 'field_product_sku' ) ) {
+                $args['search_in']['fields']['sku'] = 160;
+                $args['search_in']['fields']['ean'] = 160;
+            }
+
+            $taxonomies = ysws_get_var( 'taxonomies' );
+            if ( $taxonomies ) {
+                foreach ( $taxonomies as $taxonomy ) {
+                    $args['search_in']['taxonomies'][$taxonomy] = 20;
+                }
+            }
+            $key = md5( 'db_index_' . self::get_widget_id() . '_' . wp_json_encode( $args ) );
+            $cached = \YSWS\Core\Cache\get_query_cache( $key );
+            if ( false !== $cached && isset( $cached['post_ids'] ) ) {
+                $post_ids = $cached['post_ids'];
+                self::$found_posts = (int) $cached['found_posts'] ?? count( $post_ids );
+            } else {
+                $post_res = \YSWS\Core\DB_Index_Query\get_posts( $args );
+                $post_ids = $post_res['post_ids'];
+                self::$found_posts = (int) $post_res['found_posts'] ?? count( $post_ids );
+                \YSWS\Core\Cache\set_query_cache( $key, $post_res );
+            }
+            self::$processed[json_encode( self::get_search_terms() )] = $post_ids;
+            /**
+             * Modify the array of post ids
+             *
+             * @param array $post_ids List of post ids.
+             */
+            return apply_filters( 'sws_search_result_post_ids', $post_ids );
         }
         // fallback to old functionality
         $limit = ysws_get_var( 'max_post_count' );
@@ -498,11 +566,6 @@ class Ysm_Search {
                     $output .= $sku;
                 }
                 $output .= '</div>';
-				$sws_product_rating = '';
-				$sws_product_rating = \YSWS\Elements\rating( $product );
-				if ( $sws_product_rating ) {
-					$output .= $sws_product_rating;
-                }
             }
             if ( 'below_price' === ysws_get_var( 'popup_desc_pos' ) ) {
                 $output .= $post_excerpt;
@@ -515,8 +578,14 @@ class Ysm_Search {
                 $output .= $post_excerpt;
             }
             $output .= '</div>';
-			$output .= '</a>'; // wrapper link closed
+            $output .= '</a>'; // wrapper link closed
 
+            if ( $product ) {
+                $sws_product_rating = \YSWS\Elements\rating( $product );
+                if ( $sws_product_rating ) {
+                    $output .= $sws_product_rating;
+                }
+            }
             self::$suggestions[] = array(
                 'value'     => esc_js( $post->post_title ),
                 'data'      => $output,

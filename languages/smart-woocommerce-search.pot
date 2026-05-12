@@ -1,22 +1,22 @@
 # Copyright (C) 2026 YummyWP
-# This file is distributed under the same license as the Smart WooCommerce Search plugin.
+# This file is distributed under the same license as the Sokol: Smart WooCommerce Search plugin.
 msgid ""
 msgstr ""
-"Project-Id-Version: Smart WooCommerce Search 2.16.4\n"
+"Project-Id-Version: Sokol: Smart WooCommerce Search 3.0.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/smart-woocommerce-search\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-04-28T09:40:42+00:00\n"
+"POT-Creation-Date: 2026-05-12T15:59:58+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.11.0\n"
 "X-Domain: smart-woocommerce-search\n"
 
 #. Plugin Name of the plugin
 #: index.php
-msgid "Smart WooCommerce Search"
+msgid "Sokol: Smart WooCommerce Search"
 msgstr ""
 
 #. Plugin URI of the plugin
@@ -27,7 +27,7 @@ msgstr ""
 
 #. Description of the plugin
 #: index.php
-msgid "Smart Ajax Search allows you to instantly search WooCommerce products."
+msgid "Smart Search allows your customers to instantly find and purchase products on WooCommerce based store."
 msgstr ""
 
 #. Author of the plugin
@@ -60,7 +60,7 @@ msgstr ""
 
 #: inc/admin/admin.php:64
 #: inc/admin/admin.php:65
-#: templates/admin-page-index-status.php:32
+#: templates/admin-page-index-status.php:132
 msgid "Index Status"
 msgstr ""
 
@@ -138,6 +138,14 @@ msgstr ""
 msgid "Widget name"
 msgstr ""
 
+#: inc/core/db-index.php:291
+msgid "%s index is empty! We highly recommend to create index to improve search performance."
+msgstr ""
+
+#: inc/core/db-index.php:292
+msgid "Learn more here."
+msgstr ""
+
 #: inc/custom/class-ysm-search-widget.php:15
 msgid "Displays search widget"
 msgstr ""
@@ -197,15 +205,15 @@ msgstr ""
 msgid "Delete"
 msgstr ""
 
-#: inc/custom/scripts.php:219
+#: inc/custom/scripts.php:220
 msgid "Delete column?"
 msgstr ""
 
-#: inc/custom/scripts.php:220
+#: inc/custom/scripts.php:221
 msgid "Delete row?"
 msgstr ""
 
-#: inc/custom/scripts.php:221
+#: inc/custom/scripts.php:222
 msgid "Delete widget?"
 msgstr ""
 
@@ -309,12 +317,12 @@ msgid "When user clicked a recommended product in the fullscreen popup"
 msgstr ""
 
 #: templates/admin-page-analytics.php:88
-#: templates/admin-page-index-status.php:91
+#: templates/admin-page-index-status.php:210
 #: templates/admin-page-stop-words.php:34
 #: templates/admin-page-synonyms.php:72
 #: templates/admin-tab-fields.php:229
 #: templates/admin-tab-fullscreen.php:158
-#: templates/admin-tab-general.php:273
+#: templates/admin-tab-general.php:275
 #: templates/admin-tab-layout.php:167
 #: templates/admin-tab-styling.php:236
 msgid "Documentation"
@@ -359,41 +367,107 @@ msgstr ""
 msgid "Enter title"
 msgstr ""
 
-#: templates/admin-page-index-status.php:8
+#: templates/admin-page-index-status.php:9
 msgid "Empty"
 msgstr ""
 
+#: templates/admin-page-index-status.php:24
+msgid "Failed"
+msgstr ""
+
+#: templates/admin-page-index-status.php:27
+msgid "In progress"
+msgstr ""
+
+#: templates/admin-page-index-status.php:31
+msgid "Ready"
+msgstr ""
+
+#: templates/admin-page-index-status.php:37
+#: templates/admin-page-index-status.php:219
+msgid "Indexing…"
+msgstr ""
+
 #: templates/admin-page-index-status.php:38
-msgid "Tables are created"
-msgstr ""
-
-#: templates/admin-page-index-status.php:39
-msgid "yes"
-msgstr ""
-
-#: templates/admin-page-index-status.php:39
-msgid "no"
-msgstr ""
-
-#: templates/admin-page-index-status.php:42
-msgid "Indexed Post Types"
-msgstr ""
-
-#: templates/admin-page-index-status.php:65
-#: templates/admin-page-index-status.php:82
+#: templates/admin-page-index-status.php:218
 msgid "Create Index"
 msgstr ""
 
-#: templates/admin-page-index-status.php:76
-msgid "Delete all indexed data and create a fresh index"
+#: templates/admin-page-index-status.php:140
+msgid "Tables are created"
 msgstr ""
 
-#: templates/admin-page-index-status.php:78
+#: templates/admin-page-index-status.php:143
+msgid "Yes"
+msgstr ""
+
+#: templates/admin-page-index-status.php:145
+msgid "No"
+msgstr ""
+
+#: templates/admin-page-index-status.php:147
+msgid "Index tables are missing. Please deactivate and reactivate the plugin to recreate them."
+msgstr ""
+
+#: templates/admin-page-index-status.php:154
+msgid "Indexed Post Types"
+msgstr ""
+
+#: templates/admin-page-index-status.php:169
+msgid "Re-create index when settings updated"
+msgstr ""
+
+#: templates/admin-page-index-status.php:170
+msgid "Re-create the data index automatically when the search widget settings were updated"
+msgstr ""
+
+#: templates/admin-page-index-status.php:178
+msgid "Saved"
+msgstr ""
+
+#: templates/admin-page-index-status.php:192
+msgid "Delete all indexed data and create a fresh index."
+msgstr ""
+
+#: templates/admin-page-index-status.php:197
 msgid "Delete Index"
 msgstr ""
 
-#: templates/admin-page-index-status.php:79
-msgid "Delete all indexed data"
+#: templates/admin-page-index-status.php:199
+msgid "Delete all indexed data."
+msgstr ""
+
+#: templates/admin-page-index-status.php:221
+msgid "Processed %1$d/%2$d"
+msgstr ""
+
+#: templates/admin-page-index-status.php:262
+msgid "Indexing failed. Please try again."
+msgstr ""
+
+#: templates/admin-page-index-status.php:270
+msgid "Connection error while checking index status. Please reload the page."
+msgstr ""
+
+#: templates/admin-page-index-status.php:277
+#: templates/admin-page-index-status.php:296
+msgid "Running in background…"
+msgstr ""
+
+#: templates/admin-page-index-status.php:289
+msgid "Index is already running in the background. Do you want to stop it and start new indexing?"
+msgstr ""
+
+#: templates/admin-page-index-status.php:314
+msgid "Failed to start indexing. Please reload the page and try again."
+msgstr ""
+
+#: templates/admin-page-index-status.php:325
+msgid "Are you sure you want to delete all indexed data? This cannot be undone."
+msgstr ""
+
+#: templates/admin-page-index-status.php:342
+msgid "Failed to delete index. Please reload the page and try again."
 msgstr ""
 
 #: templates/admin-page-stop-words.php:18
@@ -782,133 +856,142 @@ msgid "Multiple Word Search"
 msgstr ""
 
 #: templates/admin-tab-general.php:158
-#: templates/admin-tab-general.php:163
+#: templates/admin-tab-general.php:164
 msgid "Only exact match"
 msgstr ""
 
 #: templates/admin-tab-general.php:159
-#: templates/admin-tab-general.php:164
+#: templates/admin-tab-general.php:165
 msgid "\"A\" or \"B\""
 msgstr ""
 
 #: templates/admin-tab-general.php:160
-#: templates/admin-tab-general.php:165
+#: templates/admin-tab-general.php:166
 msgid "\"A\" and \"B\" in one field"
 msgstr ""
 
-#: templates/admin-tab-general.php:162
-msgid "Define how to handle multiple words search:"
+#: templates/admin-tab-general.php:161
+#: templates/admin-tab-general.php:167
+msgid "\"A\" and \"B\" anywhere"
 msgstr ""
 
 #: templates/admin-tab-general.php:163
-msgid "results containing the exact phrase as entered by the user, preserving the word order"
+msgid "Define how to handle multiple words search:"
 msgstr ""
 
 #: templates/admin-tab-general.php:164
-msgid "results containing at least one of the entered words, regardless of their order or location"
+msgid "results containing the exact phrase as entered by the user, preserving the word order"
 msgstr ""
 
 #: templates/admin-tab-general.php:165
+msgid "results containing at least one of the entered words, regardless of their order or location"
+msgstr ""
+
+#: templates/admin-tab-general.php:166
 msgid "results where all entered words appear together within the same field (e.g., product title or description)"
 msgstr ""
 
-#: templates/admin-tab-general.php:171
+#: templates/admin-tab-general.php:167
+msgid "results where all entered words appear anywhere in the content, even if they are in different fields"
+msgstr ""
+
+#: templates/admin-tab-general.php:173
 msgid "Exclude Out of Stock Products"
 msgstr ""
 
-#: templates/admin-tab-general.php:172
+#: templates/admin-tab-general.php:174
 msgid "Exclude out of stock products and variations from results"
 msgstr ""
 
-#: templates/admin-tab-general.php:179
+#: templates/admin-tab-general.php:181
 msgid "Exclude variations from results if the parent product is \"Out of stock\""
 msgstr ""
 
-#: templates/admin-tab-general.php:186
+#: templates/admin-tab-general.php:188
 msgid "Visibility of Products with Variations"
 msgstr ""
 
-#: templates/admin-tab-general.php:187
+#: templates/admin-tab-general.php:189
 msgid "Select visibility of parent products and variations"
 msgstr ""
 
-#: templates/admin-tab-general.php:189
+#: templates/admin-tab-general.php:191
 msgid "Parent product with variations"
 msgstr ""
 
-#: templates/admin-tab-general.php:190
+#: templates/admin-tab-general.php:192
 msgid "Only parent product"
 msgstr ""
 
-#: templates/admin-tab-general.php:191
+#: templates/admin-tab-general.php:193
 msgid "Only variations"
 msgstr ""
 
-#: templates/admin-tab-general.php:198
+#: templates/admin-tab-general.php:200
 msgid "Search Results Page"
 msgstr ""
 
-#: templates/admin-tab-general.php:203
+#: templates/admin-tab-general.php:205
 msgid "Disable Redirect to Product Page"
 msgstr ""
 
-#: templates/admin-tab-general.php:204
+#: templates/admin-tab-general.php:206
 msgid "Prevent WooCommerce from automatically redirecting to a product page when there is only one search result."
 msgstr ""
 
-#: templates/admin-tab-general.php:210
+#: templates/admin-tab-general.php:212
 msgid "Suppress Database Query Altering"
 msgstr ""
 
-#: templates/admin-tab-general.php:211
+#: templates/admin-tab-general.php:213
 msgid "Prevent the theme or plugins from modifying the database query on the search results page"
 msgstr ""
 
-#: templates/admin-tab-general.php:217
+#: templates/admin-tab-general.php:219
 msgid "Disable Smart Search Feature on the Search Results Page"
 msgstr ""
 
-#: templates/admin-tab-general.php:218
+#: templates/admin-tab-general.php:220
 msgid "Disable altering search results by Smart Search plugin on the search results page.<br>By default the plugin modified search results according to selected options"
 msgstr ""
 
-#: templates/admin-tab-general.php:224
+#: templates/admin-tab-general.php:226
 msgid "Disable WooCommerce Template on the Search Results Page"
 msgstr ""
 
-#: templates/admin-tab-general.php:225
+#: templates/admin-tab-general.php:227
 msgid "Displays the default search results template defined in the theme instead of WooCommerce template.<br>Useful if you want to display posts with products together"
 msgstr ""
 
-#: templates/admin-tab-general.php:231
+#: templates/admin-tab-general.php:233
 msgid "Highlight Search Terms on the Search Results Page"
 msgstr ""
 
-#: templates/admin-tab-general.php:232
+#: templates/admin-tab-general.php:234
 msgid "Highlight words that match a search query on the search results page. Works only if the Smart Search Feature is not disabled on the search results page"
 msgstr ""
 
-#: templates/admin-tab-general.php:237
+#: templates/admin-tab-general.php:239
 msgid "Advanced"
 msgstr ""
 
-#: templates/admin-tab-general.php:243
+#: templates/admin-tab-general.php:245
 msgid "It may be helpful if you changed the base slug for WooCommerce products. The base slug is \"product\""
 msgstr ""
 
-#: templates/admin-tab-general.php:253
+#: templates/admin-tab-general.php:255
 msgid "To enhance existing search bar with the Smart Search features."
 msgstr ""
 
-#: templates/admin-tab-general.php:254
+#: templates/admin-tab-general.php:256
 msgid "Add a CSS selector (id or class) of the search bar's form element."
 msgstr ""
 
-#: templates/admin-tab-general.php:255
+#: templates/admin-tab-general.php:257
 msgid "Fill in each selector on a new line."
 msgstr ""
 
-#: templates/admin-tab-general.php:265
+#: templates/admin-tab-general.php:267
 msgid "Add extra CSS styles"
 msgstr ""
 
@@ -1077,7 +1160,7 @@ msgid "DESC"
 msgstr ""
 
 #: templates/admin-tab-order.php:44
-#: templates/promo/updates.php:54
+#: templates/promo/updates.php:83
 msgid "Relevance Configurator"
 msgstr ""
 
@@ -1221,82 +1304,123 @@ msgstr ""
 msgid "We've just shipped improvements to make your store search smarter and faster. Here's what's new:"
 msgstr ""
 
-#: templates/promo/updates.php:35
-msgid "Relevance Configurator:"
+#: templates/promo/updates.php:36
+msgid "Data Indexing — Now Free! 🎉"
 msgstr ""
 
-#: templates/promo/updates.php:36
-msgid "Fine-tune how search results are ranked — boost weight for title, SKU, or description matches so the most relevant products always rise to the top."
+#: templates/promo/updates.php:37
+msgid "The data indexing engine is now available in the free plugin. Build a blazing-fast search index of your entire product catalog for instant, accurate results — even for large stores."
 msgstr ""
 
 #: templates/promo/updates.php:38
-msgid "PRO"
+msgid "FREE"
 msgstr ""
 
 #: templates/promo/updates.php:43
-msgid "Google Analytics (GA4) Integration:"
+msgid "Product Variations Popup:"
 msgstr ""
 
 #: templates/promo/updates.php:44
-msgid "Track every search interaction — queries, clicks, and no-results events — directly in your GA4 dashboard."
+msgid "NEW"
 msgstr ""
 
-#: templates/promo/updates.php:45
-msgid "Learn more"
+#: templates/promo/updates.php:46
+#: templates/promo/updates.php:55
+msgid "PRO"
+msgstr ""
+
+#: templates/promo/updates.php:48
+msgid "Shoppers can now select product options (size, color, and more) and add items to cart directly from the search popup — without ever leaving the page."
 msgstr ""
 
 #: templates/promo/updates.php:52
-msgid "Unlock all PRO features:"
+msgid "Relevance Configurator:"
 msgstr ""
 
-#: templates/promo/updates.php:54
-msgid "control exactly how search results are ranked"
+#: templates/promo/updates.php:53
+msgid "Fine-tune how search results are ranked — boost weight for title, SKU, or description matches so the most relevant products always rise to the top."
 msgstr ""
 
-#: templates/promo/updates.php:55
-msgid "\"Did You Mean\" Keywords & Synonyms"
+#: templates/promo/updates.php:60
+msgid "Google Analytics (GA4) Integration:"
 msgstr ""
 
-#: templates/promo/updates.php:55
-msgid "automatically correct typos and suggest alternatives"
-msgstr ""
-
-#: templates/promo/updates.php:56
-msgid "Search in Variations, Custom Fields & Taxonomies"
-msgstr ""
-
-#: templates/promo/updates.php:56
-msgid "find any product by any attribute"
-msgstr ""
-
-#: templates/promo/updates.php:57
-msgid "Product Labels & Add to Cart Button"
-msgstr ""
-
-#: templates/promo/updates.php:57
-msgid "convert directly from the search popup"
-msgstr ""
-
-#: templates/promo/updates.php:58
-msgid "Data Indexing & Grid Layout"
-msgstr ""
-
-#: templates/promo/updates.php:58
-msgid "blazing fast results even for large catalogs"
-msgstr ""
-
-#: templates/promo/updates.php:59
-msgid "Stop Words, WPML & Polylang support"
+#: templates/promo/updates.php:61
+msgid "Track every search interaction — queries, clicks, and no-results events — directly in your GA4 dashboard."
 msgstr ""
 
 #: templates/promo/updates.php:62
+msgid "Learn more"
+msgstr ""
+
+#: templates/promo/updates.php:70
+msgid "You have used this free plugin for some time now, and I hope you like it! If you do, please consider"
+msgstr ""
+
+#: templates/promo/updates.php:72
+msgid "leaving a 5-star review on WordPress.org"
+msgstr ""
+
+#: templates/promo/updates.php:74
+msgid "— it really helps!"
+msgstr ""
+
+#: templates/promo/updates.php:80
+msgid "Unlock all PRO features:"
+msgstr ""
+
+#: templates/promo/updates.php:82
+msgid "Product Variations Popup"
+msgstr ""
+
+#: templates/promo/updates.php:82
+msgid "let shoppers pick options and add to cart right from search results"
+msgstr ""
+
+#: templates/promo/updates.php:83
+msgid "control exactly how search results are ranked"
+msgstr ""
+
+#: templates/promo/updates.php:84
+msgid "\"Did You Mean\" Keywords & Synonyms"
+msgstr ""
+
+#: templates/promo/updates.php:84
+msgid "automatically correct typos and suggest alternatives"
+msgstr ""
+
+#: templates/promo/updates.php:85
+msgid "Search in Variations, Custom Fields & Taxonomies"
+msgstr ""
+
+#: templates/promo/updates.php:85
+msgid "find any product by any attribute"
+msgstr ""
+
+#: templates/promo/updates.php:86
+msgid "Product Labels & Add to Cart Button"
+msgstr ""
+
+#: templates/promo/updates.php:86
+msgid "convert directly from the search popup"
+msgstr ""
+
+#: templates/promo/updates.php:87
+msgid "Grid Layout"
+msgstr ""
+
+#: templates/promo/updates.php:87
+msgid "display results in a visual product grid"
+msgstr ""
+
+#: templates/promo/updates.php:90
 msgid "Start 14-Day Free Trial"
 msgstr ""
 
-#: templates/promo/updates.php:65
+#: templates/promo/updates.php:93
 msgid "View all PRO features →"
 msgstr ""
 
-#: templates/promo/updates.php:71
+#: templates/promo/updates.php:99
 msgid "Dismiss"
 msgstr ""

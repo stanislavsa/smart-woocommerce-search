@@ -113,7 +113,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
                 'type'        => 'checkbox',
                 'title'       => __( 'Product SKU', 'smart-woocommerce-search' ),
                 'description' => __( 'Enable search in product SKU', 'smart-woocommerce-search' ),
-                'value'       => '',
+                'value'       => 1,
             ));
 
             ysm_setting( $w_id, 'custom_fields', array(

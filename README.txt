@@ -1,7 +1,7 @@
-=== Smart WooCommerce Search ===
+=== Sokol: Smart WooCommerce Search ===
 Contributors: yummy-wp
 Tags: search, ajax search, product search, search by sku, woocommerce search
-Stable tag: 2.16.4
+Stable tag: 3.0.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Requires at least: 5.9
@@ -22,13 +22,14 @@ Improve the default **WooCommerce search** or create a fully custom search widge
 
 = Free Features: =
 
+* [Data indexing](https://www.wpsmartsearch.com/docs/data-indexing/) - new feature!
 * Full Screen Mode
 * Recent Searches
 * Search results with images and prices
-* [Google Analytics integration (GA4)](https://www.wpsmartsearch.com/docs/analytics/)
+* [Google Analytics integration (GA4)](https://www.wpsmartsearch.com/docs/analytics/) - new feature!
 * Simple integration into default search widgets
-* Advanced caching (Memcache, Redis)
-* [Search by product SKU](https://www.wpsmartsearch.com/docs/content-types/#2-toc-title)
+* Advanced caching (Memcache, Redis) - new feature!
+* [Search by product SKU or EAN](https://www.wpsmartsearch.com/docs/content-types/#2-toc-title)
 * Search in product Categories
 * Search in product Tags
 * Selected product categories
@@ -40,26 +41,25 @@ Improve the default **WooCommerce search** or create a fully custom search widge
 * WPBakery Page Builder compatible
 * Visual Composer compatible
 * Search Exclude plugin compatible
+* WPML compatibility - new feature!
+* Polylang compatibility - new feature!
 
 Discover all PRO features with a **14-day free trial** — no risk, cancel anytime.
 
 = Upgrade to PRO and boost your sales: =
 
 * ["Did you mean" Keywords / Synonyms](https://www.wpsmartsearch.com/docs/synonyms/)
-* [Search in Variations](https://www.wpsmartsearch.com/docs/content-types/#1-toc-title)
+* Product Variations Popup - Shoppers can now select product options (size, color, and more) and add items to cart directly from the search popup
+* Add to Cart button in search results
+* Relevance configurator
+* [Grid layout](https://www.wpsmartsearch.com/docs/layout-settings/#1-toc-title)
 * [Search in Custom Post Types](https://www.wpsmartsearch.com/docs/content-types/#1-toc-title)
 * [Search in Custom Taxonomies](https://www.wpsmartsearch.com/docs/content-types/#3-toc-title)
 * [Search in Custom Fields](https://www.wpsmartsearch.com/docs/content-types/#2-toc-title)
 * Search in Product Attributes
 * Search in Product Brands
 * Product labels (Featured, Sale, Out of Stock badges)
-* Add to Cart button in search results
 * [Stop words](https://www.wpsmartsearch.com/docs/stop-words/)
-* [Data indexing](https://www.wpsmartsearch.com/docs/data-indexing/)
-* [Grid layout](https://www.wpsmartsearch.com/docs/layout-settings/#1-toc-title)
-* Relevance configurator
-* WPML compatibility
-* Polylang compatibility
 * ACF plugin compatibility
 * Custom Post Type UI plugin compatibility
 * Ultimate WooCommerce Brands plugin compatibility
@@ -105,6 +105,14 @@ Multilingual support (WPML and Polylang) is available in the PRO version.
 Yes — you can try all PRO features free for 14 days. Start your trial from the plugin settings page inside your WordPress dashboard.
 
 == Changelog ==
+
+= 3.0.4 =
+* fix
+
+= 3.0.0 =
+* Added: new major feature - data indexing - that improves search performance
+* Updated: WPML and Polylang compatibility
+* Updated: caching logic
 
 = 2.16.4 =
 * Added: toggles to on/off category events for Google Analytics

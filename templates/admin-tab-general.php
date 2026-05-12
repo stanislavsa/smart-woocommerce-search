@@ -153,16 +153,18 @@
             ysm_setting( $w_id, 'enable_fuzzy_search', array(
                 'type'        => 'select',
                 'title'       => __( 'Multiple Word Search', 'smart-woocommerce-search' ),
-                'value'       => '',
+                'value'       => '2',
                 'choices'     => array(
                     '0' => __( 'Only exact match', 'smart-woocommerce-search' ),
                     '1' => __( '"A" or "B"', 'smart-woocommerce-search' ),
                     '2' => __( '"A" and "B" in one field', 'smart-woocommerce-search' ),
+                    '3' => __( '"A" and "B" anywhere', 'smart-woocommerce-search' ),
                 ),
                 'description' => __( 'Define how to handle multiple words search:', 'smart-woocommerce-search' )
 				. '<br>- ' . __( 'Only exact match', 'smart-woocommerce-search' ) . ' - ' . __( 'results containing the exact phrase as entered by the user, preserving the word order', 'smart-woocommerce-search' )
 				. '<br>- ' . __( '"A" or "B"', 'smart-woocommerce-search' ) . ' - ' . __( 'results containing at least one of the entered words, regardless of their order or location', 'smart-woocommerce-search' )
 				. '<br>- ' . __( '"A" and "B" in one field', 'smart-woocommerce-search' ) . ' - ' . __( 'results where all entered words appear together within the same field (e.g., product title or description)', 'smart-woocommerce-search' )
+				. '<br>- ' . __( '"A" and "B" anywhere', 'smart-woocommerce-search' ) . ' - ' . __( 'results where all entered words appear anywhere in the content, even if they are in different fields', 'smart-woocommerce-search' )
 				,
             ));
 
