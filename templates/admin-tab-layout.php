@@ -55,14 +55,6 @@
 	            'value'       => 0,
             ));
 
-            ysm_setting( $w_id, 'variation_thumb_fallback', array(
-                'type'        => 'checkbox',
-                'title'       => 'Variation\'s Image Fallback',
-                'description' => __( 'Use the parent product image if a variation has no image', 'smart-woocommerce-search' ),
-                'value'       => 1,
-                'is_pro'      => true,
-            ));
-
             $image_sizes = get_intermediate_image_sizes();
             ysm_setting( $w_id, 'popup_thumb_media_size', array(
                 'type'        => 'select',
@@ -152,8 +144,8 @@
 
             ysm_setting( $w_id, 'display_add_to_cart', array(
                 'type' => 'checkbox',
-                'title' => __( 'Display "Add to Cart" Button', 'smart-woocommerce-search' ),
-                'description' => __( 'Allow users to add products to their cart directly from the popup', 'smart-woocommerce-search' ),
+                'title' => __( 'Display "Add to Cart" / "Select options" Button', 'smart-woocommerce-search' ),
+                'description' => __( 'Allow users to preview variations and add products to their cart directly from the popup', 'smart-woocommerce-search' ),
                 'value' => 0,
                 'is_pro'      => true,
             ));

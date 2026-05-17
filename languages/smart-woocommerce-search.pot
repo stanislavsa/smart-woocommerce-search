@@ -2,14 +2,14 @@
 # This file is distributed under the same license as the Sokol: Smart WooCommerce Search plugin.
 msgid ""
 msgstr ""
-"Project-Id-Version: Sokol: Smart WooCommerce Search 3.0.0\n"
+"Project-Id-Version: Sokol: Smart WooCommerce Search 3.0.5\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/smart-woocommerce-search\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-05-12T15:59:58+00:00\n"
+"POT-Creation-Date: 2026-05-17T11:04:38+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.11.0\n"
 "X-Domain: smart-woocommerce-search\n"
@@ -35,52 +35,52 @@ msgstr ""
 msgid "YummyWP"
 msgstr ""
 
-#: inc/admin/admin.php:40
+#: inc/admin/admin.php:42
 #: templates/admin-page-widgets.php:112
 msgid "Search Widgets"
 msgstr ""
 
-#: inc/admin/admin.php:41
+#: inc/admin/admin.php:43
 msgid "Widgets"
 msgstr ""
 
-#: inc/admin/admin.php:48
+#: inc/admin/admin.php:50
 msgid "Add New Search Widget"
 msgstr ""
 
-#: inc/admin/admin.php:49
+#: inc/admin/admin.php:51
 #: templates/admin-page-widgets.php:150
 msgid "Add New"
 msgstr ""
 
-#: inc/admin/admin.php:56
-#: inc/admin/admin.php:57
+#: inc/admin/admin.php:58
+#: inc/admin/admin.php:59
 msgid "Analytics"
 msgstr ""
 
-#: inc/admin/admin.php:64
-#: inc/admin/admin.php:65
+#: inc/admin/admin.php:66
+#: inc/admin/admin.php:67
 #: templates/admin-page-index-status.php:132
 msgid "Index Status"
 msgstr ""
 
-#: inc/admin/admin.php:72
-#: inc/admin/admin.php:73
+#: inc/admin/admin.php:74
+#: inc/admin/admin.php:75
 msgid "Synonyms"
 msgstr ""
 
-#: inc/admin/admin.php:80
-#: inc/admin/admin.php:81
+#: inc/admin/admin.php:82
+#: inc/admin/admin.php:83
 msgid "Stop Words"
 msgstr ""
 
-#: inc/admin/admin.php:118
+#: inc/admin/admin.php:147
 #: templates/admin-page-form.php:58
 msgid "Settings"
 msgstr ""
 
 #. translators: %s: Name/id of a widget
-#: inc/admin/admin.php:135
+#: inc/admin/admin.php:164
 msgid "Edit Widget: %s"
 msgstr ""
 
@@ -205,15 +205,15 @@ msgstr ""
 msgid "Delete"
 msgstr ""
 
-#: inc/custom/scripts.php:220
+#: inc/custom/scripts.php:196
 msgid "Delete column?"
 msgstr ""
 
-#: inc/custom/scripts.php:221
+#: inc/custom/scripts.php:197
 msgid "Delete row?"
 msgstr ""
 
-#: inc/custom/scripts.php:222
+#: inc/custom/scripts.php:198
 msgid "Delete widget?"
 msgstr ""
 
@@ -322,8 +322,8 @@ msgstr ""
 #: templates/admin-page-synonyms.php:72
 #: templates/admin-tab-fields.php:229
 #: templates/admin-tab-fullscreen.php:158
-#: templates/admin-tab-general.php:275
-#: templates/admin-tab-layout.php:167
+#: templates/admin-tab-general.php:267
+#: templates/admin-tab-layout.php:159
 #: templates/admin-tab-styling.php:236
 msgid "Documentation"
 msgstr ""
@@ -903,95 +903,91 @@ msgstr ""
 msgid "Exclude out of stock products and variations from results"
 msgstr ""
 
-#: templates/admin-tab-general.php:181
-msgid "Exclude variations from results if the parent product is \"Out of stock\""
-msgstr ""
-
-#: templates/admin-tab-general.php:188
+#: templates/admin-tab-general.php:180
 msgid "Visibility of Products with Variations"
 msgstr ""
 
-#: templates/admin-tab-general.php:189
+#: templates/admin-tab-general.php:181
 msgid "Select visibility of parent products and variations"
 msgstr ""
 
-#: templates/admin-tab-general.php:191
+#: templates/admin-tab-general.php:183
 msgid "Parent product with variations"
 msgstr ""
 
-#: templates/admin-tab-general.php:192
+#: templates/admin-tab-general.php:184
 msgid "Only parent product"
 msgstr ""
 
-#: templates/admin-tab-general.php:193
+#: templates/admin-tab-general.php:185
 msgid "Only variations"
 msgstr ""
 
-#: templates/admin-tab-general.php:200
+#: templates/admin-tab-general.php:192
 msgid "Search Results Page"
 msgstr ""
 
-#: templates/admin-tab-general.php:205
+#: templates/admin-tab-general.php:197
 msgid "Disable Redirect to Product Page"
 msgstr ""
 
-#: templates/admin-tab-general.php:206
+#: templates/admin-tab-general.php:198
 msgid "Prevent WooCommerce from automatically redirecting to a product page when there is only one search result."
 msgstr ""
 
-#: templates/admin-tab-general.php:212
+#: templates/admin-tab-general.php:204
 msgid "Suppress Database Query Altering"
 msgstr ""
 
-#: templates/admin-tab-general.php:213
+#: templates/admin-tab-general.php:205
 msgid "Prevent the theme or plugins from modifying the database query on the search results page"
 msgstr ""
 
-#: templates/admin-tab-general.php:219
+#: templates/admin-tab-general.php:211
 msgid "Disable Smart Search Feature on the Search Results Page"
 msgstr ""
 
-#: templates/admin-tab-general.php:220
+#: templates/admin-tab-general.php:212
 msgid "Disable altering search results by Smart Search plugin on the search results page.<br>By default the plugin modified search results according to selected options"
 msgstr ""
 
-#: templates/admin-tab-general.php:226
+#: templates/admin-tab-general.php:218
 msgid "Disable WooCommerce Template on the Search Results Page"
 msgstr ""
 
-#: templates/admin-tab-general.php:227
+#: templates/admin-tab-general.php:219
 msgid "Displays the default search results template defined in the theme instead of WooCommerce template.<br>Useful if you want to display posts with products together"
 msgstr ""
 
-#: templates/admin-tab-general.php:233
+#: templates/admin-tab-general.php:225
 msgid "Highlight Search Terms on the Search Results Page"
 msgstr ""
 
-#: templates/admin-tab-general.php:234
+#: templates/admin-tab-general.php:226
 msgid "Highlight words that match a search query on the search results page. Works only if the Smart Search Feature is not disabled on the search results page"
 msgstr ""
 
-#: templates/admin-tab-general.php:239
+#: templates/admin-tab-general.php:231
 msgid "Advanced"
 msgstr ""
 
-#: templates/admin-tab-general.php:245
+#: templates/admin-tab-general.php:237
 msgid "It may be helpful if you changed the base slug for WooCommerce products. The base slug is \"product\""
 msgstr ""
 
-#: templates/admin-tab-general.php:255
+#: templates/admin-tab-general.php:247
 msgid "To enhance existing search bar with the Smart Search features."
 msgstr ""
 
-#: templates/admin-tab-general.php:256
+#: templates/admin-tab-general.php:248
 msgid "Add a CSS selector (id or class) of the search bar's form element."
 msgstr ""
 
-#: templates/admin-tab-general.php:257
+#: templates/admin-tab-general.php:249
 msgid "Fill in each selector on a new line."
 msgstr ""
 
-#: templates/admin-tab-general.php:267
+#: templates/admin-tab-general.php:259
 msgid "Add extra CSS styles"
 msgstr ""
 
@@ -1032,103 +1028,99 @@ msgid "Display Rating"
 msgstr ""
 
 #: templates/admin-tab-layout.php:61
-msgid "Use the parent product image if a variation has no image"
-msgstr ""
-
-#: templates/admin-tab-layout.php:69
 msgid "Image Size"
 msgstr ""
 
-#: templates/admin-tab-layout.php:70
+#: templates/admin-tab-layout.php:62
 msgid "Select image size"
 msgstr ""
 
-#: templates/admin-tab-layout.php:77
+#: templates/admin-tab-layout.php:69
 msgid "Image Max Width, px"
 msgstr ""
 
-#: templates/admin-tab-layout.php:78
+#: templates/admin-tab-layout.php:70
 msgid "Limit image maximal width in pixels"
 msgstr ""
 
-#: templates/admin-tab-layout.php:84
+#: templates/admin-tab-layout.php:76
 msgid "Display Description"
 msgstr ""
 
-#: templates/admin-tab-layout.php:85
+#: templates/admin-tab-layout.php:77
 msgid "Display product description"
 msgstr ""
 
-#: templates/admin-tab-layout.php:91
+#: templates/admin-tab-layout.php:83
 msgid "Description's Location"
 msgstr ""
 
-#: templates/admin-tab-layout.php:95
+#: templates/admin-tab-layout.php:87
 msgid "Under the image"
 msgstr ""
 
-#: templates/admin-tab-layout.php:96
+#: templates/admin-tab-layout.php:88
 msgid "Under the title"
 msgstr ""
 
-#: templates/admin-tab-layout.php:97
+#: templates/admin-tab-layout.php:89
 msgid "Under the price and SKU"
 msgstr ""
 
-#: templates/admin-tab-layout.php:103
+#: templates/admin-tab-layout.php:95
 msgid "Display Category"
 msgstr ""
 
-#: templates/admin-tab-layout.php:104
+#: templates/admin-tab-layout.php:96
 msgid "Display product or post category"
 msgstr ""
 
-#: templates/admin-tab-layout.php:110
+#: templates/admin-tab-layout.php:102
 msgid "Display Product Price"
 msgstr ""
 
-#: templates/admin-tab-layout.php:117
+#: templates/admin-tab-layout.php:109
 msgid "Display Product SKU"
 msgstr ""
 
-#: templates/admin-tab-layout.php:124
+#: templates/admin-tab-layout.php:116
 msgid "SKU label"
 msgstr ""
 
-#: templates/admin-tab-layout.php:125
+#: templates/admin-tab-layout.php:117
 msgid "Displays label before SKU. Leave this field empty to hide the label"
 msgstr ""
 
-#: templates/admin-tab-layout.php:131
+#: templates/admin-tab-layout.php:123
 msgid "Display \"Out of stock\" Label"
 msgstr ""
 
-#: templates/admin-tab-layout.php:132
+#: templates/admin-tab-layout.php:124
 msgid "Indicates if a product is out of stock"
 msgstr ""
 
-#: templates/admin-tab-layout.php:139
+#: templates/admin-tab-layout.php:131
 msgid "Display \"Sale\" Label"
 msgstr ""
 
-#: templates/admin-tab-layout.php:140
+#: templates/admin-tab-layout.php:132
 msgid "Indicates if product has discount price"
 msgstr ""
 
-#: templates/admin-tab-layout.php:147
+#: templates/admin-tab-layout.php:139
 msgid "Display \"Featured\" Label"
 msgstr ""
 
-#: templates/admin-tab-layout.php:148
+#: templates/admin-tab-layout.php:140
 msgid "Indicates if product is marked as special"
 msgstr ""
 
-#: templates/admin-tab-layout.php:155
-msgid "Display \"Add to Cart\" Button"
+#: templates/admin-tab-layout.php:147
+msgid "Display \"Add to Cart\" / \"Select options\" Button"
 msgstr ""
 
-#: templates/admin-tab-layout.php:156
-msgid "Allow users to add products to their cart directly from the popup"
+#: templates/admin-tab-layout.php:148
+msgid "Allow users to preview variations and add products to their cart directly from the popup"
 msgstr ""
 
 #: templates/admin-tab-order.php:21
@@ -1253,11 +1245,19 @@ msgid "Description's Text Color"
 msgstr ""
 
 #: templates/admin-tab-styling.php:152
-msgid "\"View all\" Button's Text Color"
+msgid "Buttons Text Color"
+msgstr ""
+
+#: templates/admin-tab-styling.php:153
+msgid "Set text color for buttons like: "
 msgstr ""
 
 #: templates/admin-tab-styling.php:159
-msgid "\"View all\" Button's Background Color"
+msgid "Buttons Background Color"
+msgstr ""
+
+#: templates/admin-tab-styling.php:160
+msgid "Set background color for buttons like: "
 msgstr ""
 
 #: templates/admin-tab-styling.php:166

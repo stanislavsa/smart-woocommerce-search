@@ -1,7 +1,7 @@
 === Sokol: Smart WooCommerce Search ===
 Contributors: yummy-wp
 Tags: search, ajax search, product search, search by sku, woocommerce search
-Stable tag: 3.0.4
+Stable tag: 3.0.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Requires at least: 5.9
@@ -105,6 +105,10 @@ Multilingual support (WPML and Polylang) is available in the PRO version.
 Yes — you can try all PRO features free for 14 days. Start your trial from the plugin settings page inside your WordPress dashboard.
 
 == Changelog ==
+
+= 3.0.5 =
+* Fixed: issue when a few inline widgets present and a backdrop covers widgets so user can't click on the founded results
+* Updated: resent searches chips styles for mobile
 
 = 3.0.4 =
 * fix

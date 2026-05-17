@@ -149,15 +149,15 @@
 
             ysm_setting( $w_id, 'popup_view_all_link_text_color', array(
                 'type'        => 'color',
-                'title'       => __( '"View all" Button\'s Text Color', 'smart-woocommerce-search' ),
-                'description' => '',
+                'title'       => __( 'Buttons Text Color', 'smart-woocommerce-search' ),
+                'description' => __( 'Set text color for buttons like: ', 'smart-woocommerce-search' ) . '"View all", "Add to cart", "Select options", "View product"',
                 'value'       => '',
             ));
 
             ysm_setting( $w_id, 'popup_view_all_link_bg_color', array(
                 'type'        => 'color',
-                'title'       => __( '"View all" Button\'s Background Color', 'smart-woocommerce-search' ),
-                'description' => '',
+                'title'       => __( 'Buttons Background Color', 'smart-woocommerce-search' ),
+                'description' => __( 'Set background color for buttons like: ', 'smart-woocommerce-search' ) . '"View all", "Add to cart", "Select options", "View product"',
                 'value'       => '',
             ));
 

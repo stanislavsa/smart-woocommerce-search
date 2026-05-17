@@ -9,6 +9,9 @@ add_filter( 'pre_render_block', __NAMESPACE__ . '\\update_block_query', 999999, 
  * Add class to block
  */
 function add_class_to_block( $block_content, $block ) {
+	if ( ! $block_content || is_admin() ) {
+		return $block_content;
+	}
 	if ( 'core/search' === $block['blockName'] ) {
 		$block_content = new \WP_HTML_Tag_Processor( $block_content );
 		$block_content->next_tag();

@@ -175,14 +175,6 @@
                 'value'       => 0,
             ));
 
-            ysm_setting( $w_id, 'exclude_out_of_stock_parent_variations', array(
-                'type'        => 'checkbox',
-                'title'       => '',
-                'description' => __( 'Exclude variations from results if the parent product is "Out of stock"', 'smart-woocommerce-search' ),
-                'value'       => 0,
-                'is_pro'      => true,
-            ));
-
             ysm_setting( $w_id, 'product_variation_visibility', array(
                 'type'        => 'select',
                 'title'       => __( 'Visibility of Products with Variations', 'smart-woocommerce-search' ),

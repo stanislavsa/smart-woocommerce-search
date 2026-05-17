@@ -548,7 +548,6 @@ class Ysm_Widget_Manager {
                     'popup_height'                 => 500,
                     'popup_height_mobile'          => 400,
                     'display_icon'                 => 1,
-                    'variation_thumb_fallback'     => 1,
                     'popup_thumb_media_size'       => 'large',
                     'popup_thumb_size'             => '150',
                     'popup_desc_pos'               => 'below_image',
