@@ -1,7 +1,7 @@
 === Sokol: Smart WooCommerce Search ===
 Contributors: yummy-wp
 Tags: search, ajax search, product search, search by sku, woocommerce search
-Stable tag: 3.0.5
+Stable tag: 3.0.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Requires at least: 5.9
@@ -87,7 +87,7 @@ The example uses widget ID = 1. Make sure to change the ID to match the widget y
 
 = Is it compatible with my WordPress theme? =
 
-The plugin integrates cleanly into virtually any theme. It may require minor CSS tweaks to match your exact design, but it works out of the box with all major themes and page builders (Elementor, DIVI, WPBakery, Visual Composer, Avada).
+The falcon plugin integrates cleanly into virtually any theme. It may require minor CSS tweaks to match your exact design, but it works out of the box with all major themes and page builders (Elementor, DIVI, WPBakery, Visual Composer, Avada).
 
 = How do I manage the plugin settings? =
 
@@ -99,11 +99,19 @@ Yes. When searching through products — either via the default widget or a cust
 
 = Does it work with WPML or Polylang for multilingual stores? =
 
-Multilingual support (WPML and Polylang) is available in the PRO version.
+Multilingual support (WPML and Polylang) is available.
 
 = Is there a free trial for PRO? =
 
 Yes — you can try all PRO features free for 14 days. Start your trial from the plugin settings page inside your WordPress dashboard.
+
+== Screenshots ==
+
+1. Latest Searches
+2. Smart Search PRO - Grid layout
+3. Smart Search PRO - Did you mean / Synonyms
+4. Fullscreen Popup
+5. Smart Search PRO - Product options
 
 == Changelog ==
 
