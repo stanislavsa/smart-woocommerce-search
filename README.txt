@@ -5,7 +5,7 @@ Stable tag: 3.0.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Requires at least: 5.9
-Tested up to: 6.9
+Tested up to: 7.0
 Requires PHP: 7.0
 
 Boost WooCommerce sales with instant Ajax product search — live suggestions, fullscreen popup, SKU search, and GA4 analytics, all in one plugin.
@@ -48,6 +48,7 @@ Discover all PRO features with a **14-day free trial** — no risk, cancel anyti
 
 = Upgrade to PRO and boost your sales: =
 
+* Internal Analytics with top search queries, no-results phrases, and most-clicked products
 * ["Did you mean" Keywords / Synonyms](https://www.wpsmartsearch.com/docs/synonyms/)
 * Product Variations Popup - Shoppers can now select product options (size, color, and more) and add items to cart directly from the search popup
 * Add to Cart button in search results
@@ -72,13 +73,13 @@ Have questions? [Contact us](https://www.wpsmartsearch.com/contact/).
 
 1. Unzip the downloaded .zip file.
 2. Upload the plugin folder to the `wp-content/plugins/` directory of your WordPress site.
-3. Go to **Plugins** in your WordPress dashboard and activate **Smart WooCommerce Search**.
+3. Go to **Plugins** in your WordPress dashboard and activate **Sokol: Smart WooCommerce Search**.
 4. Configure the plugin at `/wp-admin/admin.php?page=smart-search`.
 5. Place the search shortcode `<?php echo do_shortcode('[smart_search id="1"]'); ?>` into your theme template, or use the built-in widget.
 
 == Frequently Asked Questions ==
 
-= How do I add the Smart Search widget to a theme template (PHP file)? =
+= How do I add the Socol Smart Search widget to a theme template (PHP file)? =
 
 Add this code: `<?php echo do_shortcode('[smart_search id="1"]'); ?>`
 
@@ -105,6 +106,10 @@ Multilingual support (WPML and Polylang) is available in the PRO version.
 Yes — you can try all PRO features free for 14 days. Start your trial from the plugin settings page inside your WordPress dashboard.
 
 == Changelog ==
+
+= 3.0.6 =
+* Fixed: issue when user can't click on the founded results in the inline widget
+* Checked: WordPress 7.0 compatibility
 
 = 3.0.5 =
 * Fixed: issue when a few inline widgets present and a backdrop covers widgets so user can't click on the founded results

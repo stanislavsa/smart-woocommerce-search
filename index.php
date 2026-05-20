@@ -6,7 +6,7 @@
  * Tags: woocommerce search, ajax search, woocommerce, woocommerce search by sku, woocommerce search shortcode, product search, product filter, woocommerce search results, instant search, woocommerce search plugin, woocommerce search form, search for woocommerce, woocommerce search page, search, woocommerce product search, search woocommerce, shop, shop search, autocomplete, autosuggest, search for wp, search for WordPress, search plugin, woocommerce search by sku, search results,  woocommerce search shortcode, search products, search autocomplete, woocommerce advanced search, woocommerce predictive search, woocommerce live search, woocommerce single product, woocommerce site search, products, shop, category search, custom search, predictive search, relevant search, search product, woocommerce plugin, posts search, wp search, WordPress search
  * Author:      YummyWP
  * Author URI:  https://www.wpsmartsearch.com/
- * Version:     3.0.5
+ * Version:     3.0.6
  * Domain Path: /languages
  * Text Domain: smart-woocommerce-search
  * Requires at least: 5.9
@@ -44,13 +44,13 @@ if ( function_exists( 'sws_fs' ) ) {
 	}
 
 	// plugin version
-	define( 'SWS_PLUGIN_VERSION', '3.0.5' );
+	define( 'SWS_PLUGIN_VERSION', '3.0.6' );
 
 	define( 'SWS_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 	define( 'SWS_PLUGIN_URI', plugin_dir_url( __FILE__ ) );
 	define( 'SWS_PLUGIN_BASENAME', plugin_basename( __FILE__ ) );
 	// update popup version
-	define( 'SWS_PLUGIN_UPDATE_NOTICE', 5 );
+	define( 'SWS_PLUGIN_UPDATE_NOTICE', 6 );
 	// DB version
 	define( 'SWS_DB_VERSION', '1.3' );
 

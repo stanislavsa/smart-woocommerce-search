@@ -2,14 +2,14 @@
 # This file is distributed under the same license as the Sokol: Smart WooCommerce Search plugin.
 msgid ""
 msgstr ""
-"Project-Id-Version: Sokol: Smart WooCommerce Search 3.0.5\n"
+"Project-Id-Version: Sokol: Smart WooCommerce Search 3.0.6\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/smart-woocommerce-search\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-05-17T11:04:38+00:00\n"
+"POT-Creation-Date: 2026-05-20T20:05:19+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.11.0\n"
 "X-Domain: smart-woocommerce-search\n"
@@ -138,11 +138,11 @@ msgstr ""
 msgid "Widget name"
 msgstr ""
 
-#: inc/core/db-index.php:291
+#: inc/core/db-index.php:302
 msgid "%s index is empty! We highly recommend to create index to improve search performance."
 msgstr ""
 
-#: inc/core/db-index.php:292
+#: inc/core/db-index.php:303
 msgid "Learn more here."
 msgstr ""
 
@@ -205,15 +205,15 @@ msgstr ""
 msgid "Delete"
 msgstr ""
 
-#: inc/custom/scripts.php:196
+#: inc/custom/scripts.php:197
 msgid "Delete column?"
 msgstr ""
 
-#: inc/custom/scripts.php:197
+#: inc/custom/scripts.php:198
 msgid "Delete row?"
 msgstr ""
 
-#: inc/custom/scripts.php:198
+#: inc/custom/scripts.php:199
 msgid "Delete widget?"
 msgstr ""
 
@@ -228,95 +228,214 @@ msgstr ""
 msgid "To activate the free version of Smart WooCommerce Search you need to deactivate the Pro version."
 msgstr ""
 
-#: templates/admin-page-analytics.php:16
+#: templates/admin-page-analytics.php:56
+msgid "Search Stats"
+msgstr ""
+
+#: templates/admin-page-analytics.php:67
+#: templates/admin-page-analytics.php:515
 msgid "Google Analytics 4"
 msgstr ""
 
-#: templates/admin-page-analytics.php:28
+#: templates/admin-page-analytics.php:86
+msgid "Search Statistics is a Pro feature"
+msgstr ""
+
+#: templates/admin-page-analytics.php:89
+msgid "Upgrade to Pro to unlock detailed search analytics — top queries, no-results tracking, click and cart events, and more."
+msgstr ""
+
+#: templates/admin-page-analytics.php:94
+msgid "Upgrade to Pro &rarr;"
+msgstr ""
+
+#: templates/admin-page-analytics.php:146
+msgid "Show:"
+msgstr ""
+
+#. translators: %d: number of days
+#: templates/admin-page-analytics.php:166
+msgid "Last %d day"
+msgid_plural "Last %d days"
+msgstr[0] ""
+msgstr[1] ""
+
+#: templates/admin-page-analytics.php:186
+msgid "Total Searches"
+msgstr ""
+
+#: templates/admin-page-analytics.php:192
+msgid "With Results"
+msgstr ""
+
+#: templates/admin-page-analytics.php:198
+msgid "No Results"
+msgstr ""
+
+#: templates/admin-page-analytics.php:204
+msgid "Unique Phrases"
+msgstr ""
+
+#: templates/admin-page-analytics.php:250
+msgid "Top Searches"
+msgstr ""
+
+#: templates/admin-page-analytics.php:264
+#: templates/admin-page-analytics.php:329
+msgid "Phrase"
+msgstr ""
+
+#: templates/admin-page-analytics.php:267
+#: templates/admin-page-analytics.php:332
+msgid "Times Searched"
+msgstr ""
+
+#: templates/admin-page-analytics.php:270
+msgid "Avg. Found Results"
+msgstr ""
+
+#: templates/admin-page-analytics.php:273
+#: templates/admin-page-analytics.php:335
+msgid "Last Searched"
+msgstr ""
+
+#: templates/admin-page-analytics.php:305
+msgid "No successful searches in this period."
+msgstr ""
+
+#: templates/admin-page-analytics.php:315
+msgid "Searches With No Results"
+msgstr ""
+
+#: templates/admin-page-analytics.php:354
+msgid "Critical"
+msgstr ""
+
+#: templates/admin-page-analytics.php:362
+msgid "Repeated"
+msgstr ""
+
+#: templates/admin-page-analytics.php:387
+msgid "No searches without results in this period."
+msgstr ""
+
+#: templates/admin-page-analytics.php:398
+msgid "Top Clicked Products"
+msgstr ""
+
+#: templates/admin-page-analytics.php:408
+msgid "Click tracking data will appear here once visitors interact with search results."
+msgstr ""
+
+#: templates/admin-page-analytics.php:423
+msgid "Product"
+msgstr ""
+
+#: templates/admin-page-analytics.php:426
+msgid "Link Clicks"
+msgstr ""
+
+#: templates/admin-page-analytics.php:429
+msgid "Cart Clicks"
+msgstr ""
+
+#: templates/admin-page-analytics.php:432
+msgid "Last Click"
+msgstr ""
+
+#: templates/admin-page-analytics.php:441
+msgid "Product #%d"
+msgstr ""
+
+#: templates/admin-page-analytics.php:488
+msgid "No product clicks from search in this period."
+msgstr ""
+
+#: templates/admin-page-analytics.php:534
 msgid "Enable Google Analytics 4 tracking."
 msgstr ""
 
-#: templates/admin-page-analytics.php:28
+#: templates/admin-page-analytics.php:537
 msgid "Event:"
 msgstr ""
 
-#: templates/admin-page-analytics.php:35
+#: templates/admin-page-analytics.php:550
 msgid "Event Categories"
 msgstr ""
 
-#: templates/admin-page-analytics.php:37
+#: templates/admin-page-analytics.php:554
 msgid "Toggle which events are sent to Google Analytics."
 msgstr ""
 
-#: templates/admin-page-analytics.php:38
+#: templates/admin-page-analytics.php:557
 msgid "Note: to accurately track click events, clicked links will open in a new window."
 msgstr ""
 
-#: templates/admin-page-analytics.php:44
+#: templates/admin-page-analytics.php:565
 msgid "[Search term] has results"
 msgstr ""
 
-#: templates/admin-page-analytics.php:44
+#: templates/admin-page-analytics.php:566
 msgid "When user saw search results"
 msgstr ""
 
-#: templates/admin-page-analytics.php:45
+#: templates/admin-page-analytics.php:570
 msgid "[Search term] no results"
 msgstr ""
 
-#: templates/admin-page-analytics.php:45
+#: templates/admin-page-analytics.php:571
 msgid "When user saw a \"no results\" message"
 msgstr ""
 
-#: templates/admin-page-analytics.php:46
+#: templates/admin-page-analytics.php:575
 msgid "[Found Suggestions] link click"
 msgstr ""
 
-#: templates/admin-page-analytics.php:46
+#: templates/admin-page-analytics.php:576
 msgid "When user clicked on a suggestion"
 msgstr ""
 
-#: templates/admin-page-analytics.php:47
+#: templates/admin-page-analytics.php:580
 msgid "[Found Suggestions] add-to-cart click"
 msgstr ""
 
-#: templates/admin-page-analytics.php:47
+#: templates/admin-page-analytics.php:581
 msgid "When user clicked a suggestion's Add to Cart button"
 msgstr ""
 
-#: templates/admin-page-analytics.php:48
+#: templates/admin-page-analytics.php:585
 msgid "[View All] button click"
 msgstr ""
 
-#: templates/admin-page-analytics.php:48
+#: templates/admin-page-analytics.php:586
 msgid "When user clicked the View All button"
 msgstr ""
 
-#: templates/admin-page-analytics.php:49
+#: templates/admin-page-analytics.php:590
 msgid "[Promo banner] link click"
 msgstr ""
 
-#: templates/admin-page-analytics.php:49
+#: templates/admin-page-analytics.php:591
 msgid "When user clicked a banner in the fullscreen popup"
 msgstr ""
 
-#: templates/admin-page-analytics.php:50
+#: templates/admin-page-analytics.php:595
 msgid "[Selected Categories] link click"
 msgstr ""
 
-#: templates/admin-page-analytics.php:50
+#: templates/admin-page-analytics.php:596
 msgid "When user clicked a category in the fullscreen popup"
 msgstr ""
 
-#: templates/admin-page-analytics.php:51
+#: templates/admin-page-analytics.php:600
 msgid "[Recommended Products] link click"
 msgstr ""
 
-#: templates/admin-page-analytics.php:51
+#: templates/admin-page-analytics.php:601
 msgid "When user clicked a recommended product in the fullscreen popup"
 msgstr ""
 
-#: templates/admin-page-analytics.php:88
+#: templates/admin-page-analytics.php:662
 #: templates/admin-page-index-status.php:210
 #: templates/admin-page-stop-words.php:34
 #: templates/admin-page-synonyms.php:72
@@ -1152,7 +1271,7 @@ msgid "DESC"
 msgstr ""
 
 #: templates/admin-tab-order.php:44
-#: templates/promo/updates.php:83
+#: templates/promo/updates.php:78
 msgid "Relevance Configurator"
 msgstr ""
 
@@ -1321,6 +1440,7 @@ msgid "Product Variations Popup:"
 msgstr ""
 
 #: templates/promo/updates.php:44
+#: templates/promo/updates.php:53
 msgid "NEW"
 msgstr ""
 
@@ -1334,93 +1454,89 @@ msgid "Shoppers can now select product options (size, color, and more) and add i
 msgstr ""
 
 #: templates/promo/updates.php:52
-msgid "Relevance Configurator:"
+msgid "Internal Analytics:"
 msgstr ""
 
-#: templates/promo/updates.php:53
-msgid "Fine-tune how search results are ranked — boost weight for title, SKU, or description matches so the most relevant products always rise to the top."
+#: templates/promo/updates.php:57
+msgid "Get a built-in analytics dashboard — see your top search queries, no-results phrases, and most-clicked products, all without leaving WordPress."
 msgstr ""
 
-#: templates/promo/updates.php:60
-msgid "Google Analytics (GA4) Integration:"
-msgstr ""
-
-#: templates/promo/updates.php:61
-msgid "Track every search interaction — queries, clicks, and no-results events — directly in your GA4 dashboard."
-msgstr ""
-
-#: templates/promo/updates.php:62
-msgid "Learn more"
-msgstr ""
-
-#: templates/promo/updates.php:70
+#: templates/promo/updates.php:65
 msgid "You have used this free plugin for some time now, and I hope you like it! If you do, please consider"
 msgstr ""
 
-#: templates/promo/updates.php:72
+#: templates/promo/updates.php:67
 msgid "leaving a 5-star review on WordPress.org"
 msgstr ""
 
-#: templates/promo/updates.php:74
+#: templates/promo/updates.php:69
 msgid "— it really helps!"
 msgstr ""
 
-#: templates/promo/updates.php:80
+#: templates/promo/updates.php:75
 msgid "Unlock all PRO features:"
 msgstr ""
 
-#: templates/promo/updates.php:82
+#: templates/promo/updates.php:77
 msgid "Product Variations Popup"
 msgstr ""
 
-#: templates/promo/updates.php:82
+#: templates/promo/updates.php:77
 msgid "let shoppers pick options and add to cart right from search results"
 msgstr ""
 
-#: templates/promo/updates.php:83
+#: templates/promo/updates.php:78
 msgid "control exactly how search results are ranked"
 msgstr ""
 
-#: templates/promo/updates.php:84
+#: templates/promo/updates.php:79
+msgid "Internal Analytics"
+msgstr ""
+
+#: templates/promo/updates.php:79
+msgid "built-in dashboard with top queries, no-results tracking, and click stats"
+msgstr ""
+
+#: templates/promo/updates.php:80
 msgid "\"Did You Mean\" Keywords & Synonyms"
 msgstr ""
 
-#: templates/promo/updates.php:84
+#: templates/promo/updates.php:80
 msgid "automatically correct typos and suggest alternatives"
 msgstr ""
 
-#: templates/promo/updates.php:85
+#: templates/promo/updates.php:81
 msgid "Search in Variations, Custom Fields & Taxonomies"
 msgstr ""
 
-#: templates/promo/updates.php:85
+#: templates/promo/updates.php:81
 msgid "find any product by any attribute"
 msgstr ""
 
-#: templates/promo/updates.php:86
+#: templates/promo/updates.php:82
 msgid "Product Labels & Add to Cart Button"
 msgstr ""
 
-#: templates/promo/updates.php:86
+#: templates/promo/updates.php:82
 msgid "convert directly from the search popup"
 msgstr ""
 
-#: templates/promo/updates.php:87
+#: templates/promo/updates.php:83
 msgid "Grid Layout"
 msgstr ""
 
-#: templates/promo/updates.php:87
+#: templates/promo/updates.php:83
 msgid "display results in a visual product grid"
 msgstr ""
 
-#: templates/promo/updates.php:90
+#: templates/promo/updates.php:86
 msgid "Start 14-Day Free Trial"
 msgstr ""
 
-#: templates/promo/updates.php:93
+#: templates/promo/updates.php:89
 msgid "View all PRO features →"
 msgstr ""
 
-#: templates/promo/updates.php:99
+#: templates/promo/updates.php:95
 msgid "Dismiss"
 msgstr ""

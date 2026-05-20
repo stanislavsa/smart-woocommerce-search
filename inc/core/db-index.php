@@ -11,7 +11,7 @@ add_action( 'woocommerce_rest_save_product_variation', __NAMESPACE__ . '\\variat
 add_action( 'untrashed_post', __NAMESPACE__ . '\\post_save_action', 999 );
 add_action( 'wp_trash_post', __NAMESPACE__ . '\\post_trash_action', 999 );
 
-add_action( 'admin_init', __NAMESPACE__ . '\\install_tables', 10 );
+add_action( 'admin_init', __NAMESPACE__ . '\\install_tables', 50 );
 add_action( 'admin_init', __NAMESPACE__ . '\\recurring_cron' );
 add_action( 'admin_notices', __NAMESPACE__ . '\\show_activation_message', 10 );
 sws_fs()->add_action( 'after_uninstall', __NAMESPACE__ . '\\drop_tables' );
@@ -26,6 +26,17 @@ add_action( 'wp_ajax_sws_index_button_delete', __NAMESPACE__ . '\\ajax_index_but
 add_action( 'wp_ajax_sws_index_auto_update_on_save', __NAMESPACE__ . '\\ajax_index_auto_update_on_save' );
 add_action( 'wp_ajax_sws_message_index_now_dismiss', __NAMESPACE__ . '\\ajax_message_index_now_dismiss' );
 add_action( 'wp_ajax_woocommerce_feature_product', __NAMESPACE__ . '\\update_featured_product', 1 );
+
+// Unschedule the cron when the plugin is deactivated.
+register_deactivation_hook(
+	trailingslashit( WP_PLUGIN_DIR ) . SWS_PLUGIN_BASENAME,
+	function () {
+		$timestamp = wp_next_scheduled( RECURRING_CRON_ACTION );
+		if ( $timestamp ) {
+			wp_unschedule_event( $timestamp, RECURRING_CRON_ACTION );
+		}
+	}
+);
 
 
 function widget_settings_saved( $widget_id, $old_settings, $new_settings ) {
@@ -735,6 +746,7 @@ function install_tables() {
 
 	dbDelta( implode( "\n", $tables ) );
 	update_option( 'sws_db_version', SWS_DB_VERSION );
+	update_option( 'sws_bulk_index_lock', time() );
 }
 
 /**

@@ -23,6 +23,7 @@ function front_scripts() {
         'analytics'     => [
             'ga4'           => (bool) get_option( 'sws_enable_google_analytics' ),
             'enabledEvents' => (array) get_option( 'sws_ga_enabled_events', [] ),
+            'internal'      => false,
         ],
         'nonce'         => wp_create_nonce( 'wp_rest' ),
         'indexStatus'   => \YSWS\Core\DB_Index\get_index_status(),
@@ -151,13 +152,13 @@ function front_scripts() {
         ysm_add_inline_styles_to_stack( $v, $css_classes );
     }
     wp_add_inline_style( 'smart-search', \Ysm_Style_Generator::create() );
-	wp_enqueue_script(
-		'smart-search-general',
-		SWS_PLUGIN_URI . 'assets/dist/js/main.js',
-		array('jquery'),
-		SWS_PLUGIN_VERSION,
-		1
-	);
+    wp_enqueue_script(
+        'smart-search-general',
+        SWS_PLUGIN_URI . 'assets/dist/js/main.js',
+        array('jquery'),
+        SWS_PLUGIN_VERSION,
+        1
+    );
     wp_localize_script( 'smart-search-general', 'swsL10n', $l10n );
 }
 

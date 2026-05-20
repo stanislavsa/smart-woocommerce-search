@@ -136,9 +136,6 @@ class Ysm_Search {
         }
         foreach ( $registered_pt as $type ) {
             if ( !empty( $settings['post_type_' . $type] ) ) {
-                if ( 'parent' === $settings['product_variation_visibility'] && 'product_variation' === $type ) {
-                    continue;
-                }
                 $settings['post_types'][$type] = $type;
             }
         }
@@ -365,14 +362,6 @@ class Ysm_Search {
         if ( !self::get_search_terms() ) {
             return [];
         }
-        if ( !empty( self::$processed[json_encode( self::get_search_terms() )] ) ) {
-            /**
-             * Modify the array of post ids
-             *
-             * @param array $post_ids List of post ids.
-             */
-            return apply_filters( 'sws_search_result_post_ids', self::$processed[json_encode( self::get_search_terms() )] );
-        }
         if ( !$posts_count ) {
             $posts_count = ysws_get_var( 'max_post_count' );
             if ( -1 === $posts_count ) {
@@ -424,7 +413,16 @@ class Ysm_Search {
                     $args['search_in']['taxonomies'][$taxonomy] = 20;
                 }
             }
-            $key = md5( 'db_index_' . self::get_widget_id() . '_' . wp_json_encode( $args ) );
+            // get cached results or retrieve from DB
+            $key = md5( 'db_index_v2_' . self::get_widget_id() . '_' . wp_json_encode( $args ) );
+            if ( !empty( self::$processed[$key] ) ) {
+                /**
+                 * Modify the array of post ids
+                 *
+                 * @param array $post_ids List of post ids.
+                 */
+                return apply_filters( 'sws_search_result_post_ids', self::$processed[$key] );
+            }
             $cached = \YSWS\Core\Cache\get_query_cache( $key );
             if ( false !== $cached && isset( $cached['post_ids'] ) ) {
                 $post_ids = $cached['post_ids'];
@@ -435,7 +433,7 @@ class Ysm_Search {
                 self::$found_posts = (int) $post_res['found_posts'] ?? count( $post_ids );
                 \YSWS\Core\Cache\set_query_cache( $key, $post_res );
             }
-            self::$processed[json_encode( self::get_search_terms() )] = $post_ids;
+            self::$processed[$key] = $post_ids;
             /**
              * Modify the array of post ids
              *
@@ -444,6 +442,14 @@ class Ysm_Search {
             return apply_filters( 'sws_search_result_post_ids', $post_ids );
         }
         // fallback to old functionality
+	    if ( !empty( self::$processed[json_encode( self::get_search_terms() )] ) ) {
+		    /**
+		     * Modify the array of post ids
+		     *
+		     * @param array $post_ids List of post ids.
+		     */
+		    return apply_filters( 'sws_search_result_post_ids', self::$processed[json_encode( self::get_search_terms() )] );
+	    }
         $limit = ysws_get_var( 'max_post_count' );
         $key = md5( ysws_get_var( 's' ) ) . '_' . self::get_widget_id() . '_' . ysws_get_var( 'lang' );
         $cached = \YSWS\Core\Cache\get_query_cache( $key );
@@ -536,7 +542,7 @@ class Ysm_Search {
                 $post_classes[] = 'smart-search-no-thumbnail';
             }
             // wrapper link open
-            $output .= '<a class="smart-search-post-url" href="' . esc_url( get_the_permalink( $post->ID ) ) . '">';
+            $output .= '<a class="smart-search-post-url" href="' . esc_url( get_the_permalink( $post->ID ) ) . '" data-product-id="' . intval( $post->ID ) . '">';
             $output .= '<div class="' . esc_attr( implode( ' ', $post_classes ) ) . '">';
             // thumbnail
             if ( $thumbnail ) {
@@ -578,8 +584,8 @@ class Ysm_Search {
                 $output .= $post_excerpt;
             }
             $output .= '</div>';
-            $output .= '</a>'; // wrapper link closed
-
+            $output .= '</a>';
+            // wrapper link closed
             if ( $product ) {
                 $sws_product_rating = \YSWS\Elements\rating( $product );
                 if ( $sws_product_rating ) {
@@ -587,9 +593,9 @@ class Ysm_Search {
                 }
             }
             self::$suggestions[] = array(
-                'value'     => esc_js( $post->post_title ),
-                'data'      => $output,
-                'url'       => get_permalink( $post->ID ),
+                'value' => esc_js( $post->post_title ),
+                'data'  => $output,
+                'url'   => get_permalink( $post->ID ),
             );
             $ii++;
             if ( $ii == ysws_get_var( 'max_post_count' ) ) {
