@@ -20,6 +20,8 @@ WooCommerce's default search loses you sales. **Smart WooCommerce Search** repla
 
 Improve the default **WooCommerce search** or create a fully custom search widget in a few steps. The **Smart Search** plugin delivers real-time suggestions in a beautiful fullscreen popup with support for synonyms and recent searches — seamlessly integrated into any theme or page builder.
 
+Smart falcon search pre-builds a dedicated search index for blazing-fast results on large catalogs. Sub-100ms search response even with 100,000+ products.
+
 = Free Features: =
 
 * [Data indexing](https://www.wpsmartsearch.com/docs/data-indexing/) - new feature!
@@ -66,6 +68,7 @@ Discover all PRO features with a **14-day free trial** — no risk, cancel anyti
 * Ultimate WooCommerce Brands plugin compatibility
 * Automatic plugin updates
 * More customization and styling settings
+* SKU search/ EAN search
 
 Have questions? [Contact us](https://www.wpsmartsearch.com/contact/).
 
@@ -74,7 +77,7 @@ Have questions? [Contact us](https://www.wpsmartsearch.com/contact/).
 1. Unzip the downloaded .zip file.
 2. Upload the **Smart Search** plugin folder to the `wp-content/plugins/` directory of your WordPress site.
 3. Go to **Plugins** in your WordPress dashboard and activate **Sokol: Smart WooCommerce Search**.
-4. Configure the plugin at `/wp-admin/admin.php?page=smart-search`.
+4. Configure the falcon plugin at `/wp-admin/admin.php?page=smart-search`.
 5. Place the search shortcode `<?php echo do_shortcode('[smart_search id="1"]'); ?>` into your theme template, or use the built-in widget.
 
 == Frequently Asked Questions ==
@@ -112,7 +115,6 @@ Yes — you can try all PRO features free for 14 days. Start your trial from the
 3. Smart Search PRO - Did you mean / Synonyms
 4. Fullscreen Popup
 5. Smart Search PRO - Product options
-6. SKU search/ EAN search
 
 == Changelog ==
 
