@@ -72,7 +72,7 @@ Have questions? [Contact us](https://www.wpsmartsearch.com/contact/).
 == Installation ==
 
 1. Unzip the downloaded .zip file.
-2. Upload the plugin folder to the `wp-content/plugins/` directory of your WordPress site.
+2. Upload the **Smart Search** plugin folder to the `wp-content/plugins/` directory of your WordPress site.
 3. Go to **Plugins** in your WordPress dashboard and activate **Sokol: Smart WooCommerce Search**.
 4. Configure the plugin at `/wp-admin/admin.php?page=smart-search`.
 5. Place the search shortcode `<?php echo do_shortcode('[smart_search id="1"]'); ?>` into your theme template, or use the built-in widget.
@@ -112,6 +112,7 @@ Yes — you can try all PRO features free for 14 days. Start your trial from the
 3. Smart Search PRO - Did you mean / Synonyms
 4. Fullscreen Popup
 5. Smart Search PRO - Product options
+6. SKU search/ EAN search
 
 == Changelog ==
 
