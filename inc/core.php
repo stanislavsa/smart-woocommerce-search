@@ -15,8 +15,10 @@ include_once __DIR__ . '/custom/class-ysm-db.php';
 include_once __DIR__ . '/custom/class-ysm-widget-manager.php';
 include_once __DIR__ . '/custom/class-ysm-search-widget.php';
 include_once __DIR__ . '/custom/class-ysm-style-generator.php';
+include_once __DIR__ . '/core/class-nav-menu.php';
 \Ysm_Widget_Manager::init();
 \Ysm_Search::init();
+\YSWS\Core\Nav_Menu::init();
 include_once __DIR__ . '/core/db-index.php';
 include_once __DIR__ . '/core/db-index-query.php';
 // compatibility with other plugins

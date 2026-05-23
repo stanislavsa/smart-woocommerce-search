@@ -102,6 +102,7 @@ function front_scripts() {
         $widget_params['placeholder'] = ( !empty( $v['settings']['placeholder'] ) ? __( $v['settings']['placeholder'], 'smart-woocommerce-search' ) : '' );
         $widget_params['recentSearches'] = ( !empty( $v['settings']['recent_searches'] ) ? $v['settings']['recent_searches'] : '' );
         $widget_params['recentSearchesTitle'] = ( !empty( $v['settings']['recent_searches_text'] ) ? __( $v['settings']['recent_searches_text'], 'smart-woocommerce-search' ) : '' );
+        $widget_params['onlySearchIcon'] = !empty( $v['settings']['display_only_search_icon'] );
         $widget_params['selectedCategoriesLabel'] = ( !empty( $v['settings']['selected_categories_label'] ) ? __( $v['settings']['selected_categories_label'], 'smart-woocommerce-search' ) : '' );
         $widget_params['selectedCategoriesLocation'] = ( !empty( $v['settings']['selected_categories_location'] ) ? ( is_array( $v['settings']['selected_categories_location'] ) ? $v['settings']['selected_categories_location'][0] : '' ) : '' );
         $widget_params['selectedCategoriesMobile'] = ( !empty( $v['settings']['selected_categories_mobile'] ) ? $v['settings']['selected_categories_mobile'] : '' );

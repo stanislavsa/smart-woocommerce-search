@@ -118,6 +118,10 @@ Yes — you can try all PRO features free for 14 days. Start your trial from the
 
 == Changelog ==
 
+= 3.0.7 =
+* Added: option "Display only Search Icon" - hides input field and shows only search button
+* Added: ability to add "Sokol Smart Search" widget into menu
+
 = 3.0.6 =
 * Fixed: issue when user can't click on the founded results in the inline widget
 * Checked: WordPress 7.0 compatibility

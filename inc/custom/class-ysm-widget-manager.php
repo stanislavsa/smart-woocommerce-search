@@ -345,11 +345,10 @@ class Ysm_Widget_Manager {
     /**
      * Display search input
      * @param array $attr
-     * @param string $content
-     * @param string $key
+     * @param string $layout
      * @return void
      */
-    public static function display( $attr = array(), $content = '', $key = '' ) {
+    public static function display( $attr = array(), $layout = 'default' ) {
         $w_id = ( isset( $attr['id'] ) ? (int) $attr['id'] : 0 );
         if ( !$w_id ) {
             return;
@@ -364,9 +363,24 @@ class Ysm_Widget_Manager {
         if ( !empty( $settings['input_round_border'] ) ) {
             $w_classes .= ' bordered';
         }
-        $layout = '';
+        if ( 'default' === $layout ) {
+            if ( !empty( $settings['display_only_search_icon'] ) ) {
+                $w_classes .= ' sws_only_search_icon';
+            }
+        } else {
+            if ( 'icon' === $layout ) {
+                $w_classes .= ' sws_only_search_icon';
+            } elseif ( 'classic' === $layout ) {
+                $w_classes .= ' sws_only_search_bar';
+            } elseif ( 'icon-mobile' === $layout ) {
+                $w_classes .= ' sws_only_search_icon__mobile';
+            } elseif ( 'icon-desktop' === $layout ) {
+                $w_classes .= ' sws_only_search_icon__desktop';
+            }
+        }
+        $is_product = false;
         if ( !empty( $settings['post_type_product'] ) && empty( $settings['search_page_layout_posts'] ) ) {
-            $layout = 'product';
+            $is_product = true;
         }
         $uniq_id = 'ysm-smart-search-' . $w_id . '-' . uniqid();
         ?>
@@ -397,7 +411,7 @@ class Ysm_Widget_Manager {
         echo esc_attr( $w_id );
         ?>" />
 					<?php 
-        if ( 'product' === $layout ) {
+        if ( $is_product ) {
             ?>
 						<input type="hidden" name="post_type" value="<?php 
             echo esc_attr( ysw_get_woocommerce_product_slug( $w_id ) );

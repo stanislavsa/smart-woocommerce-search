@@ -9,7 +9,7 @@ class Ysm_Search_Widget extends WP_Widget {
 	function __construct() {
 		parent::__construct(
 			'ysm_search_widget',
-			'Smart Search',
+			'Sokol Smart Search',
 			array(
 				'classname'   => 'ysm_search_widget',
 				'description' => __( 'Displays search widget', 'smart-woocommerce-search' ),

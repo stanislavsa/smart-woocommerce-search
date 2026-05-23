@@ -2,14 +2,14 @@
 # This file is distributed under the same license as the Sokol: Smart WooCommerce Search plugin.
 msgid ""
 msgstr ""
-"Project-Id-Version: Sokol: Smart WooCommerce Search 3.0.6\n"
+"Project-Id-Version: Sokol: Smart WooCommerce Search 3.0.7\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/smart-woocommerce-search\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-05-20T20:05:19+00:00\n"
+"POT-Creation-Date: 2026-05-23T21:13:43+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.11.0\n"
 "X-Domain: smart-woocommerce-search\n"
@@ -138,6 +138,48 @@ msgstr ""
 msgid "Widget name"
 msgstr ""
 
+#: inc/core/class-nav-menu.php:54
+msgid "Default"
+msgstr ""
+
+#: inc/core/class-nav-menu.php:55
+msgid "Search bar"
+msgstr ""
+
+#: inc/core/class-nav-menu.php:56
+msgid "Search icon"
+msgstr ""
+
+#: inc/core/class-nav-menu.php:57
+msgid "Icon on mobile, bar on desktop"
+msgstr ""
+
+#: inc/core/class-nav-menu.php:58
+msgid "Icon on desktop, bar on mobile"
+msgstr ""
+
+#: inc/core/class-nav-menu.php:69
+msgid "Sokol Smart Search"
+msgstr ""
+
+#: inc/core/class-nav-menu.php:81
+msgid "No Smart Search widgets found. Please create one first."
+msgstr ""
+
+#: inc/core/class-nav-menu.php:124
+msgid "Select All"
+msgstr ""
+
+#: inc/core/class-nav-menu.php:131
+msgid "Add to Menu"
+msgstr ""
+
+#: inc/core/class-nav-menu.php:161
+#: templates/admin-page-form.php:28
+#: templates/admin-tab-layout.php:5
+msgid "Layout"
+msgstr ""
+
 #: inc/core/db-index.php:302
 msgid "%s index is empty! We highly recommend to create index to improve search performance."
 msgstr ""
@@ -162,13 +204,13 @@ msgstr ""
 msgid "Your changes have been saved."
 msgstr ""
 
-#: inc/custom/class-ysm-widget-manager.php:416
-#: inc/custom/class-ysm-widget-manager.php:418
+#: inc/custom/class-ysm-widget-manager.php:430
+#: inc/custom/class-ysm-widget-manager.php:432
 msgctxt "submit button"
 msgid "Search"
 msgstr ""
 
-#: inc/custom/class-ysm-widget-manager.php:528
+#: inc/custom/class-ysm-widget-manager.php:542
 msgid "Search widget"
 msgstr ""
 
@@ -205,15 +247,15 @@ msgstr ""
 msgid "Delete"
 msgstr ""
 
-#: inc/custom/scripts.php:197
+#: inc/custom/scripts.php:198
 msgid "Delete column?"
 msgstr ""
 
-#: inc/custom/scripts.php:198
+#: inc/custom/scripts.php:199
 msgid "Delete row?"
 msgstr ""
 
-#: inc/custom/scripts.php:199
+#: inc/custom/scripts.php:200
 msgid "Delete widget?"
 msgstr ""
 
@@ -442,7 +484,7 @@ msgstr ""
 #: templates/admin-tab-fields.php:229
 #: templates/admin-tab-fullscreen.php:158
 #: templates/admin-tab-general.php:267
-#: templates/admin-tab-layout.php:159
+#: templates/admin-tab-layout.php:173
 #: templates/admin-tab-styling.php:236
 msgid "Documentation"
 msgstr ""
@@ -465,11 +507,6 @@ msgstr ""
 #: templates/admin-page-form.php:23
 #: templates/admin-tab-fullscreen.php:6
 msgid "Fullscreen Mode"
-msgstr ""
-
-#: templates/admin-page-form.php:28
-#: templates/admin-tab-layout.php:5
-msgid "Layout"
 msgstr ""
 
 #: templates/admin-page-form.php:32
@@ -857,6 +894,7 @@ msgid "Enhance the standard %s search widget with the %s features"
 msgstr ""
 
 #: templates/admin-tab-general.php:40
+#: templates/admin-tab-layout.php:13
 #: templates/admin-tab-styling.php:14
 msgid "Input Field"
 msgstr ""
@@ -1110,135 +1148,143 @@ msgstr ""
 msgid "Add extra CSS styles"
 msgstr ""
 
-#: templates/admin-tab-layout.php:12
+#: templates/admin-tab-layout.php:18
+msgid "Display only Search Icon"
+msgstr ""
+
+#: templates/admin-tab-layout.php:19
+msgid "Hide text input and display only search icon. This option will enable Fullscreen mode"
+msgstr ""
+
+#: templates/admin-tab-layout.php:26
 msgid "Results Popup Elements"
 msgstr ""
 
-#: templates/admin-tab-layout.php:17
+#: templates/admin-tab-layout.php:31
 msgid "Columns Layout"
 msgstr ""
 
-#: templates/admin-tab-layout.php:18
+#: templates/admin-tab-layout.php:32
 msgid "Set the maximum number of columns to show in the popup.<br>To choose a Grid layout instead of List layout select columns number more than 1"
 msgstr ""
 
-#: templates/admin-tab-layout.php:32
+#: templates/admin-tab-layout.php:46
 msgid "Popup Max Height, px"
 msgstr ""
 
-#: templates/admin-tab-layout.php:33
+#: templates/admin-tab-layout.php:47
 msgid "Popup max height in pixels. Default is 500px"
 msgstr ""
 
-#: templates/admin-tab-layout.php:39
+#: templates/admin-tab-layout.php:53
 msgid "Popup Max Height (on mobile screen), px"
 msgstr ""
 
-#: templates/admin-tab-layout.php:40
+#: templates/admin-tab-layout.php:54
 msgid "Popup max height in pixels for mobile screen (max-width: 768px). Default is 400px"
 msgstr ""
 
-#: templates/admin-tab-layout.php:46
+#: templates/admin-tab-layout.php:60
 msgid "Display Image"
 msgstr ""
 
-#: templates/admin-tab-layout.php:53
+#: templates/admin-tab-layout.php:67
 msgid "Display Rating"
 msgstr ""
 
-#: templates/admin-tab-layout.php:61
+#: templates/admin-tab-layout.php:75
 msgid "Image Size"
 msgstr ""
 
-#: templates/admin-tab-layout.php:62
+#: templates/admin-tab-layout.php:76
 msgid "Select image size"
 msgstr ""
 
-#: templates/admin-tab-layout.php:69
+#: templates/admin-tab-layout.php:83
 msgid "Image Max Width, px"
 msgstr ""
 
-#: templates/admin-tab-layout.php:70
+#: templates/admin-tab-layout.php:84
 msgid "Limit image maximal width in pixels"
 msgstr ""
 
-#: templates/admin-tab-layout.php:76
+#: templates/admin-tab-layout.php:90
 msgid "Display Description"
 msgstr ""
 
-#: templates/admin-tab-layout.php:77
+#: templates/admin-tab-layout.php:91
 msgid "Display product description"
 msgstr ""
 
-#: templates/admin-tab-layout.php:83
+#: templates/admin-tab-layout.php:97
 msgid "Description's Location"
 msgstr ""
 
-#: templates/admin-tab-layout.php:87
+#: templates/admin-tab-layout.php:101
 msgid "Under the image"
 msgstr ""
 
-#: templates/admin-tab-layout.php:88
+#: templates/admin-tab-layout.php:102
 msgid "Under the title"
 msgstr ""
 
-#: templates/admin-tab-layout.php:89
+#: templates/admin-tab-layout.php:103
 msgid "Under the price and SKU"
 msgstr ""
 
-#: templates/admin-tab-layout.php:95
+#: templates/admin-tab-layout.php:109
 msgid "Display Category"
 msgstr ""
 
-#: templates/admin-tab-layout.php:96
+#: templates/admin-tab-layout.php:110
 msgid "Display product or post category"
 msgstr ""
 
-#: templates/admin-tab-layout.php:102
+#: templates/admin-tab-layout.php:116
 msgid "Display Product Price"
 msgstr ""
 
-#: templates/admin-tab-layout.php:109
+#: templates/admin-tab-layout.php:123
 msgid "Display Product SKU"
 msgstr ""
 
-#: templates/admin-tab-layout.php:116
+#: templates/admin-tab-layout.php:130
 msgid "SKU label"
 msgstr ""
 
-#: templates/admin-tab-layout.php:117
+#: templates/admin-tab-layout.php:131
 msgid "Displays label before SKU. Leave this field empty to hide the label"
 msgstr ""
 
-#: templates/admin-tab-layout.php:123
+#: templates/admin-tab-layout.php:137
 msgid "Display \"Out of stock\" Label"
 msgstr ""
 
-#: templates/admin-tab-layout.php:124
+#: templates/admin-tab-layout.php:138
 msgid "Indicates if a product is out of stock"
 msgstr ""
 
-#: templates/admin-tab-layout.php:131
+#: templates/admin-tab-layout.php:145
 msgid "Display \"Sale\" Label"
 msgstr ""
 
-#: templates/admin-tab-layout.php:132
+#: templates/admin-tab-layout.php:146
 msgid "Indicates if product has discount price"
 msgstr ""
 
-#: templates/admin-tab-layout.php:139
+#: templates/admin-tab-layout.php:153
 msgid "Display \"Featured\" Label"
 msgstr ""
 
-#: templates/admin-tab-layout.php:140
+#: templates/admin-tab-layout.php:154
 msgid "Indicates if product is marked as special"
 msgstr ""
 
-#: templates/admin-tab-layout.php:147
+#: templates/admin-tab-layout.php:161
 msgid "Display \"Add to Cart\" / \"Select options\" Button"
 msgstr ""
 
-#: templates/admin-tab-layout.php:148
+#: templates/admin-tab-layout.php:162
 msgid "Allow users to preview variations and add products to their cart directly from the popup"
 msgstr ""
 

@@ -28,7 +28,7 @@ class Elementor_Smart_Search_Widget extends \Elementor\Widget_Base {
 	 * @return string Widget title.
 	 */
 	public function get_title() {
-		return 'Smart Search';
+		return 'Sokol Smart Search';
 	}
 
 	/**
@@ -54,7 +54,7 @@ class Elementor_Smart_Search_Widget extends \Elementor\Widget_Base {
 	 * @return array Widget keywords.
 	 */
 	public function get_keywords() {
-		return [ 'search' ];
+		return [ 'search', 'smart', 'sokol', 'socol', 'falcon' ];
 	}
 
 	/**

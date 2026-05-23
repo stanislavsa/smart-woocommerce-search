@@ -9,6 +9,20 @@
         <table class="form-table">
             <tbody>
 
+            <?php if ( ! in_array( $w_id, ysm_get_default_widgets_ids(), true ) ) { ?>
+				<th class="ymapp-settings__title"><?php esc_html_e( 'Input Field', 'smart-woocommerce-search' ); ?></th>
+
+				<?php
+	            ysm_setting( $w_id, 'display_only_search_icon', array(
+		            'type'        => 'checkbox',
+		            'title'       => __( 'Display only Search Icon', 'smart-woocommerce-search' ),
+		            'description' => __( 'Hide text input and display only search icon. This option will enable Fullscreen mode', 'smart-woocommerce-search' ),
+		            'value'       => 0,
+	            ));
+				?>
+
+			<?php } ?>
+
             <th class="ymapp-settings__title"><?php esc_html_e( 'Results Popup Elements', 'smart-woocommerce-search' ); ?></th>
 
             <?php
