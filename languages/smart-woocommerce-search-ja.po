@@ -8,61 +8,59 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "POT-Creation-Date: 2024-06-10 21:17+0300\n"
-"PO-Revision-Date: 2024-06-10 21:27+0300\n"
+"PO-Revision-Date: 2026-05-24 12:00+0000\n"
 "Language: ja\n"
 "X-Generator: Poedit 3.4.4\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-Flags-xgettext: --add-comments=translators:\n"
-"X-Poedit-WPHeader: index.php\n"
-"X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: *.min.js\n"
 "X-Poedit-SearchPathExcluded-1: node_modules\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-WPHeader: index.php\n"
 
-#: inc/admin/admin.php:44
+#: inc/admin/admin.php:49
+#: templates/admin-page-widgets.php:112
 msgid "Search Widgets"
 msgstr "検索ウィジェット"
 
-#: inc/admin/admin.php:45
+#: inc/admin/admin.php:50
 msgid "Widgets"
 msgstr "ウィジェット"
 
-#: inc/admin/admin.php:52
+#: inc/admin/admin.php:58
 msgid "Add New Search Widget"
 msgstr "新しい検索ウィジェットを追加"
 
-#: inc/admin/admin.php:53
-#: templates/admin-page-widgets.php:108
+#: inc/admin/admin.php:59
+#: templates/admin-page-widgets.php:150
 msgid "Add New"
 msgstr "新規追加"
 
-#: inc/admin/admin.php:60
-#: inc/admin/admin.php:61
-#: templates/admin-page-index-status.php:55
+#: inc/admin/admin.php:76
+#: inc/admin/admin.php:77
+#: templates/admin-page-index-status.php:132
 msgid "Index Status"
 msgstr "インデックスステータス"
 
-#: inc/admin/admin.php:68
-#: inc/admin/admin.php:69
-#: templates/admin-tab-spellcheck.php:15
+#: inc/admin/admin.php:85
+#: inc/admin/admin.php:86
 msgid "Synonyms"
 msgstr "類義語"
 
-#: inc/admin/admin.php:76
-#: inc/admin/admin.php:77
-#: templates/admin-tab-stopwords.php:5
-#: templates/admin-tab-stopwords.php:15
+#: inc/admin/admin.php:94
+#: inc/admin/admin.php:95
 msgid "Stop Words"
 msgstr "ストップワード"
 
-#: inc/admin/admin.php:110
-#: templates/admin-page-form.php:66
+#: inc/admin/admin.php:159
+#: templates/admin-page-form.php:58
 msgid "Settings"
 msgstr "設定"
 
 #. translators: %s: Name/id of a widget
-#: inc/admin/admin.php:128
+#: inc/admin/admin.php:177
 #, php-format
 msgid "Edit Widget: %s"
 msgstr "ウィジェットの編集: %s"
@@ -81,6 +79,7 @@ msgstr "価なし"
 msgid "Select one of search widgets"
 msgstr "検索ウィジェットの1つを選択"
 
+#: inc/app/class-field.php:332
 #: templates/admin-tab-fields.php:100
 msgid "Content"
 msgstr "コンテンツ"
@@ -101,11 +100,11 @@ msgstr "見出し"
 msgid "Select Widget:"
 msgstr "ウィジェットを選択:"
 
-#: inc/custom/class-ysm-widget-manager.php:313
+#: inc/custom/class-ysm-widget-manager.php:401
 msgid "Your changes have been saved."
 msgstr "変更が保存されました。"
 
-#: inc/custom/class-ysm-widget-manager.php:390
+#: inc/custom/class-ysm-widget-manager.php:493
 msgctxt "submit button"
 msgid "Search"
 msgstr "検索"
@@ -122,23 +121,24 @@ msgstr "Avada 検索ウィジェット"
 msgid "DIVI Search Widget"
 msgstr "DIVI 検索ウィジェット"
 
-#: inc/custom/functions.php:99
+#: inc/custom/functions.php:115
 msgid "Duplicate"
 msgstr "複製"
 
-#: inc/custom/functions.php:102
+#: inc/custom/functions.php:118
+#: templates/admin-page-widgets.php:98
 msgid "Delete"
 msgstr "削除"
 
-#: inc/custom/scripts.php:258
+#: inc/custom/scripts.php:281
 msgid "Delete column?"
 msgstr "列を削除しますか?"
 
-#: inc/custom/scripts.php:259
+#: inc/custom/scripts.php:282
 msgid "Delete row?"
 msgstr "行を削除しますか?"
 
-#: inc/custom/scripts.php:260
+#: inc/custom/scripts.php:283
 msgid "Delete widget?"
 msgstr "ウィジェットを削除しますか?"
 
@@ -154,25 +154,14 @@ msgstr "在庫切れ"
 msgid "Sale"
 msgstr "セール"
 
-#: inc/features/db-index.php:294
+#: inc/core/db-index.php:302
 #, php-format
 msgid "%s index is empty! We highly recommend to create index to improve search performance."
 msgstr "%s インデックスが空です。検索パフォーマンスを向上させるためにインデックスを作成することを強くお勧めします。"
 
-#: inc/features/db-index.php:295
+#: inc/core/db-index.php:303
 msgid "Learn more here."
 msgstr "もう少し学ぶ"
-
-#: inc/fs.php:60
-#: inc/fs.php:79
-msgid "We added this opt-in feature so you won't miss any important updates and to help us enhance the plugin's compatibility and performance on your site."
-msgstr "このオプトイン機能を追加したのは、重要なアップデートを見逃さないようにし、サイトでのプラグインの互換性とパフォーマンスを向上させるためです。"
-
-#: inc/fs.php:61
-#: inc/fs.php:80
-#, php-format
-msgid "By opting in, you'll get email notifications about feature updates, educational content, promo offers, and you'll share some basic WordPress environment details. If you decide not to opt in, that's okay! %2$s will still function just as well."
-msgstr "オプトインすると、機能の更新、教育コンテンツ、プロモーション オファーに関するメール通知が届き、WordPress 環境の基本的な詳細が共有されます。オプトインしない場合でも問題ありません。%2$s は引き続き同様に機能します。"
 
 #: templates/admin-page-form.php:10
 #: templates/admin-tab-general.php:5
@@ -184,12 +173,11 @@ msgstr "一般"
 msgid "Items to Search Through"
 msgstr "検索対象項目"
 
-#: templates/admin-page-form.php:18
-#: templates/admin-tab-order.php:8
 #: templates/admin-tab-order.php:21
 msgid "Sorting"
 msgstr "並び替え"
 
+#: inc/core/class-nav-menu.php:161
 #: templates/admin-page-form.php:28
 #: templates/admin-tab-layout.php:5
 msgid "Layout"
@@ -200,20 +188,16 @@ msgstr "レイアウト"
 msgid "Styling"
 msgstr "スタイリング"
 
-#: templates/admin-tab-spellcheck.php:5
-msgid "Spelling Correction"
-msgstr "スペル修正"
-
-#: templates/admin-page-form.php:47
-#: templates/admin-page-form.php:116
-#: templates/admin-page-stop-words.php:21
-#: templates/admin-page-stop-words.php:45
-#: templates/admin-page-synonyms.php:35
-#: templates/admin-page-synonyms.php:86
+#: templates/admin-page-form.php:39
+#: templates/admin-page-form.php:104
+#: templates/admin-page-stop-words.php:20
+#: templates/admin-page-stop-words.php:44
+#: templates/admin-page-synonyms.php:34
+#: templates/admin-page-synonyms.php:85
 msgid "Save"
 msgstr "保存"
 
-#: templates/admin-page-form.php:57
+#: templates/admin-page-form.php:49
 msgid "Enter title"
 msgstr "タイトルを入力"
 
@@ -221,121 +205,97 @@ msgstr "タイトルを入力"
 msgid "Empty"
 msgstr "空"
 
-#: templates/admin-page-index-status.php:30
+#: templates/admin-page-index-status.php:24
 msgid "Failed"
 msgstr "失敗"
 
-#: templates/admin-page-index-status.php:33
+#: templates/admin-page-index-status.php:27
 msgid "In progress"
 msgstr "進行中"
 
-#: templates/admin-page-index-status.php:37
+#: templates/admin-page-index-status.php:31
 msgid "Ready"
 msgstr "使用可能"
 
-#: templates/admin-page-index-status.php:61
+#: templates/admin-page-index-status.php:140
 msgid "Tables are created"
 msgstr "テーブルが作成される"
 
-#: templates/admin-page-index-status.php:62
-#: templates/admin-page-widgets.php:63
-msgid "yes"
-msgstr "はい"
-
-#: templates/admin-page-index-status.php:62
-#: templates/admin-page-widgets.php:64
-msgid "no"
-msgstr "いいえ"
-
-#: templates/admin-page-index-status.php:65
+#: templates/admin-page-index-status.php:154
 msgid "Indexed Post Types"
 msgstr "インデックスされた投稿タイプ"
 
-#: templates/admin-page-index-status.php:79
+#: templates/admin-page-index-status.php:169
 msgid "Re-create index when settings updated"
 msgstr "設定が更新されたらインデックスを再作成する"
 
-#: templates/admin-page-index-status.php:80
+#: templates/admin-page-index-status.php:170
 msgid "Re-create the data index automatically when the search widget settings were updated"
 msgstr "検索ウィジェットの設定が更新されたときにデータインデックスを自動的に再作成します"
 
-#: templates/admin-page-index-status.php:99
-#: templates/admin-page-index-status.php:116
+#: templates/admin-page-index-status.php:38
+#: templates/admin-page-index-status.php:218
 msgid "Create Index"
 msgstr "インデックスを作成"
 
-#: templates/admin-page-index-status.php:110
-msgid "Delete all indexed data and create a fresh index"
-msgstr "すべてのインデックスデータを削除し、新しいインデックスを作成します"
-
-#: templates/admin-page-index-status.php:112
+#: templates/admin-page-index-status.php:197
 msgid "Delete Index"
 msgstr "インデックスを消去"
 
-#: templates/admin-page-index-status.php:113
-msgid "Delete all indexed data"
-msgstr "すべてのインデックスデータを削除する"
-
-#: templates/admin-page-index-status.php:123
-#: templates/admin-page-stop-words.php:52
-#: templates/admin-page-synonyms.php:93
-#: templates/admin-tab-fields.php:227
-#: templates/admin-tab-fullscreen.php:181
-#: templates/admin-tab-general.php:271
-#: templates/admin-tab-layout.php:158
-#: templates/admin-tab-styling.php:235
+#: templates/admin-page-analytics.php:498
+#: templates/admin-page-index-status.php:210
+#: templates/admin-page-stop-words.php:53
+#: templates/admin-page-synonyms.php:94
+#: templates/admin-tab-fields.php:229
+#: templates/admin-tab-fullscreen.php:184
+#: templates/admin-tab-general.php:267
+#: templates/admin-tab-layout.php:173
+#: templates/admin-tab-styling.php:236
 msgid "Documentation"
 msgstr "ドキュメント"
 
-#: templates/admin-page-stop-words.php:30
+#: templates/admin-page-stop-words.php:29
 msgid "Applies globally to all widgets."
 msgstr "すべてのウィジェットにグローバルに適用されます。"
 
-#: templates/admin-page-stop-words.php:31
+#: templates/admin-page-stop-words.php:30
 msgid "Add a list of words that should be skipped from the search request."
 msgstr "検索リクエストからスキップする単語のリストを追加します。"
 
-#: templates/admin-page-synonyms.php:70
+#: templates/admin-page-synonyms.php:69
 msgid "Example"
 msgstr "例"
 
-#: templates/admin-page-synonyms.php:72
+#: templates/admin-page-synonyms.php:71
 msgid "Correct"
 msgstr "正解"
 
-#: templates/admin-page-synonyms.php:73
+#: templates/admin-page-synonyms.php:72
 msgid "Wrong"
 msgstr "不正解"
 
-#: templates/admin-page-widgets.php:24
+#: templates/admin-page-widgets.php:25
 msgid "Edit Widget"
 msgstr "ウィジェットの編集"
 
-#: templates/admin-page-widgets.php:36
+#: templates/admin-page-widgets.php:58
 msgid "Enhance Standard Widgets"
 msgstr "標準ウィジェットの強化"
 
-#: templates/admin-page-widgets.php:43
-#: templates/admin-page-widgets.php:81
+#: templates/admin-page-widgets.php:65
+#: templates/admin-page-widgets.php:119
 msgid "ID"
 msgstr "ID"
 
-#: templates/admin-page-widgets.php:44
-#: templates/admin-page-widgets.php:82
+#: inc/app/class-field.php:331
+#: templates/admin-page-widgets.php:66
+#: templates/admin-page-widgets.php:120
 #: templates/admin-tab-fields.php:93
 #: templates/admin-tab-order.php:25
 msgid "Title"
 msgstr "タイトル"
 
-#: templates/admin-page-widgets.php:45
-msgid "Is active?"
-msgstr "アクティブですか？"
-
-#: templates/admin-page-widgets.php:74
-msgid "Custom Widgets"
-msgstr "カスタムウィジェット"
-
-#: templates/admin-page-widgets.php:83
+#: templates/admin-page-widgets.php:121
 msgid "Shortcode"
 msgstr "ショートコード"
 
@@ -381,6 +341,7 @@ msgstr "短い説明（抜粋）"
 msgid "Enable search in the short description"
 msgstr "短い説明で検索を有効にする"
 
+#: inc/app/class-field.php:334
 #: templates/admin-tab-fields.php:114
 msgid "Product SKU"
 msgstr "商品 SKU"
@@ -448,6 +409,7 @@ msgid "Enhance the standard %s search widget with the %s features"
 msgstr "標準の %s 検索ウィジェットを %s 機能で強化します"
 
 #: templates/admin-tab-general.php:40
+#: templates/admin-tab-layout.php:13
 #: templates/admin-tab-styling.php:14
 msgid "Input Field"
 msgstr "入力フィールド"
@@ -469,7 +431,7 @@ msgid "Minimum number of characters required to start a search"
 msgstr "検索を開始するために必要な最小文字数"
 
 #: templates/admin-tab-general.php:60
-#: templates/admin-tab-styling.php:106
+#: templates/admin-tab-styling.php:105
 msgid "Results Popup"
 msgstr "結果ポップアップ"
 
@@ -533,227 +495,211 @@ msgstr "AJAX機能を無効にします。結果ポップアップは表示さ�
 msgid "Search Engine Features"
 msgstr "検索エンジンの機能"
 
-#: templates/admin-tab-general.php:154
+#: templates/admin-tab-general.php:155
 msgid "Multiple Word Search"
 msgstr "複数単語検索"
 
-#: templates/admin-tab-general.php:157
-#: templates/admin-tab-general.php:163
+#: templates/admin-tab-general.php:158
+#: templates/admin-tab-general.php:164
 msgid "Only exact match"
 msgstr "完全一致のみ"
 
-#: templates/admin-tab-general.php:158
-#: templates/admin-tab-general.php:164
+#: templates/admin-tab-general.php:159
+#: templates/admin-tab-general.php:165
 msgid "\"A\" or \"B\""
 msgstr "「A」または「B」"
 
-#: templates/admin-tab-general.php:172
+#: templates/admin-tab-general.php:173
 msgid "Exclude Out of Stock Products"
 msgstr "在庫切れの商品"
 
-#: templates/admin-tab-general.php:173
+#: templates/admin-tab-general.php:174
 msgid "Exclude out of stock products and variations from results"
 msgstr "在庫切れの商品やバリエーションを結果から除外する"
 
 #: templates/admin-tab-general.php:180
-msgid "Exclude variations from results if the parent product is \"Out of stock\""
-msgstr "親製品が「在庫切れ」の場合、結果からバリエーションを除外します"
-
-#: templates/admin-tab-general.php:187
 msgid "Visibility of Products with Variations"
 msgstr "バリエーションのある商品の可視性"
 
-#: templates/admin-tab-general.php:188
+#: templates/admin-tab-general.php:181
 msgid "Select visibility of parent products and variations"
 msgstr "親製品とバリエーションの表示を選択"
 
-#: templates/admin-tab-general.php:190
+#: templates/admin-tab-general.php:183
 msgid "Parent product with variations"
 msgstr "バリエーションのある親製品"
 
-#: templates/admin-tab-general.php:191
+#: templates/admin-tab-general.php:184
 msgid "Only parent product"
 msgstr "親製品のみ"
 
-#: templates/admin-tab-general.php:192
+#: templates/admin-tab-general.php:185
 msgid "Only variations"
 msgstr "バリエーションのみ"
 
-#: templates/admin-tab-general.php:198
+#: templates/admin-tab-general.php:192
 msgid "Search Results Page"
 msgstr "検索結果ページ"
 
-#: templates/admin-tab-general.php:203
+#: templates/admin-tab-general.php:197
 msgid "Disable Redirect to Product Page"
 msgstr "製品ページへのリダイレクトを無効にする"
 
-#: templates/admin-tab-general.php:204
+#: templates/admin-tab-general.php:198
 msgid "Prevent WooCommerce from automatically redirecting to a product page when there is only one search result."
 msgstr "検索結果が 1 つしかない場合に WooCommerce が製品ページに自動的にリダイレクトされるのを防ぎます。"
 
-#: templates/admin-tab-general.php:210
+#: templates/admin-tab-general.php:204
 msgid "Suppress Database Query Altering"
 msgstr "データベースクエリの変更を抑制する"
 
-#: templates/admin-tab-general.php:211
+#: templates/admin-tab-general.php:205
 msgid "Prevent the theme or plugins from modifying the database query on the search results page"
 msgstr "テーマやプラグインが検索結果ページのデータベースクエリを変更しないようにする"
 
-#: templates/admin-tab-general.php:217
+#: templates/admin-tab-general.php:211
 msgid "Disable Smart Search Feature on the Search Results Page"
 msgstr "検索結果ページでスマート検索機能を無効にする"
 
-#: templates/admin-tab-general.php:218
+#: templates/admin-tab-general.php:212
 msgid "Disable altering search results by Smart Search plugin on the search results page.<br>By default the plugin modified search results according to selected options"
 msgstr "検索結果ページで Smart Search プラグインによる検索結果の変更を無効にします。<br>デフォルトでは、プラグインは選択されたオプションに応じて検索結果を変更します"
 
-#: templates/admin-tab-general.php:224
+#: templates/admin-tab-general.php:218
 msgid "Disable WooCommerce Template on the Search Results Page"
 msgstr "検索結果ページで WooCommerce テンプレートを無効にする"
 
-#: templates/admin-tab-general.php:225
+#: templates/admin-tab-general.php:219
 msgid "Displays the default search results template defined in the theme instead of WooCommerce template.<br>Useful if you want to display posts with products together"
 msgstr "WooCommerce テンプレートの代わりに、テーマで定義されたデフォルトの検索結果テンプレートを表示します。<br>商品と一緒に投稿を表示したい場合に便利です"
 
-#: templates/admin-tab-general.php:231
+#: templates/admin-tab-general.php:225
 msgid "Highlight Search Terms on the Search Results Page"
 msgstr "検索結果ページで検索語を強調表示する"
 
-#: templates/admin-tab-general.php:232
+#: templates/admin-tab-general.php:226
 msgid "Highlight words that match a search query on the search results page. Works only if the Smart Search Feature is not disabled on the search results page"
 msgstr "検索結果ページで検索クエリに一致する単語を強調表示します。検索結果ページでスマート検索機能が無効になっていない場合にのみ機能します。"
 
-#: templates/admin-tab-general.php:237
+#: templates/admin-tab-general.php:231
 msgid "Advanced"
 msgstr "高度な設定"
 
-#: templates/admin-tab-general.php:243
+#: templates/admin-tab-general.php:237
 msgid "It may be helpful if you changed the base slug for WooCommerce products. The base slug is \"product\""
 msgstr "WooCommerce 製品のベーススラッグを変更すると役立つ場合があります。ベーススラッグは「product」です。"
 
-#: templates/admin-tab-layout.php:12
+#: templates/admin-tab-layout.php:26
 msgid "Results Popup Elements"
 msgstr "結果ポップアップ要素"
 
-#: templates/admin-tab-layout.php:17
+#: templates/admin-tab-layout.php:31
 msgid "Columns Layout"
 msgstr "カラムレイアウト"
 
-#: templates/admin-tab-layout.php:18
+#: templates/admin-tab-layout.php:32
 msgid "Set the maximum number of columns to show in the popup.<br>To choose a Grid layout instead of List layout select columns number more than 1"
 msgstr "ポップアップに表示する列の最大数を設定します。<br>リストレイアウトの代わりにグリッドレイアウトを選択するには、1以上の列数を選択してください"
 
-#: templates/admin-tab-layout.php:32
+#: templates/admin-tab-layout.php:46
 msgid "Popup Max Height, px"
 msgstr "ポップアップの最大高さ、px"
 
-#: templates/admin-tab-layout.php:33
+#: templates/admin-tab-layout.php:47
 msgid "Popup max height in pixels. Default is 500px"
 msgstr "ポップアップの最大高さ（ピクセル単位）。デフォルトは 500 ピクセルです。"
 
-#: templates/admin-tab-layout.php:39
+#: templates/admin-tab-layout.php:53
 msgid "Popup Max Height (on mobile screen), px"
 msgstr "ポップアップの最大高さ（モバイル画面）、px"
 
-#: templates/admin-tab-layout.php:40
+#: templates/admin-tab-layout.php:54
 msgid "Popup max height in pixels for mobile screen (max-width: 768px). Default is 400px"
 msgstr "モバイル画面のポップアップの最大高さ（ピクセル単位）（最大幅：768ピクセル）。デフォルトは400ピクセルです。"
 
-#: templates/admin-tab-layout.php:46
+#: templates/admin-tab-layout.php:60
 msgid "Display Image"
 msgstr "画像オーバーレイの表示"
 
-#: templates/admin-tab-layout.php:61
-msgid "Use the parent product image if a variation has no image"
-msgstr "バリエーションに画像がない場合は親商品の画像を使用します"
-
-#: templates/admin-tab-layout.php:69
+#: templates/admin-tab-layout.php:75
 msgid "Image Size"
 msgstr "画像サイズ"
 
-#: templates/admin-tab-layout.php:70
+#: templates/admin-tab-layout.php:76
 msgid "Select image size"
 msgstr "画像サイズを選択"
 
-#: templates/admin-tab-layout.php:77
+#: templates/admin-tab-layout.php:83
 msgid "Image Max Width, px"
 msgstr "画像の最大幅、ピクセル"
 
-#: templates/admin-tab-layout.php:78
+#: templates/admin-tab-layout.php:84
 msgid "Limit image maximal width in pixels"
 msgstr "画像の最大幅をピクセル単位で制限する"
 
-#: templates/admin-tab-layout.php:84
+#: templates/admin-tab-layout.php:90
 msgid "Display Description"
 msgstr "表示の説明"
 
-#: templates/admin-tab-layout.php:85
+#: templates/admin-tab-layout.php:91
 msgid "Display product description"
 msgstr "商品の説明の表示"
 
-#: templates/admin-tab-layout.php:91
+#: templates/admin-tab-layout.php:97
 msgid "Description's Location"
 msgstr "説明の場所"
 
-#: templates/admin-tab-layout.php:95
+#: templates/admin-tab-layout.php:101
 msgid "Under the image"
 msgstr "画像の下"
 
-#: templates/admin-tab-layout.php:96
+#: templates/admin-tab-layout.php:102
 msgid "Under the title"
 msgstr "タイトルの下に"
 
-#: templates/admin-tab-layout.php:97
+#: templates/admin-tab-layout.php:103
 msgid "Under the price and SKU"
 msgstr "価格とSKUの下"
 
-#: templates/admin-tab-layout.php:103
+#: templates/admin-tab-layout.php:109
 msgid "Display Category"
 msgstr "カテゴリーを表示"
 
-#: templates/admin-tab-layout.php:104
+#: templates/admin-tab-layout.php:110
 msgid "Display product or post category"
 msgstr "商品または投稿のカテゴリを表示する"
 
-#: templates/admin-tab-layout.php:110
+#: templates/admin-tab-layout.php:116
 msgid "Display Product Price"
 msgstr "商品価格を表示"
 
-#: templates/admin-tab-layout.php:117
+#: templates/admin-tab-layout.php:123
 msgid "Display Product SKU"
 msgstr "製品SKUを表示"
 
-#: templates/admin-tab-layout.php:124
+#: templates/admin-tab-layout.php:137
 msgid "Display \"Out of stock\" Label"
 msgstr "「在庫切れ」ラベルを表示する"
 
-#: templates/admin-tab-layout.php:125
+#: templates/admin-tab-layout.php:138
 msgid "Indicates if a product is out of stock"
 msgstr "商品が在庫切れかどうかを示します"
 
-#: templates/admin-tab-layout.php:132
+#: templates/admin-tab-layout.php:145
 msgid "Display \"Sale\" Label"
 msgstr "「セール」ラベルを表示"
 
-#: templates/admin-tab-layout.php:133
+#: templates/admin-tab-layout.php:146
 msgid "Indicates if product has discount price"
 msgstr "製品に割引価格があるかどうかを示します"
 
-#: templates/admin-tab-layout.php:140
+#: templates/admin-tab-layout.php:153
 msgid "Display \"Featured\" Label"
 msgstr "「注目」ラベルを表示"
 
-#: templates/admin-tab-layout.php:141
+#: templates/admin-tab-layout.php:154
 msgid "Indicates if product is marked as special"
 msgstr "製品が特別としてマークされているかどうかを示します"
-
-#: templates/admin-tab-layout.php:148
-msgid "Display \"Add to Cart\" Button"
-msgstr "「カートに追加」ボタンを表示する"
-
-#: templates/admin-tab-layout.php:149
-msgid "Allow users to add products to their cart directly from the popup"
-msgstr "ユーザーがポップアップから直接カートに商品を追加できるようにする"
 
 #: templates/admin-tab-order.php:22
 msgid "Sort retrieved results by parameter"
@@ -788,7 +734,7 @@ msgid "Set the search field height in pixels"
 msgstr "検索フィールドの高さをピクセル単位で設定します"
 
 #: templates/admin-tab-styling.php:26
-#: templates/admin-tab-styling.php:118
+#: templates/admin-tab-styling.php:117
 msgid "Rounded Border"
 msgstr "角丸ボーダー"
 
@@ -797,7 +743,7 @@ msgid "Display search field with a rounded border (frame)"
 msgstr "丸い境界線（フレーム）付き検索フィールドを表示する"
 
 #: templates/admin-tab-styling.php:33
-#: templates/admin-tab-styling.php:125
+#: templates/admin-tab-styling.php:124
 msgid "Border Color"
 msgstr "枠線の色"
 
@@ -814,7 +760,7 @@ msgid "Text Color"
 msgstr "テキストカラー"
 
 #: templates/admin-tab-styling.php:54
-#: templates/admin-tab-styling.php:132
+#: templates/admin-tab-styling.php:131
 msgid "Background Color"
 msgstr "背景色"
 
@@ -826,87 +772,74 @@ msgstr "アイコンの色"
 msgid "Icon Background"
 msgstr "アイコン背景"
 
-#: templates/admin-tab-styling.php:80
+#: templates/admin-tab-styling.php:79
+#: templates/admin-tab-styling.php:87
 #: templates/admin-tab-styling.php:88
 #: templates/admin-tab-styling.php:89
 #: templates/admin-tab-styling.php:90
 #: templates/admin-tab-styling.php:91
-#: templates/admin-tab-styling.php:92
 msgid "Loader"
 msgstr "ローダー"
 
-#: templates/admin-tab-styling.php:81
+#: templates/admin-tab-styling.php:80
 msgid "Select loader's image"
 msgstr "ローダーの画像を選択"
 
-#: templates/admin-tab-styling.php:111
+#: templates/admin-tab-styling.php:110
 msgid "Top Indentation"
 msgstr "上部インデント"
 
-#: templates/admin-tab-styling.php:112
+#: templates/admin-tab-styling.php:111
 msgid "Indentation between search bar and popup, px"
 msgstr "検索バーとポップアップ間のインデント、px"
 
-#: templates/admin-tab-styling.php:119
+#: templates/admin-tab-styling.php:118
 msgid "Display popup with a rounded border (frame)"
 msgstr "丸い枠線（フレーム）付きのポップアップを表示する"
 
-#: templates/admin-tab-styling.php:139
+#: templates/admin-tab-styling.php:138
 msgid "Title's Text Color"
 msgstr "タイトルのテキスト色"
 
-#: templates/admin-tab-styling.php:146
+#: templates/admin-tab-styling.php:145
 msgid "Description's Text Color"
 msgstr "説明のテキストの色"
 
-#: templates/admin-tab-styling.php:153
-msgid "\"View all\" Button's Text Color"
-msgstr "「すべて表示」ボタンのテキストの色"
-
-#: templates/admin-tab-styling.php:160
-msgid "\"View all\" Button's Background Color"
-msgstr "「すべて表示」ボタンの背景色"
-
-#: templates/admin-tab-styling.php:167
+#: templates/admin-tab-styling.php:166
 msgid "Category Color"
 msgstr "カテゴリーの色"
 
-#: templates/admin-tab-styling.php:173
+#: templates/admin-tab-styling.php:172
 msgid "Product Elements"
 msgstr "商品要素"
 
-#: templates/admin-tab-styling.php:178
+#: templates/admin-tab-styling.php:177
 msgid "Price Color"
 msgstr "価格の色"
 
-#: templates/admin-tab-styling.php:185
+#: templates/admin-tab-styling.php:184
 msgid "\"Out of stock\" Label Text Color"
 msgstr "「在庫切れ」ラベルのテキストの色"
 
-#: templates/admin-tab-styling.php:193
+#: templates/admin-tab-styling.php:192
 msgid "\"Out of stock\" Label Background Color"
 msgstr "「在庫切れ」ラベルの背景色"
 
-#: templates/admin-tab-styling.php:201
+#: templates/admin-tab-styling.php:200
 msgid "\"Sale\" Label Text Color"
 msgstr "「セール」ラベルのテキストの色"
 
-#: templates/admin-tab-styling.php:209
+#: templates/admin-tab-styling.php:208
 msgid "\"Sale\" Label Background Color"
 msgstr "「セール」ラベルの背景色"
 
-#: templates/admin-tab-styling.php:217
+#: templates/admin-tab-styling.php:216
 msgid "\"Featured\" Label Text Color"
 msgstr "「注目」ラベルのテキストの色"
 
-#: templates/admin-tab-styling.php:225
+#: templates/admin-tab-styling.php:224
 msgid "\"Featured\" Label Background Color"
 msgstr "「注目」ラベルの背景色"
-
-#. Plugin Name of the plugin
-#: index.php
-msgid "Smart WooCommerce Search"
-msgstr "Smart WooCommerce Search"
 
 #. Plugin URI of the plugin
 #. Author URI of the plugin
@@ -914,190 +847,180 @@ msgstr "Smart WooCommerce Search"
 msgid "https://www.wpsmartsearch.com/"
 msgstr "https://www.wpsmartsearch.com/"
 
-#. Description of the plugin
-#: index.php
-msgid "Smart Ajax Search allows you to instantly search WooCommerce products."
-msgstr "Smart Ajax Search を使用すると、WooCommerce 製品を即座に検索できます。"
-
 #. Author of the plugin
 #: index.php
 msgid "YummyWP"
 msgstr "YummyWP"
 
-#: templates/admin-tab-general.php:253
+#: templates/admin-tab-general.php:247
 msgid "To enhance existing search bar with the Smart Search features."
-msgstr ""
+msgstr "既存の検索バーをSmart Searchの機能で強化するには。"
 
-#: templates/admin-tab-general.php:254
+#: templates/admin-tab-general.php:248
 msgid "Add a CSS selector (id or class) of the search bar's form element."
-msgstr ""
+msgstr "検索バーのフォーム要素のCSSセレクター（IDまたはクラス）を追加してください。"
 
-#: templates/admin-tab-general.php:255
+#: templates/admin-tab-general.php:249
 msgid "Fill in each selector on a new line."
-msgstr ""
+msgstr "各セレクターを新しい行に入力してください。"
 
-#: templates/admin-tab-general.php:265
+#: templates/admin-tab-general.php:259
 msgid "Add extra CSS styles"
-msgstr ""
+msgstr "追加のCSSスタイルを追加"
 
 #: templates/admin-page-form.php:23
 #: templates/admin-tab-fullscreen.php:5
 msgid "Fullscreen Mode"
-msgstr ""
+msgstr "全画面モード"
 
-#: templates/admin-page-synonyms.php:45
+#: templates/admin-page-synonyms.php:44
 msgid "Enable Automatic Synonyms Indexing"
-msgstr ""
+msgstr "自動同義語インデックス作成を有効にする"
 
-#: templates/admin-page-synonyms.php:47
+#: templates/admin-page-synonyms.php:46
 msgid "Automatically analyze product/post titles and tags to generate and store synonyms in a dedicated database index"
-msgstr ""
+msgstr "商品・投稿のタイトルとタグを自動分析し、専用データベースインデックスに同義語を生成・保存します"
 
-#: templates/admin-page-synonyms.php:51
+#: templates/admin-page-synonyms.php:50
 msgid "Use Synonyms for Fallback Search"
-msgstr ""
+msgstr "フォールバック検索に同義語を使用する"
 
-#: templates/admin-page-synonyms.php:53
+#: templates/admin-page-synonyms.php:52
 msgid "If no results are found for the original search query, the system will attempt to deliver results by searching for relevant synonyms from the indexed data"
-msgstr ""
+msgstr "元の検索クエリで結果が見つからない場合、インデックスデータから関連する同義語を検索して結果を提供しようとします"
 
-#: templates/admin-page-synonyms.php:64
+#: templates/admin-page-synonyms.php:63
 msgid "Add Custom Synonyms & Spelling Corrections"
-msgstr ""
+msgstr "カスタム同義語とスペル修正を追加"
 
-#: templates/admin-page-synonyms.php:66
+#: templates/admin-page-synonyms.php:65
 msgid "Manually define synonyms or correct common spelling errors."
-msgstr ""
+msgstr "同義語を手動で定義したり、よくあるスペルミスを修正したりできます。"
 
-#: templates/admin-page-synonyms.php:68
+#: templates/admin-page-synonyms.php:67
 msgid "Matching words in the search query will be replaced with the custom synonyms to enhance search accuracy."
-msgstr ""
+msgstr "検索クエリ内の一致する単語はカスタム同義語に置き換えられ、検索精度が向上します。"
 
 #: templates/admin-tab-fullscreen.php:14
 msgid "Full Screen Mode"
-msgstr ""
+msgstr "全画面モード"
 
 #: templates/admin-tab-fullscreen.php:15
 msgid "Enable fullscreen mode to display the search input and results within an expanded popup"
-msgstr ""
+msgstr "全画面モードを有効にして、拡張されたポップアップ内に検索入力と結果を表示します"
 
 #: templates/admin-tab-fullscreen.php:19
 msgid "Disable"
-msgstr ""
+msgstr "無効"
 
 #: templates/admin-tab-fullscreen.php:21
 msgid "Only on mobile"
-msgstr ""
+msgstr "モバイルのみ"
 
 #: templates/admin-tab-fullscreen.php:22
 msgid "Only on desktop"
-msgstr ""
+msgstr "デスクトップのみ"
 
 #: templates/admin-tab-general.php:120
 msgid "Recent Searches"
-msgstr ""
+msgstr "最近の検索"
 
 #: templates/admin-tab-general.php:121
 msgid "Display user’s recent searches below search bar"
-msgstr ""
+msgstr "検索バーの下にユーザーの最近の検索を表示"
 
 #: templates/admin-tab-general.php:128
 msgid "Displays label for recent searches if not empty"
-msgstr ""
+msgstr "最近の検索が空でない場合にラベルを表示します"
 
 #: templates/admin-tab-general.php:134
 msgid "Display “Did you mean“ Keywords"
-msgstr ""
+msgstr "「もしかして」キーワードを表示"
 
 #: templates/admin-tab-general.php:136
 msgid "Display synonyms in the search results popup below the search bar"
-msgstr ""
+msgstr "検索バーの下の検索結果ポップアップに同義語を表示します"
 
 #: templates/admin-tab-general.php:138
 msgid "Enable Automatic Synonyms Feature"
-msgstr ""
+msgstr "自動同義語機能を有効にする"
 
 #: templates/admin-tab-general.php:148
 msgid "Displays label for “Did you mean“ if not empty"
-msgstr ""
-
-#: templates/admin-tab-general.php:159
-#: templates/admin-tab-general.php:165
-msgid "\"A\" and \"B\" in one field"
-msgstr ""
+msgstr "「もしかして」キーワードを表示"
 
 #: templates/admin-tab-general.php:160
 #: templates/admin-tab-general.php:166
-msgid "\"A\" and \"B\" anywhere"
-msgstr ""
+msgid "\"A\" and \"B\" in one field"
+msgstr "\"A\" と \"B\" が同じフィールドに"
 
-#: templates/admin-tab-general.php:162
-msgid "Define how to handle multiple words search:"
-msgstr ""
+#: templates/admin-tab-general.php:161
+#: templates/admin-tab-general.php:167
+msgid "\"A\" and \"B\" anywhere"
+msgstr "\"A\" と \"B\" がどこかに"
 
 #: templates/admin-tab-general.php:163
-msgid "results containing the exact phrase as entered by the user, preserving the word order"
-msgstr ""
+msgid "Define how to handle multiple words search:"
+msgstr "複数単語検索の処理方法を定義してください："
 
 #: templates/admin-tab-general.php:164
-msgid "results containing at least one of the entered words, regardless of their order or location"
-msgstr ""
+msgid "results containing the exact phrase as entered by the user, preserving the word order"
+msgstr "ユーザーが入力した通りの語順で完全な語句を含む結果"
 
 #: templates/admin-tab-general.php:165
-msgid "results where all entered words appear together within the same field (e.g., product title or description)"
-msgstr ""
+msgid "results containing at least one of the entered words, regardless of their order or location"
+msgstr "順序や位置に関係なく、入力した単語の少なくとも1つを含む結果"
 
 #: templates/admin-tab-general.php:166
+msgid "results where all entered words appear together within the same field (e.g., product title or description)"
+msgstr "入力したすべての単語が同じフィールド（商品タイトルや説明など）に一緒に表示される結果"
+
+#: templates/admin-tab-general.php:167
 msgid "results where all entered words appear anywhere in the content, even if they are in different fields"
-msgstr ""
+msgstr "入力したすべての単語が異なるフィールドにあっても、コンテンツのどこかに表示される結果"
 
-#: templates/admin-tab-spellcheck.php:13
-#: templates/admin-tab-stopwords.php:13
-msgid "These settings have been moved to a global settings. Please check "
-msgstr ""
-
-#: templates/admin-tab-fullscreen.php:103
-#: templates/admin-tab-fullscreen.php:137
+#: templates/admin-tab-fullscreen.php:104
+#: templates/admin-tab-fullscreen.php:138
 msgid "Location"
-msgstr ""
-
-#: templates/admin-tab-fullscreen.php:107
-#: templates/admin-tab-fullscreen.php:141
-msgid "Left Sidebar Slot"
-msgstr ""
+msgstr "位置"
 
 #: templates/admin-tab-fullscreen.php:108
 #: templates/admin-tab-fullscreen.php:142
-msgid "Right Sidebar Slot"
-msgstr ""
+msgid "Left Sidebar Slot"
+msgstr "左サイドバースロット"
 
 #: templates/admin-tab-fullscreen.php:109
 #: templates/admin-tab-fullscreen.php:143
-msgid "Left Sidebar Slot 2"
-msgstr ""
+msgid "Right Sidebar Slot"
+msgstr "右サイドバースロット"
 
 #: templates/admin-tab-fullscreen.php:110
 #: templates/admin-tab-fullscreen.php:144
+msgid "Left Sidebar Slot 2"
+msgstr "左サイドバースロット2"
+
+#: templates/admin-tab-fullscreen.php:111
+#: templates/admin-tab-fullscreen.php:145
 msgid "Right Sidebar Slot 2"
-msgstr ""
+msgstr "右サイドバースロット2"
 
-#: templates/admin-tab-fullscreen.php:63
-#: templates/admin-tab-fullscreen.php:127
-#: templates/admin-tab-fullscreen.php:171
+#: templates/admin-tab-fullscreen.php:64
+#: templates/admin-tab-fullscreen.php:128
+#: templates/admin-tab-fullscreen.php:172
 msgid "Hide on mobile"
-msgstr ""
+msgstr "モバイルで非表示"
 
-#: templates/admin-tab-fullscreen.php:116
+#: templates/admin-tab-fullscreen.php:117
 msgid "Show Products Count"
-msgstr ""
+msgstr "商品数を表示"
 
-#: templates/admin-tab-fullscreen.php:132
+#: templates/admin-tab-fullscreen.php:133
 msgid "Promo banner"
-msgstr ""
+msgstr "プロモーションバナー"
 
-#: templates/admin-tab-fullscreen.php:150
+#: templates/admin-tab-fullscreen.php:151
 msgid "Banner Image"
-msgstr ""
+msgstr "バナー画像"
 
 #: inc/custom/functions.php:26
 msgid "WordPress Default Search Widget"
@@ -1105,46 +1028,584 @@ msgstr "WordPress デフォルト検索ウィジェット"
 
 #: templates/admin-tab-fullscreen.php:26
 msgid "Recommended Products"
-msgstr ""
+msgstr "おすすめ商品"
 
-#: templates/admin-tab-fullscreen.php:46
+#: templates/admin-tab-fullscreen.php:47
 msgid "Select Products"
-msgstr ""
+msgstr "商品を選択"
 
-#: templates/admin-tab-fullscreen.php:50
+#: templates/admin-tab-fullscreen.php:51
 msgid "Start typing product name..."
-msgstr ""
+msgstr "商品名を入力してください..."
 
-#: templates/admin-tab-layout.php:53
+#: templates/admin-tab-layout.php:67
 msgid "Display Rating"
-msgstr ""
+msgstr "評価を表示"
 
-#: templates/admin-tab-fullscreen.php:56
-#: templates/admin-tab-fullscreen.php:97
+#: templates/admin-tab-fullscreen.php:57
+#: templates/admin-tab-fullscreen.php:98
 msgid "Label"
-msgstr ""
+msgstr "ラベル"
 
-#: templates/admin-tab-fullscreen.php:71
+#: templates/admin-tab-fullscreen.php:72
 msgid "Selected Categories"
-msgstr ""
+msgstr "選択したカテゴリ"
 
-#: templates/admin-tab-fullscreen.php:87
+#: templates/admin-tab-fullscreen.php:88
 msgid "Select categories"
-msgstr ""
+msgstr "カテゴリを選択"
 
-#: templates/admin-tab-fullscreen.php:121
-#: templates/admin-tab-fullscreen.php:164
+#: templates/admin-tab-fullscreen.php:122
+#: templates/admin-tab-fullscreen.php:165
 msgid "Display when Popup Initially Opened"
-msgstr ""
+msgstr "ポップアップが最初に開いたときに表示"
 
-#: templates/admin-tab-fullscreen.php:157
+#: templates/admin-tab-fullscreen.php:158
 msgid "Banner Link"
-msgstr ""
+msgstr "バナーリンク"
 
-#: templates/admin-tab-styling.php:98
+#: templates/admin-tab-styling.php:97
 msgid "Loader Custom Image"
-msgstr ""
+msgstr "ローダーのカスタム画像"
 
 #: inc/app/class-field.php:291
 msgid "No image selected"
+msgstr "画像が選択されていません"
+
+#: inc/admin/admin.php:67
+#: inc/admin/admin.php:68
+msgid "Analytics"
+msgstr "アナリティクス"
+
+#: templates/admin-page-analytics.php:143
+#: templates/admin-page-analytics.php:420
+msgid "Google Analytics 4"
+msgstr "Google Analytics 4"
+
+#: templates/admin-page-analytics.php:452
+msgid "When user saw search results"
+msgstr "ユーザーが検索結果を見たとき"
+
+#: templates/admin-page-analytics.php:454
+msgid "When user clicked on a suggestion"
+msgstr "ユーザーが候補をクリックしたとき"
+
+#: inc/app/class-field.php:337
+msgid "On Sale Products"
+msgstr "セール中の商品"
+
+#: inc/app/class-field.php:338
+msgid "Featured Products"
+msgstr "注目商品"
+
+#: templates/admin-page-form.php:18
+#: templates/admin-tab-order.php:8
+msgid "Relevance & Sorting"
+msgstr "関連性と並べ替え"
+
+#: templates/admin-tab-order.php:44
+#: templates/promo/updates.php:78
+msgid "Relevance Configurator"
+msgstr "関連性コンフィギュレーター"
+
+#: templates/admin-tab-order.php:45
+msgid "Drag fields to reorder relevance priority. Items at the top carry the highest weight when sorting results by relevance."
+msgstr "フィールドをドラッグして関連性の優先度を並べ替えます。上部の項目は関連性による結果の並べ替えで最も高い重みを持ちます。"
+
+#: inc/app/class-field.php:333
+msgid "Product short description"
+msgstr "商品の短い説明"
+
+#: templates/admin-page-index-status.php:37
+#: templates/admin-page-index-status.php:219
+msgid "Indexing…"
+msgstr "インデックス作成中…"
+
+#: templates/admin-page-index-status.php:143
+msgid "Yes"
+msgstr "はい"
+
+#: templates/admin-page-index-status.php:145
+msgid "No"
+msgstr "いいえ"
+
+#: templates/admin-page-index-status.php:147
+msgid "Index tables are missing. Please deactivate and reactivate the plugin to recreate them."
+msgstr "インデックステーブルがありません。プラグインを無効化・再有効化して再作成してください。"
+
+#: templates/admin-page-index-status.php:178
+msgid "Saved"
+msgstr "保存済み"
+
+#: templates/admin-page-index-status.php:192
+msgid "Delete all indexed data and create a fresh index."
+msgstr "インデックスデータをすべて削除して新しいインデックスを作成します。"
+
+#: templates/admin-page-index-status.php:199
+msgid "Delete all indexed data."
+msgstr "インデックスデータをすべて削除します。"
+
+#: templates/admin-page-index-status.php:221
+msgid "Processed %1$d/%2$d"
+msgstr "処理済み %1$d/%2$d"
+
+#: templates/admin-page-index-status.php:262
+msgid "Indexing failed. Please try again."
+msgstr "インデックス作成に失敗しました。もう一度お試しください。"
+
+#: templates/admin-page-index-status.php:270
+msgid "Connection error while checking index status. Please reload the page."
+msgstr "インデックス状態の確認中に接続エラーが発生しました。ページを再読み込みしてください。"
+
+#: templates/admin-page-index-status.php:277
+#: templates/admin-page-index-status.php:296
+msgid "Running in background…"
+msgstr "バックグラウンドで実行中…"
+
+#: templates/admin-page-index-status.php:289
+msgid "Index is already running in the background. Do you want to stop it and start new indexing?"
+msgstr "インデックス作成はすでにバックグラウンドで実行されています。停止して新しいインデックス作成を開始しますか？"
+
+#: templates/admin-page-index-status.php:314
+msgid "Failed to start indexing. Please reload the page and try again."
+msgstr "インデックス作成を開始できませんでした。ページを再読み込みして再試行してください。"
+
+#: templates/admin-page-index-status.php:325
+msgid "Are you sure you want to delete all indexed data? This cannot be undone."
+msgstr "すべてのインデックスデータを削除してもよろしいですか？この操作は元に戻せません。"
+
+#: templates/admin-page-index-status.php:342
+msgid "Failed to delete index. Please reload the page and try again."
+msgstr "インデックスの削除に失敗しました。ページを再読み込みして再試行してください。"
+
+#: templates/promo/updates.php:27
+msgid "Smart WooCommerce Search — What's New 🚀"
+msgstr "Smart WooCommerce Search — 新機能 🚀"
+
+#: templates/promo/updates.php:30
+msgid "We've just shipped improvements to make your store search smarter and faster. Here's what's new:"
+msgstr "ストアの検索をよりスマートで高速にする改善をリリースしました。新機能のご紹介："
+
+#: templates/promo/updates.php:46
+#: templates/promo/updates.php:55
+msgid "PRO"
+msgstr "PRO"
+
+#: templates/promo/updates.php:75
+msgid "Unlock all PRO features:"
+msgstr "すべてのPRO機能を解除："
+
+#: templates/promo/updates.php:78
+msgid "control exactly how search results are ranked"
+msgstr "検索結果のランク付け方法を細かく制御"
+
+#: templates/promo/updates.php:80
+msgid "\"Did You Mean\" Keywords & Synonyms"
+msgstr "「もしかして」キーワードと同義語"
+
+#: templates/promo/updates.php:80
+msgid "automatically correct typos and suggest alternatives"
+msgstr "タイプミスを自動修正して代替案を提案"
+
+#: templates/promo/updates.php:81
+msgid "Search in Variations, Custom Fields & Taxonomies"
+msgstr "バリエーション、カスタムフィールド、タクソノミーで検索"
+
+#: templates/promo/updates.php:81
+msgid "find any product by any attribute"
+msgstr "任意の属性で任意の商品を見つける"
+
+#: templates/promo/updates.php:82
+msgid "Product Labels & Add to Cart Button"
+msgstr "商品ラベルとカートに追加ボタン"
+
+#: templates/promo/updates.php:82
+msgid "convert directly from the search popup"
+msgstr "検索ポップアップから直接コンバート"
+
+#: templates/promo/updates.php:86
+msgid "Start 14-Day Free Trial"
+msgstr "14日間の無料トライアルを開始"
+
+#: templates/promo/updates.php:89
+msgid "View all PRO features →"
+msgstr "すべてのPRO機能を見る →"
+
+#: templates/promo/updates.php:95
+msgid "Dismiss"
+msgstr "閉じる"
+
+#: inc/custom/class-ysm-widget-manager.php:601
+msgid "Search widget"
+msgstr "検索ウィジェット"
+
+#: inc/custom/functions.php:100
+msgid "Click to copy"
+msgstr "クリックしてコピー"
+
+#: inc/custom/functions.php:101
+msgid "Copied!"
+msgstr "コピーしました！"
+
+#: inc/fs.php:61
+#: inc/fs.php:80
+msgid ""
+"Opt in to receive feature updates and tips, and to share basic site details (WordPress version, PHP version, active plugin names) so we can ensure compatibility.\n"
+"<br>No spam. Unsubscribe any time. The plugin works the same either way."
 msgstr ""
+"機能の更新情報やヒントを受け取り、互換性確保のためにサイトの基本情報（WordPressバージョン、PHPバージョン、有効なプラグイン名）を共有することに同意します。\n"
+"<br>スパムなし。いつでも登録解除可能。プラグインはどちらでも同様に機能します。"
+
+#: templates/admin-page-analytics.php:433
+msgid "Enable Google Analytics 4 tracking."
+msgstr "Google Analytics 4トラッキングを有効にする。"
+
+#: templates/admin-page-analytics.php:434
+msgid "Event:"
+msgstr "イベント："
+
+#: templates/admin-page-analytics.php:443
+msgid "Event Categories"
+msgstr "イベントカテゴリ"
+
+#: templates/admin-page-analytics.php:445
+msgid "Toggle which events are sent to Google Analytics."
+msgstr "Google Analyticsに送信するイベントを選択します。"
+
+#: templates/admin-page-analytics.php:446
+msgid "Note: to accurately track click events, clicked links will open in a new window."
+msgstr "注意：クリックイベントを正確に追跡するため、クリックしたリンクは新しいウィンドウで開きます。"
+
+#: templates/admin-page-analytics.php:452
+msgid "[Search term] has results"
+msgstr "[検索語] に結果あり"
+
+#: templates/admin-page-analytics.php:453
+msgid "[Search term] no results"
+msgstr "[検索語] 結果なし"
+
+#: templates/admin-page-analytics.php:453
+msgid "When user saw a \"no results\" message"
+msgstr "ユーザーが「結果なし」メッセージを見たとき"
+
+#: templates/admin-page-analytics.php:454
+msgid "[Found Suggestions] link click"
+msgstr "[見つかった候補] リンククリック"
+
+#: templates/admin-page-analytics.php:455
+msgid "[Found Suggestions] add-to-cart click"
+msgstr "[見つかった候補] カートに追加クリック"
+
+#: templates/admin-page-analytics.php:455
+msgid "When user clicked a suggestion's Add to Cart button"
+msgstr "ユーザーが候補の「カートに追加」ボタンをクリックしたとき"
+
+#: templates/admin-page-analytics.php:456
+msgid "[View All] button click"
+msgstr "[すべて表示] ボタンクリック"
+
+#: templates/admin-page-analytics.php:456
+msgid "When user clicked the View All button"
+msgstr "ユーザーが「すべて表示」ボタンをクリックしたとき"
+
+#: templates/admin-page-analytics.php:457
+msgid "[Promo banner] link click"
+msgstr "[プロモバナー] リンククリック"
+
+#: templates/admin-page-analytics.php:457
+msgid "When user clicked a banner in the fullscreen popup"
+msgstr "ユーザーが全画面ポップアップのバナーをクリックしたとき"
+
+#: templates/admin-page-analytics.php:458
+msgid "[Selected Categories] link click"
+msgstr "[選択したカテゴリ] リンククリック"
+
+#: templates/admin-page-analytics.php:458
+msgid "When user clicked a category in the fullscreen popup"
+msgstr "ユーザーが全画面ポップアップのカテゴリをクリックしたとき"
+
+#: templates/admin-page-analytics.php:459
+msgid "[Recommended Products] link click"
+msgstr "[おすすめ商品] リンククリック"
+
+#: templates/admin-page-analytics.php:459
+msgid "When user clicked a recommended product in the fullscreen popup"
+msgstr "ユーザーが全画面ポップアップのおすすめ商品をクリックしたとき"
+
+#: templates/admin-page-widgets.php:68
+#: templates/admin-page-widgets.php:122
+msgid "Enhance Default"
+msgstr "デフォルトを強化"
+
+#: templates/admin-tab-layout.php:130
+msgid "SKU label"
+msgstr "SKUラベル"
+
+#: templates/admin-tab-layout.php:131
+msgid "Displays label before SKU. Leave this field empty to hide the label"
+msgstr "SKUの前にラベルを表示します。ラベルを非表示にするにはこのフィールドを空にしてください。"
+
+#. Plugin Name of the plugin
+#: index.php
+msgid "Sokol: Smart WooCommerce Search"
+msgstr "Sokol: スマートWooCommerce検索"
+
+#. Description of the plugin
+#: index.php
+msgid "Smart Search allows your customers to instantly find and purchase products on WooCommerce based store."
+msgstr "Smart Searchにより、お客様はWooCommerceショップで商品を即座に見つけて購入できます。"
+
+#: templates/admin-tab-styling.php:152
+msgid "Buttons Text Color"
+msgstr "ボタンのテキスト色"
+
+#: templates/admin-tab-styling.php:153
+msgid "Set text color for buttons like: "
+msgstr "ボタンのテキスト色を設定："
+
+#: templates/admin-tab-styling.php:159
+msgid "Buttons Background Color"
+msgstr "ボタンの背景色"
+
+#: templates/admin-tab-styling.php:160
+msgid "Set background color for buttons like: "
+msgstr "ボタンの背景色を設定："
+
+#: templates/promo/updates.php:36
+msgid "Data Indexing — Now Free! 🎉"
+msgstr "データインデックス — 無料で利用可能！ 🎉"
+
+#: templates/promo/updates.php:37
+msgid "The data indexing engine is now available in the free plugin. Build a blazing-fast search index of your entire product catalog for instant, accurate results — even for large stores."
+msgstr "データインデックスエンジンが無料プラグインで利用可能になりました。すべての商品カタログの超高速検索インデックスを構築し、大規模ストアでも即座に正確な結果を提供します。"
+
+#: templates/promo/updates.php:38
+msgid "FREE"
+msgstr "無料"
+
+#: templates/promo/updates.php:43
+msgid "Product Variations Popup:"
+msgstr "商品バリエーションポップアップ："
+
+#: templates/promo/updates.php:44
+#: templates/promo/updates.php:53
+msgid "NEW"
+msgstr "新機能"
+
+#: templates/promo/updates.php:48
+msgid "Shoppers can now select product options (size, color, and more) and add items to cart directly from the search popup — without ever leaving the page."
+msgstr "購入者は商品オプション（サイズ、カラーなど）を選択し、ページを離れることなく検索ポップアップから直接カートに追加できるようになりました。"
+
+#: templates/promo/updates.php:65
+msgid "You have used this free plugin for some time now, and I hope you like it! If you do, please consider"
+msgstr "このフリープラグインをしばらくご利用いただいていると思います。気に入っていただけたら、ぜひ"
+
+#: templates/promo/updates.php:67
+msgid "leaving a 5-star review on WordPress.org"
+msgstr "WordPress.orgで5つ星レビューを残してください"
+
+#: templates/promo/updates.php:69
+msgid "— it really helps!"
+msgstr "— 本当に助かります！"
+
+#: templates/promo/updates.php:77
+msgid "Product Variations Popup"
+msgstr "商品バリエーションポップアップ"
+
+#: templates/promo/updates.php:77
+msgid "let shoppers pick options and add to cart right from search results"
+msgstr "購入者が検索結果から直接オプションを選択してカートに追加できます"
+
+#: templates/promo/updates.php:83
+msgid "Grid Layout"
+msgstr "グリッドレイアウト"
+
+#: templates/promo/updates.php:83
+msgid "display results in a visual product grid"
+msgstr "ビジュアル商品グリッドで結果を表示"
+
+#: templates/admin-tab-layout.php:161
+msgid "Display \"Add to Cart\" / \"Select options\" Button"
+msgstr "「カートに追加」/「オプションを選択」ボタンを表示"
+
+#: templates/admin-tab-layout.php:162
+msgid "Allow users to preview variations and add products to their cart directly from the popup"
+msgstr "ユーザーがポップアップから直接バリエーションをプレビューして商品をカートに追加できるようにする"
+
+#: templates/admin-page-analytics.php:138
+msgid "Search Stats"
+msgstr "検索統計"
+
+#: templates/admin-page-analytics.php:157
+msgid "Search Statistics is a Pro feature"
+msgstr "検索統計はPro機能です"
+
+#: templates/admin-page-analytics.php:158
+msgid "Upgrade to Pro to unlock detailed search analytics — top queries, no-results tracking, click and cart events, and more."
+msgstr "Proにアップグレードして詳細な検索分析（トップクエリ、結果なしの追跡、クリックとカートイベントなど）のロックを解除しましょう。"
+
+#: templates/admin-page-analytics.php:159
+msgid "Upgrade to Pro &rarr;"
+msgstr "Proにアップグレード &rarr;"
+
+#: templates/admin-page-analytics.php:208
+msgid "Show:"
+msgstr "表示："
+
+#. translators: %d: number of days
+#: templates/admin-page-analytics.php:217
+msgid "Last %d day"
+msgid_plural "Last %d days"
+msgstr[0] "過去%d日間"
+msgstr[1] "過去%d日間"
+
+#: templates/admin-page-analytics.php:229
+msgid "Total Searches"
+msgstr "総検索数"
+
+#: templates/admin-page-analytics.php:235
+msgid "With Results"
+msgstr "結果あり"
+
+#: templates/admin-page-analytics.php:241
+msgid "No Results"
+msgstr "結果なし"
+
+#: templates/admin-page-analytics.php:247
+msgid "Unique Phrases"
+msgstr "ユニークフレーズ"
+
+#: templates/admin-page-analytics.php:274
+msgid "Top Searches"
+msgstr "トップ検索"
+
+#: templates/admin-page-analytics.php:282
+#: templates/admin-page-analytics.php:315
+msgid "Phrase"
+msgstr "フレーズ"
+
+#: templates/admin-page-analytics.php:283
+#: templates/admin-page-analytics.php:316
+msgid "Times Searched"
+msgstr "検索回数"
+
+#: templates/admin-page-analytics.php:284
+msgid "Avg. Found Results"
+msgstr "平均検索結果数"
+
+#: templates/admin-page-analytics.php:285
+#: templates/admin-page-analytics.php:317
+msgid "Last Searched"
+msgstr "最終検索"
+
+#: templates/admin-page-analytics.php:301
+msgid "No successful searches in this period."
+msgstr "この期間に成功した検索はありません。"
+
+#: templates/admin-page-analytics.php:307
+msgid "Searches With No Results"
+msgstr "結果なしの検索"
+
+#: templates/admin-page-analytics.php:329
+msgid "Critical"
+msgstr "重大"
+
+#: templates/admin-page-analytics.php:333
+msgid "Repeated"
+msgstr "繰り返し"
+
+#: templates/admin-page-analytics.php:346
+msgid "No searches without results in this period."
+msgstr "この期間に結果なしの検索はありません。"
+
+#: templates/admin-page-analytics.php:353
+msgid "Top Clicked Products"
+msgstr "最もクリックされた商品"
+
+#: templates/admin-page-analytics.php:359
+msgid "Click tracking data will appear here once visitors interact with search results."
+msgstr "訪問者が検索結果を操作すると、クリックトラッキングデータがここに表示されます。"
+
+#: templates/admin-page-analytics.php:368
+msgid "Product"
+msgstr "商品"
+
+#: templates/admin-page-analytics.php:369
+msgid "Link Clicks"
+msgstr "リンククリック数"
+
+#: templates/admin-page-analytics.php:370
+msgid "Cart Clicks"
+msgstr "カートクリック数"
+
+#: templates/admin-page-analytics.php:371
+msgid "Last Click"
+msgstr "最終クリック"
+
+#: templates/admin-page-analytics.php:378
+msgid "Product #%d"
+msgstr "商品 #%d"
+
+#: templates/admin-page-analytics.php:402
+msgid "No product clicks from search in this period."
+msgstr "この期間に検索からの商品クリックはありません。"
+
+#: templates/promo/updates.php:52
+msgid "Internal Analytics:"
+msgstr "内部アナリティクス："
+
+#: templates/promo/updates.php:57
+msgid "Get a built-in analytics dashboard — see your top search queries, no-results phrases, and most-clicked products, all without leaving WordPress."
+msgstr "内蔵の分析ダッシュボードで、トップ検索クエリ、結果なしフレーズ、最もクリックされた商品をWordPressから離れずに確認できます。"
+
+#: templates/promo/updates.php:79
+msgid "Internal Analytics"
+msgstr "内部アナリティクス"
+
+#: templates/promo/updates.php:79
+msgid "built-in dashboard with top queries, no-results tracking, and click stats"
+msgstr "トップクエリ、結果なしの追跡、クリック統計を含む内蔵ダッシュボード"
+
+#: inc/core/class-nav-menu.php:54
+msgid "Default"
+msgstr "デフォルト"
+
+#: inc/core/class-nav-menu.php:55
+msgid "Search bar"
+msgstr "検索バー"
+
+#: inc/core/class-nav-menu.php:56
+msgid "Search icon"
+msgstr "検索アイコン"
+
+#: inc/core/class-nav-menu.php:57
+msgid "Icon on mobile, bar on desktop"
+msgstr "モバイルはアイコン、デスクトップはバー"
+
+#: inc/core/class-nav-menu.php:58
+msgid "Icon on desktop, bar on mobile"
+msgstr "デスクトップはアイコン、モバイルはバー"
+
+#: inc/core/class-nav-menu.php:69
+msgid "Sokol Smart Search"
+msgstr "Sokol Smart Search"
+
+#: inc/core/class-nav-menu.php:81
+msgid "No Smart Search widgets found. Please create one first."
+msgstr "Smart Searchウィジェットが見つかりません。最初に作成してください。"
+
+#: inc/core/class-nav-menu.php:124
+msgid "Select All"
+msgstr "すべて選択"
+
+#: inc/core/class-nav-menu.php:131
+msgid "Add to Menu"
+msgstr "メニューに追加"
+
+#: templates/admin-tab-layout.php:18
+msgid "Display only Search Icon"
+msgstr "検索アイコンのみ表示"
+
+#: templates/admin-tab-layout.php:19
+msgid "Hide text input and display only search icon. This option will enable Fullscreen mode"
+msgstr "テキスト入力を非表示にして検索アイコンのみ表示します。このオプションは全画面モードを有効にします。"

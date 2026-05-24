@@ -1,7 +1,7 @@
 === Sokol: Smart WooCommerce Search ===
 Contributors: yummy-wp
 Tags: search, ajax search, product search, search by sku, woocommerce search
-Stable tag: 3.0.6
+Stable tag: 3.0.8
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Requires at least: 5.9
@@ -117,6 +117,10 @@ Yes — you can try all PRO features free for 14 days. Start your trial from the
 5. Smart Search PRO - Product options
 
 == Changelog ==
+
+= 3.0.8 =
+* Fixed: recent searches styling issue when search popup opened from website's menu
+* Updated: translations
 
 = 3.0.7 =
 * Added: option "Display only Search Icon" - hides input field and shows only search button
