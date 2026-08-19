@@ -3,6 +3,11 @@ namespace YSWS\Core\DB_Index;
 
 const INDEXED_META_KEY      = 'sws_indexed';
 const RECURRING_CRON_ACTION = 'sws_bulk_index_recurring_hook';
+const CONTINUE_CRON_ACTION   = 'sws_bulk_index_continue_hook';
+const BULK_INDEX_BATCH_DELAY = 5;
+const BULK_INDEX_BATCH_SIZE  = 25;
+const BULK_INDEX_HEARTBEAT   = 'sws_bulk_index_heartbeat';
+const BULK_INDEX_STALE_AFTER = 1800;
 
 add_action( 'save_post', __NAMESPACE__ . '\\post_save_action', 999 );
 add_action( 'woocommerce_save_product_variation', __NAMESPACE__ . '\\variation_save_action', 999 );
@@ -17,8 +22,9 @@ add_action( 'admin_notices', __NAMESPACE__ . '\\show_activation_message', 10 );
 sws_fs()->add_action( 'after_uninstall', __NAMESPACE__ . '\\drop_tables' );
 add_filter( 'is_protected_meta', __NAMESPACE__ . '\\protected_meta', 10, 2 );
 
-add_action( 'sws_bulk_index_hook', __NAMESPACE__ . '\\bulk_index_posts' ); // cron
+add_action( 'sws_bulk_index_hook', __NAMESPACE__ . '\\recurring_bulk_index_posts' ); // legacy cron
 add_action( RECURRING_CRON_ACTION, __NAMESPACE__ . '\\recurring_bulk_index_posts' ); // cron
+add_action( CONTINUE_CRON_ACTION, __NAMESPACE__ . '\\continue_bulk_index_posts' ); // cron
 add_action( 'sws_widget_settings_saved', __NAMESPACE__ . '\\widget_settings_saved', 10, 3 );
 add_action( 'wp_ajax_sws_index_button_click', __NAMESPACE__ . '\\ajax_index_button_click' );
 add_action( 'wp_ajax_sws_index_button_click_check', __NAMESPACE__ . '\\ajax_index_button_click_check' );
@@ -35,6 +41,8 @@ register_deactivation_hook(
 		if ( $timestamp ) {
 			wp_unschedule_event( $timestamp, RECURRING_CRON_ACTION );
 		}
+		wp_clear_scheduled_hook( CONTINUE_CRON_ACTION );
+		delete_option( BULK_INDEX_HEARTBEAT );
 	}
 );
 
@@ -102,34 +110,15 @@ function ajax_index_button_click() {
 		'sws_bulk_index_hook',
 		[]
 	);
+	wp_clear_scheduled_hook( CONTINUE_CRON_ACTION );
 
 	update_option( 'sws_bulk_index_lock', $index_lock );
 	set_index_status('doing');
+	touch_bulk_index_heartbeat();
 	truncate_tables();
+	schedule_bulk_index_continuation( $index_lock );
 
-	$query_args = [
-		'post_type'      => ysm_get_post_types(),
-		'post_status'    => [ 'publish' ],
-		'paged'          => 1,
-		'fields'         => 'ids',
-		'ignore_sticky_posts' => 1,
-		'posts_per_page' => 1,
-		'meta_query' => [
-			'relation' => 'OR',
-			[
-				'key'     => INDEXED_META_KEY,
-				'compare' => 'NOT EXISTS'
-			],
-			[
-				'key'     => INDEXED_META_KEY,
-				'value'   => $index_lock,
-				'compare' => '!='
-			]
-		]
-	];
-
-	$query = new \WP_Query( $query_args );
-	$total_not_indexed = $query->found_posts;
+	$total_not_indexed = count_unindexed_posts( $index_lock );
 
 	echo wp_json_encode( [
 		'status'  => 'doing',
@@ -146,7 +135,7 @@ function ajax_index_button_click_check() {
 		exit;
 	}
 
-	$res = bulk_index_posts( true );
+	$res = run_bulk_index_batch();
 	$index_lock = get_option( 'sws_bulk_index_lock' );
 	$index_status = get_index_status();
 
@@ -175,6 +164,8 @@ function ajax_index_button_delete() {
 		'sws_bulk_index_hook',
 		[]
 	);
+	wp_clear_scheduled_hook( CONTINUE_CRON_ACTION );
+	delete_option( BULK_INDEX_HEARTBEAT );
 
 	exit;
 }
@@ -215,19 +206,169 @@ function recurring_cron() {
  * @return void
  */
 function recurring_bulk_index_posts() {
-	bulk_index_posts();
+	$index_lock = get_option( 'sws_bulk_index_lock' );
+	$res = run_bulk_index_batch( $index_lock );
+
+	if ( ! empty( $res['posts_left'] ) && empty( $res['interrupted'] ) && empty( $res['locked'] ) ) {
+		schedule_bulk_index_continuation( $index_lock );
+	}
 }
 
-function bulk_index_posts( $batch = false ) {
+/**
+ * Count published posts that do not belong to the current index generation.
+ *
+ * @param string|int $index_lock
+ * @return int
+ */
+function count_unindexed_posts( $index_lock ) {
+	global $wpdb;
+
+	$post_types      = ysm_get_post_types();
+	$pt_placeholders = implode( ',', array_fill( 0, count( $post_types ), '%s' ) );
+	$sql             = "SELECT COUNT(*)
+		FROM {$wpdb->posts}
+		WHERE {$wpdb->posts}.post_type IN ($pt_placeholders)
+		  AND {$wpdb->posts}.post_status = 'publish'
+		  AND NOT EXISTS (
+			  SELECT 1
+			  FROM {$wpdb->postmeta} AS indexed_meta
+			  WHERE indexed_meta.post_id = {$wpdb->posts}.ID
+				AND indexed_meta.meta_key = %s
+				AND indexed_meta.meta_value = %s
+		  )";
+
+	return (int) $wpdb->get_var(
+		$wpdb->prepare( $sql, array_merge( $post_types, [ INDEXED_META_KEY, $index_lock ] ) )
+	);
+}
+
+/**
+ * Continue a full index in bounded cron requests.
+ *
+ * @param string|int $index_lock Lock value captured when the job was scheduled.
+ * @return void
+ */
+function continue_bulk_index_posts( $index_lock ) {
+	if ( ! is_bulk_index_lock_current( $index_lock ) ) {
+		return;
+	}
+
+	$res = run_bulk_index_batch( $index_lock );
+	if ( ! empty( $res['posts_left'] ) && empty( $res['interrupted'] ) && empty( $res['locked'] ) ) {
+		schedule_bulk_index_continuation( $index_lock );
+	}
+}
+
+/**
+ * Run one index batch while preventing overlapping AJAX and cron workers.
+ *
+ * @param string|int|null $index_lock Expected index generation.
+ * @return array
+ */
+function run_bulk_index_batch( $index_lock = null ) {
+	if ( ! acquire_bulk_index_db_lock() ) {
+		return [
+			'status'      => get_index_status(),
+			'posts_left'  => null,
+			'indexed'     => count_indexed_posts(),
+			'locked'      => true,
+			'interrupted' => false,
+		];
+	}
+
+	try {
+		return bulk_index_posts( true, $index_lock );
+	} finally {
+		release_bulk_index_db_lock();
+	}
+}
+
+/**
+ * Schedule the next bounded index batch for the current index generation.
+ *
+ * @param string|int $index_lock
+ * @return void
+ */
+function schedule_bulk_index_continuation( $index_lock ) {
+	$index_lock = (string) $index_lock;
+
+	if ( ! is_bulk_index_lock_current( $index_lock ) ) {
+		return;
+	}
+
+	if ( ! wp_next_scheduled( CONTINUE_CRON_ACTION, [ $index_lock ] ) ) {
+		wp_schedule_single_event( time() + BULK_INDEX_BATCH_DELAY, CONTINUE_CRON_ACTION, [ $index_lock ] );
+	}
+}
+
+/**
+ * Check whether a worker still belongs to the active index generation.
+ *
+ * @param string|int|null $index_lock
+ * @return bool
+ */
+function is_bulk_index_lock_current( $index_lock ) {
+	return null === $index_lock || (string) $index_lock === (string) get_option( 'sws_bulk_index_lock' );
+}
+
+/**
+ * Get a database advisory lock name unique to this WordPress site.
+ *
+ * @return string
+ */
+function get_bulk_index_db_lock_name() {
+	global $wpdb;
+
+	return 'sws_bulk_index_' . md5( $wpdb->dbname . ':' . $wpdb->prefix . ':' . get_current_blog_id() );
+}
+
+/**
+ * Acquire a non-blocking MySQL advisory lock for index work.
+ *
+ * @return bool
+ */
+function acquire_bulk_index_db_lock() {
+	global $wpdb;
+
+	$acquired = $wpdb->get_var(
+		$wpdb->prepare( 'SELECT GET_LOCK(%s, 0)', get_bulk_index_db_lock_name() )
+	);
+
+	return 1 === (int) $acquired;
+}
+
+/**
+ * Release the current request's MySQL advisory lock.
+ *
+ * @return void
+ */
+function release_bulk_index_db_lock() {
+	global $wpdb;
+
+	$wpdb->get_var(
+		$wpdb->prepare( 'SELECT RELEASE_LOCK(%s)', get_bulk_index_db_lock_name() )
+	);
+}
+
+function bulk_index_posts( $batch = false, $expected_lock = null ) {
 	if ( ! $batch ) {
 		set_index_status('doing');
 	}
 
 	$lock = get_option( 'sws_bulk_index_lock' );
+	if ( ! is_bulk_index_lock_current( $expected_lock ) ) {
+		return [
+			'status'      => get_index_status(),
+			'posts_left'  => null,
+			'indexed'     => count_indexed_posts(),
+			'interrupted' => true,
+		];
+	}
+	touch_bulk_index_heartbeat();
 
 	// index posts
 	global $wpdb;
-	$posts_per_page   = defined( 'ICL_LANGUAGE_CODE' ) ? 20 : 100;
+	$posts_per_page   = BULK_INDEX_BATCH_SIZE;
 	$post_types       = ysm_get_post_types();
 	$pt_placeholders  = implode( ',', array_fill( 0, count( $post_types ), '%s' ) );
 
@@ -235,40 +376,48 @@ function bulk_index_posts( $batch = false ) {
 	$sql_query = $wpdb->prepare(
 		"SELECT {$wpdb->posts}.ID
 		 FROM {$wpdb->posts}
-		     LEFT JOIN {$wpdb->postmeta} ON ( {$wpdb->posts}.ID = {$wpdb->postmeta}.post_id AND {$wpdb->postmeta}.meta_key = %s )
-		     LEFT JOIN {$wpdb->postmeta} AS mt1 ON ( {$wpdb->posts}.ID = mt1.post_id )
-		 WHERE (
-			  {$wpdb->postmeta}.post_id IS NULL
-			  OR
-			  ( mt1.meta_key = %s AND mt1.meta_value != %s )
-			)
-		   AND {$wpdb->posts}.post_type IN ($pt_placeholders)
+		 WHERE {$wpdb->posts}.post_type IN ($pt_placeholders)
 		   AND {$wpdb->posts}.post_status = 'publish'
-		 GROUP BY {$wpdb->posts}.ID
+		   AND NOT EXISTS (
+			   SELECT 1
+			   FROM {$wpdb->postmeta} AS indexed_meta
+			   WHERE indexed_meta.post_id = {$wpdb->posts}.ID
+				 AND indexed_meta.meta_key = %s
+				 AND indexed_meta.meta_value = %s
+		   )
 		 ORDER BY {$wpdb->posts}.post_date DESC
 		 LIMIT 0, {$posts_per_page}",
-		array_merge( [ INDEXED_META_KEY, INDEXED_META_KEY, $lock ], $post_types )
+		array_merge( $post_types, [ INDEXED_META_KEY, $lock ] )
 	);
 	$sql_query_count = $wpdb->prepare(
-		"SELECT COUNT(DISTINCT {$wpdb->posts}.ID)
+		"SELECT COUNT(*)
 		 FROM {$wpdb->posts}
-		     LEFT JOIN {$wpdb->postmeta} ON ( {$wpdb->posts}.ID = {$wpdb->postmeta}.post_id AND {$wpdb->postmeta}.meta_key = %s )
-		     LEFT JOIN {$wpdb->postmeta} AS mt1 ON ( {$wpdb->posts}.ID = mt1.post_id )
-		 WHERE (
-			  {$wpdb->postmeta}.post_id IS NULL
-			  OR
-			  ( mt1.meta_key = %s AND mt1.meta_value != %s )
-			)
-		   AND {$wpdb->posts}.post_type IN ($pt_placeholders)
-		   AND {$wpdb->posts}.post_status = 'publish'",
-		array_merge( [ INDEXED_META_KEY, INDEXED_META_KEY, $lock ], $post_types )
+		 WHERE {$wpdb->posts}.post_type IN ($pt_placeholders)
+		   AND {$wpdb->posts}.post_status = 'publish'
+		   AND NOT EXISTS (
+			   SELECT 1
+			   FROM {$wpdb->postmeta} AS indexed_meta
+			   WHERE indexed_meta.post_id = {$wpdb->posts}.ID
+				 AND indexed_meta.meta_key = %s
+				 AND indexed_meta.meta_value = %s
+		   )",
+		array_merge( $post_types, [ INDEXED_META_KEY, $lock ] )
 	);
 	// phpcs:enable
-	$posts_left = $wpdb->get_var($sql_query_count);
+	$posts_left = (int) $wpdb->get_var( $sql_query_count );
 
 	do {
 		$post_ids = $wpdb->get_col($sql_query);
 		foreach ( $post_ids as $post_id ) {
+			if ( ! is_bulk_index_lock_current( $lock ) ) {
+				return [
+					'status'      => get_index_status(),
+					'posts_left'  => null,
+					'indexed'     => count_indexed_posts(),
+					'interrupted' => true,
+				];
+			}
+
 			if ( is_post_indexable( $post_id ) ) {
 				update_post_with_children( $post_id );
 			}
@@ -283,14 +432,16 @@ function bulk_index_posts( $batch = false ) {
 
 	} while ( $posts_per_page === count($post_ids) );
 
-	if ( ! $batch || 0 === $posts_left ) {
+	if ( is_bulk_index_lock_current( $lock ) && ( ! $batch || 0 === $posts_left ) ) {
 		set_index_status('ready');
+		delete_option( BULK_INDEX_HEARTBEAT );
 	}
 
 	return [
 		'status'  => get_index_status(),
 		'posts_left'  => $posts_left,
 		'indexed' => count_indexed_posts(),
+		'interrupted' => false,
 	];
 }
 
@@ -656,11 +807,29 @@ function delete_post_index( $post_id, $what = 'all' ) {
  */
 function get_index_status() {
 	$status = get_option( 'sws_plugin_index_status' );
+	if ( 'doing' === $status ) {
+		$heartbeat = (int) get_option( BULK_INDEX_HEARTBEAT );
+		if ( $heartbeat && time() - $heartbeat > BULK_INDEX_STALE_AFTER ) {
+			delete_option( BULK_INDEX_HEARTBEAT );
+			set_index_status( 'failed' );
+			return 'failed';
+		}
+	}
+
 	if ( $status && in_array( $status, [ 'doing', 'ready', 'failed' ] ) ) {
 		return $status;
 	}
 
 	return '';
+}
+
+/**
+ * Record activity for the active index worker.
+ *
+ * @return void
+ */
+function touch_bulk_index_heartbeat() {
+	update_option( BULK_INDEX_HEARTBEAT, time(), false );
 }
 
 /**
@@ -714,7 +883,8 @@ function truncate_tables() {
 	$tables = get_tables();
 
 	foreach ( $tables as $table_name => $table_sql ) {
-		$sql = "TRUNCATE TABLE $table_name";
+		$table_name = esc_sql( $table_name );
+		$sql        = "TRUNCATE TABLE `{$table_name}`";
 		$wpdb->query( $sql );
 	}
 }

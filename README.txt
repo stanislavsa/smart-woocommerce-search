@@ -1,11 +1,11 @@
 === Sokol: Smart WooCommerce Search ===
 Contributors: yummy-wp
 Tags: search, ajax search, product search, search by sku, woocommerce search
-Stable tag: 3.0.8
-License: GPLv2 or later
-License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Stable tag: 3.0.9
+License: GPLv3
+License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Requires at least: 5.9
-Tested up to: 7.0
+Tested up to: 7.1
 Requires PHP: 7.0
 
 Boost WooCommerce sales with instant Ajax product search — live suggestions, fullscreen popup, SKU search, and GA4 analytics, all in one plugin.
@@ -117,6 +117,10 @@ Yes — you can try all PRO features free for 14 days. Start your trial from the
 5. Smart Search PRO - Product options
 
 == Changelog ==
+
+= 3.0.9 =
+* Fixed: product indexing updates
+* Checked: WordPress 7.1 compatibility
 
 = 3.0.8 =
 * Fixed: recent searches styling issue when search popup opened from website's menu

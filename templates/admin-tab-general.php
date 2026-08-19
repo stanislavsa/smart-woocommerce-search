@@ -1,3 +1,4 @@
+<?php if ( ! defined( 'ABSPATH' ) ) exit; ?>
 <div id="general_tab" class="ymapp-settings__content">
     <div data-href="#general_tab" class="sws_tab_mobile_heading js-sws-tab-mobile-heading sws_tab_mobile_heading--active">
         <div class="sws_tab_mobile_heading__inner">

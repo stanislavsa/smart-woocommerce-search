@@ -38,79 +38,79 @@ $create_btn_label = $is_running
 	: __( 'Create Index', 'smart-woocommerce-search' );
 ?>
 <style>
-/* Status badge — replaces inline style="background-color:X" on <code> */
-.sws-index-status-badge {
-	display: inline-block;
-	padding: 2px 10px;
-	border-radius: 3px;
-	font-size: 12px;
-	font-weight: 600;
-	color: #fff;
-	background: #999;
-	vertical-align: middle;
-	margin-left: 8px;
-	font-family: inherit;
-}
-.sws-index-status-badge--ready  { background: #46b450; }
-.sws-index-status-badge--doing  { background: #2271b1; }
-.sws-index-status-badge--failed { background: #dc3232; }
+    /* Status badge — replaces inline style="background-color:X" on <code> */
+    .sws-index-status-badge {
+        display: inline-block;
+        padding: 2px 10px;
+        border-radius: 3px;
+        font-size: 12px;
+        font-weight: 600;
+        color: #fff;
+        background: #999;
+        vertical-align: middle;
+        margin-left: 8px;
+        font-family: inherit;
+    }
+    .sws-index-status-badge--ready  { background: #46b450; }
+    .sws-index-status-badge--doing  { background: #2271b1; }
+    .sws-index-status-badge--failed { background: #dc3232; }
 
-/* Button area — replaces <br> spacers */
-.sws-index-actions {
-	margin-top: 20px;
-}
-.sws-index-actions .sws-action-group {
-	margin-bottom: 16px;
-}
-.sws-index-actions .sws-page-description {
-	margin: 4px 0 0;
-	color: #646970;
-	font-size: 12px;
-}
+    /* Button area — replaces <br> spacers */
+    .sws-index-actions {
+        margin-top: 20px;
+    }
+    .sws-index-actions .sws-action-group {
+        margin-bottom: 16px;
+    }
+    .sws-index-actions .sws-page-description {
+        margin: 4px 0 0;
+        color: #646970;
+        font-size: 12px;
+    }
 
-/* Loader + message sit inline with the button */
-.sws-index-now-button-holder {
-	display: flex;
-	align-items: center;
-	gap: 12px;
-	flex-wrap: wrap;
-}
-.sws-index-now-button-loader {
-	display: none;
-}
-.sws-index-now-button-loader img {
-	display: block;
-}
-.sws-index-now-button-message {
-	font-size: 13px;
-	color: #646970;
-}
+    /* Loader + message sit inline with the button */
+    .sws-index-now-button-holder {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        flex-wrap: wrap;
+    }
+    .sws-index-now-button-loader {
+        display: none;
+    }
+    .sws-index-now-button-loader img {
+        display: block;
+    }
+    .sws-index-now-button-message {
+        font-size: 13px;
+        color: #646970;
+    }
 
-/* "Saved" confirmation — hidden by default, shown via JS opacity transition */
-.field-updated {
-	opacity: 0;
-	color: #46b450;
-	font-size: 13px;
-	margin-top: 8px;
-	transition: opacity 0.3s ease;
-}
+    /* "Saved" confirmation — hidden by default, shown via JS opacity transition */
+    .field-updated {
+        opacity: 0;
+        color: #46b450;
+        font-size: 13px;
+        margin-top: 8px;
+        transition: opacity 0.3s ease;
+    }
 
-/* Inline notice for missing tables */
-.sws-tables-missing-notice {
-	margin: 6px 0 0 !important;
-}
+    /* Inline notice for missing tables */
+    .sws-tables-missing-notice {
+        margin: 6px 0 0 !important;
+    }
 
-/* Doc link — styling handled globally in _buttons.scss */
+    /* Doc link — styling handled globally in _buttons.scss */
 
-#sws-index-now-button,
-#sws-index-now-delete {
-	margin-left: 0;
-}
+    #sws-index-now-button,
+    #sws-index-now-delete {
+        margin-left: 0;
+    }
 
-/* Settings panel — always visible on this page (overrides any tab-hide logic) */
-.ysm-widget-edit-settings.ymapp-settings__content {
-	display: block;
-}
+    /* Settings panel — always visible on this page (overrides any tab-hide logic) */
+    .ysm-widget-edit-settings.ymapp-settings__content {
+        display: block;
+    }
 </style>
 
 <div class="wrap">
@@ -193,11 +193,11 @@ $create_btn_label = $is_running
 				</div>
 
 				<div class="sws-action-group">
-						<a href="#" id="sws-index-now-delete" class="ymapp-button-small<?php echo $is_running ? ' disabled' : ''; ?>">
-							<?php esc_html_e( 'Delete Index', 'smart-woocommerce-search' ); ?>
-						</a>
-						<p class="sws-page-description"><?php esc_html_e( 'Delete all indexed data.', 'smart-woocommerce-search' ); ?></p>
-					</div>
+					<a href="#" id="sws-index-now-delete" class="ymapp-button-small<?php echo $is_running ? ' disabled' : ''; ?>">
+						<?php esc_html_e( 'Delete Index', 'smart-woocommerce-search' ); ?>
+					</a>
+					<p class="sws-page-description"><?php esc_html_e( 'Delete all indexed data.', 'smart-woocommerce-search' ); ?></p>
+				</div>
 
 			</div>
 
@@ -217,6 +217,8 @@ $create_btn_label = $is_running
 		var $deleteBtn    = $('#sws-index-now-delete');
 		var labelCreate    = <?php echo wp_json_encode( __( 'Create Index',    'smart-woocommerce-search' ) ); ?>;
 		var labelIndexing  = <?php echo wp_json_encode( __( 'Indexing…',       'smart-woocommerce-search' ) ); ?>;
+		var pollDelay      = 5000;
+		var requestTimeout = 120000;
 		/* translators: 1: posts processed so far, 2: total posts to process */
 		var labelProcessed = <?php echo wp_json_encode( __( 'Processed %1$d/%2$d', 'smart-woocommerce-search' ) ); ?>;
 
@@ -240,34 +242,37 @@ $create_btn_label = $is_running
 		}
 
 		var checkStatus = function() {
-			$.post(
-				ajaxurl,
-				{
+			$.ajax({
+				url: ajaxurl,
+				type: 'POST',
+				data: {
 					action: 'sws_index_button_click_check',
 					nonce: $('#sws_index_button_nonce').val()
 				},
-				function( res ) {
-					if ( ! res || ! res['status'] ) {
-						return;
-					}
+				dataType: 'json',
+				timeout: requestTimeout
+			}).done(function( res ) {
+				if ( ! res || ! res['status'] ) {
+					setTimeout( checkStatus, pollDelay );
+					return;
+				}
 
-					if ( notIndexed && res['indexed'] ) {
-						showMessage( labelProcessed.replace( '%1$d', Math.min( res['indexed'], notIndexed ) ).replace( '%2$d', notIndexed ) );
-					}
+				if ( notIndexed && null !== res['posts_left'] && undefined !== res['posts_left'] ) {
+					var processed = Math.max( 0, notIndexed - parseInt( res['posts_left'], 10 ) );
+					showMessage( labelProcessed.replace( '%1$d', processed ).replace( '%2$d', notIndexed ) );
+				}
 
-					if ( res['status'] === 'ready' ) {
-						location.reload();
-					} else if ( res['status'] === 'failed' ) {
-						setRunningState( false );
-						showMessage( <?php echo wp_json_encode( __( 'Indexing failed. Please try again.', 'smart-woocommerce-search' ) ); ?>, true );
-					} else {
-						setTimeout( checkStatus, 1000 );
-					}
-				},
-				'json'
-			).fail(function() {
-				setRunningState( false );
-				showMessage( <?php echo wp_json_encode( __( 'Connection error while checking index status. Please reload the page.', 'smart-woocommerce-search' ) ); ?>, true );
+				if ( res['status'] === 'ready' ) {
+					location.reload();
+				} else if ( res['status'] === 'failed' ) {
+					setRunningState( false );
+					showMessage( <?php echo wp_json_encode( __( 'Indexing failed. Please try again.', 'smart-woocommerce-search' ) ); ?>, true );
+				} else {
+					setTimeout( checkStatus, 1000 );
+				}
+			}).fail(function() {
+				showMessage( <?php echo wp_json_encode( __( 'Connection interrupted. Retrying index status…', 'smart-woocommerce-search' ) ); ?>, true );
+				setTimeout( checkStatus, pollDelay );
 			});
 		};
 
@@ -295,23 +300,24 @@ $create_btn_label = $is_running
 			setRunningState( true );
 			showMessage( <?php echo wp_json_encode( __( 'Running in background…', 'smart-woocommerce-search' ) ); ?> );
 
-			$.post(
-				ajaxurl,
-				{
+			$.ajax({
+				url: ajaxurl,
+				type: 'POST',
+				data: {
 					action: 'sws_index_button_click',
 					nonce: $('#sws_index_button_nonce').val()
 				},
-				function( res ) {
-					if ( res && res.not_indexed ) {
-						notIndexed = res.not_indexed;
-						showMessage( labelProcessed.replace( '%1$d', 0 ).replace( '%2$d', notIndexed ) );
-					}
-					checkStatus();
-				},
-				'json'
-			).fail(function() {
-				setRunningState( false );
-				showMessage( <?php echo wp_json_encode( __( 'Failed to start indexing. Please reload the page and try again.', 'smart-woocommerce-search' ) ); ?>, true );
+				dataType: 'json',
+				timeout: requestTimeout
+			}).done(function( res ) {
+				if ( res && res.not_indexed ) {
+					notIndexed = res.not_indexed;
+					showMessage( labelProcessed.replace( '%1$d', 0 ).replace( '%2$d', notIndexed ) );
+				}
+				checkStatus();
+			}).fail(function() {
+				showMessage( <?php echo wp_json_encode( __( 'Index start interrupted. Checking background progress…', 'smart-woocommerce-search' ) ); ?>, true );
+				setTimeout( checkStatus, pollDelay );
 			});
 		});
 
