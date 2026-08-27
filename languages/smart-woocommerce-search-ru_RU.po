@@ -54,13 +54,13 @@ msgstr "Синонимы"
 msgid "Stop Words"
 msgstr "Стоп-слова"
 
-#: inc/admin/admin.php:159
+#: inc/admin/admin.php:156
 #: templates/admin-page-form.php:58
 msgid "Settings"
 msgstr "Настройки"
 
 #. translators: %s: Name/id of a widget
-#: inc/admin/admin.php:177
+#: inc/admin/admin.php:174
 #, php-format
 msgid "Edit Widget: %s"
 msgstr "Редактировать виджет: %s"
@@ -70,21 +70,21 @@ msgid "Upgrade to Pro"
 msgstr "Обновить до Pro"
 
 #: inc/compat/class-module-elementor.php:92
-#: inc/compat/compat-visual-composer.php:17
+#: inc/compat/compat-wp-bakery.php:17
 msgid "No value"
 msgstr "Нет значения"
 
 #: inc/compat/class-module-elementor.php:104
-#: inc/compat/compat-visual-composer.php:41
+#: inc/compat/compat-wp-bakery.php:41
 msgid "Select one of search widgets"
 msgstr "Выберите один из поисковых виджетов"
 
 #: inc/app/class-field.php:332
-#: templates/admin-tab-fields.php:100
+#: templates/admin-tab-fields.php:98
 msgid "Content"
 msgstr "Содержание"
 
-#: inc/compat/compat-visual-composer.php:38
+#: inc/compat/compat-wp-bakery.php:38
 msgid "Widget name"
 msgstr "Название виджета"
 
@@ -154,28 +154,28 @@ msgstr "Нет в наличии"
 msgid "Sale"
 msgstr "Распродажа"
 
-#: inc/core/db-index.php:303
+#: inc/core/db-index.php:454
 msgid "Learn more here."
 msgstr "Узнайте больше здесь."
 
 #: templates/admin-page-form.php:10
-#: templates/admin-tab-general.php:5
+#: templates/admin-tab-general.php:6
 msgid "General"
 msgstr "Общие"
 
 #: templates/admin-page-form.php:14
-#: templates/admin-tab-fields.php:8
+#: templates/admin-tab-fields.php:6
 msgid "Items to Search Through"
 msgstr "Предметы для поиска"
 
 #: inc/core/class-nav-menu.php:161
 #: templates/admin-page-form.php:28
-#: templates/admin-tab-layout.php:5
+#: templates/admin-tab-layout.php:6
 msgid "Layout"
 msgstr "Макет"
 
 #: templates/admin-page-form.php:32
-#: templates/admin-tab-styling.php:5
+#: templates/admin-tab-styling.php:6
 msgid "Styling"
 msgstr "Стилизация"
 
@@ -260,8 +260,8 @@ msgstr "ID"
 #: inc/app/class-field.php:331
 #: templates/admin-page-widgets.php:66
 #: templates/admin-page-widgets.php:120
-#: templates/admin-tab-fields.php:93
-#: templates/admin-tab-order.php:25
+#: templates/admin-tab-fields.php:91
+#: templates/admin-tab-order.php:23
 msgid "Title"
 msgstr "Заголовок"
 
@@ -269,490 +269,490 @@ msgstr "Заголовок"
 msgid "Shortcode"
 msgstr "Шорткод"
 
-#: templates/admin-tab-fields.php:17
+#: templates/admin-tab-fields.php:15
 msgid "Post Types"
 msgstr "Типы записей"
 
 #. translators: %s: Name of a Post Type
-#: templates/admin-tab-fields.php:36
+#: templates/admin-tab-fields.php:34
 #, php-format
 msgid "Enable search in %s"
 msgstr "Включите поиск в %s"
 
-#: templates/admin-tab-fields.php:48
+#: templates/admin-tab-fields.php:46
 msgid "Product Variations"
 msgstr "Вариации товаров"
 
-#: templates/admin-tab-fields.php:49
+#: templates/admin-tab-fields.php:47
 msgid "Enable search through Product Variations"
 msgstr "Включите поиск по вариациям товаров"
 
-#: templates/admin-tab-fields.php:80
+#: templates/admin-tab-fields.php:78
 msgid "Enable search through selected custom post types"
 msgstr "Включите поиск по выбранным пользовательским типам постов"
 
-#: templates/admin-tab-fields.php:87
+#: templates/admin-tab-fields.php:85
 msgid "Fields"
 msgstr "Поля"
 
-#: templates/admin-tab-fields.php:94
+#: templates/admin-tab-fields.php:92
 msgid "Enable search in the title"
 msgstr "Включите поиск в заголовке"
 
-#: templates/admin-tab-fields.php:101
+#: templates/admin-tab-fields.php:99
 msgid "Enable search in the content"
 msgstr "Включите поиск в контенте"
 
-#: templates/admin-tab-fields.php:107
+#: templates/admin-tab-fields.php:105
 msgid "Short description (Excerpt)"
 msgstr "Краткое описание (Отрывок)"
 
-#: templates/admin-tab-fields.php:108
+#: templates/admin-tab-fields.php:106
 msgid "Enable search in the short description"
 msgstr "Включите поиск в кратком описании"
 
 #: inc/app/class-field.php:334
-#: templates/admin-tab-fields.php:114
+#: templates/admin-tab-fields.php:112
 msgid "Product SKU"
 msgstr "Артикул товара"
 
-#: templates/admin-tab-fields.php:115
+#: templates/admin-tab-fields.php:113
 msgid "Enable search in product SKU"
 msgstr "Включите поиск в SKU продукта"
 
-#: templates/admin-tab-fields.php:122
+#: templates/admin-tab-fields.php:120
 msgid "Enable search in Custom Fields. Fill in each field slug on a new line"
 msgstr "Включите поиск в пользовательских полях. Заполните каждое поле с новой строки"
 
-#: templates/admin-tab-fields.php:129
+#: templates/admin-tab-fields.php:127
 msgid "Taxonomies"
 msgstr "Таксономии"
 
-#: templates/admin-tab-fields.php:136
+#: templates/admin-tab-fields.php:134
 msgid "Enable search in post tags"
 msgstr "Включите поиск в тегах постов"
 
-#: templates/admin-tab-fields.php:143
+#: templates/admin-tab-fields.php:141
 msgid "Enable search in post categories"
 msgstr "Включите поиск в категориях постов"
 
-#: templates/admin-tab-fields.php:151
+#: templates/admin-tab-fields.php:149
 msgid "Enable search in product tags"
 msgstr "Включите поиск в тегах товаров"
 
-#: templates/admin-tab-fields.php:158
+#: templates/admin-tab-fields.php:156
 msgid "Enable search in product categories"
 msgstr "Включите поиск в категориях товаров"
 
-#: templates/admin-tab-fields.php:185
+#: templates/admin-tab-fields.php:183
 msgid "Enable search in selected custom taxonomies"
 msgstr "Включите поиск в выбранных пользовательских таксономиях"
 
-#: templates/admin-tab-fields.php:208
+#: templates/admin-tab-fields.php:206
 msgid "Allowed Product Categories"
 msgstr "Разрешённые категории товаров"
 
-#: templates/admin-tab-fields.php:209
+#: templates/admin-tab-fields.php:207
 msgid "Limit customers' search to selected product categories"
 msgstr "Ограничьте поиск покупателей выбранными категориями товаров"
 
-#: templates/admin-tab-fields.php:216
+#: templates/admin-tab-fields.php:214
 msgid "Disallowed Product Categories"
 msgstr "Запрещенные категории продуктов"
 
-#: templates/admin-tab-fields.php:217
+#: templates/admin-tab-fields.php:215
 msgid "Disallow search in selected product categories"
 msgstr "Запретите поиск в выбранных категориях товаров"
 
-#: templates/admin-tab-fullscreen.php:20
-#: templates/admin-tab-general.php:15
-#: templates/admin-tab-general.php:24
-#: templates/admin-tab-general.php:33
+#: templates/admin-tab-fullscreen.php:21
+#: templates/admin-tab-general.php:16
+#: templates/admin-tab-general.php:25
+#: templates/admin-tab-general.php:34
 msgid "Enable"
 msgstr "Включить"
 
-#: templates/admin-tab-general.php:40
-#: templates/admin-tab-layout.php:13
-#: templates/admin-tab-styling.php:14
+#: templates/admin-tab-general.php:41
+#: templates/admin-tab-layout.php:14
+#: templates/admin-tab-styling.php:15
 msgid "Input Field"
 msgstr "Поле Ввода"
 
-#: templates/admin-tab-general.php:48
+#: templates/admin-tab-general.php:49
 msgid "Search"
 msgstr "Поиск"
 
-#: templates/admin-tab-general.php:54
+#: templates/admin-tab-general.php:55
 msgid "Minimum Number of Characters"
 msgstr "Минимальное количество символов"
 
-#: templates/admin-tab-general.php:55
+#: templates/admin-tab-general.php:56
 msgid "Minimum number of characters required to start a search"
 msgstr "Минимальное количество символов, необходимое для начала поиска"
 
-#: templates/admin-tab-general.php:60
-#: templates/admin-tab-styling.php:105
+#: templates/admin-tab-general.php:61
+#: templates/admin-tab-styling.php:106
 msgid "Results Popup"
 msgstr "Всплывающее окно результатов"
 
-#: templates/admin-tab-general.php:65
+#: templates/admin-tab-general.php:66
 msgid "Maximum Number of Results"
 msgstr "Максимальное количество результатов"
 
-#: templates/admin-tab-general.php:66
+#: templates/admin-tab-general.php:67
 msgid "Maximum number of results that can be displayed in a popup"
 msgstr "Максимальное количество результатов, которые могут быть отображены во всплывающем окне"
 
-#: templates/admin-tab-general.php:73
+#: templates/admin-tab-general.php:74
 msgid "Maximum number of characters in the description"
 msgstr "Максимальное количество символов в описании"
 
-#: templates/admin-tab-general.php:80
+#: templates/admin-tab-general.php:81
 msgid "Displays when no results are found"
 msgstr "Отображается, когда результаты не найдены"
 
-#: templates/admin-tab-general.php:87
+#: templates/admin-tab-general.php:88
 msgid "The button is only displayed if the field is not empty"
 msgstr "Кнопка отображается только в том случае, если поле не пустое"
 
-#: templates/admin-tab-general.php:93
+#: templates/admin-tab-general.php:94
 msgid "New Tab when \"View All\" Button Clicked"
 msgstr "Новая вкладка при нажатии кнопки \"Просмотреть все\""
 
-#: templates/admin-tab-general.php:94
+#: templates/admin-tab-general.php:95
 msgid "Open results in a new tab when \"View All\" button clicked. Adds target=\"_blank\" attribute to the \"View All\" button"
 msgstr "Открывает результаты в новой вкладке при нажатии кнопки \"Просмотреть все\". Добавляет атрибут target=\"_blank\" к кнопке \"Просмотреть все\""
 
-#: templates/admin-tab-general.php:100
+#: templates/admin-tab-general.php:101
 msgid "Number of Found Results in the \"View All\" Button"
 msgstr "Количество найденных результатов в кнопке \"Просмотреть все\""
 
-#: templates/admin-tab-general.php:101
+#: templates/admin-tab-general.php:102
 msgid "Display total number of found results in the \"View All\" button"
 msgstr "Отображает общее количество найденных результатов в кнопке \"Просмотреть все\""
 
-#: templates/admin-tab-general.php:108
+#: templates/admin-tab-general.php:109
 msgid "Disable AJAX"
 msgstr "Отключить AJAX"
 
-#: templates/admin-tab-general.php:109
+#: templates/admin-tab-general.php:110
 msgid "Disables AJAX functionality. The results popup will not appear"
 msgstr "Отключает функциональность AJAX. Всплывающее окно с результатами не будет появляться"
 
-#: templates/admin-tab-general.php:114
+#: templates/admin-tab-general.php:115
 msgid "Search Engine Features"
 msgstr "Особенности поисковой системы"
 
-#: templates/admin-tab-general.php:155
+#: templates/admin-tab-general.php:156
 msgid "Multiple Word Search"
 msgstr "Поиск по нескольким словам"
 
-#: templates/admin-tab-general.php:158
-#: templates/admin-tab-general.php:164
+#: templates/admin-tab-general.php:159
+#: templates/admin-tab-general.php:165
 msgid "Only exact match"
 msgstr "Только точное соответствие"
 
-#: templates/admin-tab-general.php:159
-#: templates/admin-tab-general.php:165
+#: templates/admin-tab-general.php:160
+#: templates/admin-tab-general.php:166
 msgid "\"A\" or \"B\""
 msgstr "\"A\" или \"B\""
 
-#: templates/admin-tab-general.php:173
+#: templates/admin-tab-general.php:174
 msgid "Exclude Out of Stock Products"
 msgstr "Исключите товары, отсутствующие на складе"
 
-#: templates/admin-tab-general.php:174
+#: templates/admin-tab-general.php:175
 msgid "Exclude out of stock products and variations from results"
 msgstr "Исключите из результатов продукты и вариации продуктов, отсутствующие на складе"
 
-#: templates/admin-tab-general.php:180
+#: templates/admin-tab-general.php:181
 msgid "Visibility of Products with Variations"
 msgstr "Видимость продуктов с вариациями"
 
-#: templates/admin-tab-general.php:183
+#: templates/admin-tab-general.php:184
 msgid "Parent product with variations"
 msgstr "Родительский продукт с вариациями"
 
-#: templates/admin-tab-general.php:184
+#: templates/admin-tab-general.php:185
 msgid "Only parent product"
 msgstr "Только родительский продукт"
 
-#: templates/admin-tab-general.php:185
+#: templates/admin-tab-general.php:186
 msgid "Only variations"
 msgstr "Только вариации"
 
-#: templates/admin-tab-general.php:192
+#: templates/admin-tab-general.php:193
 msgid "Search Results Page"
 msgstr "Страница результатов поиска"
 
-#: templates/admin-tab-general.php:197
+#: templates/admin-tab-general.php:198
 msgid "Disable Redirect to Product Page"
 msgstr "Отключите перенаправление на страницу продукта"
 
-#: templates/admin-tab-general.php:198
+#: templates/admin-tab-general.php:199
 msgid "Prevent WooCommerce from automatically redirecting to a product page when there is only one search result."
 msgstr "Запретите WooCommerce автоматически перенаправлять на страницу товара, когда есть только один результат поиска."
 
-#: templates/admin-tab-general.php:204
+#: templates/admin-tab-general.php:205
 msgid "Suppress Database Query Altering"
 msgstr "Подавление изменения запросов к базе данных"
 
-#: templates/admin-tab-general.php:205
+#: templates/admin-tab-general.php:206
 msgid "Prevent the theme or plugins from modifying the database query on the search results page"
 msgstr "Запретите теме или плагинам изменять запрос к базе данных на странице результатов поиска"
 
-#: templates/admin-tab-general.php:211
+#: templates/admin-tab-general.php:212
 msgid "Disable Smart Search Feature on the Search Results Page"
 msgstr "Отключите функцию интеллектуального поиска на странице результатов поиска"
 
-#: templates/admin-tab-general.php:212
+#: templates/admin-tab-general.php:213
 msgid "Disable altering search results by Smart Search plugin on the search results page.<br>By default the plugin modified search results according to selected options"
 msgstr "Отключите изменение результатов поиска плагином Smart Search на странице результатов поиска.<br>По умолчанию плагин изменяет результаты поиска в соответствии с выбранными параметрами"
 
-#: templates/admin-tab-general.php:218
+#: templates/admin-tab-general.php:219
 msgid "Disable WooCommerce Template on the Search Results Page"
 msgstr "Отключите шаблон WooCommerce на странице результатов поиска"
 
-#: templates/admin-tab-general.php:219
+#: templates/admin-tab-general.php:220
 msgid "Displays the default search results template defined in the theme instead of WooCommerce template.<br>Useful if you want to display posts with products together"
 msgstr "Отображает шаблон результатов поиска по умолчанию, заданный в теме, вместо шаблона WooCommerce.<br>Полезно, если Вы хотите отображать посты с товарами вместе"
 
-#: templates/admin-tab-general.php:225
+#: templates/admin-tab-general.php:226
 msgid "Highlight Search Terms on the Search Results Page"
 msgstr "Выделите поисковые термины на странице результатов поиска"
 
-#: templates/admin-tab-general.php:226
+#: templates/admin-tab-general.php:227
 msgid "Highlight words that match a search query on the search results page. Works only if the Smart Search Feature is not disabled on the search results page"
 msgstr "Выделяет слова, соответствующие поисковому запросу, на странице результатов поиска. Работает только в том случае, если функция интеллектуального поиска не отключена на странице результатов поиска"
 
-#: templates/admin-tab-general.php:231
+#: templates/admin-tab-general.php:232
 msgid "Advanced"
 msgstr "Дополнительно"
 
-#: templates/admin-tab-general.php:237
+#: templates/admin-tab-general.php:238
 msgid "It may be helpful if you changed the base slug for WooCommerce products. The base slug is \"product\""
 msgstr "Возможно, Вам будет полезно изменить базовый slug для продуктов WooCommerce. Базовым slug является \"product\""
 
-#: templates/admin-tab-layout.php:26
+#: templates/admin-tab-layout.php:27
 msgid "Results Popup Elements"
 msgstr "Элементы всплывающего окна результатов"
 
-#: templates/admin-tab-layout.php:31
+#: templates/admin-tab-layout.php:32
 msgid "Columns Layout"
 msgstr "Макет колонок"
 
-#: templates/admin-tab-layout.php:32
+#: templates/admin-tab-layout.php:33
 msgid "Set the maximum number of columns to show in the popup.<br>To choose a Grid layout instead of List layout select columns number more than 1"
 msgstr "Установите максимальное количество колонок, которые будут отображаться во всплывающем окне.<br>Чтобы выбрать макет Сетка вместо макета Список, выберите количество колонок больше 1"
 
-#: templates/admin-tab-layout.php:46
+#: templates/admin-tab-layout.php:47
 msgid "Popup Max Height, px"
 msgstr "Максимальная высота всплывающего окна, px"
 
-#: templates/admin-tab-layout.php:47
+#: templates/admin-tab-layout.php:48
 msgid "Popup max height in pixels. Default is 500px"
 msgstr "Максимальная высота всплывающего окна в пикселях. По умолчанию 500px"
 
-#: templates/admin-tab-layout.php:53
+#: templates/admin-tab-layout.php:54
 msgid "Popup Max Height (on mobile screen), px"
 msgstr "Максимальная высота всплывающего окна (на мобильном экране), px"
 
-#: templates/admin-tab-layout.php:54
+#: templates/admin-tab-layout.php:55
 msgid "Popup max height in pixels for mobile screen (max-width: 768px). Default is 400px"
 msgstr "Максимальная высота всплывающего окна в пикселях для мобильного экрана (max-width: 768px). По умолчанию 400px"
 
-#: templates/admin-tab-layout.php:60
+#: templates/admin-tab-layout.php:61
 msgid "Display Image"
 msgstr "Отображать изображение"
 
-#: templates/admin-tab-layout.php:75
+#: templates/admin-tab-layout.php:76
 msgid "Image Size"
 msgstr "Размер изображения"
 
-#: templates/admin-tab-layout.php:76
+#: templates/admin-tab-layout.php:77
 msgid "Select image size"
 msgstr "Выберите размер изображения"
 
-#: templates/admin-tab-layout.php:83
+#: templates/admin-tab-layout.php:84
 msgid "Image Max Width, px"
 msgstr "Максимальная ширина изображения, px"
 
-#: templates/admin-tab-layout.php:84
+#: templates/admin-tab-layout.php:85
 msgid "Limit image maximal width in pixels"
 msgstr "Ограничьте максимальную ширину изображения в пикселях"
 
-#: templates/admin-tab-layout.php:91
+#: templates/admin-tab-layout.php:92
 msgid "Display product description"
 msgstr "Отображение описания товаров"
 
-#: templates/admin-tab-layout.php:97
+#: templates/admin-tab-layout.php:98
 msgid "Description's Location"
 msgstr "Расположение описания"
 
-#: templates/admin-tab-layout.php:101
+#: templates/admin-tab-layout.php:102
 msgid "Under the image"
 msgstr "Под картинкой"
 
-#: templates/admin-tab-layout.php:102
+#: templates/admin-tab-layout.php:103
 msgid "Under the title"
 msgstr "Под названием"
 
-#: templates/admin-tab-layout.php:103
+#: templates/admin-tab-layout.php:104
 msgid "Under the price and SKU"
 msgstr "Под ценой и SKU"
 
-#: templates/admin-tab-layout.php:109
+#: templates/admin-tab-layout.php:110
 msgid "Display Category"
 msgstr "Показать категорию"
 
-#: templates/admin-tab-layout.php:110
+#: templates/admin-tab-layout.php:111
 msgid "Display product or post category"
 msgstr "Отображение категории продукта или поста"
 
-#: templates/admin-tab-layout.php:116
+#: templates/admin-tab-layout.php:117
 msgid "Display Product Price"
 msgstr "Отображение цены продукта"
 
-#: templates/admin-tab-layout.php:123
+#: templates/admin-tab-layout.php:124
 msgid "Display Product SKU"
 msgstr "Отображение SKU продукта"
 
-#: templates/admin-tab-layout.php:137
+#: templates/admin-tab-layout.php:138
 msgid "Display \"Out of stock\" Label"
 msgstr "Показать ярлык \"Нет в наличии\""
 
-#: templates/admin-tab-layout.php:138
+#: templates/admin-tab-layout.php:139
 msgid "Indicates if a product is out of stock"
 msgstr "Указывает, если товар отсутствует на складе"
 
-#: templates/admin-tab-layout.php:145
+#: templates/admin-tab-layout.php:146
 msgid "Display \"Sale\" Label"
 msgstr "Отобразите ярлык “Скидка”"
 
-#: templates/admin-tab-layout.php:146
+#: templates/admin-tab-layout.php:147
 msgid "Indicates if product has discount price"
 msgstr "Указывает, есть ли у товара цена со скидкой"
 
-#: templates/admin-tab-layout.php:153
+#: templates/admin-tab-layout.php:154
 msgid "Display \"Featured\" Label"
 msgstr "Отображение ярлыка \"Featured\""
 
-#: templates/admin-tab-layout.php:154
+#: templates/admin-tab-layout.php:155
 msgid "Indicates if product is marked as special"
 msgstr "Указывает, отмечен ли продукт как особый"
 
-#: templates/admin-tab-order.php:26
+#: templates/admin-tab-order.php:24
 msgid "Publish Date"
 msgstr "Дата публикации"
 
-#: templates/admin-tab-order.php:27
+#: templates/admin-tab-order.php:25
 msgid "Modified Date"
 msgstr "Дата изменения"
 
-#: templates/admin-tab-order.php:34
+#: templates/admin-tab-order.php:32
 msgid "Ascending means smallest to largest, 0 to 9, and/or A to Z and Descending means largest to smallest, 9 to 0, and/or Z to A"
 msgstr "По возрастанию означает от наименьшего к наибольшему, от 0 до 9, и/или от A до Z, а по убыванию означает от наибольшего к наименьшему, от 9 до 0, и/или от Z до A"
 
-#: templates/admin-tab-order.php:36
+#: templates/admin-tab-order.php:34
 msgid "ASC"
 msgstr "По возрастанию"
 
-#: templates/admin-tab-order.php:37
+#: templates/admin-tab-order.php:35
 msgid "DESC"
 msgstr "По убыванию"
 
-#: templates/admin-tab-styling.php:19
+#: templates/admin-tab-styling.php:20
 msgid "Search Field Height, px"
 msgstr "Высота поля поиска, px"
 
-#: templates/admin-tab-styling.php:20
+#: templates/admin-tab-styling.php:21
 msgid "Set the search field height in pixels"
 msgstr "Установите высоту поля поиска в пикселях"
 
-#: templates/admin-tab-styling.php:26
-#: templates/admin-tab-styling.php:117
+#: templates/admin-tab-styling.php:27
+#: templates/admin-tab-styling.php:118
 msgid "Rounded Border"
 msgstr "Округлая граница"
 
-#: templates/admin-tab-styling.php:33
-#: templates/admin-tab-styling.php:124
+#: templates/admin-tab-styling.php:34
+#: templates/admin-tab-styling.php:125
 msgid "Border Color"
 msgstr "Цвет границы"
 
-#: templates/admin-tab-styling.php:40
+#: templates/admin-tab-styling.php:41
 msgid "Border Width, px"
 msgstr "Ширина рамки, px"
 
-#: templates/admin-tab-styling.php:47
+#: templates/admin-tab-styling.php:48
 msgid "Text Color"
 msgstr "Цвет текста"
 
-#: templates/admin-tab-styling.php:54
-#: templates/admin-tab-styling.php:131
+#: templates/admin-tab-styling.php:55
+#: templates/admin-tab-styling.php:132
 msgid "Background Color"
 msgstr "Цвет фона"
 
-#: templates/admin-tab-styling.php:61
+#: templates/admin-tab-styling.php:62
 msgid "Icon Color"
 msgstr "Цвет иконки"
 
-#: templates/admin-tab-styling.php:68
+#: templates/admin-tab-styling.php:69
 msgid "Icon Background"
 msgstr "Фон иконки"
 
-#: templates/admin-tab-styling.php:79
-#: templates/admin-tab-styling.php:87
+#: templates/admin-tab-styling.php:80
 #: templates/admin-tab-styling.php:88
 #: templates/admin-tab-styling.php:89
 #: templates/admin-tab-styling.php:90
 #: templates/admin-tab-styling.php:91
+#: templates/admin-tab-styling.php:92
 msgid "Loader"
 msgstr "Загрузчик"
 
-#: templates/admin-tab-styling.php:80
+#: templates/admin-tab-styling.php:81
 msgid "Select loader's image"
 msgstr "Выберите изображение загрузчика"
 
-#: templates/admin-tab-styling.php:138
+#: templates/admin-tab-styling.php:139
 msgid "Title's Text Color"
 msgstr "Цвет текста заголовка"
 
-#: templates/admin-tab-styling.php:145
+#: templates/admin-tab-styling.php:146
 msgid "Description's Text Color"
 msgstr "Цвет текста описания"
 
-#: templates/admin-tab-styling.php:166
+#: templates/admin-tab-styling.php:167
 msgid "Category Color"
 msgstr "Цвет категории"
 
-#: templates/admin-tab-styling.php:172
+#: templates/admin-tab-styling.php:173
 msgid "Product Elements"
 msgstr "Элементы товара"
 
-#: templates/admin-tab-styling.php:177
+#: templates/admin-tab-styling.php:178
 msgid "Price Color"
 msgstr "Цвет цены"
 
-#: templates/admin-tab-styling.php:184
+#: templates/admin-tab-styling.php:185
 msgid "\"Out of stock\" Label Text Color"
 msgstr "цвет текста ярлыка \"Нет в наличии\""
 
-#: templates/admin-tab-styling.php:192
+#: templates/admin-tab-styling.php:193
 msgid "\"Out of stock\" Label Background Color"
 msgstr "цвет фона ярлыка \"Нет в наличии\""
 
-#: templates/admin-tab-styling.php:200
+#: templates/admin-tab-styling.php:201
 msgid "\"Sale\" Label Text Color"
 msgstr "цвет текста ярлыка \"Распродажа\""
 
-#: templates/admin-tab-styling.php:208
+#: templates/admin-tab-styling.php:209
 msgid "\"Sale\" Label Background Color"
 msgstr "цвет фона ярлыка \"Распродажа\""
 
-#: templates/admin-tab-styling.php:216
+#: templates/admin-tab-styling.php:217
 msgid "\"Featured\" Label Text Color"
 msgstr "цвет текста ярлыка \"Featured\""
 
-#: templates/admin-tab-styling.php:224
+#: templates/admin-tab-styling.php:225
 msgid "\"Featured\" Label Background Color"
 msgstr "цвет фона ярлыка \"Featured\""
 
@@ -767,11 +767,11 @@ msgstr "https://www.wpsmartsearch.com/"
 msgid "YummyWP"
 msgstr "YummyWP"
 
-#: templates/admin-tab-order.php:21
+#: templates/admin-tab-order.php:19
 msgid "Sorting"
 msgstr "Сортировка"
 
-#: templates/admin-tab-layout.php:90
+#: templates/admin-tab-layout.php:91
 msgid "Display Description"
 msgstr "Показать описание"
 
@@ -780,53 +780,53 @@ msgstr "Показать описание"
 msgid "Create Index"
 msgstr "Создать индекс"
 
-#: inc/core/db-index.php:302
+#: inc/core/db-index.php:453
 msgid "%s index is empty! We highly recommend to create index to improve search performance."
 msgstr "%s Индекс пуст! Мы настоятельно рекомендуем создать индекс, чтобы улучшить производительность поиска."
 
-#: templates/admin-tab-general.php:16
-#: templates/admin-tab-general.php:25
-#: templates/admin-tab-general.php:34
+#: templates/admin-tab-general.php:17
+#: templates/admin-tab-general.php:26
+#: templates/admin-tab-general.php:35
 msgid "Enhance the standard %s search widget with the %s features"
 msgstr "Дополните стандартный виджет поиска %s функциями %s"
 
-#: templates/admin-tab-styling.php:110
+#: templates/admin-tab-styling.php:111
 msgid "Top Indentation"
 msgstr "Верхний отступ"
 
-#: templates/admin-tab-styling.php:111
+#: templates/admin-tab-styling.php:112
 msgid "Indentation between search bar and popup, px"
 msgstr "Отступ между строкой поиска и всплывающим окном, px"
 
-#: templates/admin-tab-styling.php:27
+#: templates/admin-tab-styling.php:28
 msgid "Display search field with a rounded border (frame)"
 msgstr "Отображайте поле поиска с закругленной границей (рамкой)"
 
-#: templates/admin-tab-styling.php:118
+#: templates/admin-tab-styling.php:119
 msgid "Display popup with a rounded border (frame)"
 msgstr "Отображение всплывающего окна с закругленной границей (рамкой)"
 
-#: templates/admin-tab-order.php:22
+#: templates/admin-tab-order.php:20
 msgid "Sort retrieved results by parameter"
 msgstr "Сортируйте полученные результаты по параметру"
 
-#: templates/admin-tab-styling.php:41
+#: templates/admin-tab-styling.php:42
 msgid "Border (frame) width in pixels"
 msgstr "Ширина границы (рамки) в пикселях"
 
-#: templates/admin-tab-general.php:72
+#: templates/admin-tab-general.php:73
 msgid "Description's Size"
 msgstr "Размер описания"
 
-#: templates/admin-tab-general.php:181
+#: templates/admin-tab-general.php:182
 msgid "Select visibility of parent products and variations"
 msgstr "Выберите видимость родительских продуктов и вариаций"
 
-#: templates/admin-tab-general.php:79
+#: templates/admin-tab-general.php:80
 msgid "Text of \"No Results\" notification"
 msgstr "Текст уведомления \"Нет результатов\""
 
-#: templates/admin-tab-general.php:86
+#: templates/admin-tab-general.php:87
 msgid "Text of \"View All\" Button"
 msgstr "Текст кнопки \"Просмотреть все\""
 
@@ -838,36 +838,36 @@ msgstr "Пусто"
 #: templates/admin-page-index-status.php:210
 #: templates/admin-page-stop-words.php:53
 #: templates/admin-page-synonyms.php:94
-#: templates/admin-tab-fields.php:229
-#: templates/admin-tab-fullscreen.php:184
-#: templates/admin-tab-general.php:267
-#: templates/admin-tab-layout.php:173
-#: templates/admin-tab-styling.php:236
+#: templates/admin-tab-fields.php:227
+#: templates/admin-tab-fullscreen.php:185
+#: templates/admin-tab-general.php:268
+#: templates/admin-tab-layout.php:174
+#: templates/admin-tab-styling.php:237
 msgid "Documentation"
 msgstr "Документация"
 
-#: templates/admin-tab-general.php:47
+#: templates/admin-tab-general.php:48
 msgid "Placeholder text for the search field"
 msgstr "Текст-заполнитель для поля поиска"
 
-#: templates/admin-tab-general.php:247
+#: templates/admin-tab-general.php:248
 msgid "To enhance existing search bar with the Smart Search features."
 msgstr "Для улучшения существующего поиска с помощью функций Smart Search."
 
-#: templates/admin-tab-general.php:248
+#: templates/admin-tab-general.php:249
 msgid "Add a CSS selector (id or class) of the search bar's form element."
 msgstr "Добавьте CSS-селектор (id или класс) элемента формы поиска."
 
-#: templates/admin-tab-general.php:249
+#: templates/admin-tab-general.php:250
 msgid "Fill in each selector on a new line."
 msgstr "Заполняйте каждый селектор с новой строки."
 
-#: templates/admin-tab-general.php:259
+#: templates/admin-tab-general.php:260
 msgid "Add extra CSS styles"
 msgstr "Добавьте дополнительные стили CSS"
 
 #: templates/admin-page-form.php:23
-#: templates/admin-tab-fullscreen.php:5
+#: templates/admin-tab-fullscreen.php:6
 msgid "Fullscreen Mode"
 msgstr "Полноэкранный режим"
 
@@ -899,124 +899,124 @@ msgstr "Вручную задавайте синонимы или исправл
 msgid "Matching words in the search query will be replaced with the custom synonyms to enhance search accuracy."
 msgstr "Совпадающие слова в поисковом запросе будут заменяться на пользовательские синонимы для повышения точности поиска."
 
-#: templates/admin-tab-fullscreen.php:14
+#: templates/admin-tab-fullscreen.php:15
 msgid "Full Screen Mode"
 msgstr "Полноэкранный режим"
 
-#: templates/admin-tab-fullscreen.php:15
+#: templates/admin-tab-fullscreen.php:16
 msgid "Enable fullscreen mode to display the search input and results within an expanded popup"
 msgstr "Включите полноэкранный режим для отображения поля поиска и результатов в расширенном всплывающем окне"
 
-#: templates/admin-tab-fullscreen.php:19
+#: templates/admin-tab-fullscreen.php:20
 msgid "Disable"
 msgstr "Отключить"
 
-#: templates/admin-tab-fullscreen.php:21
+#: templates/admin-tab-fullscreen.php:22
 msgid "Only on mobile"
 msgstr "Только на мобильном телефоне"
 
-#: templates/admin-tab-fullscreen.php:22
+#: templates/admin-tab-fullscreen.php:23
 msgid "Only on desktop"
 msgstr "Только для десктопа"
 
-#: templates/admin-tab-general.php:120
+#: templates/admin-tab-general.php:121
 msgid "Recent Searches"
 msgstr "Недавние поиски"
 
-#: templates/admin-tab-general.php:121
+#: templates/admin-tab-general.php:122
 msgid "Display user’s recent searches below search bar"
 msgstr "Отображать последние поисковые запросы пользователя под строкой поиска"
 
-#: templates/admin-tab-general.php:128
+#: templates/admin-tab-general.php:129
 msgid "Displays label for recent searches if not empty"
 msgstr "Отображать метку для последних поисковых запросов, если они не пустые"
 
-#: templates/admin-tab-general.php:134
+#: templates/admin-tab-general.php:135
 msgid "Display “Did you mean“ Keywords"
 msgstr "Отображать слова-подсказки «Вы имели в виду»"
 
-#: templates/admin-tab-general.php:136
+#: templates/admin-tab-general.php:137
 msgid "Display synonyms in the search results popup below the search bar"
 msgstr "Отображать синонимы в всплывающем окне результатов поиска под строкой поиска"
 
-#: templates/admin-tab-general.php:138
+#: templates/admin-tab-general.php:139
 msgid "Enable Automatic Synonyms Feature"
 msgstr "Включить функцию автоматического добавления синонимов"
 
-#: templates/admin-tab-general.php:148
+#: templates/admin-tab-general.php:149
 msgid "Displays label for “Did you mean“ if not empty"
 msgstr "Отображать метку «Вы имели в виду», если она не пуста"
 
-#: templates/admin-tab-general.php:160
-#: templates/admin-tab-general.php:166
+#: templates/admin-tab-general.php:161
+#: templates/admin-tab-general.php:167
 msgid "\"A\" and \"B\" in one field"
 msgstr "«A» и «Б» в одном поле"
 
-#: templates/admin-tab-general.php:161
-#: templates/admin-tab-general.php:167
+#: templates/admin-tab-general.php:162
+#: templates/admin-tab-general.php:168
 msgid "\"A\" and \"B\" anywhere"
 msgstr "«A» и «Б» в любом месте"
 
-#: templates/admin-tab-general.php:163
+#: templates/admin-tab-general.php:164
 msgid "Define how to handle multiple words search:"
 msgstr "Определите, как обрабатывать поиск по нескольким словам:"
 
-#: templates/admin-tab-general.php:164
+#: templates/admin-tab-general.php:165
 msgid "results containing the exact phrase as entered by the user, preserving the word order"
 msgstr "результаты, содержащие точную фразу, введённую пользователем, с сохранением порядка слов"
 
-#: templates/admin-tab-general.php:165
+#: templates/admin-tab-general.php:166
 msgid "results containing at least one of the entered words, regardless of their order or location"
 msgstr "результаты, содержащие хотя бы одно из введённых слов, независимо от их порядка или расположения"
 
-#: templates/admin-tab-general.php:166
+#: templates/admin-tab-general.php:167
 msgid "results where all entered words appear together within the same field (e.g., product title or description)"
 msgstr "результаты, в которых все введённые слова встречаются вместе в одном поле (например, в названии или описании товара)"
 
-#: templates/admin-tab-general.php:167
+#: templates/admin-tab-general.php:168
 msgid "results where all entered words appear anywhere in the content, even if they are in different fields"
 msgstr "результаты, в которых все введённые слова встречаются в любом месте содержимого, даже если они находятся в разных полях"
 
-#: templates/admin-tab-fullscreen.php:104
-#: templates/admin-tab-fullscreen.php:138
+#: templates/admin-tab-fullscreen.php:105
+#: templates/admin-tab-fullscreen.php:139
 msgid "Location"
 msgstr "Расположение"
 
-#: templates/admin-tab-fullscreen.php:108
-#: templates/admin-tab-fullscreen.php:142
+#: templates/admin-tab-fullscreen.php:109
+#: templates/admin-tab-fullscreen.php:143
 msgid "Left Sidebar Slot"
 msgstr "Слот в левой боковой панели"
 
-#: templates/admin-tab-fullscreen.php:109
-#: templates/admin-tab-fullscreen.php:143
+#: templates/admin-tab-fullscreen.php:110
+#: templates/admin-tab-fullscreen.php:144
 msgid "Right Sidebar Slot"
 msgstr "Слот в правой боковой панели"
 
-#: templates/admin-tab-fullscreen.php:110
-#: templates/admin-tab-fullscreen.php:144
+#: templates/admin-tab-fullscreen.php:111
+#: templates/admin-tab-fullscreen.php:145
 msgid "Left Sidebar Slot 2"
 msgstr "Слот №2 в левой боковой панели"
 
-#: templates/admin-tab-fullscreen.php:111
-#: templates/admin-tab-fullscreen.php:145
+#: templates/admin-tab-fullscreen.php:112
+#: templates/admin-tab-fullscreen.php:146
 msgid "Right Sidebar Slot 2"
 msgstr "Слот №2 в правой боковой панели"
 
-#: templates/admin-tab-fullscreen.php:64
-#: templates/admin-tab-fullscreen.php:128
-#: templates/admin-tab-fullscreen.php:172
+#: templates/admin-tab-fullscreen.php:65
+#: templates/admin-tab-fullscreen.php:129
+#: templates/admin-tab-fullscreen.php:173
 msgid "Hide on mobile"
 msgstr "Скрыть на мобильном"
 
-#: templates/admin-tab-fullscreen.php:117
+#: templates/admin-tab-fullscreen.php:118
 msgid "Show Products Count"
 msgstr "Показать количество продуктов"
 
-#: templates/admin-tab-fullscreen.php:133
+#: templates/admin-tab-fullscreen.php:134
 msgid "Promo banner"
 msgstr "Рекламный баннер"
 
-#: templates/admin-tab-fullscreen.php:151
+#: templates/admin-tab-fullscreen.php:152
 msgid "Banner Image"
 msgstr "Изображение баннера"
 
@@ -1024,45 +1024,45 @@ msgstr "Изображение баннера"
 msgid "WordPress Default Search Widget"
 msgstr "Виджет поиска по умолчанию WordPress"
 
-#: templates/admin-tab-fullscreen.php:26
+#: templates/admin-tab-fullscreen.php:27
 msgid "Recommended Products"
 msgstr "Рекомендуемые товары"
 
-#: templates/admin-tab-fullscreen.php:47
+#: templates/admin-tab-fullscreen.php:48
 msgid "Select Products"
 msgstr "Выбрать товары"
 
-#: templates/admin-tab-fullscreen.php:51
+#: templates/admin-tab-fullscreen.php:52
 msgid "Start typing product name..."
 msgstr "Начните вводить название товара..."
 
-#: templates/admin-tab-layout.php:67
+#: templates/admin-tab-layout.php:68
 msgid "Display Rating"
 msgstr "Отображать рейтинг"
 
-#: templates/admin-tab-fullscreen.php:57
-#: templates/admin-tab-fullscreen.php:98
+#: templates/admin-tab-fullscreen.php:58
+#: templates/admin-tab-fullscreen.php:99
 msgid "Label"
 msgstr "Название"
 
-#: templates/admin-tab-fullscreen.php:72
+#: templates/admin-tab-fullscreen.php:73
 msgid "Selected Categories"
 msgstr "Выбранные категории"
 
-#: templates/admin-tab-fullscreen.php:88
+#: templates/admin-tab-fullscreen.php:89
 msgid "Select categories"
 msgstr "Выберите категории"
 
-#: templates/admin-tab-fullscreen.php:122
-#: templates/admin-tab-fullscreen.php:165
+#: templates/admin-tab-fullscreen.php:123
+#: templates/admin-tab-fullscreen.php:166
 msgid "Display when Popup Initially Opened"
 msgstr "Отображать при первоначальном открытии всплывающего окна"
 
-#: templates/admin-tab-fullscreen.php:158
+#: templates/admin-tab-fullscreen.php:159
 msgid "Banner Link"
 msgstr "Ссылка баннера"
 
-#: templates/admin-tab-styling.php:97
+#: templates/admin-tab-styling.php:98
 msgid "Loader Custom Image"
 msgstr "Выберите изображение загрузчика"
 
@@ -1097,16 +1097,16 @@ msgid "Featured Products"
 msgstr "Рекомендуемые товары"
 
 #: templates/admin-page-form.php:18
-#: templates/admin-tab-order.php:8
+#: templates/admin-tab-order.php:6
 msgid "Relevance & Sorting"
 msgstr "Релевантность и сортировка"
 
-#: templates/admin-tab-order.php:44
+#: templates/admin-tab-order.php:42
 #: templates/promo/updates.php:78
 msgid "Relevance Configurator"
 msgstr "Конфигуратор релевантности"
 
-#: templates/admin-tab-order.php:45
+#: templates/admin-tab-order.php:43
 msgid "Drag fields to reorder relevance priority. Items at the top carry the highest weight when sorting results by relevance."
 msgstr "Перетащите поля, чтобы изменить приоритет релевантности. Элементы вверху имеют наибольший вес при сортировке результатов по релевантности."
 
@@ -1143,36 +1143,28 @@ msgstr "Удалить все индексированные данные и с�
 msgid "Delete all indexed data."
 msgstr "Удалить все индексированные данные."
 
-#: templates/admin-page-index-status.php:221
+#: templates/admin-page-index-status.php:223
 msgid "Processed %1$d/%2$d"
 msgstr "Обработано %1$d/%2$d"
 
-#: templates/admin-page-index-status.php:262
+#: templates/admin-page-index-status.php:269
 msgid "Indexing failed. Please try again."
 msgstr "Индексирование не удалось. Пожалуйста, повторите попытку."
 
-#: templates/admin-page-index-status.php:270
-msgid "Connection error while checking index status. Please reload the page."
-msgstr "Ошибка подключения при проверке статуса индекса. Пожалуйста, перезагрузите страницу."
-
-#: templates/admin-page-index-status.php:277
-#: templates/admin-page-index-status.php:296
+#: templates/admin-page-index-status.php:282
+#: templates/admin-page-index-status.php:301
 msgid "Running in background…"
 msgstr "Выполняется в фоновом режиме…"
 
-#: templates/admin-page-index-status.php:289
+#: templates/admin-page-index-status.php:294
 msgid "Index is already running in the background. Do you want to stop it and start new indexing?"
 msgstr "Индексирование уже выполняется в фоновом режиме. Хотите остановить его и начать новое?"
 
-#: templates/admin-page-index-status.php:314
-msgid "Failed to start indexing. Please reload the page and try again."
-msgstr "Не удалось запустить индексирование. Пожалуйста, перезагрузите страницу и повторите попытку."
-
-#: templates/admin-page-index-status.php:325
+#: templates/admin-page-index-status.php:331
 msgid "Are you sure you want to delete all indexed data? This cannot be undone."
 msgstr "Вы уверены, что хотите удалить все индексированные данные? Это действие нельзя отменить."
 
-#: templates/admin-page-index-status.php:342
+#: templates/admin-page-index-status.php:348
 msgid "Failed to delete index. Please reload the page and try again."
 msgstr "Не удалось удалить индекс. Пожалуйста, перезагрузите страницу и повторите попытку."
 
@@ -1335,37 +1327,32 @@ msgstr "Когда пользователь нажал на рекомендуе
 msgid "Enhance Default"
 msgstr "Улучшить стандартный"
 
-#: templates/admin-tab-layout.php:130
+#: templates/admin-tab-layout.php:131
 msgid "SKU label"
 msgstr "Метка SKU"
 
-#: templates/admin-tab-layout.php:131
+#: templates/admin-tab-layout.php:132
 msgid "Displays label before SKU. Leave this field empty to hide the label"
 msgstr "Отображает метку перед SKU. Оставьте это поле пустым, чтобы скрыть метку."
-
-#. Plugin Name of the plugin
-#: index.php
-msgid "Sokol: Smart WooCommerce Search"
-msgstr "Sokol: Умный поиск WooCommerce"
 
 #. Description of the plugin
 #: index.php
 msgid "Smart Search allows your customers to instantly find and purchase products on WooCommerce based store."
 msgstr "Smart Search позволяет вашим покупателям мгновенно находить и приобретать товары в вашем магазине на WooCommerce."
 
-#: templates/admin-tab-styling.php:152
+#: templates/admin-tab-styling.php:153
 msgid "Buttons Text Color"
 msgstr "Цвет текста кнопок"
 
-#: templates/admin-tab-styling.php:153
+#: templates/admin-tab-styling.php:154
 msgid "Set text color for buttons like: "
 msgstr "Установить цвет текста для кнопок, например: "
 
-#: templates/admin-tab-styling.php:159
+#: templates/admin-tab-styling.php:160
 msgid "Buttons Background Color"
 msgstr "Цвет фона кнопок"
 
-#: templates/admin-tab-styling.php:160
+#: templates/admin-tab-styling.php:161
 msgid "Set background color for buttons like: "
 msgstr "Установить цвет фона для кнопок, например: "
 
@@ -1422,11 +1409,11 @@ msgstr "Сетчатый макет"
 msgid "display results in a visual product grid"
 msgstr "отображать результаты в виде визуальной сетки товаров"
 
-#: templates/admin-tab-layout.php:161
+#: templates/admin-tab-layout.php:162
 msgid "Display \"Add to Cart\" / \"Select options\" Button"
 msgstr "Отображать кнопку «В корзину» / «Выбрать параметры»"
 
-#: templates/admin-tab-layout.php:162
+#: templates/admin-tab-layout.php:163
 msgid "Allow users to preview variations and add products to their cart directly from the popup"
 msgstr "Позвольте пользователям просматривать вариации и добавлять товары в корзину прямо из всплывающего окна"
 
@@ -1600,10 +1587,23 @@ msgstr "Выбрать все"
 msgid "Add to Menu"
 msgstr "Добавить в меню"
 
-#: templates/admin-tab-layout.php:18
+#: templates/admin-tab-layout.php:19
 msgid "Display only Search Icon"
 msgstr "Показывать только значок поиска"
 
-#: templates/admin-tab-layout.php:19
+#: templates/admin-tab-layout.php:20
 msgid "Hide text input and display only search icon. This option will enable Fullscreen mode"
 msgstr "Скрыть текстовое поле и отображать только значок поиска. Эта опция включит полноэкранный режим."
+
+#. Plugin Name of the plugin
+#: index.php
+msgid "Sokol: Smart WooCommerce Search Pro"
+msgstr ""
+
+#: templates/admin-page-index-status.php:274
+msgid "Connection interrupted. Retrying index status…"
+msgstr ""
+
+#: templates/admin-page-index-status.php:319
+msgid "Index start interrupted. Checking background progress…"
+msgstr ""

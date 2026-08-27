@@ -2,14 +2,14 @@
 # This file is distributed under the GPL v3.
 msgid ""
 msgstr ""
-"Project-Id-Version: Sokol: Smart WooCommerce Search 3.0.9\n"
+"Project-Id-Version: Sokol: Smart WooCommerce Search 3.0.11\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/smart-woocommerce-search\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-08-20T17:18:40+00:00\n"
+"POT-Creation-Date: 2026-08-29T09:35:58+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.11.0\n"
 "X-Domain: smart-woocommerce-search\n"
@@ -124,17 +124,16 @@ msgstr ""
 msgid "Featured Products"
 msgstr ""
 
-#: inc/compat/class-module-elementor.php:92
-#: inc/compat/compat-visual-composer.php:17
-msgid "No value"
-msgstr ""
-
-#: inc/compat/class-module-elementor.php:104
-#: inc/compat/compat-visual-composer.php:41
+#: inc/compat/class-module-elementor.php:106
+#: inc/compat/compat-wp-bakery.php:41
 msgid "Select one of search widgets"
 msgstr ""
 
-#: inc/compat/compat-visual-composer.php:38
+#: inc/compat/compat-wp-bakery.php:17
+msgid "No value"
+msgstr ""
+
+#: inc/compat/compat-wp-bakery.php:38
 msgid "Widget name"
 msgstr ""
 

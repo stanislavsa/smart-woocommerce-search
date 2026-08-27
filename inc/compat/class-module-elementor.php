@@ -88,12 +88,14 @@ class Elementor_Smart_Search_Widget extends \Elementor\Widget_Base {
 		);
 
 		$widgets_list = ysm_get_custom_widgets();
-		$opts = [
-			'' => __( 'No value', 'smart-woocommerce-search' ),
-		];
+		$opts = [];
+		$default = '';
 
 		if ( ! empty( $widgets_list ) ) {
 			foreach ( $widgets_list as $id => $obj ) {
+				if ( ! $default ) {
+					$default = $id;
+				}
 				$opts[ $id ] = __( $obj['name'], 'smart-woocommerce-search' );
 			}
 		}
@@ -103,7 +105,7 @@ class Elementor_Smart_Search_Widget extends \Elementor\Widget_Base {
 			[
 				'label'   => __( 'Select one of search widgets', 'smart-woocommerce-search' ),
 				'type'    => \Elementor\Controls_Manager::SELECT,
-				'default' => '',
+				'default' => $default,
 				'options' => $opts,
 			]
 		);

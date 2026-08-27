@@ -1,7 +1,7 @@
 === Sokol: Smart WooCommerce Search ===
 Contributors: yummy-wp
 Tags: search, ajax search, product search, search by sku, woocommerce search
-Stable tag: 3.0.10
+Stable tag: 3.0.11
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Requires at least: 5.9
@@ -43,8 +43,8 @@ Smart falcon search pre-builds a dedicated search index for blazing-fast results
 * WPBakery Page Builder compatible
 * Visual Composer compatible
 * Search Exclude plugin compatible
-* WPML compatibility - new feature!
-* Polylang compatibility - new feature!
+* WPML compatibility
+* Polylang compatibility
 
 Discover all PRO features with a **14-day free trial** — no risk, cancel anytime.
 
@@ -117,6 +117,13 @@ Yes — you can try all PRO features free for 14 days. Start your trial from the
 5. Smart Search PRO - Product options
 
 == Changelog ==
+
+= 3.0.11 =
+* Updated: compatibility with "WPBakery Page Builder"
+* Updated: compatibility with "Visual Composer Website Builder"
+* Updated: compatibility with "Elementor"
+* Updated: Freemius SDK
+* Updated: CSS styles fixes
 
 = 3.0.10 =
 * Fixed: issue with empty 'lang' parameter on multisite

@@ -1,0 +1,22 @@
+{
+  "elements": {
+    "smartSearch": {
+      "settings": {
+        "name": "Sokol Smart Search",
+        "metaThumbnailUrl": "[publicPath]/thumbnail.png",
+        "metaPreviewUrl": "[publicPath]/preview.png",
+        "metaDescription": "Add a Smart Ajax Product Search field to your layout."
+      },
+      "phpFiles": [
+        "SmartSearchController.php"
+      ]
+    }
+  },
+  "categories": {
+    "Search": {
+      "elements": [
+        "smartSearch"
+      ]
+    }
+  }
+}

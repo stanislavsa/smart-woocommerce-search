@@ -1,0 +1,55 @@
+{
+  "tag": {
+    "access": "protected",
+    "type": "string",
+    "value": "smartSearch"
+  },
+  "relatedTo": {
+    "type": "group",
+    "access": "protected",
+    "value": ["General"]
+  },
+  "widgetId": {
+    "type": "dropdown",
+    "access": "public",
+    "value": "",
+    "options": {
+      "label": "Search widget",
+      "description": "Select the Smart Search widget to display.",
+      "global": "swsVcWidgets"
+    }
+  },
+  "customClass": {
+    "type": "string",
+    "access": "public",
+    "value": "",
+    "options": {
+      "label": "Extra class name"
+    }
+  },
+  "metaCustomId": {
+    "type": "customId",
+    "access": "public",
+    "value": "",
+    "options": {
+      "label": "Element ID"
+    }
+  },
+  "designOptions": {
+    "type": "designOptions",
+    "access": "public",
+    "value": {},
+    "options": {"label": "Design Options"}
+  },
+  "editFormTab1": {
+    "type": "group",
+    "access": "protected",
+    "value": ["widgetId", "metaCustomId", "customClass"],
+    "options": {"label": "General"}
+  },
+  "metaEditFormTabs": {
+    "type": "group",
+    "access": "protected",
+    "value": ["editFormTab1", "designOptions"]
+  }
+}

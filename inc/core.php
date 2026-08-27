@@ -22,6 +22,7 @@ include_once __DIR__ . '/core/class-nav-menu.php';
 include_once __DIR__ . '/core/db-index.php';
 include_once __DIR__ . '/core/db-index-query.php';
 // compatibility with other plugins
+include_once __DIR__ . '/compat/compat-wp-bakery.php';
 include_once __DIR__ . '/compat/compat-visual-composer.php';
 include_once __DIR__ . '/compat/compat-elementor.php';
 include_once __DIR__ . '/compat/compat-gutenberg.php';

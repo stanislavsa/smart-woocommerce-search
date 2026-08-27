@@ -1,45 +1,43 @@
 <?php
-namespace YSWS\Compat\VC;
+/** Compatibility with Visual Composer Website Builder. */
+namespace YSWS\Compat\VCWB;
 
-add_filter( 'init', __NAMESPACE__ . '\\extend' );
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
+add_action( 'vcv:api', __NAMESPACE__ . '\\register_element' );
 
 /**
- * Add search widget to visual composer shortcodes list
+ * Register the Smart Search element when Visual Composer initializes its API.
+ *
+ * @param object $api Visual Composer API factory.
  */
-function extend() {
-
-	if ( ! function_exists( 'vc_map' ) ) {
+function register_element( $api ) {
+	if ( ! is_object( $api ) ) {
 		return;
 	}
 
-	$widgets_list = ysm_get_custom_widgets();
-	$opts = array(
-		__( 'No value', 'smart-woocommerce-search' ) => '',
-	);
+	$tag = 'smartSearch';
+	$manifest_path = __DIR__ . '/elements/' . $tag . '/manifest.json';
 
-	if ( ! empty( $widgets_list ) ) {
-		foreach ( $widgets_list as $id => $obj ) {
-			$opts[ __( $obj['name'], 'smart-woocommerce-search' ) ] = $id;
-		}
+	if ( ! is_readable( $manifest_path ) ) {
+		return;
 	}
 
-	vc_map( array(
-		'name'        => 'Smart Search',
-		'description' => '',
-		'base'        => 'smart_search',
-		'icon'        => SWS_PLUGIN_URI . 'assets/images/search-icon.png',
-		'category'    => __( 'Content', 'js_composer' ),
-		'params'      => array(
-			array(
-				'admin_label' => true,
-				'type'        => 'dropdown',
-				'holder'      => 'hidden',
-				'class'       => '',
-				'heading'     => __( 'Widget name', 'smart-woocommerce-search' ),
-				'param_name'  => 'id',
-				'value'       => $opts,
-				'description' => __( 'Select one of search widgets', 'smart-woocommerce-search' ),
-			),
-		),
-	));
+	$plugin_base_url = defined( 'SWS_PLUGIN_URI' )
+		? rtrim( SWS_PLUGIN_URI, '\\/' ) . '/inc/compat'
+		: rtrim( plugins_url( '', __FILE__ ), '\\/' );
+
+	// VCWB caches discovered element controllers. Clear that cache so changes
+	// to this third-party element (including its PHP variable provider) load
+	// immediately instead of waiting for the transient to expire.
+	if ( function_exists( 'vchelper' ) ) {
+		vchelper( 'Options' )->deleteTransient( 'elements:autoload:all' );
+	}
+
+	$api->elements->add(
+		$manifest_path,
+		$plugin_base_url . '/elements/' . $tag
+	);
 }
