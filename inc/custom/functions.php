@@ -458,40 +458,65 @@ function ysw_get_woocommerce_product_slug( $w_id ) {
 add_action('wp_ajax_ysm_search_products', 'ysm_search_products_callback');
 
 function ysm_search_products_callback() {
+	global $wpdb;
 
 	$search_term = isset( $_GET['term'] ) ? sanitize_text_field( $_GET['term'] ) : '';
+	$like_term = '%' . $wpdb->esc_like( $search_term ) . '%';
 
-	$args = [
-		'post_type'      => 'product',
-		'posts_per_page' => 10,
-		'post_status'    => 'publish',
-		'order'          => 'DESC',
-		'orderby'        => 'relevance',
-		's'              => $search_term,
-	];
-
-	$query = new WP_Query( $args );
+	$query = $wpdb->prepare(
+		"SELECT ID
+		FROM {$wpdb->posts}
+		WHERE post_type = %s
+			AND post_status = %s
+			AND (
+				%s = ''
+				OR post_title LIKE %s
+				OR post_content LIKE %s
+				OR post_excerpt LIKE %s
+			)
+		ORDER BY
+			CASE
+				WHEN %s = '' THEN 0
+				WHEN post_title = %s THEN 4
+				WHEN post_title LIKE %s THEN 3
+				WHEN post_title LIKE %s THEN 2
+				WHEN post_content LIKE %s OR post_excerpt LIKE %s THEN 1
+				ELSE 0
+			END DESC,
+			post_date DESC
+		LIMIT 10",
+		'product',
+		'publish',
+		$search_term,
+		$like_term,
+		$like_term,
+		$like_term,
+		$search_term,
+		$search_term,
+		$search_term . '%',
+		$like_term,
+		$like_term,
+		$like_term
+	);
+	$product_ids = $wpdb->get_col( $query );
 
 	$results = [];
 
-	if ( $query->have_posts() ) {
-		while ( $query->have_posts() ) {
-			$query->the_post();
-
+	if ( $product_ids ) {
+		foreach ( $product_ids as $product_id ) {
 			// Get WooCommerce product object
-			$product = wc_get_product( get_the_ID() );
+			$product = wc_get_product( $product_id );
 
 			if ( $product ) {
 				$results[] = [
 					'id'   => $product->get_id(),
 					'text' => sprintf(
 						'%s',
-						$product->get_name(),
+						$product->get_name()
 					)
 				];
 			}
 		}
-		wp_reset_postdata();
 	}
 
 	// Send results
