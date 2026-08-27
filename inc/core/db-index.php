@@ -675,7 +675,7 @@ function update_post_index( $post_id ) {
 	$wpdb->replace(
 		$wpdb->prefix . 'sws_post_data',
 		$post_data,
-		[ '%d', '%s', '%s', '%s', '%s', '%d', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s' ]
+		[ '%d', '%s', '%s', '%s', '%s', '%d', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s' ]
 	);
 
 	// sws_post_fields
