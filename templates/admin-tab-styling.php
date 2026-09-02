@@ -54,7 +54,7 @@
                     'type'        => 'color',
                     'title'       => __( 'Background Color', 'smart-woocommerce-search' ),
                     'description' => '',
-                    'value'       => '',
+                    'value'       => '#ffffff',
                 ));
 
                 ysm_setting( $w_id, 'input_icon_color', array(

@@ -30,7 +30,7 @@ function rating( $product ): string {
 					$output .= '<span style="color: #ddd; font-size: 20px;">☆</span>';
 				}
 			}
-			$output .= '</div>';
+			$output .= '</div><div class="clear"></div>';
 		} else {
 			$output .= '';
 		}

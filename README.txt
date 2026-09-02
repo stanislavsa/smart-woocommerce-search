@@ -1,7 +1,7 @@
 === Sokol: Smart WooCommerce Search ===
 Contributors: yummy-wp
 Tags: search, ajax search, product search, search by sku, woocommerce search
-Stable tag: 3.0.11
+Stable tag: 3.0.12
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Requires at least: 5.9
@@ -117,6 +117,10 @@ Yes — you can try all PRO features free for 14 days. Start your trial from the
 5. Smart Search PRO - Product options
 
 == Changelog ==
+
+= 3.0.12 =
+* Updated: CSS styles fixes
+* Updated: product indexing functionality
 
 = 3.0.11 =
 * Updated: compatibility with "WPBakery Page Builder"

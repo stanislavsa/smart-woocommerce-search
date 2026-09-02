@@ -4,10 +4,8 @@ namespace YSWS\Core\DB_Index;
 const INDEXED_META_KEY      = 'sws_indexed';
 const RECURRING_CRON_ACTION = 'sws_bulk_index_recurring_hook';
 const CONTINUE_CRON_ACTION   = 'sws_bulk_index_continue_hook';
-const BULK_INDEX_BATCH_DELAY = 5;
-const BULK_INDEX_BATCH_SIZE  = 25;
-const BULK_INDEX_HEARTBEAT   = 'sws_bulk_index_heartbeat';
-const BULK_INDEX_STALE_AFTER = 1800;
+const BULK_INDEX_BATCH_DELAY = 2;
+const BULK_INDEX_BATCH_SIZE  = 20;
 
 add_action( 'save_post', __NAMESPACE__ . '\\post_save_action', 999 );
 add_action( 'woocommerce_save_product_variation', __NAMESPACE__ . '\\variation_save_action', 999 );
@@ -22,7 +20,6 @@ add_action( 'admin_notices', __NAMESPACE__ . '\\show_activation_message', 10 );
 sws_fs()->add_action( 'after_uninstall', __NAMESPACE__ . '\\drop_tables' );
 add_filter( 'is_protected_meta', __NAMESPACE__ . '\\protected_meta', 10, 2 );
 
-add_action( 'sws_bulk_index_hook', __NAMESPACE__ . '\\recurring_bulk_index_posts' ); // legacy cron
 add_action( RECURRING_CRON_ACTION, __NAMESPACE__ . '\\recurring_bulk_index_posts' ); // cron
 add_action( CONTINUE_CRON_ACTION, __NAMESPACE__ . '\\continue_bulk_index_posts' ); // cron
 add_action( 'sws_widget_settings_saved', __NAMESPACE__ . '\\widget_settings_saved', 10, 3 );
@@ -41,8 +38,10 @@ register_deactivation_hook(
 		if ( $timestamp ) {
 			wp_unschedule_event( $timestamp, RECURRING_CRON_ACTION );
 		}
+		wp_clear_scheduled_hook( CONTINUE_CRON_ACTION, [ get_option('sws_cron_lock') ] );
+		wp_clear_scheduled_hook( CONTINUE_CRON_ACTION, [''] );
+		wp_clear_scheduled_hook( CONTINUE_CRON_ACTION, [] );
 		wp_clear_scheduled_hook( CONTINUE_CRON_ACTION );
-		delete_option( BULK_INDEX_HEARTBEAT );
 	}
 );
 
@@ -84,16 +83,7 @@ function widget_settings_saved( $widget_id, $old_settings, $new_settings ) {
 
 	$timestamp = time();
 	update_option( 'sws_bulk_index_lock', $timestamp );
-
-//	wp_clear_scheduled_hook(
-//		'sws_bulk_index_hook',
-//		[]
-//	);
-//	wp_schedule_single_event(
-//		$timestamp + 30,
-//		'sws_bulk_index_hook',
-//		[]
-//	);
+	update_option( 'sws_cron_lock', $timestamp );
 }
 
 function ajax_index_button_click() {
@@ -104,25 +94,21 @@ function ajax_index_button_click() {
 	}
 
 	$timestamp = time();
-	$index_lock = $timestamp;
 
-	wp_clear_scheduled_hook(
-		'sws_bulk_index_hook',
-		[]
-	);
+	wp_clear_scheduled_hook( CONTINUE_CRON_ACTION, [ get_option('sws_cron_lock') ] );
+	wp_clear_scheduled_hook( CONTINUE_CRON_ACTION, [''] );
+	wp_clear_scheduled_hook( CONTINUE_CRON_ACTION, [] );
 	wp_clear_scheduled_hook( CONTINUE_CRON_ACTION );
 
-	update_option( 'sws_bulk_index_lock', $index_lock );
+	update_option( 'sws_bulk_index_lock', $timestamp );
+	update_option( 'sws_cron_lock', $timestamp );
 	set_index_status('doing');
-	touch_bulk_index_heartbeat();
 	truncate_tables();
-	schedule_bulk_index_continuation( $index_lock );
-
-	$total_not_indexed = count_unindexed_posts( $index_lock );
+	schedule_bulk_index_continuation( $timestamp );
 
 	echo wp_json_encode( [
 		'status'  => 'doing',
-		'not_indexed' => $total_not_indexed,
+		'not_indexed' => count_unindexed_posts(),
 		'indexed' => 0,
 	] );
 	exit;
@@ -135,15 +121,13 @@ function ajax_index_button_click_check() {
 		exit;
 	}
 
-	$res = run_bulk_index_batch();
-	$index_lock = get_option( 'sws_bulk_index_lock' );
-	$index_status = get_index_status();
+	schedule_bulk_index_continuation( get_option( 'sws_cron_lock' ) );
 
 	echo wp_json_encode( [
-		'status' => $index_status,
+		'status' => get_index_status(),
 		'indexed' => count_indexed_posts(),
-		'posts_left' => $res['posts_left'],
-		'lock' => $index_lock,
+		'posts_left' => count_unindexed_posts(),
+		'lock' => get_option( 'sws_bulk_index_lock' ),
 	] );
 	exit;
 }
@@ -155,17 +139,21 @@ function ajax_index_button_delete() {
 		exit;
 	}
 
+	wp_clear_scheduled_hook( CONTINUE_CRON_ACTION, [ get_option('sws_cron_lock') ] );
+	wp_clear_scheduled_hook( CONTINUE_CRON_ACTION, [''] );
+	wp_clear_scheduled_hook( CONTINUE_CRON_ACTION, [] );
+	wp_clear_scheduled_hook( CONTINUE_CRON_ACTION );
+	$timestamp = wp_next_scheduled( RECURRING_CRON_ACTION );
+	if ( $timestamp ) {
+		wp_unschedule_event( $timestamp, RECURRING_CRON_ACTION );
+	}
+
 	set_index_status('empty');
 	delete_option( 'sws_db_version' );
+	delete_option( 'sws_bulk_index_lock' );
+	delete_option( 'sws_cron_lock' );
 	install_tables();
 	truncate_tables();
-
-	wp_clear_scheduled_hook(
-		'sws_bulk_index_hook',
-		[]
-	);
-	wp_clear_scheduled_hook( CONTINUE_CRON_ACTION );
-	delete_option( BULK_INDEX_HEARTBEAT );
 
 	exit;
 }
@@ -197,7 +185,7 @@ function ajax_message_index_now_dismiss() {
 
 function recurring_cron() {
 	if ( ! wp_next_scheduled( RECURRING_CRON_ACTION ) ) {
-		wp_schedule_event( time(), 'hourly', RECURRING_CRON_ACTION );
+		wp_schedule_event( time() + 5 * MINUTE_IN_SECONDS, 'hourly', RECURRING_CRON_ACTION );
 	}
 }
 
@@ -206,21 +194,20 @@ function recurring_cron() {
  * @return void
  */
 function recurring_bulk_index_posts() {
-	$index_lock = get_option( 'sws_bulk_index_lock' );
-	$res = run_bulk_index_batch( $index_lock );
+	$cron_lock = get_option( 'sws_cron_lock' );
+	$res = run_bulk_index_batch( $cron_lock, false );
 
-	if ( ! empty( $res['posts_left'] ) && empty( $res['interrupted'] ) && empty( $res['locked'] ) ) {
-		schedule_bulk_index_continuation( $index_lock );
+	if ( ! empty( $res['posts_left'] ) ) {
+		schedule_bulk_index_continuation( $cron_lock );
 	}
 }
 
 /**
  * Count published posts that do not belong to the current index generation.
  *
- * @param string|int $index_lock
  * @return int
  */
-function count_unindexed_posts( $index_lock ) {
+function count_unindexed_posts() {
 	global $wpdb;
 
 	$post_types      = ysm_get_post_types();
@@ -238,7 +225,7 @@ function count_unindexed_posts( $index_lock ) {
 		  )";
 
 	return (int) $wpdb->get_var(
-		$wpdb->prepare( $sql, array_merge( $post_types, [ INDEXED_META_KEY, $index_lock ] ) )
+		$wpdb->prepare( $sql, array_merge( $post_types, [ INDEXED_META_KEY, get_option( 'sws_bulk_index_lock' ) ] ) )
 	);
 }
 
@@ -254,7 +241,7 @@ function continue_bulk_index_posts( $index_lock ) {
 	}
 
 	$res = run_bulk_index_batch( $index_lock );
-	if ( ! empty( $res['posts_left'] ) && empty( $res['interrupted'] ) && empty( $res['locked'] ) ) {
+	if ( ! empty( $res['posts_left'] ) ) {
 		schedule_bulk_index_continuation( $index_lock );
 	}
 }
@@ -265,19 +252,18 @@ function continue_bulk_index_posts( $index_lock ) {
  * @param string|int|null $index_lock Expected index generation.
  * @return array
  */
-function run_bulk_index_batch( $index_lock = null ) {
+function run_bulk_index_batch( $index_lock = null, $is_a_chunk = true ) {
 	if ( ! acquire_bulk_index_db_lock() ) {
 		return [
 			'status'      => get_index_status(),
 			'posts_left'  => null,
 			'indexed'     => count_indexed_posts(),
 			'locked'      => true,
-			'interrupted' => false,
 		];
 	}
 
 	try {
-		return bulk_index_posts( true, $index_lock );
+		return bulk_index_posts( $index_lock, $is_a_chunk );
 	} finally {
 		release_bulk_index_db_lock();
 	}
@@ -308,7 +294,7 @@ function schedule_bulk_index_continuation( $index_lock ) {
  * @return bool
  */
 function is_bulk_index_lock_current( $index_lock ) {
-	return null === $index_lock || (string) $index_lock === (string) get_option( 'sws_bulk_index_lock' );
+	return null === $index_lock || (string) $index_lock === (string) get_option( 'sws_cron_lock' );
 }
 
 /**
@@ -350,21 +336,15 @@ function release_bulk_index_db_lock() {
 	);
 }
 
-function bulk_index_posts( $batch = false, $expected_lock = null ) {
-	if ( ! $batch ) {
-		set_index_status('doing');
-	}
-
-	$lock = get_option( 'sws_bulk_index_lock' );
+function bulk_index_posts( $expected_lock = null, $is_a_chunk = false ) {
+	$index_timestamp = get_option( 'sws_bulk_index_lock' );
 	if ( ! is_bulk_index_lock_current( $expected_lock ) ) {
 		return [
 			'status'      => get_index_status(),
 			'posts_left'  => null,
 			'indexed'     => count_indexed_posts(),
-			'interrupted' => true,
 		];
 	}
-	touch_bulk_index_heartbeat();
 
 	// index posts
 	global $wpdb;
@@ -387,7 +367,7 @@ function bulk_index_posts( $batch = false, $expected_lock = null ) {
 		   )
 		 ORDER BY {$wpdb->posts}.post_date DESC
 		 LIMIT 0, {$posts_per_page}",
-		array_merge( $post_types, [ INDEXED_META_KEY, $lock ] )
+		array_merge( $post_types, [ INDEXED_META_KEY, $index_timestamp ] )
 	);
 	$sql_query_count = $wpdb->prepare(
 		"SELECT COUNT(*)
@@ -401,47 +381,46 @@ function bulk_index_posts( $batch = false, $expected_lock = null ) {
 				 AND indexed_meta.meta_key = %s
 				 AND indexed_meta.meta_value = %s
 		   )",
-		array_merge( $post_types, [ INDEXED_META_KEY, $lock ] )
+		array_merge( $post_types, [ INDEXED_META_KEY, $index_timestamp ] )
 	);
 	// phpcs:enable
 	$posts_left = (int) $wpdb->get_var( $sql_query_count );
+	$processed = 0;
 
-	do {
-		$post_ids = $wpdb->get_col($sql_query);
-		foreach ( $post_ids as $post_id ) {
-			if ( ! is_bulk_index_lock_current( $lock ) ) {
-				return [
-					'status'      => get_index_status(),
-					'posts_left'  => null,
-					'indexed'     => count_indexed_posts(),
-					'interrupted' => true,
-				];
-			}
-
-			if ( is_post_indexable( $post_id ) ) {
-				update_post_with_children( $post_id );
-			}
-			$posts_left--;
+	if ( $posts_left > 0 ) {
+		if ( ! $is_a_chunk ) {
+			set_index_status('doing');
 		}
 
-		if ( $batch ) {
-			break;
-		}
+		do {
+			$post_ids = $wpdb->get_col($sql_query);
+			foreach ( $post_ids as $post_id ) {
+				if ( is_post_indexable( $post_id ) ) {
+					update_post_with_children( $post_id );
+				}
+				$posts_left--;
+				$processed++;
+			}
 
-		sleep( 1 );
+			if ( ! $is_a_chunk ) {
+				sleep( 1 );
+			}
 
-	} while ( $posts_per_page === count($post_ids) );
+			if ( $is_a_chunk || $processed >= 2000 ) {
+				break;
+			}
 
-	if ( is_bulk_index_lock_current( $lock ) && ( ! $batch || 0 === $posts_left ) ) {
+		} while ( $posts_per_page === count($post_ids) );
+	}
+
+	if ( 0 === $posts_left ) {
 		set_index_status('ready');
-		delete_option( BULK_INDEX_HEARTBEAT );
 	}
 
 	return [
 		'status'  => get_index_status(),
 		'posts_left'  => $posts_left,
 		'indexed' => count_indexed_posts(),
-		'interrupted' => false,
 	];
 }
 
@@ -807,29 +786,12 @@ function delete_post_index( $post_id, $what = 'all' ) {
  */
 function get_index_status() {
 	$status = get_option( 'sws_plugin_index_status' );
-	if ( 'doing' === $status ) {
-		$heartbeat = (int) get_option( BULK_INDEX_HEARTBEAT );
-		if ( $heartbeat && time() - $heartbeat > BULK_INDEX_STALE_AFTER ) {
-			delete_option( BULK_INDEX_HEARTBEAT );
-			set_index_status( 'failed' );
-			return 'failed';
-		}
-	}
 
 	if ( $status && in_array( $status, [ 'doing', 'ready', 'failed' ] ) ) {
 		return $status;
 	}
 
 	return '';
-}
-
-/**
- * Record activity for the active index worker.
- *
- * @return void
- */
-function touch_bulk_index_heartbeat() {
-	update_option( BULK_INDEX_HEARTBEAT, time(), false );
 }
 
 /**
@@ -940,6 +902,7 @@ function drop_tables() {
 	delete_option( 'sws_message_index_now_dismiss' );
 	delete_option( 'sws_db_version' );
 	delete_option( 'sws_bulk_index_lock' );
+	delete_option( 'sws_cron_lock' );
 }
 
 /**

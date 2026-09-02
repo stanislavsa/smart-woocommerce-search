@@ -212,7 +212,6 @@ $create_btn_label = $is_running
 </div>
 <script>
 	(function($) {
-		var notIndexed    = 0;
 		var $createBtn    = $('#sws-index-now-button');
 		var $deleteBtn    = $('#sws-index-now-delete');
 		var labelCreate    = <?php echo wp_json_encode( __( 'Create Index',    'smart-woocommerce-search' ) ); ?>;
@@ -241,6 +240,7 @@ $create_btn_label = $is_running
 				.text( text );
 		}
 
+		var checkStatusTimeoutId = 0;
 		var checkStatus = function() {
 			$.ajax({
 				url: ajaxurl,
@@ -253,13 +253,12 @@ $create_btn_label = $is_running
 				timeout: requestTimeout
 			}).done(function( res ) {
 				if ( ! res || ! res['status'] ) {
-					setTimeout( checkStatus, pollDelay );
+					checkStatusTimeoutId = setTimeout( checkStatus, pollDelay );
 					return;
 				}
 
-				if ( notIndexed && null !== res['posts_left'] && undefined !== res['posts_left'] ) {
-					var processed = Math.max( 0, notIndexed - parseInt( res['posts_left'], 10 ) );
-					showMessage( labelProcessed.replace( '%1$d', processed ).replace( '%2$d', notIndexed ) );
+				if ( null !== res['posts_left'] && undefined !== res['posts_left'] ) {
+					showMessage( labelProcessed.replace( '%1$d', parseInt( res['indexed'], 10 ) ).replace( '%2$d', parseInt( res['posts_left'], 10 ) + parseInt( res['indexed'], 10 ) ) );
 				}
 
 				if ( res['status'] === 'ready' ) {
@@ -268,11 +267,11 @@ $create_btn_label = $is_running
 					setRunningState( false );
 					showMessage( <?php echo wp_json_encode( __( 'Indexing failed. Please try again.', 'smart-woocommerce-search' ) ); ?>, true );
 				} else {
-					setTimeout( checkStatus, 1000 );
+					checkStatusTimeoutId = setTimeout( checkStatus, 1000 );
 				}
 			}).fail(function() {
 				showMessage( <?php echo wp_json_encode( __( 'Connection interrupted. Retrying index status…', 'smart-woocommerce-search' ) ); ?>, true );
-				setTimeout( checkStatus, pollDelay );
+				checkStatusTimeoutId = setTimeout( checkStatus, pollDelay );
 			});
 		};
 
@@ -296,7 +295,6 @@ $create_btn_label = $is_running
 				}
 			}
 
-			notIndexed = 0;
 			setRunningState( true );
 			showMessage( <?php echo wp_json_encode( __( 'Running in background…', 'smart-woocommerce-search' ) ); ?> );
 
@@ -311,13 +309,12 @@ $create_btn_label = $is_running
 				timeout: requestTimeout
 			}).done(function( res ) {
 				if ( res && res.not_indexed ) {
-					notIndexed = res.not_indexed;
-					showMessage( labelProcessed.replace( '%1$d', 0 ).replace( '%2$d', notIndexed ) );
+					showMessage( labelProcessed.replace( '%1$d', 0 ).replace( '%2$d', res.not_indexed ) );
 				}
 				checkStatus();
 			}).fail(function() {
 				showMessage( <?php echo wp_json_encode( __( 'Index start interrupted. Checking background progress…', 'smart-woocommerce-search' ) ); ?>, true );
-				setTimeout( checkStatus, pollDelay );
+				checkStatusTimeoutId = setTimeout( checkStatus, pollDelay );
 			});
 		});
 
@@ -325,7 +322,7 @@ $create_btn_label = $is_running
 			e.preventDefault();
 
 			if ( $(this).hasClass('disabled') ) {
-				return;
+				//return;
 			}
 
 			if ( ! confirm( <?php echo wp_json_encode( __( 'Are you sure you want to delete all indexed data? This cannot be undone.', 'smart-woocommerce-search' ) ); ?> ) ) {
@@ -333,6 +330,8 @@ $create_btn_label = $is_running
 			}
 
 			$(this).addClass('disabled');
+
+			clearTimeout(checkStatusTimeoutId);
 
 			$.post(
 				ajaxurl,
