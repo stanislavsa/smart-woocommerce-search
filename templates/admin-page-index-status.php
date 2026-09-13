@@ -13,6 +13,7 @@ $post_types_count = [];
 
 $tables_exists = \YSWS\Core\DB_Index\tables_exists();
 $status        = \YSWS\Core\DB_Index\get_index_status();
+$failed_posts = [];
 
 if ( $post_types ) {
 	foreach ( $post_types as $pt ) {
@@ -200,6 +201,33 @@ $create_btn_label = $is_running
 				</div>
 
 			</div>
+
+			<?php if ( $failed_posts ) : ?>
+				<table class="form-table">
+					<tr>
+						<th scope="row"><?php esc_html_e( 'Failed Products', 'smart-woocommerce-search' ); ?></th>
+						<td>
+							<p><?php esc_html_e( 'These products were skipped because an indexing error occurred:', 'smart-woocommerce-search' ); ?></p>
+							<ul>
+								<?php foreach ( $failed_posts as $failed_post ) : ?>
+									<li>
+										<?php if ( ! empty( $failed_post['edit_url'] ) ) : ?>
+											<a href="<?php echo esc_url( $failed_post['edit_url'] ); ?>" target="_blank">
+												<?php echo esc_html( sprintf( '#%d — %s', $failed_post['id'], $failed_post['title'] ) ); ?>
+											</a>
+										<?php else : ?>
+											<?php echo esc_html( sprintf( '#%d — %s', $failed_post['id'], $failed_post['title'] ) ); ?>
+										<?php endif; ?>
+										<?php if ( $failed_post['message'] ) : ?>
+											— <?php echo esc_html( $failed_post['message'] ); ?>
+										<?php endif; ?>
+									</li>
+								<?php endforeach; ?>
+							</ul>
+						</td>
+					</tr>
+				</table>
+			<?php endif; ?>
 
 		</div>
 

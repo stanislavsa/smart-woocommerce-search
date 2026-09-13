@@ -104,12 +104,16 @@ function ajax_index_button_click() {
 	update_option( 'sws_cron_lock', $timestamp );
 	set_index_status('doing');
 	truncate_tables();
+
+	$res = run_bulk_index_batch( $timestamp, true );
+
 	schedule_bulk_index_continuation( $timestamp );
 
 	echo wp_json_encode( [
 		'status'  => 'doing',
-		'not_indexed' => count_unindexed_posts(),
-		'indexed' => 0,
+		'not_indexed' => $res['posts_left'],
+		'indexed'     => $res['indexed'],
+		'posts_left'  => $res['posts_left'],
 	] );
 	exit;
 }
@@ -121,12 +125,14 @@ function ajax_index_button_click_check() {
 		exit;
 	}
 
+	$res = run_bulk_index_batch( get_option( 'sws_cron_lock' ), true );
 	schedule_bulk_index_continuation( get_option( 'sws_cron_lock' ) );
 
 	echo wp_json_encode( [
 		'status' => get_index_status(),
-		'indexed' => count_indexed_posts(),
-		'posts_left' => count_unindexed_posts(),
+		'indexed'    => $res['indexed'],
+		'posts_left' => $res['posts_left'],
+		'debug' => $res['debug'],
 		'lock' => get_option( 'sws_bulk_index_lock' ),
 	] );
 	exit;
@@ -236,10 +242,6 @@ function count_unindexed_posts() {
  * @return void
  */
 function continue_bulk_index_posts( $index_lock ) {
-	if ( ! is_bulk_index_lock_current( $index_lock ) ) {
-		return;
-	}
-
 	$res = run_bulk_index_batch( $index_lock );
 	if ( ! empty( $res['posts_left'] ) ) {
 		schedule_bulk_index_continuation( $index_lock );
@@ -253,20 +255,39 @@ function continue_bulk_index_posts( $index_lock ) {
  * @return array
  */
 function run_bulk_index_batch( $index_lock = null, $is_a_chunk = true ) {
+	$d = [];
+	if ( ! is_bulk_index_lock_current( $index_lock ) ) {
+		return [
+			'status'      => get_index_status(),
+			'posts_left'  => count_unindexed_posts(),
+			'indexed'     => count_indexed_posts(),
+			'locked'      => 1,
+			'debug'       => $d,
+		];
+	}
 	if ( ! acquire_bulk_index_db_lock() ) {
 		return [
 			'status'      => get_index_status(),
-			'posts_left'  => null,
+			'posts_left'  => count_unindexed_posts(),
 			'indexed'     => count_indexed_posts(),
-			'locked'      => true,
+			'locked'      => 2,
+			'debug'       => $d,
 		];
 	}
 
 	try {
-		return bulk_index_posts( $index_lock, $is_a_chunk );
+		$d = bulk_index_posts( $is_a_chunk );
 	} finally {
 		release_bulk_index_db_lock();
 	}
+
+	return [
+		'status'      => get_index_status(),
+		'posts_left'  => count_unindexed_posts(),
+		'indexed'     => count_indexed_posts(),
+		'locked'      => false,
+		'debug'       => $d,
+	];
 }
 
 /**
@@ -336,15 +357,8 @@ function release_bulk_index_db_lock() {
 	);
 }
 
-function bulk_index_posts( $expected_lock = null, $is_a_chunk = false ) {
+function bulk_index_posts( $is_a_chunk = false ) {
 	$index_timestamp = get_option( 'sws_bulk_index_lock' );
-	if ( ! is_bulk_index_lock_current( $expected_lock ) ) {
-		return [
-			'status'      => get_index_status(),
-			'posts_left'  => null,
-			'indexed'     => count_indexed_posts(),
-		];
-	}
 
 	// index posts
 	global $wpdb;
@@ -380,12 +394,14 @@ function bulk_index_posts( $expected_lock = null, $is_a_chunk = false ) {
 			   WHERE indexed_meta.post_id = {$wpdb->posts}.ID
 				 AND indexed_meta.meta_key = %s
 				 AND indexed_meta.meta_value = %s
-		   )",
+		   )
+		 ",
 		array_merge( $post_types, [ INDEXED_META_KEY, $index_timestamp ] )
 	);
 	// phpcs:enable
 	$posts_left = (int) $wpdb->get_var( $sql_query_count );
 	$processed = 0;
+	$not_indexable = [];
 
 	if ( $posts_left > 0 ) {
 		if ( ! $is_a_chunk ) {
@@ -397,6 +413,8 @@ function bulk_index_posts( $expected_lock = null, $is_a_chunk = false ) {
 			foreach ( $post_ids as $post_id ) {
 				if ( is_post_indexable( $post_id ) ) {
 					update_post_with_children( $post_id );
+				} else {
+					$not_indexable[] = $post_id;
 				}
 				$posts_left--;
 				$processed++;
@@ -418,9 +436,8 @@ function bulk_index_posts( $expected_lock = null, $is_a_chunk = false ) {
 	}
 
 	return [
-		'status'  => get_index_status(),
-		'posts_left'  => $posts_left,
-		'indexed' => count_indexed_posts(),
+		'processed' => $processed,
+		'not_indexable' => $not_indexable,
 	];
 }
 
@@ -747,7 +764,7 @@ function update_post_index( $post_id ) {
 		) );
 	}
 
-	if ( ! $the_post->post_parent ) {
+	if ('product_variation' !== $the_post->post_type ) {
 		update_post_meta( $the_post->ID, INDEXED_META_KEY, get_option( 'sws_bulk_index_lock' ) );
 	}
 }
@@ -786,12 +803,54 @@ function delete_post_index( $post_id, $what = 'all' ) {
  */
 function get_index_status() {
 	$status = get_option( 'sws_plugin_index_status' );
-
 	if ( $status && in_array( $status, [ 'doing', 'ready', 'failed' ] ) ) {
 		return $status;
 	}
 
 	return '';
+}
+
+/**
+ * Get posts which were skipped because indexing failed.
+ *
+ * @return array
+ */
+function get_failed_index_posts() {
+	global $wpdb;
+
+	$post_types = ysm_get_post_types();
+	if ( ! $post_types ) {
+		return [];
+	}
+
+	$placeholders = implode( ',', array_fill( 0, count( $post_types ), '%s' ) );
+	$sql          = "SELECT posts.ID, posts.post_title, failed_meta.meta_value
+		FROM {$wpdb->posts} AS posts
+		INNER JOIN {$wpdb->postmeta} AS failed_meta ON failed_meta.post_id = posts.ID
+		WHERE posts.post_type IN ($placeholders)
+		  AND failed_meta.meta_key = %s
+		ORDER BY posts.ID ASC LIMIT 50";
+	$failed_rows  = $wpdb->get_results(
+		$wpdb->prepare( $sql, array_merge( $post_types, [ 'sws_index_error' ] ) )
+	);
+	$failed_posts = [];
+
+	foreach ( $failed_rows as $failed_row ) {
+		$error = maybe_unserialize( $failed_row->meta_value );
+
+		if ( ! is_array( $error ) ) {
+			$error = [ 'message' => (string) $error ];
+		}
+
+		$failed_posts[] = [
+			'id'      => (int) $failed_row->ID,
+			'title'   => $failed_row->post_title,
+			'edit_url' => get_edit_post_link( $failed_row->ID, 'raw' ),
+			'message' => isset( $error['message'] ) ? (string) $error['message'] : '',
+		];
+	}
+
+	return $failed_posts;
 }
 
 /**
